@@ -22,7 +22,7 @@ docpadConfig = {
 			]
 
 			# The default title of our website
-			title: "Your Website"
+			title: "Soomla Knowledge Base"
 
 			# The website description (for SEO)
 			description: """
@@ -38,7 +38,9 @@ docpadConfig = {
 			styles: [
 				'/vendor/normalize.css'
 				'/vendor/h5bp.css'
-				'/styles/style.css'
+				'/styles/knowledge.css'
+				'/styles/tocify.css'
+				'/styles/bootstrap.css'
 			]
 
 			# The website's scripts
@@ -48,7 +50,8 @@ docpadConfig = {
 				<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 				<script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\\/script>')</script>
 				"""
-
+				'/scripts/jquery-ui-1-10-4-min.js'
+				'/scripts/jquery-tocify-min.js'
 				'/vendor/log.js'
 				'/vendor/modernizr.js'
 				'/scripts/script.js'
@@ -90,15 +93,31 @@ docpadConfig = {
 	# You can learn more about live collections and querying via
 	# http://bevry.me/queryengine/guide
 
+
+	# That contains all the documents that will be going to the out path posts
 	collections:
-
-		# Create a collection called posts
-		# That contains all the documents that will be going to the out path posts
 		posts: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: 'posts'})
+			@getCollection('documents').findAllLive({relativeOutDirPath:'posts'},[title:1])
 
+		platforms: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms'},[title:1])
 
-	# =================================
+		android: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/android'},[title:1])
+
+		ios: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/ios'},[title:1])
+
+		cocos2dx: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/cocos2dx'},[title:1])
+
+		unity: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/unity'},[title:1])
+
+		economy: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/economy'},[title:1])
+
+# =================================
 	# Environments
 
 	# DocPad's default environment is the production environment
@@ -143,6 +162,10 @@ docpadConfig = {
 					res.redirect(newUrl+req.url, 301)
 				else
 					next()
+
+	plugins:
+		ignoreincludes:
+			ignoredExtensions: ['inc', 'min', 'map']
 }
 
 # Export our DocPad Configuration

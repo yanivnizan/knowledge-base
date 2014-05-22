@@ -23,21 +23,6 @@
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="/">Welcome</a>
-				<ul class="nav">
-					<% for document in @getCollection('documents').toJSON(): %>
-						<li typeof="sioc:Page" about="<%= document.url %>" class="<%= 'active'  if @document.url is document.url %>">
-							<a href="<%= document.url %>" property="dc:title"><%= document.title %></a>
-						</li>
-					<% end %>
-				</ul>
-			</div>
-		</div>
-	</div>
-
 	<!--[if lt IE 7]>
 	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -52,6 +37,14 @@
 	<article>
 		<%- @content %>
 	</article>
+
+    <div class="nav-options">
+            <%- @partial('grid-option', {image:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQKaaQYZWGmp3kP-cx06aPvL0g2XSLjUXm_YJN9bYm1L7v38f1mNOnUQg",link:"http://www.google.com",title: "CSS 3!",text: "This is just a test..."}) %>
+            <%- @partial('grid-option', {image:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQKaaQYZWGmp3kP-cx06aPvL0g2XSLjUXm_YJN9bYm1L7v38f1mNOnUQg",link:"http://www.google.com",title: "CSS 3!",text: "This is just a test..."}) %>
+            <%- @partial('grid-option', {image:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQKaaQYZWGmp3kP-cx06aPvL0g2XSLjUXm_YJN9bYm1L7v38f1mNOnUQg",link:"http://www.google.com",title: "CSS 3!",text: "This is just a test..."}) %>
+            <%- @partial('grid-option', {image:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQKaaQYZWGmp3kP-cx06aPvL0g2XSLjUXm_YJN9bYm1L7v38f1mNOnUQg",link:"http://www.google.com",title: "CSS 3!",text: "This is just a test..."}) %>
+            <%- @partial('grid-option', {image:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQKaaQYZWGmp3kP-cx06aPvL0g2XSLjUXm_YJN9bYm1L7v38f1mNOnUQg",link:"http://www.google.com",title: "CSS 3!",text: "This is just a test..."}) %>
+    </div>
 	<footer></footer>
 
 	<!-- DocPad Scripts + Our Own -->

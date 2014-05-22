@@ -7,18 +7,11 @@
 	<%- @getBlock('styles').add(@site.styles).toHTML() %>
 	</head>
 <body>
-    <nav>
-        <ul>
-         <% for document in @getCollection(@document.platform).toJSON(): %>
-               <li typeof="sioc:Page" about="<%= document.url %>" class="<%= 'active'  if @document.url is document.url %>">
-               							<a href="<%= document.url %>" property="dc:title"><%= document.title %></a>
-               	</li>
-        	<% end %>
-        </ul>
-    </nav>
-
+    <div id="nav">
+    </div>
+    <div id="doc-container">
   <% for document in @getCollection(@document.platform).toJSON(): %>
-        <div>
+        <div class="chapter">
         <%- @include(document.url) %>
         </div>
 	<% end %>
@@ -27,7 +20,7 @@
 
 <!-- DocPad Scripts + Our Own -->
 	<%- @getBlock('scripts').add(@site.scripts).toHTML() %>
-
+    </div>
 
 
 </body>

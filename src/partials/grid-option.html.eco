@@ -1,0 +1,13 @@
+<div class="col-lg-6 menu-option">
+    <div class="thumbnail">
+        <div class="option-image col-lg-4">
+            <a href="<%= @link %>"><img src="<%= @image %>"/></a>
+        </div>
+        <div class="option-text-container col-lg-8">
+            <h3><%= @title %></h3>
+            <div class="option-text">
+                <p><%= @text %></p>
+            </div>
+        </div>
+    </div>
+</div>

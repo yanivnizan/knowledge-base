@@ -24,12 +24,14 @@ Every `PurchasableVirtualItem` has the function `buy` that performs a purchase o
 
 **PurchaseWithVirtualItem**
 
+###Testing
 
 Any PurchaseWithVirtualItem can be purchased with any VirtualItem, like a sort of trade. When creating an instance of PurchaseWithVirtualItem, you need to provide the id of the virtual item that you want to be paid with and the amount of that virtual item.  
 
 *For Example:* 
 Suppose that in your game, you offer a “CHOCOLATECAKE_GOOD” that can be bought by paying 250 “Muffins”. The item being purchased is a “CHOCOLATECAKE_GOOD”, the item (virtual currency) to be paid with is “Muffin”, and the amount is 250.
 
+####Not Testing
 - In android: 
 
 ```
