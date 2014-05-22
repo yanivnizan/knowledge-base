@@ -1,6 +1,7 @@
 ---
 layout: 'content'
 title: 'Where now?'
+menuTitle: 'Some Usefull Links'
 ---
 
 ### Not sure what to do? Here's some useful links:

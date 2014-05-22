@@ -23,6 +23,21 @@
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 </head>
 <body>
+<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="/">Welcome</a>
+				<ul class="nav">
+					<% for document in @getCollection('documents').toJSON(): %>
+						<li typeof="sioc:Page" about="<%= document.url %>" class="<%= 'active'  if @document.url is document.url %>">
+							<a href="<%= document.url %>" property="dc:title"><%= document.title %></a>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</div>
+
 	<!--[if lt IE 7]>
 	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -30,6 +45,10 @@
 	<header>
 		<h1><a href="<%= @site.url %>"><%- @site.title %></a></h1>
 	</header>
+
+
+
+
 	<article>
 		<%- @content %>
 	</article>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+
+<!-- DocPad Meta -->
+	<%- @getBlock('meta').toHTML() %>
+	<!-- DocPad Styles + Our Own -->
+	<%- @getBlock('styles').add(@site.styles).toHTML() %>
+	</head>
+<body>
+    <nav>
+        <ul>
+         <% for document in @getCollection(@document.platform).toJSON(): %>
+               <li typeof="sioc:Page" about="<%= document.url %>" class="<%= 'active'  if @document.url is document.url %>">
+               							<a href="<%= document.url %>" property="dc:title"><%= document.title %></a>
+               	</li>
+        	<% end %>
+        </ul>
+    </nav>
+
+  <% for document in @getCollection(@document.platform).toJSON(): %>
+        <div>
+        <%- @include(document.url) %>
+        </div>
+	<% end %>
+
+	<%- @content %>
+
+<!-- DocPad Scripts + Our Own -->
+	<%- @getBlock('scripts').add(@site.scripts).toHTML() %>
+
+
+
+</body>
+</html>
