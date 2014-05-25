@@ -37,7 +37,8 @@
     "docpad-plugin-less": "~2.4.1",
     "docpad-plugin-menu": "~2.1.0",
     "docpad-plugin-marked": "~2.2.1",
-    "docpad-plugin-ignoreincludes": "~2.1.0"
+    "docpad-plugin-ignoreincludes": "~2.1.0",
+    "docpad-plugin-cleanurls": "~2.7.0"
   },
   "devDependencies": {
     "docpad-plugin-livereload": "~2.6.0"

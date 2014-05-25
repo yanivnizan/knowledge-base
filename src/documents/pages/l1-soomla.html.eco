@@ -1,0 +1,21 @@
+---
+layout: 'knowledge-base'
+title: 'Soomla'
+---
+
+<div class="jumbotron" id="know-soomla">
+    <div id="jumbo-main-text">
+        <%- @partial('nav-menu-l1', {current:'l1-soomla'}) %>
+        HOW DO YOU PREFER TO CONTINUE?
+    </div>
+    <div id="jumbo-small-text">
+        We offer several types of documentation
+    </div>
+</div>
+
+<div class="nav-options clearfix">
+    <%- @partial('grid-option', {image:"../../img/Level2-EconomyFramework.png",link:"http://www.google.com",title: "ECONOMY FRAMEWORK",text: "I'd rather be dead in California than alive in Arizona. There are dozens of us! Dozens!", selectorid:"test"}) %>
+    <%- @partial('grid-option', {image:"../../img/Level2-Blueprint.png",link:"http://www.google.com",title: "BLUEPRINT",text: "Did you know that more frozen bananas are sold right here on this boardwalk than anywhere in the OC?"}) %>
+    <%- @partial('grid-option', {image:"../../img/Level2-Highway.png",link:"http://www.google.com",title: "HIGHWAY",text: "Tobias is Queen Mary. I've always been deeply passionate about nature. Perhaps you remember Neuterfest? I'll never forget your wedding."}) %>
+    <%- @partial('grid-option', {image:"../../img/Level2-StoreFront.png",link:"http://www.google.com",title: "STOREFRONT",text: "I will pack your sweet pink mouth with so much ice cream you'll be the envy of every Jerry and Jane on the block!"}) %>
+</div>

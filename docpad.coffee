@@ -54,7 +54,7 @@ docpadConfig = {
 				'/scripts/jquery-tocify-min.js'
 				'/vendor/log.js'
 				'/vendor/modernizr.js'
-				'/scripts/script.js'
+				'/scripts/knowledge-base.js'
 			]
 
 
@@ -116,6 +116,9 @@ docpadConfig = {
 
 		economy: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/economy'},[title:1])
+
+		l2platforms: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'level2-docs'},[position:1])
 
 # =================================
 	# Environments

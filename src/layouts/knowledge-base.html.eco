@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Properities -->
+    <title><%= @getPreparedTitle() %></title>
+    <meta name="description" content="<%= @getPreparedDescription() %>" />
+    <meta name="keywords" content="<%= @getPreparedKeywords() %>" />
+
+    <!-- DocPad Meta -->
+    <%- @getBlock('meta').toHTML() %>
+
+    <!-- DocPad Styles + Our Own -->
+    <%- @getBlock('styles').add(@site.styles).toHTML() %>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,300' rel='stylesheet' type='text/css'>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<nav id="knowledge-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div id="dropdown-container" class="dropdown pull-right">
+        <a id="nav-toggle" class="dropdown-toggle" data-toggle="dropdown" href="#"></a>
+        <ul id="nav-list" class="dropdown-menu" role="menu" >
+           <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+        </ul>
+    </div>
+</nav>
+<%- @content %>
+
+<footer>
+
+</footer>
+
+<!-- DocPad Scripts + Our Own -->
+<%- @getBlock('scripts').add(@site.scripts).toHTML() %>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>
