@@ -1,4 +1,5 @@
 ---
+layout: 'content'
 image: 'Tutorial'
 title: 'GOOGLE PLAY'
 text: 'Did you know that more frozen bananas are sold right here on this boardwalk than anywhere in the OC?'

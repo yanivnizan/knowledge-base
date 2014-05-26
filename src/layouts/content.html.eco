@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<body>
-<div>
-	<%- @content %>
+---
+layout: 'knowledge-base'
+---
+<div id="nav">
 </div>
-</body>
-</html>
+<div id="doc-container" class="article-content">
+<%- @content %>
+</div>
