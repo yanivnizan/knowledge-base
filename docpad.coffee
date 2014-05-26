@@ -117,8 +117,8 @@ docpadConfig = {
 		economy: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/economy'},[title:1])
 
-		l2platforms: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'level2-docs'},[position:1])
+		articles: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/articles'},[position:1])
 
 # =================================
 	# Environments

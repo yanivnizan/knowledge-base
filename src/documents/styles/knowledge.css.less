@@ -1,6 +1,11 @@
 @import "../../files/less/variables.less";
 @import "../../files/less/mixins.less";
 
+@soomla-color: #ff921e;;
+@platforms-color: #00a89c;
+@downloads-color: #3fa8f4;
+@university-color: #7ac843;
+
 #doc-container {
     width: 70%;
     float:right;
@@ -46,6 +51,9 @@ li.tocify-item.active {
   }
 }
 .nav-options {
+  a {
+    text-decoration: none;
+  }
   .user-select(none);
   background-color:#F0F9FF;
   padding-left:200px;
@@ -69,7 +77,7 @@ li.tocify-item.active {
         height:354px;
         top:0;
         left:0;
-        &:hover {
+        &.hover {
           top:-118px;
         }
         &:active {
@@ -96,6 +104,82 @@ li.tocify-item.active {
     }
   }
 }
+.nav-options-sm {
+  a {
+    text-decoration: none;
+  }
+  .user-select(none);
+  background-color:#F0F9FF;
+  padding-left:100px;
+  padding-right: 100px;
+  padding-top:120px;
+  .menu-option {
+    border:none;
+    margin-bottom:150px;
+    background-color:inherit;
+    .thumbnail {
+      border:none;
+    }
+    .option-image {
+      position:relative;
+      overflow:hidden;
+      height:59px;
+      width:59px;
+      margin-bottom:5px;
+      margin-left:10px;
+      img {
+        position:absolute;
+        width:59px;
+        height:295px;
+        top:0;
+        left:0;
+        &.soomla.hover {
+          top:-59px;
+        }
+        &.university.hover {
+          top:-118px;
+        }
+        &.downloads.hover {
+          top:-177px;
+        }
+        &.platforms.hover {
+          top:-236px;
+        }
+      }
+    }
+    .option-text-container {
+
+      .option-head-text {
+        font-family: 'Open Sans', sans-serif;
+        font-weight:600;
+        font-size: 22px;
+        color: #4D4D4D;
+        &.soomla.hover {
+          color: @soomla-color;
+        }
+        &.university.hover {
+          color: @university-color;
+        }
+        &.downloads.hover {
+          color: @downloads-color;
+        }
+        &.platforms.hover {
+          color:@platforms-color;
+        }
+      }
+      .option-text {
+        font-family: 'Open Sans', sans-serif;
+        font-weight:400;
+        font-size: 15px;
+        color: #666666;
+        margin-top:10px;
+        line-height:26px;
+      }
+    }
+  }
+}
+
+
 
 #know-soomla {
   .user-select(none);
@@ -139,35 +223,35 @@ li.tocify-item.active {
       top: -6px;
     }
 
-    &.l1-soomla {
-      &:after {border-bottom: 6px solid #ff921e;}
+    &.soomla {
+      &:after {border-bottom: 6px solid @soomla-color;}
     }
-    &.l1-platforms {
-      &:after {border-bottom: 6px solid #00a89c;}
+    &.platforms {
+      &:after {border-bottom: 6px solid @platforms-color;}
     }
-    &.l1-university {
-      &:after {border-bottom: 6px solid #7ac843;}
+    &.university {
+      &:after {border-bottom: 6px solid @university-color;}
     }
-    &.l1-downloads {
-      &:after {border-bottom: 6px solid #3fa8f4;}
+    &.downloads {
+      &:after {border-bottom: 6px solid @downloads-color;}
     }
     a {
       color:#ffffff;
     }
 
   }
-  .l1-soomla {
-    background-color:#ff921e;
+  .soomla {
+    background-color:@soomla-color;
   }
-  .l1-platforms {
-    background-color: #00a89c;
+  .platforms {
+    background-color: @platforms-color;
 
   }
-  .l1-university {
-    background-color: #7ac843;
+  .university {
+    background-color: @university-color;
   }
-  .l1-downloads {
-    background-color: #3fa8f4;
+  .downloads {
+    background-color: @downloads-color;
   }
 }
 
