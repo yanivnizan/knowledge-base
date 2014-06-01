@@ -6,8 +6,7 @@ text: 'Throughout the SOOMLA SDK events are fired. You will need to handle them 
 position: 4
 ---
 
-**Event Handling**
-=====================
+#**Event Handling**
 
 SOOMLA uses a [publish-subscribe](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) pattern for event handling. In order to be notified of store-related events, you can register for events, get notifications on various events, and create your game-specific behavior to handle them, as an addition to the behavior already defined by SOOMLA.
 
