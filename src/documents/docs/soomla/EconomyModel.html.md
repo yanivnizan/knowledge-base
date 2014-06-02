@@ -1,8 +1,8 @@
 ---
-layout: ‘content’
-image: 'Tutorial'
-title: 'Economy Model'
-text: 'SOOMLA provides game developers with an economy model that every game economy can be based upon. The game economy entities that are provided are virtual currencies, currency packs, and virtual items of all sorts.'
+layout: "content"
+image: "Tutorial"
+title: "Economy Model"
+text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 2
 ---
 
@@ -73,7 +73,7 @@ public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
     "Test purchase of MANAGED item.",                         //description
     "no_ads",                                                 //item id
     new PurchaseWithMarket(new MarketItem(NO_ADDS_NONCONS_PRODUCT_ID,
-MarketItem.Managed.MANAGED , 1.99))  //purchase type
+        MarketItem.Managed.MANAGED , 1.99))                   //purchase type
 );
 ```
 
@@ -119,7 +119,7 @@ Don't be confused... this is not a `LifetimeVG` (explained below). It's just a `
 
 
 *For Example:*
-Suppose your game offers a “No-Ads” feature that costs $1.99 in the Market. This “No-Ads” item should be declared as a `NonConsumableItem` in your implementation of `IStoreAssets`, and in the Market it should be declared as well; in Apple App Store it should be declared as a NonConsumable, in the Google Play Store it should be declared as a MANAGED item, etc…
+Suppose your game offers a “No-Ads” feature that costs $1.99 in the Market. This “No-Ads” item should be declared as a `NonConsumableItem` in your implementation of `IStoreAssets`, and in the Market it should be declared as well (in Apple App Store it should be declared as a non-consumable, in the Google Play Store it should be declared as a MANAGED item, etc…).
 
 The above example declared in your implementation of `IStoreAssets`:
 
@@ -130,7 +130,7 @@ public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
     "Test purchase of MANAGED item.",                         //description
     "no_ads",                                                 //item id
     new PurchaseWithMarket(new MarketItem(NO_ADDS_NONCONS_PRODUCT_ID,
-MarketItem.Managed.MANAGED , 1.99))  //purchase type
+        MarketItem.Managed.MANAGED , 1.99))                   //purchase type
 );
 ```
 
@@ -262,12 +262,12 @@ Create a `SingleUsePackVG` (in `IStoreAssets`):
 Android:
 ```
 public static final VirtualGood 20_CHOCOLATECAKE_GOOD = new SingleUsePackVG(
-    "CHOCOLATECAKE_ITEM_ID"					                    //good item id
-    20							                                //amount
-    "20 Chocolate Cakes",                                       //name
-    "A pack of 20 chocolate cakes",             			    //description
-    "20_chocolate_cakes_pack",                                 	//item id
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 30) 	//purchase type
+    "CHOCOLATECAKE_ITEM_ID"                                  //good item id
+    20							                                         //amount
+    "20 Chocolate Cakes",                                    //name
+    "A pack of 20 chocolate cakes",             			       //description
+    "20_chocolate_cakes_pack",                               //item id
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 30) //purchase type
 );
 ```
 
@@ -311,10 +311,10 @@ Android:
 ```
 public static final VirtualGood MARRIAGE_GOOD = new LifetimeVG(
     "Marriage",							                                      //name
-    "This is a LIFETIME thing.",					                          //description
-    "MARRIAGE_GOOD_ITEM_ID",						                          //item id
+    "This is a LIFETIME thing.",					                         //description
+    "MARRIAGE_GOOD_ITEM_ID",						                           //item id
     new PurchaseWithMarket(new MarketItem(
-                   MARRIAGE_PRODUCT_ID, MarketItem.Managed.MANAGED, 9.99))    //purchase type
+        MARRIAGE_PRODUCT_ID, MarketItem.Managed.MANAGED, 9.99))    //purchase type
 );
 ```
 
@@ -392,23 +392,23 @@ To create an `UpgradeVG`:
 Android:
 ```
 public static final VirtualGood LEVEL_1_GOOD = new UpgradeVG(
-"MUFFIN_CAKE_GOOD_ITEM_ID",					                //goodItemId
-null,                                       			    //prevItemId
-"LEVEL_2_GOOD_ITEM_ID",                                     //nextItemId
-"Level 1",							                        //name
-"Muffin Cake Level 1",						                //description
-"LEVEL_1_GOOD_ITEM_ID",					                    //item id
-new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 50)    //purchase type
+    "MUFFIN_CAKE_GOOD_ITEM_ID",					                    //goodItemId
+    null,                                       			       //prevItemId
+    "LEVEL_2_GOOD_ITEM_ID",                                  //nextItemId
+    "Level 1",							                                 //name
+    "Muffin Cake Level 1",						                       //description
+    "LEVEL_1_GOOD_ITEM_ID",					                        //item id
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 50) //purchase type
 );
 
 public static final VirtualGood LEVEL_2_GOOD = new UpgradeVG(
-"MUFFIN_CAKE_GOOD_ITEM_ID",					                //goodItemId
-"LEVEL_1_GOOD_ITEM_ID",                                     //prevItemId
-null,                                   			        //nextItemId
-"Level 2",							                        //name
-"Muffin Cake Level 2",						                //description
-"LEVEL_2_GOOD_ITEM_ID",					                    //item id
-new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 250)	//purchase type
+    "MUFFIN_CAKE_GOOD_ITEM_ID",					                     //goodItemId
+    "LEVEL_1_GOOD_ITEM_ID",                                   //prevItemId
+    null,                                   			            //nextItemId
+    "Level 2",							                                  //name
+    "Muffin Cake Level 2",						                        //description
+    "LEVEL_2_GOOD_ITEM_ID",					                         //item id
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 250) //purchase type
 );
 ```
 

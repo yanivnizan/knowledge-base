@@ -1,8 +1,8 @@
 ---
-layout: ‘content’
-image: 'Tutorial'
-title: 'Events'
-text: 'Throughout the SOOMLA SDK events are fired. You will need to handle them with your game-specific behavior.'
+layout: "content"
+image: "Tutorial"
+title: "Events"
+text: "Throughout the SOOMLA SDK events are fired and need to be handled with your game-specific behavior."
 position: 4
 ---
 

@@ -20,21 +20,21 @@ public class MuffinRushAssets implements IStoreAssets {
     /** Virtual Currencies **/
 
     public static final VirtualCurrency MUFFIN_CURRENCY = new VirtualCurrency(
-        "Muffins",                                  // name
-        "",                                         // description
-        MUFFIN_CURRENCY_ITEM_ID                     // item id
+        "Muffins",                 // name
+        "",                        // description
+        MUFFIN_CURRENCY_ITEM_ID    // item id
     );
 
 
     /** Virtual Currency Packs **/
 
     public static final VirtualCurrencyPack TENMUFF_PACK = new VirtualCurrencyPack(
-        "10 Muffins",                               // name
-        "Test refund of an item",                   // description
-        "muffins_10",                               // item id
-        10,                                         // number of currencies in the pack
-        MUFFIN_CURRENCY_ITEM_ID,                    // the currency associated with this pack
-        new PurchaseWithMarket(TENMUFF_PACK_PRODUCT_ID, 0.99));
+        "10 Muffins",                                           // name
+        "Test refund of an item",                               // description
+        "muffins_10",                                           // item id
+        10,                                                     // number of currencies in the pack
+        MUFFIN_CURRENCY_ITEM_ID,                                // the currency associated with this pack
+        new PurchaseWithMarket(TENMUFF_PACK_PRODUCT_ID, 0.99)); // purchase type
 
 
     /** Virtual Goods **/
@@ -42,10 +42,10 @@ public class MuffinRushAssets implements IStoreAssets {
     // SingleUseVG
     // Notice the Purchase type
     public static final VirtualGood PAVLOVA_GOOD = new SingleUseVG(
-        "Pavlova",                                                      // name
-        "Gives customers a sugar rush and they call their friends",     // description
-        "pavlova",                                                      // item id
-        new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 175)       // purchase type
+        "Pavlova",                                                   // name
+        "Gives customers a sugar rush and they call their friends",  // description
+        "pavlova",                                                   // item id
+        new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 175)    // purchase type
     );
 
 
@@ -53,11 +53,11 @@ public class MuffinRushAssets implements IStoreAssets {
 
     // Notice the Purchase type
     public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
-        "No Ads",                                                       // name
-        "Test purchase of MANAGED item.",                               // description
-        "no_ads",                                                       // item id
+        "No Ads",                                                           // name
+        "Test purchase of MANAGED item.",                                   // description
+        "no_ads",                                                           // item id
         new PurchaseWithMarket(new MarketItem(
-                   NO_ADDS_NONCONS_PRODUCT_ID, MarketItem.Managed.MANAGED , 1.99)) // purchase type
+            NO_ADDS_NONCONS_PRODUCT_ID, MarketItem.Managed.MANAGED , 1.99)) // purchase type
     );
     ...
 }
