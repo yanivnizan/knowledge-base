@@ -4,6 +4,8 @@ image: 'Tutorial'
 title: 'GOOGLE PLAY'
 text: 'Did you know that more frozen bananas are sold right here on this boardwalk than anywhere in the OC?'
 position: 4
+theme: 'university'
+collection: 'university_articles'
 ---
 
 **Define Your Economy in Google Play**

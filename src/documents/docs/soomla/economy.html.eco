@@ -1,0 +1,6 @@
+---
+name: 'economy'
+layout: 'l2-main'
+theme: 'soomla'
+collection: 'soomla_economy'
+---

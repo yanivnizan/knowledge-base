@@ -1,0 +1,8 @@
+<div class="dropdown dropdown-container">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <div id="article-header"><div class="image-container"><img id="article-icon" src="/img/level2/Icon-<%= @icon %>.png"/></div><div id="article-name"></div></div></a>
+    <ul id="nav-list-l3" class="dropdown-menu l3-gray" role="menu" >
+        <% for doc in @getCollection(@collection).toJSON(): %>
+        <li class="icon-option"><a class="icon-link" href="<%= doc.url %>"><%= doc.name %></a></li>
+        <% end %>
+    </ul>
+</div>

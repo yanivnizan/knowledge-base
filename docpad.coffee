@@ -105,8 +105,8 @@ docpadConfig = {
 		soomla: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla'},[position:1])
 
-		soomuniversity: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity'},[position:1])
+		university: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university'},[position:1])
 
 	  platforms_android: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/android'},[position:1])
@@ -133,16 +133,16 @@ docpadConfig = {
 			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/storefront'},[position:1])
 
 		university_articles: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity/articles'},[position:1])
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/articles'},[position:1])
 
 		university_datacommunity: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity/datacommunity'},[position:1])
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/datacommunity'},[position:1])
 
 		university_realworldexamples: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity/realworldexamples'},[position:1])
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/realworldexamples'},[position:1])
 
 	  university_videos: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity/videos'},[position:1])
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/videos'},[position:1])
 
 # =================================
 	# Environments

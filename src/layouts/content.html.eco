@@ -3,6 +3,13 @@ layout: 'knowledge-base'
 ---
 <div id="nav">
 </div>
-<div id="doc-container" class="article-content">
+<div id="page-container">
+<div id="article-nav" class="jumbotron">
+    <%- @partial('nav-menu-l1', {current:@document.theme}) %>
+    <%- @partial('nav-menu-l2', {collection:@document.collection, current:@document.theme}) %>
+    <%- @partial('nav-menu-l3', {collection:@document.collection, icon:@document.image}) %>
+</div>
+<div id="doc-container" class="article-content clearfix">
 <%- @content %>
+</div>
 </div>
