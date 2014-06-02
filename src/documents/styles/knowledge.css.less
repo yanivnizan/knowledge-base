@@ -7,13 +7,31 @@
 @university-color: #7ac843;
 
 #doc-container {
-    width: 70%;
-    float:right;
 
 }
 #nav {
-    margin-top:20px;
+  right:0;
 }
+
+#tocify-header0 {
+  & > li:first-of-type {
+    background-color:navy;
+  }
+  [data-tag="2"] {
+    & li a {
+      color:yellow;
+    }
+  }
+  [data-tag="3"] {
+    & li a {
+      color:green;
+    }
+  }
+
+}
+
+
+
 li.tocify-item.active {
     background-color: #C8A2C8;
 }
@@ -258,3 +276,4 @@ li.tocify-item.active {
 .article-content {
   margin-top:60px;
 }
+

@@ -96,29 +96,53 @@ docpadConfig = {
 
 	# That contains all the documents that will be going to the out path posts
 	collections:
-		posts: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'posts'},[title:1])
+		downloads: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/downloads'},[position:1])
 
 		platforms: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms'},[title:1])
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms'},[position:1])
 
-		android: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/android'},[title:1])
+		soomla: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla'},[position:1])
 
-		ios: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/ios'},[title:1])
+		soomuniversity: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity'},[position:1])
 
-		cocos2dx: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/cocos2dx'},[title:1])
+	  platforms_android: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/android'},[position:1])
 
-		unity: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/unity'},[title:1])
+		platforms_ios: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/ios'},[position:1])
 
-		economy: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'platforms/economy'},[title:1])
+		platforms_cocos2dx: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/cocos2dx'},[position:1])
 
-		articles: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/articles'},[position:1])
+		platforms_unity: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/unity'},[position:1])
+
+		soomla_blueprint: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/blueprint'},[position:1])
+
+		soomla_economy: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/economy'},[position:1])
+
+		soomla_highway: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/highway'},[position:1])
+
+		soomla_storefront: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/storefront'},[position:1])
+
+		university_articles: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity/articles'},[position:1])
+
+		university_datacommunity: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity/datacommunity'},[position:1])
+
+		university_realworldexamples: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity/realworldexamples'},[position:1])
+
+	  university_videos: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomuniversity/videos'},[position:1])
 
 # =================================
 	# Environments

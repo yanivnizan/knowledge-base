@@ -5,6 +5,7 @@ layout: 'knowledge-base'
 <div class="jumbotron" id="know-soomla">
     <div id="jumbo-main-text">
         <%- @partial('nav-menu-l1', {current:@document.theme}) %>
+        <%- @partial('nav-menu-l2', {collection:@document.collection, current:@document.theme}) %>
         HOW DO YOU PREFER TO CONTINUE?
     </div>
     <div id="jumbo-small-text">

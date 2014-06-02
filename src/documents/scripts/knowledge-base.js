@@ -6,12 +6,11 @@ $(function() {
     $('.dropdown-toggle').dropdown();
 
     $('.dropdown').on('show.bs.dropdown', function(e){
-        $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+        $(this).find('.dropdown-menu').first().stop(true, true).slideDown(200);
     });
 
-    // ADD SLIDEUP ANIMATION TO DROPDOWN //
     $('.dropdown').on('hide.bs.dropdown', function(e){
-        $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+        $(this).find('.dropdown-menu').first().stop(true, true).slideUp(200);
     });
     $('div.menu-option').hover(function(){
         $(this).find(".option-head-text").addClass("hover");
@@ -19,5 +18,9 @@ $(function() {
     }, function(){
         $(this).find(".option-head-text").removeClass("hover");
         $(this).find("img").removeClass("hover");
+    });
+    $(".tocify-header > li:first-child").append("<div><button id='collapseToc'>Test</button></div>");
+    $('#collapseToc').click(function() {
+        $(".tocify-subheader").toggle();
     });
 });
