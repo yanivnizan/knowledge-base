@@ -212,7 +212,7 @@ The most basic and common kind of a `VirtualGood` is a `SingleUseVG`. `SingleUse
 Create a `SingleUseVG` (in `IStoreAssets`):
 
 Android:
-```
+``` java
 public static final VirtualGood PAVLOVA_GOOD = new SingleUseVG(
     "Pavlova",                                                      // name
     "Gives customers a sugar rush and they call their friends",     // description

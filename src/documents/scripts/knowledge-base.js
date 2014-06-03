@@ -20,10 +20,15 @@ $(function() {
         $(this).find(".option-head-text").removeClass("hover");
         $(this).find("img").removeClass("hover");
     });
-    $(".tocify-header > li:first-child").prepend("<div id='collapse-container'><button id='collapseToc'>Test</button></div>");
-    $('#collapseToc').click(function(e) {
+    $(".tocify-header > li:first-child").prepend("<div id='collapse-container'> <span id='collapseToc' class='minus'> </span></div>");
+    $('#collapse-container').click(function(e) {
         e.stopPropagation();
         $(".tocify-subheader").slideToggle(200);
+        if ($("#collapseToc").hasClass('minus')) {
+            $("#collapseToc").removeClass('minus').addClass('plus');
+        } else {
+            $("#collapseToc").removeClass('plus').addClass('minus');
+        }
     });
     $('#article-name').text($("#doc-container h1").text());
 });
