@@ -46,10 +46,12 @@ $(function() {
     // Set L3-Menu as Article Name On Top Of Article
     $('#article-name').text($("#doc-container h1").text());
 
-    // Hover Over Menus
+    // Hover Over Navigation Menus
     $('.dropdown-toggle').mouseenter(function(){
 //        $(this).click();
     }).mouseleave(function(){
     });
+
+
 
 });

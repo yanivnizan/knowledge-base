@@ -31,14 +31,23 @@
 <![endif]-->
 
 <nav id="knowledge-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div id="dropdown-container" class="dropdown pull-right">
-        <a id="nav-toggle" class="dropdown-toggle" data-toggle="dropdown" href="#"></a>
-        <ul id="nav-list" class="dropdown-menu" role="menu" >
-           <li>One</li>
-            <li>Two</li>
-            <li>Three</li>
+    <div id="main-menu">
+        <ul>
+            <li>
+                <a href="#">OPEN SOURCE</a>
+            </li>
+            <li>
+                <a href="#">KNOWLEDGE BASE</a>
+            </li>
+            <li>
+                <a href="#">ANSWERS</a>
+            </li>
+            <li>
+                <a href="#">ABOUT</a>
+            </li>
         </ul>
     </div>
+    <img id="header-logo" src="/img/HeaderLogo.png"/>
 </nav>
 <%- @content %>
 

@@ -511,3 +511,48 @@ code {
   color: #3Fa9F5
 }
 
+#main-menu {
+  margin-left:50px;
+  background-image: url('/img/menu/Menu-BG.png');
+  background-repeat: no-repeat;
+  background-position:bottom;
+  width: 299px;
+  height: 350px;
+  top:-247px;
+  position: fixed;
+  -webkit-transition: top 0.5s ease-in-out;
+  -moz-transition: top 0.5s ease-in-out;
+  -ms-transition: top 0.5s ease-in-out;
+  -o-transition: top 0.5s ease-in-out;
+  transition: top 0.5s ease-in-out;
+  &:hover {
+    top:0px;
+
+  }
+  ul {
+    margin-top:60px;
+    li {
+      font-family: 'Open Sans', sans-serif;
+      font-weight:500;
+      font-size: 18px;
+
+      a {
+        color:#ffffff;
+      }
+      &:hover a {
+        color: #4B90A5;
+        text-decoration: underline;
+      }
+
+    }
+  }
+}
+
+#header-logo {
+  margin-left:150px;
+}
+
+.dropdown:hover > ul{
+  display: block;
+  margin:0;
+}
