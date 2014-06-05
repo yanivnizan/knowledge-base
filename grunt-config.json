@@ -1,0 +1,21 @@
+{
+  "uglify": {
+    "js": {
+      "src": ["out/scripts/jquery-ui-1-10-4-min.js", "out/vendor/log.js", "out/vendor/modernizr.js", "out/scripts/jquery-tocify-min.js", "out/scripts/knowledge-base.js"],
+      "dest": "out/scripts/kb.min.js"
+    }
+  },
+  "concat": {
+    "css": {
+      "src": ["out/styles/bootstrap.css","out/styles/tocify.css", "out/styles/highlightcode.css","out/styles/old.css", "out/styles/knowledge.css"],
+      "dest": "out/styles/kb.css"
+    }
+  },
+  "cssmin": {
+    "all": {
+      "src": ["out/styles/kb.css"],
+      "dest": "out/styles/kb.min.css"
+    }
+  }
+}
+

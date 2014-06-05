@@ -36,11 +36,7 @@ docpadConfig = {
 
 			# The website's styles
 			styles: [
-				'/vendor/normalize.css'
-				'/vendor/h5bp.css'
-				'/styles/knowledge.css'
-				'/styles/tocify.css'
-				'/styles/bootstrap.css'
+
 			]
 
 			# The website's scripts
@@ -50,11 +46,7 @@ docpadConfig = {
 				<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 				<script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\\/script>')</script>
 				"""
-				'/scripts/jquery-ui-1-10-4-min.js'
-				'/scripts/jquery-tocify-min.js'
-				'/vendor/log.js'
-				'/vendor/modernizr.js'
-				'/scripts/knowledge-base.js'
+				'/scripts/kb.min.js'
 			]
 
 
@@ -82,6 +74,27 @@ docpadConfig = {
 			# Merge the document keywords with the site keywords
 			@site.keywords.concat(@document.keywords or []).join(', ')
 
+		getGruntedStyles: ->
+			_ = require 'underscore'
+			styles = []
+			gruntConfig = require('./grunt-config.json')
+			_.each gruntConfig, (value, key) ->
+				styles = styles.concat _.flatten _.pluck value, 'dest'
+			styles = _.filter styles, (value) ->
+				return value.indexOf('.min.css') > -1
+			_.map styles, (value) ->
+				return value.replace 'out', ''
+
+		getGruntedScripts: ->
+			_ = require 'underscore'
+			scripts = []
+			gruntConfig = require('./grunt-config.json')
+			_.each gruntConfig, (value, key) ->
+				scripts = scripts.concat _.flatten _.pluck value, 'dest'
+			scripts = _.filter scripts, (value) ->
+				return value.indexOf('.min.js') > -1
+			_.map scripts, (value) ->
+				return value.replace 'out', ''
 
 	# =================================
 	# Collections
@@ -189,6 +202,24 @@ docpadConfig = {
 					res.redirect(newUrl+req.url, 301)
 				else
 					next()
+
+		# Write After
+		# Used to minify our assets with grunt
+		writeAfter: (opts,next) ->
+		  # Prepare
+			safeps = require('safeps')
+			pathUtil = require('path')
+			docpad = @docpad
+			rootPath = docpad.getConfig().rootPath
+			gruntPath = pathUtil.join(rootPath, 'node_modules', '.bin', 'grunt')
+
+			command = [gruntPath, 'default']
+
+			# Execute
+			safeps.spawn(command, {cwd:rootPath,output:true}, next)
+
+			# Chain
+			@
 
 	plugins:
 		ignoreincludes:

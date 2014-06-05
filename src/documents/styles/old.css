@@ -1,0 +1,979 @@
+/* reset.css */
+
+a img {border:none;}
+a{text-decoration: none;}
+a:hover{text-decoration: underline;}
+ul li{
+    list-style: none;
+}
+
+.clear{
+    clear: both;
+}
+
+
+/* float clearing for everyone else */
+.clearfix:after{
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    font-size: 0;
+}
+
+/*General CSS*/
+
+
+#site_wrapper{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#site_wrapper .site-inner{
+    width: 1024px;
+    margin: 0px auto;
+}
+
+
+/**footer section */
+#site_footer{
+    background-color: #333333;
+    font-size: 13px;
+    color: #f2f2f2;
+    padding-top: 55px;
+    padding-bottom: 45px;
+}
+#site_footer a{
+    color: #f2f2f2;
+    text-decoration: none;
+}
+#site_footer a:hover{
+    color: #4f93a7;
+}
+#site_footer .site-inner{
+    width: 850px;
+    margin: 0px auto 0px auto;
+}
+#site_footer .col{
+
+}
+#site_footer h2{
+    font-size: 25.5px;
+    margin: 0px 0px 30px 0px;
+    white-space: nowrap;
+    line-height: 1;
+    color: white;
+}
+#site_footer .col.first{
+    float: left;
+    width: 390px;
+}
+#site_footer .col.second{
+    float: right;
+    width: 405px;
+}
+#site_footer .newsfeed{
+
+}
+#site_footer .newsfeed li{
+    margin: 0px 35px 25px 0px;
+    line-height: 20px;
+}
+#site_footer .newsfeed li img.avatar{
+    width: 46px;
+    height: 46px;
+    float: left;
+    margin-right: 15px;
+    margin-top: 3px;
+}
+#site_footer .newsfeed li .text{
+
+}
+#site_footer .newsfeed li .username{
+    clear: both;
+    text-align: right;
+}
+#site_footer .newsfeed li .username a{
+    color: #4f93a7;
+}
+#site_footer .newsfeed li .username a:hover{
+    text-decoration: underline;
+}
+#site_footer .col.second h2{
+    margin-bottom: 24px;
+}
+#site_footer .social-links{
+    margin-bottom: 40px;
+}
+#site_footer .social-links label{
+    display: block;
+    text-align: left;
+    font-size: 11px;
+}
+#site_footer .social-links .social-btns{
+    width: 145px;
+    height: 33px;
+    position: relative;
+    margin-top: 12px;
+}
+#site_footer .social-links .social-btns a{
+    position: absolute;
+    top: 0px;
+    width: 40px;
+    height: 33px;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+#site_footer .social-links .social-btns a:hover{
+    background-position: center -44px;
+}
+#site_footer .social-links .social-btns a:active{
+    background-position: center -88px;
+}
+#site_footer .social-links .social-btns a.facebook{
+    background-image: url(http://d4fc8c11mg3fh.cloudfront.net/website/img/social_facebook.png);
+    left: 72px;
+    top: -8px;
+    z-index: 3;
+}
+#site_footer .social-links .social-btns a.twitter{
+    background-image: url(http://d4fc8c11mg3fh.cloudfront.net/website/img/social_twitter.png);
+    left: 144px;
+    top: -16px;
+    z-index: 5;
+}
+#site_footer .social-links .social-btns a.gplus{
+    background-image: url(http://soom.la/wp-content/themes/soomla/img/social_google.png);
+    left: 108px;
+    top: -12px;
+    z-index: 4;
+}
+#site_footer .social-links .social-btns a.linkedin{
+    background-image: url(http://d4fc8c11mg3fh.cloudfront.net/website/img/social_linkedin.png);
+    z-index: 1;
+}
+#site_footer .social-links .social-btns a.github{
+    background-image: url(http://d4fc8c11mg3fh.cloudfront.net/website/img/social_gmail.png);
+    left: 36px;
+    top: -4px;
+    z-index: 2;
+}
+#site_footer .useful-links{
+
+}
+#site_footer .useful-links li{
+    width: 200px;
+    float: left;
+}
+#site_footer .useful-links li a{
+    float: left;
+    line-height: 20px;
+    padding-left: 25px;
+    background: url(http://d4fc8c11mg3fh.cloudfront.net/website/img/bullets.png) 0px -20px no-repeat;
+}
+#site_footer .useful-links li a:hover{
+    background-position: 0px 0px;
+    color: #4f93a7;
+}
+#site_footer .site-links{
+
+}
+#site_footer .site-links li{
+    float: left;
+    margin-top: 50px;
+    line-height: 15px;
+    font-size: 11px;
+}
+#site_footer .site-links li.pad{
+    width: 2px;
+    height: 12px;
+    background-color: #f2f2f2;
+    margin-top: 52px;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+#site_footer .site-links li.pad a{
+    text-indent: -9999999px;
+    display: inline-block;
+}
+#site_footer .site-links li a{
+}
+
+
+
+.mc4wp-form {
+    margin-bottom:28px;
+}
+
+#footer-info {
+    padding-bottom:73px;
+}
+
+
+
+#mc4wp_email:focus {
+    outline:0;
+}
+
+
+
+.content{
+    margin-top: 75px;
+    margin-bottom: 120px;
+}
+.content h2{
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 60px;
+}
+
+
+
+
+
+/*social buttons*/
+.social {
+    width:23px;
+    height:23px;
+    background-color:#4d4d4d;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:8px;
+}
+
+#social-icons .mail {
+    background-image: url("http://soomla3.staging.wpengine.com/wp-content/uploads/2014/04/Social-Email@2x.png");
+    background-repeat:no-repeat;
+    background-position-x:4px;
+    background-position-y:6px;
+    background-size: 68%;
+}
+
+#social-icons .mail:hover {
+    background-color:#ee5a2f;
+}
+
+#social-icons .mail:active {
+    background-color:#DD542C;
+}
+
+#social-icons .linkedin {
+    background-image: url("http://soomla3.staging.wpengine.com/wp-content/uploads/2014/04/Social-Linkedin@2x.png");
+    background-repeat:no-repeat;
+    background-position-x:6px;
+    background-position-y:5px;
+    background-size: 61%;
+}
+
+#social-icons .linkedin:hover {
+    background-color:#027BB5;
+}
+
+#social-icons .linkedin:active {
+    background-color:#026DA1;
+}
+
+#social-icons .google-plus {
+    background-image: url("http://soomla3.staging.wpengine.com/wp-content/uploads/2014/04/Social-GooglePlus@2x.png");
+    background-repeat:no-repeat;
+    background-position-x:6px;
+    background-position-y:5px;
+    background-size: 66%;
+}
+
+#social-icons .google-plus:hover {
+    background-color:#CC3731;
+}
+
+#social-icons .google-plus:active {
+    background-color:#B8312B;
+}
+
+#social-icons .twitter {
+    background-image: url("http://soomla3.staging.wpengine.com/wp-content/uploads/2014/04/Social-Twitter@2x.png");
+    background-repeat:no-repeat;
+    background-position-x:6px;
+    background-position-y:6px;
+    background-size: 66%;
+}
+
+#social-icons .twitter:hover {
+    background-color:#29A7DF;
+}
+
+#social-icons .twitter:active {
+    background-color:#2598CB;
+}
+
+#social-icons .facebook {
+    background-image: url("http://soomla3.staging.wpengine.com/wp-content/uploads/2014/04/Social-Facebook@2x.png");
+    background-repeat:no-repeat;
+    background-position-x:7px;
+    background-position-y:4px;
+    background-size: 40%;
+}
+
+#social-icons .facebook:hover {
+    background-color:#3A5A98;
+}
+
+#social-icons .facebook:active {
+    background-color:#324E84;
+}
+
+
+
+
+/*footer*/
+#site_footer {
+    height:110px;
+    padding-top:20px;
+    padding-bottom:30px;
+    background-color: #4c4c4c !important;
+}
+
+#site_footer .site-links li {
+    font-size:15px;
+    margin-left:17px;
+    margin-top:0px;
+}
+
+#site_footer .site-links li a:hover {
+    color:#f2f2f2;
+    text-decoration:underline;
+}
+
+#site_footer .site-links li a:active {
+    color:#b2b2b2;
+    text-decoration:underline;
+}
+
+ul#menu-bottom.menu {
+    margin-left:165px;
+    margin-top: -20px;
+}
+
+#copyright {
+    width:100%;
+    max-width:1000px;
+    font-size:11px;
+    color:#999999;
+}
+
+#copyright p {
+    margin-top:30px;
+    float:left;
+    position:absolute;
+}
+
+#copyright a:hover {
+    color:#f2f2f2;
+    text-decoration:underline;
+}
+
+#copyright a:active {
+    color:#b2b2b2;
+    text-decoration:underline;
+}
+
+
+/****styles****/
+@media all and (min-width:1024px) {
+
+    #bankerbot {max-width:400px}
+
+}
+
+#site_footer .site-inner {
+    width: 100% !important;
+    max-width: 1050px;
+}
+
+#site_footer #social-icons {
+    margin-right:0px !important;
+}
+
+#site_footer .social {
+    background-color:transparent;
+    border:1px solid white;
+}
+
+.visible-small {display:none}
+
+#open-source-link-wrap{float:left}
+
+
+
+
+
+
+.twitter-timeline {
+    position: absolute;
+    top: 696px;
+    left: 50%;
+    margin-left: -260px;
+    margin-bottom: 50px;
+}
+
+.timeline {
+    background-color: transparent !important;
+}
+
+
+
+#footer .pin_wall {
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+
+
+#footer-container {
+    max-width:1050px;
+    margin:0 auto;
+}
+
+#footer-header {
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size:40px;
+    color:#4d4d4d;
+    text-align:center;
+}
+
+#footer-subheader {
+    font-weight:100;
+    font-size:23px;
+    color:#4c4c4c;
+    text-align:center;
+    margin-bottom:90px;
+}
+
+#footer-info {
+    height:235px;
+    padding:55px;
+    border:1px solid #f4f4f4;
+    border-radius:3px;
+}
+
+#footer-info-header {
+    text-transform:uppercase;
+    font-size:22px;
+    font-weight:bold;
+    color:#1A778D;
+    float:left;
+}
+
+#footer-info-header:hover {
+    color:#166275;
+    text-decoration:none;
+}
+
+#footer-info-header:active {
+    color:#125363;
+}
+
+#footer-info-text {
+    float:left;
+    font-size:15px;
+    text-align:left;
+    color:#666666;
+    margin-top:25px;
+    margin-bottom:25px;
+}
+
+#footer {
+    background-color:white;
+}
+
+#footer .read-more {
+    font-size: 15px;
+    color:#EE5A2F;
+}
+
+#footer .read-more:active {
+    color:#D6512B;
+}
+
+#footer-bot {
+    float:right;
+    margin-top:-25px;
+}
+
+
+
+
+
+
+
+/******* for iPads ******/
+@media all and (max-width: 1024px) and (min-width: 491px) {
+
+    div.mc4wp-alert.mc4wp-error {
+        width:350px !important;
+    }
+
+    #blue-line {
+        height:75px;
+    }
+
+    .blue-line-div {
+        height:80px;
+        font-size:13px;
+    }
+
+    #site_header .logo {
+        margin-top:-5px;
+    }
+
+    .site-inner #social-icons {
+        margin-right: 10px !important;
+        z-index: 99999;
+        position: relative;
+        margin-top: 10px;
+    }
+
+    #site_header .nav ul li {
+        margin-left:15px;
+    }
+
+    #site_header .nav {
+        margin-right:210px;
+        margin-top: -30px;
+    }
+
+    #site_footer #social-icons {
+        margin-top:25px;
+    }
+
+    #site_footer .site-links li {
+        margin-left:15px;
+    }
+
+    #footer-info-text {
+        width:335px;
+    }
+
+    #footer-bot {
+        margin-top:30px;
+        float:right;
+    }
+
+    #footer-info {
+        height:365px;
+    }
+
+    #mc4wp_email {
+        width:295px;
+    }
+
+    #mailchimp p {
+        margin-left:15px;
+    }
+
+    #heading {
+        width: 98%;
+        margin: 0 1%;
+    }
+
+    #bankerbot {
+        width: 45%;
+
+    }
+
+    #header-primary {
+        font-size: 32px;
+        line-height: 38px;
+    }
+
+    #header-secondary {
+        font-size: 22px;
+        line-height: 26px;
+    }
+
+    #email-container {
+        margin-top: 30px;
+    }
+}
+
+
+
+@media all and (min-width:641px) and (max-width:1024px) {
+
+    #footer-info {
+        margin-left:12px;
+        margin-right:12px;
+    }
+
+    .visible-small {
+        display:none;
+    }
+
+    .hidden-bg {
+        display:visible !important;
+    }
+
+    #site_wrapper .site-inner {
+        width:calc(100% - 50px);
+        margin:0;
+        padding-left: 50px;
+    }
+
+    #site_header .logo {
+        margin-left:0;
+    }
+
+    #heading {
+        width:calc(100% - 100px);
+        margin:0;
+        padding-left:50px;
+        padding-right: 50px;
+    }
+
+    #blue-line {
+        width:calc(100% - 100px);
+        padding-left:50px;
+        padding-right:50px;
+    }
+
+    #header-primary {
+        font-size: 48px;
+        line-height: 55px;
+    }
+
+    #heading-wrap {
+        padding-bottom:47px;
+    }
+
+    #footer .pin_wall {
+        padding-top:80px;
+    }
+
+    #email-container {
+        margin-top:90px;
+    }
+
+    .visible-small {
+        display:hidden;
+    }
+
+    #bankerbot {
+        max-width: 400px;
+    }
+
+    a#open-source-link {
+        float:left;
+    }
+
+}
+
+
+@media all and (max-width:640px) {
+
+    #heading {
+        padding-left:15px;
+        padding-right:15px;
+        width:calc(100% - 30px);
+    }
+
+    #bankerbot {
+        width:100%;
+        margin-top: 90px;
+    }
+
+    #site_wrapper .site-inner {
+        width:calc(100% - 30px) !important;
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+    #menu-toggle {
+        margin-left: 0px;
+        margin-top:-26px;
+        position:absolute;
+    }
+
+    #site_header .logo {
+        margin-left:40px !important;
+    }
+
+    #header-primary {
+        font-size:22px;
+        line-height: 33px;
+    }
+
+    #open-source-link-wrap {
+        position: absolute;
+        margin:0 auto;
+        margin-left: 15px;
+        margin-top: 0px;
+    }
+
+    #heading-wrap {
+        padding-bottom:0;
+    }
+
+    .blue-line-div {
+        width:100%;
+        border:none;
+        font-size:15px;
+        margin-bottom: 40px;
+    }
+
+    #blue-line {
+        padding:40px 15px;
+        width:calc(100% - 30px);
+        height:330px;
+    }
+
+    .blue-line-div img {
+        padding-left:15px !important;
+        padding-right:30px;
+
+    }
+
+    #footer-header {
+        font-size:22px;
+    }
+
+    #footer-subheader{
+        font-size:17px;
+        margin-bottom:50px;
+    }
+
+    #footer-info {
+        height:580px;
+        padding:25px 8px;
+        padding-bottom: 30px;
+    }
+
+    #footer-info-header {
+        font-size:16px;
+    }
+
+    #footer-info-text {
+        font-size:14px;
+        text-align:justify;
+        margin-bottom:40px;
+    }
+
+    #footer .read-more {
+        font-size:15px;
+    }
+
+    .hidden-small {
+        display:none;
+    }
+
+    #footer-bot {
+        margin-top:0;
+        float:none;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: calc(100% - 40px);
+    }
+
+    #mailchimp p {
+        font-size:18px !important;
+        float: none !important;
+    }
+
+    #mc4wp_email {
+        width:70%;
+    }
+
+    .visible-small {
+        display:block;
+    }
+
+    #heading-wrap {
+        padding-top:20px;
+    }
+
+    #footer-bot {
+        float:none;
+    }
+
+    #site_header .git-logo {
+        width: 72px;
+        height: 107px;
+        background-size: contain;
+    }
+
+    #site_header .git-logo:hover {
+        width: 72px;
+        height: 107px;
+        background-size: contain;
+    }
+
+    #site_header .git-logo:active {
+        width: 72px;
+        height: 107px;
+        background-size: contain;
+    }
+
+    /*footer*/
+    #site_footer {
+        height:150px;
+    }
+
+    #site_footer .site-links li {
+        display:inline-block;
+    }
+
+    #site_footer .site-links {
+        text-align:center;
+        margin-left:-25px;
+    }
+
+    ul#menu-bottom.menu {
+        margin-left:0;
+    }
+
+    .footer-logo {
+        display:none;
+    }
+
+    #site_footer #social-icons {
+        float:none !important;
+        text-align:center;
+        margin-right:0 !important;
+    }
+
+    ul#menu-bottom.menu {
+        margin-top: 60px;
+        position: absolute;
+    }
+
+    #copyright {
+        position:absolute;
+        margin-top: 75px;
+        width:90%;
+    }
+
+    #copyright p {
+        left:50%;
+        margin-left:-130px;
+        float:none;
+    }
+
+    #site_footer .social {
+        width:36px;
+        height:36px;
+        margin-right: 20px;
+    }
+
+    #social-icons .mail {
+        background-size:65%;
+        background-position-x:6px;
+        background-position-y:8px;
+    }
+
+    #social-icons .linkedin {
+        background-size:50%;
+        background-position-x:9px;
+        background-position-y:8px;
+    }
+
+    #social-icons .facebook {
+        background-size:40%;
+        background-position-x:11px;
+    }
+
+    #social-icons .twitter {
+        background-size:65%;
+        background-position-x:8px;
+        background-position-y:9px;
+    }
+
+    #social-icons .google-plus {
+        background-size:65%;
+        background-position-x:7px;
+        background-position-y:6px;
+    }
+
+    #header-primary {width:100%}
+
+    #footer-container {
+        width:calc(100% - 28px);
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    div.mc4wp-alert.mc4wp-error {
+        width:calc(100% - 55px) !important;
+        right:0;
+    }
+
+    #email-container {
+        margin-top:60px;
+    }
+
+    .mc4wp-form {
+        margin-top:26px;
+        margin-bottom:0;
+    }
+
+    #footer .pin_wall {
+        padding-bottom:110px;
+    }
+
+    div.mc4wp-alert.mc4wp-error {
+
+    }
+
+    div.mc4wp-alert.mc4wp-success {
+
+        width:calc(100% - 55px) !important;
+    }
+
+}
+
+@media all and (max-width:490px) {
+
+    li > a {
+        display:block;
+    }
+
+    #site_header .nav ul {
+        margin-top:18px;
+    }
+
+    #site_header .nav ul li {
+        height:45px;
+        background-color:#cccccc;
+    }
+
+    #site_header .nav ul li:active {
+        background-color:#b3b3b3;
+    }
+
+    #site_header .nav ul li:hover {
+        background-color:#b3b3b3;
+    }
+
+    #site_header .nav ul li a {
+        font-size:16px;
+        color:#4c4c4c;
+        margin-top: 1px;
+        padding-top: 10px;
+        text-align: left;
+        padding-left: 42px;
+    }
+
+    #site_header .nav ul li a:hover {
+        border:none;
+    }
+
+    #site_header .nav ul li a:active {
+        border:none;
+    }
+
+    #site_header .nav {
+        width: 120%;
+        margin-left: -40px;
+    }
+
+}

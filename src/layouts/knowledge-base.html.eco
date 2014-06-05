@@ -18,10 +18,8 @@
     <%- @getBlock('meta').toHTML() %>
 
     <!-- DocPad Styles + Our Own -->
-    <link rel="stylesheet" type="text/css" href="/styles/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/styles/tocify.css"  />
-    <link rel="stylesheet" type="text/css" href="/styles/highlightcode.css"  />
-    <link rel="stylesheet" type="text/css" href="/styles/knowledge.css"  />
+
+    <link rel="stylesheet" type="text/css" href="/styles/kb.min.css"  />
 
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,300' rel='stylesheet' type='text/css'>
@@ -45,6 +43,37 @@
 <%- @content %>
 
 <footer>
+    <div id="site_footer" class="clearfix">
+        <div class="site-inner clearfix">
+            <img src="http://1sf6c258qpwx97bav8rum17m8.wpengine.netdna-cdn.com/wp-content/uploads/2014/04/Logo-Footer.png" style="float:left;" class="footer-logo">
+
+
+
+            <div class="clear"></div>
+            <div class="site-links"><ul id="menu-bottom" class="menu"><li id="menu-item-357" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-357"><a href="http://soom.la/soombots/">Soombots</a></li>
+                <li id="menu-item-358" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-358"><a href="http://soom.la/the-goodfellas/">Team</a></li>
+                <li id="menu-item-359" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-359"><a href="https://angel.co/soomla-1">Investor Info</a></li>
+                <li id="menu-item-360" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-360"><a href="mailto:support@soom.la">Contact</a></li>
+                <li id="menu-item-361" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-361"><a href="http://blog.soom.la/">Blog</a></li>
+                <li id="menu-item-362" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-362"><a href="http://mappedinisrael.com/">Lovingly made in Israel</a></li>
+            </ul></div>
+
+            <div style="float:right; margin-right:100px;" id="social-icons">
+                <a href="mailto:support@soom.la"><div class="social mail"></div></a>
+                <a href="http://www.linkedin.com/company/soomla"><div class="social linkedin"></div></a>
+                <a href="http://gplus.to/soomla"><div class="social google-plus"></div></a>
+                <a href="https://twitter.com/Soomla"><div class="social twitter"></div></a>
+                <a href="https://www.facebook.com/The.SOOMLA.Project"><div class="social facebook" style="margin-right:0;"></div></a>
+            </div>
+
+
+            <div id="copyright">
+                <p><span>© 2014 Soomla </span><span style="margin-left:10px;"><a href="http://soom.la/terms-conditions/">Terms of Use</a> | <a href="http://soom.la/privacy-policy/">Privacy Policy</a></span></p>
+
+            </div>
+
+        </div><!-- .site-inner -->
+    </div><!-- #site_footer -->
 
 </footer>
 

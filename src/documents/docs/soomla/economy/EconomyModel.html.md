@@ -222,7 +222,7 @@ public static final VirtualGood PAVLOVA_GOOD = new SingleUseVG(
 ```
 
 iOS:
-```
+``` objectivec
 PAVLOVA_GOOD = [[SingleUseVG alloc]
     initWithName:@"Pavlova"
     andDescription:@"Gives customers a sugar rush and they call their friends"
@@ -262,7 +262,7 @@ Suppose you offer a `SingleUsePackVG` of “10 Swords”. The `SingleUseVG` that
 Create a `SingleUsePackVG` (in `IStoreAssets`):
 
 Android:
-```
+``` java
 public static final VirtualGood 20_CHOCOLATECAKE_GOOD = new SingleUsePackVG(
     "CHOCOLATECAKE_ITEM_ID"                                  //good item id
     20							                                         //amount
@@ -274,7 +274,7 @@ public static final VirtualGood 20_CHOCOLATECAKE_GOOD = new SingleUsePackVG(
 ```
 
 iOS:
-```
+``` objectivec
 _20_CHOCOLATE_CAKES_GOOD = [[SingleUsePackVG alloc]
     initWithName:@"20 chocolate cakes"
     andDescription:@"A pack of 20 chocolate cakes"
@@ -310,7 +310,7 @@ A `LifetimeVG` is a `VirtualGood` that is bought exactly once and kept forever.
 To create a `LifetimeVG`:
 
 Android:
-```
+``` java
 public static final VirtualGood MARRIAGE_GOOD = new LifetimeVG(
     "Marriage",							                                      //name
     "This is a LIFETIME thing.",					                         //description
@@ -321,7 +321,7 @@ public static final VirtualGood MARRIAGE_GOOD = new LifetimeVG(
 ```
 
 iOS:
-```
+``` objectivec
 MARRIAGE_GOOD = [[LifetimeVG alloc]
     initWithName:@"Marriage"
     andDescription:@"This is a LIFETIME thing."
@@ -392,7 +392,7 @@ Now, when the user buys this `UpgradeVG`, we check and make sure the appropriate
 To create an `UpgradeVG`:
 
 Android:
-```
+``` java
 public static final VirtualGood LEVEL_1_GOOD = new UpgradeVG(
     "MUFFIN_CAKE_GOOD_ITEM_ID",					                    //goodItemId
     null,                                       			       //prevItemId
@@ -415,7 +415,7 @@ public static final VirtualGood LEVEL_2_GOOD = new UpgradeVG(
 ```
 
 iOS:
-```
+``` objectivec
 LEVEL_1_GOOD = [[UpgradeVG alloc]
     initWithName:@"Level 1"
     andDescription:@"Muffin Cake Level 1"
