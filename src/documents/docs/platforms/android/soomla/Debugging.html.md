@@ -1,3 +1,11 @@
+---
+layout: "content"
+image: "Tutorial"
+title: "Debugging"
+text: "android-store debugging methods and tips"
+position: 6
+---
+
 #**Debugging**
 
 ##Before debugging

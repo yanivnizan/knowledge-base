@@ -1,13 +1,23 @@
+---
+layout: "content"
+image: "Tutorial"
+title: "Economy Model"
+text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
+position: 3
+---
+
 #**Using the Economy Model**
 
 SOOMLA android-store uses modelV3 which is a complete data model implementation for Virtual Economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course.
 
 This tutorial has brief descriptions of each entity in the economy model, but lots of examples. We recommend that you also read [SOOMLA Economy Model](/docs/soomla/EconomyModel), where you will find more detailed explanations for each of the different entities.
 
+![alt text](/img/tutorial_img/soomla_diagrams/EconomyModel.png "Soomla Economy Model")
+
 ## PurchaseTypes
 Purchase types are used to indicate whether an item will be purchased with money or with other virtual items.
 
-> **NOTE:** In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.
+<div class="info-box">In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.</div>
 
 
 
@@ -39,7 +49,7 @@ public static final VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyP
 );
 ```
 
-> **NOTE:** The `productId` that is used to define a new `MarketItem` must be defined in the Market (Google Play, Amazon Store, etc..).
+<div class="info-box">The `productId` that is used to define a new `MarketItem` must be defined in the Market (Google Play, Amazon Store, etc..).</div>
 
 
 ###[PurchaseWithVirtualItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithVirtualItem.java)
@@ -185,7 +195,7 @@ StoreInventory.giveVirtualItem("fruit_cake", 10);
 ```
 
 **Take:**
-This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
+This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.  
 
 ``` java
 StoreInventory.takeVirtualItem("fruit_cake", 1);
