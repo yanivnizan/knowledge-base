@@ -20,12 +20,13 @@ Purchase types are used to indicate whether an item will be purchased with money
 <div class="info-box">In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.</div>
 
 
-
 ###[PurchaseWithMarket](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithMarket.java)
+
+This type of purchase is with money. Items with this purchase type must be defined in the Market (for more info see one of our tutorials on IAB: [Google Play IAB](/docs/platforms/android/soomla/billing_providers/GooglePlayIAB) or [Amazon IAB](/docs/platforms/android/soomla/billing_providers/AmazonIAB)).
 
 There are 2 ways to define this purchase type.
 ``` java
-public static final String NO_ADDS_NONCONS_PRODUCT_ID = "no_ads";
+public static final String NO_ADDS_NONCONS_PRODUCT_ID = "soomla_no_ads";
 
 public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
     ...
@@ -38,7 +39,7 @@ public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
 ```
 OR
 ```  java
-public static final String THOUSANDMUFF_PACK_PRODUCT_ID = "android.test.thousand_muffins";
+public static final String THOUSANDMUFF_PACK_PRODUCT_ID = "soomla_thousand_muffins";
 
 public static final VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyPack(
     ...
@@ -53,6 +54,8 @@ public static final VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyP
 
 
 ###[PurchaseWithVirtualItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithVirtualItem.java)
+
+This type of purchase is with some amount of other virtual items.
 
 ```  java
 public static final String MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
@@ -170,7 +173,7 @@ Virtual goods need to be declared in your implementation of `IStoreAssets`.
 ####How to define
 
 ``` java
-public static final VirtualGood MUFFINCAKE_GOOD = new SingleUseVG(
+public static final VirtualGood FRUITCAKE_GOOD = new SingleUseVG(
     "Fruit Cake",                                                   // name
     "Customers buy a double portion on each purchase of this cake", // description
     "fruit_cake",                                                   // item ID
@@ -207,7 +210,6 @@ Get the balance of a specific `SingleUseVG`.
 
 ``` java
 StoreInventory.getVirtualItemBalance("fruit_cake");
-
 ```
 
 
@@ -216,14 +218,14 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 ####How to define
 
 ``` java
-// Define a pack of 5 "Cream cup" goods that costs $2.99.
-public static final VirtualGood CREAMCUP_GOOD_PACK = new SingleUsePackVG(
-    "cream_cup",                                            // item ID of associated good
+// Define a pack of 5 "Fruit cake" goods that costs $2.99.
+public static final VirtualGood FRUITCAKE_GOOD_PACK = new SingleUsePackVG(
+    "fruit_cake",                                           // item ID of associated good
     5,                                                      // amount of goods in pack
-    "Cream Cup Pack",                                       // name
-    "A pack of 5 Cream Cups",                               // description
-    "cream_cup_5pack",                                      // item ID
-    new PurchaseWithMarket(CREAMCUP_PACK_PRODUCT_ID, 2.99)  // purchase type
+    "Fruit Cake 5 Pack",                                    // name
+    "A pack of 5 Fruit Cakes",                              // description
+    "fruit_cake_5pack",                                     // item ID
+    new PurchaseWithMarket(FRUITCAKE_PACK_PRODUCT_ID, 2.99) // purchase type
 );
 ```
 
@@ -232,17 +234,17 @@ The explanations for buying, giving, and taking are the same as those in [Single
 
 **Buy:**
 ``` java
-StoreInventory.buy("cream_cup_5pack");
+StoreInventory.buy("fruit_cake_5pack");
 ```
 
 **Give:**
 ``` java
-StoreInventory.giveVirtualItem("cream_cup_5pack", 1);
+StoreInventory.giveVirtualItem("fruit_cake_5pack", 1);
 ```
 
 **Take:**
 ``` java
-StoreInventory.takeVirtualItem("cream_cup_5pack", 1);
+StoreInventory.takeVirtualItem("fruit_cake_5pack", 1);
 ```
 
 ####How to query
@@ -250,8 +252,7 @@ StoreInventory.takeVirtualItem("cream_cup_5pack", 1);
 
 Query the balance of the virtual good with item id cream_cup:
 ``` java
-VirtualGood creamCup = (VirtualGood)StoreInfo.getVirtualItem("cream_cup");
-int creamCupBalance = StorageManager.getVirtualGoodsStorage().getBalance(creamCup);
+StoreInventory.getVirtualItemBalance("fruit_cake");
 ```
 
 
