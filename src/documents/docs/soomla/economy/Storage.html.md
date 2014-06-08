@@ -18,7 +18,9 @@ Upon initialization, `StoreController` initializes `StoreInfo`. The first time y
 
 If at some point you want to change the metadata, you will have to bump up the version number in the `getVersion` function in your implementation of `IStoreAssetes`, in order for your users to see your changes. The value of `getVersion` will determine if the saved data in the local (on-device) database will be deleted or not. You'll need to bump the version after ANY change in order to see the changes, otherwise your store’s metadata will always be loaded from the local database, hence your changes will not be shown. Think about this when you release updates to your users.
 
-> **NOTE:** In case you are using the SOOMLA Highway or Storefront, you do NOT need to bump the version after changes, because they allow updating the economy remotely without re-distributing your game.
+<div class="info-box">
+In case you are using the SOOMLA Highway or Storefront, you do NOT need to bump the version after changes, because they allow updating the economy remotely without re-distributing your game.
+</div>
 
 ##Security
 

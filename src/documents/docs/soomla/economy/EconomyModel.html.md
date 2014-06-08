@@ -12,6 +12,8 @@ collection: 'soomla_economy'
 
 SOOMLA provides game developers with an economy model that every game economy can be based upon. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course. SOOMLA supplies you with many types of items, all explained in the overview below.
 
+![alt text](/img/tutorial_img/soomla_diagrams/EconomyModel.png "Soomla Economy Model")
+
 ##Virtual Items
 
 Almost every entity in your virtual economy will be a Virtual Item. There are many types of Virtual Items and you can select the ones that fit your needs. Each one of the various types extends the class `VirtualItem` and adds its own behavior.
@@ -95,7 +97,7 @@ NO_ADS_NON_CONS = [[NonConsumableItem alloc]
 
 MarketItem is a representation of an item in the Market. `MarketItem` is only used for `PurchaseWithMarket` purchase type.
 
-> IMPORTANT: You have to define `MarketItem`s in the Market (App Store, Google Play, etc..).
+<div class="info-box">You have to define `MarketItem`s in the Market (App Store, Google Play, etc..).</div>
 
 **MarketItem Members:**
 
@@ -164,9 +166,9 @@ Every game that has an economy has at least one `VirtualCurrency`. Use this clas
 - Gem
 - Muffin
 
-> **NOTE:** `VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` which is explained below.
+<div class="info-box">`VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` which is explained below.</div>
 
-> However, if for some reason you do want to sell a single “Gold Coin” or a single “Gem” you can do so by providing a `VirtualCurrencyPack` with one Coin or one Gem.
+If for some reason you want to sell a single “Gold Coin” or a single “Gem” you can do so by providing a `VirtualCurrencyPack` with one Coin or one Gem.
 
 ##VirtualCurrencyPack
 
@@ -443,7 +445,7 @@ LEVEL_2_GOOD = [[UpgradeVG alloc]
 
 A `VirtualCategory` is used to categorize `VirtualGood`s. Categories are helpful for organizational purposes, but especially come in handy when you have Equippable Virtual Goods.
 
-> **NOTE:** If you don’t have any need for categories, you can just define all of your virtual goods in one category and call it something like “General”.
+<div class="info-box">If you don’t have any need for categories, you can just define all of your virtual goods in one category and call it something like “General”.</div>
 
 **UpgradeVG Members:**
 
