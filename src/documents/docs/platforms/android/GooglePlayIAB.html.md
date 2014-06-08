@@ -22,9 +22,9 @@ position: 1
 
 - Choose Managed product.
 
-        > NOTE: SOOMLA does not support Subscription products.
+        <div class="info-box">SOOMLA does not support Subscription products.</div>
 
-        > NOTE: Google’s in-app billing v3 treats Unmanaged products as Managed products. Therefore we recommend you make all of your in-app products Managed. If your game already contains Unmanaged products see [Google’s documentation](http://developer.android.com/google/play/billing/billing_overview.html#migration).
+        <div class="info-box">Google’s in-app billing v3 treats Unmanaged products as Managed products. Therefore we recommend you make all of your in-app products Managed. If your game already contains Unmanaged products see [Google’s documentation](http://developer.android.com/google/play/billing/billing_overview.html#migration).</div>
 
         ![alt text](/img/tutorial_img/google_play_iab/managedProduct.png "In-app products")
 
@@ -38,7 +38,7 @@ position: 1
 
 - Click on the “Save” button. Go back to the in-app products list.
 
-        > **NOTE:** SOOMLA is all about free-to-play mobile games, so we recommend you choose the “Free” option in the “Pricing & Distribution” tab.
+        <div class="info-box">SOOMLA is all about free-to-play mobile games, so we recommend you choose the “Free” option in the “Pricing & Distribution” tab.</div>
 
  4. Go to the “Services & APIs” tab and make note of your license key. You need to insert it into the code.
 

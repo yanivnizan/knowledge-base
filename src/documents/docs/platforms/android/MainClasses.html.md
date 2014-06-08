@@ -28,7 +28,9 @@ StoreController.getInstance().initialize(storeAssets,
     + "f2EzDb1byP3ISiwxZAgic5BfQYh3HAbeEMD0CvRCHQIctJ8k7zn63NmaemPR7lFjY1GNWeowIDAQAB",
     "aaaaabbbbbb");
 ```
+
 <br>
+
 ###Important Functions
 
 **`public void refreshInventory(final boolean refreshMarketItemsDetails)`**
@@ -59,6 +61,7 @@ Get the current balance of a virtual good with item id "green_hat" (This is the 
 VirtualGood greenHat = (VirtualGood)StoreInfo.getVirtualItem("green_hat");
 int greenHatsBalance = StorageManager.getVirtualGoodsStorage().getBalance(greenHat);
 ```
+
 ##[StorageManager](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StorageManager.java)
 
 `StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodsStorage`, `NonConsumableItemsStorage`, and `KeyValueStorage`.
@@ -88,6 +91,7 @@ StoreInventory.buy("blue_hat");
 ```
 
 <br>
+
 **`giveVirtualItem(String itemId, int amount)`**
 
 Gives your user the given amount of the virtual item with the given item ID, and gets nothing in return. For example, when your user plays your game for the first time you can GIVE him 1000 free gems to start out with.
@@ -99,11 +103,13 @@ StoreInventory.giveVirtualItem("currency_coin", 10);
 ```
 
 <br>
+
 **`takeVirtualItem(String itemId, int amount)`**
 
 Takes from your user the given amount of the virtual item with the given item ID. For example, when your user requests a refund you TAKE the item he/she is returning.
 
 **Example:**  Take 1 virtual good with `itemId` "green_hat":
+
 ``` java
 StoreInventory.takeVirtualItem("green_hat", 1);
 ```
@@ -125,8 +131,8 @@ The configurations of your store will be kept in `StoreConfig`.
 
 * **DB_DELETE** - If this is true then the database will be deleted whenever the application loads.
 
-    > **WARNING:** Do not release your game with this option set to true! Otherwise, your users will lose all their data every time they load the application.
+    <div class="info-box">This feature can be useful for testing when you want to change stuff in your implementation of `IStoreAssets` and see the changes. If you try to change things in `IStoreAssets` and don't delete the DB then your changes will not be shown.</div>
 
-    This feature can be useful for testing when you want to change stuff in your implementation of `IStoreAssets` and see the changes. If you try to change things in `IStoreAssets` and don't delete the DB then your changes will not be shown.
+    <div class="warning-box">Do not release your game with this option set to true! Otherwise, your users will lose all their data every time they load the application.</div>
 
 * **METADATA_VERSION** - Never change this value!

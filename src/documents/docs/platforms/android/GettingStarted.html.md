@@ -28,7 +28,8 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
     ```
 
 3. Change the value of `StoreConfig.SOOM_SEC` to a secret of your choice. Do this now!
-   **You can't change this value after you publish your game!**
+
+   <div class="warning-box">You can't change this value after you publish your game!</div>
 
 4. Create your own implementation of *IStoreAssets* in order to describe your specific game's assets ([example](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/MuffinRushAssets.java)). Initialize *StoreController* with the class you just created:
 
