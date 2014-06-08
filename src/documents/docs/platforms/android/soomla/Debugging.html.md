@@ -34,7 +34,7 @@ position: 6
 
 - To filter the logcat messages, click the dropdown menu at the top right corner of the logcat window, and choose “Edit Filter Configurations”. Then, you can enter “SOOMLA” in the Log Tag field to display only messages that are SOOMLA-related.
 
-    ![alt text](/img/tutorial_img/debugging/1.png "Debugging")
+    ![alt text](/img/tutorial_img/debugging/logcatFilter.png "Debugging")
 
 - SOOMLA provides a Tag for almost every class in android-store. You can use these tags to filter the log messages according to your needs.
 

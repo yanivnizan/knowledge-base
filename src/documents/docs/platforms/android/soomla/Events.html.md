@@ -32,7 +32,7 @@ In addition, android-store provides a singleton class called `BusProvider`, whic
 
 
 
-    > **NOTE:** You can `post` to the bus where you need to.
+    <div class="info-box">You can `post` to the bus where you need to.</div>
 
 
 2. You need to create an event-handler class with functions that listen for and handle such events. Annotate these functions with `@subscribe`.
@@ -44,15 +44,16 @@ In addition, android-store provides a singleton class called `BusProvider`, whic
     }
     ```
 
-    > **NOTE:** Any class can have `@subscribe` functions that handle events.
-    > You can see a full example of such an event handler class [here](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/ExampleEventHandler.java).
+    <div class="info-box">Any class can have `@subscribe` functions that handle events.</div>
+
+    You can see a full example of such an event handler class [here](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/ExampleEventHandler.java).
 
 3. In order to receive events, any class that contains functions that receive events (`@subscribe` functions) needs to register with the bus:
     ``` java
     BusProvider.getInstance().register(this);
     ```
 
-    > **NOTE:** Any class can register to listen for events. If your class is an Activity register in `onResume`.
+    <div class="info-box">Any class can register to listen for events. If your class is an Activity register in `onResume`.</div>
 
 4. In order to stop receiving events, you’ll need to unregister with the bus:
 
@@ -60,4 +61,4 @@ In addition, android-store provides a singleton class called `BusProvider`, whic
     BusProvider.getInstance().unregister(this);
     ```
 
-    > **NOTE:** If your class is an Activity unregister in `onPause`.
+    <div class="info-box">If your class is an Activity unregister in `onPause`.</div>
