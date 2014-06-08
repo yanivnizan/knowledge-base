@@ -4,6 +4,8 @@ image: "Tutorial"
 title: "Economy Model"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 3
+theme: 'platforms'
+collection: 'platforms_android'
 ---
 
 #**Using the Economy Model**

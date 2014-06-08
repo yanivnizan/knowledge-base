@@ -4,6 +4,8 @@ image: "Tutorial"
 title: "Google Play In-app Billing"
 text: "Google Play in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
 position: 1
+theme: 'platforms'
+collection: 'platforms_android'
 ---
 
 #**Define Your Economy in Google Play - Developer Console**

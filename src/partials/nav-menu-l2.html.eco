@@ -2,7 +2,11 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="/img/level2-topmenu/<%= @collection %>.png"/></a>
     <ul id="nav-list-l2" class="dropdown-menu <%= @current %>" role="menu" >
         <% for doc in @getCollection(@current).toJSON(): %>
-            <li class="icon-option"><a class="icon-link" href="/docs/<%= @current %>/<%= doc.name %>"><%= doc.name %></a></li>
+            <li class="icon-option">
+                <a class="icon-link" href="/docs/<%= @current %>/<%= doc.name.toLowerCase() %>">
+                    <% if doc.placeholder: %>
+                    <% end %>
+                    <%= doc.name %></a></li>
         <% end %>
     </ul>
 </div>

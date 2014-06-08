@@ -7,7 +7,7 @@
   },
   "concat": {
     "css": {
-      "src": ["out/styles/bootstrap.css","out/styles/tocify.css", "out/styles/highlightcode.css","out/styles/old.css", "out/styles/knowledge.css"],
+      "src": ["out/styles/bootstrap.css","out/styles/tocify.css", "out/styles/highlightcode.css","out/styles/footer.css", "out/styles/knowledge.css"],
       "dest": "out/styles/kb.css"
     }
   },

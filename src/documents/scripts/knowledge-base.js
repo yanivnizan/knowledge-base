@@ -4,7 +4,8 @@ $(function() {
     $("#nav").tocify({
         showAndHide:false,
         selectors: "h1, h2, h3",
-        ignoreSelector: ".jumbotron"
+        ignoreSelector: ".jumbotron, footer",
+        extendPage: false
     });
 
     // Initialize Dropdown Navigation Instances
@@ -12,12 +13,12 @@ $(function() {
 
     // Dropdown menu animations
     $('.dropdown').on('show.bs.dropdown', function(e){
-        $(this).find('.dropdown-menu').first().stop(true, true).slideDown(200);
+        $(this).find('.dropdown-menu').show();
     });
 
     // Dropdown menu animations
     $('.dropdown').on('hide.bs.dropdown', function(e){
-        $(this).find('.dropdown-menu').first().stop(true, true).slideUp(200);
+        $(this).find('.dropdown-menu').hide();
     });
 
     // Grid-Menu (L3) coloring of icons when hovering
@@ -51,7 +52,11 @@ $(function() {
 //        $(this).click();
     }).mouseleave(function(){
     });
-
+    $('#main-menu').draggable({
+        axis:"y",
+        containment: "#main-menu-container",
+        stack:"div"
+    });
 
 
 });

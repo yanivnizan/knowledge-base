@@ -121,11 +121,11 @@ docpadConfig = {
 		university: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university'},[position:1])
 
-	  platforms_android: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/android'},[position:1])
-
 		platforms_ios: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/ios'},[position:1])
+
+		platforms_android: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/android'},[position:1])
 
 		platforms_cocos2dx: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/cocos2dx'},[position:1])

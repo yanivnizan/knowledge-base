@@ -70,9 +70,9 @@ a {
         background-color:#F0F9FF;
       }
     }
-   & li.active a {
-     font-weight:600;
-   }
+    & li.active a {
+      font-weight:600;
+    }
 
   }
 
@@ -439,13 +439,19 @@ a {
   }
   p {
     margin-top:10px;
+    img {
+      width: 100%;
+      border: 1px solid #e5e5e5;
+    }
   }
   code.hljs {
     background-color: #F0F9FF;
+    padding: 26px 40px 26px 40px;
   }
-  div {
+  div:not(.info-box):not(.warning-box) {
     margin-top:-50px;
     padding-top:50px;
+
   }
 }
 #collapse-container {
@@ -455,6 +461,7 @@ a {
 
 }
 #page-container {
+  margin-bottom:50px;
   @media all and (max-width: 1080px) {
     padding-left:50px;
     padding-right:250px;
@@ -493,6 +500,13 @@ span.plus {
   font-family: 'Open Sans', sans-serif;
   font-weight:400;
   font-size: 15px;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  code {
+    background-color:inherit;
+  }
 }
 .info-box {
   .soomla-box;
@@ -510,7 +524,14 @@ code {
   background-color:#FFFFFF;
   color: #3Fa9F5
 }
-
+#main-menu-container {
+  width:299px;
+  height:597px;
+  margin-left:50px;
+  position:fixed;
+  top:-247px;
+  visibility: hidden;
+}
 #main-menu {
   margin-left:50px;
   background-image: url('/img/menu/Menu-BG.png');
@@ -525,34 +546,102 @@ code {
   -ms-transition: top 0.5s ease-in-out;
   -o-transition: top 0.5s ease-in-out;
   transition: top 0.5s ease-in-out;
+  z-index:1;
   &:hover {
-    top:0px;
-
+//    top:0px;
+    z-index:3;
   }
   ul {
     margin-top:60px;
+    list-style:none;
     li {
       font-family: 'Open Sans', sans-serif;
       font-weight:500;
       font-size: 18px;
-
+      margin-bottom:17px;
       a {
         color:#ffffff;
+        text-shadow: 0px -1px 1px rgba(150, 150, 150, 0.35);
+        span {
+          height:22px;
+          width:22px;
+          display:inline-block;
+          vertical-align:middle;
+          margin-left: 10px;
+          margin-right: 15px;
+        }
+        #opensource-icon {
+          background: url('/img/menu/Icon-OpenSource-Normal.png') no-repeat;
+        }
+        #knowledgebase-icon {
+          background: url('/img/menu/Icon-KnowledgeBase-Normal.png') no-repeat;
+        }
+        #answers-icon {
+          background: url('/img/menu/Icon-Answers-Normal.png') no-repeat;
+        }
+        #about-icon {
+          background: url('/img/menu/Icon-About-Normal.png') no-repeat;
+        }
       }
       &:hover a {
         color: #4B90A5;
         text-decoration: underline;
+        #opensource-icon {
+          background: url('/img/menu/Icon-OpenSource-Selected.png') no-repeat;
+        }
+        #knowledgebase-icon {
+          background: url('/img/menu/Icon-KnowledgeBase-Selected.png') no-repeat;
+        }
+        #answers-icon {
+          background: url('/img/menu/Icon-Answers-Selected.png') no-repeat;
+        }
+        #about-icon {
+          background: url('/img/menu/Icon-About-Selected.png') no-repeat;
+        }
       }
-
     }
   }
 }
 
 #header-logo {
-  margin-left:150px;
+  position:absolute;
+  z-index:3;
+  width:100%;
+  height:100%;
+  margin-left:15px;
 }
 
-.dropdown:hover > ul{
-  display: block;
-  margin:0;
+
+.comingsoon-container {
+  position:relative;
+  overflow:hidden;
+  height:54px;
+  width:54px;
+  img {
+    position:absolute;
+    width:54px;
+    height:216px;
+    top:0;
+    left:0;
+    &.soomla {
+      top:0px;
+    }
+    &.university {
+      top:-54px;
+    }
+    &.downloads {
+      top:-108px;
+    }
+    &.platforms {
+      top:-162px;
+    }
+  }
+}
+
+.cover {
+  width: 300px;
+  height: 60px;
+  position: absolute;
+  left: 140px;
+  z-index:1000;
 }
