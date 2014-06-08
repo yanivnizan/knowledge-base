@@ -25,7 +25,6 @@ position: 6
     **Some Background:**
    When In-App billing purchases are made they are verified directly with Google Play using the Purchase Status API, an HTTP-based API that allows remote querying of the status of a specific in-app product.
 
-
 ##Newbie? Here are some useful tips
 
 ###Debug in Android Studio:

@@ -30,10 +30,7 @@ In addition, android-store provides a singleton class called `BusProvider`, whic
 
     **What will happen next:** the subscriber function that catches this kind of event will be notified, and will handle the change in currency balance.
 
-
-
     <div class="info-box">You can `post` to the bus where you need to.</div>
-
 
 2. You need to create an event-handler class with functions that listen for and handle such events. Annotate these functions with `@subscribe`.
 
