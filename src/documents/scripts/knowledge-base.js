@@ -55,7 +55,12 @@ $(function() {
     $('#main-menu').draggable({
         axis:"y",
         containment: "#main-menu-container",
-        stack:"div"
+        stack:"div",
+        stop: function( event, ui ) {
+            if (ui.position.top <= -236) {
+                $(".cover").css('z-index',1000);
+            }
+        }
     });
 
 
