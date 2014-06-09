@@ -92,6 +92,15 @@ call !NPM_CMD! install --production
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
+:: 2. Install Grunt
+echo Installing Grunt...
+IF EXIST "Gruntfile.js" (
+   call !NPM_CMD! install grunt-cli
+   IF !ERRORLEVEL! NEQ 0 goto error
+   call .\node_modules\.bin\grunt --no-color uglify concat cssmin
+   IF !ERRORLEVEL! NEQ 0 goto error
+ )
+
 :: 2. Build DocPad site
 echo Building DocPad site...
 pushd "%DEPLOYMENT_SOURCE%"
