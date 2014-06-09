@@ -18,8 +18,13 @@
     <%- @getBlock('meta').toHTML() %>
 
     <!-- DocPad Styles + Our Own -->
-
-    <link rel="stylesheet" type="text/css" href="/styles/kb.min.css"  />
+    <!--Temporary add each css/js file separately  -->
+    <link rel="stylesheet" type="text/css" href="/styles/bootstrap.css"  />
+    <link rel="stylesheet" type="text/css" href="/styles/tocify.css"  />
+    <link rel="stylesheet" type="text/css" href="/styles/highlightcode.css"  />
+    <link rel="stylesheet" type="text/css" href="/styles/footer.css"  />
+    <link rel="stylesheet" type="text/css" href="/styles/knowledge.css"  />
+    <!--<link rel="stylesheet" type="text/css" href="/styles/kb.min.css"  />-->
 
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,300' rel='stylesheet' type='text/css'>
@@ -89,7 +94,14 @@
 </footer><!-- /FOOTER -->
 
 <!-- DocPad Scripts + Our Own -->
-<%- @getBlock('scripts').add(@site.scripts).toHTML() %>
+<!--Temporary add each css/js file separately  -->
+<script src="/scripts/jquery-ui-1-10-4-min.js"></script>
+<script src="/vendor/log.js"></script>
+<script src="/vendor/modernizr.js"></script>
+<script src="/scripts/jquery-tocify-min.js"></script>
+<script src="/scripts/knowledge-base.js"></script>
+
+<!--<%- @getBlock('scripts').add(@site.scripts).toHTML() %>-->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
