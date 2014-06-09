@@ -6,101 +6,101 @@ docpadConfig = {
 	# Template Data
 	# These are variables that will be accessible via our templates
 	# To access one of these within our templates, refer to the FAQ: https://github.com/bevry/docpad/wiki/FAQ
-	prompts: false,
+  prompts: false,
 
-	templateData:
+  templateData:
 
-		# Specify some site properties
-		site:
-			# The production url of our website
-			# If not set, will default to the calculated site URL (e.g. http://localhost:9778)
-			url: "http://website.com"
+  # Specify some site properties
+    site:
+      # The production url of our website
+      # If not set, will default to the calculated site URL (e.g. http://localhost:9778)
+      url: "http://website.com"
 
-			# Here are some old site urls that you would like to redirect from
-			oldUrls: [
-				'www.website.com',
-				'website.herokuapp.com'
-			]
+      # Here are some old site urls that you would like to redirect from
+      oldUrls: [
+        'www.website.com',
+        'website.herokuapp.com'
+      ]
 
-			# The default title of our website
-			title: "Soomla Knowledge Base"
+      # The default title of our website
+      title: "Soomla Knowledge Base"
 
-			# The website description (for SEO)
-			description: """
-				When your website appears in search results in say Google, the text here will be shown underneath your website's title.
-				"""
+      # The website description (for SEO)
+      description: """
+        When your website appears in search results in say Google, the text here will be shown underneath your website's title.
+        """
 
-			# The website keywords (for SEO) separated by commas
-			keywords: """
-				place, your, website, keywoards, here, keep, them, related, to, the, content, of, your, website
-				"""
+      # The website keywords (for SEO) separated by commas
+      keywords: """
+        place, your, website, keywoards, here, keep, them, related, to, the, content, of, your, website
+        """
 
-			# The website's styles
-			styles: [
+      # The website's styles
+      styles: [
 
-			]
+      ]
 
-			# The website's scripts
-			scripts: [
-				"""
-				<!-- jQuery -->
-				<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-				<script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\\/script>')</script>
-				"""
-#				'/scripts/kb.min.js'
-				'/scripts/jquery-ui-1-10-4-min.js'
-				'/vendor/log.js'
-				'/vendor/modernizr.js'
-				'/scripts/jquery-tocify-min.js'
-				'/scripts/knowledge-base.js'
-			]
+      # The website's scripts
+      scripts: [
+        """
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\\/script>')</script>
+        """
+        #'/scripts/kb.min.js'
+        '/scripts/jquery-ui-1-10-4-min.js'
+        '/vendor/log.js'
+        '/vendor/modernizr.js'
+        '/scripts/jquery-tocify-min.js'
+        '/scripts/knowledge-base.js'
+      ]
 
 
-		# -----------------------------
-		# Helper Functions
+    # -----------------------------
+    # Helper Functions
 
 		# Get the prepared site/document title
 		# Often we would like to specify particular formatting to our page's title
 		# we can apply that formatting here
-		getPreparedTitle: ->
+    getPreparedTitle: ->
 			# if we have a document title, then we should use that and suffix the site's title onto it
-			if @document.title
-				"#{@document.title} | #{@site.title}"
+      if @document.title
+        "#{@document.title} | #{@site.title}"
 			# if our document does not have it's own title, then we should just use the site's title
-			else
-				@site.title
+      else
+        @site.title
 
 		# Get the prepared site/document description
-		getPreparedDescription: ->
+    getPreparedDescription: ->
 			# if we have a document description, then we should use that, otherwise use the site's description
-			@document.description or @site.description
+      @document.description or @site.description
 
 		# Get the prepared site/document keywords
-		getPreparedKeywords: ->
+    getPreparedKeywords: ->
 			# Merge the document keywords with the site keywords
-			@site.keywords.concat(@document.keywords or []).join(', ')
+      @site.keywords.concat(@document.keywords or []).join(', ')
 
-		getGruntedStyles: ->
-			_ = require 'underscore'
-			styles = []
-			gruntConfig = require('./grunt-config.json')
-			_.each gruntConfig, (value, key) ->
-				styles = styles.concat _.flatten _.pluck value, 'dest'
-			styles = _.filter styles, (value) ->
-				return value.indexOf('.min.css') > -1
-			_.map styles, (value) ->
-				return value.replace 'out', ''
+    getGruntedStyles: ->
+      _ = require 'underscore'
+      styles = []
+      gruntConfig = require('./grunt-config.json')
+      _.each gruntConfig, (value, key) ->
+      styles = styles.concat _.flatten _.pluck value, 'dest'
+      styles = _.filter styles, (value) ->
+        return value.indexOf('.min.css') > -1
+      _.map styles, (value) ->
+        return value.replace 'out', ''
 
-		getGruntedScripts: ->
-			_ = require 'underscore'
-			scripts = []
-			gruntConfig = require('./grunt-config.json')
-			_.each gruntConfig, (value, key) ->
-				scripts = scripts.concat _.flatten _.pluck value, 'dest'
-			scripts = _.filter scripts, (value) ->
-				return value.indexOf('.min.js') > -1
-			_.map scripts, (value) ->
-				return value.replace 'out', ''
+    getGruntedScripts: ->
+      _ = require 'underscore'
+      scripts = []
+      gruntConfig = require('./grunt-config.json')
+      _.each gruntConfig, (value, key) ->
+        scripts = scripts.concat _.flatten _.pluck value, 'dest'
+      scripts = _.filter scripts, (value) ->
+        return value.indexOf('.min.js') > -1
+      _.map scripts, (value) ->
+        return value.replace 'out', ''
 
 	# =================================
 	# Collections
@@ -114,54 +114,54 @@ docpadConfig = {
 
 
 	# That contains all the documents that will be going to the out path posts
-	collections:
-		downloads: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/downloads'},[position:1])
+  collections:
+    downloads: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/downloads'},[position:1])
 
-		platforms: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms'},[position:1])
+    platforms: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms'},[position:1])
 
-		soomla: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla'},[position:1])
+    soomla: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla'},[position:1])
 
-		university: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university'},[position:1])
+    university: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university'},[position:1])
 
-		platforms_ios: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/ios'},[position:1])
+    platforms_ios: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/ios'},[position:1])
 
-		platforms_android: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/android'},[position:1])
+    platforms_android: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/android'},[position:1])
 
-		platforms_cocos2dx: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/cocos2dx'},[position:1])
+    platforms_cocos2dx: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/cocos2dx'},[position:1])
 
-		platforms_unity: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/unity'},[position:1])
+    platforms_unity: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/unity'},[position:1])
 
-		soomla_blueprint: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/blueprint'},[position:1])
+    soomla_blueprint: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/blueprint'},[position:1])
 
-		soomla_economy: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/economy'},[position:1])
+    soomla_economy: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/economy'},[position:1])
 
-		soomla_highway: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/highway'},[position:1])
+    soomla_highway: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/highway'},[position:1])
 
-		soomla_storefront: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/storefront'},[position:1])
+    soomla_storefront: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/storefront'},[position:1])
 
-		university_articles: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/articles'},[position:1])
+    university_articles: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/articles'},[position:1])
 
-		university_datacommunity: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/datacommunity'},[position:1])
+    university_datacommunity: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/datacommunity'},[position:1])
 
-		university_realworldexamples: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/realworldexamples'},[position:1])
+    university_realworldexamples: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/realworldexamples'},[position:1])
 
-		university_videos: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/videos'},[position:1])
+    university_videos: ->
+      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/videos'},[position:1])
 
 # =================================
 	# Environments
@@ -173,11 +173,11 @@ docpadConfig = {
 	# This allows DocPad's to use it's own calculated site URL instead, due to the falsey value
 	# This allows <%- @site.url %> in our template data to work correctly, regardless what environment we are in
 
-	environments:
-		development:
-			templateData:
-				site:
-					url: false
+  environments:
+    development:
+      templateData:
+        site:
+          url: false
 
 
 	# =================================
@@ -186,50 +186,50 @@ docpadConfig = {
 	# Here we can define handlers for events that DocPad fires
 	# You can find a full listing of events on the DocPad Wiki
 
-	events:
+  events:
 
 		# Server Extend
 		# Used to add our own custom routes to the server before the docpad routes are added
-		serverExtend: (opts) ->
+    serverExtend: (opts) ->
 			# Extract the server from the options
-			{server} = opts
-			docpad = @docpad
+      {server} = opts
+      docpad = @docpad
 
 			# As we are now running in an event,
 			# ensure we are using the latest copy of the docpad configuraiton
-			# and fetch our urls from it
-			latestConfig = docpad.getConfig()
-			oldUrls = latestConfig.templateData.site.oldUrls or []
-			newUrl = latestConfig.templateData.site.url
+      # and fetch our urls from it
+      latestConfig = docpad.getConfig()
+      oldUrls = latestConfig.templateData.site.oldUrls or []
+      newUrl = latestConfig.templateData.site.url
 
-			# Redirect any requests accessing one of our sites oldUrls to the new site url
-			server.use (req,res,next) ->
-				if req.headers.host in oldUrls
-					res.redirect(newUrl+req.url, 301)
-				else
-					next()
+      # Redirect any requests accessing one of our sites oldUrls to the new site url
+      server.use (req,res,next) ->
+        if req.headers.host in oldUrls
+          res.redirect(newUrl+req.url, 301)
+        else
+          next()
 
 		# Write After
 		# Used to minify our assets with grunt
-		writeAfter: (opts,next) ->
+    writeAfter: (opts,next) ->
 		  # Prepare
-			safeps = require('safeps')
-			pathUtil = require('path')
-			docpad = @docpad
-			rootPath = docpad.getConfig().rootPath
-			gruntPath = pathUtil.join(rootPath, 'node_modules', '.bin', 'grunt')
+      safeps = require('safeps')
+      pathUtil = require('path')
+      docpad = @docpad
+      rootPath = docpad.getConfig().rootPath
+      gruntPath = pathUtil.join(rootPath, 'node_modules', '.bin', 'grunt')
 
-			command = [gruntPath, 'default']
+      command = [gruntPath, 'default']
 
-			# Execute
-			safeps.spawn(command, {cwd:rootPath,output:true}, next)
+      # Execute
+      safeps.spawn(command, {cwd:rootPath,output:true}, next)
 
-			# Chain
-			@
+      # Chain
+      @
 
-	plugins:
-		ignoreincludes:
-			ignoredExtensions: ['inc', 'min', 'map']
+  plugins:
+    ignoreincludes:
+      ignoredExtensions: ['inc', 'min', 'map']
 }
 
 # Export our DocPad Configuration
