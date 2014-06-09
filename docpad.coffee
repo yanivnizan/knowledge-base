@@ -160,7 +160,7 @@ docpadConfig = {
 		university_realworldexamples: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/realworldexamples'},[position:1])
 
-	  university_videos: ->
+		university_videos: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/videos'},[position:1])
 
 # =================================
