@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Debugging"
 text: "android-store debugging methods and tips"
-position: 6
+position: 7
 ---
 
 #**Debugging**

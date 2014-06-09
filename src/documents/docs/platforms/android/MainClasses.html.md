@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Main Classes"
 text: "The main classes of android-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
-position: 4
+position: 5
 ---
 
 #**Main Classes**
@@ -14,7 +14,7 @@ Here you can find descriptions of some of the main classes and interfaces of and
 
 StoreController holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon App Store, etc…).
 
-> **NOTE:** This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/android/GettingStarted).
+<div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/android/GettingStarted).</div>
 
 Taken from StoreExampleActivity.java of our Muffin Rush [Example](https://github.com/soomla/android-store/tree/master/SoomlaAndroidExample/src/com/soomla/example).
 
@@ -121,18 +121,18 @@ The configurations of your store will be kept in `StoreConfig`.
 
 ###`StoreConfig`’s configurations explained:
 
-* **SOOM_SEC** - The main encryption secret. CHANGE IT! and change it only once.
+* `SOOM_SEC` - The main encryption secret. CHANGE IT! and change it only once.
 
-* **logDebug** - Tells android-store if it needs to print debug messages or not.
+* `logDebug` - Tells android-store if it needs to print debug messages or not.
 
-* **friendlyRefunds** - A friendlyRefunds tells android-store if to let your refunded users keep their VirtualItems after a refund or not (default: false).
+* `friendlyRefunds` - A friendlyRefunds tells android-store if to let your refunded users keep their VirtualItems after a refund or not (default: false).
 
-* **obfuscationSalt** - The obfuscated salt is an array randomly generated numbers. It's recommended that you change these numbers for your specific application, but change them only once!
+* `obfuscationSalt` - The obfuscated salt is an array randomly generated numbers. It's recommended that you change these numbers for your specific application, but change them only once!
 
-* **DB_DELETE** - If this is true then the database will be deleted whenever the application loads.
+* `DB_DELETE` - If this is true then the database will be deleted whenever the application loads.
 
     <div class="info-box">This feature can be useful for testing when you want to change stuff in your implementation of `IStoreAssets` and see the changes. If you try to change things in `IStoreAssets` and don't delete the DB then your changes will not be shown.</div>
 
     <div class="warning-box">Do not release your game with this option set to true! Otherwise, your users will lose all their data every time they load the application.</div>
 
-* **METADATA_VERSION** - Never change this value!
+* `METADATA_VERSION` - Never change this value!

@@ -117,6 +117,6 @@ The configurations of your store will be kept in `StoreConfig`.
 
 - `METADATA_VERSION` - This value defines the version of the metadata located in your database. Never change the value of this variable!
 
-- `VERIFY_PURCHASES` - When set to 'YES', this removes the need to verify purchases when there's no signature. This is useful while you are in development and testing stages of your game.
+- `VERIFY_PURCHASES` - When set to 'YES', server side verification will be enabled.
 
     <div class="warning-box">Set `VERIFY_PURCHASES` to `NO` before you publish your app!</div>

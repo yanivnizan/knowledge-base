@@ -1,3 +1,11 @@
+---
+layout: "content"
+image: "Tutorial"
+title: "Getting Started"
+text: "Explanation of how to get started with iOS-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
+position: 1
+---
+
 #**Getting Started**
 
 Before doing anything, SOOMLA recommends that you go through [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
@@ -18,7 +26,11 @@ Before doing anything, SOOMLA recommends that you go through [Selling with In-Ap
 
     ![alt text](/img/tutorial_img/ios_getting_started/compileSources.png "Compile sources")
 
-5. Create your own implementation of _IStoreAssets_ in order to describe your specific game's assets. Initialize _StoreController_ with the class you just created:
+5. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
+  - For a brief example, see the [example](#example) at the bottom.
+  - For a more detailed example, see our MuffinRush [example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m).
+
+6. Initialize _StoreController_ with the class you just created:
 
     ``` objectivec
     [[StoreController getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init] andCustomSecret:@"[YOUR CUSTOM SECRET HERE]"];
