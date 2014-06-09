@@ -42,16 +42,16 @@
     <div id="main-menu">
             <ul>
                 <li>
-                    <a href="#"><span id="opensource-icon"></span>OPEN SOURCE</a>
+                    <a href="//soom.la"><span id="opensource-icon"></span>OPEN SOURCE</a>
                 </li>
                 <li>
-                    <a href="#"><span id="knowledgebase-icon"></span>KNOWLEDGE BASE</a>
+                    <a href="//know.soom.la"><span id="knowledgebase-icon"></span>KNOWLEDGE BASE</a>
                 </li>
                 <li>
-                    <a href="#"><span id="answers-icon"></span>ANSWERS</a>
+                    <a href="//answers.soom.la"><span id="answers-icon"></span>ANSWERS</a>
                 </li>
                 <li>
-                    <a href="#"><span id="about-icon"></span>ABOUT</a>
+                    <a href="//about.soom.la"><span id="about-icon"></span>ABOUT</a>
                 </li>
             </ul>
         </div>
