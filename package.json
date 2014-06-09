@@ -50,7 +50,7 @@
     "underscore": "~1.4.3"
   },
   "devDependencies": {
-    "docpad-plugin-livereload": "~2.6.0",
+    "docpad-plugin-livereload": "~2.6.0"
   },
   "main": "node_modules/docpad/bin/docpad-server"
 }
