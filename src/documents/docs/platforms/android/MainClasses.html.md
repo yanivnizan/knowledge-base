@@ -3,9 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Main Classes"
 text: "The main classes of android-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
-position: 4
-theme: 'platforms'
-collection: 'platforms_android'
+position: 5
 ---
 
 #**Main Classes**
@@ -16,7 +14,7 @@ Here you can find descriptions of some of the main classes and interfaces of and
 
 StoreController holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon App Store, etc…).
 
-> **NOTE:** This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/android/soomla/GettingStarted).
+<div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/android/GettingStarted).</div>
 
 Taken from StoreExampleActivity.java of our Muffin Rush [Example](https://github.com/soomla/android-store/tree/master/SoomlaAndroidExample/src/com/soomla/example).
 
@@ -30,7 +28,9 @@ StoreController.getInstance().initialize(storeAssets,
     + "f2EzDb1byP3ISiwxZAgic5BfQYh3HAbeEMD0CvRCHQIctJ8k7zn63NmaemPR7lFjY1GNWeowIDAQAB",
     "aaaaabbbbbb");
 ```
+
 <br>
+
 ###Important Functions
 
 **`public void refreshInventory(final boolean refreshMarketItemsDetails)`**
@@ -61,6 +61,7 @@ Get the current balance of a virtual good with item id "green_hat" (This is the 
 VirtualGood greenHat = (VirtualGood)StoreInfo.getVirtualItem("green_hat");
 int greenHatsBalance = StorageManager.getVirtualGoodsStorage().getBalance(greenHat);
 ```
+
 ##[StorageManager](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StorageManager.java)
 
 `StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodsStorage`, `NonConsumableItemsStorage`, and `KeyValueStorage`.
@@ -81,7 +82,7 @@ StorageManager.getNonConsumableItemsStorage().add(nonConsumableItem);
 
 **`buy(String itemId)`**
 
-Buys the item that has the given itemId according to its purchase type - either with real money ($$$) or with other virtual items. Read more about PurchaseTypes in [Economy Model](/docs/platforms/android/soomla/EconomyModel).
+Buys the item that has the given itemId according to its purchase type - either with real money ($$$) or with other virtual items. Read more about PurchaseTypes in [Economy Model](/docs/platforms/android/EconomyModel).
 
 **Example:** Buy a virtual item with `itemId` "blue_hat":
 
@@ -90,6 +91,7 @@ StoreInventory.buy("blue_hat");
 ```
 
 <br>
+
 **`giveVirtualItem(String itemId, int amount)`**
 
 Gives your user the given amount of the virtual item with the given item ID, and gets nothing in return. For example, when your user plays your game for the first time you can GIVE him 1000 free gems to start out with.
@@ -101,11 +103,13 @@ StoreInventory.giveVirtualItem("currency_coin", 10);
 ```
 
 <br>
+
 **`takeVirtualItem(String itemId, int amount)`**
 
 Takes from your user the given amount of the virtual item with the given item ID. For example, when your user requests a refund you TAKE the item he/she is returning.
 
 **Example:**  Take 1 virtual good with `itemId` "green_hat":
+
 ``` java
 StoreInventory.takeVirtualItem("green_hat", 1);
 ```
@@ -117,18 +121,18 @@ The configurations of your store will be kept in `StoreConfig`.
 
 ###`StoreConfig`’s configurations explained:
 
-* **SOOM_SEC** - The main encryption secret. CHANGE IT! and change it only once.
+* `SOOM_SEC` - The main encryption secret. CHANGE IT! and change it only once.
 
-* **logDebug** - Tells android-store if it needs to print debug messages or not.
+* `logDebug` - Tells android-store if it needs to print debug messages or not.
 
-* **friendlyRefunds** - A friendlyRefunds tells android-store if to let your refunded users keep their VirtualItems after a refund or not (default: false).
+* `friendlyRefunds` - A friendlyRefunds tells android-store if to let your refunded users keep their VirtualItems after a refund or not (default: false).
 
-* **obfuscationSalt** - The obfuscated salt is an array randomly generated numbers. It's recommended that you change these numbers for your specific application, but change them only once!
+* `obfuscationSalt` - The obfuscated salt is an array randomly generated numbers. It's recommended that you change these numbers for your specific application, but change them only once!
 
-* **DB_DELETE** - If this is true then the database will be deleted whenever the application loads.
+* `DB_DELETE` - If this is true then the database will be deleted whenever the application loads.
 
-    > **WARNING:** Do not release your game with this option set to true! Otherwise, your users will lose all their data every time they load the application.
+    <div class="info-box">This feature can be useful for testing when you want to change stuff in your implementation of `IStoreAssets` and see the changes. If you try to change things in `IStoreAssets` and don't delete the DB then your changes will not be shown.</div>
 
-    This feature can be useful for testing when you want to change stuff in your implementation of `IStoreAssets` and see the changes. If you try to change things in `IStoreAssets` and don't delete the DB then your changes will not be shown.
+    <div class="warning-box">Do not release your game with this option set to true! Otherwise, your users will lose all their data every time they load the application.</div>
 
-* **METADATA_VERSION** - Never change this value!
+* `METADATA_VERSION` - Never change this value!
