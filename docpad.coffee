@@ -219,7 +219,7 @@ docpadConfig = {
       safeps = require('safeps')
       docpad = @docpad
       rootPath = docpad.getConfig().rootPath
-      gruntPath = path.join(rootPath, 'node_modules', '.bin', 'grunt')
+      gruntPath = path.join('node_modules', '.bin', 'grunt')
 
       command = [gruntPath, 'default']
 
