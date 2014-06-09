@@ -116,52 +116,52 @@ docpadConfig = {
 	# That contains all the documents that will be going to the out path posts
   collections:
     downloads: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/downloads'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/downloads'},[position:1])
 
     platforms: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/platforms'},[position:1])
 
     soomla: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/soomla'},[position:1])
 
     university: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/university'},[position:1])
 
     platforms_ios: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/ios'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/platforms/ios'},[position:1])
 
     platforms_android: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/android'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/platforms/android'},[position:1])
 
     platforms_cocos2dx: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/cocos2dx'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/platforms/cocos2dx'},[position:1])
 
     platforms_unity: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/platforms/unity'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/platforms/unity'},[position:1])
 
     soomla_blueprint: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/blueprint'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/soomla/blueprint'},[position:1])
 
     soomla_economy: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/economy'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/soomla/economy'},[position:1])
 
     soomla_highway: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/highway'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/soomla/highway'},[position:1])
 
     soomla_storefront: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/soomla/storefront'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/soomla/storefront'},[position:1])
 
     university_articles: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/articles'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/university/articles'},[position:1])
 
     university_datacommunity: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/datacommunity'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/university/datacommunity'},[position:1])
 
     university_realworldexamples: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/realworldexamples'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/university/realworldexamples'},[position:1])
 
     university_videos: ->
-      @getCollection('documents').findAllLive({relativeOutDirPath:'docs/university/videos'},[position:1])
+      @getCollection('documents').findAllLive({relativeOutDirPath:'/docs/university/videos'},[position:1])
 
 # =================================
 	# Environments
@@ -223,7 +223,7 @@ docpadConfig = {
       command = [gruntPath, 'default']
 
       # Execute
-      #safeps.spawn(command, {cwd:rootPath,output:true}, next)
+      safeps.spawn(command, {cwd:rootPath,output:true}, next)
 
       # Chain
       @
