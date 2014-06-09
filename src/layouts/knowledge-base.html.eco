@@ -94,14 +94,8 @@
 </footer><!-- /FOOTER -->
 
 <!-- DocPad Scripts + Our Own -->
-<!--Temporary add each css/js file separately  -->
-<script src="/scripts/jquery-ui-1-10-4-min.js"></script>
-<script src="/vendor/log.js"></script>
-<script src="/vendor/modernizr.js"></script>
-<script src="/scripts/jquery-tocify-min.js"></script>
-<script src="/scripts/knowledge-base.js"></script>
 
-<!--<%- @getBlock('scripts').add(@site.scripts).toHTML() %>-->
+<%- @getBlock('scripts').add(@site.scripts).toHTML() %>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>

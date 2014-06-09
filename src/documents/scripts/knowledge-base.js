@@ -21,7 +21,7 @@ $(function() {
         $(this).find('.dropdown-menu').hide();
     });
 
-    // Grid-Menu (L3) coloring of icons when hovering
+    // Grid-Menu (L1-2) coloring of icons when hovering
     $('div.menu-option').hover(function(){
         $(this).find(".option-head-text").addClass("hover");
         $(this).find("img").addClass("hover");

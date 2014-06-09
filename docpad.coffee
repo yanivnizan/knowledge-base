@@ -47,7 +47,12 @@ docpadConfig = {
 				<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 				<script>window.jQuery || document.write('<script src="/vendor/jquery.js"><\\/script>')</script>
 				"""
-				'/scripts/kb.min.js'
+#				'/scripts/kb.min.js'
+				'/scripts/jquery-ui-1-10-4-min.js'
+				'/vendor/log.js'
+				'/vendor/modernizr.js'
+				'/scripts/jquery-tocify-min.js'
+				'/scripts/knowledge-base.js'
 			]
 
 
