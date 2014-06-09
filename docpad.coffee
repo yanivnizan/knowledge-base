@@ -176,6 +176,8 @@ docpadConfig = {
 	# This allows <%- @site.url %> in our template data to work correctly, regardless what environment we are in
 
   environments:
+    static:
+      maxAge: false
     development:
       maxAge: false
       templateData:
