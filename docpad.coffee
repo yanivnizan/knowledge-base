@@ -175,6 +175,7 @@ docpadConfig = {
 
   environments:
     development:
+      maxAge: false
       templateData:
         site:
           url: false
@@ -222,7 +223,7 @@ docpadConfig = {
       command = [gruntPath, 'default']
 
       # Execute
-      safeps.spawn(command, {cwd:rootPath,output:true}, next)
+      #safeps.spawn(command, {cwd:rootPath,output:true}, next)
 
       # Chain
       @
