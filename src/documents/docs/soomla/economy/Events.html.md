@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Events"
 text: "Throughout the SOOMLA SDK events are fired and need to be handled with your game-specific behavior."
-position: 4
+position: 5
 theme: 'soomla'
 collection: 'soomla_economy'
 ---

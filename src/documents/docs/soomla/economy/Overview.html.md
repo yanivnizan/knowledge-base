@@ -4,6 +4,8 @@ image: "Tutorial"
 title: "Overview"
 text: "SOOMLA Overview"
 position: 1
+theme: 'soomla'
+collection: 'soomla_economy'
 ---
 
 #**What is SOOMLA?**

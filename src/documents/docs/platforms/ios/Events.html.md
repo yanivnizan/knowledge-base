@@ -4,6 +4,8 @@ image: "Tutorial"
 title: "Events"
 text: "Event handling in iOS-store follows the publish-subscribe pattern."
 position: 5
+theme: 'platforms'
+collection: 'platforms_ios'
 ---
 
 #**Event Handling**

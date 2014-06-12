@@ -4,6 +4,8 @@ image: "Tutorial"
 title: "In-app Billing"
 text: "iTunes Connect in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
 position: 2
+theme: 'platforms'
+collection: 'platforms_ios'
 ---
 
 #**IAB: App Store**
