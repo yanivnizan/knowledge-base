@@ -1,5 +1,5 @@
 ---
-name: 'Android'
+title: 'Android'
 layout: 'l2-main'
 theme: 'platforms'
 collection: 'platforms_android'

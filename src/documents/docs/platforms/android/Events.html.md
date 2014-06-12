@@ -5,7 +5,7 @@ title: "Events"
 text: "Event handling in android-store follows the publish-subscribe pattern."
 position: 6
 theme: 'platforms'
-collection: 'soomla_economy'
+collection: 'platforms_android'
 ---
 
 #**Event Handling**
