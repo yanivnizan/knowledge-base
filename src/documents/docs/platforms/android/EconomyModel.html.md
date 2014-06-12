@@ -27,12 +27,12 @@ This type of purchase is with money. Items with this purchase type must be defin
 There are 2 ways to define this purchase type.
 
 ``` java
-public static final String NO_ADDS_NONCONS_PRODUCT_ID = "soomla_no_ads";
+public static final String NO_ADS_NONCONS_PRODUCT_ID = "soomla_no_ads";
 
-public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
+public static final NonConsumableItem NO_ADS_NONCONS  = new NonConsumableItem(
     ...
     new PurchaseWithMarket(new MarketItem(
-                   NO_ADDS_NONCONS_PRODUCT_ID,  // product ID
+                   NO_ADS_NONCONS_PRODUCT_ID,  // product ID
                    MarketItem.Managed.MANAGED,  // product type
                    1.99                         // initial price
    ))
@@ -489,12 +489,12 @@ A `NonConsumableItem` is a representation of a non-consumable (MANAGED) item in 
 `NonConsumableItem`s need to be declared in your implementation of `IStoreAssets`.
 
 ``` java
-public static final NonConsumableItem NO_ADS_NONCONS  = new NonConsumableItem(
+public static final NonConsumableItem NO_ADS_NONCONS = new NonConsumableItem(
     "No Ads",                                                       // name
     "Buy this once and ads will disappear forever!",                // description
     "no_ads",                                                       // item ID
     new PurchaseWithMarket(new MarketItem(                          // purchase type
-        NO_ADDS_NONCONS_PRODUCT_ID,             // product ID
+        NO_ADS_NONCONS_PRODUCT_ID,             // product ID
         MarketItem.Managed.MANAGED,             // product type
         1.99)                                   // initial price
     )
@@ -530,8 +530,6 @@ StoreInventory.takeVirtualItem("no_ads", 1);
 ``` java
 StoreInventory.nonConsumableItemExists("no_ads");
 ```
-
-
 
 ###[VirtualCategory](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/VirtualCategory.java)
 

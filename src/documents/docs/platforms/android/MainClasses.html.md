@@ -33,7 +33,7 @@ StoreController.getInstance().initialize(storeAssets,
 
 ###Important Functions
 
-**`public void refreshInventory(final boolean refreshMarketItemsDetails)`**
+**`refreshInventory(final boolean refreshMarketItemsDetails)`**
 
 This function queries the Market’s inventory, and creates a list of all metadata stored in the Market (the items that have been purchased). The metadata includes the item's name, description, price, product ID, etc… Then a `MarketItemsRefreshed` event is posted with the list just created. Upon failure, an error message is printed.
 
@@ -51,16 +51,16 @@ This class holds your store's
 
 `StoreInfo` can be questioned about the existence of `VirtualItem`s and the associations between them.
 
-`StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
-
 **Example:**
 
-Get the current balance of a virtual good with item id "green_hat" (This is the long way, you should actually use `StoreInventory`'s functions.):
+Get the current balance of a virtual good with item id "green_hat" (This is the long way, you should actually use `StoreInventory`'s functions):
 
 ``` java
 VirtualGood greenHat = (VirtualGood)StoreInfo.getVirtualItem("green_hat");
 int greenHatsBalance = StorageManager.getVirtualGoodsStorage().getBalance(greenHat);
 ```
+
+`StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
 
 ##[StorageManager](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StorageManager.java)
 

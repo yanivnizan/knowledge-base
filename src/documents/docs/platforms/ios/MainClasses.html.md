@@ -14,7 +14,7 @@ Here you can find descriptions of some of the main classes and interfaces of iOS
 
 StoreController holds the basic assets needed to operate the Store. You can use it to purchase products from the App Store. It provides you with functionality such as starting/stopping the in-app billing service in the background, querying the inventory for information, or starting a purchase process in the App Store.
 
-> **NOTE:** This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/ios/GettingStarted).
+<div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/ios/GettingStarted).</div>
 
 Taken from AppDelegate.m of our Muffin Rush [Example](https://github.com/soomla/ios-store/tree/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample):
 
@@ -44,8 +44,6 @@ This class holds your store's
 
 `StoreInfo` can be questioned about the existence of `VirtualItem`s and the associations between them.
 
-`StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
-
 **Example:**
 
 Get the current balance of a virtual good with item id "green_hat" (This is the 'long' way, but you should preferably use `StoreInventory`'s functions):
@@ -54,6 +52,8 @@ Get the current balance of a virtual good with item id "green_hat" (This is the 
 VirtualGood* greenHat = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:@"green_hat"];
 int greenHatsBalance = [[[StorageManager getInstance] virtualGoodStorage] balanceForItem:greenHat];
 ```
+
+`StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
 
 ##[StorageManager](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/data/StorageManager.h)
 

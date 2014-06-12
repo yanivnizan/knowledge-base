@@ -20,7 +20,9 @@ In addition, android-store provides a singleton class called `BusProvider`, whic
 
 ##How it works and what you need to do:
 
-1. Throughout the android-store code events are fired, which means they are posted to the singleton instance of the bus. The example below is taken from android-store’s class `VirtualCurrencyStorage`. Here we can see a function that fires a `CurrencyBalanceChangedEvent`.
+1. Throughout the android-store code events are fired, which means they are posted to the singleton instance of the bus.
+
+    The example below is taken from android-store’s class `VirtualCurrencyStorage`. Here we can see a function that fires a `CurrencyBalanceChangedEvent`.
 
     ``` java
     protected void postBalanceChangeEvent(VirtualItem item, int balance, int amountAdded) {
