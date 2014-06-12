@@ -18,7 +18,15 @@
     <%- @getBlock('meta').toHTML() %>
 
     <!-- DocPad Styles + Our Own -->
-    <%- @getBlock('styles').add(@site.styles).toHTML() %>
+    <!--Temporary add each css/js file separately  -->
+    <link rel="stylesheet" type="text/css" href="/styles/bootstrap.css"  />
+    <link rel="stylesheet" type="text/css" href="/styles/tocify.css"  />
+    <link rel="stylesheet" type="text/css" href="/styles/highlightcode.css"  />
+    <link rel="stylesheet" type="text/css" href="/styles/footer.css"  />
+    <link rel="stylesheet" type="text/css" href="/styles/knowledge.css"  />
+    <!--<link rel="stylesheet" type="text/css" href="/styles/kb.min.css"  />-->
+
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,300' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 </head>
@@ -28,22 +36,65 @@
 <![endif]-->
 
 <nav id="knowledge-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div id="dropdown-container" class="dropdown pull-right">
-        <a id="nav-toggle" class="dropdown-toggle" data-toggle="dropdown" href="#"></a>
-        <ul id="nav-list" class="dropdown-menu" role="menu" >
-           <li>One</li>
-            <li>Two</li>
-            <li>Three</li>
-        </ul>
-    </div>
+    <div class="cover"> <a id="header-logo" href="/"><img  src="/img/HeaderLogo.png"/></a></div>
+    <div id="main-menu-container"></div>
+
+    <div id="main-menu">
+            <ul>
+                <li>
+                    <a href="//soom.la"><span id="opensource-icon"></span>OPEN SOURCE</a>
+                </li>
+                <li>
+                    <a href="//know.soom.la"><span id="knowledgebase-icon"></span>KNOWLEDGE BASE</a>
+                </li>
+                <li>
+                    <a href="//answers.soom.la"><span id="answers-icon"></span>ANSWERS</a>
+                </li>
+                <li>
+                    <a href="//about.soom.la"><span id="about-icon"></span>ABOUT</a>
+                </li>
+            </ul>
+        </div>
+
 </nav>
 <%- @content %>
 
-<footer>
+<!-- FOOTER -->
 
-</footer>
+<footer id="footer">
+    <div class="container">
+        <div class="footer-right">
+            <div class="media-icons ">
+                <ul class="clearfix">
+                    <li><a href=""><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a href="http://www.linkedin.com/company/soomla"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="https://www.facebook.com/The.SOOMLA.Project"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com/Soomla"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="http://gplus.to/soomla"><i class="fa fa-google-plus"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-left">
+            <div class="clearfix">
+                <a class="visible-md visible-lg pull-left" href=""><img src="http://about-stg.soom.la/wp-content/themes/soomla/images/Logo-footer.png"></a>
+                <ul id="menu-footer-menu" class="menu footer-menu h-list pull-left"><li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22"><a href="http://about-stg.soom.la/soombots/">Soombots</a></li>
+                    <li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23"><a href="http://about-stg.soom.la/">Team</a></li>
+                    <li id="menu-item-24" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-24"><a href="https://angel.co/soomla-1">Inverstors Info</a></li>
+                    <li id="menu-item-25" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-25"><a href="mailto:support@soom.la">Contact</a></li>
+                    <li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26"><a href="http://blog.soom.la">Blog</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <span>&#169; 2014 Soomla</span>
+                <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+                <span>Lovingly Made In Tel Aviv</span>
+            </div>
+        </div>
+    </div>
+</footer><!-- /FOOTER -->
 
 <!-- DocPad Scripts + Our Own -->
+
 <%- @getBlock('scripts').add(@site.scripts).toHTML() %>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>

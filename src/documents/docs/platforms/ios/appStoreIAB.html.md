@@ -39,6 +39,6 @@ position: 2
 
 ###Some useful tips and links
 
-- Make sure to be using the correct type of user account. While your game is in development mode you'll need to use a test user. Read more about that [here](https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Chapters/SettingUpUserAccounts.html).
+- Make sure to be using the correct type of user account. While your game is in development mode you'll need to use a test user. Read more about that [here](https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnectInAppPurchase_Guide/Chapters/TestingInAppPurchases.html) or [here](https://developer.apple.com/library/ios/documentation/LanguagesUtilities/Conceptual/iTunesConnect_Guide/Chapters/SettingUpUserAccounts.html).
 
 - Make sure to use the correct Bundle ID. Read more about that [here](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/ConfiguringYourApp/ConfiguringYourApp.html).

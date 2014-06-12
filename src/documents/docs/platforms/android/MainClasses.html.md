@@ -4,6 +4,8 @@ image: "Tutorial"
 title: "Main Classes"
 text: "The main classes of android-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
 position: 5
+theme: 'platforms'
+collection: 'platforms_android'
 ---
 
 #**Main Classes**

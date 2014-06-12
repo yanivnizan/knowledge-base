@@ -1,6 +1,7 @@
 ---
+name: 'articles'
 layout: 'l2-main'
-theme: 'platforms'
-collection: 'articles'
+theme: 'university'
+collection: 'university_articles'
 ---
 

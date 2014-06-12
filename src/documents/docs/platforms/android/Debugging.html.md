@@ -4,6 +4,8 @@ image: "Tutorial"
 title: "Debugging"
 text: "android-store debugging methods and tips"
 position: 7
+theme: 'platforms'
+collection: 'platforms_android'
 ---
 
 #**Debugging**
