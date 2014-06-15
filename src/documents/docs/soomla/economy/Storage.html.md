@@ -1,6 +1,6 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "Storage"
 title: "Storage"
 text: "SOOMLA provides game developers with local storage and functionality to maintain it."
 position: 4

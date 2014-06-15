@@ -1,6 +1,6 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "Wrench"
 title: "Debugging"
 text: "android-store debugging methods and tips"
 position: 7
@@ -54,6 +54,6 @@ Go to your AndroidSDK/platform-tools directory.
 
    2. Get [Pidcat](https://github.com/JakeWharton/pidcat)
 
-       - Type `brew install pidcat`
+       - `brew install pidcat`
 
-       - Type `pidcat com.soomla.example` (or other package name)
+       - For filtering: `pidcat com.soomla.example` (or other package name)

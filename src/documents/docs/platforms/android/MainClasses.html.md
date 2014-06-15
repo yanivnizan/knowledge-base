@@ -23,12 +23,7 @@ Taken from StoreExampleActivity.java of our Muffin Rush [Example](https://github
 ``` java
 IStoreAssets storeAssets = new MuffinRushAssets();
 StoreController.getInstance().initialize(storeAssets,
-    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAphC8H7OYag8u8l1WayR7dHMKFC+XC09tLk9A"
-    + "6FnxqsJPF4+Y4iJ4NTs24PVYWB4y/DQjfo3b7z6DqXBYgAOMYn7I3VIbjzgbit+DgGWfmiKWCQotcG"
-    + "5jWEsTiGMy+yRkJ6mwvWyVt8c3EfYrgrIfDMYrzIpk+F0PK/ybDiQmj4j2H9PB3NwOMpaGCkKM3IrE"
-    + "Y66fclnJpO3nDqN7Lun5mGAlni5eMKkwM5f5O8DUD65y/MmXTwUddXKnIaurY6giRcJktK6zWsFopx"
-    + "f2EzDb1byP3ISiwxZAgic5BfQYh3HAbeEMD0CvRCHQIctJ8k7zn63NmaemPR7lFjY1GNWeowIDAQAB",
-    "aaaaabbbbbb");
+    "MIIBIjANBgkqhkiG9w...");
 ```
 
 <br>

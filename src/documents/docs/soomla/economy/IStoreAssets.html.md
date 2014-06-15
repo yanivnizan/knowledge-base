@@ -1,6 +1,6 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "Game"
 title: "IStoreAssets"
 text: "IStoreAssets is an interface that represents a single game’s economy. When you use SOOMLA to create your game economy, one of the first steps to take is to create your own implementation of IStoreAssets."
 position: 2

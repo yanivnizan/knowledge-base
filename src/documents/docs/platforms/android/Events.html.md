@@ -1,6 +1,6 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "Events"
 title: "Events"
 text: "Event handling in android-store follows the publish-subscribe pattern."
 position: 6

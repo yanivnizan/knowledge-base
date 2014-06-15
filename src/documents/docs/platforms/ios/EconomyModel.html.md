@@ -1,6 +1,6 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "Modeling"
 title: "Economy Model"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 3
@@ -39,7 +39,7 @@ NO_ADS_NON_CONS = [[NonConsumableItem alloc]
 
 OR
 
-```  objectivec
+``` objectivec
 _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
     ...
     andPurchaseType:[[PurchaseWithMarket alloc]
@@ -54,7 +54,7 @@ _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
 
 This type of purchase is with some amount of other virtual items.
 
-```  objectivec
+``` objectivec
 // A chocolate cake good can be purchased with 250 muffin currencies
 CHOCOLATE_CAKE_GOOD = [[SingleUseVG alloc]
     ...

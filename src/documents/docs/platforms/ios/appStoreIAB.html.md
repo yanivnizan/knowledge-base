@@ -1,6 +1,6 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "InAppPurchase"
 title: "In-app Billing"
 text: "iTunes Connect in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
 position: 2
@@ -8,7 +8,7 @@ theme: 'platforms'
 collection: 'platforms_ios'
 ---
 
-#**IAB: App Store**
+#**App Store IAB**
 
 1. Create your app in Apple’s IAP for Developers. If you’re not sure how to do this, please read Apple's [In-App Purchase for Developers](https://developer.apple.com/in-app-purchase/) before continuing.
 
@@ -33,9 +33,9 @@ collection: 'platforms_ios'
 
 3. When you're done defining your in-app purchase products, click on "View or generate a shared secret". A shared secret is a unique code that you should use when you need to make the call to Apple's servers for your In-App Purchase receipts.
 
-<div class="info-box">SOOMLA is all about free-to-play mobile games, so we recommend you choose the “Free” option in the "Rights and Pricing" tab.</div>
+  <div class="info-box">SOOMLA is all about free-to-play mobile games, so we recommend you choose the “Free” option in the "Rights and Pricing" tab.</div>
 
-![alt text](/img/tutorial_img/ios_iab/free2play.png "Free-to-play")
+  ![alt text](/img/tutorial_img/ios_iab/free2play.png "Free-to-play")
 
 ##Newbie?
 
