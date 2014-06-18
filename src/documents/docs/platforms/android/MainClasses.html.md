@@ -93,7 +93,7 @@ StoreInventory.buy("blue_hat");
 
 Gives your user the given amount of the virtual item with the given item ID, and gets nothing in return. For example, when your user plays your game for the first time you can GIVE him 1000 free gems to start out with.
 
-**Example:** Give the user 10 pieces of a virtual currency with `itemId` "currency_coin":
+**Example:** Give the user 10 units of the virtual currency with `itemId` "currency_coin":
 
 ``` java
 StoreInventory.giveVirtualItem("currency_coin", 10);

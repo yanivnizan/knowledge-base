@@ -10,7 +10,7 @@ collection: 'platforms_android'
 
 #**Using the Economy Model**
 
-SOOMLA android-store uses modelV3 which is a complete data model implementation for Virtual Economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course.
+SOOMLA's android-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course.
 
 This tutorial has brief descriptions of each entity in the economy model, but lots of examples. We recommend that you also read [SOOMLA Economy Model](/docs/soomla/EconomyModel), where you will find more detailed explanations for each of the different entities.
 
@@ -34,7 +34,7 @@ public static final String NO_ADS_NONCONS_PRODUCT_ID = "soomla_no_ads";
 public static final NonConsumableItem NO_ADS_NONCONS  = new NonConsumableItem(
     ...
     new PurchaseWithMarket(new MarketItem(
-                   NO_ADS_NONCONS_PRODUCT_ID,  // product ID
+                   NO_ADS_NONCONS_PRODUCT_ID,   // product ID
                    MarketItem.Managed.MANAGED,  // product type
                    1.99                         // initial price
    ))
@@ -55,7 +55,7 @@ public static final VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyP
 );
 ```
 
-<div class="info-box">The `productId` that is used to define a new `MarketItem` must be defined in the Market (Google Play, Amazon Store, etc..).</div>
+<div class="info-box">The `productId` that is used to define a new `MarketItem` must must match the product ID defined in the Market (Google Play, Amazon Store, etc..).</div>
 
 ###[PurchaseWithVirtualItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithVirtualItem.java)
 
@@ -365,11 +365,11 @@ StoreInventory.takeVirtualItem("kramer", 1);
 // The user equips an owned good, George:
 StoreInventory.equipVirtualGood("george");
 
-//The user tries to equip Kramer (while he has George equipped):
+// The user tries to equip Kramer (while he has George equipped):
 StoreInventory.equipVirtualGood("kramer");
-//Internally, George will be unequipped and Kramer will be equipped instead.
+// Internally, George will be unequipped and Kramer will be equipped instead.
 
-//The user unequips the currently equipped character (Kramer).
+// The user unequips the currently equipped character (Kramer).
 StoreInventory.unEquipVirtualGood("kramer");
 ```
 

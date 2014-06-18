@@ -84,7 +84,7 @@ Buys the item that has the given `itemId` according to its purchase type - eithe
 
 Gives your user the given amount of the virtual item with the given item id, and demands nothing in return. For example, when your user plays your game for the first time you GIVE him for free 1000 gems.
 
-**Example:** Give the user 10 pieces of a virtual currency with item id "currency_coin":
+**Example:** Give the user 10 units of the virtual currency with item id "currency_coin":
 
 ``` objectivec
 [StoreInventory giveAmount:10 ofItem:@"currency_coin"];

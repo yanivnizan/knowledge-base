@@ -10,7 +10,7 @@ collection: 'platforms_ios'
 
 #**Using the Economy Model**
 
-SOOMLA's ios-store provides an economy model that supplies game devs with items that every game has. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items.
+SOOMLA's iOS-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items.
 
 This tutorial has brief descriptions of each entity in the economy model, but lots of examples. We recommend that you also read [SOOMLA Economy Model](/docs/soomla/EconomyModel), where you will find more detailed explanations for each of the different entities.
 
@@ -47,7 +47,7 @@ _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
         andPrice:8.99]];
 ```
 
-<div class="info-box">The `productId` that is used to define a new `MarketItem` must be defined in the App Store.</div>
+<div class="info-box">The `productId` that is used to define a new `MarketItem` must match the product ID defined in the App Store.</div>
 
 
 ###[PurchaseWithVirtualItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/PurchaseTypes/PurchaseWithVirtualItem.h)
@@ -334,7 +334,7 @@ KRAMER_GOOD = [[EquippableVG alloc]
     andItemId:KRAMER_GOOD_ITEM_ID
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
         initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
-        andAmount:450]
+        andAmount:500]
         andEquippingModel:kCategory];
 ```
 
@@ -367,11 +367,11 @@ This function simply deducts the user's balance. In case of a refund request, it
 // The user equips an owned good, George:
 [StoreInventory equipVirtualGoodWithItemId:@"george"];
 
-//The user tries to equip Kramer (while he has George equipped):
+// The user tries to equip Kramer (while he has George equipped):
 [StoreInventory equipVirtualGoodWithItemId:@"kramer"];
-//Internally, George will be unequipped and Kramer will be equipped instead.
+// Internally, George will be unequipped and Kramer will be equipped instead.
 
-//The user unequips the currently equipped character (Kramer).
+// The user unequips the currently equipped character (Kramer).
 [StoreInventory unEquipVirtualGoodWithItemId:@"kramer"];
 ```
 
