@@ -217,11 +217,12 @@ docpadConfig = {
 		# Write After
 		# Used to minify our assets with grunt
     writeAfter: (opts,next) ->
-		  # Prepare
+
+      # Prepare
       safeps = require('safeps')
       docpad = @docpad
       rootPath = docpad.getConfig().rootPath
-      gruntPath = path.join('node_modules', '.bin', 'grunt')
+      gruntPath = path.join('node_modules', 'docpad-plugin-grunt', 'node_modules', '.bin', 'grunt')
 
       command = [gruntPath, 'default']
 
