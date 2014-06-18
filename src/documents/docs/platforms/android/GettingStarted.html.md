@@ -64,7 +64,7 @@ And that's it ! You have storage and in-app purchasing capabilities... ALL-IN-ON
   - Click the “+” button at the bottom of the screen and choose “Jars and directories”.
   - Find and add the relevant jar file.
 
-    ![alt text](/img/tutorial_img/android_getting_started/1.png "android-store with jars")
+    ![alt text](/img/tutorial_img/android_getting_started/androidGettingStarted.png "android-store with jars")
 
 ##What's next? Select a Billing Service
 

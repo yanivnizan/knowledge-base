@@ -9,13 +9,13 @@ title: 'Platforms'
         HOW DO YOU PREFER TO CONTINUE?
     </div>
     <div id="jumbo-small-text">
-        We offer several types of documentation
+        Get started with the platform of your choice.
     </div>
 </div>
 
 <div class="nav-options clearfix">
-    <%- @partial('grid-option', {image:"/img/Level2-iOS.png",link:"/docs/platforms/ios",title: "IOS",text: "I'd rather be dead in California than alive in Arizona. There are dozens of us! Dozens!"}) %>
-    <%- @partial('grid-option', {image:"/img/Level2-Android.png",link:"/docs/platforms/android",title: "ANDROID",text: "Did you know that more frozen bananas are sold right here on this boardwalk than anywhere in the OC?"}) %>
-    <%- @partial('grid-option', {image:"/img/Level2-Unity.png",link:"/docs/platforms/unity",title: "UNITY",text: "Tobias is Queen Mary. I've always been deeply passionate about nature. Perhaps you remember Neuterfest? I'll never forget your wedding."}) %>
-    <%- @partial('grid-option', {image:"/img/Level2-Cocos2dx.png",link:"/docs/platforms/cocos2dx",title: "COCOS2DX",text: "I will pack your sweet pink mouth with so much ice cream you'll be the envy of every Jerry and Jane on the block!"}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-iOS.png",link:"/docs/platforms/ios",title: "IOS",text: "Learn about the game economy entities that iOS-store offers, integrate iOS-store into your game, and define your game's IAP products."}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-Android.png",link:"/docs/platforms/android",title: "ANDROID",text: "Learn about the game economy entities that android-store offers, integrate android-store into your game, and define your game's IAP products."}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-Unity.png",link:"/docs/platforms/unity",title: "UNITY",text: "Learn about the game economy entities that unity3d-store offers, integrate unity3d-store into your game, and define your game's IAP products."}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-Cocos2dx.png",link:"/docs/platforms/cocos2dx",title: "COCOS2DX",text: "Learn about the game economy entities that cocos2x-store offers, integrate cocos2dx-store into your game, and define your game's IAP products."}) %>
 </div>

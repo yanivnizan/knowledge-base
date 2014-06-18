@@ -2,6 +2,5 @@
 title: 'Unity'
 layout: 'l2-main'
 theme: 'platforms'
-collection: 'soomla_economy'
-placeholder: 'true'
+collection: 'platforms_unity'
 ---
