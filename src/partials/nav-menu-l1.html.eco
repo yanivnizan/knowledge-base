@@ -4,7 +4,7 @@
         <li><a href="/soomla">Soomla</a></li>
         <li><a href="/platforms">Platforms</a></li>
         <li><a href="/downloads">Downloads</a></li>
-        <li><a href="/university">University</a></li>
+        <!--<li><a href="/university">University</a></li>-->
     </ul>
 </div>
 <img src="/img/Arrow.png"/>
