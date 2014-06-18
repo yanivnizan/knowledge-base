@@ -216,21 +216,25 @@ docpadConfig = {
 
 		# Write After
 		# Used to minify our assets with grunt
-    writeAfter: (opts,next) ->
-
-      # Prepare
-      safeps = require('safeps')
-      docpad = @docpad
-      rootPath = docpad.getConfig().rootPath
-      gruntPath = path.join('node_modules', 'docpad-plugin-grunt', 'node_modules', '.bin', 'grunt')
-
-      command = [gruntPath, 'default']
-
-      # Execute
-      safeps.spawn(command, {cwd:rootPath,output:true}, next)
-
-      # Chain
-      @
+#
+# Gur: commented out because it conflicts with the default behavior of the
+# docpad grunt plugin, which registers to this hook by default
+#
+#    writeAfter: (opts,next) ->
+#
+#      # Prepare
+#      safeps = require('safeps')
+#      docpad = @docpad
+#      rootPath = docpad.getConfig().rootPath
+#      gruntPath = path.join('node_modules', 'docpad-plugin-grunt', 'node_modules', '.bin', 'grunt')
+#
+#      command = [gruntPath, 'default']
+#
+#      # Execute
+#      safeps.spawn(command, {cwd:rootPath,output:true}, next)
+#
+#      # Chain
+#      @
 
   plugins:
     ignoreincludes:
