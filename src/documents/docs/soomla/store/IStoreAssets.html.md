@@ -5,7 +5,7 @@ title: "IStoreAssets"
 text: "IStoreAssets is an interface that represents a single game’s economy. When you use SOOMLA to create your game economy, one of the first steps to take is to create your own implementation of IStoreAssets."
 position: 1
 theme: 'soomla'
-collection: 'soomla_economy'
+collection: 'soomla_store'
 ---
 
 #**IStoreAssets**

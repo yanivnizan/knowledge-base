@@ -14,7 +14,7 @@ title: 'Soomla'
 </div>
 
 <div class="nav-options clearfix">
-    <%- @partial('grid-option', {image:"/img/Level2-EconomyFramework.png",link:"/docs/soomla/economy",title: "ECONOMY FRAMEWORK",text: "I'd rather be dead in California than alive in Arizona. There are dozens of us! Dozens!"}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-StoreFramework.png",link:"/docs/soomla/store",title: "STORE FRAMEWORK",text: "I'd rather be dead in California than alive in Arizona. There are dozens of us! Dozens!"}) %>
     <%- @partial('grid-option', {image:"/img/Level2-Blueprint.png",link:"/docs/soomla/blueprint",title: "BLUEPRINT",text: "Did you know that more frozen bananas are sold right here on this boardwalk than anywhere in the OC?"}) %>
     <%- @partial('grid-option', {image:"/img/Level2-Highway.png",link:"/docs/soomla/highway",title: "HIGHWAY",text: "Tobias is Queen Mary. I've always been deeply passionate about nature. Perhaps you remember Neuterfest? I'll never forget your wedding."}) %>
     <%- @partial('grid-option', {image:"/img/Level2-StoreFront.png",link:"/docs/soomla/storefront",title: "STOREFRONT",text: "I will pack your sweet pink mouth with so much ice cream you'll be the envy of every Jerry and Jane on the block!"}) %>

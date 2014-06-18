@@ -74,7 +74,7 @@ Use the `StorageManager`’s functions to access the different storage bases. Th
 
 **`+ (void)buyItemWithItemId:(NSString*)itemId`**
 
-Buys the item that has the given `itemId` according to its purchase type - either with real money ($$) or with other virtual items. Read more about PurchaseTypes in [Economy Model](/docs/platforms/ios/soomla/economy/EconomyModel).
+Buys the item that has the given `itemId` according to its purchase type - either with real money ($$) or with other virtual items. Read more about PurchaseTypes in [Economy Model](/docs/platforms/ios/soomla/store/EconomyModel).
 
 <br>
 **`+ (void)giveAmount:(int)amount ofItem:(NSString*)itemId`**
@@ -99,7 +99,7 @@ Takes from your user the given amount of the virtual item with the given item id
 <br>
 **`+ (void)equipVirtualGoodWithItemId:(NSString*)goodItemId`**
 
-Equips the given virtual good with the given good item id. Equipping means that your user decides to currently use a specific virtual good. According to additional factors, your user may or may not use other equippable goods at the same time. To understand more about equipping please see section "EquippableVG" in [Economy Model](/docs/platforms/ios/soomla/economy/EconomyModel).
+Equips the given virtual good with the given good item id. Equipping means that your user decides to currently use a specific virtual good. According to additional factors, your user may or may not use other equippable goods at the same time. To understand more about equipping please see section "EquippableVG" in [Economy Model](/docs/platforms/ios/soomla/store/EconomyModel).
 
 
 ##[StoreConfig](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreConfig.h)

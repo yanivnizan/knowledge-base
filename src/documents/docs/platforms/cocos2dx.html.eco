@@ -2,6 +2,6 @@
 name: 'Cocos2dx'
 layout: 'l2-main'
 theme: 'platforms'
-collection: 'soomla_economy'
+collection: 'soomla_store'
 placeholder: 'true'
 ---

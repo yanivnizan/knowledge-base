@@ -5,7 +5,7 @@ title: "Storage"
 text: "SOOMLA provides game developers with local storage and functionality to maintain it."
 position: 3
 theme: 'soomla'
-collection: 'soomla_economy'
+collection: 'soomla_store'
 ---
 
 #**Storage & Metadata**
