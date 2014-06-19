@@ -100,4 +100,39 @@ $(function() {
         }
     });
 
+
+    //
+    // Move article nav to header on scroll
+    //
+
+    var $hierarchyNav   = $("#hierarchy-nav"),
+        articleNavTop   = $hierarchyNav.offset().top,
+        $articlePosition= $("#knowledge-navbar .container"),
+        $headerPosition = $("#main-container .row:first .col-md-9"),
+        $window         = $(window),
+        inHeader        = false;
+
+    $window.on("scroll.article", function() {
+        if ($hierarchyNav.length) {
+
+            // If the article nav is scrolled out of view...
+            if ($window.scrollTop() >= articleNavTop) {
+
+                // If it's not in the header yet, move it there
+                if (!inHeader) {
+                    $hierarchyNav.prependTo($articlePosition);
+                    inHeader = true;
+                }
+
+            // otherwise the article
+            } else {
+
+                if (inHeader) {
+                    $hierarchyNav.appendTo($headerPosition);
+                    inHeader = false;
+                }
+            }
+        }
+    });
+
 });

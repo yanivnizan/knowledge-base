@@ -6,7 +6,7 @@ layout: 'knowledge-base'
 <div id="main-container" class="container">
   <div class="row">
     <div class="col-md-9">
-      <div id="article-nav">
+      <div id="hierarchy-nav">
         <%- @partial('nav-menu-l1', {current:@document.theme}) %>
         <%- @partial('nav-menu-l2', {collection:@document.collection, current:@document.theme}) %>
         <%- @partial('nav-menu-l3', {collection:@document.collection, icon:@document.image}) %>
