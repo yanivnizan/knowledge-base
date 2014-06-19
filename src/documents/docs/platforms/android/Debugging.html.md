@@ -1,9 +1,9 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "Wrench"
 title: "Debugging"
-text: "android-store debugging methods and tips"
-position: 6
+text: "Debugging methods and tips for android-store."
+position: 7
 theme: 'platforms'
 collection: 'platforms_android'
 ---
@@ -26,7 +26,6 @@ collection: 'platforms_android'
 
     **Some Background:**
    When In-App billing purchases are made they are verified directly with Google Play using the Purchase Status API, an HTTP-based API that allows remote querying of the status of a specific in-app product.
-
 
 ##Newbie? Here are some useful tips
 
@@ -55,6 +54,6 @@ Go to your AndroidSDK/platform-tools directory.
 
    2. Get [Pidcat](https://github.com/JakeWharton/pidcat)
 
-       - Type `brew install pidcat`
+       - `brew install pidcat`
 
-       - Type `pidcat com.soomla.example` (or other package name)
+       - For filtering: `pidcat com.soomla.example` (or other package name)

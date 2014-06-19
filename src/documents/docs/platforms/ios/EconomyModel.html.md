@@ -1,6 +1,6 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "Modeling"
 title: "Economy Model"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 3
@@ -10,7 +10,7 @@ collection: 'platforms_ios'
 
 #**Using the Economy Model**
 
-SOOMLA's ios-store provides an economy model that supplies game devs with items that every game has. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items.
+SOOMLA's iOS-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items.
 
 This tutorial has brief descriptions of each entity in the economy model, but lots of examples. We recommend that you also read [SOOMLA Economy Model](/docs/soomla/EconomyModel), where you will find more detailed explanations for each of the different entities.
 
@@ -19,12 +19,11 @@ This tutorial has brief descriptions of each entity in the economy model, but lo
 ## PurchaseTypes
 Purchase types are used to indicate whether an item will be purchased with money or with other virtual items.
 
-> **NOTE:** In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.
-
+<div class="info-box">In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.</div>
 
 ###[PurchaseWithMarket](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/PurchaseTypes/PurchaseWithMarket.h)
 
-This type of purchase is with money. Items with this purchase type must be defined in the App Store (for more info see our tutorial on [App Store IAB](/docs/platforms/ios/soomla/AppStoreIAB)).
+This type of purchase is with money. Items with this purchase type must be defined in the App Store (for more info see our tutorial on [App Store IAB](/docs/platforms/ios/AppStoreIAB)).
 
 There are 2 ways to define this purchase type.
 
@@ -37,8 +36,10 @@ NO_ADS_NON_CONS = [[NonConsumableItem alloc]
             andConsumable:kNonConsumable
             andPrice:1.99]]];
 ```
+
 OR
-```  objectivec
+
+``` objectivec
 _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
     ...
     andPurchaseType:[[PurchaseWithMarket alloc]
@@ -46,14 +47,14 @@ _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
         andPrice:8.99]];
 ```
 
-<div class="info-box">The `productId` that is used to define a new `MarketItem` must be defined in the App Store.</div>
+<div class="info-box">The `productId` that is used to define a new `MarketItem` must match the product ID defined in the App Store.</div>
 
 
 ###[PurchaseWithVirtualItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/PurchaseTypes/PurchaseWithVirtualItem.h)
 
 This type of purchase is with some amount of other virtual items.
 
-```  objectivec
+``` objectivec
 // A chocolate cake good can be purchased with 250 muffin currencies
 CHOCOLATE_CAKE_GOOD = [[SingleUseVG alloc]
     ...
@@ -235,16 +236,19 @@ FRUIT_CAKE_GOOD_PACK = [SingleUsePackVG alloc]
 The explanations for buying, giving, and taking are the same as those in [SingleUseVG](#singleusevg).
 
 **Buy:**
+
 ``` objectivec
 [StoreInventory buyItemWithItemId:@"fruit_cake_5pack"];
 ```
 
 **Give:**
+
 ``` objectivec
 [StoreInventory giveAmount:1 ofItem:@"fruit_cake_5pack"];
 ```
 
 **Take:**
+
 ``` objectivec
 [StoreInventory takeAmount:1 ofItem:@"fruit_cake_5pack"];
 ```
@@ -253,6 +257,7 @@ The explanations for buying, giving, and taking are the same as those in [Single
 `SingleUsePackVG`s do not have a balance of their own in the database. When a user buys a `SingleUsePackVG`, the balance of the associated `SingleUseVG` is increased. After buying a pack of 5 fruit cakes, your user's fruit cake balance should be increased by 5.
 
 Query the balance of the virtual good with item ID "fruit_cake":
+
 ``` objectivec
 [StoreInventory getItemBalance:@"fruit_cake"];
 ```
@@ -277,6 +282,7 @@ MARRIAGE_GOOD = [[LifetimeVG alloc]
 
 **Buy:**
 Buying a `LifetimeVG` means that the user will now own the item for the rest of time, unless the game developer decides to *explicitly* take away the item from the user. Lifetime goods can be bought only once.
+
 ``` objectivec
 [StoreInventory buyItemWithItemId:@"marriage"];
 ```
@@ -284,19 +290,21 @@ Buying a `LifetimeVG` means that the user will now own the item for the rest of 
 **Give:**
 Give a `LifetimeVG` and get nothing in return.
 This is useful if you’d like to give your users a `LifetimeVG` when they first download your game.
+
 ``` objectivec
 [StoreInventory giveAmount:1 ofItem:@"marriage"];
 ```
 
 **Take:**
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
+
 ``` objectivec
 [StoreInventory takeAmount:1 ofItem:@"marriage"];
 ```
 
-
 ####How to query
 Check the ownership of a lifetime good:
+
 ``` objectivec
 //If the balance is greater than 0, the user owns this LifetimeVG.
 [StoreInventory getItemBalance:@"marriage"];
@@ -326,13 +334,14 @@ KRAMER_GOOD = [[EquippableVG alloc]
     andItemId:KRAMER_GOOD_ITEM_ID
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
         initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
-        andAmount:450]
+        andAmount:500]
         andEquippingModel:kCategory];
 ```
 
 ####How to use
 **Buy:**
 Buying an `EquippableVG` is exactly like buying a [`LifetimeVG`](#lifetimevg). The balance of "kramer" will be checked and if it is 0 buying will be allowed.
+
 ``` objectivec
 [StoreInventory buyItemWithItemId:@"kramer"];
 ```
@@ -340,38 +349,44 @@ Buying an `EquippableVG` is exactly like buying a [`LifetimeVG`](#lifetimevg). T
 **Give:**
 Give an `EquippableVG` and get nothing in return.
 This is useful if you’d like to give your users a free character to begin with when they first download your game.
+
 ``` objectivec
 [StoreInventory giveAmount:1 ofItem:@"george"];
 ```
 
 **Take:**
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
+
 ``` objectivec
 [StoreInventory takeAmount:1 ofItem:@"kramer"];
 ```
 
 **Equip & Unequip:**
+
 ``` objectivec
 // The user equips an owned good, George:
 [StoreInventory equipVirtualGoodWithItemId:@"george"];
 
-//The user tries to equip Kramer (while he has George equipped):
+// The user tries to equip Kramer (while he has George equipped):
 [StoreInventory equipVirtualGoodWithItemId:@"kramer"];
-//Internally, George will be unequipped and Kramer will be equipped instead.
+// Internally, George will be unequipped and Kramer will be equipped instead.
 
-//The user unequips the currently equipped character (Kramer).
+// The user unequips the currently equipped character (Kramer).
 [StoreInventory unEquipVirtualGoodWithItemId:@"kramer"];
 ```
 
 ####How to query
 **Check ownership:**
 Check if user owns Kramer:
+
 ``` objectivec
 //If the balance is greater than 0, the user owns Kramer.
 [StoreInventory getItemBalance:@"kramer"];
 ```
+
 **Check equipping status:**
 Check if Kramer is currently equipped:
+
 ``` objectivec
 [StoreInventory isVirtualGoodWithItemIdEquipped:@"kramer"];
 ```
@@ -421,24 +436,28 @@ LEVEL_2_GOOD = [[UpgradeVG alloc]
 ####How to use
 **Buy:**
 When a user buys an upgrade, the `buy` method checks that the upgrade that's being purchased is valid.
+
 ``` objectivec
 [StoreInventory buyItemWithItemId:LEVEL_1_GOOD_ITEM_ID];
 ```
 
 **Upgrade:**
 When you upgrade a virtual good, the method performs a check to see that this upgrade is valid.
+
 ``` objectivec
 [StoreInventory upgradeVirtualGood:MUFFIN_CAKE_GOOD_ITEM_ID];
 ```
 
 **Remove upgrades:**
 Remove all upgrades from the virtual good with the given ID (Muffin cake in our example).
+
 ``` objectivec
 [StoreInventory removeUpgrades:MUFFIN_CAKE_GOOD_ITEM_ID];
 ```
 
 **Give:**
 To give a free upgrade use `forceUpgrade`.
+
 ``` objectivec
 [StoreInventory forceUpgrade:LEVEL_1_GOOD_ITEM_ID];
 ```
@@ -489,24 +508,28 @@ NO_ADS_NON_CONS = [[NonConsumableItem alloc]
 
 **Buy:**
 Non-consumables can only be purchased once and are kept forever for the user. When a user buys a non-consumable item, a check is performed to see that he/she doesn't already own this item.
+
 ``` objectivec
 [StoreInventory buyItemWithItemId:@"no_ads"];
 ```
 
 **Give:**
 Give your users the "No Ads" feature for free.
+
 ``` objectivec
 [StoreInventory giveAmount:1 ofItem:@"no_ads"];
 ```
 
 **Take:**
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
+
 ``` objectivec
 [StoreInventory takeAmount:1 ofItem:@"no_ads"];
 ```
 
 ####How to query
 **Check existence:**
+
 ``` objectivec
 [StoreInventory nonConsumableItemExists:@"no_ads"];
 ```
@@ -516,6 +539,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
 
 ####How to define
+
 ``` objectivec
 // Assume that MUFFIN_CAKE_GOOD_ITEM_ID, PAVLOVA_GOOD_ITEM_ID, etc.. are item IDs of virtual goods that have been declared.
 _MUFFINS_CATEGORY  = [[VirtualCategory alloc]
@@ -525,6 +549,7 @@ _MUFFINS_CATEGORY  = [[VirtualCategory alloc]
 
 ####How to query
 Check which category an item belongs to:
+
 ``` objectivec
 [StoreInfo categoryForGoodWithItemId:MUFFIN_CAKE_GOOD_ITEM_ID];
 ```

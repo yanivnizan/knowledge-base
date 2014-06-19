@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "Getting Started"
-text: "Explanation of how to get started with android-store. Here you can find a basic example of initialization, store framework integration, and links to downloads and IAP setup."
+text: "Get started with android-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
 position: 1
 theme: 'platforms'
 collection: 'platforms_android'
@@ -30,9 +30,14 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
     ```
 
 3. Change the value of `StoreConfig.SOOM_SEC` to a secret of your choice. Do this now!
-   **You can't change this value after you publish your game!**
 
-4. Create your own implementation of *IStoreAssets* in order to describe your specific game's assets ([example](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/MuffinRushAssets.java)). Initialize *StoreController* with the class you just created:
+   <div class="warning-box">You can't change this value after you publish your game!</div>
+
+4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
+  - See the brief [example](#example) at the bottom.
+  - See a more detailed example, our MuffinRush [example](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/MuffinRushAssets.java).
+
+5. Initialize *StoreController* with the class you just created:
 
     ``` java
     StoreController.getInstance().initialize(new YourStoreAssetsImplementation(), "[YOUR CUSTOM GAME SECRET HERE]");
@@ -42,14 +47,16 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
     >
     > Initialize `StoreController` ONLY ONCE when your application loads.
 
-5. Refer to the [next section](#whats-next-select-a-billing-service) for information on selecting your Billing Service and setting it up.
+6. Refer to the [next section](#whats-next-select-a-billing-service) for information on selecting your Billing Service and setting it up.
 
 And that's it ! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
 
 ###With jars
 
  1. Download the .jar file from our downloads page.
+
  2. Add the .jar file to your libs directory
+
  3. In Android Studio, add the .jar file as a dependency to your project:
 
   - Click on the “Project Structure” icon in Android Studio.
@@ -82,31 +89,32 @@ Once you complete the following steps, see the [Google Play IAB](/docs/platforms
   Add the following permission (for Google Play):
 
   ``` xml
-      <uses-permission android:name="com.android.vending.BILLING" />
+  <uses-permission android:name="com.android.vending.BILLING" />
   ```
 
   Add the `IabActivity` to your `application` element, the plugin will spawn a transparent activity to make purchases. Also, you need to tell us what plugin you're using so add a meta-data tag for that:
 
   ``` xml
-      <activity android:name="com.soomla.store.billing.google.GooglePlayIabService$IabActivity"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
-      <meta-data android:name="billing.service" android:value="google.GooglePlayIabService" />
+  <activity android:name="com.soomla.store.billing.google.GooglePlayIabService$IabActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+  <meta-data android:name="billing.service" android:value="google.GooglePlayIabService" />
   ```
 
 3. After you initialize `StoreController`, let the plugin know your public key from [Google play Developer Console](https://play.google.com/apps/publish/):
 
   ``` java
-      GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM THE MARKET]");
+  GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM THE MARKET]");
   ```
-
 
 4. If you want to allow the test purchases, all you need to do is tell that to the plugin:
 
   ``` java
-      GooglePlayIabService.AllowAndroidTestPurchases = true;
+  GooglePlayIabService.AllowAndroidTestPurchases = true;
   ```
 
-For Google Play, we recommend that you open the IAB Service and keep it open in the background in cases where you have an in-game storefront. This is how you do that:
+####If you have an in-game storefront
+
+We recommend that you open the IAB Service and keep it open in the background. This how to do that:
 
 When you open the store, call:  
 ``` java
@@ -128,15 +136,15 @@ Once you complete the following steps, see the [Amazon IAB](/docs/platforms/andr
 
   Add Amazon's `ResponseReceiver` to your `application` element. Also, you need to tell us what plugin you're using so add a meta-data tag for that:
 
-``` xml
-        <receiver android:name = "com.amazon.inapp.purchasing.ResponseReceiver" >
-            <intent-filter>
-                <action android:name = "com.amazon.inapp.purchasing.NOTIFY"
-                        android:permission = "com.amazon.inapp.purchasing.Permission.NOTIFY" />
-            </intent-filter>
-        </receiver>
-        <meta-data android:name="billing.service" android:value="amazon.AmazonIabService" />
-```
+  ``` xml
+  <receiver android:name = "com.amazon.inapp.purchasing.ResponseReceiver" >
+    <intent-filter>
+        <action android:name = "com.amazon.inapp.purchasing.NOTIFY"
+            android:permission = "com.amazon.inapp.purchasing.Permission.NOTIFY" />
+    </intent-filter>
+  </receiver>
+  <meta-data android:name="billing.service" android:value="amazon.AmazonIabService" />
+  ```
 
 ##Example
 
@@ -158,7 +166,7 @@ public class ExampleStoreAssets extends IStoreAssets {
         10,                                 // number of currencies in the pack
         "currency_coin",                    // the currency associated with this pack
         new PurchaseWithMarket(             // purchase type
-            TEN_COIN_PACK_PRODUCT_ID,       // product id
+            TEN_COIN_PACK_PRODUCT_ID,       // product ID
             0.99)                           // initial price
     );
 
@@ -174,7 +182,7 @@ public class ExampleStoreAssets extends IStoreAssets {
     public static final VirtualGood 5_SHIELD_GOOD = new SingleUsePackVG(
         ...
         new PurchaseWithMarket(             // purchase type
-            SHIELD_PACK_PRODUCT_ID,         // product id
+            SHIELD_PACK_PRODUCT_ID,         // product ID
             2.99)                           // initial price
     );
 

@@ -1,9 +1,9 @@
 ---
 layout: "content"
-image: "Tutorial"
+image: "Storage"
 title: "Storage"
 text: "SOOMLA provides game developers with local storage and functionality to maintain it."
-position: 3
+position: 4
 theme: 'soomla'
 collection: 'soomla_store'
 ---

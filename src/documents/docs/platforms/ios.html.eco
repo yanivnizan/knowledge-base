@@ -1,5 +1,5 @@
 ---
-name: 'iOS'
+title: 'iOS'
 layout: 'l2-main'
 theme: 'platforms'
 collection: 'platforms_ios'

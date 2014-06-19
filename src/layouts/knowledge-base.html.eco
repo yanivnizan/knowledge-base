@@ -67,7 +67,7 @@
         <div class="footer-right">
             <div class="media-icons ">
                 <ul class="clearfix">
-                    <li><a href=""><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a href="mailto:support@soom.la"><i class="fa fa-envelope-o"></i></a></li>
                     <li><a href="http://www.linkedin.com/company/soomla"><i class="fa fa-linkedin"></i></a></li>
                     <li><a href="https://www.facebook.com/The.SOOMLA.Project"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="https://twitter.com/Soomla"><i class="fa fa-twitter"></i></a></li>
@@ -78,8 +78,8 @@
         <div class="footer-left">
             <div class="clearfix">
                 <a class="visible-md visible-lg pull-left" href=""><img src="http://about-stg.soom.la/wp-content/themes/soomla/images/Logo-footer.png"></a>
-                <ul id="menu-footer-menu" class="menu footer-menu h-list pull-left"><li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22"><a href="http://about-stg.soom.la/soombots/">Soombots</a></li>
-                    <li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23"><a href="http://about-stg.soom.la/">Team</a></li>
+                <ul id="menu-footer-menu" class="menu footer-menu h-list pull-left"><li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22"><a href="http://about.soom.la/soombots/">Soombots</a></li>
+                    <li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23"><a href="http://about.soom.la/">Team</a></li>
                     <li id="menu-item-24" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-24"><a href="https://angel.co/soomla-1">Inverstors Info</a></li>
                     <li id="menu-item-25" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-25"><a href="mailto:support@soom.la">Contact</a></li>
                     <li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26"><a href="http://blog.soom.la">Blog</a></li>

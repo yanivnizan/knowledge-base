@@ -3,7 +3,7 @@
     <ul id="nav-list" class="dropdown-menu <%= @current %>" role="menu" >
         <li><a href="/soomla">Soomla</a></li>
         <li><a href="/platforms">Platforms</a></li>
-        <li><a href="/downloads">Downloads</a></li>
+        <li><a href="//soom.la/downloads">Downloads</a></li>
         <!--<li><a href="/university">University</a></li>-->
     </ul>
 </div>
