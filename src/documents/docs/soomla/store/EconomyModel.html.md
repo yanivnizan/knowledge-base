@@ -2,7 +2,7 @@
 layout: "content"
 image: "Modeling"
 title: "Economy Model"
-text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
+text: "Every game economy can be based on SOOMLA's economy model, with entities such as virtual currencies, currency packs, and virtual items of all sorts."
 position: 3
 theme: 'soomla'
 collection: 'soomla_store'
@@ -20,92 +20,91 @@ Almost every entity in your virtual economy will be a Virtual Item. There are ma
 
 Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeVirtualItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
 
-Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use buy). Use `takeVirtualItem` when you want to take something from your user.
+Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeVirtualItem` when you want to take something from your user, for example in the case of a refund.
 
-**VirtualItem Members:**
-
-- `name`
-- `description`
-- `itemId` - A unique string that we use to identify the different Virtual Items. (Don't be confused, this has nothing to do with the App Store’s `productId`. We'll get to that when we talk about `MarketItem`.)
+Every virtual item has an `itemId`, a unique string that we use to identify the different items.
 
 ##Purchase Types
 
 As stated above, almost all Virtual Items are purchasable, or as we call them, `PurchasableVirtualItem`s. The only one that isn’t purchasable is `VirtualCurrency`, and we’ll get to why that is later on in this document.
-Every `PurchasableVirtualItem` has the function `buy` that performs a purchase of a virtual item according to a given purchase type. The purchase type can be either of two options: `PurchaseWithVirtualItem` or `PurchaseWithMarket`.
+Every `PurchasableVirtualItem` has the function `buy` that performs a purchase of a virtual item according to a given purchase type. There are 2 different purchase types: `PurchaseWithVirtualItem` and `PurchaseWithMarket`.
 
 ###PurchaseWithVirtualItem
 
-Any `PurchaseWithVirtualItem` can be purchased with any `VirtualItem`, like a sort of trade. When creating an instance of `PurchaseWithVirtualItem`, you need to provide the Id of the virtual item that you want to be paid with and the amount of that virtual item.
+Any item with purchase type `PurchaseWithVirtualItem` can be purchased with any `VirtualItem`, like a sort of trade. When creating an instance of `PurchaseWithVirtualItem`, you need to provide the ID of the virtual item that you want to be paid with and the amount of that virtual item.
 
-**For Example:**
-Suppose that in your game, you offer a “CHOCOLATECAKE_GOOD” that can be bought by paying 250 “Muffins”. The item being purchased is a “CHOCOLATECAKE_GOOD”, the item (virtual currency) to be paid with is “Muffin”, and the amount is 250.
+####**For Example**
+Suppose that in your game, you offer a “CHOCOLATECAKE_GOOD” that can be bought by paying 250 “Muffins”. The item being purchased is a “CHOCOLATECAKE_GOOD”, the item (virtual currency) to pay with is “Muffin”, and the amount is 250.
 
-Android:
+**Android:**
 
 ```
 public static final VirtualGood CHOCOLATECAKE_GOOD = new SingleUseVG(
-    "Chocolate Cake",                                         //name
-    "A classic cake to maximize customer satisfaction",       //description
-    "chocolate_cake",                                         //item id
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 250) //purchase type
+    "Chocolate Cake",                                         // name
+    "A classic cake to maximize customer satisfaction",       // description
+    "chocolate_cake",                                         // item ID
+    new PurchaseWithVirtualItem(                              // purchase type
+      MUFFIN_CURRENCY_ITEM_ID,                                // product ID
+      250)                                                    // amount
 );
 ```
 
-iOS:
+**iOS:**
 ```
 CHOCOLATE_CAKE_GOOD = [[SingleUseVG alloc]
     initWithName:@"Chocolate Cake"
     andDescription:@"A classic cake to maximize customer satisfaction"
     andItemId:CHOCOLATE_CAKE_GOOD_ITEM_ID
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
-    initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
-    andAmount:250]];
+      initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
+      andAmount:250]];
 ```
 
 
 ###PurchaseWithMarket
 
-This kind of `PurchaseType` should be attached to `PurchasableVirtualItem`s that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market, and insert the product id of the item into the SOOMLA code.
+This kind of `PurchaseType` should be attached to items that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market, and insert the product ID of the item into the SOOMLA code (in your version of [IStoreAssets](/docs/soomla/economy/IStoreAssets)).
 
-**For Example:**
-Suppose that in your game, you offer a “No-Ads” feature for $1.99 in the Market. You will need to declare the PurchaseType parameter of your “No-Ads” feature like so:
+####**For Example**
+Suppose that in your game, you offer a “No-Ads” feature for $1.99 in the Market. You will need to declare the `PurchaseType` parameter of your “No-Ads” feature like so:
 
-Android:
+**Android:**
 ```
 public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
-    "No Ads",                                                 //name
-    "Test purchase of MANAGED item.",                         //description
-    "no_ads",                                                 //item id
-    new PurchaseWithMarket(new MarketItem(NO_ADDS_NONCONS_PRODUCT_ID,
-        MarketItem.Managed.MANAGED , 1.99))                   //purchase type
+    "No Ads",                                                 // name
+    "Test purchase of MANAGED item.",                         // description
+    "no_ads",                                                 // item ID
+    new PurchaseWithMarket(                                   // purchase type
+      new MarketItem(
+        NO_ADDS_NONCONS_PRODUCT_ID,                           // product ID
+        MarketItem.Managed.MANAGED,                           // product type
+        1.99))                                                // initial price
 );
 ```
 
-iOS:
+**iOS:**
 ```
 NO_ADS_NON_CONS = [[NonConsumableItem alloc]
     initWithName:@"No Ads"
     andDescription:@"No more ads"
     andItemId:NO_ADS_NON_CONS_ITEM_ID
     andPurchaseType:[[PurchaseWithMarket alloc]
-    initWithMarketItem:[[MarketItem alloc]
-    initWithProductId:NO_ADS_PRODUCT_ID
-    andConsumable:kNonConsumable
-    andPrice:1.99]]];
+      initWithMarketItem:[[MarketItem alloc]
+        initWithProductId:NO_ADS_PRODUCT_ID
+        andConsumable:kNonConsumable
+        andPrice:1.99]]];
 ```
 ##MarketItem
 
 MarketItem is a representation of an item in the Market. `MarketItem` is only used for `PurchaseWithMarket` purchase type.
 
-<div class="info-box">You have to define `MarketItem`s in the Market (App Store, Google Play, etc..).</div>
+<div class="info-box">When you define your items in the Market (App Store, Google Play, etc..) their product IDs should exactly match the product IDs of the corresponding `MarketItem`s. This is explained in detail in the platform-specific "In-app Billing" tutorials. </div>
 
 **MarketItem Members:**
 
-- `productId` - Id of the item in the Market (App Store, Google Play Store, etc..).
+- `productId` - ID of the item in the Market (App Store, Google Play Store, etc..).
 - `type` - The type of the item in the Market.
-	*For example:*
-    - In Google Play Store the type can be either MANAGED or UNMANAGED (see [android-store’s MarketItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/MarketItem.java)).
-    - In App Store the type can be Consumable, NonConsumable, AutoRenewableSubscription, NonRenewableSubscription, or FreeSubscription (see [iOS-store’s MarketItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/MarketItem.h)).
+  (see [android-store’s MarketItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/MarketItem.java) or [iOS-store’s MarketItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/MarketItem.h)).
 - `price` - The price of the item that you charge in the Market.
 
 ##NonConsumableItem
@@ -114,31 +113,25 @@ A `NonConsumableItem` is a representation of a non-consumable item in the Market
 
 Don't be confused... this is not a `LifetimeVG` (explained below). It's just a `MANAGED` item in the Market. If you want to make a `LifetimeVG` available for purchase in the Market, you will need to declare it as a `NonConsumableItem`.
 
-**NonConsumableItem Members:**
+####**For Example**
 
-- `name`
-- `description`
-- `itemId`
-- `purchaseType` - This can be either `PurchaseWithMarket` or `PurchaseWithVirtualItem` (explained below).
-
-
-*For Example:*
 Suppose your game offers a “No-Ads” feature that costs $1.99 in the Market. This “No-Ads” item should be declared as a `NonConsumableItem` in your implementation of `IStoreAssets`, and in the Market it should be declared as well (in Apple App Store it should be declared as a non-consumable, in the Google Play Store it should be declared as a MANAGED item, etc…).
 
-The above example declared in your implementation of `IStoreAssets`:
-
-Android:
+**Android:**
 ```
 public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
-    "No Ads",                                                 //name
-    "Test purchase of MANAGED item.",                         //description
-    "no_ads",                                                 //item id
-    new PurchaseWithMarket(new MarketItem(NO_ADDS_NONCONS_PRODUCT_ID,
-        MarketItem.Managed.MANAGED , 1.99))                   //purchase type
+    "No Ads",                                                 // name
+    "Test purchase of MANAGED item.",                         // description
+    "no_ads",                                                 // item id
+    new PurchaseWithMarket(                                   // purchase type
+      new MarketItem(
+        NO_ADDS_NONCONS_PRODUCT_ID,                           // product ID
+        MarketItem.Managed.MANAGED,                           // product type
+        1.99))                                                // initial price
 );
 ```
 
-iOS:
+**iOS:**
 ```
 NO_ADS_NON_CONS = [[NonConsumableItem alloc]
     initWithName:@"No Ads"
@@ -146,11 +139,12 @@ NO_ADS_NON_CONS = [[NonConsumableItem alloc]
     andItemId:NO_ADS_NON_CONS_ITEM_ID
     andPurchaseType:[[PurchaseWithMarket alloc]
     initWithMarketItem:[[MarketItem alloc]
-    initWithProductId:NO_ADS_PRODUCT_ID
-    andConsumable:kNonConsumable andPrice:1.99]]];
+      initWithProductId:NO_ADS_PRODUCT_ID
+      andConsumable:kNonConsumable
+      andPrice:1.99]]];
 ```
 <br>
-**Real Game Examples:**
+####**Real Game Examples:**
 
 - Another level in the game
 - Access to a character in the game
@@ -158,32 +152,85 @@ NO_ADS_NON_CONS = [[NonConsumableItem alloc]
 
 ##VirtualCurrency
 
-Every game that has an economy has at least one `VirtualCurrency`. Use this class to represent your game's virtual currency.
+Every game that has an economy has at least one `VirtualCurrency`. Use this class to define your game's virtual currency.
 
-**Real Game Examples:**
+####**For Example**
+
+**Android:**
+
+``` java
+public static final String MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
+
+public static final VirtualCurrency MUFFIN_CURRENCY = new VirtualCurrency(
+    "Muffins",                                  // name
+    "Muffin currency",                          // description
+    MUFFIN_CURRENCY_ITEM_ID                     // item id
+);
+```
+
+**iOS:**
+
+``` objectivec
+MUFFINS_CURRENCY = [[VirtualCurrency alloc]
+    initWithName:@"Muffins"
+    andDescription:@"Muffin currency"
+    andItemId:@"currency_muffin"];
+```
+
+
+`VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` which is explained below.
+
+If for some reason you want to sell a single “Gold Coin” or a single “Gem” you can do so by providing a `VirtualCurrencyPack` with one Coin or one Gem.
+
+####**Real Game Examples:**
 
 - Gold Coin
 - Gem
 - Muffin
 
-<div class="info-box">`VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` which is explained below.</div>
-
-If for some reason you want to sell a single “Gold Coin” or a single “Gem” you can do so by providing a `VirtualCurrencyPack` with one Coin or one Gem.
-
 ##VirtualCurrencyPack
 
-As we mentioned above, in game stores you never buy just a "Gold Coin" or a "Muffin", you always buy a pack of the game's `VirtualCurrency`. `VirtualCurrencyPack` represents exactly that: a pack of `VirtualCurrency`.
+As we mentioned above, in game stores you never buy just a "Gold Coin" or a "Muffin", you always buy a pack of the game's `VirtualCurrency`. This class represents exactly that: a pack of `VirtualCurrency`. Use this class to define various currency packs in your game.
 
-**Real Game Examples:**
+####**For Example**
+
+**Android:**
+
+``` java
+public static final VirtualCurrencyPack FIFTYMUFF_PACK = new VirtualCurrencyPack(
+    "50 Muffins",                                              // name
+    "A currency pack of 50 muffins",                           // description
+    "muffins_50",                                              // item ID
+    50,                                                        // number of currency units in this pack
+    MUFFIN_CURRENCY_ITEM_ID,                                   // the currency associated with this pack
+    new PurchaseWithMarket(FIFTYMUFF_PACK_PRODUCT_ID, 1.99)    // purchase type
+);
+```
+
+**iOS:**
+
+``` objectivec
+ _50_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
+    initWithName:@"50 Muffins"
+    andDescription:@"A currency pack of 50 muffins"
+    andItemId:@"muffins_50"
+    andCurrencyAmount:50
+    andCurrency:MUFFINS_CURRENCY_ITEM_ID
+    andPurchaseType:[[PurchaseWithMarket alloc]
+        initWithMarketItem:[[MarketItem alloc]
+            initWithProductId:_50_MUFFINS_PRODUCT_ID
+            andConsumable:kConsumable
+            andPrice:1.99]]];
+```
+
+####**Real Game Examples:**
 
 - A pack of 100 “Gold Coins”
 - A pack of 12 “Muffins”
 
-`VirtualCurrencyPack` is a `PurchasableVirtualItem`, therefore your users will be able to buy it according to the `PurchaseType` you define.
-
 ##VirtualGoods
 
-Every virtual good is a `PurchasableVirtualItem`. You can buy it with another `VirtualItem` or in the Market as described above. `Virtual goods are the heart of every virtual economy. These are the game objects you’re going to want to sell in your game's store.
+Every virtual good is a `PurchasableVirtualItem`. You can buy it with other `VirtualItem`s or in the Marketwith money. Virtual goods are the heart of every virtual economy. These are the game objects you’re going to want to sell in your game's store.
 
 Every virtual good belongs to one of the following groups:
 1. Single Use
@@ -194,26 +241,19 @@ Every virtual good belongs to one of the following groups:
 
 Below are detailed descriptions of each category.
 
-##SingleUseVG
+###SingleUseVG
 
-The most basic and common kind of a `VirtualGood` is a `SingleUseVG`. `SingleUseVG` is a `VirtualGood` your users can buy multiple times. No limits!
+The most basic and common kind of a `VirtualGood` is a `SingleUseVG`. `SingleUseVG`s can be purchase by your users multiple times. No limits!
 
 **The SingleUseVG's characteristics are:**
 
-- Can be purchased unlimited number of times.
-- Has a balance that is saved in the database. Its balance goes up when you "give" it or "buy" it. The balance goes down when you “take” it or give a refund.
+- Can be purchased an unlimited number of times.
+- Has a balance that is saved in the database. Its balance goes up when you "give" it or "buy" it. The balance goes down when you “take” it (for example in the case of a refund).
 
-**SingleUseVG Members:**
+####**For example:**
 
-- `name`
-- `description`
-- `itemId`
-- `purchaseType` - can be either `PurchaseWithMarket` or `PurchaseWithVirtualItem`
+**Android:**
 
-**For example:**
-Create a `SingleUseVG` (in `IStoreAssets`):
-
-Android:
 ``` java
 public static final VirtualGood PAVLOVA_GOOD = new SingleUseVG(
     "Pavlova",                                                      // name
@@ -223,26 +263,27 @@ public static final VirtualGood PAVLOVA_GOOD = new SingleUseVG(
 );
 ```
 
-iOS:
+**iOS:**
+
 ``` objectivec
 PAVLOVA_GOOD = [[SingleUseVG alloc]
     initWithName:@"Pavlova"
     andDescription:@"Gives customers a sugar rush and they call their friends"
     andItemId:PAVLOVA_GOOD_ITEM_ID
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
-    initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
-    andAmount:175]];
+      initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
+      andAmount:175]];
 ```
 
-**Real Game Examples:**
+####**Real Game Examples:**
 
-- ‘Hat’
-- ‘Sword’
-- ‘Cake’
+- Hat
+- Sword
+- Cake
 
-##SingleUsePackVG
+###SingleUsePackVG
 
-Sometimes, you want to to sell packs of `SingleUseVG`s. To support these cases, we've created `SingleUsePackVG`. `Single Use Packs are just packs of Single Use Virtual Goods.
+Sometimes, you'll want to to sell packs of `SingleUseVG`s. To support these cases, we've created `SingleUsePackVG`.
 
 **The SingleUsePackVG's characteristics are:**
 
@@ -251,19 +292,9 @@ Sometimes, you want to to sell packs of `SingleUseVG`s. To support these cases, 
 *For Example:*
 Suppose you offer a `SingleUsePackVG` of “10 Swords”. The `SingleUseVG` that’s associated with this Pack is “Sword”. When your user buys a “10 Sword” Pack, the balance of “Sword” is increased by 10 in the database.
 
-**SingleUsePackVG Members:**
+####**For Example**
 
-- `name`
-- `description`
-- `itemId`
-- `purchaseType` - can be either `PurchaseWithMarket` or `PurchaseWithVirtualItem`
-- `goodItemId` - the itemId of the `SingleUseVG` associated with this pack.
-- `amount` - the number of `SingleUseVG`s in the pack.
-
-**For example:**
-Create a `SingleUsePackVG` (in `IStoreAssets`):
-
-Android:
+**Android:**
 ``` java
 public static final VirtualGood 20_CHOCOLATECAKE_GOOD = new SingleUsePackVG(
     "CHOCOLATECAKE_ITEM_ID"                                  //good item id
@@ -275,19 +306,19 @@ public static final VirtualGood 20_CHOCOLATECAKE_GOOD = new SingleUsePackVG(
 );
 ```
 
-iOS:
+**iOS:**
 ``` objectivec
 _20_CHOCOLATE_CAKES_GOOD = [[SingleUsePackVG alloc]
     initWithName:@"20 chocolate cakes"
     andDescription:@"A pack of 20 chocolate cakes"
     andItemId:_20_CHOCOLATE_CAKES_GOOD_ITEM_ID
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
-    initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
-    andAmount:30]
-    andSingleUseGood:CHOCOLATE_CAKE_GOOD_ITEM_ID
-    andAmount:20];
+      initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
+      andAmount:30]
+      andSingleUseGood:CHOCOLATE_CAKE_GOOD_ITEM_ID
+      andAmount:20];
 ```
-##LifetimeVG
+###LifetimeVG
 
 A `LifetimeVG` is a `VirtualGood` that is bought exactly once and kept forever.
 
@@ -296,48 +327,40 @@ A `LifetimeVG` is a `VirtualGood` that is bought exactly once and kept forever.
 - Can only be purchased once.
 - Your users can't have more than one of this item. In other words, they can have either 0 or 1 of this item at any given time.
 
-**Real Game Examples:**
+####**For Example**
 
-- No Ads
-- Double Coins
+**Android:**
 
-**LifetimeVG Members:**
-
-- `name`
-- `description`
-- `itemId`
-- `purchaseType` - can be either `PurchaseWithMarket` or `PurchaseWithVirtualItem`
-
-**For Example:*
-To create a `LifetimeVG`:
-
-Android:
 ``` java
 public static final VirtualGood MARRIAGE_GOOD = new LifetimeVG(
-    "Marriage",							                                      //name
-    "This is a LIFETIME thing.",					                         //description
-    "MARRIAGE_GOOD_ITEM_ID",						                           //item id
-    new PurchaseWithMarket(new MarketItem(
-        MARRIAGE_PRODUCT_ID, MarketItem.Managed.MANAGED, 9.99))    //purchase type
+    "Marriage",                                         // name
+    "This is a lifetime thing",                         // description
+    "marriage",                                         // item ID
+    new PurchaseWithMarket(MARRIAGE_PRODUCT_ID, 7.99)   // purchase type
 );
 ```
 
-iOS:
+**iOS:**
+
 ``` objectivec
 MARRIAGE_GOOD = [[LifetimeVG alloc]
     initWithName:@"Marriage"
     andDescription:@"This is a LIFETIME thing."
     andItemId:MARRIAGE_GOOD_ITEM_ID
     andPurchaseType:[[PurchaseWithMarket alloc]
-    initWithMarketItem:[[MarketItem alloc]
-    initWithProductId:MARRIAGE_PRODUCT_ID
-    andConsumable:kConsumable
-    andPrice:9.99]]];
+        initWithMarketItem:[[MarketItem alloc]
+            initWithProductId:MARRIAGE_PRODUCT_ID
+            andConsumable:kConsumable andPrice:9.99]]];
 ```
 
-##EquippableVG
+####**Real Game Examples:**
 
-An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact that `EquippableVG` can be purchased once, it can also be equipped by your users. Equipping means that the user decides to currently use a specific `EquippableVG`.
+- No Ads
+- Double Coins
+
+###EquippableVG
+
+An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact that an `EquippableVG` can be purchased once, it can also be equipped by your users. Equipping means that the user decides to currently use a specific `EquippableVG`.
 
 **The EquippableVG's characteristics are:**
 
@@ -345,13 +368,39 @@ An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact tha
 - Can be equipped by the user.
 - Inherits the definition of `LifetimeVG`.
 
-**There are 3 ways to equip an EquippableVG:**
+**There are 3 equipping models:**
 
 - `LOCAL` - The current `EquippableVG`'s equipping status doesn't affect any other `EquippableVG`.
 - `CATEGORY` - In the containing category, if this `EquippableVG` is equipped, all other `EquippableVG`s are unequipped.
 - `GLOBAL` - In the whole game, if this `EquippableVG` is equipped, all other `EquippableVG`s are unequipped.
 
-**Usage Examples:**
+####**For Example**
+
+**Android:**
+
+``` java
+public static final VirtualGood GEORGE_GOOD = new EquippableVG(
+    EquippableVG.EquippingModel.CATEGORY,                       // equipping model
+    "George",                                                   // name
+    "George is the best muffin eater in the north",             // description
+    "george_good",                                              // item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 350)   // purchase type
+);
+```
+
+**iOS:**
+``` objectivec
+KRAMER_GOOD = [[EquippableVG alloc]
+    initWithName:@"Kramer"
+    andDescription:@"Knows how to get muffins"
+    andItemId:KRAMER_GOOD_ITEM_ID
+    andPurchaseType:[[PurchaseWithVirtualItem alloc]
+      initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
+      andAmount:500]
+    andEquippingModel:kCategory];
+```
+
+####**Real Game Examples:**
 
 - **LOCAL EquippableVG Example:** Say your game offers 3 weapons, all `EquippableVG`s: a sword, a gun, and an axe. Let’s suppose your user has already bought all 3. These are equippables that do not affect one another - your user can “carry” the sword, gun, and axe at the same time if he chooses to.
 
@@ -359,11 +408,11 @@ An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact tha
 
 - **CATEGORY EquippableVG Example:** Suppose your game offers “shirts” and “hats”. Let’s say there are 4 available shirts and 2 available hats, and your user has purchased all of the items available. He/she can can equip at most one of each category (0 or 1 shirts AND 0 or 1 hats). (`VirtualCategory` is explained below).
 
-##UpgradeVG
+###UpgradeVG
 
-An UpgradeVG is a VirtualGood in a series of UpgradeVGs that define an upgrade sequence for a given VirtualGood. The associated VirtualGood can be of any type (SingleUseVG, EquippableVG, etc..).
+An `UpgradeVG` is a `VirtualGood` in a series of `UpgradeVG`s that define an upgrade sequence for a given `VirtualGood`. The associated `VirtualGood` can be of any type (`SingleUseVG`, `EquippableVG`, etc..).
 
-**An UpgradeVG is best explained with an example:**
+**An `UpgradeVG` is best explained with an example:**
 Say you have a strength attribute in your game and that strength is upgradeable on a scale of 1-5.  This is what you'll need to create:
 
 1. SingleUseVG for 'strength'
@@ -373,27 +422,22 @@ Say you have a strength attribute in your game and that strength is upgradeable 
 5. UpgradeVG for strength 'level 4'
 6. UpgradeVG for strength 'level 5'
 
-Now, when the user buys this `UpgradeVG`, we check and make sure the appropriate conditions are met and buy it for you (which actually means we upgrade the associated `VirtualGood`).
+When the user buys an`UpgradeVG`, a check is performed to make sure the appropriate conditions are met (which actually means the associated `VirtualGood` is upgraded).
 
-**The UpgradeVG characteristics are:**
+**The UpgradeVG's characteristics are:**
 
 - Can be purchased whenever it's not the current upgrade.
 - Doesn't have a balance in the database.
 
-**UpgradeVG Members:**
+**UpgradeVG class members that are worth mentioning:**
 
-- `name`
-- `description`
-- `itemId`
-- `purchaseType` - can be either PurchaseWithMarket or PurchaseWithVirtualItem
-- `goodItemId` - the itemId of the VirtualGood associated with this upgrade.
-- `prevItemId` - the itemId of the UpgradeVG before, or if this is the first UpgradeVG in the scale then the value is null.
-- `nextItemId` - the itemId of the UpgradeVG after, or if this is the last UpgradeVG in the scale then the value is null.
+- `goodItemId` - the itemId of the `VirtualGood` associated with this upgrade.
+- `prevItemId` - the itemId of the `UpgradeVG` that comes before this one, or if this is the first `UpgradeVG` in the scale then this value is null.
+- `nextItemId` - the itemId of the `UpgradeVG` that comes after this one, or if this is the last `UpgradeVG` in the scale then the value is null.
 
-**For Example:**
-To create an `UpgradeVG`:
+####**For Example:**
 
-Android:
+**Android:**
 ``` java
 public static final VirtualGood LEVEL_1_GOOD = new UpgradeVG(
     "MUFFIN_CAKE_GOOD_ITEM_ID",					                    //goodItemId
@@ -416,15 +460,15 @@ public static final VirtualGood LEVEL_2_GOOD = new UpgradeVG(
 );
 ```
 
-iOS:
+**iOS:**
 ``` objectivec
 LEVEL_1_GOOD = [[UpgradeVG alloc]
     initWithName:@"Level 1"
     andDescription:@"Muffin Cake Level 1"
     andItemId:LEVEL_1_GOOD_ITEM_ID
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
-    initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
-    andAmount:50]
+      initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
+      andAmount:50]
     andLinkedGood:MUFFIN_CAKE_GOOD_ITEM_ID
     andPreviousUpgrade:@""
     andNextUpgrade:LEVEL_2_GOOD_ITEM_ID];
@@ -434,12 +478,13 @@ LEVEL_2_GOOD = [[UpgradeVG alloc]
     andDescription:@"Muffin Cake Level 2"
     andItemId:LEVEL_2_GOOD_ITEM_ID
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
-    initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
-    andAmount:250]
+      initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
+      andAmount:250]
     andLinkedGood:MUFFIN_CAKE_GOOD_ITEM_ID
     andPreviousUpgrade:LEVEL_1_GOOD_ITEM_ID
     andNextUpgrade:@""];
 ```
+
 
 ##VirtualCategory
 
@@ -447,15 +492,11 @@ A `VirtualCategory` is used to categorize `VirtualGood`s. Categories are helpful
 
 <div class="info-box">If you don’t have any need for categories, you can just define all of your virtual goods in one category and call it something like “General”.</div>
 
-**UpgradeVG Members:**
-
-- `name`
-- list of `itemId`s of the `VirtualGood`s in this category
-
-**For Example:**
+####**Real Game Examples:**
 Let’s suppose your game has the following categories of virtual goods: "Power Ups", "Weapons", and  "Hats". Say you decide to make “Weapons” and “Hats” `CATEGORY` `EquippableVG`s. You can easily implement this functionality once the goods are divided into virtual categories.
 
-##Usage Example
+
+##**Usage Example**
 
 An example that contains most or all of the economy objects we described above:
 

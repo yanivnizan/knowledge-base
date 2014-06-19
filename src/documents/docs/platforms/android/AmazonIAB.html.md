@@ -20,24 +20,23 @@ collection: 'platforms_android'
     - Click on "Add a Consumable" or "Add an Entitlement".
         <div class="warning-box">Please note that SOOMLA does not support Subscription products, so do not choose this option.</div>
 
-        ![alt text](/img/tutorial_img/amazon_iab/.png "")
+        ![alt text](/img/tutorial_img/amazon_iab/productTypes.png "Product Types")
 
     - Fill in the mandatory fields.
 
-    - Insert a Product ID for your product. If you followed the steps in the [Getting Started](/docs/platforms/unity3d/GettingStarted) tutorial, you created product IDs for the items you wanted to sell in Amazon App Store. Now you need to insert the EXACT product IDs here.
+    - Insert a product ID for your product in the SKU field. If you followed the steps in the [Getting Started](/docs/platforms/unity3d/GettingStarted) tutorial, you created product IDs for the items you wanted to sell for money. Now you need to insert the EXACT product IDs here.
 
-        ![alt text](/img/tutorial_img/ios_iab/productIDs.png "Product IDs")
+        ![alt text](/img/tutorial_img/amazon_iab/productIDs.png "Product IDs")
 
     - Fill out the rest of the mandatory information. Don't forget to "Save".
-    ![alt text](/img/tutorial_img/amazon_iab/.png "")
 
     <div class="info-box">SOOMLA is all about free-to-play mobile games, so we recommend you set your app's "Base list price" to 0.00 in the “Availability & Pricing” tab.</div>
 
 
 ##Newbie?
 
-###Some useful tips and links
+###Useful links
 
-- Amazon provides a testing service you can find [here](https://developer.amazon.com/tya/welcome.html).
+- Learn how to [test your app](https://developer.amazon.com/appsandservices/apis/earn/mobile-associates/docs/testing-your-app).
 
-- Here is a guide on how to [export a project in Android Studio](http://stackoverflow.com/questions/16622843/how-do-i-export-a-project-in-the-android-studio/19876060#19876060) (generate a signed APK).
+- Amazon provides a [testing service](https://developer.amazon.com/tya/welcome.html) you can use.

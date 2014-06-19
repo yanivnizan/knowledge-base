@@ -2,18 +2,18 @@
 layout: "content"
 image: "Tutorial"
 title: "Overview"
-text: "SOOMLA Overview"
+text: "SOOMLA is the first store creation platform for mobile games. Use our open-source framework to easily create your in-game economy."
 position: 1
 theme: 'soomla'
 collection: 'soomla_store'
 ---
 
-#**What is SOOMLA?**
+#**SOOMLA's Economy Framework**
 
 SOOMLA is the first store creation platform for mobile games. SOOMLA helps you easily create your in-game economy.
 
 ##Open Source
-The SOOMLA Project is an open source framework for mobile game economies. Its goal is to allow mobile game developers easier implementation of virtual currencies, virtual goods and in-app purchases. SOOMLA has decided to create and freely support The SOOMLA Project in order to provide the ultimate game economy solution for the mobile game dev community. learn more ...
+The SOOMLA Project is an open source framework for mobile game economies. Its goal is to allow mobile game developers easier implementation of virtual currencies, virtual goods and in-app purchases. SOOMLA has decided to create and freely support The SOOMLA Project in order to provide the ultimate game economy solution for the mobile game dev community. [Learn more...](http://project.soom.la/)
 
 Through our open source project you get a lot of game economy features like: economy data model, local storage, in-app purchasing interfaces to 3rd party providers, and various easy-to-use store related operations.
 
@@ -21,32 +21,32 @@ SOOMLA's open source code is currently available for Android, iOS, Unity3d, and 
 
 ![alt text](/img/tutorial_img/soomla_diagrams/SoomlaBuildingBlocks.png "Soomla Building Blocks")
 
-###Read about the different game economy features that SOOMLA supplies:
+##The Building Blocks
 
-####[Economy Model](/docs/soomla/EconomyModel)
-Every game economy includes virtual currencies and virtual goods that can be purchased. The Economy Model guide explains the different entities that can be found throughout the economy.
+###Economy Model
+Every game economy includes virtual currencies and virtual goods that can be purchased. The Economy Model guide explains the different entities that can be found throughout the economy. [Learn more...](/docs/soomla/economy/EconomyModel)
 
-####[IStoreAssets](/docs/soomla/IStoreAssets)
-You will define your game's economy in your implementation of IStoreAssets. Read this guide to understand the basics.
+###IStoreAssets
+This interface represents your game's economy. You will need to implement your version of IStoreAssets. [Learn more...](/docs/soomla/economy/IStoreAssets)
 
-####[Local Storage](/docs/soomla/Storage)
-Understand how SOOMLA storage works, and what you need to do to maintain your users' data.
+###Local Storage
+You users get access to their data even when there’s no internet around. Our encrypted local storage is designed just for that. [Learn more...](/docs/soomla/economy/Storage)
 
-####[Event Handling](/docs/soomla/Events)
-Listen to and handle various events that are fired throughout the code.
+###Event Handling
+Throughout the SOOMLA SDK events are fired and need to be handled with your game-specific behavior. [Learn more...](/docs/soomla/economy/Events)
 
-####One API in various platforms:
-Each link to every one of the different platforms will supply you with tutorials on how to get started and in-app billing integration, as well as guides that explain the building blocks of SOOMLA platform-specifically.  
+###One API in various platforms
+Each link to every one of the different platforms will lead you to tutorials on how to get started including in-app billing integration, as well as guides that explain the building blocks of SOOMLA platform-specifically with lots of examples.  
 
-[android-store]()
+[android-store](/docs/platforms/android)
 
-[iOS-store]()
+[iOS-store](/docs/platforms/ios)
 
-[unity3d-store]()
+[unity3d-store](/docs/platforms/unity)
 
-[cocos2dx-store]()
+[cocos2dx-store](/docs/platforms/cocos2dx)
 
-####Platform-specific IAP:
+###Platform-specific IAP
 
 Android: [Google Play](/docs/platforms/android/GooglePlayIAB) and [Amazon App Store](/docs/platforms/android/AmazonIAB)
 

@@ -34,20 +34,18 @@ collection: 'platforms_android'
 
   - Once you click “Continue” you will be transferred to a page where you’ll need to fill out more details for your product. Fill in all of the mandatory fields marked with ‘*’. Notice that under Pricing, you can click on “Auto-convert prices now” and that will automatically set local prices for all other countries based on the exchange rate.
 
-          ![alt text](/img/tutorial_img/google_play_iab/autoConvertPrices.png "In-app products pricing")
-
-  - Click on the “Save” button. Go back to the in-app products list.
+  - Click on the “Save” button and go back to the in-app products list.
 
     <div class="info-box">SOOMLA is all about free-to-play mobile games, so we recommend you choose the “Free” option in the “Pricing & Distribution” tab.</div>
 
-4. Go to the “Services & APIs” tab and make note of your license key. You need to insert it into the code (see step 3 of the [Google Play](/docs/platforms/android/GettingStarted#google-play) section in Getting Started).
+4. Go to the “Services & APIs” tab and make note of your license key. You need to insert it into the code (see step 3 of the Google Play Dev Console section in [Getting Started](/docs/platforms/android/GettingStarted)).
 
     ![alt text](/img/tutorial_img/google_play_iab/licenseKey.png "License key")
 
 ##Newbie?
 
-###Some useful tips
+###Useful links
 
-- Make sure you have a test account defined in Google Play and a device using that test account.
+- Make sure you have a [test account](http://developer.android.com/google/play/licensing/setting-up.html#test-acct-setup) defined in Google Play and a device using that test account.
 
-- Make sure you know the difference between sandbox testing and real testing. To learn more read [Google’s Testing In-app Billing](developer.android.com/google/play/billing/billing_testing.html).
+- Make sure you know the difference between sandbox testing and real testing. To learn more read [Google’s Testing In-app Billing](http://developer.android.com/google/play/billing/billing_testing.html).

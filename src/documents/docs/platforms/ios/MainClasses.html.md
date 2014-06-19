@@ -48,7 +48,7 @@ This class holds your store's
 
 **Example:**
 
-Get the current balance of a virtual good with item id "green_hat" (This is the 'long' way, but you should preferably use `StoreInventory`'s functions):
+Get the current balance of a virtual good with item id "green_hat" (This is the 'long' way, you should preferably use `StoreInventory`'s functions):
 
 ``` objectivec
 VirtualGood* greenHat = (VirtualGood*)[[StoreInfo getInstance] virtualItemWithId:@"green_hat"];
@@ -56,18 +56,6 @@ int greenHatsBalance = [[[StorageManager getInstance] virtualGoodStorage] balanc
 ```
 
 `StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
-
-##[StorageManager](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/data/StorageManager.h)
-
-`StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodStorage`, `NonConsumableStorage`, and `KeyValueStorage`.
-
-Use the `StorageManager`’s functions to access the different storage bases. Then you will be able to use the different storages’ available functions to perform actions such as set/get an item’s balance, add/remove an item from the storage, etc…
-
-**Example:**
-
-``` objectivec
-[[[StorageManager getInstance] nonConsumableStorage] add:nonConsumable];
-```
 
 ##[StoreInventory](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreInventory.h)
 
@@ -82,12 +70,10 @@ Buys the item that has the given `itemId` according to its purchase type - eithe
 <br>
 **`+ (void)giveAmount:(int)amount ofItem:(NSString*)itemId`**
 
-Gives your user the given amount of the virtual item with the given item id, and demands nothing in return. For example, when your user plays your game for the first time you GIVE him for free 1000 gems.
-
-**Example:** Give the user 10 units of the virtual currency with item id "currency_coin":
+Gives your user the given amount of the virtual item with the given item id, and demands nothing in return. For example, when your user plays your game for the first time you GIVE him for free 1000 coins.
 
 ``` objectivec
-[StoreInventory giveAmount:10 ofItem:@"currency_coin"];
+[StoreInventory giveAmount:1000 ofItem:@"currency_coin"];
 ```
 
 <br>
@@ -95,17 +81,30 @@ Gives your user the given amount of the virtual item with the given item id, and
 
 Takes from your user the given amount of the virtual item with the given item id. For example, when your user requests a refund you need to TAKE the item he/she is returning.
 
-**Example:** Take 10 virtual goods with item id "green_hat":
+**Example:** Take 1 virtual good with item ID "green_hat":
 
 ``` objectivec
-[StoreInventory takeAmount:10 ofItem:@"currency_coin"];
+[StoreInventory takeAmount:1 ofItem:@"green_hat"];
 ```
 
 <br>
 **`+ (void)equipVirtualGoodWithItemId:(NSString*)goodItemId`**
 
-Equips the given virtual good with the given good item id. Equipping means that your user decides to currently use a specific virtual good. According to additional factors, your user may or may not use other equippable goods at the same time. To understand more about equipping please see section "EquippableVG" in [Economy Model](/docs/platforms/ios/EconomyModel).
+Equips the given virtual good with the given good item id. Equipping means that your user decides to currently use a specific virtual good. According to additional factors, your user may or may not use other equippable goods at the same time. To understand more about equipping see `EquippableVG` in our [Economy Model](/docs/platforms/ios/EconomyModel#virtual-goods) guide.
 
+##[StorageManager](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/data/StorageManager.h)
+
+<div class="warning-box">SOOMLA discourages the use of StorageManager's functions, and suggests you use StoreInventory's functions instead to perform the same actions.</div>
+
+`StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodStorage`, `NonConsumableStorage`, and `KeyValueStorage`.
+
+You can use the `StorageManager`’s functions to access the different storage bases, and then use the different storages’ available functions to perform actions such as set/get an item’s balance, add/remove an item from the storage, etc…
+
+**Example:**
+
+``` objectivec
+[[[StorageManager getInstance] nonConsumableStorage] add:nonConsumable];
+```
 
 ##[StoreConfig](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreConfig.h)
 
@@ -115,10 +114,8 @@ The configurations of your store will be kept in `StoreConfig`.
 
 - `SOOM_SEC` - The main encryption secret. CHANGE IT! and change it only once.
 
-- `STORE_DEBUG_LOG` - Tells iOS-store if to print debug messages or not.
+- `STORE_DEBUG_LOG` - Tells iOS-store if to print debug messages or not. [Learn more...](/docs/platforms/ios/Debugging)
 
 - `METADATA_VERSION` - This value defines the version of the metadata located in your database. Never change the value of this variable!
 
-- `VERIFY_PURCHASES` - When set to 'YES', server side verification will be enabled.
-
-    <div class="warning-box">Set `VERIFY_PURCHASES` to `NO` before you publish your app!</div>
+- `VERIFY_PURCHASES` - When set to `YES`, server side verification will be enabled. Don't forget to set to `NO` before you publish your app!

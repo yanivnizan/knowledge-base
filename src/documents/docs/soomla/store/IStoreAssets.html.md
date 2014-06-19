@@ -2,7 +2,7 @@
 layout: "content"
 image: "Game"
 title: "IStoreAssets"
-text: "IStoreAssets is an interface that represents a single game’s economy. When you use SOOMLA to create your game economy, one of the first steps to take is to create your own implementation of IStoreAssets."
+text: "To use SOOMLA, you'll need to create your own implementation of IStoreAssets, an interface that represents your game’s economy."
 position: 2
 theme: 'soomla'
 collection: 'soomla_store'
@@ -10,11 +10,15 @@ collection: 'soomla_store'
 
 #**IStoreAssets**
 
-`IStoreAssets` is an interface that represents a single game’s economy. When you use SOOMLA to create your game economy, one of the first steps to take is to create your own implementation of `IStoreAssets`. This is where you declare all of your virtual currencies, virtual goods, etc...
 
-**For Example:**
+##What is IStoreAssets?
 
-Android: (Taken from our example,  [MuffinRushAssets.java](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/MuffinRushAssets.java))
+`IStoreAssets` is an interface that represents a single game’s economy. When you use SOOMLA to create your game economy, one of the first steps to take is to create your own implementation of `IStoreAssets`. This is where you declare all of your virtual currencies, virtual currency packs, and virtual goods of all kinds.
+
+###Android Example
+
+This brief example (taken from our [MuffinRush](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/MuffinRushAssets.java) example) contains only a few of the in-game economy items available.
+
 ```
 public class MuffinRushAssets implements IStoreAssets {
     ...
@@ -42,7 +46,6 @@ public class MuffinRushAssets implements IStoreAssets {
     /** Virtual Goods **/
 
     // SingleUseVG
-    // Notice the Purchase type
     public static final VirtualGood PAVLOVA_GOOD = new SingleUseVG(
         "Pavlova",                                                   // name
         "Gives customers a sugar rush and they call their friends",  // description
@@ -51,9 +54,8 @@ public class MuffinRushAssets implements IStoreAssets {
     );
 
 
-    /** Market Non Consumable (MANAGED) Items **/
+    /** Market Non-Consumable (MANAGED) Items **/
 
-    // Notice the Purchase type
     public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
         "No Ads",                                                           // name
         "Test purchase of MANAGED item.",                                   // description
@@ -65,7 +67,8 @@ public class MuffinRushAssets implements IStoreAssets {
 }
 ```
 
-iOS: (Taken from our example,  [MuffinRushAssets.m](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m))
+###iOS Example
+This brief example (taken from our [MuffinRush](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m) example) contains only a few of the in-game economy items available.
 
 ```
 @implementation MuffinRushAssets
@@ -73,23 +76,48 @@ iOS: (Taken from our example,  [MuffinRushAssets.m](https://github.com/soomla/io
 + (void)initialize{
 
     /** Virtual Currencies **/
-    MUFFINS_CURRENCY = [[VirtualCurrency alloc] initWithName:@"Muffins" andDescription:@"" andItemId:MUFFINS_CURRENCY_ITEM_ID];
+    MUFFINS_CURRENCY = [[VirtualCurrency alloc]
+      initWithName:@"Muffins"
+      andDescription:@""
+      andItemId:MUFFINS_CURRENCY_ITEM_ID];
 
 
     /** Virtual Currency Packs **/
 
-    _10_MUFFINS_PACK = [[VirtualCurrencyPack alloc]initWithName:@"10 Muffins" andDescription:@"Test refund of an item" andItemId:_10_MUFFINS_PACK_ITEM_ID andCurrencyAmount:10 andCurrency:MUFFINS_CURRENCY_ITEM_ID andPurchaseType:[[PurchaseWithMarket alloc] initWithMarketItem:[[MarketItem alloc] initWithProductId:_10_MUFFINS_PRODUCT_ID andConsumable:kConsumable andPrice:0.99]]];
+    _10_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
+      initWithName:@"10 Muffins"
+      andDescription:@"Test refund of an item"
+      andItemId:_10_MUFFINS_PACK_ITEM_ID
+      andCurrencyAmount:10
+      andCurrency:MUFFINS_CURRENCY_ITEM_ID
+      andPurchaseType:[[PurchaseWithMarket alloc]
+        initWithMarketItem:[[MarketItem alloc]
+        initWithProductId:_10_MUFFINS_PRODUCT_ID
+        andConsumable:kConsumable
+        andPrice:0.99]]];
 
 
     /** Virtual Goods **/
 
     // SingleUseVG
-    // Notice the Purchase type
-    CHOCOLATE_CAKE_GOOD = [[SingleUseVG alloc] initWithName:@"Chocolate Cake" andDescription:@"A classic cake to maximize customer satisfaction" andItemId:CHOCOLATE_CAKE_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithVirtualItem alloc] initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID andAmount:250]];
+    CHOCOLATE_CAKE_GOOD = [[SingleUseVG alloc]
+      initWithName:@"Chocolate Cake"
+      andDescription:@"A classic cake to maximize customer satisfaction"
+      andItemId:CHOCOLATE_CAKE_GOOD_ITEM_ID
+      andPurchaseType:[[PurchaseWithVirtualItem alloc]
+        initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
+        andAmount:250]];
 
     // LifetimeVG
-    // Notice the Purchase type
-    MARRIAGE_GOOD = [[LifetimeVG alloc] initWithName:@"Marriage" andDescription:@"This is a LIFETIME thing." andItemId:MARRIAGE_GOOD_ITEM_ID andPurchaseType:[[PurchaseWithMarket alloc] initWithMarketItem:[[MarketItem alloc] initWithProductId:MARRIAGE_PRODUCT_ID andConsumable:kConsumable andPrice:9.99]]];
+    MARRIAGE_GOOD = [[LifetimeVG alloc]
+      initWithName:@"Marriage"
+      andDescription:@"This is a LIFETIME thing."
+      andItemId:MARRIAGE_GOOD_ITEM_ID
+      andPurchaseType:[[PurchaseWithMarket alloc]
+        initWithMarketItem:[[MarketItem alloc]
+        initWithProductId:MARRIAGE_PRODUCT_ID
+        andConsumable:kConsumable
+        andPrice:9.99]]];
 
 @end
 ```
@@ -99,13 +127,10 @@ After you’ve implemented your version of `IStoreAssets`, you’ll need to init
 `IStoreAssets` is transformed into metadata in JSON format and saved in a local SQLite database on the device. After that, the economy is always loaded from the database.
 
 
-##Important functions of IStoreAssets:
-(Please note that the name of the functions may vary across the different platforms, but their descriptions are the same).
+##Functions
+<div class="info-box">The names of the functions may vary across the different platforms, but their descriptions are the same.</div>
 
 ###getVersion
-
-**Params:** none
-**Return:** the version number
 
 This value will determine if the saved data in the database will be deleted or not. Bump the version every time you want to delete the old data in the DB. If you don't bump this value, you won't be able to see changes you've made to the objects in your implementation of `IStoreAssets`.
 
@@ -114,44 +139,28 @@ For example: If you previously created a `VirtualGood` with the name "Hat" and y
 
 ###getCurrencies
 
-**Params:** none
-**Return:** `VirtualCurrency[]`
-
-Create an instance of all your desired virtual currencies. For every `VirtualCurrency`, you'll have to provide: name, description and item Id.
-
-
-###getGoods
-
-**Params:** none
-**Return:** `VirtualGood[]`
-
-Create an instance of all your desired `VirtualGood`s. For every good, you'll have to provide: name, description, item Id and purchase type.
+Create an instance of all your desired virtual currencies. For every `VirtualCurrency`, you'll have to provide: name, description and item Id. Use this functions to access your game's currencies.
 
 
 ###getCurrencyPacks
 
-**Params:** none
-**Return:** `VirtualCurrencyPack[]`
+Create an instance of all your desired `VirtualCurrencyPack`s. For every `VirtualCurrencyPack`, you'll have to provide: name, description, item Id, purchase type, currency amount (the amount of currencies in the pack), and currency item Id (the item Id of the associated currency). Use this functions to access your game's currency packs.
 
-Create an instance of all your desired `VirtualCurrencyPack`s. For every `VirtualCurrencyPack`, you'll have to provide: name, description, item Id, purchase type, currency amount (the amount of currencies in the pack), and currency item Id (the item Id of the associated currency).
+
+###getGoods
+
+Create an instance of all your desired `VirtualGood`s. For every good, you'll have to provide: name, description, item Id and purchase type. Use this functions to access your game's virtual goods.
 
 
 ###getCategories
 
-**Params:** none
-**Return:** `VirtualCategory[]`
+Create an instance of all your desired virtual categories. For every `VirtualCategory`, you'll have to provide: name and goods item Ids (list of item Ids of the `VirtualGood`s in this category). Use this functions to access your game's categories.
 
-Create an instance of all your desired virtual categories. For every `VirtualCategory`, you'll have to provide: name and goods item Ids (list of item Ids of the `VirtualGood`s in this category).
-
-> **NOTE:** If you don't want to categorize your `VirtualGood`s, just add one 'GENERAL' `VirtualCategory`.
+<div class="info-box">If you don't want to categorize your `VirtualGood`s, just add one 'GENERAL' `VirtualCategory`.</div>
 
 
 ###getNonConsumableItems
 
-**Params:** none
-**Return:** `NonConsumableItem[]`
+Create an instance of all your desired `NonConsumableItem`s. For every `NonConsumableItem`, you'll have to provide: name, description, itemId and purchase type. Use this function to access your game's non-consumable items.
 
-
-Create an instance of all your desired `NonConsumableItem`s. For every `NonConsumableItem`, you'll have to provide: name, description, itemId and purchase type.
-
-**NOTE:** Make sure to set the type of the items (in `NonConsumableItem[]`) as Non-Consumables according to the Billing service provider that you’re working with (in Google Play store: MANAGED, in Apple App Store: Non-Consumable, etc..). Read more about this in [android-store’s MarketItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/MarketItem.java) or [iOS-store’s MarketItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/MarketItem.h).
+<div class="info-box">Make sure to set the type of the items (in `NonConsumableItem[]`) as Non-Consumables according to the Billing service provider that you’re working with (in Google Play store: MANAGED, in Apple App Store: Non-Consumable, etc..). Read more about this in [android-store’s MarketItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/MarketItem.java) or [iOS-store’s MarketItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/MarketItem.h).</div>

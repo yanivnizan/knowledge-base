@@ -10,11 +10,9 @@ collection: 'platforms_android'
 
 #**Getting Started**
 
-Before doing anything, SOOMLA recommends that you go through [Android In-app Billing](http://developer.android.com/guide/google/play/billing/index.html) or [Amazon In App Purchasing](https://developer.amazon.com/public/apis/earn/in-app-purchasing).
+Before doing anything, SOOMLA recommends that you go through [Android In-app Billing](http://developer.android.com/guide/google/play/billing/index.html) or [Amazon In App Purchasing](https://developer.amazon.com/public/apis/earn/in-app-purchasing) according to the billing service provider you choose.
 
 ##Get android-store
-
-###With sources
 
 1. Clone android-store. Copy all files from android-store/SoomlaAndroidStore subfolders to their equivalent folders in your Android project:
 
@@ -44,27 +42,12 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
     ```
 
     > The custom secret is your encryption secret for data saved in the DB. This secret is NOT the secret from step 3 (select a different value).
-    >
-    > Initialize `StoreController` ONLY ONCE when your application loads.
+
+    <div class="warning-box">Initialize `StoreController` ONLY ONCE when your application loads.</div>
 
 6. Refer to the [next section](#whats-next-select-a-billing-service) for information on selecting your Billing Service and setting it up.
 
-And that's it ! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
-
-###With jars
-
- 1. Download the .jar file from our downloads page.
-
- 2. Add the .jar file to your libs directory
-
- 3. In Android Studio, add the .jar file as a dependency to your project:
-
-  - Click on the “Project Structure” icon in Android Studio.
-  - In the left side navigation bar click on the Modules tab. Then click on the Dependencies tab at the top.
-  - Click the “+” button at the bottom of the screen and choose “Jars and directories”.
-  - Find and add the relevant jar file.
-
-    ![alt text](/img/tutorial_img/android_getting_started/1.png "android-store with jars")
+And that's it! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
 
 ##What's next? Select a Billing Service
 
@@ -103,16 +86,28 @@ Once you complete the following steps, see the [Google Play IAB](/docs/platforms
 3. After you initialize `StoreController`, let the plugin know your public key from [Google play Developer Console](https://play.google.com/apps/publish/):
 
   ``` java
-  GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM THE MARKET]");
+  public class StoreExampleActivity extends Activity {
+      ...
+      protected void onCreate(Bundle savedInstanceState) {
+          ...
+          GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM GOOGLE PLAY]");
+      }
+  }
   ```
 
-4. If you want to allow the test purchases, all you need to do is tell that to the plugin:
+4. If you want to allow Android's test purchases, all you need to do is tell that to the plugin:
 
   ``` java
-  GooglePlayIabService.AllowAndroidTestPurchases = true;
+  public class StoreExampleActivity extends Activity {
+      ...
+      protected void onCreate(Bundle savedInstanceState) {
+          ...
+          GooglePlayIabService.AllowAndroidTestPurchases = true;
+      }
+  }
   ```
 
-####If you have an in-game storefront
+####**If you have an in-game storefront**
 
 We recommend that you open the IAB Service and keep it open in the background. This how to do that:
 
@@ -205,7 +200,6 @@ public class StoreExampleActivity extends Activity {
 
         // When you create your app in Google play Developer Console, you'll find this key under the "Services & APIs" tab.
         GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM THE MARKET]");
-
         GooglePlayIabService.AllowAndroidTestPurchases = true;
     }
 

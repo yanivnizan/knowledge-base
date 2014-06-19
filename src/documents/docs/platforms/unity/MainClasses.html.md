@@ -3,9 +3,9 @@ layout: "content"
 image: "Tutorial"
 title: "Main Classes"
 text: "The main classes of unity3d-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
-position: 5
+position: 3
 theme: 'platforms'
-collection: 'platforms_unity3d'
+collection: 'platforms_unity'
 ---
 
 #**Main Classes**
@@ -16,11 +16,11 @@ To see more usage examples of the functions of these classes see [Economy Model]
 
 ##[StoreController](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/StoreController.cs)
 
-StoreController holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon App Store, etc…).
+StoreController holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon Appstore, App Store).
 
-<div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/unity3d/GettingStarted).</div>
+<div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/unity/GettingStarted).</div>
 
-Taken from our Muffin Rush [Example](https://github.com/soomla/android-store/tree/master/SoomlaAndroidExample/src/com/soomla/example):
+Taken from our Muffin Rush [Example](https://github.com/soomla/unity3d-store/tree/master/Soomla/Assets/Examples/MuffinRush):
 
 ``` cs
 public class ExampleWindow : MonoBehaviour {
