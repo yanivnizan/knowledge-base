@@ -1,5 +1,7 @@
 <div class="dropdown dropdown-container">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><img src="/img/<%= @current %>-TopMenu.png"/></a>
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <img  class="dropdown-menu-icon" src="/img/<%= @current %>-TopMenu.png"/>
+    </a>
     <ul id="nav-list" class="dropdown-menu <%= @current %>" role="menu" >
         <li><a href="/soomla">Soomla</a></li>
         <li><a href="/platforms">Platforms</a></li>
