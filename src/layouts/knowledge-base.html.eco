@@ -77,17 +77,21 @@
         </div>
         <div class="footer-left">
             <div class="clearfix">
-                <a class="visible-md visible-lg pull-left" href=""><img src="http://about-stg.soom.la/wp-content/themes/soomla/images/Logo-footer.png"></a>
-                <ul id="menu-footer-menu" class="menu footer-menu h-list pull-left"><li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22"><a href="http://about.soom.la/soombots/">Soombots</a></li>
-                    <li id="menu-item-23" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23"><a href="http://about.soom.la/">Team</a></li>
-                    <li id="menu-item-24" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-24"><a href="https://angel.co/soomla-1">Inverstors Info</a></li>
-                    <li id="menu-item-25" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-25"><a href="mailto:support@soom.la">Contact</a></li>
-                    <li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26"><a href="http://blog.soom.la">Blog</a></li>
+                <a class="visible-md visible-lg pull-left" href="">
+                  <img src="http://about-stg.soom.la/wp-content/themes/soomla/images/Logo-footer.png">
+                </a>
+                <ul id="menu-footer-menu" class="menu footer-menu h-list pull-left">
+                    <li><a href="http://about.soom.la/soombots/">Soombots</a></li>
+                    <li><a href="http://about.soom.la/">Team</a></li>
+                    <li><a href="https://angel.co/soomla-1">Investors Info</a></li>
+                    <li><a href="mailto:support@soom.la">Contact</a></li>
+                    <li><a href="http://blog.soom.la">Blog</a></li>
                 </ul>
             </div>
             <div class="copyright">
                 <span>&#169; 2014 Soomla</span>
-                <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+                <a href="http://soom.la/terms-conditions/">Terms of Use</a> |
+                <a href="http://soom.la/privacy-policy/">Privacy Policy</a>
                 <span>Lovingly Made In Tel Aviv</span>
             </div>
         </div>
