@@ -54,7 +54,7 @@ To further understand how SOOMLA handles storage, below are descriptions about e
 
 - **equipVirtualGood(String goodItemId)**
 
-  Equips the given virtual good with the given `goodItemId`. Equipping means that your user decides to currently use a specific virtual good. To understand more about equipping see [EquippableVG](/docs/soomla/economy/EconomyModel#equippablevg).
+  Equips the given virtual good with the given `goodItemId`. Equipping means that your user decides to currently use a specific virtual good. To understand more about equipping see [EquippableVG](/docs/soomla/store/EconomyModel#equippablevg).
 
 ###StoreInfo
 This class holds all of the metadata information about your specific game. It is initialized with your implementation of `IStoreAssets` and you can use it to retrieve information about your specific game. `StoreInfo` holds your store's:

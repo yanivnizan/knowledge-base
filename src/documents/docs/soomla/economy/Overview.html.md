@@ -24,16 +24,16 @@ SOOMLA's open source code is currently available for Android, iOS, Unity3d, and 
 ##The Building Blocks
 
 ###Economy Model
-Every game economy includes virtual currencies and virtual goods that can be purchased. The Economy Model guide explains the different entities that can be found throughout the economy. [Learn more...](/docs/soomla/economy/EconomyModel)
+Every game economy includes virtual currencies and virtual goods that can be purchased. The Economy Model guide explains the different entities that can be found throughout the economy. [Learn more...](/docs/soomla/store/EconomyModel)
 
 ###IStoreAssets
-This interface represents your game's economy. You will need to implement your version of IStoreAssets. [Learn more...](/docs/soomla/economy/IStoreAssets)
+This interface represents your game's economy. You will need to implement your version of IStoreAssets. [Learn more...](/docs/soomla/store/IStoreAssets)
 
 ###Local Storage
-You users get access to their data even when there’s no internet around. Our encrypted local storage is designed just for that. [Learn more...](/docs/soomla/economy/Storage)
+You users get access to their data even when there’s no internet around. Our encrypted local storage is designed just for that. [Learn more...](/docs/soomla/store/Storage)
 
 ###Event Handling
-Throughout the SOOMLA SDK events are fired and need to be handled with your game-specific behavior. [Learn more...](/docs/soomla/economy/Events)
+Throughout the SOOMLA SDK events are fired and need to be handled with your game-specific behavior. [Learn more...](/docs/soomla/store/Events)
 
 ###One API in various platforms
 Each link to every one of the different platforms will lead you to tutorials on how to get started including in-app billing integration, as well as guides that explain the building blocks of SOOMLA platform-specifically with lots of examples.  

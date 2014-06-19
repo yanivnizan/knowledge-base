@@ -63,7 +63,7 @@ CHOCOLATE_CAKE_GOOD = [[SingleUseVG alloc]
 
 ###PurchaseWithMarket
 
-This kind of `PurchaseType` should be attached to items that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market, and insert the product ID of the item into the SOOMLA code (in your version of [IStoreAssets](/docs/soomla/economy/IStoreAssets)).
+This kind of `PurchaseType` should be attached to items that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market, and insert the product ID of the item into the SOOMLA code (in your version of [IStoreAssets](/docs/soomla/store/IStoreAssets)).
 
 ####**For Example**
 Suppose that in your game, you offer a “No-Ads” feature for $1.99 in the Market. You will need to declare the `PurchaseType` parameter of your “No-Ads” feature like so:
