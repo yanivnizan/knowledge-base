@@ -40,10 +40,14 @@ $(function() {
     $('#collapse-container').click(function(e) {
         e.stopPropagation();
         $(".tocify-subheader").slideToggle(200);
+        $("#nav").toggleClass("collapsed");
+
         if ($("#collapseToc").hasClass('minus')) {
             $("#collapseToc").removeClass('minus').addClass('plus');
+            $("#main-container .col-md-9").removeClass("col-md-9").addClass("col-md-12");
         } else {
             $("#collapseToc").removeClass('plus').addClass('minus');
+            $("#main-container .col-md-12").removeClass("col-md-12").addClass("col-md-9");
         }
     });
 

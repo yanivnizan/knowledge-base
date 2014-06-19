@@ -36,25 +36,26 @@
 <![endif]-->
 
 <nav id="knowledge-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="cover"> <a id="header-logo" href="/"><img  src="/img/HeaderLogo.png"/></a></div>
-    <div id="main-menu-container"></div>
-
-    <div id="main-menu">
-            <ul>
-                <li>
-                    <a href="//soom.la"><span id="opensource-icon"></span>OPEN SOURCE</a>
-                </li>
-                <li>
-                    <a href="//know.soom.la"><span id="knowledgebase-icon"></span>KNOWLEDGE BASE</a>
-                </li>
-                <li>
-                    <a href="//answers.soom.la"><span id="answers-icon"></span>ANSWERS</a>
-                </li>
-                <li>
-                    <a href="//about.soom.la"><span id="about-icon"></span>ABOUT</a>
-                </li>
-            </ul>
-        </div>
+    <div class="container">
+      <div id="main-menu-container"></div>
+      <div id="main-menu">
+        <ul>
+          <li>
+            <a href="//soom.la"><span id="opensource-icon"></span>OPEN SOURCE</a>
+          </li>
+          <li>
+            <a href="//know.soom.la"><span id="knowledgebase-icon"></span>KNOWLEDGE BASE</a>
+          </li>
+          <li>
+            <a href="//answers.soom.la"><span id="answers-icon"></span>ANSWERS</a>
+          </li>
+          <li>
+            <a href="//about.soom.la"><span id="about-icon"></span>ABOUT</a>
+          </li>
+        </ul>
+      </div>
+      <div class="cover"> <a id="header-logo" href="/"><img  src="/img/HeaderLogo.png"/></a></div>
+    </div>
 
 </nav>
 <%- @content %>

@@ -238,7 +238,9 @@
 #footer{
     background: #4D4D4D;
     padding: 15px 0 15px 0;
-    position: relative;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 #footer a:hover{
     text-decoration: underline;

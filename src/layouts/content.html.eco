@@ -3,13 +3,21 @@ layout: 'knowledge-base'
 ---
 <div id="nav">
 </div>
-<div id="page-container">
-<div id="article-nav" class="jumbotron">
-    <%- @partial('nav-menu-l1', {current:@document.theme}) %>
-    <%- @partial('nav-menu-l2', {collection:@document.collection, current:@document.theme}) %>
-    <%- @partial('nav-menu-l3', {collection:@document.collection, icon:@document.image}) %>
-</div>
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div id="article-nav">
+        <%- @partial('nav-menu-l1', {current:@document.theme}) %>
+        <%- @partial('nav-menu-l2', {collection:@document.collection, current:@document.theme}) %>
+        <%- @partial('nav-menu-l3', {collection:@document.collection, icon:@document.image}) %>
+      </div>
+    </div>
+  </div>
 <div id="doc-container" class="article-content clearfix">
-<%- @content %>
+  <div class="row">
+    <div class="col-md-9">
+      <%- @content %>
+    </div>
+  </div>
 </div>
 </div>

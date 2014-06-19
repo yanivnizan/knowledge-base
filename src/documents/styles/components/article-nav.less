@@ -1,0 +1,138 @@
+#nav {
+  max-height: 80%;
+  border: none;
+  display: none;
+
+  // Ensure hover over article when collapsed
+  z-index: 1;
+
+  &.collapsed {
+    opacity: 0.8;
+  }
+
+  // Override the default tocify header
+  // Influenced by Kinvey's article TOC
+  &.tocify {
+    left: 50%;
+
+    @media (min-width: 992px) {
+      display: block;
+      margin-left: 250px;
+      width: 230px;
+    }
+    @media (min-width: 1200px) {
+      margin-left: 300px;
+      width: 300px;
+    }
+
+  }
+}
+
+#main-container, #nav.tocify {
+  margin-top: 60px;
+}
+
+#tocify-header0 {
+  background-color: #f0f9ff;
+  & > li:first-of-type {
+    background-color: #1676A6;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    & a {
+      display: inline;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      color: #ffffff;
+      &:focus, &:hover {
+        background-color: #1676A6;
+      }
+    }
+  }
+  [data-tag="2"] {
+    & li a {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #1676A6;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      &:focus, &:hover {
+        font-weight: 900;
+        background-color: #F0F9FF;
+      }
+    }
+    & li.active a {
+      font-weight: 600;
+    }
+  }
+  [data-tag="3"] {
+    & li a {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #666666;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      padding-left: 20px;
+      &:focus, &:hover {
+        font-weight: 900;
+        background-color: #F0F9FF;
+      }
+    }
+    & li.active a {
+      font-weight: 600;
+    }
+  }
+}
+
+#article-nav {
+  background-color: #ffffff;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  #article-header {
+    display: inline;
+
+    #article-name {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 600;
+      font-size: 40px;
+      color: #4D4D4D;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+  }
+  .dropdown-container .dropdown-menu:not(.l3-gray) {
+    margin-top: 30px;
+
+  }
+
+}
+
+#collapse-container {
+  display:inline-block;
+  width:20px;
+  height:20px;
+
+}
+
+span.minus {
+  background-image: url('/img/Minus.png');
+  display:inline-block;
+  height:2px;
+  width:9px;
+  padding-bottom:5px;
+  background-repeat: no-repeat;
+}
+
+span.plus {
+  background-image: url('/img/Plus.png');
+  display: inline-block;
+  height:10px;
+  width:9px;
+  background-repeat:no-repeat;
+}
+
+

@@ -1,0 +1,79 @@
+#main-menu, #main-menu-container {
+  position: absolute;
+  top: -247px;
+  left: -80px;
+  width: 299px;
+}
+
+#main-menu-container {
+  height: 597px;
+  visibility: hidden;
+}
+
+#main-menu {
+  cursor: pointer;
+  background-image: url('/img/menu/Menu-BG.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 350px;
+  -webkit-transition: top 0.4s ease-in-out;
+  -moz-transition: top 0.4s ease-in-out;
+  -ms-transition: top 0.4s ease-in-out;
+  -o-transition: top 0.4s ease-in-out;
+  transition: top 0.4s ease-in-out;
+  z-index: 1;
+  &:hover {
+    //    top:0px;
+    z-index: 3;
+  }
+  ul {
+    margin-top: 60px;
+    list-style: none;
+    li {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      margin-bottom: 17px;
+      a {
+        color: #ffffff;
+        text-shadow: 0px -1px 1px rgba(150, 150, 150, 0.35);
+        span {
+          height: 22px;
+          width: 22px;
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 10px;
+          margin-right: 15px;
+        }
+        #opensource-icon {
+          background: url('/img/menu/Icon-OpenSource-Normal.png') no-repeat;
+        }
+        #knowledgebase-icon {
+          background: url('/img/menu/Icon-KnowledgeBase-Normal.png') no-repeat;
+        }
+        #answers-icon {
+          background: url('/img/menu/Icon-Answers-Normal.png') no-repeat;
+        }
+        #about-icon {
+          background: url('/img/menu/Icon-About-Normal.png') no-repeat;
+        }
+      }
+      &:hover a {
+        color: #4B90A5;
+        text-decoration: none;
+        #opensource-icon {
+          background: url('/img/menu/Icon-OpenSource-Selected.png') no-repeat;
+        }
+        #knowledgebase-icon {
+          background: url('/img/menu/Icon-KnowledgeBase-Selected.png') no-repeat;
+        }
+        #answers-icon {
+          background: url('/img/menu/Icon-Answers-Selected.png') no-repeat;
+        }
+        #about-icon {
+          background: url('/img/menu/Icon-About-Selected.png') no-repeat;
+        }
+      }
+    }
+  }
+}
