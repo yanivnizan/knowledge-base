@@ -12,7 +12,7 @@ collection: 'platforms_android'
 
 SOOMLA's android-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course.
 
-This tutorial has brief descriptions of each entity in the economy model, but lots of examples. We recommend that you also read [SOOMLA Economy Model](/docs/soomla/EconomyModel), where you will find more detailed explanations for each of the different entities.
+This tutorial has brief descriptions of each entity in the economy model, but lots of examples. We recommend that you also read [SOOMLA Economy Model](/docs/soomla/economy/EconomyModel), where you will find more detailed explanations for each of the different entities.
 
 ![alt text](/img/tutorial_img/soomla_diagrams/EconomyModel.png "Soomla Economy Model")
 
@@ -34,9 +34,9 @@ public static final String NO_ADS_NONCONS_PRODUCT_ID = "soomla_no_ads";
 public static final NonConsumableItem NO_ADS_NONCONS  = new NonConsumableItem(
     ...
     new PurchaseWithMarket(new MarketItem(
-                   NO_ADS_NONCONS_PRODUCT_ID,   // product ID
-                   MarketItem.Managed.MANAGED,  // product type
-                   1.99                         // initial price
+        NO_ADS_NONCONS_PRODUCT_ID,   // product ID
+        MarketItem.Managed.MANAGED,  // product type
+        1.99                         // initial price
    ))
 );
 ```
@@ -78,7 +78,7 @@ Virtual currencies need to be declared in your implementation of `IStoreAssets`.
 
 ###[VirtualCurrency](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualCurrencies/VirtualCurrency.java)
 
-####How to define
+####**How to define**
 
 ``` java
 public static final String MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
@@ -90,7 +90,7 @@ public static final VirtualCurrency MUFFIN_CURRENCY = new VirtualCurrency(
 );
 ```
 
-####How to use
+####**How to use**
 A `VirtualCurrency` by itself is not very useful, because it cannot be sold individually. To sell currency, you need to use a `VirtualCurrencyPack` (see section below).
 
 Use `VirtualCurrency` when defining `VirtualCurrencyPack`s:
@@ -107,15 +107,16 @@ public static final VirtualCurrencyPack TENMUFF_PACK = new VirtualCurrencyPack(
 ```
 
 **Give:**
+
 Give a `VirtualCurrency` and get nothing in return.
 This is useful if you'd like to give your users some amount of currency to begin with when they first download your game.
 
 ``` java
-// If this is the first time playing, give the user an initial balance of 1000 muffins.
+// Give the user an initial balance of 1000 muffins.
 StoreInventory.giveVirtualItem("currency_muffin", 1000);
 ```
 
-####How to query
+####**How to query**
 Get the balance of a specific `VirtualCurrency`.
 
 ``` java
@@ -124,7 +125,7 @@ StoreInventory.getVirtualItemBalance("currency_muffin");
 
 ###[VirtualCurrencyPack](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualCurrencies/VirtualCurrencyPack.java)
 
-####How to define
+####**How to define**
 
 ``` java
 public static final VirtualCurrencyPack FIFTYMUFF_PACK = new VirtualCurrencyPack(
@@ -137,9 +138,10 @@ public static final VirtualCurrencyPack FIFTYMUFF_PACK = new VirtualCurrencyPack
 );
 ```
 
-####How to use
+####**How to use**
 
 **Buy:**
+
 When your user buys a `VirtualCurrencyPack` of 50 muffins, his/her muffin currency balance will be increased by 50, and the payment will be deducted.
 
 ``` java
@@ -147,13 +149,15 @@ StoreInventory.buy("muffins_50");
 ```
 
 **Give:**
-Give your users a 50-muffin pack for free. This is useful if you’d like to give your users a currency_pack to begin with when they first download your game.
+
+Give your users a 50-muffin pack for free. This is useful if you’d like to give your users a currency pack to begin with when they first download your game.
 
 ``` java
 StoreInventory.giveVirtualItem("muffins_50", 1);
 ```
 
 **Take:**
+
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
 
 Take back the 50-muffin pack that the user owns:
@@ -162,7 +166,7 @@ Take back the 50-muffin pack that the user owns:
 StoreInventory.takeVirtualItem("muffins_50", 1);
 ```
 
-####How to query
+####**How to query**
 `VirtualCurrencyPack`s do not have a balance of their own in the database. When a user purchases a `VirtualCurrencyPack`, the balance of the associated `VirtualCurrency` is increased.
 
 ``` java
@@ -174,7 +178,7 @@ Virtual goods need to be declared in your implementation of `IStoreAssets`.
 
 ###[SingleUseVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/SingleUseVG.java)
 
-####How to define
+####**How to define**
 
 ``` java
 public static final VirtualGood FRUITCAKE_GOOD = new SingleUseVG(
@@ -185,16 +189,18 @@ public static final VirtualGood FRUITCAKE_GOOD = new SingleUseVG(
 );
 ```
 
-####How to use
+####**How to use**
 
 **Buy:**
-When your user buys a `SingleUseVG`, for example "fruit_cake", his/her "fruit_cake" balance will be increased by 1, and the payment will be deducted.
+
+When your user buys a `SingleUseVG` ("fruit_cake" in our example) his/her "fruit_cake" balance will be increased by 1, and the payment will be deducted.
 
 ``` java
 StoreInventory.buy("fruit_cake");
 ```
 
 **Give:**
+
 Gives your user the given amount of the `SingleUseVG` with the given `itemId` ("fruit_cake" in our example) for free. This is useful if you'd like to give your users a `SingleUseVG` to start with when they first download your game.
 
 ``` java
@@ -202,13 +208,14 @@ StoreInventory.giveVirtualItem("fruit_cake", 10);
 ```
 
 **Take:**
+
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.  
 
 ``` java
 StoreInventory.takeVirtualItem("fruit_cake", 1);
 ```
 
-####How to query
+####**How to query**
 Get the balance of a specific `SingleUseVG`.
 
 ``` java
@@ -217,7 +224,7 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 
 ###[SingleUsePackVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/SingleUsePackVG.java)
 
-####How to define
+####**How to define**
 
 ``` java
 // Define a pack of 5 "Fruit cake" goods that costs $2.99.
@@ -231,7 +238,7 @@ public static final VirtualGood FRUITCAKE_GOOD_PACK = new SingleUsePackVG(
 );
 ```
 
-####How to use
+####**How to use**
 The explanations for buying, giving, and taking are the same as those in [SingleUseVG](#singleusevg).
 
 **Buy:**
@@ -252,7 +259,7 @@ StoreInventory.giveVirtualItem("fruit_cake_5pack", 1);
 StoreInventory.takeVirtualItem("fruit_cake_5pack", 1);
 ```
 
-####How to query
+####**How to query**
 `SingleUsePackVG`s do not have a balance of their own in the database. When a user buys a `SingleUsePackVG`, the balance of the associated `SingleUseVG` is increased. After buying a pack of 5 cream cup goods, your user's cream cup balance should be increased by 5.
 
 Query the balance of the virtual good with item id cream_cup:
@@ -263,7 +270,7 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 
 ###[LifetimeVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/LifetimeVG.java)
 
-####How to define
+####**How to define**
 
 ``` java
 public static final VirtualGood MARRIAGE_GOOD = new LifetimeVG(
@@ -274,16 +281,18 @@ public static final VirtualGood MARRIAGE_GOOD = new LifetimeVG(
 );
 ```
 
-####How to use
+####**How to use**
 
 **Buy:**
-Buying a `LifetimeVG` means that the user will now own the item for the rest of time, unless the game developer decides to *explicitly* take away the item from the user. Lifetime goods can be bought only once.
+
+Buying a `LifetimeVG` means that the user will now own the item for the rest of time. Lifetime goods can be bought only once.
 
 ``` java
 StoreInventory.buy("marriage");
 ```
 
 **Give:**
+
 Give a `LifetimeVG` and get nothing in return.
 This is useful if you’d like to give your users a `LifetimeVG` when they first download your game.
 
@@ -292,6 +301,7 @@ StoreInventory.giveVirtualItem("marriage", 1);
 ```
 
 **Take:**
+
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
 
 ``` java
@@ -299,7 +309,7 @@ StoreInventory.takeVirtualItem("marriage", 1);
 ```
 
 
-####How to query
+####**How to query**
 Check the ownership of a lifetime good:
 
 ``` java
@@ -313,7 +323,7 @@ if (balance > 0) {
 
 ###[EquippableVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/EquippableVG.java)
 
-####How to define
+####**How to define**
 There are 3 types of Equipping models: `GLOBAL`, `CATEGORY`, and `LOCAL`. Read a detailed description about them [here](/docs/soomla/EconomyModel#equippablevg). In this example we're defining 2 characters, George and Kramer. These are `CATEGORY` equippable goods because the user can own both characters but can play only as one at a time.
 
 ``` java
@@ -336,8 +346,9 @@ public static final VirtualGood KRAMER_GOOD = new EquippableVG(
 );
 ```
 
-####How to use
+####**How to use**
 **Buy:**
+
 Buying an `EquippableVG` is exactly like buying a [`LifetimeVG`](#lifetimevg). The balance of "kramer" will be checked and if it is 0 buying will be allowed.
 
 ``` java
@@ -345,6 +356,7 @@ StoreInventory.buy("kramer");
 ```
 
 **Give:**
+
 Give an `EquippableVG` and get nothing in return.
 This is useful if you’d like to give your users a free character to begin with when they first download your game.
 
@@ -353,6 +365,7 @@ StoreInventory.giveVirtualItem("george", 1);
 ```
 
 **Take:**
+
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
 
 ``` java
@@ -373,7 +386,7 @@ StoreInventory.equipVirtualGood("kramer");
 StoreInventory.unEquipVirtualGood("kramer");
 ```
 
-####How to query
+####**How to query**
 **Check ownership:**
 Check if user owns Kramer:
 
@@ -395,7 +408,7 @@ StoreInventory.isVirtualGoodEquipped("kramer");
 
 ###[UpgradeVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/UpgradeVG.java)
 
-####How to define
+####**How to define**
 Suppose you offer a "Strength" attribute to one of the characters in your game and you want to make it upgradeable with 2 levels.
 
 ``` java
@@ -429,8 +442,9 @@ public static final VirtualGood STRENGTH_UPGRADE_2 = new UpgradeVG(
 );
 ```
 
-####How to use
+####**How to use**
 **Buy:**
+
 When a user buys an upgrade, the `buy` method checks that the upgrade that's being purchased is valid.
 
 ``` java
@@ -438,6 +452,7 @@ StoreInventory.buy("strength_upgrade_2");
 ```
 
 **Upgrade:**
+
 When you upgrade a virtual good, the method performs a check to see that this upgrade is valid.
 
 ``` java
@@ -445,6 +460,7 @@ StoreInventory.upgradeVirtualGood("strength");
 ```
 
 **Remove upgrades:**
+
 Remove all upgrades from the virtual good with the given id (Strength in our example).
 
 ``` java
@@ -452,6 +468,7 @@ StoreInventory.removeUpgrades("strength");
 ```
 
 **Give:**
+
 To give a free upgrade use `forceUpgrade`.
 
 ``` java
@@ -459,6 +476,7 @@ StoreInventory.forceUpgrade("strength_upgrade_2");
 ```
 
 **Take:**
+
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid. Essentially, taking an upgrade is the same as a downgrade.
 
 ``` java
@@ -466,8 +484,9 @@ This function simply deducts the user's balance. In case of a refund request, it
 StoreInventory.takeVirtualItem("strength_upgrade_2", 1);
 ```
 
-####How to query
+####**How to query**
 **Get current upgrade:**
+
 To get the current upgrade of a virtual good use `getGoodCurrentUpgrade`. If our Strength attribute is currently upgraded to level 2, this method will return "strength_upgrade_2". (If the good has no upgrades, the method returns null).
 
 ``` java
@@ -475,6 +494,7 @@ StoreInventory.getGoodCurrentUpgrade("strength");
 ```
 
 **Get current upgrade level:**
+
 To find out the upgrade level of a virtual good use `getGoodUpgradeLevel`. If our Strength attribute is currently upgraded to level 2, this method will return 2. (If the good has no upgrades, the method returns 0).
 
 ``` java
@@ -487,7 +507,7 @@ StoreInventory.getGoodUpgradeLevel("strength");
 
 A `NonConsumableItem` is a representation of a non-consumable (MANAGED) item in Google Play. These kinds of items are bought by the user once and kept forever in the market. A `NonConsumableItem` is different from a `LifetimeVG` in that it is never consumed from the market. We recommend using `LifetimeVG`s.
 
-####How to define
+####**How to define**
 `NonConsumableItem`s need to be declared in your implementation of `IStoreAssets`.
 
 ``` java
@@ -503,9 +523,10 @@ public static final NonConsumableItem NO_ADS_NONCONS = new NonConsumableItem(
 );
 ```
 
-####How to use
+####**How to use**
 
 **Buy:**
+
 Non-consumables can only be purchased once and are kept forever for the user. When a user buys a non-consumable item, a check is performed to see that he/she doesn't already own this item.
 
 ``` java
@@ -513,6 +534,7 @@ StoreInventory.buy("no_ads");
 ```
 
 **Give:**
+
 Give your users the "No Ads" feature for free.
 
 ``` java
@@ -520,13 +542,14 @@ StoreInventory.giveVirtualItem("no_ads", 1);
 ```
 
 **Take:**
+
 This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
 
 ``` java
 StoreInventory.takeVirtualItem("no_ads", 1);
 ```
 
-####How to query
+####**How to query**
 **Check existence:**
 
 ``` java
@@ -537,7 +560,7 @@ StoreInventory.nonConsumableItemExists("no_ads");
 
 Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
 
-####How to define
+####**How to define**
 
 ``` java
 // Assume that MUFFINCAKE_ITEM_ID, PAVLOVA_ITEM_ID, etc.. are item ids of virtual goods that have been declared.
@@ -548,7 +571,7 @@ public static final VirtualCategory SWEETS_CATEGORY = new VirtualCategory(
 );
 ```
 
-####How to query
+####**How to query**
 Check which category an item belongs to:
 
 ``` java

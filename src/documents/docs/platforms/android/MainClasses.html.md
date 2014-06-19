@@ -59,17 +59,6 @@ int greenHatsBalance = StorageManager.getVirtualGoodsStorage().getBalance(greenH
 
 `StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
 
-##[StorageManager](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StorageManager.java)
-
-`StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodsStorage`, `NonConsumableItemsStorage`, and `KeyValueStorage`.
-
-Use the `StorageManager`’s static functions to access the different storage bases. Then you will be able to use the different storages’ available functions to perform actions such as set/get an item’s balance, add/remove an item from the storage, etc…
-
-**Example:**
-
-``` java
-StorageManager.getNonConsumableItemsStorage().add(nonConsumableItem);
-```
 
 ##[StoreInventory](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/StoreInventory.java)
 
@@ -111,12 +100,24 @@ Takes from your user the given amount of the virtual item with the given item ID
 StoreInventory.takeVirtualItem("green_hat", 1);
 ```
 
+##[StorageManager](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StorageManager.java)
+
+<div class="warning-box">SOOMLA discourages the use of StorageManager's functions, and suggests you use StoreInventory's functions instead to perform the same actions.</div>
+
+`StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodsStorage`, `NonConsumableItemsStorage`, and `KeyValueStorage`.
+
+You can use the `StorageManager`’s functions to access the different storage bases, and then use the different storages’ available functions to perform actions such as set/get an item’s balance, add/remove an item from the storage, etc…
+
+**Example:**
+
+``` java
+StorageManager.getNonConsumableItemsStorage().add(nonConsumableItem);
+```
+
 
 ##[StoreConfig](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/StoreConfig.java)
 
 The configurations of your store will be kept in `StoreConfig`.
-
-###`StoreConfig`’s configurations explained:
 
 * `SOOM_SEC` - The main encryption secret. CHANGE IT! and change it only once.
 
@@ -126,10 +127,8 @@ The configurations of your store will be kept in `StoreConfig`.
 
 * `obfuscationSalt` - The obfuscated salt is an array randomly generated numbers. It's recommended that you change these numbers for your specific application, but change them only once!
 
-* `DB_DELETE` - If this is true then the database will be deleted whenever the application loads.
-
-    <div class="info-box">This feature can be useful for testing when you want to change stuff in your implementation of `IStoreAssets` and see the changes. If you try to change things in `IStoreAssets` and don't delete the DB then your changes will not be shown.</div>
+* `DB_DELETE` - If this is true then the database will be deleted whenever the application loads. This feature can be useful for testing when you want to change stuff in your implementation of `IStoreAssets` and see the changes. If you try to change things in `IStoreAssets` and don't delete the DB then your changes will not be shown.
 
     <div class="warning-box">Do not release your game with this option set to true! Otherwise, your users will lose all their data every time they load the application.</div>
 
-* `METADATA_VERSION` - Never change this value!
+* `METADATA_VERSION` - This value defines the version of the metadata located in your database. Never change the value of this variable!

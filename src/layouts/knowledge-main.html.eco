@@ -12,8 +12,8 @@ title: 'Soomla Knowledge Base'
     </div>
 
     <div class="nav-options clearfix">
-            <%- @partial('grid-option', {image:"img/Level1-Soomla.png",link:"/soomla",title: "SOOMLA",text: "SOOMLA provides several game economy components that can easily be integrated into your games. Learn more about what SOOMLA has to offer.", selectorid:"test"}) %>
-            <%- @partial('grid-option', {image:"img/Level1-Platforms.png",link:"/platforms",title: "PLATFORMS",text: "SOOMLA's open-source in-game economy is offered in several native platforms and game engines."}) %>
-            <%- @partial('grid-option', {image:"img/Level1-Downloads.png",link:"//soom.la/downloads",title: "DOWNLOADS",text: "Tobias is Queen Mary. I've always been deeply passionate about nature. Perhaps you remember Neuterfest? I'll never forget your wedding."}) %>
-            <%- @partial('grid-option', {image:"img/Level1-University-ComingSoon.png",link:"javascript:;",title: "UNIVERSITY",text: "I will pack your sweet pink mouth with so much ice cream you'll be the envy of every Jerry and Jane on the block!"}) %>
+            <%- @partial('grid-option', {image:"img/Level1-Soomla.png",link:"/soomla",title: "SOOMLA",text: "Learn about the several game economy components that SOOMLA offers that can easily be integrated into your games.", selectorid:"test"}) %>
+            <%- @partial('grid-option', {image:"img/Level1-Platforms.png",link:"/platforms",title: "PLATFORMS",text: "SOOMLA's open-source in-game economy is offered in various native platforms and game engines."}) %>
+            <%- @partial('grid-option', {image:"img/Level1-Downloads.png",link:"//soom.la/downloads",title: "DOWNLOADS",text: "Download links to the latest (and previous) store versions of each of the platforms SOOMLA supports."}) %>
+            <%- @partial('grid-option', {image:"img/Level1-University-ComingSoon.png",link:"javascript:;",title: "UNIVERSITY",text: "Study examples, read articles, and watch video tutorials to get you started with SOOMLA."}) %>
     </div>

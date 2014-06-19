@@ -279,7 +279,7 @@ public static VirtualGood MARRIAGE_GOOD = new LifetimeVG(
 ####How to use
 
 **Buy:**
-Buying a `LifetimeVG` means that the user will now own the item for the rest of time, unless the game developer decides to *explicitly* take away the item from the user. Lifetime goods can be bought only once.
+Buying a `LifetimeVG` means that the user will now own the item for the rest of time. Lifetime goods can be bought only once.
 
 ``` cs
 StoreInventory.BuyItem("marriage");
