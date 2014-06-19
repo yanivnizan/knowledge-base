@@ -14,8 +14,6 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
 
 ##Get android-store
 
-###With sources
-
 1. Clone android-store. Copy all files from android-store/SoomlaAndroidStore subfolders to their equivalent folders in your Android project:
 
      `git clone git@github.com:soomla/android-store.git`
@@ -49,22 +47,7 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
 
 6. Refer to the [next section](#whats-next-select-a-billing-service) for information on selecting your Billing Service and setting it up.
 
-And that's it ! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
-
-###With jars
-
- 1. Download the .jar file from our downloads page.
-
- 2. Add the .jar file to your libs directory
-
- 3. In Android Studio, add the .jar file as a dependency to your project:
-
-  - Click on the “Project Structure” icon in Android Studio.
-  - In the left side navigation bar click on the Modules tab. Then click on the Dependencies tab at the top.
-  - Click the “+” button at the bottom of the screen and choose “Jars and directories”.
-  - Find and add the relevant jar file.
-
-    ![alt text](/img/tutorial_img/android_getting_started/androidGettingStarted.png "android-store with jars")
+And that's it! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
 
 ##What's next? Select a Billing Service
 

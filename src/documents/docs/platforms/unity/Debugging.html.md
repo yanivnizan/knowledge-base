@@ -28,4 +28,4 @@ In Build Settings, when switching between one platform to another: Choose the pl
 
 <div class="warning-box">Click on "Build", NOT "Build & Run". SOOMLA has a post-build script that needs to run, and clicking on "Build & Run" doesn't give that script a chance.</div>
 
-![alt text](/img/tutorial_img/unity_debugging/switchPlatform.png "tip")
+![alt text](/img/tutorial_img/unity_debugging/switchPlatform.png "Tip")

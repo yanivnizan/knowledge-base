@@ -18,7 +18,7 @@ collection: 'platforms_unity'
 
     [Unity 4.x - unity3d-store v1.4.4](http://bit.ly/1ir2odn)
 
-  - **unity3d-store v1.4.4 example:**
+  - **unity3d-store v1.4.4 with example:**
 
     [Unity 4.x - unity3d-store v1.4.4 example](http://bit.ly/SDcsGS)
 
@@ -28,17 +28,19 @@ collection: 'platforms_unity'
 
 2. Drag the "StoreEvents" Prefab from `../Assets/Soomla/Prefabs` into your scene. You should see it listed in the "Hierarchy" panel.
 
-    ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Store Listing")
+    ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
 
 3. On the menu bar click "Soomla -> Edit Settings" and change the values for "Custom Secret", "Public Key" and "Soom Sec":
 
-  - *Public Key* - is the public key given to you from Google. (iOS doesn't have a public key).
-  - *Custom Secret* - is an encryption secret you provide that will be used to secure your data.
-  - *Soom Sec* - is a special secret SOOMLA uses to increase your data protection.
+  - **Custom Secret** - is an encryption secret you provide that will be used to secure your data.
 
-      **Choose both secrets wisely. You can't change them after you launch your game!**
+  - **Soom Sec** - is a special secret SOOMLA uses to increase your data protection.
 
-      ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Store Listing")
+  - **Public Key** - If your billing service provider is Google Play, you'll need to insert here the public key given to you from Google. (Learn more in step 4 [here](/docs/platforms/android/GooglePlayIAB)).
+
+      <div class="warning-box">Choose both secrets wisely. You can't change them after you launch your game!</div>
+
+      ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
 
 4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
   - For a brief example, see the [example](#example) at the bottom.
@@ -49,14 +51,33 @@ collection: 'platforms_unity'
     ``` cs
     StoreController.Initialize(new YourStoreAssetsImplementation());
     ```
+    Initialize StoreController in the `Start` function of `MonoBehaviour` and NOT in the `Awake` function. SOOMLA has its own `MonoBehaviour` and it needs to be "Awakened" before you initialize.
 
-    <div class="info-box">Initialize StoreController ONLY ONCE when your application loads.</div>
-
-    <div class="info-box">Initialize StoreController in the `Start` function of `MonoBehaviour` and NOT in the `Awake` function. SOOMLA has its own `MonoBehaviour` and it needs to be "Awakened" before you initialize.</div>
+    <div class="warning-box">Initialize StoreController ONLY ONCE when your application loads.</div>
 
 5. You'll need an event handler in order to be notified about in-app purchasing related events. Refer to the [Event Handling](/docs/platforms/unity3d/Events) section for more information.
 
 That's it! You now have storage and in-app purchasing capabilities ALL-IN-ONE!
+
+###Unity & Android
+
+**Starting IAB Service in background**
+
+If you have your own storefront implemented inside your game, it's recommended that you open the IAB Service in the background when the store opens and close it when the store is closed.
+
+``` cs
+// Start Iab Service
+StoreController.StartIabServiceInBg();
+
+// Stop Iab Service
+StoreController.StopIabServiceInBg();
+```
+
+This is not mandatory, your game will work without this, but we do recommend it because it enhances performance. The idea here is to preemptively start the in-app billing setup process with Google's (or Amazon's) servers.
+
+In many games the user has to navigate into the in-game store, or start a game session in order to reach the point of making purchases. You want the user experience to be fast and smooth and prevent any lag that could be caused by network latency and setup routines you could have done silently in the background.
+
+
 
 ## Example
 
@@ -113,34 +134,21 @@ public class ExampleWindow : MonoBehaviour {
 }
 ```
 
-###Unity & Android
-
-####Starting IAB Service in background
-
-If you have your own storefront implemented inside your game, it's recommended that you open the IAB Service in the background when the store opens and close it when the store is closed.
-
-``` cs
-// Start Iab Service
-StoreController.StartIabServiceInBg();
-
-// Stop Iab Service
-StoreController.StopIabServiceInBg();
-```
-
-Don't forget to close the Iab Service when your store is closed. This is not mandatory, your game will work without this, but we do recommend it  because it enhances performance.
-
-<div class="info-box">The idea is to preemptively start the in-app billing setup process with Google's (or Amazon's) servers. In many games the user has to navigate into the in-game store, or start a game session in order to reach the point of making purchases. You want the user experience to be fast and smooth and prevent any lag that could be caused by network latency and setup routines you could have done silently in the background.</div>
-
 ##In-app Billing
+
+SOOMLA's unity3d-store knows how to contact Google Play, Amazon Appstore, or Apple App Store for you and will redirect your users to their purchasing system to complete the transaction.
+
 ###Android
+
 Define your economy in Google Play or Amazon App Store.
 
 See our tutorials:
 
 - [Google Play](/docs/platforms/android/GooglePlayIAB)
-- [Amazon App Store](/docs/platfroms/android/AmazonIAB)
+- [Amazon App Store](/docs/platforms/android/AmazonIAB)
 
 ###iOS
-Define your economy in the App Store.
 
-See our tutorial: [App Store](docs/platforms/ios/AppStoreIAB)
+Define your economy in the Appstore.
+
+See our tutorial: [App Store](/docs/platforms/ios/AppStoreIAB)
