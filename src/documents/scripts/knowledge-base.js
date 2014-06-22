@@ -54,52 +54,11 @@ $(function() {
     // Set L3-Menu as Article Name On Top Of Article
     $('#article-name').text($("#doc-container h1").text());
 
-    // Hover Over Navigation Menus
-    $('.dropdown-toggle').mouseenter(function(){
-//        $(this).click();
-    }).mouseleave(function(){
+    // Expand \ collapse main menu
+    var $mainMenu = $("#main-menu");
+    $("#main-menu-tab").click(function() {
+        $mainMenu.toggleClass("expanded");
     });
-
-    // set cross-site menu to be draggable
-    $('#main-menu').draggable({
-        axis:"y",
-        containment: "#main-menu-container",
-        stack:"div",
-
-        start: function( event, ui ) {
-            start = ui.position.top;
-        },
-
-        stop: function( event, ui ) {
-            stop = ui.position.top;
-
-            if (ui.position.top <= -236) {
-                $(".cover").css('z-index',1000);
-            }
-
-            if ((start - stop) > 0) {
-                // Menu Dragged Up
-                $('#main-menu').css('top',-247);
-
-
-
-            } else if ((start - stop) < 0) {
-
-                // Menu Dragged Down
-                $('#main-menu').css('top',0);
-            }
-        }
-    });
-
-    // Wait for menu collapse animation to end before re-shuffing z-indexes
-    $("#main-menu").bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
-        if ($("#main-menu").css('top') === "-247px") {
-
-            // Set site logo to be clickable link
-            $(".cover").css('z-index',1000);
-        }
-    });
-
 
     //
     // Move article nav to header on scroll

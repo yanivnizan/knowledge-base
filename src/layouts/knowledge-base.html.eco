@@ -37,7 +37,6 @@
 
 <nav id="knowledge-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
-      <div id="main-menu-container"></div>
       <div id="main-menu">
         <ul>
           <li>
@@ -53,6 +52,7 @@
             <a href="//about.soom.la"><span id="about-icon"></span>ABOUT</a>
           </li>
         </ul>
+        <img id="main-menu-tab" src="/img/menu/Menu-BG-Tab.png">
       </div>
       <div class="cover"> <a id="header-logo" href="/"><img  src="/img/HeaderLogo.png"/></a></div>
     </div>
