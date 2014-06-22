@@ -54,11 +54,37 @@ $(function() {
     // Set L3-Menu as Article Name On Top Of Article
     $('#article-name').text($("#doc-container h1").text());
 
+
+    //
     // Expand \ collapse main menu
-    var $mainMenu = $("#main-menu");
-    $("#main-menu-tab").click(function() {
-        $mainMenu.toggleClass("expanded");
+    //
+
+    var $html               = $("html"),
+        $mainMenu           = $("#main-menu"),
+        isMainMenuExpanded  = false,
+        collapseMainMenu    = function() {
+            $mainMenu.removeClass("expanded");
+            isMainMenuExpanded = false;
+        };
+
+    $("#main-menu-tab").click(function(event) {
+        event.stopPropagation();
+
+        // If menu is collapsed, expand it and listen to external clicks
+        if (!isMainMenuExpanded) {
+            $mainMenu.addClass("expanded");
+            $html.one("click.soomlaMainMenu", collapseMainMenu);
+            isMainMenuExpanded = true;
+
+        } else {
+
+            // If menu is expanded, stop listening to external clicks and collapse
+            $html.off("soomlaMainMenu");
+            collapseMainMenu();
+        }
     });
+
+
 
     //
     // Move article nav to header on scroll
