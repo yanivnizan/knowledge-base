@@ -90,34 +90,36 @@ $(function() {
     // Move article nav to header on scroll
     //
 
-    var $hierarchyNav   = $("#hierarchy-nav"),
-        articleNavTop   = $hierarchyNav.offset().top,
-        $articlePosition= $("#knowledge-navbar .container"),
-        $headerPosition = $("#main-container .row:first .col-md-9"),
-        $window         = $(window),
-        inHeader        = false;
+    var $hierarchyNav = $("#hierarchy-nav");
 
-    $window.on("scroll.article", function() {
-        if ($hierarchyNav.length) {
+    if ($hierarchyNav.length) {
+        var articleNavTop   = $hierarchyNav.offset().top,
+            $articlePosition= $("#knowledge-navbar .container"),
+            $headerPosition = $("#main-container .row:first .col-md-9"),
+            $window         = $(window),
+            inHeader        = false;
 
-            // If the article nav is scrolled out of view...
-            if ($window.scrollTop() >= articleNavTop) {
+        $window.on("scroll.article", function() {
+            if ($hierarchyNav.length) {
 
-                // If it's not in the header yet, move it there
-                if (!inHeader) {
-                    $hierarchyNav.prependTo($articlePosition);
-                    inHeader = true;
-                }
+                // If the article nav is scrolled out of view...
+                if ($window.scrollTop() >= articleNavTop) {
 
-            // otherwise the article
-            } else {
+                    // If it's not in the header yet, move it there
+                    if (!inHeader) {
+                        $hierarchyNav.prependTo($articlePosition);
+                        inHeader = true;
+                    }
 
-                if (inHeader) {
-                    $hierarchyNav.appendTo($headerPosition);
-                    inHeader = false;
+                    // otherwise the article
+                } else {
+
+                    if (inHeader) {
+                        $hierarchyNav.appendTo($headerPosition);
+                        inHeader = false;
+                    }
                 }
             }
-        }
-    });
-
+        });
+    }
 });
