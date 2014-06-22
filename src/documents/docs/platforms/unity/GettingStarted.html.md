@@ -32,13 +32,9 @@ collection: 'platforms_unity'
 
 3. On the menu bar click "Soomla -> Edit Settings" and change the values for "Custom Secret", "Public Key" and "Soom Sec":
 
-  - **Custom Secret** - is an encryption secret you provide that will be used to secure your data.
+  - **Soomla Secret** - This is an encryption secret you provide that will be used to secure your data. (If you used versions before v1.5.2 this secret MUST be the same as Custom Secret)
 
-  - **Soom Sec** - is a special secret SOOMLA uses to increase your data protection.
-
-  - **Public Key** - If your billing service provider is Google Play, you'll need to insert here the public key given to you from Google. (Learn more in step 4 [here](/docs/platforms/android/GooglePlayIAB)).
-
-      <div class="warning-box">Choose both secrets wisely. You can't change them after you launch your game!</div>
+  - **Public Key** - If your billing service provider is Google Play, you'll need to insert here the public key given to you from Google. (Learn more in step 4 [here](/docs/platforms/android/GooglePlayIAB)). **Choose both secrets wisely. You can't change them after you launch your game!**
 
       ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
 
@@ -46,14 +42,15 @@ collection: 'platforms_unity'
   - For a brief example, see the [example](#example) at the bottom.
   - For a more detailed example, see our MuffinRush [example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Examples/MuffinRush/MuffinRushAssets.cs).
 
-5. Initialize `StoreController` with the class you just created:
+5. Initialize `SoomlaStore` with the class you just created:
 
     ``` cs
-    StoreController.Initialize(new YourStoreAssetsImplementation());
+    SoomlaStore.Initialize(new YourStoreAssetsImplementation());
     ```
-    Initialize StoreController in the `Start` function of `MonoBehaviour` and NOT in the `Awake` function. SOOMLA has its own `MonoBehaviour` and it needs to be "Awakened" before you initialize.
+    
+    Initialize SoomlaStore in the `Start` function of `MonoBehaviour` and NOT in the `Awake` function. SOOMLA has its own `MonoBehaviour` and it needs to be "Awakened" before you initialize.
 
-    <div class="warning-box">Initialize StoreController ONLY ONCE when your application loads.</div>
+    <div class="warning-box">Initialize SoomlaStore ONLY ONCE when your application loads.</div>
 
 5. You'll need an event handler in order to be notified about in-app purchasing related events. Refer to the [Event Handling](/docs/platforms/unity3d/Events) section for more information.
 
@@ -67,10 +64,10 @@ If you have your own storefront implemented inside your game, it's recommended t
 
 ``` cs
 // Start Iab Service
-StoreController.StartIabServiceInBg();
+SoomlaStore.StartIabServiceInBg();
 
 // Stop Iab Service
-StoreController.StopIabServiceInBg();
+SoomlaStore.StopIabServiceInBg();
 ```
 
 This is not mandatory, your game will work without this, but we do recommend it because it enhances performance. The idea here is to preemptively start the in-app billing setup process with Google's (or Amazon's) servers.
@@ -123,12 +120,12 @@ public class ExampleAssets : IStoreAssets{
     ...
 }
 
-// Initialize StoreController
+// Initialize SoomlaStore
 public class ExampleWindow : MonoBehaviour {
     ...
     void Start () {
 		...
-		StoreController.Initialize(new ExampleAssets());
+		SoomlaStore.Initialize(new ExampleAssets());
 		...
 	}
 }

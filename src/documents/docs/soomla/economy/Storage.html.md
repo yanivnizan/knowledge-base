@@ -12,9 +12,9 @@ collection: 'soomla_economy'
 
 ##How SOOMLA storage works
 
-Every user that downloads your game will have local, on-device storage that is encrypted and kept in an SQLite database. `StoreController` is the only class you need to initialize in order to use the SOOMLA SDK.
+Every user that downloads your game will have local, on-device storage that is encrypted and kept in an SQLite database. `SoomlaStore` is the only class you need to initialize in order to use the SOOMLA SDK.
 
-Upon initialization, `StoreController` initializes `StoreInfo`. The first time your game is loaded, `StoreInfo` is initialized with your implementation of `IStoreAssets`. On that first time, your virtual economy’s metadata is saved on the local database on your users’ devices. After that it is always initialized from the database.
+Upon initialization, `SoomlaStore` initializes `StoreInfo`. The first time your game is loaded, `StoreInfo` is initialized with your implementation of `IStoreAssets`. On that first time, your virtual economy’s metadata is saved on the local database on your users’ devices. After that it is always initialized from the database.
 
 If at some point you want to change the metadata, you will have to bump up the version number in the `getVersion` function in your implementation of `IStoreAssets`, in order for your users to see your changes. The value of `getVersion` will determine if the saved data in the local (on-device) database will be deleted or not. You'll need to bump the version after ANY change in order to see the changes, otherwise your store’s metadata will always be loaded from the local database, hence your changes will not be shown. Keep this in mind when you release updates to your users.
 
@@ -24,9 +24,13 @@ If at some point you want to change the metadata, you will have to bump up the v
 
 SOOMLA keeps the game's data in an encrypted database, and uses the AES (Advanced Encryption Standard) algorithm for encryption. This algorithm is a standard symmetric encryption algorithm used to secure the user's data on the device. AES is a common approach to solve this kind of problem. To learn more about AES read [here](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
 
-In order to encrypt your data, SOOMLA generates a private key out of several parts of information. In the class StoreConfig you’ll find a field called SOOM_SEC. To protect your game from hackers, SOOMLA recommends that you change this value before you release your game.
+If you want to protect your game from 'bad people' (and who doesn't?!), you might want to follow some guidelines:
 
-<div class="warning-box">You can change this value only once! If you try to change it again, old data from the database will become unavailable.</div>
+SOOMLA keeps the game's data in an encrypted database. In order to encrypt your data, SOOMLA generates a private key out of several parts of information. The Soomla Secret (before v3.4.1 is was called customSec) is one of them. SOOMLA recommends that you provide this value when initializing SoomlaStore and before you release your game. 
+
+<div class="warning-box">You can change this value once! If you try to change it again, old data from the database will become unavailable.</div>
+
+Following Google's recommendation, SOOMLA also recommends that you split your public key and construct it on runtime or even use bit manipulation on it in order to hide it. The key itself is not secret information but if someone replaces it, your application might receive fake messages that might harm it.
 
 ##**Useful Classes**
 To further understand how SOOMLA handles storage, below are descriptions about each of the relevant classes.

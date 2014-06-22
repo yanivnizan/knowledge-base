@@ -14,9 +14,9 @@ Here you can find descriptions of some of the main classes and interfaces of and
 
 To see more usage examples of the functions of these classes see [Economy Model](/docs/platforms/unity3d/EconomyModel).
 
-##[StoreController](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/StoreController.cs)
+##[SoomlaStore](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs)
 
-StoreController holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon Appstore, App Store).
+SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon Appstore, App Store).
 
 <div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/unity/GettingStarted).</div>
 
@@ -27,7 +27,7 @@ public class ExampleWindow : MonoBehaviour {
     ...
     void Start () {
 		...
-		StoreController.Initialize(new MuffinRushAssets());
+		SoomlaStore.Initialize(new MuffinRushAssets());
 		...
 	}
 }

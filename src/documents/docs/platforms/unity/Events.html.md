@@ -12,7 +12,7 @@ collection: 'platforms_unity'
 
 ##About
 
-SOOMLA's unity3d-store's event handling mechanism is based on the event-handling methods of android-store and ios-store. Throughout android-store and iOS-store events are fired and in unity3d-store they are observed and handled.
+SOOMLA allows you to subscribe to store events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur. SOOMLA's unity3d-store's event handling mechanism is based on the event-handling methods of android-store and ios-store. Throughout android-store and iOS-store events are fired and in unity3d-store they are observed and handled.
 
 ###In Android
 
@@ -59,7 +59,7 @@ public void onMarketPurchaseStarted(string message) {
 
 You can find a full example of an event handler class [here](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Examples/MuffinRush/ExampleEventHandler.cs).
 
-Make sure to instantiate your event-handler class BEFORE `StoreController`.  
+Make sure to instantiate your event-handler class BEFORE `SoomlaStore`.  
 
 ``` cs
 public class ExampleWindow : MonoBehaviour {
@@ -69,7 +69,7 @@ public class ExampleWindow : MonoBehaviour {
    void Start () {
         ...
 	    handler = new ExampleEventHandler();
-	    StoreController.Initialize(new ExampleAssets());
+	    SoomlaStore.Initialize(new ExampleAssets());
 	    ...
     }
 }

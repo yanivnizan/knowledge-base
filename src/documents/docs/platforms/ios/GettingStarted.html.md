@@ -20,31 +20,34 @@ Before doing anything, SOOMLA recommends that you go through [Selling with In-Ap
 
  `git clone git@github.com:soomla/ios-store.git`
 
-2. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
+2. The static libs and headers you need are in the folder build.
 
-3. Change the value of SOOM_SEC in StoreConfig.m to a secret of your choice. Do this now! **You can't change this value after you publish your game!**
+    - Set your project's "Library Search Paths" and "Header Search Paths" to that folder.
+    - Add `-ObjC -lSoomlaiOSStore -lSoomlaiOSCore` to the project's "Other Linker Flags".
 
-4. We use [OpenUDID](https://github.com/ylechelle/OpenUDID) when we can't use Apple's approved way of fetching the UDID (using 'identifierForVendor'). We use ARC but OpenUDID doesn't use ARC. Open your *Project Properties* -> *Build Phases* -> *Compile Sources* and and add the flag '-fno-objc-arc' to OpenUDID.m.
+3. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
 
-    ![alt text](/img/tutorial_img/ios_getting_started/compileSources.png "Compile sources")
+4. Initialize Soomla with a secret that you chose to encrypt the user data. (For those who came from older versions, this should be the same as the old "custom secret"):
+
+    ``` objectivec
+    [Soomla initializeWithSecret:@"[YOUR CUSTOM GAME SECRET HERE]"];
+    ```
+
+    <div class="info-box">The secret is your encryption secret for data saved in the DB.</div>
 
 5. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
   - For a brief example, see the [example](#example) at the bottom.
   - For a more detailed example, see our MuffinRush [example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m).
 
-6. Initialize `_`StoreController`_` with the class you just created:
-
-    > **NOTE:** The custom secret is your encryption secret for data saved in the DB. This secret is NOT the secret from step 3 (select a different value).
+6. Initialize `SoomlaStore` with the class you just created:
 
     ``` objectivec
-    [[StoreController getInstance]
-        initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init]
-        andCustomSecret:@"[YOUR CUSTOM SECRET HERE]"];
+    [[SoomlaStore getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init]];
     ```
 
-    <div class="warning-box">Initialize `StoreController` ONLY ONCE when your application loads.</div>
+    <div class="warning-box">Initialize `SoomlaStore` ONLY ONCE when your application loads.</div>
 
-And that's it ! You have Storage and in-app purchasing capabilities... ALL-IN-ONE.
+And that's it! You have Storage and in-app purchasing capabilities... ALL-IN-ONE.
 
 ###Run the Example App
 
@@ -126,17 +129,17 @@ In order to define the way your various virtual items (Coins, swords, hats...) a
 @end
 
 
-// Initialize StoreController
+// Initialize SoomlaStore
 @implementation AppDelegate
     ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     {
         ...
-        // We initialize StoreController when the application loads!
+        // We initialize SoomlaStore when the application loads!
         id<IStoreAssets> storeAssets = [[ExampleStoreAssets alloc] init];
 
         // CustomSecret is a secret of your choice. You can't change it after you publish your game.
-        [[StoreController getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
+        [[SoomlaStore getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
         ...
     }
     ...
