@@ -31,19 +31,15 @@
 //
 
 .nav-options {
+  .user-select(none);
+  background-color: @nav-grid-bg-color;
   a {
     text-decoration: none;
   }
-  .user-select(none);
-  background-color:#F0F9FF;
   @media all and (min-width: 1125px) {
-    padding-left:200px;
-    padding-right: 200px;
     padding-top:120px;
   }
   @media all and (max-width: 1124px) {
-    padding-left:120px;
-    padding-right: 120px;
     padding-top:80px;
   }
 
@@ -100,14 +96,14 @@
 //
 
 .nav-options-sm {
+
+  .user-select(none);
+  background-color:@nav-grid-bg-color;
+  padding-top:90px;
+
   a {
     text-decoration: none;
   }
-  .user-select(none);
-  background-color:#F0F9FF;
-  padding-left:100px;
-  padding-right: 100px;
-  padding-top:90px;
   .menu-option {
     border:none;
     margin-bottom:50px;
@@ -119,14 +115,12 @@
     .option-image {
       position:relative;
       overflow:hidden;
-      height:59px;
-      width:59px;
+      .square(59px);
       margin-bottom:5px;
       margin-left:10px;
       img {
         position:absolute;
-        width:59px;
-        height:295px;
+        .size(59px, 295px);
         top:0;
         left:0;
         &.soomla.hover {
