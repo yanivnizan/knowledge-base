@@ -7,7 +7,13 @@
     </a>
     <ul id="nav-list-l3" class="dropdown-menu l3-gray" role="menu" >
         <% for doc in @getCollection(@collection).toJSON(): %>
-        <li class="icon-option"><a class="icon-link" href="<%= doc.url %>"><%= doc.title %></a></li>
+        <li class="icon-option">
+          <% if doc.title == @document.title: %>
+              <a class="icon-link link-current" href="<%= doc.url %>"><%= @document.title %></a>
+          <% else: %>
+              <a class="icon-link" href="<%= doc.url %>"><%= doc.title %></a>
+          <% end %>
+        </li>
         <% end %>
     </ul>
 </div>

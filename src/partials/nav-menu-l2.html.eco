@@ -15,4 +15,4 @@
         <% end %>
     </ul>
 </div>
-<img src="/img/Arrow.png"/>
+<img class="breadcrumb-icon" src="/img/Arrow.png"/>

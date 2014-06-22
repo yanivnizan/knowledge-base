@@ -9,4 +9,4 @@
         <!--<li><a href="/university">University</a></li>-->
     </ul>
 </div>
-<img src="/img/Arrow.png"/>
+<img class="breadcrumb-icon" src="/img/Arrow.png"/>
