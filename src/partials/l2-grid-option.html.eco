@@ -1,10 +1,10 @@
-<div class="col-lg-4 col-md-6 menu-option thumbnail">
+<div class="col-lg-4 col-md-6 menu-option">
     <a href="<%= @link %>">
         <div class="link-container clearfix">
             <div class="option-image">
                 <img class="<%= @subjectclass %>" src="<%= @image %>" alt="" id="<%= @selectorid %>"/>
             </div>
-            <div class="option-text-container col-lg-9 col-md-9">
+	    <div class="option-text-container">
                 <div class="option-head-text <%= @subjectclass %>"><%= @title %></div>
                 <div class="option-text">
                     <%= @text %>

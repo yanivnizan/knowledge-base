@@ -19,7 +19,7 @@
 
     <!-- DocPad Styles + Our Own -->
     <!--Temporary add each css/js file separately  -->
-    <link rel="stylesheet" type="text/css" href="/styles/bootstrap.css"  />
+    <!--<link rel="stylesheet" type="text/css" href="/styles/bootstrap.css"  />-->
     <link rel="stylesheet" type="text/css" href="/styles/tocify.css"  />
     <link rel="stylesheet" type="text/css" href="/styles/highlightcode.css"  />
     <link rel="stylesheet" type="text/css" href="/styles/footer.css"  />
