@@ -89,10 +89,10 @@
                 </ul>
             </div>
             <div class="copyright">
-                <span>&#169; 2014 Soomla</span>
+                <span id="soomla-copyright">&#169; 2014 Soomla</span>
                 <a href="http://soom.la/terms-conditions/">Terms of Use</a> |
-                <a href="http://soom.la/privacy-policy/">Privacy Policy</a>
-                <span>Lovingly Made In Tel Aviv</span>
+                <a href="http://soom.la/privacy-policy/">Privacy Policy</a> |
+                <a href="//mappedinisrael.com/search/SOOMLA">Made with <span class="heart"></span> in Tel-Aviv</a>
             </div>
         </div>
     </div>

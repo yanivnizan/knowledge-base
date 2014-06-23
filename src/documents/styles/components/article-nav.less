@@ -21,7 +21,7 @@
       width: 230px;
     }
     @media (min-width: 1200px) {
-      margin-left: 300px;
+      margin-left: 270px;
       width: 300px;
     }
 
@@ -34,12 +34,38 @@
 
 #tocify-header0 {
   background-color: @nav-grid-bg-color;
+  padding-bottom: 30px;
+  li a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  &.collapsed {
+    margin:3px 0px 0px 0px;
+    padding:0;
+    position:fixed;
+    left:850px;
+    width:250px;
+    & > li:first-of-type {
+      margin:0px 0px 0px 0px;
+      padding: 0;
+      & a {
+        display:inline-block;
+        overflow: initial;
+      }
+    }
+  }
   & > li:first-of-type {
     background-color: #1676A6;
     padding-top: 5px;
     padding-bottom: 5px;
+    margin-bottom:20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     & a {
+      text-overflow: ellipsis;
       display: inline;
       font-family: 'Open Sans', sans-serif;
       font-weight: 900;
@@ -53,7 +79,7 @@
   [data-tag="2"] {
     & li a {
       font-family: 'Open Sans', sans-serif;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 16px;
       color: #1676A6;
       padding-top: 2px;
@@ -70,7 +96,7 @@
   [data-tag="3"] {
     & li a {
       font-family: 'Open Sans', sans-serif;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 16px;
       color: #666666;
       padding-top: 2px;
@@ -84,6 +110,9 @@
     & li.active a {
       font-weight: 600;
     }
+  }
+  .tocify-subheader .tocify-subheader {
+    text-indent:70px;
   }
 }
 
@@ -112,5 +141,3 @@ span.plus {
   width:9px;
   background-repeat:no-repeat;
 }
-
-

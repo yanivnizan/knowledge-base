@@ -37,18 +37,40 @@ $(function() {
     /*
      *  Add -/+ collapse option for Table Of Contents
      */
+    var     tocInHeader = false,
+            $navbar = $("#tocify-header0");
+
     $(".tocify-header > li:first-child").prepend("<div id='collapse-container'> <span id='collapseToc' class='minus'> </span></div>");
     $('#collapse-container').click(function(e) {
         e.stopPropagation();
-        $(".tocify-subheader").slideToggle(200);
+        $(".tocify-subheader").slideToggle(20);
         $("#nav").toggleClass("collapsed");
-
+        $navbar.toggleClass("collapsed");
         if ($("#collapseToc").hasClass('minus')) {
+
+            // Pin collapsed toc to header
+            $navbar.prependTo($("#knowledge-navbar .container"));
+            tocInHeader = true;
+
+            // Replace 'collapse' with 'expand' button
             $("#collapseToc").removeClass('minus').addClass('plus');
-            $("#main-container .col-md-9").removeClass("col-md-9").addClass("col-md-12");
+
+            // Expand doc view
+            $("#main-container .col-md-8").removeClass("col-md-8").addClass("col-md-12");
         } else {
+
+            // Bring back toc down
+            $('#tocify-header0 > li:first-of-type a').text($('#article-name').text());
+
+            // pin back to normal view
+            $navbar.prependTo($("#nav"));
+            tocInHeader = false;
+
+            // Replace 'expand' with 'collapse' button
             $("#collapseToc").removeClass('plus').addClass('minus');
-            $("#main-container .col-md-12").removeClass("col-md-12").addClass("col-md-9");
+
+            // Restrict doc view
+            $("#main-container .col-md-12").removeClass("col-md-12").addClass("col-md-8");
         }
     });
 
@@ -101,6 +123,12 @@ $(function() {
             inHeader        = false;
 
         $window.on("scroll.article", function() {
+
+            // If navbar is in header, change title to current viewed section
+            if (tocInHeader) {
+                $('#tocify-header0 > li:first-of-type a').text($(".tocify-item.active").text());
+            }
+
             if ($hierarchyNav.length) {
 
                 // If the article nav is scrolled out of view...

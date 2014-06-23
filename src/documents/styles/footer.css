@@ -282,14 +282,18 @@ ul.footer-menu li a{
     padding-top: 15px;
     font-size: 12px;
 }
-.copyright span{
+#soomla-copyright {
     padding-right: 17px;
-}
-.copyright span:last-child{
     padding-left: 17px;
 }
-
-
+.heart {
+    background: url('/img/h.png') no-repeat center;
+    width:14px;
+    height:12px;
+    display:inline-block;
+    margin-left:2px;
+    margin-right:1px;
+}
 
 
 /*!
