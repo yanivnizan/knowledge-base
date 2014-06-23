@@ -8,6 +8,7 @@ $(function() {
         showAndHide:false,
         selectors: "h1, h2, h3",
         ignoreSelector: ".jumbotron, footer",
+        scrollTo: 130, // === $("#hierarchy-nav").offset().top
         extendPage: false
     });
 
