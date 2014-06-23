@@ -26,15 +26,15 @@ collection: 'platforms_unity'
 
     `git clone https://github.com/soomla/unity3d-store.git`
 
-2. Drag the "StoreEvents" Prefab from `../Assets/Soomla/Prefabs` into your scene. You should see it listed in the "Hierarchy" panel.
+2. Drag the "StoreEvents" and "CoreEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
     ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
 
-3. On the menu bar click "Soomla -> Edit Settings" and change the values for "Custom Secret", "Public Key" and "Soom Sec":
+3. On the menu bar click "Window" > "Soomla" > "Edit Settings" and change the values for "Soomla Secret" and "Public Key":
 
   - **Soomla Secret** - This is an encryption secret you provide that will be used to secure your data. (If you used versions before v1.5.2 this secret MUST be the same as Custom Secret)
 
-  - **Public Key** - If your billing service provider is Google Play, you'll need to insert here the public key given to you from Google. (Learn more in step 4 [here](/docs/platforms/android/GooglePlayIAB)). **Choose both secrets wisely. You can't change them after you launch your game!**
+  - **Public Key** - If your billing service provider is Google Play, you'll need to insert the public key given to you from Google. (Learn more in step 4 [here](/docs/platforms/android/GooglePlayIAB)). **Choose both secrets wisely. You can't change them after you launch your game!**
 
       ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
 
@@ -47,7 +47,7 @@ collection: 'platforms_unity'
     ``` cs
     SoomlaStore.Initialize(new YourStoreAssetsImplementation());
     ```
-    
+
     Initialize SoomlaStore in the `Start` function of `MonoBehaviour` and NOT in the `Awake` function. SOOMLA has its own `MonoBehaviour` and it needs to be "Awakened" before you initialize.
 
     <div class="warning-box">Initialize SoomlaStore ONLY ONCE when your application loads.</div>
@@ -137,15 +137,15 @@ SOOMLA's unity3d-store knows how to contact Google Play, Amazon Appstore, or App
 
 ###Android
 
-Define your economy in Google Play or Amazon App Store.
+Define your economy in Google Play or Amazon Appstore.
 
 See our tutorials:
 
 - [Google Play](/docs/platforms/android/GooglePlayIAB)
-- [Amazon App Store](/docs/platforms/android/AmazonIAB)
+- [Amazon Appstore](/docs/platforms/android/AmazonIAB)
 
 ###iOS
 
-Define your economy in the Appstore.
+Define your economy in the App Store.
 
 See our tutorial: [App Store](/docs/platforms/ios/AppStoreIAB)

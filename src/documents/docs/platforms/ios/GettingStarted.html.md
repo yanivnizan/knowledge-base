@@ -16,18 +16,14 @@ Before doing anything, SOOMLA recommends that you go through [Selling with In-Ap
 
 <div class="info-box">We use ARC! Read about ARC [here](http://www.google.com/url?q=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAutomatic_Reference_Counting&sa=D&sntz=1&usg=AFQjCNHaQBd32glc8dP7HSzlvW1RhjInQA).</div>
 
-1. Clone ios-store. Copy all files from ../ios-store/SoomlaiOSStore/SoomlaiOSStore into your iOS project:
-
- `git clone git@github.com:soomla/ios-store.git`
-
-2. The static libs and headers you need are in the folder build.
+1. The static libs and headers you need are in the [build](https://github.com/soomla/ios-store/tree/master/build) folder.
 
     - Set your project's "Library Search Paths" and "Header Search Paths" to that folder.
     - Add `-ObjC -lSoomlaiOSStore -lSoomlaiOSCore` to the project's "Other Linker Flags".
 
-3. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
+2. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
 
-4. Initialize Soomla with a secret that you chose to encrypt the user data. (For those who came from older versions, this should be the same as the old "custom secret"):
+3. Initialize `Soomla` with a secret that you chose to encrypt the user data saved in the DB. (For those who came from older versions, this should be the same as the old "custom secret"):
 
     ``` objectivec
     [Soomla initializeWithSecret:@"[YOUR CUSTOM GAME SECRET HERE]"];
@@ -35,11 +31,11 @@ Before doing anything, SOOMLA recommends that you go through [Selling with In-Ap
 
     <div class="info-box">The secret is your encryption secret for data saved in the DB.</div>
 
-5. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
+4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
   - For a brief example, see the [example](#example) at the bottom.
-  - For a more detailed example, see our MuffinRush [example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m).
+  - For a more detailed example, see our [Muffin Rush Example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m).
 
-6. Initialize `SoomlaStore` with the class you just created:
+5. Initialize `SoomlaStore` with the class you just created:
 
     ``` objectivec
     [[SoomlaStore getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init]];
@@ -49,17 +45,11 @@ Before doing anything, SOOMLA recommends that you go through [Selling with In-Ap
 
 And that's it! You have Storage and in-app purchasing capabilities... ALL-IN-ONE.
 
-###Run the Example App
-
-In order for the MuffinRush Example to run, make sure that in *SoomlaiOSStoreExample > Build Settings > Linking*, the value for “Other Linker Flags” is “-ObjC”. If it’s not, add it.
-
-![alt text](/img/tutorial_img/ios_getting_started/linkerFlags.png "Linker flags")
-
-##What's next? In App Purchasing.
+##In App Purchasing
 
 SOOMLA provides two ways in which you can let your users purchase items in your game:
 
- 1. **PurchaseWithMarket** is a `PurchaseType` that allows users to purchase a `VirtualItem` via the App Store.
+ 1. **PurchaseWithMarket** is a `PurchaseType` that allows users to purchase a `VirtualItem` via the App Store. These products need to be defined in iTunesConnect.
 
  2. **PurchaseWithVirtualItem** is a `PurchaseType` that lets your users purchase a `VirtualItem` with some amount of a different `VirtualItem`. *For Example:* Buying 1 Sword with 100 Gems.
 
@@ -129,17 +119,15 @@ In order to define the way your various virtual items (Coins, swords, hats...) a
 @end
 
 
-// Initialize SoomlaStore
+// Initialization
 @implementation AppDelegate
     ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     {
         ...
-        // We initialize SoomlaStore when the application loads!
-        id<IStoreAssets> storeAssets = [[ExampleStoreAssets alloc] init];
-
-        // CustomSecret is a secret of your choice. You can't change it after you publish your game.
-        [[SoomlaStore getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
+        id<IStoreAssets> storeAssets = [[MuffinRushAssets alloc] init];
+        [Soomla initializeWithSecret:@"ChangeMe!!"];
+        [[SoomlaStore getInstance] initializeWithStoreAssets:storeAssets];
         ...
     }
     ...

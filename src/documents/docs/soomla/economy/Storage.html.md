@@ -26,11 +26,11 @@ SOOMLA keeps the game's data in an encrypted database, and uses the AES (Advance
 
 If you want to protect your game from 'bad people' (and who doesn't?!), you might want to follow some guidelines:
 
-SOOMLA keeps the game's data in an encrypted database. In order to encrypt your data, SOOMLA generates a private key out of several parts of information. The Soomla Secret (before v3.4.1 is was called customSec) is one of them. SOOMLA recommends that you provide this value when initializing SoomlaStore and before you release your game. 
+- SOOMLA keeps the game's data in an encrypted database. In order to encrypt your data, SOOMLA generates a private key out of several parts of information. The Soomla Secret (before v3.4.1 is was called customSec) is one of them. SOOMLA recommends that you provide this value when initializing SoomlaStore and before you release your game.
 
-<div class="warning-box">You can change this value once! If you try to change it again, old data from the database will become unavailable.</div>
+  <div class="warning-box">You can change this value once! If you try to change it again, old data from the database will become unavailable.</div>
 
-Following Google's recommendation, SOOMLA also recommends that you split your public key and construct it on runtime or even use bit manipulation on it in order to hide it. The key itself is not secret information but if someone replaces it, your application might receive fake messages that might harm it.
+- Following Google's recommendation, SOOMLA also recommends that you split your public key and construct it on runtime or even use bit manipulation on it in order to hide it. The key itself is not secret information but if someone replaces it, your application might receive fake messages that might harm it.
 
 ##**Useful Classes**
 To further understand how SOOMLA handles storage, below are descriptions about each of the relevant classes.

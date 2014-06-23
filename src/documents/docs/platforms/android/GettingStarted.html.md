@@ -14,13 +14,15 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
 
 ##Get android-store
 
-1. Clone android-store. Copy all files from android-store/SoomlaAndroidStore subfolders to their equivalent folders in your Android project:
+1. Add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder to your project.
 
-     `git clone git@github.com:soomla/android-store.git`
+    > **NOTE:** You can choose to clone android-store instead. If you choose this option, you need to add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder, except for AndroidStore.jar.
+
+    > `git clone git@github.com:soomla/android-store.git`
 
 2. Make the following changes to your AndroidManifest.xml:
 
-      Set `SoomlaApp` as the main Application by placing it in the `application` tag:
+    Set `SoomlaApp` as the main Application by placing it in the `application` tag:
 
     ``` xml
     <application ...
@@ -39,7 +41,7 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
   - See the brief [example](#example) at the bottom.
   - See a more detailed example, our MuffinRush [example](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/MuffinRushAssets.java).
 
-5. Initialize `*`SoomlaStore`*` with the class you just created:
+5. Initialize `SoomlaStore` with the class you just created:
 
     ``` java
     SoomlaStore.getInstance().initialize(new YourStoreAssetsImplementation());
@@ -51,13 +53,13 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
 
 And that's it! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
 
-##What's next? Select a Billing Service
+##Select a Billing Service
 
-android-store can be used on all Android based devices meaning that you might want to use IAP with different billing services.
+SOOMLA's android-store can be used on all Android based devices meaning that you might want to use IAP with different billing services.
 
 We've created two billing services for you: Google Play and Amazon (according to your demand).
 
-The billing service is automatically started and stopped for every operation you're running on `StoreContoroller` (`buyWithMarket`, `restoreTransactions` ...).
+The billing service is automatically started and stopped for every operation you're running on `SoomlaStore` (`buyWithMarket`, `restoreTransactions`, etc...).
 
 Be careful with that. Don't leave the service running in the background without closing it.
 
@@ -186,7 +188,7 @@ public class ExampleStoreAssets extends IStoreAssets {
     ...
 }
 
-// Initialize SoomlaStore
+// Initialization
 public class StoreExampleActivity extends Activity {
     ...
 
@@ -196,13 +198,15 @@ public class StoreExampleActivity extends Activity {
         IStoreAssets storeAssets = new ExampleStoreAssets();
 
         // This value is a secret of your choice. You can't change it after you publish your game.
-        SoomlaStore.getInstance().initialize(storeAssets, "[CUSTOM SECRET HERE]");
+        Soomla.initialize("[CUSTOM SECRET HERE]");
+        SoomlaStore.getInstance().initialize(storeAssets);
 
         /** The following are relevant only if your Billing Provider is Google Play **/
 
         // When you create your app in Google play Developer Console, you'll find this key under the "Services & APIs" tab.
         GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM THE MARKET]");
         GooglePlayIabService.AllowAndroidTestPurchases = true;
+        ...
     }
 
     ...

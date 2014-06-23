@@ -14,7 +14,7 @@ Here you can find descriptions of some of the main classes and interfaces of and
 
 ##[SoomlaStore](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/SoomlaStore.java)
 
-SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon App Store, etc…).
+SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon Appstore, etc…).
 
 <div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/android/GettingStarted).</div>
 
