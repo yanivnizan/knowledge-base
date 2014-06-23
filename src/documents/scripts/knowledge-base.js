@@ -49,7 +49,7 @@ $(function() {
         if ($("#collapseToc").hasClass('minus')) {
 
             // Pin collapsed toc to header
-            $navbar.prependTo($("#knowledge-navbar .container"));
+            $navbar.appendTo($(".header-right"));
             tocInHeader = true;
 
             // Replace 'collapse' with 'expand' button
@@ -136,7 +136,7 @@ $(function() {
 
                     // If it's not in the header yet, move it there
                     if (!inHeader) {
-                        $hierarchyNav.prependTo($articlePosition);
+                        $hierarchyNav.prependTo($('.header-right'));
                         inHeader = true;
                     }
 

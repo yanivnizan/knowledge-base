@@ -70,7 +70,7 @@ public class MuffinRushAssets implements IStoreAssets {
 ###iOS Example
 This brief example (taken from our [MuffinRush](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m) example) contains only a few of the in-game economy items available.
 
-```
+```objectivec
 @implementation MuffinRushAssets
 
 + (void)initialize{

@@ -41,10 +41,10 @@
     overflow: hidden;
   }
   &.collapsed {
-    margin:3px 0px 0px 0px;
+    margin:3px 0px 0px 30px;
     padding:0;
-    position:fixed;
-    left:850px;
+    display: inline-block;
+
     width:250px;
     & > li:first-of-type {
       margin:0px 0px 0px 0px;
@@ -82,8 +82,8 @@
       font-weight: 300;
       font-size: 16px;
       color: #1676A6;
-      padding-top: 2px;
-      padding-bottom: 2px;
+      padding-top: 0px;
+      padding-bottom: 0px;
       &:focus, &:hover {
         font-weight: 900;
         background-color: @nav-grid-bg-color;
@@ -99,8 +99,8 @@
       font-weight: 300;
       font-size: 16px;
       color: #666666;
-      padding-top: 2px;
-      padding-bottom: 2px;
+      padding-top: 0px;
+      padding-bottom: 0px;
       padding-left: 20px;
       &:focus, &:hover {
         font-weight: 900;
