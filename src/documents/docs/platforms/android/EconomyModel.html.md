@@ -55,7 +55,7 @@ public static final VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyP
 );
 ```
 
-<div class="info-box">The `productId` that is used to define a new `MarketItem` must must match the product ID defined in the Market (Google Play, Amazon Store, etc..).</div>
+<div class="info-box">The `productId` that is used to define a new `MarketItem` must must match the product ID defined in the Market (Google Play, Amazon Appstore, etc..).</div>
 
 ###[PurchaseWithVirtualItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithVirtualItem.java)
 

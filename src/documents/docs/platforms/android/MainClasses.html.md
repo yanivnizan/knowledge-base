@@ -12,9 +12,9 @@ collection: 'platforms_android'
 
 Here you can find descriptions of some of the main classes and interfaces of android-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
 
-##[StoreController](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/StoreController.java)
+##[SoomlaStore](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/SoomlaStore.java)
 
-StoreController holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon App Store, etc…).
+SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon Appstore, etc…).
 
 <div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/android/GettingStarted).</div>
 
@@ -22,7 +22,7 @@ Taken from StoreExampleActivity.java of our Muffin Rush [Example](https://github
 
 ``` java
 IStoreAssets storeAssets = new MuffinRushAssets();
-StoreController.getInstance().initialize(storeAssets,
+SoomlaStore.getInstance().initialize(storeAssets,
     "MIIBIjANBgkqhkiG9w...");
 ```
 
@@ -118,8 +118,6 @@ StorageManager.getNonConsumableItemsStorage().add(nonConsumableItem);
 ##[StoreConfig](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/StoreConfig.java)
 
 The configurations of your store will be kept in `StoreConfig`.
-
-* `SOOM_SEC` - The main encryption secret. CHANGE IT! and change it only once.
 
 * `logDebug` - Tells android-store if it needs to print debug messages or not.
 

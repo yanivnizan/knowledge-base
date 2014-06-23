@@ -14,48 +14,52 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
 
 ##Get android-store
 
-1. Clone android-store. Copy all files from android-store/SoomlaAndroidStore subfolders to their equivalent folders in your Android project:
+1. Add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder to your project.
 
-     `git clone git@github.com:soomla/android-store.git`
+    > **NOTE:** You can choose to clone android-store instead. If you choose this option, you need to add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder, except for AndroidStore.jar.
+
+    > `git clone git@github.com:soomla/android-store.git`
 
 2. Make the following changes to your AndroidManifest.xml:
 
-      Set `SoomlaApp` as the main Application by placing it in the `application` tag:
+    Set `SoomlaApp` as the main Application by placing it in the `application` tag:
 
     ``` xml
     <application ...
         android:name="com.soomla.store.SoomlaApp">
     ```
 
-3. Change the value of `StoreConfig.SOOM_SEC` to a secret of your choice. Do this now!
+3. Initialize Soomla with a secret that you chose to encrypt the user data. (For those who came from older versions, this should be the same as the old "customSec"):
 
-   <div class="warning-box">You can't change this value after you publish your game!</div>
+    ``` java
+    Soomla.initialize("[YOUR CUSTOM GAME SECRET HERE]");
+    ```
+
+    <div class="info-box">This secret is your encryption secret for data saved in the DB.</div>
 
 4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
   - See the brief [example](#example) at the bottom.
   - See a more detailed example, our MuffinRush [example](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/MuffinRushAssets.java).
 
-5. Initialize *StoreController* with the class you just created:
+5. Initialize `SoomlaStore` with the class you just created:
 
     ``` java
-    StoreController.getInstance().initialize(new YourStoreAssetsImplementation(), "[YOUR CUSTOM GAME SECRET HERE]");
+    SoomlaStore.getInstance().initialize(new YourStoreAssetsImplementation());
     ```
 
-    > The custom secret is your encryption secret for data saved in the DB. This secret is NOT the secret from step 3 (select a different value).
-
-    <div class="warning-box">Initialize `StoreController` ONLY ONCE when your application loads.</div>
+    <div class="warning-box">Initialize `SoomlaStore` ONLY ONCE when your application loads.</div>
 
 6. Refer to the [next section](#whats-next-select-a-billing-service) for information on selecting your Billing Service and setting it up.
 
 And that's it! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
 
-##What's next? Select a Billing Service
+##Select a Billing Service
 
-android-store can be used on all Android based devices meaning that you might want to use IAP with different billing services.
+SOOMLA's android-store can be used on all Android based devices meaning that you might want to use IAP with different billing services.
 
 We've created two billing services for you: Google Play and Amazon (according to your demand).
 
-The billing service is automatically started and stopped for every operation you're running on `StoreContoroller` (`buyWithMarket`, `restoreTransactions` ...).
+The billing service is automatically started and stopped for every operation you're running on `SoomlaStore` (`buyWithMarket`, `restoreTransactions`, etc...).
 
 Be careful with that. Don't leave the service running in the background without closing it.
 
@@ -83,7 +87,7 @@ Once you complete the following steps, see the [Google Play IAB](/docs/platforms
   <meta-data android:name="billing.service" android:value="google.GooglePlayIabService" />
   ```
 
-3. After you initialize `StoreController`, let the plugin know your public key from [Google play Developer Console](https://play.google.com/apps/publish/):
+3. After you initialize `SoomlaStore`, let the plugin know your public key from [Google play Developer Console](https://play.google.com/apps/publish/):
 
   ``` java
   public class StoreExampleActivity extends Activity {
@@ -113,12 +117,12 @@ We recommend that you open the IAB Service and keep it open in the background. T
 
 When you open the store, call:  
 ``` java
-StoreController.getInstance().startIabServiceInBg();
+SoomlaStore.getInstance().startIabServiceInBg();
 ```
 
 When the store is closed, call:  
 ``` java
-StoreController.getInstance().stopIabServiceInBg();
+SoomlaStore.getInstance().stopIabServiceInBg();
 ```
 
 ### [Amazon](https://github.com/soomla/android-store-amazon)
@@ -184,7 +188,7 @@ public class ExampleStoreAssets extends IStoreAssets {
     ...
 }
 
-// Initialize StoreController
+// Initialization
 public class StoreExampleActivity extends Activity {
     ...
 
@@ -194,13 +198,15 @@ public class StoreExampleActivity extends Activity {
         IStoreAssets storeAssets = new ExampleStoreAssets();
 
         // This value is a secret of your choice. You can't change it after you publish your game.
-        StoreController.getInstance().initialize(storeAssets, "[CUSTOM SECRET HERE]");
+        Soomla.initialize("[CUSTOM SECRET HERE]");
+        SoomlaStore.getInstance().initialize(storeAssets);
 
         /** The following are relevant only if your Billing Provider is Google Play **/
 
         // When you create your app in Google play Developer Console, you'll find this key under the "Services & APIs" tab.
         GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM THE MARKET]");
         GooglePlayIabService.AllowAndroidTestPurchases = true;
+        ...
     }
 
     ...

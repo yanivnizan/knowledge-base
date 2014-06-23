@@ -16,47 +16,40 @@ Before doing anything, SOOMLA recommends that you go through [Selling with In-Ap
 
 <div class="info-box">We use ARC! Read about ARC [here](http://www.google.com/url?q=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAutomatic_Reference_Counting&sa=D&sntz=1&usg=AFQjCNHaQBd32glc8dP7HSzlvW1RhjInQA).</div>
 
-1. Clone ios-store. Copy all files from ../ios-store/SoomlaiOSStore/SoomlaiOSStore into your iOS project:
+1. The static libs and headers you need are in the [build](https://github.com/soomla/ios-store/tree/master/build) folder.
 
- `git clone git@github.com:soomla/ios-store.git`
+    - Set your project's "Library Search Paths" and "Header Search Paths" to that folder.
+    - Add `-ObjC -lSoomlaiOSStore -lSoomlaiOSCore` to the project's "Other Linker Flags".
 
 2. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
 
-3. Change the value of SOOM_SEC in StoreConfig.m to a secret of your choice. Do this now! **You can't change this value after you publish your game!**
-
-4. We use [OpenUDID](https://github.com/ylechelle/OpenUDID) when we can't use Apple's approved way of fetching the UDID (using 'identifierForVendor'). We use ARC but OpenUDID doesn't use ARC. Open your *Project Properties* -> *Build Phases* -> *Compile Sources* and and add the flag '-fno-objc-arc' to OpenUDID.m.
-
-    ![alt text](/img/tutorial_img/ios_getting_started/compileSources.png "Compile sources")
-
-5. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
-  - For a brief example, see the [example](#example) at the bottom.
-  - For a more detailed example, see our MuffinRush [example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m).
-
-6. Initialize `_`StoreController`_` with the class you just created:
-
-    > **NOTE:** The custom secret is your encryption secret for data saved in the DB. This secret is NOT the secret from step 3 (select a different value).
+3. Initialize `Soomla` with a secret that you chose to encrypt the user data saved in the DB. (For those who came from older versions, this should be the same as the old "custom secret"):
 
     ``` objectivec
-    [[StoreController getInstance]
-        initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init]
-        andCustomSecret:@"[YOUR CUSTOM SECRET HERE]"];
+    [Soomla initializeWithSecret:@"[YOUR CUSTOM GAME SECRET HERE]"];
     ```
 
-    <div class="warning-box">Initialize `StoreController` ONLY ONCE when your application loads.</div>
+    <div class="info-box">The secret is your encryption secret for data saved in the DB.</div>
 
-And that's it ! You have Storage and in-app purchasing capabilities... ALL-IN-ONE.
+4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
+  - For a brief example, see the [example](#example) at the bottom.
+  - For a more detailed example, see our [Muffin Rush Example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m).
 
-###Run the Example App
+5. Initialize `SoomlaStore` with the class you just created:
 
-In order for the MuffinRush Example to run, make sure that in *SoomlaiOSStoreExample > Build Settings > Linking*, the value for “Other Linker Flags” is “-ObjC”. If it’s not, add it.
+    ``` objectivec
+    [[SoomlaStore getInstance] initializeWithStoreAssets:[[YourStoreAssetsImplementation alloc] init]];
+    ```
 
-![alt text](/img/tutorial_img/ios_getting_started/linkerFlags.png "Linker flags")
+    <div class="warning-box">Initialize `SoomlaStore` ONLY ONCE when your application loads.</div>
 
-##What's next? In App Purchasing.
+And that's it! You have Storage and in-app purchasing capabilities... ALL-IN-ONE.
+
+##In App Purchasing
 
 SOOMLA provides two ways in which you can let your users purchase items in your game:
 
- 1. **PurchaseWithMarket** is a `PurchaseType` that allows users to purchase a `VirtualItem` via the App Store.
+ 1. **PurchaseWithMarket** is a `PurchaseType` that allows users to purchase a `VirtualItem` via the App Store. These products need to be defined in iTunesConnect.
 
  2. **PurchaseWithVirtualItem** is a `PurchaseType` that lets your users purchase a `VirtualItem` with some amount of a different `VirtualItem`. *For Example:* Buying 1 Sword with 100 Gems.
 
@@ -126,17 +119,15 @@ In order to define the way your various virtual items (Coins, swords, hats...) a
 @end
 
 
-// Initialize StoreController
+// Initialization
 @implementation AppDelegate
     ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     {
         ...
-        // We initialize StoreController when the application loads!
-        id<IStoreAssets> storeAssets = [[ExampleStoreAssets alloc] init];
-
-        // CustomSecret is a secret of your choice. You can't change it after you publish your game.
-        [[StoreController getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
+        id<IStoreAssets> storeAssets = [[MuffinRushAssets alloc] init];
+        [Soomla initializeWithSecret:@"ChangeMe!!"];
+        [[SoomlaStore getInstance] initializeWithStoreAssets:storeAssets];
         ...
     }
     ...

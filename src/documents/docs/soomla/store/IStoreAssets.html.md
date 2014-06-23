@@ -122,7 +122,7 @@ This brief example (taken from our [MuffinRush](https://github.com/soomla/ios-st
 @end
 ```
 
-After you’ve implemented your version of `IStoreAssets`, you’ll need to initialize `StoreController` with the implementation you just created. All of this is explained in detail in the platform-specific "Getting Started" tutorials.
+After you’ve implemented your version of `IStoreAssets`, you’ll need to initialize `SoomlaStore` with the implementation you just created. All of this is explained in detail in the platform-specific "Getting Started" tutorials.
 
 `IStoreAssets` is transformed into metadata in JSON format and saved in a local SQLite database on the device. After that, the economy is always loaded from the database.
 

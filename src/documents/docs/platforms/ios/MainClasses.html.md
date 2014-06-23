@@ -12,18 +12,18 @@ collection: 'platforms_ios'
 
 Here you can find descriptions of some of the main classes and interfaces of iOS-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
 
-##[StoreController](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreController.h)
+##[SoomlaStore](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/SoomlaStore.h)
 
-StoreController holds the basic assets needed to operate the Store. You can use it to purchase products from the App Store. It provides you with functionality such as starting/stopping the in-app billing service in the background, querying the inventory for information, or starting a purchase process in the App Store.
+SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the App Store. It provides you with functionality such as starting/stopping the in-app billing service in the background, querying the inventory for information, or starting a purchase process in the App Store.
 
 <div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/ios/GettingStarted).</div>
 
 Taken from AppDelegate.m of our Muffin Rush [Example](https://github.com/soomla/ios-store/tree/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample):
 
 ``` objectivec
-// We initialize StoreController when the application loads!
+// We initialize SoomlaStore when the application loads!
 id<IStoreAssets> storeAssets = [[MuffinRushAssets alloc] init];
-[[StoreController getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
+[[SoomlaStore getInstance] initializeWithStoreAssets:storeAssets andCustomSecret:@"ChangeMe!!!"];
 ```
 
 ###Important Functions
@@ -112,10 +112,8 @@ The configurations of your store will be kept in `StoreConfig`.
 
 `StoreConfig`’s configurations:
 
-- `SOOM_SEC` - The main encryption secret. CHANGE IT! and change it only once.
-
 - `STORE_DEBUG_LOG` - Tells iOS-store if to print debug messages or not. [Learn more...](/docs/platforms/ios/Debugging)
 
 - `METADATA_VERSION` - This value defines the version of the metadata located in your database. Never change the value of this variable!
 
-- `VERIFY_PURCHASES` - When set to `YES`, server side verification will be enabled. Don't forget to set to `NO` before you publish your app!
+- `VERIFY_PURCHASES` - When set to `YES`, server side verification will be enabled.
