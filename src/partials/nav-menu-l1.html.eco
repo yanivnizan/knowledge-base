@@ -3,10 +3,26 @@
       <img  class="dropdown-menu-icon" src="/img/<%= @current %>-TopMenu.png"/>
     </a>
     <ul id="nav-list" class="dropdown-menu <%= @current %>" role="menu" >
-        <li><a href="/soomla">Soomla</a></li>
-        <li><a href="/platforms">Platforms</a></li>
-        <li><a href="//soom.la/downloads">Downloads</a></li>
-        <!--<li><a href="/university">University</a></li>-->
+        <% if @current == "soomla": %>
+          <li><a href="/soomla" class="link-current">Soomla</a></li>
+        <% else: %>
+          <li><a href="/soomla">Soomla</a></li>
+        <% end %>
+        <% if @current == "platforms": %>
+          <li><a href="/platforms" class="link-current">Platforms</a></li>
+        <% else: %>
+          <li><a href="/platforms">Platforms</a></li>
+        <% end %>
+        <% if @current == "downloads": %>
+            <li><a href="//soom.la/downloads" class="link-current">Downloads</a></li>
+        <% else: %>
+            <li><a href="//soom.la/downloads">Downloads</a></li>
+        <% end %>
+        <% if @current == "university": %>
+            <!--<li><a href="/university" class="link-current">University</a></li>-->
+        <% else: %>
+            <!--<li><a href="/university">University</a></li>-->
+        <% end %>
     </ul>
 </div>
 <img class="breadcrumb-icon" src="/img/Arrow.png"/>

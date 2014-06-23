@@ -7,10 +7,14 @@
             <% if doc.placeholder: %>
 
             <% else: %>
-            <li class="icon-option">
-                <a class="icon-link" href="/docs/<%= @current %>/<%= doc.title.toLowerCase() %>">
 
-                    <%= doc.title %></a></li>
+              <li class="icon-option">
+                <% if @platform == doc.platform: %>
+                <a class="icon-link link-current" href="/docs/<%= @current %>/<%= doc.title.toLowerCase() %>"><%= doc.title %></a>
+                <% else: %>
+                    <a class="icon-link" href="/docs/<%= @current %>/<%= doc.title.toLowerCase() %>"><%= doc.title %></a>
+                <% end %>
+              </li>
             <% end %>
         <% end %>
     </ul>
