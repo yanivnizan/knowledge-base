@@ -106,7 +106,7 @@ echo Installing Bower and Bower components...
 call !NPM_CMD! install bower
 IF !ERRORLEVEL! NEQ 0 goto error
 echo Bower installation successful
-node_modules\.bin\bower install
+call node_modules\.bin\bower install
 echo Bower components installation successful
 IF !ERRORLEVEL! NEQ 0 goto error
 
