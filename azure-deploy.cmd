@@ -101,7 +101,16 @@ IF EXIST "Gruntfile.js" (
    IF !ERRORLEVEL! NEQ 0 goto error
  )
 
-:: 2. Build DocPad site
+:: 3. Install Bower
+echo Installing Bower and Bower components...
+call !NPM_CMD! install bower
+IF !ERRORLEVEL! NEQ 0 goto error
+cd src
+bower install
+IF !ERRORLEVEL! NEQ 0 goto error
+cd ..
+
+:: 4. Build DocPad site
 echo Building DocPad site...
 pushd "%DEPLOYMENT_SOURCE%"
 rd /s /q out
