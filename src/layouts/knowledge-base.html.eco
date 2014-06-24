@@ -55,7 +55,7 @@
         <img id="main-menu-tab" src="/img/menu/Menu-BG-Tab.png">
       </div>
       <div class="cover"> <a id="header-logo" href="/"><img  src="/img/HeaderLogo.png"/></a></div>
-      <div class="header-right"></div>
+      <div id="header-right"></div>
     </div>
 
 </nav>

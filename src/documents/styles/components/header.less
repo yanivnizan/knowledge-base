@@ -21,6 +21,13 @@
 #header-logo {
   display: inline-block;
   margin-left: 60px;
+
+  // Tighten the logo in XS small resolutions
+  @media (max-width: @screen-xs) {
+    max-width: 240px;
+    margin-top: 5px;
+  }
+
 }
 
 .navbar-header {
@@ -29,6 +36,6 @@
 .cover {
   display: inline-block;
 }
-.header-right {
+#header-right {
   float:right;
 }

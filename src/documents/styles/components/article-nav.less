@@ -141,3 +141,11 @@ span.plus {
   width:9px;
   background-repeat:no-repeat;
 }
+
+
+// Hide the tocify nav in medium resolutions
+#header-right #tocify-header0 {
+  @media (max-width: (@screen-md - 1)) {
+    display: none;
+  }
+}
