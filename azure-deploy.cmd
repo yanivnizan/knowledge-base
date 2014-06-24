@@ -105,8 +105,10 @@ IF EXIST "Gruntfile.js" (
 echo Installing Bower and Bower components...
 call !NPM_CMD! install bower
 IF !ERRORLEVEL! NEQ 0 goto error
+echo Bower installation successful
 cd src
-bower install
+..\node_modules\.bin\bower install
+echo Bower components installation successful
 IF !ERRORLEVEL! NEQ 0 goto error
 cd ..
 
