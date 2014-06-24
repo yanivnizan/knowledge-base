@@ -282,13 +282,10 @@ ul.footer-menu li a{
     padding-top: 15px;
     font-size: 12px;
 }
-.copyright span{
+#soomla-copyright {
     padding-right: 17px;
-}
-.copyright span:last-child{
     padding-left: 17px;
 }
-
 
 
 

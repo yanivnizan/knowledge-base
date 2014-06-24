@@ -31,7 +31,9 @@
 }
 
 #knowledge-navbar #hierarchy-nav {
-  float: right;
+  vertical-align: top;
+  margin-top: 7px;
+  display: inline-block;
   .clearfix;
   margin-top: 6px;
 
@@ -141,6 +143,14 @@
     }
   }
 }
+
+// Hide the hierarachy nav in small resolutions
+#header-right #hierarchy-nav {
+  @media (max-width: (@screen-sm - 1)) {
+    display: none;
+  }
+}
+
 
 #nav-list, #nav-list-l2, #nav-list-l3 {
   text-align: left;
