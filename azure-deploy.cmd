@@ -106,11 +106,9 @@ echo Installing Bower and Bower components...
 call !NPM_CMD! install bower
 IF !ERRORLEVEL! NEQ 0 goto error
 echo Bower installation successful
-cd src
-..\node_modules\.bin\bower install
+node_modules\.bin\bower install
 echo Bower components installation successful
 IF !ERRORLEVEL! NEQ 0 goto error
-cd ..
 
 :: 4. Build DocPad site
 echo Building DocPad site...
