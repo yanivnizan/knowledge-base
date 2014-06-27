@@ -43,7 +43,9 @@ Every operation presented by `IIabService` returns its response using a callback
 ##Add an Activity For Purchasing
 
 Some billing services (like Google Play) need an `Activity` in order to run the purchasing operation. What these services basically do is they launch the IAB `Activity` on top of the given `Activity`. SOOMLA doesn't require the developer to provide an `Activity` on market purchasing operations so there's no `Activity` object to provide to those billing services. To solve this problem, we recommend billing services to create an inner public static class which will extend Android's `Activity` object and will serve as the parent to the service's IAB `Activity`. This custom inner `Activity` will be transparent and will be loaded on top of the Application using the `ApplicationContext` that's saved in `SoomlaApp`. Some guidelines to using an inner `Activity` for purchasing:
-* In the custom `Activity`'s `onCreate` method you will call the billing service's purchasing process. When the purchasing process finishes, the response will usually be transferred back to the `Activity` in its `onActivityResult(...)` method. Keep the `OnPurchaseListener` from the `launchPurchaseFlow` method so you can call the appropriate handler from it when there's a response to the billing operation.
+* In the custom `Activity`'s `onCreate` method you will call the billing service's purchasing process.
+* When the purchasing process finishes, the response will usually be transferred back to the `Activity` in its `onActivityResult(...)` method.
+* Keep the `OnPurchaseListener` from the `launchPurchaseFlow` method so you can call the appropriate handler from it when there's a response to the billing operation.
 * When you write your "Getting Started", don't forget to tell your users that they need to add this `Activity` to their `AndroidManifest.xml`.  For example this is how it's done with Google Play:
 
 ```xml
@@ -52,7 +54,7 @@ Some billing services (like Google Play) need an `Activity` in order to run the 
 
 A good example of having an inner `Activity` for purchasing can be found in *android-store-google-play's* [GooglePlayIabService.java](https://github.com/soomla/android-store-google-play/blob/master/src/com/soomla/store/billing/google/GooglePlayIabService.java).
 
-##Implemeting IabHelper
+##Implementing IabHelper
 
 We found out that most billing services have some specific implementation and that it's better to divide this behavior to a separate class. Also, the abstract `IabHelper` takes care of proper running of the billing service operations like making sure that only one runs at a time, or taking care of successful or failed responses (whenever you want them returned). Your `IIabService` is the one who needs to use the helper you'll create. Don't forget to initialize the helper when `IIabService` is started and stop it when it needs to be stopped. Some guidelines:
 * You can decide if you want the billing operations to run asynchronously or not. We recommend that everything will run asynchronously on threads.
