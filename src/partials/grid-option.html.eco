@@ -4,7 +4,7 @@
                 <div class="option-image col-lg-4 col-md-4">
                     <img src="<%= @image %>" alt="" id="<%= @selectorid %>"/>
                 </div>
-                <div class="option-text-container col-lg-8 col-md-8">
+                <div class="option-text-container col-lg-8 col-md-7">
                     <div class="option-head-text"><%= @title %></div>
                     <div class="option-text">
                         <%= @text %>
