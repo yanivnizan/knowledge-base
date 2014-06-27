@@ -1,7 +1,11 @@
 $(function() {
-    // For draggable main menu, check drag direction
-    var start,
-        stop;
+
+    // Set option heights to max to keep grid shape
+    var maxHeight = 0;
+    $(".menu-option").each(function(){
+	if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
+    });
+    $(".menu-option").height(maxHeight);
 
     // Initialize Table Of Contents
     $("#nav").tocify({
