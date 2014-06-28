@@ -21,6 +21,10 @@ setlocal enabledelayedexpansion
 
 SET ARTIFACTS=%~dp0%artifacts
 
+IF NOT DEFINED NODE_ENV (
+  SET NODE_ENV=production
+)
+
 IF NOT DEFINED DEPLOYMENT_SOURCE (
   SET DEPLOYMENT_SOURCE=%~dp0%.
 )
