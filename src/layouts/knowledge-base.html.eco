@@ -77,8 +77,8 @@
                   <img src="/img/Logo-footer.png">
                 </a>
                 <ul id="menu-footer-menu" class="menu footer-menu h-list pull-left">
-                    <li><a href="http://about.soom.la/soombots/">Soombots</a></li>
-                    <li><a href="http://about.soom.la/">Team</a></li>
+                    <li><a href="http://soom.la/soombots/">Soombots</a></li>
+                    <li><a href="http://soom.la/the-goodfellas/">Team</a></li>
                     <li><a href="https://angel.co/soomla-1">Investors Info</a></li>
                     <li><a href="mailto:support@soom.la">Contact</a></li>
                     <li><a href="http://blog.soom.la">Blog</a></li>
