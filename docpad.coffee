@@ -47,7 +47,7 @@ docpadConfig = {
 
 		# The website's scripts
 			scripts: [
-        'scripts/jquery-ui-1-10-4-min.js',
+        '/scripts/jquery-ui-1-10-4-min.js',
         '/vendor/log.js'
         '/vendor/modernizr.js'
         '/scripts/jquery-tocify-min.js'
