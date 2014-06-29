@@ -21,6 +21,10 @@ setlocal enabledelayedexpansion
 
 SET ARTIFACTS=%~dp0%artifacts
 
+IF NOT DEFINED NODE_ENV (
+  SET NODE_ENV=production
+)
+
 IF NOT DEFINED DEPLOYMENT_SOURCE (
   SET DEPLOYMENT_SOURCE=%~dp0%.
 )
@@ -119,7 +123,7 @@ IF !ERRORLEVEL! NEQ 0 goto error
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
-:: 3. KuduSync
+:: 5. KuduSync
 echo Copying Files...
 call %KUDU_SYNC_CMD% -v 500 -f "%DEPLOYMENT_SOURCE%\out" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%"
 IF !ERRORLEVEL! NEQ 0 goto error
