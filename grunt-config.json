@@ -14,7 +14,7 @@
   "cssmin": {
     "all": {
       "src": ["out/styles/kb.css"],
-      "dest": "out/styles/kb.min.css"
+      "dest": "/home/site/wwwroot/styles/kb.min.css"
     }
   }
 }
