@@ -244,7 +244,7 @@ docpadConfig = {
 				development:
 					enabled: false
 		ignoreincludes:
-			ignoredExtensions: ['inc', 'min', 'map']
+			ignoredExtensions: ['inc', 'map']
 		livereload:
 			enabled: false
 
