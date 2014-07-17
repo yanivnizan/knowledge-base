@@ -18,7 +18,11 @@
     <%- @getBlock('meta').toHTML() %>
 
     <!-- DocPad Styles + Our Own -->
+    <% if @getEnvironment() == 'development':%>
     <%- @getBlock('styles').add(@site.styles).toHTML() %>
+    <%else:%>
+    <link  rel="stylesheet" href="/styles/kb.min.css" />
+    <%end%>
 
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,300' rel='stylesheet' type='text/css'>
@@ -100,6 +104,10 @@
 <script>window.jQuery || document.write('<script src="scripts/jquery-1.11.1.min.js"><\/script>')</script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script>$.fn.modal || document.write('<script src="scripts/bootstrap-3.1.1.min.js"><\/script>')</script>
+<% if @getEnvironment() == 'development':%>
 <%- @getBlock('scripts').add(@site.scripts).toHTML() %>
+<%else:%>
+<script src="/scripts/kb.min.js"></script>
+<%end%>
 </body>
 </html>
