@@ -9,8 +9,8 @@
             <% else: %>
 
               <li class="icon-option">
-                <% if @platform == doc.platform: %>
-                <a class="icon-link link-current" href="/docs/<%= @current %>/<%= doc.title.toLowerCase() %>"><%= doc.title %></a>
+                <% if @collection == doc.collection: %>
+                    <a class="icon-link link-current" href="/docs/<%= @current %>/<%= doc.title.toLowerCase() %>"><%= doc.title %></a>
                 <% else: %>
                     <a class="icon-link" href="/docs/<%= @current %>/<%= doc.title.toLowerCase() %>"><%= doc.title %></a>
                 <% end %>
