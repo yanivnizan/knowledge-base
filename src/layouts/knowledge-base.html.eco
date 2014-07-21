@@ -28,6 +28,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,300' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 </head>
+
 <body>
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
