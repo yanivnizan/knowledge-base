@@ -5,7 +5,7 @@ title: 'Soomla'
 
 <div class="jumbotron" id="know-soomla">
     <div id="jumbo-main-text">
-        <%- @partial('nav-menu-l1', {current:'soomla'}) %>
+        <div id="hierarchy-nav"><%- @partial('nav-menu-l1', {current:'soomla'}) %></div>
         HOW DO YOU PREFER TO CONTINUE?
     </div>
     <div id="jumbo-small-text">
