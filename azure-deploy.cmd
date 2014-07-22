@@ -101,7 +101,7 @@ echo Installing Grunt...
 IF EXIST "Gruntfile.js" (
    call !NPM_CMD! install grunt-cli
    IF !ERRORLEVEL! NEQ 0 goto error
-   call .\node_modules\.bin\grunt --no-color uglify concat cssmin
+   call .\node_modules\.bin\grunt --no-color uglify concat cssmin copy
    IF !ERRORLEVEL! NEQ 0 goto error
  )
 
