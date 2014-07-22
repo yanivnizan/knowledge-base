@@ -16,6 +16,12 @@
       "src": ["out/styles/kb.css"],
         "dest": "/home/site/wwwroot/styles/kb.min.css"
     }
+  },
+  "copy": {
+      "main": {
+        "src": "/home/site/repository/out/marked.js",
+          "dest": "/home/site/repository/node_modules/docpad-plugin-marked/node_modules/marked/lib/marked.js"
+      }
   }
 }
 
