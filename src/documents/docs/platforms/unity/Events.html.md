@@ -22,7 +22,7 @@ In addition, android-store provides a singleton class called `BusProvider`, whic
 
 ###In iOS
 
-SOOMLA's iOS-store contains classes [EventHandling.h](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/EventHandling.h) and [EventHandling.m](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/EventHandling.m). `EvenHandling.h` lists all supported events, and `EventHandling.m` contains implementations of functions that are used to register and post all the supported events. SOOMLA's iOS-store uses iOS's `NSNotificationCenter` to handle events across the SDK.
+SOOMLA's iOS-store contains classes [StoreEventHandling.h](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreEventHandling.h) and [StoreEventHandling.m](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreEventHandling.m). `EvenHandling.h` lists all supported events, and `EventHandling.m` contains implementations of functions that are used to register and post all the supported events. SOOMLA's iOS-store uses iOS's `NSNotificationCenter` to handle events across the SDK.
 
 ##How it works
 

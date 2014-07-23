@@ -5,7 +5,7 @@ title: "Create Your Own Billing Plugin"
 text: "Not all Android users pay with Google Play. Learn how to create new billing plugins for android-store to allow alternative payment methods."
 position: 8
 theme: 'platforms'
-collection: 'platforms_android'
+collection: 'platforms_unity'
 ---
 
 #**Make your In App Billing Service available on unity3d-store**
@@ -26,14 +26,14 @@ We created a mechanism which makes it easy to extend SOOMLA on Unity. unity3d-st
 
 2. Open [StoreSettings.cs](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/Config/) and add the code to support your billing service. You'll need to do 3 things in this file:
 
-    - Write the code that'll draw the UI associated with your billing service into the SOOMLA Settings panel. [Example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/Config/StoreSettings.cs#L119)
+    - Write the code that'll draw the UI associated with your billing service into the SOOMLA Settings panel. See this [example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/Config/StoreSettings.cs#L119).
 
-    - Add fields that'll save the user input and will determine if your billing service is the one that the user has selected in the UI. see  [AmazonBP](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/Config/StoreSettings.cs#L314).
+    - Add fields that'll save the user input and will determine if your billing service is the one that the user has selected in the UI. See [AmazonBP](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/Config/StoreSettings.cs#L314).
 
-    - Write code that’ll copy the jars related with your billing services from the android-billing-services folder to the Plugins/Android folder whenever your billing service is selected. Remove them when it's unselected. [Example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/Config/StoreSettings.cs#L111)
+    - Write code that’ll copy the jars related with your billing services from the android-billing-services folder to the Plugins/Android folder whenever your billing service is selected. Remove them when it's unselected. See this [example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/Config/StoreSettings.cs#L111).
 
 3. Open [StoreManifestTools.cs](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/Config/StoreManifestTools.cs) and add the code that'll do the necessary changes to AndroidManifest.xml so your service will run properly.
 
 **Test** your work. Make sure that the right jars are in Plugins/Android and the AndroidManifest.xml looks ok when your billing service is selected and when other services are selected (and when nothing is selected).
 
-**Finished?** Great! Now pull-request your work and wait for it to be merged into the master branch of the main unity3d-store repo. When it gets in, your billing service will also appear in the official unityproject SOOMLA releases for unity3d-store.
+**Finished?** Great! Now pull-request your work and wait for it to be merged into the master branch of the main unity3d-store repo. When it gets in, your billing service will also appear in the official Unity project SOOMLA releases for unity3d-store.

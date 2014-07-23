@@ -12,7 +12,7 @@ collection: 'platforms_unity'
 
 Here you can find descriptions of some of the main classes and interfaces of android-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
 
-To see more usage examples of the functions of these classes see [Economy Model](/docs/platforms/unity3d/EconomyModel).
+To see more usage examples of the functions of these classes see [Economy Model](/docs/platforms/unity/EconomyModel).
 
 ##[SoomlaStore](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs)
 
@@ -74,7 +74,7 @@ UpgradeVG firstUpgrade = StoreInfo.GetFirstUpgradeForVirtualGood("strength");
 
 **`BuyItem(string itemId)`**
 
-Buys the item that has the given itemId according to its purchase type - either with real money ($$$) or with other virtual items. Read more about PurchaseTypes in [Economy Model](/docs/platforms/android/EconomyModel).
+Buys the item that has the given itemId according to its purchase type - either with real money ($$$) or with other virtual items. Read more about PurchaseTypes in [Economy Model](/docs/platforms/unity/EconomyModel#purchase-types).
 
 **Example:** Buy a virtual item with `itemId` "blue_hat":
 
