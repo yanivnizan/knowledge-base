@@ -16,7 +16,7 @@ collection: 'platforms_cocos2dx'
 
     <div class="info-box">Make sure the version you clone is supported by SOOMLA's cocos2dx-store (the tag is the version).</div>
 
-2. Go into your cocos2d-x project and recursively clone cocos2dx-core into the `extensions` directory located at the root of your Cocos2d-x framework.
+2. Go into your cocos2d-x project and **recursively** clone cocos2dx-core into the `extensions` directory located at the root of your Cocos2d-x framework.
 
     ```
     $ git clone --recursive git@github.com:soomla/cocos2dx-core.git extensions/soomla-cocos2dx-core
