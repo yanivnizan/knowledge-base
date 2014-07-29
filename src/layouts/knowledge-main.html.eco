@@ -3,6 +3,7 @@ layout: 'knowledge-base'
 title: 'Soomla Knowledge Base'
 ---
     <div class="jumbotron" id="know-soomla">
+
         <div id="jumbo-main-text">
             KNOW SOOMLA
         </div>
