@@ -124,8 +124,12 @@ $(function() {
             $articlePosition= $("#knowledge-navbar .container"),
             $headerPosition = $("#main-container .row:first .col-md-9"),
             $window         = $(window),
-            inHeader        = false;
+            inHeader        = false,
+            levelTwoNav     = $("#jumbo-main-text").length;
 
+            if (levelTwoNav) {
+                $headerPosition = $("#jumbo-main-text");
+            }
         $window.on("scroll.article", function() {
 
             // If navbar is in header, change title to current viewed section
@@ -148,8 +152,13 @@ $(function() {
                 } else {
 
                     if (inHeader) {
-                        $hierarchyNav.appendTo($headerPosition);
-                        inHeader = false;
+                        if (levelTwoNav) {
+                            $hierarchyNav.prependTo($headerPosition);
+                            inHeader = false;
+                        } else {
+                            $hierarchyNav.appendTo($headerPosition);
+                            inHeader = false;
+                        }
                     }
                 }
             }
