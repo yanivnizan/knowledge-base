@@ -1,0 +1,26 @@
+
+<div class="video-text-item">
+    <input class="play-button" id="<%= @idbuttonnum %>" type="image" src="/img/Play-Normal.png" />
+    <div class="video-part col-lg-6 col-md-4 col-sm-4">
+        <iframe id="<%= @idnum %>" src="<%= @iframe %>" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="video-text-container col-lg-6 col-md-4 col-sm-4">
+        <div class="head-text">
+            <%= @title %>
+        </div>
+        <div class="main-text">
+            <%= @text %>
+        </div>
+        <div class="published-text">
+            <%= @published %>
+        </div>
+        <div class="social-buttons">
+            <a class="btn twitter-button" href="https://twitter.com/share?url=<%= @vurl %>"><span style="padding-left: 16px">Tweet</span></a>
+            <a class="btn facebook-button" href="https://www.facebook.com/sharer.php?u=<%= @vurl %>&t=title_of_content"><span style="padding-left: 16px">Share</span></a>
+            <a class="btn google-button" href="https://plus.google.com/share?url=<%= @vurl %>" data-url="http://www.youtube.com/embed/U5Ck6oNMMNc?list=UUR1-D9GdSRRLD0fiEDkpeyg"><span style="padding-left: 16px">Share</span></a>
+        </div>
+    </div>
+</div>
+
+
+
