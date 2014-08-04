@@ -8,12 +8,12 @@ theme: 'soomla'
 collection: 'soomla_store'
 ---
 
-#**SOOMLA's Economy Framework**
+#**SOOMLA's Store Module**
 
 SOOMLA is the first store creation platform for mobile games. SOOMLA helps you easily create your in-game economy.
 
 ##Open Source
-The SOOMLA Project is an open source framework for mobile game economies. Its goal is to allow mobile game developers easier implementation of virtual currencies, virtual goods and in-app purchases. SOOMLA has decided to create and freely support The SOOMLA Project in order to provide the ultimate game economy solution for the mobile game dev community. [Learn more...](http://project.soom.la/)
+The SOOMLA Project is an open source framework for mobile game economies. Its goal is to allow mobile game developers easier implementation of virtual currencies, virtual goods and in-app purchases. SOOMLA has decided to create and freely support The SOOMLA Project in order to provide the ultimate game economy solution for the mobile game dev community. [Learn more...](http://soom.la/)
 
 Through our open source project you get a lot of game economy features like: economy data model, local storage, in-app purchasing interfaces to 3rd party providers, and various easy-to-use store related operations.
 
