@@ -1,7 +1,7 @@
 
 <div class="row video-text-item">
     <div class="video-part col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <iframe id="<%= @idnum %>" src="<%= @iframe %>" frameborder="0" allowfullscreen></iframe>
+        <iframe class="video-iframe" id="<%= @idnum %>" src="<%= @iframe %>" frameborder="0" allowfullscreen></iframe>
         <div class="button-container" id="<%= @idbuttonnum %>">
             <input class="play-button" type="image" src="/img/Play-Normal.png" />
         </div>
