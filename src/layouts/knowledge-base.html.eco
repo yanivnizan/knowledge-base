@@ -108,6 +108,7 @@
 <% if @getEnvironment() == 'development':%>
 <%- @getBlock('scripts').add(@site.scripts).toHTML() %>
 <%else:%>
+<%- @include('analytics.html') %>
 <script src="/scripts/kb.min.js"></script>
 <%end%>
 </body>
