@@ -5,10 +5,10 @@ title: 'Soomla University'
 
 
 <!-- SOOMLA UNIVERSITY LOGO -->
-<img class="logo" src="/img/Logo-Green.png" alt="Soomla University">
+<img id="university-logo" src="/img/Logo-Green.png" alt="Soomla University">
 
 <!-- VIDEO LIST TITLE -->
-<div class="jumbotron" id="know-soomla">
+<div id="know-soomla">
     <div id="jumbo-small-text">
         Learn how to get started with SOOMLA, integrate SOOMLA into your projects, and more!
     </div>
@@ -16,27 +16,33 @@ title: 'Soomla University'
 
 <!-- VIDEOS LIST-->
 <div class="videos-library container">
-    <%- @partial('video-item', {idbuttonnum:"play-button1", idnum:"video1", iframe:"//www.youtube.com/embed/U5Ck6oNMMNc?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH ANDROID",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an Android device.",published: "Published on Jun 24, 2014",vurl:"https://www.youtube.com/watch?v=U5Ck6oNMMNc"}) %>
+    <%- @partial('video-item', {idbuttonnum:"playButton1", idnum:"video1", iframe:"//www.youtube.com/embed/U5Ck6oNMMNc?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH ANDROID",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an Android device.",published: "Published on Jun 24, 2014",vurl:"https://www.youtube.com/watch?v=U5Ck6oNMMNc"}) %>
     <hr>
-    <%- @partial('video-item', {idbuttonnum:"play-button2", idnum:"video2", iframe:"//www.youtube.com/embed/2PH-iLNKECw?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH IOS",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an iOS device.",published: "Published on Jun 24, 2014",vurl:"https://www.youtube.com/watch?v=2PH-iLNKECw"}) %>
+    <%- @partial('video-item', {idbuttonnum:"playButton2", idnum:"video2", iframe:"//www.youtube.com/embed/2PH-iLNKECw?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH IOS",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an iOS device.",published: "Published on Jun 24, 2014",vurl:"https://www.youtube.com/watch?v=2PH-iLNKECw"}) %>
     <hr>
-    <%- @partial('video-item', {idbuttonnum:"play-button3", idnum:"video3", iframe:"//www.youtube.com/embed/blebF5eYKw4?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH ANDROID",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an Android device.",published: "Published on Jul 4, 2014",vurl:"https://www.youtube.com/watch?v=blebF5eYKw4"}) %>
+    <%- @partial('video-item', {idbuttonnum:"playButton3", idnum:"video3", iframe:"//www.youtube.com/embed/blebF5eYKw4?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH ANDROID",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an Android device.",published: "Published on Jul 4, 2014",vurl:"https://www.youtube.com/watch?v=blebF5eYKw4"}) %>
     <hr>
-    <%- @partial('video-item', {idbuttonnum:"play-button4", idnum:"video4", iframe:"//www.youtube.com/embed/jIBcRMlrTUg?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH IOS",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an iOS device",published: "Published on Jul 15, 2014",vurl:"https://www.youtube.com/watch?v=jIBcRMlrTUg"}) %>
+    <%- @partial('video-item', {idbuttonnum:"playButton4", idnum:"video4", iframe:"//www.youtube.com/embed/jIBcRMlrTUg?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH IOS",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an iOS device",published: "Published on Jul 15, 2014",vurl:"https://www.youtube.com/watch?v=jIBcRMlrTUg"}) %>
 </div>
+
 
 <!-- Script to make video play-buttons work -->
 <script>
-    var tag = document.createElement('script');
-    tag.src = "//www.youtube.com/player_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var player;
-    var player2;
-    var player3;
-    var player4;
+
+    (function() {
+        var tag = document.createElement('script');
+        tag.src = "//www.youtube.com/player_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        var player;
+        var player2;
+        var player3;
+        var player4;
+    })();
+
 
     function onYouTubePlayerAPIReady() {
+
         player = new YT.Player("video1", {
             events: {
                 'onReady': onPlayerReady,
@@ -65,60 +71,63 @@ title: 'Soomla University'
             }
         });
     }
+
     // play video and make play button disappear
     function onPlayerReady(event) {
-        var playButton = document.getElementById("play-button1");
-        playButton.addEventListener("click", function() {
+        var playButton = $("#playButton1");
+        playButton.click(function() {
             player.playVideo();
-            document.getElementById("play-button1").style.display = "none";
+            playButton.hide();
         });
     }
     // when video ends play button will reappear
     function onPlayerStateChange(event) {
         if(event.data === 0) {
-            document.getElementById("play-button1").style.display = "inline";
+            $("#playButton1").show();
         }
     }
 
     function onPlayerReady2(event) {
-        var playButton = document.getElementById("play-button2");
-        playButton.addEventListener("click", function() {
+        var playButton = $('#playButton2');
+        playButton.click(function() {
             player2.playVideo();
-            document.getElementById("play-button2").style.display = "none";
+            playButton.hide();
         });
     }
     function onPlayerStateChange2(event) {
         if(event.data === 0) {
-            document.getElementById("play-button2").style.display = "inline";
+            $("#playButton2").show();
         }
     }
 
     function onPlayerReady3(event) {
-        var playButton = document.getElementById("play-button3");
-        playButton.addEventListener("click", function() {
+        var playButton = $("#playButton3");
+        playButton.click(function() {
             player3.playVideo();
-            document.getElementById("play-button3").style.display = "none";
+            playButton.hide();
         });
     }
     function onPlayerStateChange3(event) {
         if(event.data === 0) {
-            document.getElementById("play-button3").style.display = "inline";
+            $("#playButton3").show();
         }
     }
 
     function onPlayerReady4(event) {
-        var playButton = document.getElementById("play-button4");
-        playButton.addEventListener("click", function() {
+        var playButton = $('#playButton4');
+        playButton.click(function() {
             player4.playVideo();
-            document.getElementById("play-button4").style.display = "none";
+            playButton.hide();
         });
     }
     function onPlayerStateChange4(event) {
         if(event.data === 0) {
-            document.getElementById("play-button4").style.display = "inline";
+            $("#playButton4").show();
         }
     }
 </script>
+
+
 
 
 

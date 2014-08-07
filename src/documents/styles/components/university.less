@@ -1,120 +1,147 @@
-@media screen and (max-width: 1024px) { /* Specific to this particular image */
-  img.bg {
-    left: 50%;
-    margin-left: -512px;   /* 50% */
-  }
-}
-
-.navbar-fixed-top {
-  border-width: 0 0 0;
-}
-
-#know-soomla {
-  padding-top:40px;
-}
-
-img.logo {
-  left: 40%;
+#university-logo {
+  left: 50%;
+  margin-left: -189px;
   position: relative;
   top: 15px;
 }
 
+#know-soomla {
+  padding-top: 25px;
+  padding-bottom: 30px;
+}
+
 hr {
   border-top: 1px solid #B6AEAE;
-  width: 1060px;
+  width: 100%;
 }
 
+// Custom play button on videos "instead of" YouTube's button
 .play-button {
-  position:absolute;
-  z-index:3;
-  width:65px;
-  margin-left:245px;
-  margin-top:80px;
+  position: absolute;
+  width: 12%;
+  top: 50%;
+  left: 50%;
+  margin-left: -32.5px;
+  margin-top: -50px;
+  @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    width: 14%;
+  }
+  @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    width: 19.6%;
+  }
+  @media all and (max-width: @screen-xs-max) {
+    width: 65px;
+  }
 }
 
+// Consists of video title, description, published-on date, and social buttons
+.video-text-item {
+  @media all and (max-width: @screen-xs-max) {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+// Video library that includes several video-text-items
 .videos-library {
-  margin-top: -50px;
+  padding-top: 25px;
   margin-bottom: 200px;
-  .video-text-item {
-    border:none;
-    margin-bottom:60px;
-    height: 220px;
-    .video-part {
-      iframe {
-        width:480px;
-        height:260px;
-        top:0;
-        left:0;
-      }
+  // Video part consists of YT iframe and play-button
+  .video-part {
+    position: relative;
+  }
+  iframe {
+    width: 100%;
+    height: 260px;
+  }
+  // Purpose: when the user clicks anywhere on the iframe, the custom play button will disappear.
+  .button-container{
+    position: absolute;
+    width: 86.5%;
+    height: 260px;
+    top: 0;
+    left: 0;
+    margin-left: 41px;
+    @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      width: 84.9%;
     }
-    .video-text-container {
-      display:inline-block;
-      .head-text {
-        font-family: 'Open Sans', sans-serif;
-        font-weight:600;
-        font-size: 22px;
-        color: #4D4D4D;
-      }
-      .main-text {
-        font-family: 'Open Sans', sans-serif;
-        font-weight:400;
-        font-size: 15px;
-        color: #666666;
-        margin-top:10px;
-        line-height:26px;
-        padding-top:22px;
-        padding-bottom: 80px;
-      }
-      .published-text {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 10px;
-        font-style: italic;
-        color: #666666;
-        width: 50%;
-        float: left;
-        padding-top: 5px;
-      }
-
-      .social-buttons {
-        width: 50%;
-        float: right;
-        .twitter-button {
-          background: #29ABE2 url('/img/Icon-Twitter-img.png') no-repeat left;
-          width: 65px;
-          padding: 1px 6px;
-          color: white;
-          margin-right: 5px;
-          font-size: 12px;
-          letter-spacing: 0.8px;
-          border-radius: 3px;
-        }
-
-        .fb-style {
-          opacity: 0;
-        }
-
-        .facebook-button {
-          background: #355396 url('/img/Icon-Facebook-img.png') no-repeat left;
-          width: 65px;
-          padding: 1px 6px;
-          color: white;
-          margin-right: 5px;
-          font-size: 12px;
-          letter-spacing: 0.8px;
-          border-radius: 3px;
-        }
-
-        .google-button {
-          background: #BD2226 url('/img/Icon-Google-img.png') no-repeat left;
-          width: 65px;
-          padding: 1px 6px;
-          color: white;
-          font-size: 12px;
-          letter-spacing: 0.8px;
-          border-radius: 3px;
-        }
-      }
+    @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      width: 80.1%;
     }
+    @media all and (max-width: @screen-xs-max) {
+      width: 86%;
+    }
+  }
+  // Video title (part of video-text-item)
+  .head-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #4D4D4D;
+    @media all and (max-width: @screen-xs-max) {
+      margin-top: 15px;
+    }
+  }
+  // Video description (part of video-text-item)
+  .main-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #666666;
+    margin-top: 10px;
+    line-height: 26px;
+    padding-top: 22px;
+    padding-bottom: 80px;
+    @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      padding-bottom: 10px;
+      padding-top: 5px;
+    }
+    @media all and (max-width: @screen-xs-max) {
+      padding-bottom: 10px;
+      padding-top: 5px;
+    }
+  }
+  // Video published on date (part of video-text-item)
+  .published-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    font-style: italic;
+    color: #666666;
+    width: 50%;
+    float: left;
+    @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      width: 100%;
+    }
+  }
+}
+
+.social-buttons {
+  width: 50%;
+  float: right;
+  @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    width: 100%;
+    float: none;
+    margin-top: 30px;
+  }
+  .social-button(@bgColor, @img) {
+    background: @bgColor url(@img) no-repeat left;
+    width: 65px;
+    padding: 1px 6px;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    border-radius: 3px;
+  }
+  .google-button {
+    .social-button(#BD2226, '/img/Icon-Google-img.png');
+  }
+  .twitter-button {
+    .social-button(#29ABE2, '/img/Icon-Twitter-img.png');
+    margin-right: 5px;
+  }
+  .facebook-button {
+    .social-button(#355396, '/img/Icon-Facebook-img.png');
+    margin-right: 5px;
   }
 }
 
