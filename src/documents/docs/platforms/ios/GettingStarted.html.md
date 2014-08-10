@@ -12,7 +12,7 @@ collection: 'platforms_ios'
 
 Before doing anything, SOOMLA recommends that you go through Apple's [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
 
-##Get iOS-store (sources)
+##Integrate iOS-store (sources)
 
 <div class="info-box">We use ARC! Read about ARC [here](http://www.google.com/url?q=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAutomatic_Reference_Counting&sa=D&sntz=1&usg=AFQjCNHaQBd32glc8dP7HSzlvW1RhjInQA).</div>
 

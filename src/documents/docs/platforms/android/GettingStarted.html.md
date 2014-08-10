@@ -12,7 +12,7 @@ collection: 'platforms_android'
 
 Before doing anything, SOOMLA recommends that you go through [Android In-app Billing](http://developer.android.com/guide/google/play/billing/index.html) or [Amazon In App Purchasing](https://developer.amazon.com/public/apis/earn/in-app-purchasing) according to the billing service provider you choose.
 
-##Get android-store
+##Integrate android-store
 
 1. Add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder to your project.
 

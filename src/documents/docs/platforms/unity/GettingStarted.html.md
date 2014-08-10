@@ -10,12 +10,12 @@ collection: 'platforms_unity'
 
 #**Getting Started**
 
-##Get unity3d-store
+##Integrate unity3d-store
 
 1. Either download or clone unity3d-store from SOOMLA's github page.
 
   - Download [unity3d-store v1.5.3](http://bit.ly/1rc21Zo) and double-click on it. It'll import all the necessary files into your project.
-  
+
   - OR clone the project.
 
   ```
