@@ -26,11 +26,13 @@ collection: 'platforms_android'
 
     <div class="info-box">SOOMLA does not support Subscription products, so do not choose this option. Google’s in-app billing v3 treats Unmanaged products as Managed products. Therefore we recommend you make all of your in-app products Managed. If your game already contains Unmanaged products see [Google’s documentation](http://developer.android.com/google/play/billing/billing_overview.html#migration).</div>
 
-    ![alt text](/img/tutorial_img/google_play_iab/managedProduct.png "In-app products")
+  ![alt text](/img/tutorial_img/google_play_iab/managedProduct.png "In-app products")
 
     To learn more about Google’s Managed/Unmanaged products please see [In-app Billing Version 3 - Product Types](http://developer.android.com/google/play/billing/api.html).
 
-  - If you followed the steps in the [Getting Started](/docs/platforms/android/GettingStarted) tutorial, you created product IDs for the items you wanted to sell in Google Play. Now you need to insert the EXACT product IDs here. Notice that once you choose a product ID you cannot change it.
+  - If you followed the steps in the [Getting Started](/docs/platforms/android/GettingStarted) tutorial, you created product IDs for the items you wanted to sell in Google Play. Now you need to insert the EXACT product IDs here. Remember that once you choose a product ID you cannot change it.
+
+    <div class="info-box">For testing use [Google's test product IDs](http://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static) for your product IDs.</div>
 
   - Once you click “Continue” you will be transferred to a page where you’ll need to fill out more details for your product. Fill in all of the mandatory fields marked with ‘*’. Notice that under Pricing, you can click on “Auto-convert prices now” and that will automatically set local prices for all other countries based on the exchange rate.
 

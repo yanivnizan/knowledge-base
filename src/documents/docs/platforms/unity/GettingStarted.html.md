@@ -15,14 +15,16 @@ collection: 'platforms_unity'
 1. Either download or clone unity3d-store from SOOMLA's github page.
 
   - Download [unity3d-store v1.5.3](http://bit.ly/1rc21Zo) and double-click on it. It'll import all the necessary files into your project.
+  
   - OR clone the project.
-    ```
-    $ git clone --recursive git@github.com:soomla/unity3d-store.git
-    ```
+
+  ```
+  $ git clone --recursive git@github.com:soomla/unity3d-store.git
+  ```
 
 2. Drag the "StoreEvents" and "CoreEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
-    ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
+  ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
 
 3. On the menu bar click "Window" > "Soomla" > "Edit Settings" and change the values for "Soomla Secret" and "Public Key":
 
@@ -30,10 +32,12 @@ collection: 'platforms_unity'
 
   - **Public Key** - If your billing service provider is Google Play, you'll need to insert the public key given to you from Google. (Learn more in step 4 [here](/docs/platforms/android/GooglePlayIAB)). **Choose both secrets wisely. You can't change them after you launch your game!**
 
-      ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
+  ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
 
 4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
+
   - For a brief example, see the [example](#example) at the bottom.
+
   - For a more detailed example, see our MuffinRush [example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Examples/MuffinRush/MuffinRushAssets.cs).
 
 5. Initialize `SoomlaStore` with the class you just created:

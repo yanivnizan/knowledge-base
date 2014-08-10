@@ -17,16 +17,18 @@ collection: 'platforms_android'
  2. Once you’ve created your app, fill out the mandatory fields under the "General Information" tab. Click “Save” when you’re done.
 
  3. Go to the "In-app Items" tab. Before you add any items you'll find an explanation of the different item types.
-    - Click on "Add a Consumable" or "Add an Entitlement".
-        <div class="warning-box">Please note that SOOMLA does not support Subscription products, so do not choose this option.</div>
 
-        ![alt text](/img/tutorial_img/amazon_iab/productTypes.png "Product Types")
+    - Click on "Add a Consumable" or "Add an Entitlement".
+
+    <div class="warning-box">Please note that SOOMLA does not support Subscription products, so do not choose this option.</div>
+
+    ![alt text](/img/tutorial_img/amazon_iab/productTypes.png "Product Types")
 
     - Fill in the mandatory fields.
 
     - Insert a product ID for your product in the SKU field. If you followed the steps in the [Getting Started](/docs/platforms/unity3d/GettingStarted) tutorial, you created product IDs for the items you wanted to sell for money. Now you need to insert the EXACT product IDs here.
 
-        ![alt text](/img/tutorial_img/amazon_iab/productIDs.png "Product IDs")
+    ![alt text](/img/tutorial_img/amazon_iab/productIDs.png "Product IDs")
 
     - Fill out the rest of the mandatory information. Don't forget to "Save".
 
