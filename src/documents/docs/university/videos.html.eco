@@ -22,7 +22,7 @@ title: 'Soomla University'
   <hr>
   <%- @partial('video-item', {idbuttonnum:"playButton3", idnum:"video3", iframe:"//www.youtube.com/embed/blebF5eYKw4?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH ANDROID",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an Android device.",published: "Published on Jul 4, 2014",vurl:"https://www.youtube.com/watch?v=blebF5eYKw4"}) %>
   <hr>
-  <%- @partial('video-item', {idbuttonnum:"playButton4", idnum:"video4", iframe:"//www.youtube.com/embed/jIBcRMlrTUg?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH IOS",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an iOS device",published: "Published on Jul 15, 2014",vurl:"https://www.youtube.com/watch?v=jIBcRMlrTUg"}) %>
+  <%- @partial('video-item', {idbuttonnum:"playButton4", idnum:"video4", iframe:"//www.youtube.com/embed/jIBcRMlrTUg?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH IOS",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an iOS device.",published: "Published on Jul 15, 2014",vurl:"https://www.youtube.com/watch?v=jIBcRMlrTUg"}) %>
 </div>
 
 
@@ -38,7 +38,7 @@ title: 'Soomla University'
         api_isReady = true;
         for (var i = 0; i < onReady_funcs.length; i++) {
 
-          // Removes the first func from the array, and execute func
+          // Removes the first func from the array, and executes func
           onReady_funcs.shift()();
         }
       } else if (typeof func == "function") {
@@ -95,3 +95,4 @@ title: 'Soomla University'
     }
   }
 </script>
+
