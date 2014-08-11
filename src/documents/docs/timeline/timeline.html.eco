@@ -1,0 +1,193 @@
+---
+layout: 'knowledge-base'
+title: 'TimeLine'
+---
+<style>
+
+</style>
+
+<div class="wrapper">
+    <div class="top-section">
+        <h2>TIMELINE</h2>
+          <div id="main-description">
+            Learn how to get started with SOOMLA, integrate SOOMLA into your projects, and more!
+          </div>
+        <div class="filter-box">
+            <div class="filters">
+
+                <ul class="row">
+                    <li class="col-lg-1">
+                        <span>SORT:</span>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="highway-selected"></div>
+                        <div class="filter-title">Highway</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="grow-selected"></div>
+                        <div class="filter-title">Grow</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="storefront-selected"></div>
+                        <div class="filter-title">Storefront</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="blogpost-selected"></div>
+                        <div class="filter-title">BlogPost</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="opensource-selected"></div>
+                        <div class="filter-title">Open Source</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="ios-selected" ></div>
+                        <div class="filter-title">iOS</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="android-selected"></div>
+                        <div class="filter-title">Android</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="unity-selected"></div>
+                        <div class="filter-title">Unity</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="cocos2dx-selected"></div>
+                        <div class="filter-title">Cocos2dx</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="meetups-selected" ></div>
+                        <div class="filter-title">Meetups</div>
+                    </li>
+                    <li class="col-lg-1">
+                        <div id="companyevents-selected"></div>
+                        <div class="filter-title">Company Events</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="line-part"></div>
+<div class="wrapper">
+    <div class="timeline">
+        <div class="vertical-line"></div>
+        <div class="blogpost-post timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/BlogPost.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span >Blog Post</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+            </div>
+        </div>
+        <div class="grow-post timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Grow.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Grow</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Unity.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Unity Event</span>
+                <ul>
+                    <li>Increased timeout for long running tasks.</li>
+                    <li>Collaboration - Fixed bug where users could not be invited to collaborate to an environment
+                        when they already work on a different environment</li>
+                    <li>API Console - Fixed bug with the DELETE method getting back an error related to missing a body</li>
+                    <li>Databrowser - We no longer sort on collections that are too large to be sorted</li>
+                 </ul>
+                <div class="download-button">DOWNLOAD</div>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Storefront.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Storefront</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+                <div class="download-button">DOWNLOAD</div>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Cocos2dx.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Cocos2dx</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Meetups.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Conferences or Meetups</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/OpenSource.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Open Source</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Highway.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Highway Event</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Android.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Android</span>
+                <ul>
+                    <li> New social login - Twitter and LinkedIn</li>
+                    <li> Added custom push notification builder</li>
+                    <li> Bug fix(es):</li>
+                    <ul>
+                        <li>compatibility issue with pre-Honeycomb</li>
+                        <li>3rd party login resulting in error "The request body is either missing or incomplete" has been fixed</li>
+                        <li>Push User registration not properly linking device to user has been fixed</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/CompanyEvents.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>Inner Company Event</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+            </div>
+        </div>
+        <div class="timeline-events row">
+            <div class="timeline-date col-lg-1">28/05/14</div>
+            <div class="timeline-item-line col-lg-1"></div>
+            <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/iOS.png"></div>
+            <div class="timeline-text col-lg-9">
+                <span>iOS</span>
+                <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
+            </div>
+        </div>
+    </div>
+</div>
+

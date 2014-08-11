@@ -1,0 +1,240 @@
+@import "../../bower_components/bootstrap/less/bootstrap";
+
+//
+// Override Bootstrap variables
+//
+@grid-gutter-width: 80px;
+
+
+@soomla-color: #ff921e;;
+@platforms-color: #00a89c;
+@downloads-color: #3fa8f4;
+@university-color: #7ac843;
+@nav-grid-bg-color: #f0f9ff;
+
+
+
+//
+// Import all components
+//
+
+@import "components/layout";
+@import "components/header";
+@import "components/main-menu";
+@import "components/hierarchy-nav";
+@import "components/hierarchy-levels";
+@import "components/article";
+@import "components/article-nav";
+
+
+//timeline styling
+
+.wrapper{
+  width: 1024px;
+  margin: 0 auto;
+}
+.top-section {
+    margin: 0 auto;
+  h2{
+    text-align: center;
+    font-size: 40px;
+    margin-top: 70px;
+  }
+
+}
+.filter-box{
+  margin-top:75px;
+  margin-left: -80px;
+
+  span{
+    font-size: 15px;
+    color: #666666;
+    float: left;
+    display: block;
+    font-weight: bold;
+    line-height: 50px;
+    margin-left: 3%;
+
+  }
+  .filters{
+    ul{
+      margin: 0 auto;
+      height: 50px;
+
+    }
+    ul li{
+      list-style: none;
+      float: left;
+      text-align: center;
+    }
+    ul li img{
+      cursor:pointer;
+
+    }
+    ul li .filter-title{
+      text-align: center;
+      margin-top: 10px;
+      font-size: 17px;
+      color: #979797;
+      font-weight: lighter;
+    }
+  }
+}
+
+  //    background image selected
+  #highway-selected{
+    background-image: url("/img/timeline-img/Highway-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #grow-selected{
+    background-image: url("/img/timeline-img/Grow-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #storefront-selected{
+    background-image: url("/img/timeline-img/Storefront-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #blogpost-selected{
+    background-image: url("/img/timeline-img/BlogPost-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #opensource-selected{
+    background-image: url("/img/timeline-img/OpenSource-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #ios-selected{
+    background-image: url("/img/timeline-img/iOS-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #android-selected{
+    background-image: url("/img/timeline-img/Android-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #unity-selected{
+    background-image: url("/img/timeline-img/Unity-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #cocos2dx-selected{
+    background-image: url("/img/timeline-img/Cocos2dx-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #meetups-selected{
+    background-image: url("/img/timeline-img/Meetups-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  #companyevents-selected{
+    background-image: url("/img/timeline-img/CompanyEvents-Selected.png");
+    width: 50px;
+    height: 50px;
+  }
+  // background image off
+  #highway-selected:hover{
+    background-image: url("/img/timeline-img/Highway-Clear.png");
+    width: 50px;
+    height: 50px;
+  }
+  #grow-selected:hover{
+    background-image: url("/img/timeline-img/Grow-Clear.png");
+    width: 50px;
+    height: 50px;
+  }
+
+.filters{
+  ul li{
+        list-style: none;
+        float: left;
+
+  }
+}
+#main-description{
+  font-family: 'Open Sans', sans-serif;
+  font-weight:300;
+  font-size: 16px;
+  color: #969696;
+  margin-top:10px;
+  text-align: center;
+}
+
+.line-part{
+  background-image: url("/img/timeline-img/Shadow.png");
+  width: 100%;
+  height: 14px;
+  margin-top: 80px;
+}
+
+.timeline{
+  .vertical-line{
+    width: 5px;
+    height: 2000px;
+    background-color: #d7e4ee;
+    position: relative;
+    margin-left: 150px;
+    top: -13px;
+  }
+
+}
+.timeline-events{
+  font-family: 'Open Sans', sans-serif;
+  position: relative;
+  top: -1980px;
+  font-weight:300;
+  font-size: 16px;
+  color: #969696;
+  margin-bottom: 50px;
+  min-height: 100px;
+  .timeline-date{
+    font-size: 15px;
+    color: #000000;
+    line-height: 50px;
+    text-align: center;
+  }
+  .timeline-item-line{
+
+  }
+  .timeline-item-icon img{
+    margin-left: -70px;
+  }
+  .timeline-text{
+    padding-left: 20px;
+    line-height: 25px;
+    margin-top: 15px;
+
+    span{
+      font-size: 20px;
+      font-weight: bold;
+      color: #4d4d4d;
+    }
+    p{
+      color: #666666;
+
+    }
+    ul{
+      color: #666666;
+    }
+    ul li{
+
+    }
+    .download-button{
+      width: 100px;
+      height: 30px;
+      line-height: 30px;
+      background-color: #d7e4ee;
+      color: #000000;
+      font-family: arial;
+      font-size: 14px;
+      border-radius: 5px;
+      padding-left: 9px;
+
+    }
+  }
+}

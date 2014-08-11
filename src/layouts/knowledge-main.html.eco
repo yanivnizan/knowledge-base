@@ -1,22 +1,1 @@
----
-layout: 'knowledge-base'
-title: 'Soomla Knowledge Base'
----
-    <div class="jumbotron" id="know-soomla">
-
-        <div id="jumbo-main-text">
-            KNOW SOOMLA
-        </div>
-        <div id="jumbo-small-text">
-            Get more intimate with SOOMLA and related services
-        </div>
-    </div>
-
-    <div class="nav-options">
-      <div class="container">
-        <%- @partial('grid-option', {image:"img/Level1-Soomla.png",link:"/soomla",title: "SOOMLA",text: "Learn about the several game economy components that SOOMLA offers that can easily be integrated into your games.", selectorid:"test"}) %>
-        <%- @partial('grid-option', {image:"img/Level1-Platforms.png",link:"/platforms",title: "PLATFORMS",text: "SOOMLA's open-source in-game economy is offered in various native platforms and game engines."}) %>
-        <%- @partial('grid-option', {image:"img/Level1-Downloads.png",link:"//soom.la/getting-started/",title: "DOWNLOADS",text: "Download links to the latest (and previous) store versions of each of the platforms SOOMLA supports."}) %>
-        <%- @partial('grid-option', {image:"img/Level1-University-ComingSoon.png",link:"javascript:;",title: "UNIVERSITY",text: "Study examples, read articles, and watch video tutorials to get you started with SOOMLA."}) %>
-      </div>
-    </div>
+---layout: 'knowledge-base'title: 'Soomla Knowledge Base'---    <div class="jumbotron" id="know-soomla">        <div id="jumbo-main-text">            KNOW SOOMLA        </div>        <div id="jumbo-small-text">            Get more intimate with SOOMLA and related services        </div>    </div>    <div class="nav-options">      <div class="container">        <%- @partial('grid-option', {image:"img/Level1-Soomla.png",link:"/soomla",title: "SOOMLA",text: "Learn about the several game economy components that SOOMLA offers that can easily be integrated into your games.", selectorid:"test"}) %>        <%- @partial('grid-option', {image:"img/Level1-Platforms.png",link:"/platforms",title: "PLATFORMS",text: "SOOMLA's open-source in-game economy is offered in various native platforms and game engines."}) %>        <%- @partial('grid-option', {image:"img/Level1-Downloads.png",link:"//soom.la/getting-started/",title: "DOWNLOADS",text: "Download links to the latest (and previous) store versions of each of the platforms SOOMLA supports."}) %>        <%- @partial('grid-option', {image:"img/Level1-University-ComingSoon.png",link:"javascript:;",title: "UNIVERSITY",text: "Study examples, read articles, and watch video tutorials to get you started with SOOMLA."}) %>        <%- @partial('grid-option', {image:"img/Level1-University-ComingSoon.png",link:"docs/timeline/timeline",title: "TIMELINE",text: "Study examples, read articles, and watch video tutorials to get you started with SOOMLA."}) %>      </div>    </div>
