@@ -52,6 +52,7 @@ docpadConfig = {
         '/vendor/modernizr.js'
         '/scripts/jquery-tocify-min.js'
         '/scripts/knowledge-base.js'
+        '/scripts/timeline-script.js'
 			]
 
 
