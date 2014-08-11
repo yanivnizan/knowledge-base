@@ -25,16 +25,16 @@ docpadConfig = {
 			]
 
 		# The default title of our website
-			title: "Soomla Knowledge Base"
+			title: "SOOMLA Knowledge Base"
 
 		# The website description (for SEO)
 			description: """
-        When your website appears in search results in say Google, the text here will be shown underneath your website's title.
+        Game programming framework for free to play mobile games. Easily develop: virtual economy, in-app purchase (IAP), levels, worlds, scores and social functions.
         """
 
 		# The website keywords (for SEO) separated by commas
 			keywords: """
-        place, your, website, keywoards, here, keep, them, related, to, the, content, of, your, website
+        game programming framework, virtual economy, in app purchase, gaming, indie developers
         """
 
 		# The website's styles
