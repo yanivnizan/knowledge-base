@@ -47,5 +47,4 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
-# Bower
-src/bower_components
+src/bower_components/
