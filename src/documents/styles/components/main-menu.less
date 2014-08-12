@@ -73,3 +73,24 @@
   left: 0;
   bottom: -68px;
 }
+
+#university-container {
+  position: relative;
+  top: 310px;
+  right: 507px;
+  @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    right: 407px;
+  }
+  @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    right: 507px;
+  }
+  @media all and (max-width: @screen-xs-max) {
+    right: 507px;
+  }
+}
+.clip {
+  position: absolute;
+}
+.pos-1 {
+  clip: rect(0 71px 24px 0);
+}
