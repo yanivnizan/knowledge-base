@@ -49,9 +49,9 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
 
     <div class="warning-box">Initialize `SoomlaStore` ONLY ONCE when your application loads.</div>
 
-6. Refer to the [next section](#whats-next-select-a-billing-service) for information on selecting your Billing Service and setting it up.
-
 And that's it! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
+
+Refer to the next section for information on selecting your Billing Serviceprovider and setting it up.
 
 ##Select a Billing Service
 

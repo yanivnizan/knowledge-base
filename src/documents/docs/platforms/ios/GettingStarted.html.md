@@ -10,7 +10,7 @@ collection: 'platforms_ios'
 
 #**Getting Started**
 
-Before doing anything, SOOMLA recommends that you go through [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
+Before doing anything, SOOMLA recommends that you go through Apple's [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
 
 ##Get iOS-store (sources)
 

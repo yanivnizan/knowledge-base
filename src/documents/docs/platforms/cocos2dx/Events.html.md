@@ -2,17 +2,17 @@
 layout: "content"
 image: "Events"
 title: "Events"
-text: "Event handling in unity3d-store follows the publish-subscribe pattern."
+text: "Event handling in cocos2dx-store follows the publish-subscribe pattern."
 position: 4
 theme: 'platforms'
-collection: 'platforms_unity'
+collection: 'platforms_cocos2dx'
 ---
 
 #**Event Handling**
 
 ##About
 
-SOOMLA allows you to subscribe to store events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur. SOOMLA's unity3d-store's event handling mechanism is based on the event-handling methods of android-store and ios-store. Throughout android-store and ios-store events are fired and in unity3d-store they are observed and handled.
+SOOMLA allows you to subscribe to store events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur. SOOMLA's cocos2dx-store's event handling mechanism is based on the event-handling methods of android-store and ios-store. Throughout android-store and ios-store events are fired and in cocos2dx-store they are observed and handled.
 
 ###In Android
 
@@ -41,36 +41,41 @@ BusProvider.getInstance().post(new CurrencyBalanceChangedEvent((VirtualCurrency)
 
 ###Observing & Handling Events
 
-The `StoreEvents` class is where all events go through. To handle various events, just add your game-specific behavior to the delegates in the `StoreEvents` class.
+The `CCStoreEventDispatcher` class is where all events go through. To handle various events, create your own event handler class that implements `CCEventHandler`, and add it to the `CCStoreEventDispatcher` class:
 
-For example, if you want to 'listen' for a `MarketPurchaseStarted` event:
+####**For example**
 
-``` cs
-StoreEvents.OnMarketPurchaseStarted += onMarketPurchaseStarted;
 
-public void onMarketPurchaseStarted(string message) {
-    Utils.LogDebug(TAG, "SOOMLA/UNITY onMarketPurchaseStarted: " + message);
-    PurchasableVirtualItem pvi = (PurchasableVirtualItem)StoreInfo.GetItemByItemId(message);
-    StoreEvents.OnMarketPurchaseStarted(pvi);
+**Handle a "market purchase started" event in the event handler class**
+``` cpp
+//ExampleEventHandler.h:
+class ExampleEventHandler : public soomla::CCStoreEventHandler {
+    virtual void onMarketPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
+}
+
+//In ExampleEventHandler.cpp:
+void ExampleEventHandler::onMarketPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
+    soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseStarted");
+}
+```
+
+**Add the event handler class to `CCStoreEventDispatcher`**
+``` cpp
+//AppDelegate.h:
+class  AppDelegate : private cocos2d::Application {
+    ...
+    soomla::CCStoreEventHandler *handler;
+    ...
+}
+
+//In AppDelegate.cpp:
+bool AppDelegate::applicationDidFinishLaunching() {
+    ...
+    soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(handler);
+    ...
 }
 ```
 
 <div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
-You can find a full example of an event handler class [here](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Examples/MuffinRush/ExampleEventHandler.cs).
-
-Make sure to instantiate your event-handler class BEFORE `SoomlaStore`.  
-
-``` cs
-public class ExampleWindow : MonoBehaviour {
-    ...
-    private static ExampleEventHandler handler;
-
-    void Start () {
-        ...
-        handler = new ExampleEventHandler();
-        SoomlaStore.Initialize(new ExampleAssets());
-        ...
-    }
-}
-```
+You can find a full example of an event handler class [here](https://github.com/soomla/cocos2dx-store-example/blob/master/Classes/ExampleEventHandler.h).
