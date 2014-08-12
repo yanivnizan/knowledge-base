@@ -16,13 +16,13 @@ title: 'Soomla University'
 
 <!-- VIDEOS LIST-->
 <div class="videos-library container">
-  <%- @partial('video-item', {idbuttonnum:"playButton1", idnum:"video1", iframe:"//www.youtube.com/embed/U5Ck6oNMMNc?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH ANDROID",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an Android device.",published: "Published on Jun 24, 2014",vurl:"https://www.youtube.com/watch?v=U5Ck6oNMMNc"}) %>
+  <%- @partial('video-item', {idbuttonnum:"playButton1", idnum:"video1", iframe:"//www.youtube.com/embed/59aTzSNoJbQ?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH ANDROID",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an Android device.",published: "Published on Aug 11, 2014",vurl:"http://youtu.be/59aTzSNoJbQ"}) %>
   <hr>
-  <%- @partial('video-item', {idbuttonnum:"playButton2", idnum:"video2", iframe:"//www.youtube.com/embed/2PH-iLNKECw?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH IOS",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an iOS device.",published: "Published on Jun 24, 2014",vurl:"https://www.youtube.com/watch?v=2PH-iLNKECw"}) %>
+  <%- @partial('video-item', {idbuttonnum:"playButton2", idnum:"video2", iframe:"//www.youtube.com/embed/OjCqvWogLtg?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH IOS",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an iOS device.",published: "Published on Aug 11, 2014",vurl:"http://youtu.be/OjCqvWogLtg"}) %>
   <hr>
-  <%- @partial('video-item', {idbuttonnum:"playButton3", idnum:"video3", iframe:"//www.youtube.com/embed/blebF5eYKw4?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH ANDROID",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an Android device.",published: "Published on Jul 4, 2014",vurl:"https://www.youtube.com/watch?v=blebF5eYKw4"}) %>
+  <%- @partial('video-item', {idbuttonnum:"playButton3", idnum:"video3", iframe:"//www.youtube.com/embed/geQ1Cx1B-ao?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION INTO EXAMPLE APP WITH ANDROID",text: "Learn how to integrate SOOMLA's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an Android device.",published: "Published on Aug 11, 2014",vurl:"http://youtu.be/geQ1Cx1B-ao"}) %>
   <hr>
-  <%- @partial('video-item', {idbuttonnum:"playButton4", idnum:"video4", iframe:"//www.youtube.com/embed/jIBcRMlrTUg?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION NO-ADS EXAMPLE APP WITH IOS",text: "Learn how to integrate Soomla's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an iOS device.",published: "Published on Jul 15, 2014",vurl:"https://www.youtube.com/watch?v=jIBcRMlrTUg"}) %>
+  <%- @partial('video-item', {idbuttonnum:"playButton4", idnum:"video4", iframe:"//www.youtube.com/embed/ZQN-com1Pyg?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION INTO EXAMPLE APP WITH IOS",text: "Learn how to integrate SOOMLA's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an iOS device.",published: "Published on Aug 11, 2014",vurl:"http://youtu.be/ZQN-com1Pyg"}) %>
 </div>
 
 
