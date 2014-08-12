@@ -1,0 +1,98 @@
+---
+layout: 'knowledge-base'
+title: 'Soomla University'
+---
+
+
+<!-- SOOMLA UNIVERSITY LOGO -->
+<img id="university-logo" src="/img/Logo-Green.png" alt="Soomla University">
+
+<!-- VIDEO LIST TITLE -->
+<div id="know-soomla">
+  <div id="jumbo-small-text">
+    Learn how to get started with SOOMLA, integrate SOOMLA into your projects, and more!
+  </div>
+</div>
+
+<!-- VIDEOS LIST-->
+<div class="videos-library container">
+  <%- @partial('video-item', {idbuttonnum:"playButton1", idnum:"video1", iframe:"//www.youtube.com/embed/59aTzSNoJbQ?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH ANDROID",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an Android device.",published: "Published on Aug 11, 2014",vurl:"http://youtu.be/59aTzSNoJbQ"}) %>
+  <hr>
+  <%- @partial('video-item', {idbuttonnum:"playButton2", idnum:"video2", iframe:"//www.youtube.com/embed/OjCqvWogLtg?enablejsapi=1",title: "UNITY3D-STORE GETTING STARTED TUTORIAL WITH IOS",text: "Learn how to get started with SOOMLA's unity3d-store and run SOOMLA's example app on an iOS device.",published: "Published on Aug 11, 2014",vurl:"http://youtu.be/OjCqvWogLtg"}) %>
+  <hr>
+  <%- @partial('video-item', {idbuttonnum:"playButton3", idnum:"video3", iframe:"//www.youtube.com/embed/geQ1Cx1B-ao?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION INTO EXAMPLE APP WITH ANDROID",text: "Learn how to integrate SOOMLA's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an Android device.",published: "Published on Aug 11, 2014",vurl:"http://youtu.be/geQ1Cx1B-ao"}) %>
+  <hr>
+  <%- @partial('video-item', {idbuttonnum:"playButton4", idnum:"video4", iframe:"//www.youtube.com/embed/ZQN-com1Pyg?enablejsapi=1",title: "UNITY3D-STORE INTEGRATION INTO EXAMPLE APP WITH IOS",text: "Learn how to integrate SOOMLA's unity3d-store into an example app that has a simple store with a No-Ads button, and run the app on an iOS device.",published: "Published on Aug 11, 2014",vurl:"http://youtu.be/ZQN-com1Pyg"}) %>
+</div>
+
+
+<!-- Script to make video play-buttons work -->
+<script>
+
+  // Define YT_ready function.
+  var YT_ready = (function() {
+    var onReady_funcs = [],
+        api_isReady = false;
+    return function(func, b_before) {
+      if (func === true) {
+        api_isReady = true;
+        for (var i = 0; i < onReady_funcs.length; i++) {
+
+          // Removes the first func from the array, and executes func
+          onReady_funcs.shift()();
+        }
+      } else if (typeof func == "function") {
+        if (api_isReady) {
+          func();
+        } else onReady_funcs[b_before ? "unshift" : "push"](func);
+      }
+    }
+  })();
+
+  // This function will be called when the API is fully loaded
+  function onYouTubePlayerAPIReady() {
+    YT_ready(true)
+  }
+
+  // Object to save all players
+  var players = {};
+
+
+  YT_ready(function() {
+    $(".video-iframe").each(function() {
+      var frameID =  this.id;
+      players[frameID] = new YT.Player(frameID, {
+        events: {
+          "onReady": createYTEvent(frameID),
+          "onStateChange": onPlayerStateChange(frameID)
+        }
+      });
+    });
+  });
+
+  // Returns a function to enable multiple events
+  function createYTEvent(frameID) {
+    return function (event) {
+      var player = players[frameID];
+      var the_div = $('#'+frameID).parent();
+      the_div.children('.button-container').click(function() {
+        $(this).hide();
+        player.playVideo();
+      });
+    }
+  }
+
+  // Returns a function to enable multiple events
+  function onPlayerStateChange(frameID) {
+    return function(event) {
+
+      // if video ended(0) or paused(2) show play button
+      if(event.data === 0 || event.data === 2) {
+
+        // get the id # of the current iframe, show its "play" icon; should have same id #
+        $("#playButton" + event.target.a.id.slice(-1)).show();
+      }
+    }
+  }
+</script>
+

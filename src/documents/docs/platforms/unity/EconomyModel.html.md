@@ -186,7 +186,7 @@ Virtual goods need to be declared in your implementation of `IStoreAssets`.
 public static VirtualGood MUFFINCAKE_GOOD = new SingleUseVG(
     "Fruit Cake",                              // name
     "Customers buy a double portion!",         // description
-    "fruit_cake",                            	// item ID
+    "fruit_cake",                              // item ID
     new PurchaseWithVirtualItem(               // purchase type
       MUFFIN_CURRENCY_ITEM_ID,
       225));
@@ -333,7 +333,7 @@ if (balance > 0) {
 ###[EquippableVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/EquippableVG.cs)
 
 ####**How to define**
-There are 3 types of Equipping models: `GLOBAL`, `CATEGORY`, and `LOCAL`. Read a detailed description about them [here](/docs/soomla/storeModel#equippablevg). In this example we're defining 2 characters, George and Kramer. These are `CATEGORY` equippable goods because the user can own both characters but can play only as one at a time.
+There are 3 types of Equipping models: `GLOBAL`, `CATEGORY`, and `LOCAL`. Read a detailed description about them [here](/docs/soomla/store/EconomyModel#equippablevg). In this example we're defining 2 characters, George and Kramer. These are `CATEGORY` equippable goods because the user can own both characters but can play only as one at a time.
 
 ``` cs
 // Character "George" can be purchased for 350 Muffins.

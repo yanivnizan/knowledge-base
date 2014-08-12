@@ -16,14 +16,14 @@ collection: 'platforms_unity'
 
   - Download [unity3d-store v1.5.3](http://bit.ly/1rc21Zo) and double-click on it. It'll import all the necessary files into your project.
   - OR clone the project.
-  
+
     ```
     $ git clone --recursive git@github.com:soomla/unity3d-store.git
     ```
 
 2. Drag the "StoreEvents" and "CoreEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
-    ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
+  ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
 
 3. On the menu bar click "Window" > "Soomla" > "Edit Settings" and change the values for "Soomla Secret" and "Public Key":
 
@@ -31,7 +31,7 @@ collection: 'platforms_unity'
 
   - **Public Key** - If your billing service provider is Google Play, you'll need to insert the public key given to you from Google. (Learn more in step 4 [here](/docs/platforms/android/GooglePlayIAB)). **Choose both secrets wisely. You can't change them after you launch your game!**
 
-      ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
+  ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
 
 4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
   - For a brief example, see the [example](#example) at the bottom.
@@ -68,7 +68,6 @@ SoomlaStore.StopIabServiceInBg();
 This is not mandatory, your game will work without this, but we do recommend it because it enhances performance. The idea here is to preemptively start the in-app billing setup process with Google's (or Amazon's) servers.
 
 In many games the user has to navigate into the in-game store, or start a game session in order to reach the point of making purchases. You want the user experience to be fast and smooth and prevent any lag that could be caused by network latency and setup routines you could have done silently in the background.
-
 
 
 ## Example

@@ -18,6 +18,6 @@ title: 'Platforms'
     <%- @partial('grid-option', {image:"/img/Level2-iOS.png",link:"/docs/platforms/ios",title: "IOS",text: "Learn about the game economy entities that iOS-store offers, integrate iOS-store into your game, and define your game's IAP products."}) %>
     <%- @partial('grid-option', {image:"/img/Level2-Android.png",link:"/docs/platforms/android",title: "ANDROID",text: "Learn about the game economy entities that android-store offers, integrate android-store into your game, and define your game's IAP products."}) %>
     <%- @partial('grid-option', {image:"/img/Level2-Unity.png",link:"/docs/platforms/unity",title: "UNITY",text: "Learn about the game economy entities that unity3d-store offers, integrate unity3d-store into your game, and define your game's IAP products."}) %>
-    <%- @partial('grid-option', {image:"/img/Level2-Cocos2dx-ComingSoon.png",link:"javascript:;",title: "COCOS2DX",text: "Learn about the game economy entities that cocos2x-store offers, integrate cocos2dx-store into your game, and define your game's IAP products."}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-Cocos2dx.png",link:"/docs/platforms/cocos2dx",title: "COCOS2DX",text: "Learn about the game economy entities that cocos2x-store offers, integrate cocos2dx-store into your game, and define your game's IAP products."}) %>
   </div>
 </div>
