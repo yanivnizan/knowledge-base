@@ -23,47 +23,47 @@ title: 'TimeLine'
                         <div id="clear-filter">Clear All</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="highway-selected"></div>
+                        <div class="highway-selected timeline-tag" data-type="highway"></div>
                         <div class="filter-title">Highway</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="grow-selected"></div>
+                        <div class="grow-selected timeline-tag" data-type="grow"></div>
                         <div class="filter-title">Grow</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="storefront-selected"></div>
+                        <div class="storefront-selected timeline-tag" data-type="storefront"></div>
                         <div class="filter-title">Store Front</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="blogpost-selected"></div>
+                        <div class="blogpost-selected timeline-tag" data-type="blogpost"></div>
                         <div class="filter-title">Blog Post</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="opensource-selected"></div>
+                        <div class="opensource-selected timeline-tag" data-type="opensource"></div>
                         <div class="filter-title">Open Source</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="ios-selected" ></div>
+                        <div class="ios-selected timeline-tag" data-type="ios"></div>
                         <div class="filter-title">iOS</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="android-selected"></div>
+                        <div class="android-selected timeline-tag" data-type="android"></div>
                         <div class="filter-title">Android</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="unity-selected"></div>
+                        <div class="unity-selected timeline-tag" data-type="unity"></div>
                         <div class="filter-title">Unity</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="cocos2dx-selected"></div>
+                        <div class="cocos2dx-selected timeline-tag" data-type="cocos2dx"></div>
                         <div class="filter-title">Cocos2dx</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="meetups-selected" ></div>
+                        <div class="meetups-selected timeline-tag" data-type="meetups"></div>
                         <div class="filter-title">Meetups</div>
                     </li>
                     <li class="col-lg-1">
-                        <div class="companyevents-selected"></div>
+                        <div class="companyevents-selected timeline-tag" data-type="companyevents"></div>
                         <div class="filter-title">Company Events</div>
                     </li>
                 </ul>
@@ -74,17 +74,22 @@ title: 'TimeLine'
 <div class="line-part"></div>
 <div class="wrapper">
     <div class="timeline">
-        <div class="vertical-line"></div>
+        <div class="first-event timeline-events row">
+            <div class="vertical-line"></div>
+        </div>
         <div class="blogpost-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/BlogPost.png"></div>
             <div class="timeline-text col-lg-9">
+
                 <span >Blog Post</span>
                 <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
             </div>
         </div>
         <div class="grow-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Grow.png"></div>
@@ -94,6 +99,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="unity-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Unity.png"></div>
@@ -110,6 +116,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="storefront-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Storefront.png"></div>
@@ -120,6 +127,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="cocos2dx-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Cocos2dx.png"></div>
@@ -129,6 +137,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="meetups-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Meetups.png"></div>
@@ -138,6 +147,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="opensource-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/OpenSource.png"></div>
@@ -147,6 +157,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="highway-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Highway.png"></div>
@@ -156,6 +167,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="android-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/Android.png"></div>
@@ -174,6 +186,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="companyevents-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/CompanyEvents.png"></div>
@@ -183,6 +196,7 @@ title: 'TimeLine'
             </div>
         </div>
         <div class="ios-post timeline-events row">
+            <div class="vertical-line"></div>
             <div class="timeline-date col-lg-1">28/05/14</div>
             <div class="timeline-item-line col-lg-1"></div>
             <div class="timeline-item-icon col-lg-1"><img src="/img/timeline-img/iOS.png"></div>
@@ -191,6 +205,13 @@ title: 'TimeLine'
                 <p>Lorem Ipsum is simply dummy text industry. Lorem Ipsum has been the industry's text ever since.</p>
             </div>
         </div>
+
     </div>
+    <div class="soom-start"><img src="/img/timeline-img/Start.png"> </div>
+    <div class="no-posts">
+        <div class="arrow-left"></div>
+        Select something from the options above
+    </div>
+
 </div>
 
