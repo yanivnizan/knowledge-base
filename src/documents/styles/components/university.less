@@ -119,6 +119,7 @@ hr {
     }
     @media all and (max-width: @screen-xs-max) {
       margin-top: 15px;
+      text-align: center;
     }
   }
   // Video description (part of video-text-item)
@@ -135,10 +136,15 @@ hr {
     @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
       padding-bottom: 10px;
       padding-top: 5px;
+
     }
     @media all and (max-width: @screen-xs-max) {
       padding-bottom: 10px;
       padding-top: 5px;
+      width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+      text-align: center;
     }
   }
   // Video published on date (part of video-text-item)
@@ -150,8 +156,12 @@ hr {
     width: 50%;
     float: left;
     padding-top: 5px;
+    @media all and (max-width: @screen-sm-max) {
+      width: 100%;
+    }
     @media all and (max-width: @screen-xs-max) {
       width: 100%;
+      text-align: center;
     }
   }
 }
@@ -163,6 +173,18 @@ hr {
     width: 100%;
     float: none;
     margin-top: 30px;
+  }
+  @media all and (max-width: @screen-xs-max) {
+    padding-right: 0;
+    width: 273px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media all and (max-width: 467px) {
+    padding-right: 0;
+    width: 108px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .social-button(@bgColor, @img) {
     background-image: url(@img);
