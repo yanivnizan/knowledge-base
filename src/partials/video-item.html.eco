@@ -1,12 +1,11 @@
-
 <div class="row video-text-item">
-    <div class="video-part col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="video-part col-xs-12 col-sm-4 col-md-4 col-lg-4">
         <iframe class="video-iframe" id="<%= @idnum %>" src="<%= @iframe %>" frameborder="0" allowfullscreen></iframe>
         <div class="button-container" id="<%= @idbuttonnum %>">
             <input class="play-button" type="image" src="/img/Play-Normal.png" />
         </div>
     </div>
-    <div class="video-text-container col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="video-text-container col-xs-12 col-sm-8 col-lg-8">
         <div class="head-text">
             <%= @title %>
         </div>
@@ -23,6 +22,4 @@
         </div>
     </div>
 </div>
-
-
 
