@@ -24,8 +24,8 @@ If you want to see full debug messages from android-store and iOS-store you just
 
 ##Tips
 
-In Build Settings, when switching between one platform to another: Choose the platform you would like to use, click on "Switch platform", and WAIT until the circular motion icon at the bottom right corner of the editor disappears! Only then, click on "Build". If you click on "Build" too early you will be likely to run into problems.
+- In Build Settings, when switching between one platform to another, after clicking on "Switch platform" **WAIT** until the circular motion icon at the bottom right corner of the editor disappears! Only then, click on "Build". If you click on "Build" too early you will be likely to run into problems.
 
-<div class="warning-box">Click on "Build", NOT "Build & Run". SOOMLA has a post-build script that needs to run, and clicking on "Build & Run" doesn't give that script a chance.</div>
+- Click on "**Build**", NOT "Build & Run". SOOMLA has a post-build script that needs to run, and clicking on "Build & Run" doesn't give that script a chance.
 
 ![alt text](/img/tutorial_img/unity_debugging/switchPlatform.png "Tip")

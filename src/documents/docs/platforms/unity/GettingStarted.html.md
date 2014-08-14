@@ -10,16 +10,17 @@ collection: 'platforms_unity'
 
 #**Getting Started**
 
-##Get unity3d-store
+##Integrate unity3d-store
 
 1. Either download or clone unity3d-store from SOOMLA's github page.
 
   - Download [unity3d-store v1.5.3](http://bit.ly/1rc21Zo) and double-click on it. It'll import all the necessary files into your project.
+
   - OR clone the project.
 
-    ```
-    $ git clone --recursive git@github.com:soomla/unity3d-store.git
-    ```
+  ```
+  $ git clone --recursive git@github.com:soomla/unity3d-store.git
+  ```
 
 2. Drag the "StoreEvents" and "CoreEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
@@ -34,7 +35,9 @@ collection: 'platforms_unity'
   ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
 
 4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
+
   - For a brief example, see the [example](#example) at the bottom.
+
   - For a more detailed example, see our MuffinRush [example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Examples/MuffinRush/MuffinRushAssets.cs).
 
 5. Initialize `SoomlaStore` with the class you just created:

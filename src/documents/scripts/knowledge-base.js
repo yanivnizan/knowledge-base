@@ -33,9 +33,15 @@ $(function() {
     $('div.menu-option').hover(function(){
         $(this).find(".option-head-text").addClass("hover");
         $(this).find("img").addClass("hover");
+        if ($(this).find("#new-container").length > 0) {
+            $("#new-container").addClass("hover");
+        }
     }, function(){
         $(this).find(".option-head-text").removeClass("hover");
         $(this).find("img").removeClass("hover");
+        if ($(this).find("#new-container").length > 0) {
+            $("#new-container").removeClass("hover");
+        }
     });
 
     /*
@@ -166,7 +172,8 @@ $(function() {
     }
 
     // Load Youtube API if on videos page
-    if (".videos-library") {
+    if ($(".videos-library")) {
+        $("#university-hierarchy-nav").prependTo($('#header-right'));
         var tag = document.createElement('script');
         tag.src = "//www.youtube.com/player_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];

@@ -24,17 +24,15 @@ collection: 'platforms_ios'
 
       <div class="warning-box">Please note that SOOMLA does not support Subscription products, so do not choose these options.</div>
 
-      ![alt text](/img/tutorial_img/ios_iab/productTypes.png "Product Types")
+  ![alt text](/img/tutorial_img/ios_iab/productTypes.png "Product Types")
 
     - Insert a Product ID for your product. In the [Getting Started](/docs/platforms/ios/GettingStarted) tutorial you were to define product IDs for the products you wanted to sell in the App Store. Now, when you define the product IDs in the App Store, they should be EXACTLY the same as you defined them in the code.
 
-      ![alt text](/img/tutorial_img/ios_iab/productIDs.png "Product IDs")
+  ![alt text](/img/tutorial_img/ios_iab/productIDs.png "Product IDs")
 
     - Fill out the rest of the mandatory information. Don't forget to "Save".
 
-SOOMLA is all about free-to-play mobile games, so we recommend you choose the “Free” option in the "Rights and Pricing" tab.
-
-![alt text](/img/tutorial_img/ios_iab/free2play.png "Free-to-play")
+  <div class="info-box">SOOMLA is all about free-to-play mobile games, we recommend you choose the “Free” option in the "Rights and Pricing" tab.</div>
 
 ##Newbie?
 

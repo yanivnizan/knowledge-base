@@ -73,3 +73,20 @@
   left: 0;
   bottom: -68px;
 }
+
+#new-container {
+  background-image: url("/img/NewIcon.jpg");
+  position:absolute;
+  overflow:hidden;
+  width:71px;
+  height:24px;
+  z-index:1;
+  top: -6px;
+  left: 63.2px;
+  &.hover {
+    background-position: 0 -24px;
+  }
+  &:active {
+    background-position: 0 -48px;
+  }
+}

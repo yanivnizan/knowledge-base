@@ -1,6 +1,6 @@
 <div class="dropdown dropdown-container">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <img  class="dropdown-menu-icon" src="/img/<%= @current %>-TopMenu.png"/>
+      <img class="dropdown-menu-icon" src="/img/<%= @current %>-TopMenu.png"/>
     </a>
     <ul id="nav-list" class="dropdown-menu <%= @current %>" role="menu" >
         <% if @current == "soomla": %>
@@ -14,14 +14,14 @@
           <li><a href="/platforms">Platforms</a></li>
         <% end %>
         <% if @current == "downloads": %>
-            <li><a href="//soom.la/downloads" class="link-current">Downloads</a></li>
+            <li><a href="//soom.la/getting-started" class="link-current">Downloads</a></li>
         <% else: %>
-            <li><a href="//soom.la/downloads">Downloads</a></li>
+            <li><a href="//soom.la/getting-started">Downloads</a></li>
         <% end %>
         <% if @current == "university": %>
-            <!--<li><a href="/university" class="link-current">University</a></li>-->
+            <li><a href="/docs/university/videos" class="link-current">University</a></li>
         <% else: %>
-            <!--<li><a href="/university">University</a></li>-->
+            <li><a href="/docs/university/videos">University</a></li>
         <% end %>
     </ul>
 </div>

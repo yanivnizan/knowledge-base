@@ -10,7 +10,7 @@ collection: 'platforms_cocos2dx'
 
 #**Getting Started (C++)**
 
-##Get cocos2dx-store
+##Integrate cocos2dx-store
 
 1. As with all Cocos2d-x projects, you need to clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x) or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download).  
 
