@@ -4,9 +4,31 @@ title: 'TimeLine'
 ---
 
 <div class="social">
-    <div class="twitter"><img  src="/img/timeline-img/Social-Twitter.png"><span>Tweet</span></div>
-    <div class="facebook"><img  src="/img/timeline-img/Social-Facebook.png"><span>Like</span></div>
-    <div class="google"><img  src="/img/timeline-img/Social-GooglePlus.png"><span>Share</span></div>
+    <div class="twitter twitterbtn" data-tw-text="Beatuful timeline on SOOMLA knowledgbase.">
+        <img  src="/img/timeline-img/Social-Twitter.png">
+        <span>Tweet</span>
+    </div>
+
+
+    <a target='_blank'
+       class="facebook"
+       href="#">
+
+        <img src="/img/timeline-img/Social-Facebook.png"><span>Like</span>
+    </a>
+
+
+    <a class="google g-plus" href="https://plus.google.com/share?url=http://about.soom.la/soombots/"
+       data-action="share"
+       data-height="24">
+        <img  src="/img/timeline-img/Social-GooglePlus.png">
+        <span>Share</span>
+    </a>
+
+
+
+
+
 </div>
 <div class="wrapper">
     <div class="top-section">
@@ -215,3 +237,4 @@ title: 'TimeLine'
 
 </div>
 
+<!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->

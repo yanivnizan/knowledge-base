@@ -33,11 +33,44 @@ $("#clear-filter").click(function(){
 });
 
 
+function popupwindow(url, title, w, h) {
+    var left = (screen.width/2)-(w/2);
+    var top = (screen.height/2)-(h/2);
+    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+    }
 
+$(function() {
+    $('.twitterbtn').click(function() {
+      var url = 'http://soom.la/community',
+          text = $(this).attr('data-tw-text'),
+          via = 'SOOMLA',
+          hashtags = 'opensource,freestuff,ilovesoomla';
+      popupwindow('https://twitter.com/share?hashtags='+hashtags+'&via='+via+'&text='+text+'&url='+url, 'Share SOOMLA Love', 617, 317); return false;
+    });
+    });
 
+$(function() {
+  $('.facebook').click(function() {
+    var url = 'http://soom.la/community',
+        text = $(this).attr('data-tw-text'),
+        via = 'SOOMLA',
+        hashtags = 'opensource,freestuff,ilovesoomla';
+    popupwindow('https://www.facebook.com/dialog/feed?app_id=409611972431183&redirect_uri=http://0.0.0.0:9778/docs/timeline/timeline',
+        'Share SOOMLA Love', 617, 317); return false;
+  });
+});
 
-
-
+$(function() {
+  $('.google').click(function() {
+    var url = 'http://soom.la/community',
+        text = $(this).attr('data-tw-text'),
+        via = 'SOOMLA',
+        hashtags = 'opensource,freestuff,ilovesoomla';
+    popupwindow('https://plus.google.com/share?url=http://about.soom.la/soombots/='
+            +hashtags+'&caption='+via+'&description='+text+'&redirect_uri='+url,
+        'Share SOOMLA Love', 617, 317); return false;
+  });
+});
 
 //
 //  $(".highway-selected").click(function () {
