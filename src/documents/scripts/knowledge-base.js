@@ -166,7 +166,8 @@ $(function() {
     }
 
     // Load Youtube API if on videos page
-    if (".videos-library") {
+    if ($(".videos-library")) {
+        $("#university-hierarchy-nav").prependTo($('#header-right'));
         var tag = document.createElement('script');
         tag.src = "//www.youtube.com/player_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];

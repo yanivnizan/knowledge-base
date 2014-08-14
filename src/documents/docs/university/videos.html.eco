@@ -5,12 +5,13 @@ title: 'Soomla University'
 
 
 <!-- SOOMLA UNIVERSITY LOGO -->
-<img id="university-logo" src="/img/Logo-Green.png" alt="Soomla University">
+<img id="university-logo" src="/img/Logo-university.png" alt="Soomla University">
 
 <!-- VIDEO LIST TITLE -->
 <div id="know-soomla">
   <div id="jumbo-small-text">
-    Learn how to get started with SOOMLA, integrate SOOMLA into your projects, and more!
+      <div id="university-hierarchy-nav"><%- @partial('nav-menu-l1', {current:'university'}) %></div>
+      Learn how to get started with SOOMLA, integrate SOOMLA into your projects, and more!
   </div>
 </div>
 
