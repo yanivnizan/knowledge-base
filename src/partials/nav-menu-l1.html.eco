@@ -14,9 +14,9 @@
           <li><a href="/platforms">Platforms</a></li>
         <% end %>
         <% if @current == "downloads": %>
-            <li><a href="//soom.la/downloads" class="link-current">Downloads</a></li>
+            <li><a href="//soom.la/getting-started" class="link-current">Downloads</a></li>
         <% else: %>
-            <li><a href="//soom.la/downloads">Downloads</a></li>
+            <li><a href="//soom.la/getting-started">Downloads</a></li>
         <% end %>
         <% if @current == "university": %>
             <li><a href="/docs/university/videos" class="link-current">University</a></li>
