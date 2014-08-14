@@ -69,6 +69,35 @@
         }
       }
     }
+    .option-image-university {
+      position:relative;
+      overflow:hidden;
+      height:118px;
+      width:118px;
+      img {
+        position:absolute;
+        width:118px;
+        height:354px;
+        top:0;
+        left:0;
+        &.hover {
+          top:-118px;
+          #new-container {
+            &:hover {
+              background-position: 0 -24px;
+            }
+          }
+        }
+        &:active {
+          top:-236px;
+          &#new-container {
+            &:active {
+              background-position: 0 -48px;
+            }
+          }
+        }
+      }
+    }
     .option-text-container {
 
       .option-head-text {

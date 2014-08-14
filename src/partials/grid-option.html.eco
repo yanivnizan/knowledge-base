@@ -1,14 +1,23 @@
 <div class="col-lg-6 col-md-6 menu-option">
-        <a href="<%= @link %>">
-            <div class="link-container">
+    <% if @new == "true": %>
+        <div id="new-container"> </div>
+    <% end %>
+    <a href="<%= @link %>">
+        <div class="link-container">
+            <% if @image == "img/Level1-University-green.png": %>
+                <div class="option-image-university col-lg-4 col-md-4">
+                    <img src="<%= @image %>" alt="" id="<%= @selectorid %>"/>
+                </div>
+            <% else: %>
                 <div class="option-image col-lg-4 col-md-4">
                     <img src="<%= @image %>" alt="" id="<%= @selectorid %>"/>
                 </div>
-                <div class="option-text-container col-lg-8 col-md-7">
-                    <div class="option-head-text"><%= @title %></div>
-                    <div class="option-text">
-                        <%= @text %>
-                    </div>
+            <% end %>
+            <div class="option-text-container col-lg-8 col-md-7">
+                <div class="option-head-text"><%= @title %></div>
+                <div class="option-text">
+                    <%= @text %>
                 </div>
-            </div></a>
+            </div>
+        </div></a>
 </div>

@@ -74,24 +74,19 @@
   bottom: -68px;
 }
 
-#university-container {
-  position: relative;
-  top: 408px;
-  right: 506px;
-  @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-    right: 407px;
+#new-container {
+  background-image: url("/img/NewIcon.jpg");
+  position:absolute;
+  overflow:hidden;
+  width:71px;
+  height:24px;
+  z-index:1;
+  top: -6px;
+  left: 63.2px;
+  &.hover {
+    background-position: 0 -24px;
   }
-  @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-    right: 507px;
-  }
-  @media all and (max-width: @screen-xs-max) {
-    right: 507px;
+  &:active {
+    background-position: 0 -48px;
   }
 }
-.clip {
-  position: absolute;
-}
-.pos-1 {
-  clip: rect(0 71px 24px 0);
-}
-
