@@ -30,7 +30,7 @@ Every game economy includes virtual currencies and virtual goods that can be pur
 This interface represents your game's economy. You will need to implement your version of IStoreAssets. [Learn more...](/docs/soomla/store/IStoreAssets)
 
 ###Local Storage
-You users get access to their data even when there’s no internet around. Our encrypted local storage is designed just for that. [Learn more...](/docs/soomla/store/Storage)
+Your users get access to their data even when there’s no internet around. Our encrypted local storage is designed just for that. [Learn more...](/docs/soomla/store/Storage)
 
 ###Event Handling
 Throughout the SOOMLA SDK events are fired and need to be handled with your game-specific behavior. [Learn more...](/docs/soomla/store/Events)
