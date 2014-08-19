@@ -10,7 +10,7 @@ collection: 'platforms_cocos2dx'
 
 #**Debugging**
 
-##Enable cocos2dx-store debug logging
+##Enable debug logging
 
 You can enable debug logging in cocos2dx-store by setting `SOOMLA_DEBUG` in `CCStoreUtils.h` to `true`. Debug logging can also be enabled at build time by doing the following:
 
