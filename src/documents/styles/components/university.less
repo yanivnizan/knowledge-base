@@ -1,36 +1,47 @@
+//Ignore the overwriting of bootstrap in knowledge.css and DO use bootstrap's sizes
+@media (min-width: 992px) {
+  .hadar {
+    width: 66.6666%;
+  }
+}
+
 #university-logo {
   left: 50%;
   margin-left: -189px;
   position: relative;
-  top: 15px;
+  top: 43px;
 }
 
 #know-soomla {
-  padding-top: 25px;
-  padding-bottom: 30px;
+  padding-top: 40px;
+  padding-bottom: 45px;
 }
 
 hr {
   border-top: 1px solid #B6AEAE;
   width: 100%;
+  margin-top: 16px;
+  margin-bottom: 20px;
 }
 
 // Custom play button on videos "instead of" YouTube's button
 .play-button {
   position: absolute;
-  width: 12%;
+  width: 22%;
   top: 50%;
   left: 50%;
-  margin-left: -32.5px;
+  margin-left: -37px;
   margin-top: -50px;
   @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-    width: 14%;
+    margin-left: -31px;
+    margin-top: -44px;
   }
   @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-    width: 19.6%;
+    margin-left: -26px;
+    margin-top: -42px;
   }
   @media all and (max-width: @screen-xs-max) {
-    width: 65px;
+    display:none;
   }
 }
 
@@ -49,91 +60,151 @@ hr {
   // Video part consists of YT iframe and play-button
   .video-part {
     position: relative;
+//    width: 34%;
+    @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      height: 210px;
+    }
+    @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      height: 210px;
+    }
   }
   iframe {
     width: 100%;
-    height: 260px;
+    height: 240px;
+    @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      height: 210px;
+    }
+    @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      width: 230px;
+      height: 200px;
+    }
   }
   // Purpose: when the user clicks anywhere on the iframe, the custom play button will disappear.
   .button-container{
     position: absolute;
-    width: 86.5%;
-    height: 260px;
+    cursor: pointer;
+    width: 327px;
+    height: 240px;
     top: 0;
     left: 0;
     margin-left: 41px;
     @media all and (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-      width: 84.9%;
+      width: 260px;
+      height: 210px;
     }
     @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-      width: 80.1%;
+      width: 230px;
+      height: 200px;
     }
     @media all and (max-width: @screen-xs-max) {
-      width: 86%;
+      display:none;
+    }
+  }
+  .video-text-container {
+    //  width: 66%;
+    padding-top: 10px;
+    @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      padding-top: 0;
     }
   }
   // Video title (part of video-text-item)
   .head-text {
+    padding-top: 15px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 19px;
     color: #4D4D4D;
+    @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      padding-top: 0;
+    }
     @media all and (max-width: @screen-xs-max) {
       margin-top: 15px;
+      text-align: center;
     }
   }
   // Video description (part of video-text-item)
   .main-text {
+    width:85%;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 15px;
     color: #666666;
     margin-top: 10px;
     line-height: 26px;
-    padding-top: 22px;
-    padding-bottom: 80px;
+    padding-top: 10px;
+    padding-bottom: 60px;
     @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
       padding-bottom: 10px;
       padding-top: 5px;
+
     }
     @media all and (max-width: @screen-xs-max) {
       padding-bottom: 10px;
       padding-top: 5px;
+      width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+      text-align: center;
     }
   }
   // Video published on date (part of video-text-item)
   .published-text {
     font-family: 'Open Sans', sans-serif;
-    font-size: 10px;
+    font-size: 13px;
     font-style: italic;
     color: #666666;
     width: 50%;
     float: left;
-    @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    padding-top: 5px;
+    @media all and (max-width: @screen-sm-max) {
       width: 100%;
+    }
+    @media all and (max-width: @screen-xs-max) {
+      width: 100%;
+      text-align: center;
     }
   }
 }
 
 .social-buttons {
-  width: 50%;
+  padding-right: 25px;
   float: right;
-  @media all and (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  @media all and (max-width: @screen-sm-max) {
     width: 100%;
     float: none;
     margin-top: 30px;
   }
+  @media all and (max-width: @screen-xs-max) {
+    padding-right: 0;
+    width: 273px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media all and (max-width: 467px) {
+    padding-right: 0;
+    width: 108px;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .social-button(@bgColor, @img) {
-    background: @bgColor url(@img) no-repeat left;
-    width: 65px;
-    padding: 1px 6px;
+    background-image: url(@img);
+    background-position-x: 6px;
+    background-position-y: 50%;
+    background-repeat: no-repeat;
+    background-origin: initial;
+    background-color: @bgColor;
+    width: 85px;
+    padding: 3.5px 6px;
     color: white;
     font-size: 12px;
-    letter-spacing: 0.8px;
-    border-radius: 3px;
-  }
-  .google-button {
-    .social-button(#BD2226, '/img/Icon-Google-img.png');
+    letter-spacing: 1px;
+    border-radius: 2.3px;
+    font-weight: 200;
+    @media all and (max-width: 467px) {
+      width: 30px;
+      padding: 12px 6px;
+      font-size: 0px;
+    }
   }
   .twitter-button {
     .social-button(#29ABE2, '/img/Icon-Twitter-img.png');
@@ -142,6 +213,9 @@ hr {
   .facebook-button {
     .social-button(#355396, '/img/Icon-Facebook-img.png');
     margin-right: 5px;
+  }
+  .google-button {
+    .social-button(#BD2226, '/img/Icon-Google-img.png');
   }
 }
 
