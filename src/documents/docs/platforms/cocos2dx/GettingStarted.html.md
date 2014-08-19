@@ -8,11 +8,11 @@ theme: 'platforms'
 collection: 'platforms_cocos2dx'
 ---
 
-#**Getting Started (C++)**
+#**Getting Started**
 
-##Integrate cocos2dx-store
+##Integrate cocos2dx-store (C++)
 
-1. As with all Cocos2d-x projects, you need to clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x) or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download).  
+1. As with all Cocos2d-x projects, you need to clone the **Cocos2d-x framework** from [here](https://github.com/cocos2d/cocos2d-x) or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download).
 
     <div class="info-box">Make sure the version you clone is supported by SOOMLA's cocos2dx-store (the tag is the version).</div>
 
@@ -60,14 +60,14 @@ collection: 'platforms_cocos2dx'
 
     soomla::CCStoreService::initShared(assets, storeParams);
     ```
+
     - *Custom Secret* - is an encryption secret you provide that will be used to secure your data.
     - *Android Public Key* - is the public key given to you from Google. (iOS doesn't have a public key).
 
-    **Choose the secret wisely. You can't change it after you launch your game!**
+    <div class="warning-box">Choose the secret wisely. You can't change it after you launch your game!<br>
+    Initialize `CCStoreService` ONLY ONCE when your application loads.</div>
 
-    > Initialize `CCStoreService` ONLY ONCE when your application loads.
-
-10. Add instance of your event handler to `CCStoreEventDispatcher` after `CCStoreService` initialization:
+10. Add an instance of your event handler to `CCStoreEventDispatcher` after `CCStoreService` initialization:
 
     ``` cpp
     soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(handler);
@@ -75,24 +75,24 @@ collection: 'platforms_cocos2dx'
 
 And that's it! You now have storage and in-app purchasing capabilities.
 
-##Integrate cocos2dx-store into your project
-
 ###Instructions for iOS
 
 If you're building your application for iOS, follow these instructions on how to integrate cocos2dx-store into your iOS project:
 
-![alt text](/img/tutorial_img/cocos2dx_getting_started/iOS_steps1to4.png "iOS Integration")
-(Image relevant for steps 1 - 4)
+1. Add `jansson` (external/jansson/) to the sources of your project.
 
-1. Add `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**) as linked project to your project.
+    (Image for steps 2 - 5)
+    ![alt text](/img/tutorial_img/cocos2dx_getting_started/iOS_steps1to4.png "iOS Integration")
 
-2. Add `Cocos2dXStore.xcodeproj` (**extensions/cocos2dx-store/**) as linked project to your project.
+2. Add `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**) as a linked project to your project.
 
-3. Add **targets** of these projects to **Build Phases->Target Dependencies**.
+3. Add `Cocos2dXStore.xcodeproj` (**extensions/cocos2dx-store/**) as a linked project to your project.
 
-4. Add *.a of these projects to **Build Phases->Link Binary With Libraries**.
+4. Add **targets** of these projects to **Build Phases->Target Dependencies**.
 
-5. Add to Build Settings->Header Search Paths:
+5. Add the .a files of these projects to **Build Phases->Link Binary With Libraries**.
+
+6. Add to Build Settings->Header Search Paths:
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/soomla-native/compilations/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
@@ -100,11 +100,12 @@ If you're building your application for iOS, follow these instructions on how to
 
   ![alt text](/img/tutorial_img/cocos2dx_getting_started/iOS_step5.png "iOS Integration")
 
-6. Register native StoreService, adding:
+7. Register native StoreService by adding:
 
     ``` cpp
     [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
     ```
+
 at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
 <div class="info-box">Make sure you have these 3 Frameworks linked to your XCode project: Security, libsqlite3.0.dylib, StoreKit.</div>
@@ -131,7 +132,7 @@ If you're building your application for Android, follow these instructions on ho
     - SoomlaAndroidStore.jar
     - Cocos2dxAndroidStore.jar
 
-3. In your main Cocos2dxActivity (The one your Cocos2d-x application runs in), call the following in the `onCreateView` method:
+3. In your main Cocos2dxActivity (the one your Cocos2d-x application runs in), call the following in the `onCreateView` method:
 
     ``` java
     public Cocos2dxGLSurfaceView onCreateView() {
@@ -161,20 +162,21 @@ If you're building your application for Android, follow these instructions on ho
     }
     ```
 
-1. Update your manifest to include internet premission and SoomlaApp:
+5. Update your manifest to include internet permission and SoomlaApp:
 
     ``` xml
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="com.android.vending.BILLING"/>
 
     <application ...
-    	       android:name="com.soomla.store.SoomlaApp">
-        <activity android:name="com.soomla.store.StoreController$IabActivity"
-                  android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+        android:name="com.soomla.store.SoomlaApp">
+        ...
     </application>
     ```
 
-##Android: Select a Billing Service
+##Select a Billing Service
+
+SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Apple App Store for you and will redirect your users to their purchasing system to complete the transaction.
 
 ###Google Play
 
@@ -189,38 +191,37 @@ If you're building your application for Android, follow these instructions on ho
     <application ...
         <activity android:name="com.soomla.store.billing.google.GooglePlayIabService$IabActivity"
                   android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
-        <meta-data android:name="billing.service" android:value="google.GooglePlayIabService" />
+        <meta-data android:name="billing.service" android:value="google.GooglePlayIabService"/>
     </application>
     ```
 
-####**If you have an in-game storefront**
+3. Read our [tutorial](/docs/platforms/android/GooglePlayIAB) on how to define your in-app products in Google Play.
 
-SOOMLA recommends that you open the IAB Service and keep it open in the background.
+4. Start IAB Service in background (optional)
 
-``` cpp
-// Start Iab Service
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	CCStoreController::sharedStoreController()->startIabServiceInBg();
-#endif
+    ``` cpp
+    // Start Iab Service
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        CCSoomlaStore::getInstance()->startIabServiceInBg();
+    #endif
 
-// Stop Iab Service
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	CCStoreController::sharedStoreController()->stopIabServiceInBg();
-#endif
-```
+    // Stop Iab Service
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        CCSoomlaStore::getInstance()->stopIabServiceInBg();
+    #endif
+    ```
 
-This is not mandatory, your game will work without this, but we *do* recommend it because it enhances performance. The idea here is to preemptively start the in-app billing setup process with Google's servers.
+    This is not mandatory, your game will work without this, but we recommend it because it enhances performance. The idea here is to preemptively start the in-app billing setup process with Google's servers.
 
-In many games the user has to navigate into the in-game store, or start a game session in order to reach the point of making purchases. You want the user experience to be fast and smooth and prevent any lag that could be caused by network latency and setup routines you could have done silently in the background.
+    In many games the user has to navigate into the in-game store, or start a game session in order to reach the point of making purchases. You want the user experience to be fast and smooth and prevent any lag that could be caused by network latency and setup routines you could have done silently in the background.
 
-
-<div class="warning-box">Don't forget to close the Iab Service when your store is closed.</div>
+    <div class="info-box">Don't forget to close the Iab Service when your store is closed.</div>
 
 ###Amazon Appstore
 
-1. Add `in-app-purchasing-1.0.3.jar` and `AndroidStoreAmazon.jar` from the folder `extensions/cocos2dx-store/soomla-native/compilations/android` to your classpath:
+1. Add `in-app-purchasing-1.0.3.jar` and `AndroidStoreAmazon.jar` from the folder `extensions/cocos2dx-store/soomla-native/compilations/android` to your classpath.
 
-1. Update your manifest:
+2. Update your manifest:
 
     ``` xml
     ...
@@ -233,31 +234,28 @@ In many games the user has to navigate into the in-game store, or start a game s
     <meta-data android:name="billing.service" android:value="amazon.AmazonIabService" />
     ```
 
-That's it! Now all you have to do is run the **build_native.sh** script and you can begin using cocos2dx-store in your game.
+3. Read our [tutorial](/docs/platforms/android/AmazonIAB) on how to define your in-app products in Amazon Appstore.
 
-##In App Purchasing
+###Apple App Store
 
-SOOMLA provides two purchase types: `CCPurchaseWithMarket` and `CCPurchaseWithVirtualItem`.
+Read our [tutorial](/docs/platforms/ios/AppStoreIAB) on how to define your in-app products in the App Store.
 
-- **CCPurchaseWithMarket** is a purchase type that allows users to purchase a `CCVirtualItem` via Google Play or the App Store.
-- **CCPurchaseWithVirtualItem** is a purchase type that lets  users purchase a `CCVirtualItem` with another `CCVirtualItem`. For example: Buying a sword with 100 gems.
-
-In order to define the way your various virtual items are purchased, you'll need to create your implementation of `CCIStoreAssets` (the same one from step 5 [above](#get-cocos2dx-store) section above).
+**That's it! Now all you have to do is run the **build_native.sh** script and you can begin using cocos2dx-store in your game.**
 
 ##Example
 
 **Create your implementation of `CCIStoreAssets`**
 
-In this example we'll call it ExampleAssets.
-
 ``` cpp
+// Our implementation will be called ExampleAssets.
+
 #define COIN_CURRENCY_ITEM_ID "coin_currency"
 #define TEN_COIN_PACK_ITEM_ID "ten_coin_pack"
 #define TEN_COIN_PACK_PRODUCT_ID "10_coins_pack"
 
 /** Virtual Currencies **/
 CCVirtualCurrency *COIN_CURRENCY = CCVirtualCurrency::create(
-	String::create("COIN_CURRECY"),                             // name
+	String::create("COIN_CURRENCY"),                            // name
 	String::create(""),                                         // description
 	String::create(COIN_CURRENCY_ITEM_ID)                       // item ID
 );
@@ -296,15 +294,14 @@ CCVirtualGood *tenShieldGoods = CCSingleUsePackVG::create(
         CCInteger::create(300)));                               // price
 ```
 
-**Initialize SOOMLA SDK**
-In `AppDelegate.cpp`:
+**Initialize SOOMLA SDK in `AppDelegate.cpp`:**
+
 ``` cpp
 #include "ExampleAssets.h"
 
 bool AppDelegate::applicationDidFinishLaunching() {
     __Dictionary *commonParams = __Dictionary::create();
     commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-
     soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
 
     ExampleAssets *assets = ExampleAssets::create();
@@ -316,25 +313,3 @@ bool AppDelegate::applicationDidFinishLaunching() {
     ...
 }
 ```
-
-And that's it! cocos2dx-store knows how to contact Google Play or the App Store for you and will redirect your users to the purchasing system to complete the transaction. Don't forget to subscribe to store events in order to get notified of successful or failed purchases (see [Event Handling](https://github.com/soomla/cocos2dx-store#event-handling)).
-
-
-##In-app Billing
-
-SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Apple App Store for you and will redirect your users to their purchasing system to complete the transaction.
-
-###Android
-
-Define your economy in Google Play or Amazon Appstore.
-
-See our tutorials:
-
-- [Google Play](/docs/platforms/android/GooglePlayIAB)
-- [Amazon Appstore](/docs/platforms/android/AmazonIAB)
-
-###iOS
-
-Define your economy in the App Store.
-
-See our tutorial: [App Store](/docs/platforms/ios/AppStoreIAB)
