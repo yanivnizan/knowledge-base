@@ -297,8 +297,8 @@ Suppose you offer a `SingleUsePackVG` of “10 Swords”. The `SingleUseVG` that
 **Android:**
 ``` java
 public static final VirtualGood 20_CHOCOLATECAKE_GOOD = new SingleUsePackVG(
-    "CHOCOLATECAKE_ITEM_ID"                                  //good item id
-    20							                                         //amount
+    "CHOCOLATECAKE_ITEM_ID",                                 //good item id
+    20,							                                         //amount
     "20 Chocolate Cakes",                                    //name
     "A pack of 20 chocolate cakes",             			       //description
     "20_chocolate_cakes_pack",                               //item id

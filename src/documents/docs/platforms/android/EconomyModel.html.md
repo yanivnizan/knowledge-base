@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "Economy Model"
+title: "Economy Model & Operations"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 4
 theme: 'platforms'
 collection: 'platforms_android'
 ---
 
-#**Using the Economy Model**
+#**Economy Model & Operations**
 
 SOOMLA's android-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course.
 
@@ -116,7 +116,7 @@ This is useful if you'd like to give your users some amount of currency to begin
 StoreInventory.giveVirtualItem("currency_muffin", 1000);
 ```
 
-####**How to query**
+####**Get the balance**
 Get the balance of a specific `VirtualCurrency`.
 
 ``` java
@@ -166,7 +166,7 @@ Take back the 50-muffin pack that the user owns:
 StoreInventory.takeVirtualItem("muffins_50", 1);
 ```
 
-####**How to query**
+####**Get the balance**
 `VirtualCurrencyPack`s do not have a balance of their own in the database. When a user purchases a `VirtualCurrencyPack`, the balance of the associated `VirtualCurrency` is increased.
 
 ``` java
@@ -215,7 +215,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 StoreInventory.takeVirtualItem("fruit_cake", 1);
 ```
 
-####**How to query**
+####**Get the balance**
 Get the balance of a specific `SingleUseVG`.
 
 ``` java
@@ -259,7 +259,7 @@ StoreInventory.giveVirtualItem("fruit_cake_5pack", 1);
 StoreInventory.takeVirtualItem("fruit_cake_5pack", 1);
 ```
 
-####**How to query**
+####**Get the balance**
 `SingleUsePackVG`s do not have a balance of their own in the database. When a user buys a `SingleUsePackVG`, the balance of the associated `SingleUseVG` is increased. After buying a pack of 5 cream cup goods, your user's cream cup balance should be increased by 5.
 
 Query the balance of the virtual good with item id cream_cup:
@@ -309,8 +309,7 @@ StoreInventory.takeVirtualItem("marriage", 1);
 ```
 
 
-####**How to query**
-Check the ownership of a lifetime good:
+####**Check ownership**
 
 ``` java
 int balance = StoreInventory.getVirtualItemBalance("marriage");
@@ -386,8 +385,7 @@ StoreInventory.equipVirtualGood("kramer");
 StoreInventory.unEquipVirtualGood("kramer");
 ```
 
-####**How to query**
-**Check ownership:**
+####**Check ownership**
 Check if user owns Kramer:
 
 ``` java
@@ -398,7 +396,8 @@ if (balance > 0) {
     // User owns Kramer!
 }
 ```
-**Check equipping status:**
+####**Check equipping status**
+
 Check if Kramer is currently equipped:
 
 ``` java
@@ -484,8 +483,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 StoreInventory.takeVirtualItem("strength_upgrade_2", 1);
 ```
 
-####**How to query**
-**Get current upgrade:**
+####**Get current upgrade**
 
 To get the current upgrade of a virtual good use `getGoodCurrentUpgrade`. If our Strength attribute is currently upgraded to level 2, this method will return "strength_upgrade_2". (If the good has no upgrades, the method returns null).
 
@@ -493,7 +491,7 @@ To get the current upgrade of a virtual good use `getGoodCurrentUpgrade`. If our
 StoreInventory.getGoodCurrentUpgrade("strength");
 ```
 
-**Get current upgrade level:**
+####**Get current upgrade level**
 
 To find out the upgrade level of a virtual good use `getGoodUpgradeLevel`. If our Strength attribute is currently upgraded to level 2, this method will return 2. (If the good has no upgrades, the method returns 0).
 
@@ -549,8 +547,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 StoreInventory.takeVirtualItem("no_ads", 1);
 ```
 
-####**How to query**
-**Check existence:**
+####**Check existence**
 
 ``` java
 StoreInventory.nonConsumableItemExists("no_ads");
@@ -571,7 +568,7 @@ public static final VirtualCategory SWEETS_CATEGORY = new VirtualCategory(
 );
 ```
 
-####**How to query**
+####**Get category**
 Check which category an item belongs to:
 
 ``` java
