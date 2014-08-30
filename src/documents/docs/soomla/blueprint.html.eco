@@ -1,7 +1,6 @@
 ---
-title: 'Blueprint'
+title: 'LevelUp'
 layout: 'l2-main'
 theme: 'soomla'
-collection: 'soomla_store'
-placeholder: 'true'
+collection: 'soomla_blueprint'
 ---
