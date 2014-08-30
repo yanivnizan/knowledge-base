@@ -185,4 +185,18 @@ $(function() {
     $(this).attr('title', $(this).text());
   });
 
+  // FAQ page - animate link scroll
+  $('#faq-toc a').click(function(event) {
+
+    event.preventDefault();
+
+    var el = $(event.currentTarget);
+    var anchor = el.prop('href').match("#(.*)$")[1];
+    var target = $('a[name=' + anchor + ']');
+    $('html, body').animate({
+      scrollTop: target.offset().top - 300
+    }, 400);
+
+  });
+
 });
