@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "Economy Model"
+title: "Economy Model & Operations"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 2
 theme: 'platforms'
 collection: 'platforms_cocos2dx'
 ---
 
-#**Using the Economy Model**
+#**Economy Model & Operations**
 
 SOOMLA’s cocos2dx-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items.
 
@@ -112,7 +112,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->giveItem("currency_coin", 1000, &soomlaError);
 ```
 
-####**How to query**
+####**Get the balance**
 
 Get the balance of a specific VirtualCurrency.
 
@@ -173,7 +173,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->takeItem("muffins_50", 1, &soomlaError);
 ```
 
-####**How to query**
+####**Get the balance**
 
 VirtualCurrencyPacks do not have a balance of their own in the database. When a user purchases a VirtualCurrencyPack, the balance of the associated VirtualCurrency is increased.
 
@@ -234,7 +234,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->takeItem("fruit_cake", 1, &soomlaError);
 ```
 
-####**How to query**
+####**Get the balance**
 
 Get the balance of a specific SingleUseVG.
 
@@ -288,7 +288,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->takeItem("fruit_cake_5pack", 1, &soomlaError);
 ```
 
-####**How to query**
+####**Get the balance**
 
 SingleUsePackVGs do not have a balance of their own in the database. When a user buys a SingleUsePackVG, the balance of the associated SingleUseVG is increased. After buying a pack of 5 fruit cakes, your user’s fruit cake balance should be increased by 5.
 
@@ -347,12 +347,11 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->takeItem("marriage", 1, &soomlaError);
 ```
 
-####**How to query**
-
-Check the ownership of a lifetime good:
-//If the balance is greater than 0, the user owns this LifetimeVG.
+####**Check ownership**
 
 ``` cpp
+//If the balance is greater than 0, the user owns this LifetimeVG.
+
 CCSoomlaError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->getItemBalance("marriage", &soomlaError);
@@ -433,9 +432,7 @@ CCStoreInventory::sharedStoreInventory()->equipVirtualGood("kramer", &soomlaErro
 CCStoreInventory::sharedStoreInventory()->unEquipVirtualGood("kramer", &soomlaError);
 ```
 
-####**How to query**
-
-**Check ownership:**
+####**Check ownership**
 
 ``` cpp
 //Check if user owns Kramer:
@@ -548,9 +545,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->takeItem(LEVEL_1_GOOD_ITEM_ID, 1, &soomlaError);
 ```
 
-####How to query
-
-**Get current upgrade:**
+####**Get current upgrade**
 
 To get the current upgrade of a virtual good use getGoodCurrentUpgrade. If the good has no upgrades, the method will return null.
 
@@ -560,7 +555,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->getGoodCurrentUpgrade(MUFFIN_CAKE_GOOD_ITEM_ID, &soomlaError);
 ```
 
-**Get current upgrade level:**
+####**Get current upgrade level**
 
 To find out the upgrade level of a virtual good use getGoodUpgradeLevel. If the good has no upgrades, the method returns 0.
 
@@ -623,9 +618,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->takeItem("no_ads", 1, &soomlaError);
 ```
 
-####How to query
-
-**Check existence:**
+####**Check existence**
 
 ``` cpp
 CCSoomlaError *soomlaError = NULL;
@@ -652,7 +645,7 @@ CCVirtualCategory *cakes = CCVirtualCategory::create(
         NULL));
 ```
 
-####How to query
+####Get category
 
 **Check which category an item belongs to:**
 

@@ -6,10 +6,10 @@ title: 'Platforms'
 <div class="jumbotron" id="know-soomla">
     <div id="jumbo-main-text">
         <div id="hierarchy-nav"><%- @partial('nav-menu-l1', {current:'platforms'}) %></div>
-        HOW DO YOU PREFER TO CONTINUE?
+        CHOOSE YOUR PLATFORM
     </div>
     <div id="jumbo-small-text">
-        Get started with the platform of your choice.
+        SOOMLA Store is available for native platforms and popular game engines.
     </div>
 </div>
 

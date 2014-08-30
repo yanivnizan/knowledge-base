@@ -6,10 +6,10 @@ layout: 'knowledge-base'
     <div id="jumbo-main-text">
         <div id="hierarchy-nav"><%- @partial('nav-menu-l1', {current:@document.theme}) %>
         <%- @partial('nav-menu-l2', {collection:@document.collection, current:@document.theme}) %></div>
-        HOW DO YOU PREFER TO CONTINUE?
+        WHAT WOULD YOU LIKE TO KNOW?
     </div>
     <div id="jumbo-small-text">
-        Integrate SOOMLA into your game, take advantage of the economy entities and store events that SOOMLA provides, and define your IAP.
+        Learn about SOOMLA by reading explanations and studying from examples.
     </div>
 </div>
 
