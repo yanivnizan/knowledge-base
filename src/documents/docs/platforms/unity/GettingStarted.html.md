@@ -73,7 +73,6 @@ This is not mandatory, your game will work without this, but we do recommend it 
 In many games the user has to navigate into the in-game store, or start a game session in order to reach the point of making purchases. You want the user experience to be fast and smooth and prevent any lag that could be caused by network latency and setup routines you could have done silently in the background.
 
 
-
 ## Example
 
 ``` cs
@@ -85,7 +84,7 @@ public class ExampleAssets : IStoreAssets{
     public static VirtualCurrency COIN_CURRENCY = new VirtualCurrency(
         ...
         "currency_coin"                     // item id
-	);
+  );
 
     /** Virtual Currency Packs **/
     public static VirtualCurrencyPack TEN_COIN_PACK = new VirtualCurrencyPack(
@@ -122,10 +121,10 @@ public class ExampleAssets : IStoreAssets{
 public class ExampleWindow : MonoBehaviour {
     ...
     void Start () {
-		...
-		SoomlaStore.Initialize(new ExampleAssets());
-		...
-	}
+    ...
+    SoomlaStore.Initialize(new ExampleAssets());
+    ...
+  }
 }
 ```
 

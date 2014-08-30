@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "Economy Model"
+title: "Economy Model & Operations"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 3
 theme: 'platforms'
 collection: 'platforms_ios'
 ---
 
-#**Using the Economy Model**
+#**Economy Model & Operations**
 
 SOOMLA's iOS-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items.
 
@@ -111,7 +111,7 @@ This is useful if you'd like to give your users some amount of currency to begin
 [StoreInventory giveAmount:1000 ofItem:@"currency_muffin"];
 ```
 
-####**How to query**
+####**Get the balance**
 Get the balance of a specific `VirtualCurrency`.
 
 ``` objectivec
@@ -162,7 +162,7 @@ Take back the 50-muffin pack that the user owns:
 [StoreInventory takeAmount:1 ofItem:@"muffins_50"];
 ```
 
-####**How to query**
+####**Get the balance**
 `VirtualCurrencyPack`s do not have a balance of their own in the database. When a user purchases a `VirtualCurrencyPack`, the balance of the associated `VirtualCurrency` is increased.
 
 ``` objectivec
@@ -214,7 +214,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 ```
 
 
-####**How to query**
+####**Get the balance**
 Get the balance of a specific `SingleUseVG`.
 
 ``` objectivec
@@ -260,7 +260,7 @@ The explanations for buying, giving, and taking are the same as those in [Single
 [StoreInventory takeAmount:1 ofItem:@"fruit_cake_5pack"];
 ```
 
-####**How to query**
+####**Get the balance**
 `SingleUsePackVG`s do not have a balance of their own in the database. When a user buys a `SingleUsePackVG`, the balance of the associated `SingleUseVG` is increased. After buying a pack of 5 fruit cakes, your user's fruit cake balance should be increased by 5.
 
 Query the balance of the virtual good with item ID "fruit_cake":
@@ -312,7 +312,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 [StoreInventory takeAmount:1 ofItem:@"marriage"];
 ```
 
-####**How to query**
+####**Check ownership**
 Check the ownership of a lifetime good:
 
 ``` objectivec
@@ -388,8 +388,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 [StoreInventory unEquipVirtualGoodWithItemId:@"kramer"];
 ```
 
-####**How to query**
-**Check ownership:**
+####**Check ownership**
 Check if user owns Kramer:
 
 ``` objectivec
@@ -397,7 +396,7 @@ Check if user owns Kramer:
 [StoreInventory getItemBalance:@"kramer"];
 ```
 
-**Check equipping status:**
+####**Check equipping status**
 Check if Kramer is currently equipped:
 
 ``` objectivec
@@ -486,14 +485,14 @@ This function simply deducts the user's balance. In case of a refund request, it
 [StoreInventory takeAmount:1 ofItem:LEVEL_1_GOOD_ITEM_ID];
 ```
 
-####**How to query**
-**Get current upgrade:**
+####**Get current upgrade**
+
 To get the current upgrade of a virtual good use `goodCurrentUpgrade`. If the good has no upgrades, the method will return null.
 
 ``` objectivec
 [StoreInventory goodCurrentUpgrade:MUFFIN_CAKE_GOOD_ITEM_ID];
 ```
-**Get current upgrade level:**
+####**Get Current Upgrade Level**
 To find out the upgrade level of a virtual good use `goodUpgradeLevel`. If the good has no upgrades, the method returns 0.
 
 ``` objectivec
@@ -546,8 +545,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 [StoreInventory takeAmount:1 ofItem:@"no_ads"];
 ```
 
-####**How to query**
-**Check existence:**
+####**Check existence**
 
 ``` objectivec
 [StoreInventory nonConsumableItemExists:@"no_ads"];
@@ -557,7 +555,7 @@ This function simply deducts the user's balance. In case of a refund request, it
 
 Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
 
-####How to define
+####**How to define**
 
 ``` objectivec
 // Assume that MUFFIN_CAKE_GOOD_ITEM_ID, PAVLOVA_GOOD_ITEM_ID, etc.. are item IDs of virtual goods that have been declared.
@@ -566,7 +564,7 @@ _MUFFINS_CATEGORY  = [[VirtualCategory alloc]
     andGoodsItemIds:@[MUFFIN_CAKE_GOOD_ITEM_ID, PAVLOVA_GOOD_ITEM_ID, MUFFIN_CAKE_GOOD_ITEM_ID]];
 ```
 
-####**How to query**
+####**Get ccategory**
 Check which category an item belongs to:
 
 ``` objectivec

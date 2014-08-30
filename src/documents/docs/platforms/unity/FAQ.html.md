@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "FAQ"
-text: ""
+text: "Frequently asked questions about unity3d-store"
 position: 7
 theme: 'platforms'
 collection: 'platforms_unity'
@@ -10,11 +10,9 @@ collection: 'platforms_unity'
 
 #**FAQ: unity3d-store**
 
-
 ##Integration
 
-
-**iOS: What libraries do I need to have in my project?**
+**iOS: What libraries do I need in my project?**
 
 After you download and import the unity3d-store package, you should see the following static libraries under `Assets/Plugins/iOS`:
 
@@ -23,7 +21,7 @@ After you download and import the unity3d-store package, you should see the foll
 - libSoomlaIOSStore.a
 - libSoomlaIOSCore.a
 
-**Android: What jars do I need to have in my project?**
+**Android: What jars do I need in my project?**
 
 After you download and import the unity3d-store package, you should see the following jars under `Assets/Plugins/Android`:
 
@@ -38,7 +36,7 @@ After you download and import the unity3d-store package, you should see the foll
 
 **Can I test unity3d-store in the Unity editor or only on device?**
 
-Currently unity3d-store can obly be tested on a device. In the near future it will be available for testing in the Unity editor.
+Currently unity3d-store can only be tested on a device. In the near future it will be available for testing in the Unity editor.
 
 ---
 
@@ -56,12 +54,17 @@ All SOOMLA items require you to provide price by design. The purpose of this is 
 
 ---
 
-
 **To build my project in the Unity editor, should I use "Build & Run" or "Build"?**
 
 You should click on "Build". The reason for this is that Soomla has a post-build script that needs to run after the build, and if you click on “Build and run” you're not giving that script a chance.
 
 **NOTE:** Before you click on "Build", you'll need to switch to whatever platform you want to run. To avoid problems, after clicking on "Switch platform", you must wait for the little circle at the bottom right corner to disappear.
+
+---
+
+**How can I test the products that I want to sell in Google Play?**
+
+In testing mode, you should use [Google's test product IDs](http://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static). Please notice that you should use "android.test.purchased" for all the products you want to successfully test, and that you can use this same product ID for more than one product. Once you are done with testing mode you can define your actual product IDs, as explained [here](docs/platforms/android/googleplayiab/).
 
 ---
 

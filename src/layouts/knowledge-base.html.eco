@@ -18,13 +18,17 @@
     <%- @getBlock('meta').toHTML() %>
 
     <!-- DocPad Styles + Our Own -->
-
+    <% if @getEnvironment() == 'development':%>
     <%- @getBlock('styles').add(@site.styles).toHTML() %>
+    <%else:%>
+    <link  rel="stylesheet" href="/styles/kb.min.css" />
+    <%end%>
 
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,300' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 </head>
+
 <body>
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -77,8 +81,8 @@
                   <img src="/img/Logo-footer.png">
                 </a>
                 <ul id="menu-footer-menu" class="menu footer-menu h-list pull-left">
-                    <li><a href="http://soom.la/soombots/">Soombots</a></li>
-                    <li><a href="http://soom.la/the-goodfellas/">Team</a></li>
+                    <li><a href="http://about.soom.la/soombots/">Soombots</a></li>
+                    <li><a href="http://about.soom.la/">Team</a></li>
                     <li><a href="https://angel.co/soomla-1">Investors Info</a></li>
                     <li><a href="mailto:support@soom.la">Contact</a></li>
                     <li><a href="http://blog.soom.la">Blog</a></li>
@@ -86,13 +90,14 @@
             </div>
             <div class="copyright">
                 <span id="soomla-copyright">&#169; 2014 Soomla</span>
-                <a href="http://soom.la/terms-conditions/">Terms of Use</a> |
-                <a href="http://soom.la/privacy-policy/">Privacy Policy</a> |
+                <a href="http://about.soom.la/terms-of-use/">Terms of Use</a> |
+                <a href="http://about.soom.la/privacy-policy/">Privacy Policy</a> |
                 <a href="//mappedinisrael.com/search/SOOMLA">Made with ♥ in Tel-Aviv</a>
             </div>
         </div>
     </div>
-</footer><!-- /FOOTER -->
+</footer>
+<!-- /FOOTER -->
 
 <!-- DocPad Scripts + Our Own -->
 
@@ -101,7 +106,11 @@
 <script>window.jQuery || document.write('<script src="scripts/jquery-1.11.1.min.js"><\/script>')</script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script>$.fn.modal || document.write('<script src="scripts/bootstrap-3.1.1.min.js"><\/script>')</script>
-
+<% if @getEnvironment() == 'development':%>
 <%- @getBlock('scripts').add(@site.scripts).toHTML() %>
+<%else:%>
+<%- @include('analytics.html') %>
+<script src="/scripts/kb.min.js"></script>
+<%end%>
 </body>
 </html>
