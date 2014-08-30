@@ -10,7 +10,7 @@ collection: 'platforms_unity'
 
 #**Main Classes**
 
-Here you can find descriptions of some of the main classes and interfaces of android-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
+Here you can find descriptions of some of the main classes and interfaces of unity3d-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
 
 To see more usage examples of the functions of these classes see [Economy Model](/docs/platforms/unity/EconomyModel).
 
