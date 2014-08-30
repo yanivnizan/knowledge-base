@@ -3,7 +3,7 @@ layout: "content"
 image: "Events"
 title: "Events"
 text: "Event handling in unity3d-levelup follows the publish-subscribe pattern. Throughout the SOOMLA SDK events are fired and need to be handled with your game-specific behavior."
-position: 3
+position: 4
 theme: 'soomla'
 collection: 'soomla_blueprint'
 ---
@@ -59,6 +59,3 @@ public static Action<World> OnWorldCompleted = delegate {};
 ```
 
 <div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
-
-<br>
-**You can find a full example of an event handler class [here](TODO).**

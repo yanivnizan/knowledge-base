@@ -1,9 +1,9 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "Main Classes"
-text: ""
-position: 5
+title: "LevelUp Class"
+text: "LevelUp.cs is a class that provides many useful functions for retrieving different LevelUp entities and information about them."
+position: 3
 theme: 'soomla'
 collection: 'soomla_blueprint'
 ---

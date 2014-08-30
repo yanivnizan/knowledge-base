@@ -12,41 +12,49 @@ collection: 'soomla_blueprint'
 
 ##**Integrate unity3d-levelup**
 
-1. `LevelUp` is a dependent module on unity3d-store. First, you need to follow these steps to download [unity3d-store](/docs/unity/#getting-started), if you haven't already. Then, come back to get started with `LevelUp`.
+`LevelUp` is a dependent module on unity3d-store and unity3d-profile.
 
-2. **RECURSIVELY** clone unity3d-levelup:
+First, you'll need to either download the unity packages (recommended) OR clone the repos. Next, you'll need to follow the steps in [unity3d-store Getting Started](/docs/platforms/unity/gettingstarted) in order to set up and initialize the SOOMA SDK.
 
-    ```
-    git clone --recursive https://github.com/soomla/unity3d-levelup.git
-    ```
+###**Download packages (Recommended)**
 
-2. In the hierarchy panel you should see the following prefabs: `CoreEvents`, `ExampleWindow`, `LevelUpEvents`, and `StoreEvents`. If they are missing, drag them into the scene.
+Download the following pre-baked unity packages in this exact order:
 
-	![alt text](/img/tutorial_img/levelup/Unity_prefabs.png "Prefabs")
+[soomla-unity3d-core v1.5.3](https://raw.githubusercontent.com/soomla/unity3d-store/master/soomla-unity3d-core.unitypackage)
 
-3. Go to **Window** > **Soomla** > **Edit Settings**
+[unity3d-store v1.5.3](http://bit.ly/1rc21Zo)
 
-    - Provide a string of your choice in the field "Soomla Secret". This will encrypt any sensitive local data Soomla will store on the device.
+[unity3d-levelup](TODO)
 
-    - Check "Debug Messages" if you are in testing mode and want debug messages to be displayed.
+[unity3d-profile](TODO)
 
-	![alt text](/img/tutorial_img/levelup/Unity_SoomlaSettings.png "Soomla Settings")
+###**With Sources**
 
-    **Android**:
-    - Under "Android Settings" select your billing service.
-    - If your billing service is Google Play, you'll need to provide the Google Play public key found in Google Play developer console. Read more about this [here](/docs/AndroidBilling). Also, if you'd like to allow purchases of [Google's test product IDs](http://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static), check the "Test Purchases" box.
+**RECURSIVELY** clone unity3d-levelup:
 
-    **iOS**:
-    - If you'd like your purchases validated with SOOMLA's Server Side Protection, check the "Reciept Validation" box.
+  ```
+  git clone --recursive https://github.com/soomla/unity3d-levelup.git
+  ```
 
-4. Initialize Soomla LevelUp, using your own implementation of your game structure:
+###**Complete the Setup**
+
+1. In the hierarchy panel you should see the following prefabs: `CoreEvents`, `ExampleWindow`, `LevelUpEvents`, and `StoreEvents`. If they are missing, drag them into the scene.
+
+	![alt text](/img/levelup/Unity_prefabs.png "Prefabs")
+
+  <br>
+
+2. Follow steps 3-6 in [unity3d-store Getting Started](/docs/platforms/unity/gettingstarted).
+
+3. Initialize SOOMLA LevelUp, using your own implementation of your game structure:
 
 	``` cs
 	World initialWorld = ...
 	List<Rewards> rewards = ...
 	LevelUp.GetInstance().Initialize(initialWorld, rewards);
 	```
-See the [full example](#example) below.
+
+  See the full example below.
 
 ##**In-app Billing**
 

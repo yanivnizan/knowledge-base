@@ -3,7 +3,7 @@ layout: "content"
 image: "Wrench"
 title: "Debugging"
 text: "Debugging methods and tips for unity3d-levelup."
-position: 4
+position: 5
 theme: 'soomla'
 collection: 'soomla_blueprint'
 ---
