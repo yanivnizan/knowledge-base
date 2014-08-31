@@ -95,8 +95,6 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers/**`
 
-	![alt text](/img/tutorial_img/cocos2dx_getting_started/iOS_step5.png "iOS Integration")
-
 4. Register the native `StoreService` by adding:
 
     ```cpp
