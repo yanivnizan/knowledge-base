@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Events"
-title: "Events"
+title: "STORE: Events"
 text: "Event handling in cocos2dx-store follows the publish-subscribe pattern."
 position: 4
 theme: 'platforms'
 collection: 'platforms_cocos2dx'
 ---
 
-#**Event Handling**
+#**STORE: Event Handling**
 
 ##About
 
