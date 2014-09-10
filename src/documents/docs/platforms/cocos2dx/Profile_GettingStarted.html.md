@@ -210,13 +210,13 @@ To integrate cocos2dx-profile into your game, follow these steps:
 
 ##Contribution
 
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the social capabilities of the SOOMLA Profile module, by adding support to any social provider you wish (Twitter, Google+, etc.), and connect the new provider to SOOMLA's modules (Store and LevelUp).
+**SOOMLA appreciates code contributions!** You are more than welcome to extend the social capabilities of the SOOMLA Profile module, by adding support to any social provider you wish (Twitter, Google+, etc.), and connect the new provider to SOOMLA's Store module.
 
 <div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/cocos2dx-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
 
 ##Example
 
-Here is an example of initializing Profile, logging the user in, and sharing a story on the user's Facebook wall. To see a full example, please see [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example/tree/master/Classes). To learn about the different entities and functionality of Profile, see [Modeling & Operations](/docs/soomla/storefront/Model).
+Here is an example of initializing Profile, logging the user in, and sharing a story on the user's Facebook wall. To see a full example, please see [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example/tree/master/Classes). To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/cocos2dx/Profile_MainClasses).
 
 <br>
 
@@ -261,4 +261,4 @@ soomla::CCProfileController::getInstance()->updateStory(
 );
 ```
 
-And that's it! cocos2dx-profile knows how to contact Facebook and share a story with the information you provided. It will also give the user the `CCBadgeReward` configured in the function call.
+And that's it! cocos2dx-profile knows how to contact Facebook and perform social actions with the information you provide.

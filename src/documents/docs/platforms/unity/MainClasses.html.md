@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "Main Classes"
+title: "STORE: Main Classes"
 text: "The main classes of unity3d-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
 position: 3
 theme: 'platforms'
 collection: 'platforms_unity'
 ---
 
-#**Main Classes**
+#**STORE: Main Classes**
 
 Here you can find descriptions of some of the main classes and interfaces of unity3d-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
 

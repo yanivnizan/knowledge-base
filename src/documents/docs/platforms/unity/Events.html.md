@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Events"
-title: "Events"
-text: "Event handling in unity3d-store follows the publish-subscribe pattern."
+title: "STORE: Events"
+text: "Handle unity3d-store events with your game-sepcific behavior, with the publish-subscribe pattern."
 position: 4
 theme: 'platforms'
 collection: 'platforms_unity'
 ---
 
-#**Event Handling**
+#**STORE: Event Handling**
 
 ##About
 

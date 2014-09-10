@@ -1,9 +1,9 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "FAQ"
+title: "STORE: FAQ"
 text: "Frequently asked questions about unity3d-store"
-position: 7
+position: 5
 theme: 'platforms'
 collection: 'platforms_unity'
 ---
