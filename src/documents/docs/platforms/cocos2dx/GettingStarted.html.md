@@ -95,14 +95,16 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers/**`
 
-4. Register the native `StoreService` by adding:
+4. Add `-ObjC` to your project under **Build Setting->Other Linker Flags**.
+
+5. Register the native `StoreService` by adding:
 
     ```cpp
     [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
     ```
 at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
-5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
+6. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
 **That's it! Now all you have to do is build your XCode project and run your game with cocos2dx-store.**
 
@@ -125,6 +127,7 @@ at the begining of the method `application: didFinishLaunchingWithOptions:` of `
 
     - SoomlaAndroidCore.jar
     - Cocos2dxAndroidCore.jar
+	- square-otto-1.3.2.jar
 
   From `extensions/cocos2dx-store/build/android`:
 
