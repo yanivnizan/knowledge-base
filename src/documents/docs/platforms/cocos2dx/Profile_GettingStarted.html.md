@@ -117,10 +117,12 @@ at the begining of the method `application: didFinishLaunchingWithOptions:` of `
   From `extensions/soomla-cocos2dx-core/build/android`:
   - SoomlaAndroidCore.jar
   - Cocos2dxAndroidCore.jar
+  - square-otto-1.3.2.jar
 
   From `extensions/cocos2dx-profile/build/android`:
   - AndroidProfile.jar
   - Cocos2dxAndroidProfile.jar
+  - simple.facebook-2.1.jar
 
 3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
 
