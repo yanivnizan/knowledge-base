@@ -18,23 +18,28 @@ unity3d-profile allows you to subscribe to events, be notified when they occur, 
 
 In the unity-profile code, events are fired in some functions. Of course, you can also fire the events from your code where you see fit.
 
-**For Example:** In `SoomlaProfile.cs` the function `Login` triggers the event `OnLoginFinished`, if the login process completed successfully.
+**For Example:** In `SoomlaProfile.cs` the function `Login` triggers the event `OnLoginStarted`. In case of success the event `OnLoginFinished` is triggered, in case of failure `OnLoginFailed` is triggered, and in case of cancellation `OnLoginCancelled` is triggered.
 
 ``` cs
-ProfileEvents.OnLoginStarted(provider, payload);
+public static void Login(Provider provider, string payload="", Reward reward = null) {
+	ProfileEvents.OnLoginStarted(provider, payload);
 	providers[provider].Login(
 	/* success */	(UserProfile userProfile) => {
 							StoreUserProfile(userProfile);
 							ProfileEvents.OnLoginFinished(userProfile, payload);
-							...
+							if (reward != null) {
+								reward.Give();
+							}
 						},
-	/* fail */		...
-	/* cancel */	...
+	/* fail */		(string message) => {  ProfileEvents.OnLoginFailed (provider, message, payload); },
+	/* cancel */	() => {  ProfileEvents.OnLoginCancelled(provider, payload); }
 	);
 }
 ```
 
-<div class="info-box">**What will happen next:** A class that "listens" for this event will be notified, and will contain a function that handles the event that login has finished. Read below to learn how to "listen" for and handle events.</div>
+<div class="info-box">The parameter `payload` that `OnLoginFinished` receives is information that you provide the function, and is returned to you once the operation is complete (or is failed). You can use it to identify the event with the called action, or for any other use you find suitable.</div>
+
+**What will happen next:** A class that "listens" for this event will be notified, and will contain a function that handles the event that login has finished. Read below to learn how to "listen" for and handle events.
 
 ##Observing & Handling Events
 
@@ -48,7 +53,7 @@ ProfileEvents.OnLoginFinished += onLoginFinished;
 
 // Handle this event with your game-specific behavior:
 public static void onLoginFinished(UserProfile userProfileJson, string payload){
-	Soomla.SoomlaUtils.LogDebug("Login finished for: " + UserProfile.toJSONObject().print());
+	Soomla.SoomlaUtils.LogDebug("Login finished: " + UserProfile.toJSONObject().print());
 	SoomlaProfile.GetContacts(Provider.FACEBOOK);
 	string bday = SoomlaProfile.GetStoredUserProfile(Provider.FACEBOOK).Birthday;
 }

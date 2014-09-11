@@ -40,7 +40,10 @@ This class represents a profile of a user from a social network (provider). This
 
 An interface to the native `SoomlaProfile` class, which is the main class that controls the entire SOOMLA Profile module. Use this class access the native `SoomlaProfile` functionality, which allows you to perform various social and authentication operations on users.
 
+<br>
 **Useful Functions:**
+
+<div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many functions of Profile. For almost every social action, you have the option of giving a reward to your users who complete the action.</div>
 
 ###`login / logout`
 

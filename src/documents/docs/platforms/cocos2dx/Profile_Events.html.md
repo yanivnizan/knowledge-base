@@ -18,6 +18,8 @@ Profile allows you to subscribe to events, be notified when they occur, and impl
 
 The `CCProfileEventDispatcher` class is where all events go through. See [CCProfileEventDispatcher](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCProfileEventDispatcher.cpp).
 
+Events are triggered from the native side (iOS-profile and android-profile), and in turn are triggered in cocos2dx-profile. Read below to learn how to "listen for" and handle these events once they occur.
+
 ##Observing & Handling Events
 
 To handle various events, create your own event handler, a class that implements [CCProfileEventHandler](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCProfileEventHandler.h). Then, to "sign up for" (be notified about) events, add it to the `CCProfileEventDispatcher`:

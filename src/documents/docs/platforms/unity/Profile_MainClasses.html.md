@@ -45,11 +45,14 @@ This class holds information about the user for a specific `Provider`.
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The `Profile` module will work with the social and authentication plugins you provide and define in AndroidManifest.xml or your iOS project's plist.
 
+<br>
 **Useful Functions:**
+
+<div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many functions of Profile. For almost every social action, you have the option of giving a reward to your users who complete the action.</div>
 
 ###`login / logout`
 
-`login`requires the parameters: "provider" and an optional "reward". This function will log the user into the specified provider, and will give the user a reward if one was provided.
+This function will log the user into the specified provider, and will give the user a reward if one was provided.
 
 Most of the social actions provided in Profile depend on the user being logged in. Therefore, upon successful login, you'll want to enable the rest of your social action buttons. For example, after the user is successfully logged in, you can display "Like" and "Post Status" buttons.
 
