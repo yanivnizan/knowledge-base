@@ -108,6 +108,8 @@ Instructions for how to refund items in Google Play:
 2. Refund the test item. See Google's [Refund an order](https://support.google.com/wallet/business/answer/2741495?hl=en) instructions for how to do this.
 3. Call `removeNonConsumableItem` to clear your local inventory. (It will NOT be refreshed by Google Play because the reception has already been removed).
 
+Note that Google Play caches purchase statuses locally, so you may have to wait a few minutes for the cancellation to actually take place. If you don't want to wait, a faster option is to clear the cache of the "Google Play Store" app and your app manually, to force the non-consumable item refresh.
+
 ---
 
 **If I make changes to the products I have defined in iTunes Connect or Google Play, how can I see the updated information in my code?**
