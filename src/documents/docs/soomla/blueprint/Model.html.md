@@ -3,7 +3,7 @@ layout: "content"
 image: "Modeling"
 title: "Game Design Model"
 text: "Learn about the different entities of LevelUp to understand how to build your game structure and progressions behavior."
-position: 10
+position: 2
 theme: 'soomla'
 collection: 'soomla_blueprint'
 ---
@@ -53,107 +53,30 @@ A `CCSchedule` defines any time restrictions that an entity may have.
 
 A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress. For example - a user can earn a badge for completing a `Mission`. Dealing with `Reward`s is very similar to dealing with `VirtualItem`s: grant a `Reward` by giving it, and recall a `Reward` by taking it.
 
-`Reward` itself cannot be instantiated, but there are many types of rewards, all explained below, and those will have the functionality that `Reward` provides.
-
-<br>
-
-**COMMON USE**
-
-All rewards have the same functionality.
-
-**Give a `Reward`:**
-
-Use this to give your user a `Reward`, for example you can give your users a `Reward` of 100 coins just for downloading your game.
-
-``` cpp
-reward->give();
-```
-
-**Take a `Reward`:**
-
-Use this to redeem a `Reward` from your user.
-
-``` cpp
-reward->take();
-```
-
-**Retrieve a Reward:**
-
-``` cpp
-CCReward *reward = CCLevelUp::getInstance()->getReward("coinReward_ID");
-```
+`Reward` itself cannot be instantiated, but there are many types of rewards, all explained below, and those will have the functionality that `Reward` provides, such as giving or taking a reward.
 
 <br>
 ####**BadgeReward**
 
 A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score,  the user can earn a "Highest Score" badge reward.
 
-**HOW TO DEFINE**
-
-``` cpp
-CCReward *goldMedal = CCBadgeReward::create(
-  CCString::create("badge_goldMedal"),   // ID
-  CCString::create("Gold Medal"),        // Name
-  CCString::create("[icon url]"),        // Icon URL
-);
-```
 
 <br>
 ####**SequenceReward**
 
  A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
 
-**HOW TO DEFINE**
-
-``` cpp
-cocos2d::__Array *belts = cocos2d::__Array::create();
-belts->addObject(blueBelt);
-belts->addObject(yellowBelt);
-belts->addObject(greenBelt);
-belts->addObject(brownBelt);
-belts->addObject(blackBelt);
-
-CCReward *beltReward = CCSequenceReward::create(
-  CCString::create("beltReward"),         // ID
-  CCString::create("Belt Reward"),        // Name
-  belts                                   // Sequence of rewards
-);
-```
 
 <br>
 ####**VirtualItemReward**
 
 A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users a reward of 100 coins (virtual currency).
 
-**HOW TO DEFINE**
-
-``` cpp
-CCReward *coinReward = CCVirtualItemReward::create(
-  CCString::create("coinReward"),         // ID
-  CCString::create("Coin Reward"),        // Name
-  CCString::create("coinCurrency_ID")     // Associated item ID
-  CCInteger::create(100)                  // Amount
-);
-```
 
 <br>
 ####**RandomReward**
 
 A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** A user can earn a mystery box `Reward` that grants him/her a random `Reward`.
-
-**HOW TO DEFINE**
-
-``` cpp
-cocos2d::__Array *rewards = cocos2d::__Array::create();
-rewards->addObject(rewardA);
-rewards->addObject(rewardB);
-
-CCReward *mysteryReward = CCRandomReward::create(
-  CCString::create("mysteryReward"),        // ID
-  CCString::create("Mystery Box Reward"),   // Name
-  rewards                                   // Rewards to choose from
-);
-```
 
 <br>
 
@@ -165,20 +88,11 @@ One of the most common ways to create a sense of progress and accomplishment in 
 
 **A `Level` contains the following elements:**
 
-- `mStartTime` - The start time of this level.
+- A start time of the current level.
 
-- `mElapsed` -  The duration of the play time for this level. This can be used for games that need to keep track of how long the user has been playing the level in order to calculate his [`Score`](#score) at the end.
+- The duration of the play time for this level. This can be used for games that need to keep track of how long the user has been playing the level in order to calculate his [`Score`](#score) at the end.
 
-- `mState` - The state of the level is initially "Idle". While the user is playing, the level is in "Running" mode, and can later be one of "Paused", "Ended", or "Completed".
-
-<br>
-**HOW TO DEFINE**
-
-`Level` has a few different constructors, the simplest one shown here. The section about `World`s, below, demonstrates the use of a function called `BatchAddLevelsWithTemplates` which is much more convenient to use than the `Level` constructors.
-
-``` cpp
-CCLevel *level1 = CCLevel::create(__String::create(WORLD_LEVEL1_ID));
-```
+- The state of the current level. Initially, a level's state is "Idle". While the user is playing, the level is in "Running" mode, and can later be one of "Paused", "Ended", or "Completed".
 
 <br>
 **COMMON USE**
