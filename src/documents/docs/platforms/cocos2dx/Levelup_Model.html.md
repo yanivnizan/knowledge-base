@@ -1,11 +1,11 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "Game Design Model"
-text: "Learn about the different entities of LevelUp to understand how to build your game structure and progressions behavior."
+title: "LEVELUP: Model & Operations"
+text: "Learn about the different entities of LevelUp. See examples of how to initialize and use them."
 position: 10
-theme: 'soomla'
-collection: 'soomla_blueprint'
+theme: 'platforms'
+collection: 'platforms_cocos2dx'
 ---
 
 #LEVELUP: Model & Operations
@@ -39,7 +39,7 @@ A `CCSchedule` defines any time restrictions that an entity may have.
 **A `CCSchedule` contains the following restrictions:**
 
 - **Recurrence** - How often is this entity available? Every month, week, day, hour?
-  **For example:** A `Gate` that can be unlocked every hour.
+	**For example:** A `Gate` that can be unlocked every hour.
 
 - **Time Ranges** - A time range that defines when this entity is available, with a start time and an end time.
 **For example:** A `Reward` that can be given starting when the user finishes a certain `Level` and ending 8 seconds later.
@@ -257,11 +257,11 @@ CCWorld *jungleWorld = CCWorld::create(CCString::create(JUNGLE_WORLD_ID));
 /// Instantiation of gates, scores, and missions will
 /// be demonstrated in the relevant sections below.
 CCWorld *world = CCWorld::create(
-  CCString::create("world_ID"),
-  gate,
-  innerWorlds,  
-  scores,  
-  missions
+	CCString::create("world_ID"),
+	gate,
+	innerWorlds,  
+	scores,  
+	missions
 );
 ```
 
@@ -273,10 +273,10 @@ CCWorld *world = CCWorld::create(
 
 ``` cpp
 jungleWorld->batchAddLevelsWithTemplates(
-  10,                                    // Number of levels in this world
-  gate,                                  // Gate for each of the levels
-  scores,                                // Scores for each of the levels
-  missions                               // Missions for each of levels
+	10,                                    // Number of levels in this world
+	gate,                                  // Gate for each of the levels
+	scores,                                // Scores for each of the levels
+	missions                               // Missions for each of levels
 );
 ```
 
@@ -365,9 +365,9 @@ Represents a score in the game. A simple game usually has one generic numeric sc
 
 ``` cpp
 CCScore *score = CCScore::create(
-  CCString::create("NUM_SCORE_ID"),        // ID  
-  CCString::create("Number Score"),        // Name
-  CCBool::create(true)                     // Higher is better
+	CCString::create("NUM_SCORE_ID"),        // ID  
+	CCString::create("Number Score"),        // Name
+	CCBool::create(true)                     // Higher is better
 );
 ```
 
@@ -379,7 +379,7 @@ CCScore *score = CCScore::create(
 ``` cpp
 // If the score has reached 5000 give the user a badge.
 if (numScore->hasTempReached(5000)) {
-  // Give a reward
+	// Give a reward
 }
 ```
 
@@ -389,7 +389,7 @@ if (numScore->hasTempReached(5000)) {
 ``` cpp
 // Checks if a value of 300 breaks numScore's record.
 if (numScore->hasRecordReached(300)) {
-  //do something...
+	//do something...
 }
 ```
 
@@ -418,15 +418,15 @@ A specific type of `Score` that has an associated range. The `Score`'s  value ca
 
 ``` cpp
 CCScore *quizScore = CCRangeScore::create(
-  CCString::create("quizScore"),           // ID
-  CCSRange::create(0, 10)                  // Range
+	CCString::create("quizScore"),           // ID
+	CCSRange::create(0, 10)                  // Range
 );
 
 CCScore *shootingScore = CCRangeScore::create(
-  CCString::create("shootingScore"),       // ID
-  CCString::create("Shooting Score"),      // Name
-  CCSBool::create(true),                   // Higher is better
-  CCSRange::create(10, 100)                // Range
+	CCString::create("shootingScore"),       // ID
+	CCString::create("Shooting Score"),      // Name
+	CCSBool::create(true),                   // Higher is better
+	CCSRange::create(10, 100)                // Range
 );
 ```
 
@@ -448,17 +448,17 @@ CCVirtualCurrency *diamond = CCVirtualCurrency::create(
 );
 
 CCScore *diamondScore = CCVirtualItemScore::create(
-  CCString::create("diamondScore"),      // ID
-  CCString::create("diamond_ID")         // Associated item ID
+	CCString::create("diamondScore"),      // ID
+	CCString::create("diamond_ID")         // Associated item ID
 );
 
 // OR
 
 CCScore *diamondScore = CCVirtualItemScore::create(
-  CCString::create("diamondScore"),      // ID
-  CCString::create("Diamond Score"),     // Name
-  CCBool::create(true),                  // Higher is better
-  CCString::create("diamond_ID")         // Associated item ID
+	CCString::create("diamondScore"),      // ID
+	CCString::create("Diamond Score"),     // Name
+	CCBool::create(true),                  // Higher is better
+	CCString::create("diamond_ID")         // Associated item ID
 );
 ```
 
@@ -479,7 +479,7 @@ A `Gate` is an object that defines certain criteria for progressing between the 
 
 ``` cpp
 if (someGate->isOpen()) {
-  //do something
+	//do something
 }
 ```
 
@@ -512,9 +512,9 @@ CCVirtualCurrency *shield = CCVirtualCurrency::create(
 
 // Collect 5 shields to open the gate
 CCGate *shieldGate = CCBalanceGate::create(
-  CCString::create("shieldGate"),        // ID
-  CCString::create("shield_ID"),         // Associated item ID
-  CCInteger::create(5)                   // Desired balance
+	CCString::create("shieldGate"),        // ID
+	CCString::create("shield_ID"),         // Associated item ID
+	CCInteger::create(5)                   // Desired balance
 );
 ```
 
@@ -542,8 +542,8 @@ CCVirtualGood *itemToBuy = CCSingleUseVG::create(
 
 // The user must buy the 'itemToBuy' in order to unlock this Gate.
 CCGate *pGate = CCPurchasableGate::create(
-  CCString::create("purchaseGate"),     // ID
-  CCString::create("itemToBuyID")       // Associated item ID
+	CCString::create("purchaseGate"),     // ID
+	CCString::create("itemToBuyID")       // Associated item ID
 );
 ```
 
@@ -563,9 +563,9 @@ A RecordGate has an associated score and a desired record. The `Gate` opens once
 ``` cpp
 //The user needs to reach a record of 5000 for numberScore in order to unlock this Gate.
 CCGate *rGate = CCRecordGate::create(
-  CCString::create("recordGate"),        // ID
-  CCString::create("scoreID"),           // Associated score ID
-  CCDouble::create(5000)                 // Desired record
+	CCString::create("recordGate"),        // ID
+	CCString::create("scoreID"),           // Associated score ID
+	CCDouble::create(5000)                 // Desired record
 );
 ```
 
@@ -584,8 +584,8 @@ A specific type of `Gate` that has a schedule that defines when the `Gate` can b
 ``` cpp
 //The user can unlock this Gate if he/she is attempting to do so in the time frame defined in schedule.
 CCGate *sGate = CCScheduleGate::create(
-  CCString::create("scheduleGate"),      // ID
-  CCSchedule::createAnyTimeUnLimited()   // Schedule
+	CCString::create("scheduleGate"),      // ID
+	CCSchedule::createAnyTimeUnLimited()   // Schedule
 );
 ```
 
@@ -605,8 +605,8 @@ A `WorldCompletionGate` has an associated `World` that, once complete, the `Gate
 CCWorld *worldA = CCWorld::create(__String::create("worldA_ID"));
 
 CCGate *wGate = CCWorldCompletionGate::create(
-  CCString::create("worldCompGate"),     // ID
-  CCString::create("worldA_ID")          // Associated world ID
+	CCString::create("worldCompGate"),     // ID
+	CCString::create("worldA_ID")          // Associated world ID
 );
 ```
 
@@ -627,8 +627,8 @@ A specific type of `GatesList` that can be opened only if ALL `Gate`s in its lis
 ``` cpp
 ///The user needs to meet the criteria of bGate AND of sGate in order to open this Gate. For the definitions of bGate and sGate, see the sections above about BalanceGate and ScheduleGate above.
 CCGate *bGateANDsGate = CCGatesListAND::create(
-  CCString::create("andGate_ID"),        // ID
-  CCString::create(bGate, sGate, NULL)   // List of Gates
+	CCString::create("andGate_ID"),        // ID
+	CCString::create(bGate, sGate, NULL)   // List of Gates
 );
 ```
 
@@ -641,8 +641,8 @@ A specific type of `GatesList` that can be opened if AT LEAST ONE `Gate`s in its
 ``` cpp
 ///The user needs to meet the criteria of wGate OR of pGate in order to open this Gate. For the definitions of wGate and pGate, see the topics WorldCompletionGate and PurchasableGate above.
 CCGate *wGateORpGate = CCGatesListOR::create(
-  CCString::create("orGate_ID"),         // ID
-  CCString::create(wGate, pGate, NULL)    // List of Gates
+	CCString::create("orGate_ID"),         // ID
+	CCString::create(wGate, pGate, NULL)    // List of Gates
 );
 ```
 
@@ -660,9 +660,9 @@ A specific type of `Gate` that has an associated page name. The `Gate` is unlock
 
 ``` cpp
 CCGate *likeGate = CCSocialLikeGate::create(
-  CCString::create("likeGate"),          // ID
-  soomla::FACEBOOK,                      // Social Provider
-  CCString::create("[page name]")        // Page to "Like"
+	CCString::create("likeGate"),          // ID
+	soomla::FACEBOOK,                      // Social Provider
+	CCString::create("[page name]")        // Page to "Like"
 );
 ```
 
@@ -676,9 +676,9 @@ A specific type of `Gate` that has an associated status. The `Gate` is unlocked 
 
 ``` cpp
 CCGate *statusGate = CCSocialStatusGate::create(
-  CCString::create("statusGate"),        // ID
-  soomla::FACEBOOK,                      // Social Provider
-  CCString::create("[status]")           // Status to post
+	CCString::create("statusGate"),        // ID
+	soomla::FACEBOOK,                      // Social Provider
+	CCString::create("[status]")           // Status to post
 );
 ```
 
@@ -692,13 +692,13 @@ A specific type of `Gate` that has an associated story. The `Gate` is unlocked o
 
 ``` cpp
 CCGate *storyGate = CCSocialStoryGate::create(
-  CCString::create("storyGate"),         // ID
-  soomla::FACEBOOK,                      // Social Provider
-  CCString::create("[message]"),         // Message to post
-  CCString::create("[Story Name]"),      // Story name
-  CCString::create("[Caption]"),         // Caption for image
-  CCString::create("[Link]"),            // Link to post
-  CCString::create("[Image Url]")        // Image URL
+	CCString::create("storyGate"),         // ID
+	soomla::FACEBOOK,                      // Social Provider
+	CCString::create("[message]"),         // Message to post
+	CCString::create("[Story Name]"),      // Story name
+	CCString::create("[Caption]"),         // Caption for image
+	CCString::create("[Link]"),            // Link to post
+	CCString::create("[Image Url]")        // Image URL
 );
 ```
 
@@ -712,10 +712,10 @@ A specific type of `Gate` that has an associated image. The `Gate` is unlocked o
 
 ``` cpp
 CCGate *uploadGate = CCSocialUploadGate::create(
-  CCString::create("uploadGate"),         // ID
-  soomla::FACEBOOK,                       // Social Provider
-  CCString::create("[Filename]")          // Image URL
-  CCString::create("[message]"),          // Message to post
+	CCString::create("uploadGate"),         // ID
+	soomla::FACEBOOK,                       // Social Provider
+	CCString::create("[Filename]")          // Image URL
+	CCString::create("[message]"),          // Message to post
 );
 ```
 
@@ -747,7 +747,7 @@ This checks if the mission can be completed. In other words, this checks if the 
 
 ``` cpp
 if (someMission->isAvailable()) {
-  //do something...
+	//do something...
 }
 ```
 
@@ -755,7 +755,7 @@ if (someMission->isAvailable()) {
 
 ``` cpp
 if (someMission->isCompleted()) {
-  //do something...
+	//do something...
 }
 ```
 
@@ -777,11 +777,11 @@ A specific type of `Mission` that has an associated virtual item and a desired b
 ///To complete this mission the user needs to collect 250 coins.
 ///Once the mission is complete he/she will receive the reward.
 CCMission *bMission = CCBalanceMission::create(
-  CCString::create("coinMission"),       // ID
-  CCString::create("Coin Mission"),      // Name
-  balanceReward,                         // Optional reward(s)
-  CCString::create("coinScore_ID"),      // Associated Score ID
-  250                                    // Desired balance
+	CCString::create("coinMission"),       // ID
+	CCString::create("Coin Mission"),      // Name
+	balanceReward,                         // Optional reward(s)
+	CCString::create("coinScore_ID"),      // Associated Score ID
+	250                                    // Desired balance
 );
 ```
 
@@ -796,11 +796,11 @@ A specific type of `Mission` that has an associated score and a desired record. 
 ``` cpp
 ///To complete this mission, the user needs his "coinScore" to reach a record of 5000.
 CCRecordMission *rMission = CCRecordMission::create(
-  CCString::create("rMission"),          // ID
-  CCString::create("Coin Record Score"), // Name
-  coinReward,                            // Optional reward(s)
-  CCString::create("coinScore_ID"),      // Associated Score ID
-  5000                                   // Desired record
+	CCString::create("rMission"),          // ID
+	CCString::create("Coin Record Score"), // Name
+	coinReward,                            // Optional reward(s)
+	CCString::create("coinScore_ID"),      // Associated Score ID
+	5000                                   // Desired record
 );
 ```
 
@@ -814,19 +814,19 @@ A specific type of `Mission` that has an associated market item. The `Mission` i
 
 ``` cpp
 CCVirtualGood *itemToBuy = CCSingleUseVG::create(
-  CCString::create("name"),
-  CCString::create("description"),
-  CCString::create("itemToBuy_ID"),  
-  CCPurchaseWithMarket::create(CCString::create("itemToBuy_ProdID",
-    CCDouble::create(1.99))
+	CCString::create("name"),
+	CCString::create("description"),
+	CCString::create("itemToBuy_ID"),  
+	CCPurchaseWithMarket::create(CCString::create("itemToBuy_ProdID",
+		CCDouble::create(1.99))
 );
 
 ///To complete this mission, the user needs to buy the item.
 CCMission *pMission = CCPurchasingMission::create(
-  CCString::create("pMission"),          // ID
-  CCString::create("Purchase Mission"),  // Name
-  purchaseReward,                        // Optional reward(s)
-  CCString::create("itemToBuy_ID"),      // Associated item ID
+	CCString::create("pMission"),          // ID
+	CCString::create("Purchase Mission"),  // Name
+	purchaseReward,                        // Optional reward(s)
+	CCString::create("itemToBuy_ID"),      // Associated item ID
 );
 ```
 
@@ -842,10 +842,10 @@ A specific type of `Mission` that has an associated `World`. The `Mission` is co
 CCWorld *worldA = CCWorld::create(__String::create("worldA_ID"));
 
 CCRecordMission *wMission = CCWorldCompletionMission::create(
-  CCString::create("wMission"),            // ID
-  CCString::create("Complete World A"),    // Name
-  coinReward,                              // Optional reward(s)
-  CCString::create("worldA_ID")            // Associated World ID
+	CCString::create("wMission"),            // ID
+	CCString::create("Complete World A"),    // Name
+	coinReward,                              // Optional reward(s)
+	CCString::create("worldA_ID")            // Associated World ID
 );
 ```
 
@@ -861,11 +861,11 @@ A specific type of `Mission` that has an associated page name. The `Mission` is 
 
 ``` cpp
 CCMission *likeMission = CCSocialLikeMission::create(
-  CCString::create("likeMission"),         // ID
-  CCString::create("Like Mission"),        // Name
-  likeReward,                              // Optional reward(s)
-  soomla::FACEBOOK,                        // Social Provider
-  CCString::create("[page name]")          // Page to "Like"
+	CCString::create("likeMission"),         // ID
+	CCString::create("Like Mission"),        // Name
+	likeReward,                              // Optional reward(s)
+	soomla::FACEBOOK,                        // Social Provider
+	CCString::create("[page name]")          // Page to "Like"
 );
 ```
 
@@ -879,11 +879,11 @@ A specific type of `Mission` that has an associated status. The `Mission` is com
 
 ``` cpp
 CCMission *statusMission = CCSocialStatusMission::create(
-  CCString::create("statusMission"),       // ID
-  CCString::create("Status Mission"),      // Name
-  statusReward,                            // Optional reward(s)
-  soomla::FACEBOOK,                        // Social Provider
-  CCString::create("status")               // Status to post
+	CCString::create("statusMission"),       // ID
+	CCString::create("Status Mission"),      // Name
+	statusReward,                            // Optional reward(s)
+	soomla::FACEBOOK,                        // Social Provider
+	CCString::create("status")               // Status to post
 );
 ```
 
@@ -897,15 +897,15 @@ A specific type of `Mission` that has an associated story that includes a messag
 
 ``` cpp
 CCMission *storyMission = CCSocialStoryMission::create(
-  CCString::create("storyMission"),      // ID
-  CCString::create("Story Mission"),     // Name
-  storyReward,                           // Optional reward(s)
-  soomla::FACEBOOK,                      // Social Provider
-  CCString::create("message"),           // Message to post
-  CCString::create("Story Name"),        // Story name
-  CCString::create("Caption"),           // Caption for image
-  CCString::create("https://..."),       // Link to post
-  CCString::create("Image Url")          // Image URL
+	CCString::create("storyMission"),      // ID
+	CCString::create("Story Mission"),     // Name
+	storyReward,                           // Optional reward(s)
+	soomla::FACEBOOK,                      // Social Provider
+	CCString::create("message"),           // Message to post
+	CCString::create("Story Name"),        // Story name
+	CCString::create("Caption"),           // Caption for image
+	CCString::create("https://..."),       // Link to post
+	CCString::create("Image Url")          // Image URL
 );
 ```
 
@@ -919,12 +919,12 @@ A specific type of `Mission` that has an associated filename and message. The `M
 
 ``` cpp
 CCMission *uploadMission = CCSocialUploadMission::create(
-  CCString::create("uploadMission"),       // ID
-  CCString::create("Upload Mission"),      // Name
-  uploadReward,                            // Optional reward(s)
-  soomla::FACEBOOK,                        // Social Provider
-  CCString::create("filename")             // Image URL
-  CCString::create("message"),             // Message to post
+	CCString::create("uploadMission"),       // ID
+	CCString::create("Upload Mission"),      // Name
+	uploadReward,                            // Optional reward(s)
+	soomla::FACEBOOK,                        // Social Provider
+	CCString::create("filename")             // Image URL
+	CCString::create("message"),             // Message to post
 );
 ```
 
@@ -947,10 +947,10 @@ missions->addObject(pMission);
 
 ///To complete this challenge, the user must complete all 3 missions.
 CCChallenge *challenge = CCChallenge::create(
-  __String::create("challenge"),             // ID
-  __String::create("3 Mission Challenge"),   // Name
-  missions,                                  // Mission(s) to complete
-  challengeReward                            // Optional reward(s)
+	__String::create("challenge"),             // ID
+	__String::create("3 Mission Challenge"),   // Name
+	missions,                                  // Mission(s) to complete
+	challengeReward                            // Optional reward(s)
 );
 ```
 
@@ -960,6 +960,6 @@ CCChallenge *challenge = CCChallenge::create(
 **Check if the `Challenge` is complete:**
 ``` cpp
 if (challenge->isCompleted()) {
-  //do something...
+	//do something...
 }
 ```

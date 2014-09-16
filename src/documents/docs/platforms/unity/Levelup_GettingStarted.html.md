@@ -1,34 +1,34 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "Getting Started"
+title: "LEVELUP: Getting Started"
 text: "Get started with unity3d-levelup. Here you'll learn how to easily integrate LevelUp into your game, as well as see a basic example of initialization."
-position: 1
-theme: 'soomla'
-collection: 'soomla_blueprint'
+position: 11
+theme: 'platforms'
+collection: 'platforms_unity'
 ---
 
-#**Getting Started**
+**TODO: NEED TO FIX after readme comes out**
 
-##**Integrate unity3d-levelup**
+#LEVELUP: Getting Started
 
-`LevelUp` is a dependent module on unity3d-store and unity3d-profile.
+##With pre-built libraries (Recommended)
 
-First, you'll need to either download the unity packages (recommended) OR clone the repos. Next, you'll need to follow the steps in [unity3d-store Getting Started](/docs/platforms/unity/gettingstarted) in order to set up and initialize the SOOMA SDK.
+*If you want to develop with sources, refer to the [Working with sources](#working-with-sources) section below*.
 
-###**Download packages (Recommended)**
+<div class="info-box">LevelUp depends on SOOMLA's other modules: Core, Store, and Profile. This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already *have* some or all of the other modules, please follow these directions only for the modules you are missing and of course, for the **LevelUp** module. </div>
 
-Download the following pre-baked unity packages in this exact order:
+Download the following pre-baked unity packages in the following order:
 
 [soomla-unity3d-core v1.5.3](https://raw.githubusercontent.com/soomla/unity3d-store/master/soomla-unity3d-core.unitypackage)
 
 [unity3d-store v1.5.3](http://bit.ly/1rc21Zo)
 
+[unity3d-profile](https://github.com/soomla/unity3d-profile/blob/master/soomla-unity3d-profile.unitypackage)
+
 [unity3d-levelup](TODO)
 
-[unity3d-profile](TODO)
-
-###**With Sources**
+##With Sources
 
 **RECURSIVELY** clone unity3d-levelup:
 
@@ -36,44 +36,25 @@ Download the following pre-baked unity packages in this exact order:
   git clone --recursive https://github.com/soomla/unity3d-levelup.git
   ```
 
-###**Complete the Setup**
+##Complete the Setup
 
 1. In the hierarchy panel you should see the following prefabs: `CoreEvents`, `ExampleWindow`, `LevelUpEvents`, and `StoreEvents`. If they are missing, drag them into the scene.
 
-	![alt text](/img/levelup/Unity_prefabs.png "Prefabs")
+  ![alt text](/img/levelup/Unity_prefabs.png "Prefabs")
 
   <br>
 
-2. Follow steps 3-6 in [unity3d-store Getting Started](/docs/platforms/unity/gettingstarted).
+2. Follow steps 3-6 in [unity3d-store Getting Started](/docs/platforms/unity/GettingStarted).
 
 3. Initialize SOOMLA LevelUp, using your own implementation of your game structure:
 
-	``` cs
-	World initialWorld = ...
-	List<Rewards> rewards = ...
-	LevelUp.GetInstance().Initialize(initialWorld, rewards);
-	```
+  ``` cs
+  World initialWorld = ...
+  List<Rewards> rewards = ...
+  LevelUp.GetInstance().Initialize(initialWorld, rewards);
+  ```
 
   See the full example below.
-
-##**In-app Billing**
-
-SOOMLA's unity3d-store knows how to contact Google Play, Amazon Appstore, or Apple App Store for you and will redirect your users to their purchasing system to complete the transaction.
-
-###**Android**
-
-Define your economy in Google Play or Amazon Appstore.
-
-See our tutorials:
-
-- [Google Play](/docs/platforms/android/GooglePlayIAB)
-- [Amazon Appstore](/docs/platforms/android/AmazonIAB)
-
-###**iOS**
-
-Define your economy in the App Store.
-
-See our tutorial: [App Store](/docs/platforms/ios/AppStoreIAB)
 
 ##**Example**
 
@@ -102,14 +83,14 @@ mainWorld.InnerWorldsMap.Add(worldB.ID, worldB);
 
 /** Rewards **/
 BadgeReward goldMedal = new BadgeReward(
-	"gold_medal_ID",			// ID
-	"Gold Medal"				// Name
+  "gold_medal_ID",			// ID
+  "Gold Medal"				// Name
 );
 VirtualItemReward hundredCoinsReward = new VirtualItemReward(
-	"coin_reward_ID",			// ID
-	"Hundred Coin Reward",      // Name
-	coin.ID,				    // ID of the virtual item associated with this reward
-	100							// Amount of virtual item to given in the reward
+  "coin_reward_ID",			// ID
+  "Hundred Coin Reward",      // Name
+  coin.ID,				    // ID of the virtual item associated with this reward
+  100							// Amount of virtual item to given in the reward
 );
 
 /// Initialize LevelUp
