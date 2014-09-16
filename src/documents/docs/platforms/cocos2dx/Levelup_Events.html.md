@@ -16,9 +16,9 @@ LevelUp allows you to subscribe to events, be notified when they occur, and impl
 
 ##Triggering Events
 
-The `CCLevelUpEventDispatcher` class is where all events go through. See [`CCLevelUpEventDispatcher`](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCLevelUpEventDispatcher.cpp).
+The `CCLevelUpEventDispatcher` class is where all events go through. See [CCLevelUpEventDispatcher](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCLevelUpEventDispatcher.cpp).
 
-Events are triggered from the native side (iOS-profile and android-profile), and in turn are triggered in cocos2dx-levelup. Read below to learn how to "listen for" and handle these events once they occur.
+Events are triggered throughout cocos2dx-levelup. Read below to learn how to "listen for" and handle these events once they occur.
 
 ##Observing & Handling Events
 

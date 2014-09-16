@@ -8,7 +8,6 @@ theme: 'platforms'
 collection: 'platforms_unity'
 ---
 
-
 #LEVELUP: Event Handling
 
 ##About
