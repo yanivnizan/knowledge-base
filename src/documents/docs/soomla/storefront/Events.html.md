@@ -22,7 +22,7 @@ In iOS-profile, android-profile, and unity3d-profile, events are fired from vari
 
 Each platform-specific Profile module has its own, slightly different, event-handling mechanism, but in all of them, you'll need to sign up to be notified of events. Then, once notified, you'll need to handle the different events according to your game-specific behavior.
 
-Some of the functions in that you'll need to implement in order to handle events are:
+Some of the functions that you'll need to implement in order to handle events are:
 
 - `onLoginFailed`
 - `onLoginFinished`
