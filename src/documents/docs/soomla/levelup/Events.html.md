@@ -8,7 +8,7 @@ theme: 'soomla'
 collection: 'soomla_levelup'
 ---
 
-#LEVELUP: Event Handling
+#Event Handling
 
 ##About
 
@@ -16,35 +16,45 @@ LevelUp allows you to subscribe to events, be notified when they occur, and impl
 
 ##Triggering Events
 
-In iOS-profile, android-profile, and unity3d-profile, events are fired from various functions throughout the code. In cocos2dx-profile, events are fired from the native side (iOS-profile & android-profile).
+In LevelUp, events are fired from various functions throughout the code. Read below to learn how to listen for and handle the various events.
 
 ##Observing & Handling Events
 
-Each platform-specific Profile module has its own, slightly different, event-handling mechanism, but in all of them, you'll need to sign up to be notified of events. Then, once notified, you'll need to handle the different events according to your game-specific behavior.
+Each platform-specific LevelUp module has its own, slightly different, event-handling mechanism, but in any platform you'll need to sign up to be notified of events. Then, once notified, you'll need to handle the different events with your game-specific behavior.
 
-Some of the functions in that you'll need to implement in order to handle events are:
+Some of the functions that you'll need to implement in order to handle events are:
 
-onLoginFailed
-onLoginFinished
-onSocialActionFailedEvent
-onSocialActionFinishedEvent
+- `onGateOpened`
+
+- `onScoreRecordChanged`
+
+- `onWorldCompleted`
+
+- `onGateOpened`
+
 and several others.
 
-###In cocos2dx-profile
+###In cocos2dx-levelup
 
-In cocos2dx-profile, to be notified of events and handle them, you need to create an event handler class that implements CCProfileEventHandler. Then, to "sign up for" (be notified about) events, add it to the CCProfileEventDispatcher:
+In cocos2dx-levelup, to be notified of events and handle them, you need to create an event handler class that implements `CCLevelUpEventHandler`. Then, to "sign up for" (be notified about) events, add your class to the `CCLevelUpEventDispatcher`.
 
-// Say you called your event handler class "myProfileEventHandler"
-soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myProfileEventHandler);
-Read more about cocos2dx-profile event handling.
+``` cpp
+// Say you called your event handler class "myLevelUpEventHandler"
+soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(myLevelUpEventHandler);
+```
 
-###In unity3d-profile
+Read more about [cocos2dx-levelup event handling](docs/platforms/cocos2dx/Levelup_Events).
 
-In unity3d-profile, you'll need to create an event handler class that handles events once they occur. To be notified of events, you'll have to "register" each of your event handler functions to listen for the event. The way to register is like so:
+###In unity3d-levelup
 
-ProfileEvents.OnLoginFinished += onLoginFinished;
-Read more about unity3d-profile event handling.
+The `LevelUpEvents` class is where all events go through. To listen for and handle various events, just add your game-specific behavior to the delegates in the `LevelUpEvents` class.
 
+``` cs
+LevelUpEvents.OnWorldCompleted += onWorldCompleted;
+```
 
+Read more about [unity3d-levelup event handling](docs/platforms/unity/Levelup_Events).
 
-In all platforms, your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.
+<br>
+
+<div class="info-box">In all platforms, your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
