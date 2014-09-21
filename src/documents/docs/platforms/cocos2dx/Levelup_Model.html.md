@@ -26,7 +26,7 @@ In this document, you will find definitions of each of the entities of `LevelUp`
 
 ####**LevelUp Hierarchy**
 
-After observing dozens of games, the SOOMLA team realized that most game progress and accomplishment can be packed into worlds. Worlds can contain both levels and other worlds, and can have a gate that needs to be unlocked in order to enter the next world. More progress mechanisms are available under levels, which include scores, challenges, missions, and records.
+After observing dozens of games, the SOOMLA team realized that most game progress and accomplishment can be packed into **worlds**. Worlds can contain both levels and worlds, and may have missions that can be completed in order to receive rewards.
 
 ![alt text](/img/tutorial_img/soomla_diagrams/LevelUpModel.png "Soomla LevelUp Model")
 
@@ -39,7 +39,7 @@ A `CCSchedule` defines any time restrictions that an entity may have.
 **A `CCSchedule` contains the following restrictions:**
 
 - **Recurrence** - How often is this entity available? Every month, week, day, hour?
-	**For example:** A `Gate` that can be unlocked every hour.
+	**For example:** A `Mission` that is available to be completed every Monday.
 
 - **Time Ranges** - A time range that defines when this entity is available, with a start time and an end time.
 **For example:** A `Reward` that can be given starting when the user finishes a certain `Level` and ending 8 seconds later.
@@ -49,7 +49,7 @@ A `CCSchedule` defines any time restrictions that an entity may have.
 
 ###Reward
 
-<div class="info-box">Note that `Reward` is a part of soomla-cocos2dx-core, and not part of the LevelUp module. However, because `Reward`s are used very often throughout cocos2dx-levelup, it's important that you are familiar with them and the different types.</div>
+<div class="info-box">Note that `Reward` is a part of soomla-cocos2dx-core, and not part of the LevelUp module. However, because `Reward`s are used very often throughout cocos2dx-levelup, it's important that you are familiar with the different `Reward` types.</div>
 
 A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress. For example - a user can earn a badge for completing a `Mission`. Dealing with `Reward`s is very similar to dealing with `VirtualItem`s: grant a `Reward` by giving it, and recall a `Reward` by taking it.
 
@@ -448,17 +448,17 @@ CCVirtualCurrency *diamond = CCVirtualCurrency::create(
 );
 
 CCScore *diamondScore = CCVirtualItemScore::create(
-	CCString::create("diamondScore"),      // ID
-	CCString::create("diamond_ID")         // Associated item ID
+	CCString::create("diamondScore"),       // ID
+	CCString::create("diamond_ID")          // Associated item ID
 );
 
 // OR
 
 CCScore *diamondScore = CCVirtualItemScore::create(
-	CCString::create("diamondScore"),      // ID
-	CCString::create("Diamond Score"),     // Name
-	CCBool::create(true),                  // Higher is better
-	CCString::create("diamond_ID")         // Associated item ID
+	CCString::create("diamondScore"),       // ID
+	CCString::create("Diamond Score"),      // Name
+	CCBool::create(true),                   // Higher is better
+	CCString::create("diamond_ID")          // Associated item ID
 );
 ```
 
@@ -468,7 +468,7 @@ CCScore *diamondScore = CCVirtualItemScore::create(
 
 ##Gate
 
-A `Gate` is an object that defines certain criteria for progressing between the game's `World`s or `Level`s. The `Gate` is a criteria or list of rules which which must be met in order to enter the `World` or `Level`. The rules are based on components of the previous `World` or `Level`: scores achieved, missions completed, etc. The `Gate` is opened once the logical conditions are met. In some games, `Gate`s can be opened with a payment or social task, such as sharing the game on Facebook.
+A `Gate` is an object that defines certain criteria, and is opened when this criteria is met. `Gate`s are usually associated with `Mission`s - each `Mission` has a `Gate` that needs to be opened in order for the `Mission` to be complete.
 
 <div class="info-box">`Gate` itself cannot be instantiated, but there are many types of gates, all explained below, and those will have the functionality that `Gate` provides.</div>
 
@@ -498,7 +498,7 @@ CCGate *gate = CCLevelUp::getInstance()->getGate("gate1");
 
 - `mAssociatedItemId` - The ID of the virtual item whose balance is examined.
 
-- `mDesiredBalance` - The balance of the associated item that needs to be reached in order to unlock the `Gate`.
+- `mDesiredBalance` - The balance of the associated item that needs to be reached in order to open the `Gate`.
 
 <br>
 **HOW TO DEFINE**
@@ -525,7 +525,7 @@ A specific type of `Gate` that has an associated market item. The `Gate` opens o
 
 **A `PurchasableGate` contains the following elements:**
 
-- `mAssociatedItemId` - The ID of the virtual item who needs to be purchased in order to unlock the `Gate`.
+- `mAssociatedItemId` - The ID of the virtual item who needs to be purchased in order to open the `Gate`.
 
 <br>
 **HOW TO DEFINE**
@@ -540,7 +540,7 @@ CCVirtualGood *itemToBuy = CCSingleUseVG::create(
     CCDouble::create(8.99))
 );
 
-// The user must buy the 'itemToBuy' in order to unlock this Gate.
+// The user must buy the 'itemToBuy' in order to open this Gate.
 CCGate *pGate = CCPurchasableGate::create(
 	CCString::create("purchaseGate"),     // ID
 	CCString::create("itemToBuyID")       // Associated item ID
@@ -555,13 +555,15 @@ A RecordGate has an associated score and a desired record. The `Gate` opens once
 **A `RecordGate` contains the following elements:**
 
 - `mAssociatedScoreId` - The ID of the `Score` that's examined.
-- `mDesiredRecord` - The value that the associated `Score` needs to reach in order to unlock the `Gate`.
+
+
+- `mDesiredRecord` - The value that the associated `Score` needs to reach in order to open the `Gate`.
 
 <br>
 **HOW TO DEFINE**
 
 ``` cpp
-//The user needs to reach a record of 5000 for numberScore in order to unlock this Gate.
+//The user needs to reach a record of 5000 for numberScore in order to open this Gate.
 CCGate *rGate = CCRecordGate::create(
 	CCString::create("recordGate"),        // ID
 	CCString::create("scoreID"),           // Associated score ID
@@ -572,17 +574,18 @@ CCGate *rGate = CCRecordGate::create(
 <br>
 ###ScheduleGate
 
-A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens once the player tries to open it in the time frame of the defined schedule.
+A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens once the player tries to open it within the time frame of the defined schedule.
 
 **A `ScheduleGate` contains the following elements:**
 
-- `Schedule` - The `Schedule` that defines when this `Gate` can be unlocked.
+- `Schedule` - The `Schedule` that defines when this `Gate` can be opened.
+
 
 <br>
 **HOW TO DEFINE**
 
 ``` cpp
-//The user can unlock this Gate if he/she is attempting to do so in the time frame defined in schedule.
+//The user can open this Gate if he/she is attempting to do so in the time frame defined in schedule.
 CCGate *sGate = CCScheduleGate::create(
 	CCString::create("scheduleGate"),      // ID
 	CCSchedule::createAnyTimeUnLimited()   // Schedule
@@ -592,11 +595,11 @@ CCGate *sGate = CCScheduleGate::create(
 <br>
 ###WorldCompletionGate
 
-A `WorldCompletionGate` has an associated `World` that, once complete, the `Gate` becomes unlocked.
+A `WorldCompletionGate` has an associated `World` that, once complete, the `Gate` opens.
 
 **A `WorldCompletionGate` contains the following elements:**
 
-- `mAssociatedWorldId` - The `World` that needs to be completed in order to unlock the Gate.
+- `mAssociatedWorldId` - The `World` that needs to be completed in order to open the Gate.
 
 <br>
 **HOW TO DEFINE**
@@ -625,7 +628,7 @@ A specific type of `GatesList` that can be opened only if ALL `Gate`s in its lis
 **HOW TO DEFINE**
 
 ``` cpp
-///The user needs to meet the criteria of bGate AND of sGate in order to open this Gate. For the definitions of bGate and sGate, see the sections above about BalanceGate and ScheduleGate above.
+///The user needs to meet the criteria of bGate AND of sGate in order to open this Gate. For the definitions of bGate and sGate, see the sections above about BalanceGate and ScheduleGate.
 CCGate *bGateANDsGate = CCGatesListAND::create(
 	CCString::create("andGate_ID"),        // ID
 	CCString::create(bGate, sGate, NULL)   // List of Gates
@@ -648,12 +651,12 @@ CCGate *wGateORpGate = CCGatesListOR::create(
 
 <br>
 
-<div class="info-box">The gates described below are `SocialActionGate`s. These are gates that require the user to perform a specific social action in order to unlock the `Gate`s. Currently, the social provider that's available is Facebook, so the `Gate`s are FB-oriented. In the future, more social providers will be added.</div>
+<div class="info-box">The gates described below are `SocialActionGate`s. These are gates that require the user to perform a specific social action in order to open the `Gate`s. Currently, the social provider that's available is Facebook, so the `Gate`s are FB-oriented. In the future, more social providers will be added.</div>
 
 <br>
 ###SocialLikeGate
 
-A specific type of `Gate` that has an associated page name. The `Gate` is unlocked once the player "Likes" the associated page.
+A specific type of `Gate` that has an associated page name. The `Gate` opens once the player "Likes" the associated page.
 
 <br>
 **HOW TO DEFINE**
@@ -669,7 +672,7 @@ CCGate *likeGate = CCSocialLikeGate::create(
 <br>
 ###SocialStatusGate
 
-A specific type of `Gate` that has an associated status. The `Gate` is unlocked once the player posts the status.
+A specific type of `Gate` that has an associated status. The `Gate` opens once the player posts the status.
 
 <br>
 **HOW TO DEFINE**
@@ -685,7 +688,7 @@ CCGate *statusGate = CCSocialStatusGate::create(
 <br>
 ###SocialStoryGate
 
-A specific type of `Gate` that has an associated story. The `Gate` is unlocked once the player posts the story.
+A specific type of `Gate` that has an associated story. The `Gate` opens once the player posts the story.
 
 <br>
 **HOW TO DEFINE**
@@ -705,7 +708,7 @@ CCGate *storyGate = CCSocialStoryGate::create(
 <br>
 ###SocialUploadGate
 
-A specific type of `Gate` that has an associated image. The `Gate` is unlocked once the player uploads the image.
+A specific type of `Gate` that has an associated image. The `Gate` opens once the player uploads the image.
 
 <br>
 **HOW TO DEFINE**
@@ -733,7 +736,7 @@ A `Mission` is a task your users need to complete in your game. `Mission`s are u
 
 - `mSchedule` - A schedule that defines the number of times this `Mission` can be played, how often, etc.
 
-- `mGate` - A `Gate` that needs to be unlocked in order to complete this `Mission`.
+- `mGate` - A `Gate` that needs to be opened in order to complete this `Mission`.
 
 
 <br>
@@ -743,7 +746,7 @@ There are several types of missions, described below. All missions have the same
 
 **Check if the `Mission` is available:**
 
-This checks if the mission can be completed. In other words, this checks if the mission's Gate can be opened. For example, in ScheduleMission
+This checks if the mission is available to be completed. In other words, this checks if the mission's Gate can be opened.
 
 ``` cpp
 if (someMission->isAvailable()) {

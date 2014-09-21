@@ -24,7 +24,7 @@ In this document, you will find definitions of each of the entities of `LevelUp`
 
 ####**LevelUp Hierarchy**
 
-After observing dozens of games, the SOOMLA team realized that most game progress and accomplishment can be packed into worlds. Worlds can contain both levels and other worlds, and can have a gate that needs to be unlocked in order to enter the next world. More progress mechanisms are available under levels, which include scores, challenges, missions, and records.
+After observing dozens of games, the SOOMLA team realized that most game progress and accomplishment can be packed into worlds. Worlds can contain both levels and worlds, and may have missions that can be completed in order to receive rewards.
 
 ![alt text](/img/tutorial_img/soomla_diagrams/LevelUpModel.png "Soomla LevelUp Model")
 
@@ -34,7 +34,7 @@ Before we begin, let's define what a `Schedule` is, as you will see it used a fe
 
 **A `Schedule` contains the following restrictions:**
 
-- `RequiredRecurrence` - How often is this entity available? Every month, week, day, hour? **For example:** A `Gate` that can be unlocked every hour.
+- `RequiredRecurrence` - How often is this entity available? Every month, week, day, hour? **For example:** A `Mission` that is available to be completed every Monday.
 
 - `TimeRanges` - A range of time that this entity is available, with a start time and an end time. **For example:** A `Reward` that can be given starting when the user finishes a certain `Level` and ending 8 seconds later.
 
@@ -42,7 +42,7 @@ Before we begin, let's define what a `Schedule` is, as you will see it used a fe
 
 ###Reward
 
-<div class="info-box">Note that `Reward` is a part of soomla-unity3d-core, and *not* part of the LevelUp module. However, because `Reward`s are used very often throughout unity3d-levelup, it's important that you are familiar with them and the different types.</div>
+<div class="info-box">Note that `Reward` is a part of soomla-unity3d-core, and *not* part of the LevelUp module. However, because `Reward`s are used very often throughout unity3d-levelup, it's important that you are familiar with the different `Reward` types.</div>
 
 A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress. For example - a user can earn a badge for completing a `Mission`. Dealing with `Reward`s is very similar to dealing with `VirtualItem`s: grant a `Reward` by giving it, and recall a `Reward` by taking it.
 
@@ -504,7 +504,7 @@ Gate myGate = LevelUp.GetInstance().GetGate(gate1.ID);
 
 - `AssociatedItemId` - The ID of the virtual item whose balance is examined.
 
-- `DesiredBalance` - The balance of the associated item that needs to be reached in order to unlock the `Gate`.
+- `DesiredBalance` - The balance of the associated item that needs to be reached in order to open the `Gate`.
 
 <br>
 ####**HOW TO DEFINE**
@@ -512,7 +512,7 @@ Gate myGate = LevelUp.GetInstance().GetGate(gate1.ID);
 ``` cs
 VirtualCurrency muffin = new VirtualCurrency("Muffin", "", "muffin");
 
-// Collect 5 muffins to unlock the gate
+// Collect 5 muffins to open the gate
 BalanceGate bGate = new BalanceGate(
   "bGate",                              // ID
   muffin.ID,                            // Associated Item ID
@@ -526,7 +526,7 @@ A specific type of `Gate` that has an associated market item. The `Gate` opens o
 
 **A `PurchasableGate` contains the following elements:**
 
-- `AssociatedItemId` - The ID of the virtual item who needs to be purchased in order to unlock the `Gate`.
+- `AssociatedItemId` - The ID of the virtual item who needs to be purchased in order to open the `Gate`.
 
 <br>
 ####**HOW TO DEFINE**
@@ -537,7 +537,7 @@ SingleUseVG itemToBuy = new SingleUseVG(
   new PurchaseWithMarket("product_ID", 1.99)
 );
 
-//The user must buy the 'itemToBuy' in order to unlock this Gate.
+//The user must buy the 'itemToBuy' in order to open this Gate.
 PurchasableGate pGate = new PurchasableGate(
   "purchaseGate",                       // ID
   itemToBuy.ID                          // Associated item ID
@@ -551,7 +551,7 @@ A RecordGate has an associated score and a desired record. The `Gate` opens once
 **A `RecordGate` contains the following elements:**
 
 - `AssociatedScoreId` - The ID of the `Score` that's examined.
-- `DesiredRecord` - The value that the associated `Score` needs to reach in order to unlock the `Gate`.
+- `DesiredRecord` - The value that the associated `Score` needs to reach in order to open the `Gate`.
 
 <br>
 ####**HOW TO DEFINE**
@@ -559,7 +559,7 @@ A RecordGate has an associated score and a desired record. The `Gate` opens once
 ``` cs
 Score numberScore = new Score("numberScore", "Score", true);
 
-//The user needs to reach a record of 5000 for numberScore in order to unlock this Gate.
+//The user needs to reach a record of 5000 for numberScore in order to open this Gate.
 RecordGate rGate = new RecordGate(
   "rGate",
   numberScore.ID,
@@ -569,11 +569,11 @@ RecordGate rGate = new RecordGate(
 
 ###**ScheduleGate**
 
-A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens once the player tries to open it in the time frame of the defined schedule.
+A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens once the player tries to open it within the time frame of the defined schedule.
 
 **A `ScheduleGate` contains the following elements:**
 
-- `Schedule` - The `Schedule` that defines when this `Gate` can be unlocked.
+- `Schedule` - The `Schedule` that defines when this `Gate` can be opened.
 
 <br>
 ####**HOW TO DEFINE**
@@ -581,17 +581,17 @@ A specific type of `Gate` that has a schedule that defines when the `Gate` can b
 ``` cs
 Schedule schedule = new Schedule(DateTime.Now, DateTime.Now.AddHours(2), Schedule.Recurrence.EVERY_DAY, 1);
 
-//The user can unlock this Gate if he/she is attempting to do so in the time frame defined in schedule.
+//The user can open this Gate if he/she is attempting to do so within the time frame defined in schedule.
 ScheduleGate sGate = new ScheduleGate("ID", schedule);
 ```
 
 ###**WorldCompletionGate**
 
-A `WorldCompletionGate` has an associated `World` that, once complete, the `Gate` becomes unlocked.
+A `WorldCompletionGate` has an associated `World` that, once complete, the `Gate` opens.
 
 **A `WorldCompletionGate` contains the following elements:**
 
-- `AssociatedWorldId` - The `World` that needs to be completed in order to unlock the Gate.
+- `AssociatedWorldId` - The `World` that needs to be completed in order to open the Gate.
 
 <br>
 ####**HOW TO DEFINE**
@@ -599,7 +599,7 @@ A `WorldCompletionGate` has an associated `World` that, once complete, the `Gate
 ``` cs
 World worldA = new World("worldA");
 
-//The user must complete worldA in order to unlock this Gate.
+//The user must complete worldA in order to open this Gate.
 WorldCompletionGate wGate = new WorldCompletionGate(
   "wGate",                              // ID
   worldA.ID                             // Associated World ID
@@ -647,14 +647,14 @@ GatesListOR wGateORpGate = new GatesListOR(
 
 ###**SocialActionGate**
 
-`SocialActionGate`s require the user to perform a specific social action in order to unlock the `Gate`s. Currently, the social provider that's available is Facebook, so the `Gate`s are FB-oriented. In the future, more social providers will be added.
+`SocialActionGate`s require the user to perform a specific social action in order to open the `Gate`s. Currently, the social provider that's available is Facebook, so the `Gate`s are FB-oriented. In the future, more social providers will be added.
 
 <div class="info-box">`SocialActionGate` is an abstract class. Below are explanations of the four types of social `Gate`s that implement `SocialActionGate`. All types of `Gate`s implement the superclass `Gate` and therefore, implement its functionality and behavior.</div>
 
 <br>
 ###**SocialLikeGate**
 
-A specific type of `Gate` that has an associated page name. The `Gate` is unlocked once the player "Likes" the associated page.
+A specific type of `Gate` that has an associated page name. The `Gate` opens once the player "Likes" the associated page.
 
 <br>
 ####**HOW TO DEFINE**
@@ -670,7 +670,7 @@ SocialLikeGate likeGate = new SocialLikeGate(
 <br>
 ###**SocialStatusGate**
 
-A specific type of `Gate` that has an associated status. The `Gate` is unlocked once the player posts the status.
+A specific type of `Gate` that has an associated status. The `Gate` opens once the player posts the status.
 
 <br>
 ####**HOW TO DEFINE**
@@ -686,7 +686,7 @@ SocialStatusGate statusGate = new SocialStatusGate(
 <br>
 ###**SocialStoryGate**
 
-A specific type of `Gate` that has an associated story. The `Gate` is unlocked once the player posts the story.
+A specific type of `Gate` that has an associated story. The `Gate` opens once the player posts the story.
 
 <br>
 ####**HOW TO DEFINE**
@@ -706,7 +706,7 @@ SocialStoryGate storyGate = new SocialStoryGate(
 <br>
 ###**SocialUploadGate**
 
-A specific type of `Gate` that has an associated image. The `Gate` is unlocked once the player uploads the image.
+A specific type of `Gate` that has an associated image. The `Gate` opens once the player uploads the image.
 
 <br>
 ####**HOW TO DEFINE**
@@ -735,7 +735,7 @@ A `Mission` is a task your users need to complete in your game. `Mission`s are u
 
 - `Schedule` - A schedule that defines the number of times this `Mission` can be played, how often, etc.
 
-- `Gate` - A `Gate` that needs to be unlocked in order to complete this `Mission`.
+- `Gate` - A `Gate` that needs to be opened in order to complete this `Mission`.
 
 <div class="info-box">`Mission` is an abstract class. Below are several types of missions that implement `Mission`.</div>
 
