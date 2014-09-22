@@ -72,20 +72,20 @@ And that's it! unity3d-profile knows how to contact Facebook and perform social 
 
 ##Example
 
-Here is an example of initializing Profile, logging the user in, and sharing a story on the user's Facebook wall. To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/unity/Profile_MainClasses).
+Here is an example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/unity/Profile_MainClasses).
 
 
 <br>
 Initialize `SoomlaProfile`.
 
-``` cpp
+``` cs
 SoomlaProfile.Initialize();
 ```
 
 <br>
-Log the user in.
+Log the user into Facebook.
 
-``` cpp
+``` cs
 SoomlaProfile.Login(
 	Provider.FACEBOOK,                        // Provider
 	new BadgeReward("loggedIn", "Logged In!") // Reward to give

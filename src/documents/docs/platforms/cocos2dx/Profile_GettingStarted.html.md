@@ -14,7 +14,7 @@ collection: 'platforms_cocos2dx'
 
 *If you want to develop with sources, refer to the [Working with sources](#working-with-sources) section below*.
 
-<div class="info-box">Profile depends on SOOMLA's Core module. This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already have **Store**, please follow these directions only for the **Profile** module.</div>
+<div class="info-box">Profile depends on SOOMLA's Core module. This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already have Core & Store, please follow these directions only for the Profile module.</div>
 
 1. If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by cocos2dx-store (the tag is the version).
 
@@ -221,7 +221,7 @@ To integrate cocos2dx-profile into your game, follow these steps:
 
 ##Example
 
-Here is an example of initializing Profile, logging the user in, and sharing a story on the user's Facebook wall. To see a full example, please see [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example/tree/master/Classes). To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/cocos2dx/Profile_MainClasses).
+Here is an example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To see a full example, please see [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example/tree/master/Classes). To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/cocos2dx/Profile_MainClasses).
 
 <br>
 
@@ -246,7 +246,7 @@ soomla::CCMyEventHandler *myHandler = new MyEventHandler();
 soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myHandler);
 ```
 <br>
-Log the user in.
+Log the user into Facebook.
 
 ``` cpp
 soomla::CCProfileController::getInstance()->login(soomla::FACEBOOK, loginReward, &profileError);

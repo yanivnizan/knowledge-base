@@ -1,18 +1,18 @@
 ---
 layout: "content"
 image: "Events"
-title: "Events"
+title: "STORE: Events"
 text: "Event handling in iOS-store follows the publish-subscribe pattern."
-position: 5
+position: 4
 theme: 'platforms'
 collection: 'platforms_ios'
 ---
 
-#**Event Handling**
+#**STORE: Event Handling**
 
 ##About
 
-SOOMLA's iOS-store contains classes [StoreEventHandling.h](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreEventHandling.h) and [StoreEventHandling.m](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreEventHandling.m). `EvenHandling.h` lists all supported events, and `EventHandling.m` contains implementations of functions that are used to register and post all the supported events. SOOMLA's iOS-store uses iOS's `NSNotificationCenter` to handle events across the SDK.
+SOOMLA's iOS-store contains classes [StoreEventHandling.h](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreEventHandling.h) and [StoreEventHandling.m](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreEventHandling.m). `StoreEvenHandling.h` lists all supported events, and `StoreEventHandling.m` contains implementations of functions that are used to register and post all the supported events. SOOMLA's iOS-store uses iOS's `NSNotificationCenter` to handle events across the SDK.
 
 ##How it works
 
