@@ -13,8 +13,8 @@ collection: 'platforms_unity'
 ##Download or Clone
 
 ###Pre-baked package
-Download [unity3d-profile v1.0](http://bit.ly/1sUDdG0).
 
+Download [unity3d-profile v1.0](http://bit.ly/1sUDdG0).
 
 ###Working with sources
 

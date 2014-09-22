@@ -72,13 +72,16 @@ In your XCode project, perform the following steps:
 
 2. For each of the following XCode projects:
 
- * `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).  
- * `Cocos2dXProfile.xcodeproj` (**extensions/cocos2dx-profile/**).
+  * `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).  
+  * `Cocos2dXProfile.xcodeproj` (**extensions/cocos2dx-profile/**).
 
-	Perform the following:
-    **a)** Drag the project into your project.
-    **b)** Add its targets to your "Build Phases" > "Target Dependencies".
-    **c)** Add the Products (\*.a) of the project to "Build Phases" > "Link Binary With Libraries".
+    Perform the following:
+
+    a. Drag the project into your project.
+
+    b. Add its targets to your "Build Phases" > "Target Dependencies".
+
+    c. Add the Products (\*.a) of the project to "Build Phases" > "Link Binary With Libraries".
 
 3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla/**`
