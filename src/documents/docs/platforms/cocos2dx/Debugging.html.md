@@ -25,7 +25,7 @@ You can enable debug logging in cocos2dx-store and cocos2dx-profile by setting `
 **See debug messages from native platforms:**
 
 - **android-profile:** Set the `logDebug` variable in com.soomla.store.StoreConfig to **true**.
-- **iOS-profile:** Make sure you have also `DEBUG=1` in your Build Settings' Preprocessor Macros (for Debug only).
+- **ios-profile:** Make sure you have also `DEBUG=1` in your Build Settings' Preprocessor Macros (for Debug only).
 
 
 ##**Error Handling**

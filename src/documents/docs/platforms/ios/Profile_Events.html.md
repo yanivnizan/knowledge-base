@@ -7,7 +7,7 @@ position: 8
 theme: 'platforms'
 collection: 'platforms_ios'
 ---
-#**PROFILE: Event Handling**
+#PROFILE: Event Handling
 
 ##About
 
@@ -15,17 +15,19 @@ Profile allows you to subscribe to events, be notified when they occur, and impl
 
 ##Triggering Events
 
-Events are triggered throughout the different functions of ios-profile. Of course, you can also trigger events where you see fit. Read below to learn how to "listen for" and handle these events once they occur.
+Events are triggered throughout the different functions of ios-profile. Of course, you can also trigger events where you see fit.
 
-**For example:**
+**For example:** In the function `updateStatus`, a "social action started" event is triggered at the beginning.
 
 ``` objectivec
 - (void)updateStatusWithProvider:(Provider)provider andStatus:(NSString *)status andReward:(Reward *)reward {
 	...
-	[UserProfileEventHandling postSocialActionFinished:provider withType:UPDATE_STATUS];
+	[UserProfileEventHandling postSocialActionStarted:provider withType:UPDATE_STATUS];
 	...
 }
 ```
+
+Read below to learn how to "listen for" and handle these events once they occur.
 
 ##Observing & Handling Events
 
@@ -47,4 +49,4 @@ OR, you can observe all events with the same selector by calling:
 [UserProfileEventHandling observeAllEventsWithObserver:self withSelector:@selector(yourCustomSelector:)];
 ```
 
-Handle the various events however you like, but notice that your behavior is an addition to the default behavior implemented by SOOMLA. You do not replace SOOMLA's behavior.
+<div class="info-box">Handle the various events however you like, but notice that your behavior is an addition to the default behavior implemented by SOOMLA. You do not replace SOOMLA's behavior.</div>

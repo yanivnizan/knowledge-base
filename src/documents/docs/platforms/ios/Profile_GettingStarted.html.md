@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "PROFILE: Getting Started"
-text: "Get started with iOS-profile. Here you can find integration instructions and a basic example of initialization."
+text: "Get started with ios-profile. Here you can find integration instructions and a basic example of initialization."
 position: 6
 theme: 'platforms'
 collection: 'platforms_ios'
@@ -18,13 +18,13 @@ collection: 'platforms_ios'
 
 1. The static libs and headers you need are in the folder [build](https://github.com/soomla/ios-profile/tree/master/build).
 
-  * Set your project's "Library Search Paths" and "Header Search Paths" to that folder.
+  a. Set your project's "Library Search Paths" and "Header Search Paths" to that folder.
 
-  * Under the project's properties: **Build Settings > Other Linker Flags**, add `-ObjC -lSoomlaiOSProfile -lSoomlaiOSCore`.
+  b. Under the project's properties: **Build Settings > Other Linker Flags**, add `-ObjC -lSoomlaiOSProfile -lSoomlaiOSCore`.
 
 2. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib**.
 
-3. Initialize **Soomla** with a secret of your choice to encrypt the user data saved in the DB. (For those who used older versions of SOOMLA, this should be the same as the old "custom secret"):
+3. Initialize SOOMLA with a secret of your choice to encrypt the user data saved in the DB. (For those who used older versions of SOOMLA, this should be the same as the old "custom secret"):
 
   ``` objectivec
   [Soomla initializeWithSecret:@"[YOUR CUSTOM GAME SECRET HERE]"];
@@ -42,7 +42,7 @@ And that's it! You now have social network capabilities. For a brief example tha
 
 ###Select Social Providers
 
-<div class="info-box">**iOS-profile** is structured to support multiple social networks (Facebook, Twitter, etc.). However, currently SOOMLA supports only Facebook, but in the future there will be more social providers available.</div>
+<div class="info-box">**ios-profile** is structured to support multiple social networks (Facebook, Twitter, etc.). However, currently SOOMLA supports only Facebook, but in the future there will be more social providers available.</div>
 
 <br>
 ####**Facebook**

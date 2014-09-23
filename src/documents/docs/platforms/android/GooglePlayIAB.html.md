@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "InAppPurchase"
-title: "Google Play In-app Billing"
+title: "STORE: Google Play In-app Billing"
 text: "Google Play in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
 position: 2
 theme: 'platforms'
 collection: 'platforms_android'
 ---
 
-#**Google Play IAB**
+#**STORE: Google Play IAB**
 
 ##Follow these steps
 

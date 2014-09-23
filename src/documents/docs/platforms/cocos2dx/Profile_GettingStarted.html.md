@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "PROFILE: Getting Started"
-text: "Get started with cocos2dx-profile. Here you can find a detailed description of how to integrate Profile into your project, as well as a basic example of initialization and social functionality usage."
+text: "Get started with cocos2dx-profile. Here you can find integration instructions and a basic example of initialization."
 position: 5
 theme: 'platforms'
 collection: 'platforms_cocos2dx'

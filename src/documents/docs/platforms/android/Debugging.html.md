@@ -3,7 +3,7 @@ layout: "content"
 image: "Wrench"
 title: "Debugging"
 text: "Debugging methods and tips for android-store."
-position: 7
+position: 10
 theme: 'platforms'
 collection: 'platforms_android'
 ---

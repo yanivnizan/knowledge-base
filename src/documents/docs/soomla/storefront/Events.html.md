@@ -16,7 +16,7 @@ Profile allows you to subscribe to events, be notified when they occur, and impl
 
 ##Triggering Events
 
-In iOS-profile, android-profile, and unity3d-profile, events are fired from various functions throughout the code. In cocos2dx-profile, events are fired from the native side (iOS-profile & android-profile).
+In ios-profile, android-profile, and unity3d-profile, events are fired from various functions throughout the code. In cocos2dx-profile, events are fired from the native side (ios-profile & android-profile).
 
 ##Observing & Handling Events
 

@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "PROFILE: Getting Started"
-text: "Get started with unity3d-profile. Learn how to integrate Profile into your project, and see a basic example of initialization and social functionality usage."
+text: "Get started with unity3d-profile. Here you can find integration instructions and a basic example of initialization."
 position: 6
 theme: 'platforms'
 collection: 'platforms_unity'
