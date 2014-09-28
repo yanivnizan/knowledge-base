@@ -12,15 +12,19 @@ collection: 'platforms_unity'
 
 ##Integrate unity3d-store
 
-1. Either download or clone unity3d-store from SOOMLA's github page.
+1. First, you'll need to either download (recommended) or clone unity3d-store. Please download the pre-baked packages unless you are planning to [contribute](#contribution) code, in which case you should clone unity3d-store.
 
-  - Download [unity3d-store v1.5.3](http://bit.ly/1rc21Zo) and double-click on it. It'll import all the necessary files into your project.
+  - Download (RECOMMENDED): [soomla-unity3d-core](https://raw.githubusercontent.com/soomla/unity3d-store/master/soomla-unity3d-core.unitypackage) and [unity3d-store v1.5.4](http://bit.ly/1rc21Zo)
 
-  - OR clone the project.
+  OR
 
-  ```
-  $ git clone --recursive git@github.com:soomla/unity3d-store.git
-  ```
+  - Clone unity3d-store from SOOMLA's github page.
+
+    ```
+    $ git clone --recursive git@github.com:soomla/unity3d-store.git
+    ```
+    
+    <div class="info-box">There are some necessary files in submodules lined with symbolic links. If you're cloning the project make sure you clone it with the `--recursive` flag.</div>
 
 2. Drag the "StoreEvents" and "CoreEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
@@ -50,7 +54,7 @@ collection: 'platforms_unity'
 
     <div class="warning-box">Initialize SoomlaStore ONLY ONCE when your application loads.</div>
 
-5. You'll need an event handler in order to be notified about in-app purchasing related events. Refer to the [Event Handling](/docs/platforms/unity3d/Events) section for more information.
+6. You'll need an event handler in order to be notified about in-app purchasing related events. Refer to the [Event Handling](/docs/platforms/unity3d/Events) section for more information.
 
 That's it! You now have storage and in-app purchasing capabilities ALL-IN-ONE!
 
@@ -71,6 +75,16 @@ SoomlaStore.StopIabServiceInBg();
 This is not mandatory, your game will work without this, but we do recommend it because it enhances performance. The idea here is to preemptively start the in-app billing setup process with Google's (or Amazon's) servers.
 
 In many games the user has to navigate into the in-game store, or start a game session in order to reach the point of making purchases. You want the user experience to be fast and smooth and prevent any lag that could be caused by network latency and setup routines you could have done silently in the background.
+
+###Tips for running the app
+
+When you run the example app
+
+- In Build Settings, when switching between one platform to another, after clicking on "Switch platform" **WAIT** until the circular motion icon at the bottom right corner of the editor disappears! Only then, click on "Build". If you click on "Build" too early you will be likely to run into problems.
+
+- Click on "**Build**", NOT "Build & Run". SOOMLA has a post-build script that needs to run, and clicking on "Build & Run" doesn't give that script a chance.
+
+  ![alt text](/img/tutorial_img/unity_debugging/switchPlatform.png "Tip")
 
 
 ## Example
