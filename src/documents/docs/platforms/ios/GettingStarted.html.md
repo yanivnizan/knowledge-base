@@ -19,6 +19,7 @@ Before doing anything, SOOMLA recommends that you go through Apple's [Selling wi
 1. The static libs and headers you need are in the [build](https://github.com/soomla/ios-store/tree/master/build) folder.
 
     - Set your project's "Library Search Paths" and "Header Search Paths" to that folder.
+
     - Add `-ObjC -lSoomlaiOSStore -lSoomlaiOSCore` to the project's "Other Linker Flags".
 
 2. Make sure you have the following frameworks in your application's project: **Security, libsqlite3.0.dylib, StoreKit**.
@@ -32,7 +33,9 @@ Before doing anything, SOOMLA recommends that you go through Apple's [Selling wi
     <div class="info-box">The secret is your encryption secret for data saved in the DB.</div>
 
 4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
+
   - For a brief example, see the [example](#example) at the bottom.
+  
   - For a more detailed example, see our [Muffin Rush Example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m).
 
 5. Initialize `SoomlaStore` with the class you just created:
