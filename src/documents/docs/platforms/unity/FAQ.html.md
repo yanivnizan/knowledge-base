@@ -134,3 +134,11 @@ You need to use the unity3d-store version supplied in the dashboard [docs](http:
 **I am getting the error "Can’t run the java command. Add your JDK folder to the PATH environment variable". What does this mean?**
 
 If you are using Windows, this is a known bug in Windows that you can just ignore and everything will work fine.
+
+---
+
+**When I try to test a purchase after publishing my app on Google Play I fet the error message: "The item you were attempting to purchase couldn't be found".**
+
+You need to define your item's product ID exactly the same in Google Play developer console and in your code. If not, you will get this error.
+
+The other case where you will get such an error, is when you haven't waited long enough after publishing your game on Google Play. After publishing the game (to alpha or beta) you must wait a few hours (about 1-2 hours) until you can test your in-app products.

@@ -8,7 +8,7 @@ theme: 'platforms'
 collection: 'platforms_android'
 ---
 
-#**Google Play IAB**
+#Google Play IAB
 
 ##Follow these steps
 
@@ -45,6 +45,10 @@ collection: 'platforms_android'
     ![alt text](/img/tutorial_img/google_play_iab/licenseKey.png "License key")
 
 ##Newbie?
+
+**NOTE:** After publishing your game (to alpha or beta), you must wait a few hours (about 1-2 hours) until you can test your in-app products.
+
+  ![alt text](/img/tutorial_img/google_play_iab/iap_testing.png "IAP testing")
 
 ###Useful links
 
