@@ -163,14 +163,15 @@ Take back the 50-muffin pack that the user owns:
 ```
 
 ####**Get the balance**
+
 `VirtualCurrencyPack`s do not have a balance of their own in the database. When a user purchases a `VirtualCurrencyPack`, the balance of the associated `VirtualCurrency` is increased.
 
 ``` objectivec
 [StoreInventory getItemBalance:@"currency_muffin"];
 ```
 
-
 ##Virtual Goods
+
 Virtual goods need to be declared in your implementation of `IStoreAssets`.
 
 ###[SingleUseVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/SingleUseVG.h)
@@ -277,6 +278,8 @@ A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
 Read a detailed description about `LifetimeVG`s [here](/docs/soomla/store/EconomyModel#lifetimevg).
 
 <div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/docs/platforms/ios/appStoreIAB) for defining IAP products in the App Store.</div>
+
+<br>
 
 ####**How to define**
 

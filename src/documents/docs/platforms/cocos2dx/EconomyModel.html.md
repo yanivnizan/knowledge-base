@@ -26,11 +26,11 @@ This type of purchase is with money. Items with this purchase type must be defin
 There are 2 ways to define this purchase type.
 
 ``` cpp
-CCNonConsumableItem *noAdsNoncons = CCNonConsumableItem::create(
+CCLifetimeVG *noAds = CCLifetimeVG::create(
     ...
     CCPurchaseWithMarket::createWithMarketItem(             // purchase type
         CCMarketItem::create(
-            CCString::create(NO_ADDS_NONCONS_PRODUCT_ID),   // product ID
+            CCString::create(NO_ADDS_PRODUCT_ID),   // product ID
             CCInteger::create(CCMarketItem::NONCONSUMABLE), // product type
             CCDouble::create(1.99))                         // initial price
 ));
@@ -302,6 +302,14 @@ CCStoreInventory::sharedStoreInventory()->getItemBalance("fruit_cake_5pack", &so
 
 ###[LifetimeVG](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCLifetimeVG.h)
 
+A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
+
+Read a detailed description about `LifetimeVG`s [here](/docs/soomla/store/EconomyModel#lifetimevg).
+
+<div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/docs/platforms/ios/appStoreIAB) for defining IAP products in the App Store.</div>
+
+<br>
+
 ####**How to define**
 
 ``` cpp
@@ -451,7 +459,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->isVirtualGoodEquipped("kramer", &soomlaError);
 ```
 
-###[UpgradeVG]()
+###[UpgradeVG](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCUpgradeVG.h)
 
 ####**How to define**
 
@@ -565,68 +573,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->getGoodUpgradeLevel(MUFFIN_CAKE_GOOD_ITEM_ID, &soomlaError);
 ```
 
-##Other Entities
-
-###[NonConsumableItem]()
-
-A NonConsumableItem is a representation of a non-consumable item in the App Store. These kinds of items are bought by the user once and kept forever.
-
-####How to define
-
-NonConsumableItems need to be declared in your implementation ofIStoreAssets.
-
-``` cpp
-CCNonConsumableItem *noAdsNoncons = CCNonConsumableItem::create(
-    CCString::create("No Ads"),
-    CCString::create("Test purchase of MANAGED item."),
-    CCString::create("no_ads"),
-    CCPurchaseWithMarket::createWithMarketItem(CCMarketItem::create(
-        CCString::create(NO_ADDS_NONCONS_PRODUCT_ID),
-        CCInteger::create(CCMarketItem::NONCONSUMABLE),
-        CCDouble::create(1.99))));
-```
-
-####How to use
-
-**Buy:**
-
-Non-consumables can only be purchased once and are kept forever for the user. When a user buys a non-consumable item, a check is performed to see that he/she doesn’t already own this item.
-
-``` cpp
-CCSoomlaError *soomlaError = NULL;
-
-CCStoreInventory::sharedStoreInventory()->buyItem("no_ads", &soomlaError);
-```
-
-**Give:**
-
-Give your users the “No Ads” feature for free.
-
-``` cpp
-CCSoomlaError *soomlaError = NULL;
-
-CCStoreInventory::sharedStoreInventory()->giveItem("no_ads", 1, &soomlaError);
-```
-
-**Take:**
-
-This function simply deducts the user’s balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
-
-``` cpp
-CCSoomlaError *soomlaError = NULL;
-
-CCStoreInventory::sharedStoreInventory()->takeItem("no_ads", 1, &soomlaError);
-```
-
-####**Check existence**
-
-``` cpp
-CCSoomlaError *soomlaError = NULL;
-
-CCStoreInventory::sharedStoreInventory()->nonConsumableItemExists("no_ads", &soomlaError);
-```
-
-###[VirtualCategory]()
+##[VirtualCategory](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/CCVirtualCategory.h)
 
 Divide your store’s virtual goods into categories. Virtual categories become essential when you want to include CATEGORY EquippableVGs in your game.
 

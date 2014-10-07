@@ -283,6 +283,8 @@ Read a detailed description about `LifetimeVG`s [here](/docs/soomla/store/Econom
 
 <div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/docs/platforms/ios/appStoreIAB) for defining IAP products in the App Store.</div>
 
+<br>
+
 ####**How to define**
 
 ``` cs
