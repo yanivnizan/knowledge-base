@@ -197,13 +197,15 @@ public class StoreExampleActivity extends Activity {
 
         IStoreAssets storeAssets = new ExampleStoreAssets();
 
-        // This value is a secret of your choice. You can't change it after you publish your game.
+        // This value is a secret of your choice.
+        // You can't change it after you publish your game.
         Soomla.initialize("[CUSTOM SECRET HERE]");
         SoomlaStore.getInstance().initialize(storeAssets);
 
         /** The following are relevant only if your Billing Provider is Google Play **/
 
-        // When you create your app in Google play Developer Console, you'll find this key under the "Services & APIs" tab.
+        // When you create your app in Google play Developer Console,
+        // you'll find this key under the "Services & APIs" tab.
         GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM THE MARKET]");
         GooglePlayIabService.AllowAndroidTestPurchases = true;
         ...

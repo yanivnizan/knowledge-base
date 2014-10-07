@@ -42,7 +42,6 @@ This class holds your store's
 - Virtual currency packs
 - Virtual goods of all kinds
 - Virtual categories
-- Non-consumable items
 
 `StoreInfo` can be questioned about the existence of `VirtualItem`s and the associations between them.
 
@@ -96,15 +95,9 @@ Equips the given virtual good with the given good item id. Equipping means that 
 
 <div class="warning-box">SOOMLA discourages the use of StorageManager's functions, and suggests you use StoreInventory's functions instead to perform the same actions.</div>
 
-`StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodStorage`, `NonConsumableStorage`, and `KeyValueStorage`.
+`StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodStorage`, and `KeyValueStorage`.
 
 You can use the `StorageManager`’s functions to access the different storage bases, and then use the different storages’ available functions to perform actions such as set/get an item’s balance, add/remove an item from the storage, etc…
-
-**Example:**
-
-``` objectivec
-[[[StorageManager getInstance] nonConsumableStorage] add:nonConsumable];
-```
 
 ##[StoreConfig](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreConfig.h)
 

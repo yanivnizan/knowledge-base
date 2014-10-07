@@ -29,14 +29,12 @@ This type of purchase is with money. Items with this purchase type must be defin
 There are 2 ways to define this purchase type.
 
 ``` java
-public static final String NO_ADS_NONCONS_PRODUCT_ID = "soomla_no_ads";
-
-public static final NonConsumableItem NO_ADS_NONCONS  = new NonConsumableItem(
+public static final LifetimeVG NO_ADS_NONCONS  = new LifetimeVG(
     ...
     new PurchaseWithMarket(new MarketItem(
-        NO_ADS_NONCONS_PRODUCT_ID,   // product ID
-        MarketItem.Managed.MANAGED,  // product type
-        1.99                         // initial price
+        "soomla_no_ads",              // product ID
+        MarketItem.Managed.MANAGED,   // product type
+        1.99                          // initial price
    ))
 );
 ```
@@ -270,6 +268,10 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 
 ###[LifetimeVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/LifetimeVG.java)
 
+A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
+
+Read a detailed description about `LifetimeVG`s [here](/docs/soomla/store/EconomyModel#lifetimevg).
+
 ####**How to define**
 
 ``` java
@@ -499,61 +501,7 @@ To find out the upgrade level of a virtual good use `getGoodUpgradeLevel`. If ou
 StoreInventory.getGoodUpgradeLevel("strength");
 ```
 
-##Other Entities
-
-###[NonConsumableItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/NonConsumableItem.java)
-
-A `NonConsumableItem` is a representation of a non-consumable (MANAGED) item in Google Play. These kinds of items are bought by the user once and kept forever in the market. A `NonConsumableItem` is different from a `LifetimeVG` in that it is never consumed from the market. We recommend using `LifetimeVG`s.
-
-####**How to define**
-`NonConsumableItem`s need to be declared in your implementation of `IStoreAssets`.
-
-``` java
-public static final NonConsumableItem NO_ADS_NONCONS = new NonConsumableItem(
-    "No Ads",                                                       // name
-    "Buy this once and ads will disappear forever!",                // description
-    "no_ads",                                                       // item ID
-    new PurchaseWithMarket(new MarketItem(                          // purchase type
-        NO_ADS_NONCONS_PRODUCT_ID,             // product ID
-        MarketItem.Managed.MANAGED,             // product type
-        1.99)                                   // initial price
-    )
-);
-```
-
-####**How to use**
-
-**Buy:**
-
-Non-consumables can only be purchased once and are kept forever for the user. When a user buys a non-consumable item, a check is performed to see that he/she doesn't already own this item.
-
-``` java
-StoreInventory.buy("no_ads");
-```
-
-**Give:**
-
-Give your users the "No Ads" feature for free.
-
-``` java
-StoreInventory.giveVirtualItem("no_ads", 1);
-```
-
-**Take:**
-
-This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
-
-``` java
-StoreInventory.takeVirtualItem("no_ads", 1);
-```
-
-####**Check existence**
-
-``` java
-StoreInventory.nonConsumableItemExists("no_ads");
-```
-
-###[VirtualCategory](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/VirtualCategory.java)
+##[VirtualCategory](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/VirtualCategory.java)
 
 Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
 

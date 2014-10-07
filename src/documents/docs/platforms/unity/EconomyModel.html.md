@@ -34,12 +34,12 @@ For more info see one of our tutorials on In-app Billing:
 There are 2 ways to define this purchase type.
 
 ``` cs
-public const string NO_ADDS_NONCONS_PRODUCT_ID   = "no_ads";
+public const string NO_ADDS_PRODUCT_ID   = "no_ads";
 
-public static NonConsumableItem NO_ADS_NONCONS = new NonConsumableItem(
+public static LifetimeVG NO_AD = new LifetimeVG(
     ...
     new PurchaseWithMarket(new MarketItem(
-        NO_ADDS_NONCONS_PRODUCT_ID,             // product ID
+        NO_ADDS_PRODUCT_ID,                     // product ID
         MarketItem.Consumable.NONCONSUMABLE,    // product type
         1.99))                                  // initial price
 );
@@ -276,6 +276,12 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 ```
 
 ###[LifetimeVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/LifetimeVG.cs)
+
+A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
+
+Read a detailed description about `LifetimeVG`s [here](/docs/soomla/store/EconomyModel#lifetimevg).
+
+<div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/docs/platforms/ios/appStoreIAB) for defining IAP products in the App Store.</div>
 
 ####**How to define**
 
@@ -514,62 +520,7 @@ To find out the upgrade level of a virtual good use `GetGoodUpgradeLevel`. If ou
 StoreInventory.GetGoodUpgradeLevel("strength");
 ```
 
-##Other Entities
-
-###[NonConsumableItem](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/NonConsumableItem.cs)
-
-A `NonConsumableItem` is a representation of a non-consumable (MANAGED) item in Google Play. These kinds of items are bought by the user once and kept forever in the market. A `NonConsumableItem` is different from a `LifetimeVG` in that it is never consumed from the market. We recommend using `LifetimeVG`s.
-
-####**How to define**
-
-`NonConsumableItem`s need to be declared in your implementation of `IStoreAssets`.
-
-``` cs
-public static NonConsumableItem NO_ADS_NONCONS  = new NonConsumableItem(
-    "No Ads",                                              // name
-    "Buy this once and ads will disappear forever!",       // description
-    "no_ads",                                              // item ID
-    new PurchaseWithMarket(new MarketItem(                 // purchase type
-        NO_ADDS_NONCONS_PRODUCT_ID,                        // product ID
-        MarketItem.Managed.MANAGED,                        // product type
-        1.99)                                              // initial price
-    )
-);
-```
-
-####**How to use**
-
-**Buy:**
-
-Non-consumables can only be purchased once and are kept forever for the user. When a user buys a non-consumable item, a check is performed to see that he/she doesn't already own this item.
-
-``` cs
-StoreInventory.BuyItem("no_ads");
-```
-
-**Give:**
-
-Give your users the "No Ads" feature for free.
-
-``` cs
-StoreInventory.GiveItem("no_ads", 1);
-```
-
-**Take:**
-
-This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
-
-``` cs
-StoreInventory.TakeItem("no_ads", 1);
-```
-
-####**Check existence**
-
-``` cs
-StoreInventory.NonConsumableItemExists("no_ads");
-```
-
-###[VirtualCategory](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/VirtualCategory.cs)
+##[VirtualCategory](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/VirtualCategory.cs)
 
 Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
 

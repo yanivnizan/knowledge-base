@@ -78,35 +78,29 @@ Yes, a product with an item ID and a product ID can have the same value if you w
 
 ---
 
-**What’s the difference between a `LifetimeVG` and a `NonConsumableItem`?**
+**I have a `LifetimeVG` defined in my game that is available for purchase in the market. Why does this item still appear after I restart my app?**
 
-A `LifetimeVG` is an item that is bought exactly once and kept forever. A `NonConsumableItem` is a representation of a non-consumable item in the Market (App Store, Google Play, Amazon Appstore). These kinds of items are bought by the user once and kept for him/her forever **in the Market**.
+`LifetimeVG`s that are defined in the market, are defined as non-consumable products. This means that once the user purchases this item, the market saves it for them forever.
 
-If you want to make a `LifetimeVG` available for purchase in the Market, you will need to declare it as a `NonConsumableItem`.
+The only way to delete this kind of item is to refund it in the market.
 
-Notice that `LifetimeVG`s won't be saved on Google's servers, while `NonConsumableItem`s will.
-
----
-
-**Why does the `NonConsumableItem` in my game still appear after I use `RemoveNonConsumableItem` and restart my app?**
-
-Because of the characteristics of `NonConsumableItem`s (kept for him/her forever in the Market), the only way to delete this kind of item is to refund it in the Market.
-
-Using `RemoveNonConsumableItem` only removes the item from the local cache, thus when you restart the app the item will still be there.
+Read more about `LifetimeVG`s [here](/docs/soomla/store/EconomyModel#lifetimevg).
 
 ---
 
-**How can I test purchases of `NonConsumableItem`s?**
+**How can I test purchases of `LifetimeVG`s that are defined in Google Play?**
 
-For testing purposes, you will need to purchase the `NonConsumableItem` and then return it in order to repurchase.
+For testing purposes, you will need to purchase the `LifetimeVG` and then return it in order to repurchase.
 
-Because of the characteristics of `NonConsumableItem`s (kept for him/her forever in the Market), the only way to purchase the same `NonConsumableItem` a second time, is to refund the first purchase.
+Because of the characteristics of `LifetimeVG`s (kept for him/her forever in the Market), the only way to purchase the same item a second time, is to refund the first purchase.
 
 Instructions for how to refund items in Google Play:
 
 1. Visit your merchant account through Google's Developer Console (there's a link under the "Financial Reports" tab).
+
 2. Refund the test item. See Google's [Refund an order](https://support.google.com/wallet/business/answer/2741495?hl=en) instructions for how to do this.
-3. Call `removeNonConsumableItem` to clear your local inventory. (It will NOT be refreshed by Google Play because the reception has already been removed).
+
+3. Call `StoreInventory.takeVirtualItem("lifetimeVG_ID", 1)` to clear your local inventory.
 
 Note that Google Play caches purchase statuses locally, so you may have to wait a few minutes for the cancellation to actually take place. If you don't want to wait, a faster option is to clear the cache of the "Google Play Store" app and your app manually, to force the non-consumable item refresh.
 
