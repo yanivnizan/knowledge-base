@@ -58,7 +58,7 @@ Download the following pre-baked unity packages in the following order:
 
 ##**Example**
 
-Below is a short example of how to initialize SOOMLA's LevelUp. We suggest you read about the [LevelUp Game Design Model](TODO) in order to understand the different entities of `LevelUp`.
+Below is a short example of how to initialize SOOMLA's LevelUp. We suggest you read about the [LevelUp Game Design Model](/docs/platforms/unity/Levelup_Model) in order to understand the different entities of `LevelUp`.
 
 ``` cs
 /// This virtual currency needs to be defined in your implementation of IStoreAssets
@@ -83,14 +83,14 @@ mainWorld.InnerWorldsMap.Add(worldB.ID, worldB);
 
 /** Rewards **/
 BadgeReward goldMedal = new BadgeReward(
-  "gold_medal_ID",			// ID
-  "Gold Medal"				// Name
+  "gold_medal_ID",            // ID
+  "Gold Medal"                // Name
 );
 VirtualItemReward hundredCoinsReward = new VirtualItemReward(
-  "coin_reward_ID",			// ID
+  "coin_reward_ID",           // ID
   "Hundred Coin Reward",      // Name
-  coin.ID,				    // ID of the virtual item associated with this reward
-  100							// Amount of virtual item to given in the reward
+  coin.ID,                    // ID of the virtual item associated with this reward
+  100                         // Amount of virtual item to given in the reward
 );
 
 /// Initialize LevelUp
