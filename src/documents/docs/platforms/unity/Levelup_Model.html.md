@@ -26,7 +26,7 @@ In this document, you will find definitions of each of the entities of `LevelUp`
 
 After observing dozens of games, the SOOMLA team realized that most game progress and accomplishment can be packed into worlds. Worlds can contain both levels and worlds, and may have missions that can be completed in order to receive rewards.
 
-![alt text](/img/tutorial_img/soomla_diagrams/LevelUpModel.png "Soomla LevelUp Model")
+![alt text](/img/tutorial_img/soomla_diagrams/LevelUp.png "Soomla LevelUp Model")
 
 ###Schedule
 
