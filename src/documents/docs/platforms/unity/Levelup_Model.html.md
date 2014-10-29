@@ -28,28 +28,28 @@ This document assumes that you have a good understanding of SOOMLA's Store modul
 
 The `Schedule` and `Reward` entities are widely used in the examples of this document. You can read about them [here](#auxiliary-models).
 
-###SoomlaLevelUp
+##SoomlaLevelUp
 
 This class is the top level container for the unity-levelup model and definitions. It stores the configurations of the game's world-hierarchy and provides lookup functions for `LevelUp` model elements.
 
 `SoomlaLevelUp` is the central point of initialization. To use `LevelUp` you'll need to compose `World`s, `Level`s, `Mission`s, `Score`s, `Gate`s, `Reward`s, and then instantiate `SoomlaLevelUp` with your root `World`.
 
 <br>
-####**Useful Functions**
+**Useful Functions**
 
 ``` cs
-/// Retrieve a `Score` according to its ID
+// Retrieve a `Score` by its ID:
 Score score = SoomlaLevelUp.GetScore(numberScore.ID);
 
-/// Retrieve a specific `Gate`
+// Retrieve a `Gate` by its ID:
 PurchasableGate gate1 = new PurchasableGate("", "");
 Gate myGate = SoomlaLevelUp.GetGate(gate1.ID);
 
-/// Retrieve a specific `Mission`
+// Retrieve a `Mission` by its ID:
 BalanceMission mission1 = new BalanceMission("","","",0);
 Mission myMission = SoomlaLevelUp.GetMission(mission1.ID);
 
-/// Retrieve a Reward
+// Retrieve a `Reward` by its ID:
 Reward reward = SoomlaLevelUp.GetReward(coinReward.ID);
 ```
 
@@ -141,7 +141,7 @@ jungleWorld.AddScore(score);
 Use the different functions provided in `World` to get, set, increase, and decrease its `Score`s.  You can use `SumInnerWorldsRecords()` to sum up the `Score`s of the inner `World`s or `Level`s. Some functions are intended for a single `Score`, while others are for multiple `Score`s - you can differentiate between them according to their names and signatures.
 
 ``` cs
-/** For a World with a single Score: **/
+/** For worlds with single scores: **/
 
 jungleWorld.SetSingleScoreValue(300); // set score to 300
 
@@ -153,20 +153,20 @@ Score score = jungleWorld.GetSingleScore(); // get score - value is now 350
 
 double total = jungleWorld.SumInnerWorldsRecords(); // get the total score of all inner world (levels) scores
 
-jungleWorld.ResetScores(true); // reset score values and save
 
+/** For worlds with multiple scores: **/
 
-/** For a World with multiple Scores: **/
+jungleWorld.SetScoreValue(someScore.ID, 500); // set someScore to 500
 
-jungleWorld.SetScoreValue(someScore.ID, 200); // set someScore to 200
+jungleWorld.IncScore(someScore.ID, 200); // increase score by 200
 
-jungleWorld.IncScore(coinScore.ID, 250);
+jungleWorld.DecScore(someScore.ID, 100); // decrease score by 100
 
-jungleWorld.DecScore(coinScore.ID, 150);
+jungleWorld.ResetScores(true); // reset score values & save
 ```
 
 <br>
-**Manipulate/Query `Rewards` of a `World`:**
+**Manipulate/Query `Reward(s)` of a `World`:**
 
 ``` cs
 Reward coinReward = new ...
@@ -195,8 +195,7 @@ foreach(KeyValuePair<string, double> entry in recordScores)
 	scoreName = entry.Key;
 	scoreVal = entry.Value;
 	message = scoreName + ": " + scoreVal;
-	//SoomlaUtils.LogDebug("", message);
-	Assert.AreEqual("", message);
+	SoomlaUtils.LogDebug("", message);
 }
 
 // Print all the latest values of the scores of worldA
@@ -206,23 +205,22 @@ foreach(KeyValuePair<string, double> entry in latestScores)
 	scoreName = entry.Key;
 	scoreVal = entry.Value;
 	message = scoreName + ": " + scoreVal;
-	//SoomlaUtils.LogDebug("", message);
-	Assert.AreEqual("", message);
+	SoomlaUtils.LogDebug("", message);
 }
 ```
 
 <br>
 ##**Level**
 
-One of the most common ways to create a sense of progress and accomplishment in games is to have levels. Every `Level` has a state, that is always one of: "Idle", "Running", "Paused", "Ended", or "Completed". To use levels correctly, you need to use the provided `Start`, `Pause`, and `End` functions, in order for the level to keep an updated record of what its state is.
+One of the most common ways to create a sense of progress and accomplishment in games is to have levels. Every `Level` has a state, that is always one of: `Idle`, `Running`, `Paused`, `Ended`, or `Completed`. To use levels correctly, you need to use the provided `Start`, `Pause`, and `End` functions, in order for the level to keep an updated record of what its state is.
 
 **A `Level` contains the following elements:**
 
 - `StartTime` - The start time of this level.
 
-- `Elapsed` - The duration of the play time for this level. This can be used for games that need to keep track of how long the user has been playing the level in order to calculate his `Score` at the end.
+- `Elapsed` - The duration of the play time for this level. This can be used for games that need to keep track of how long the user has been playing the level in order to calculate his / her `Score` at the end.
 
-- `State` - The state of the level is initially "Idle". While the user is playing the level is in "Running" mode, and can later be one of "Paused", "Ended", or "Completed".
+- `State` - The state of the level is initially `Idle`. While the user is playing the level is in `Running` mode, and can later be one of `Paused`, `Ended`, or `Completed`.
 
 <br>
 **HOW TO DEFINE**
@@ -304,7 +302,7 @@ Score score = new Score("score_ID");
 Score numberScore = new Score(
   "numberScore",                        // ID
   "Number Score",                       // Name
-  true                                  // ascending(higher is better)
+  true                                  // Ascending(higher is better)
 );
 ```
 
@@ -328,7 +326,7 @@ if (numberScore.HasTempReached(5000)) {
 ``` cs
 // Checks if a value of 300 breaks numberScore's record.
 if (numberScore.HasRecordReached(300)) {
-  // do something...
+  // Do something...
 }
 ```
 
@@ -342,7 +340,7 @@ numberScore.Inc(200); // numberScore = 250
 
 numberScore.Dec(100); // numberScore = 150
 
-numberScore.Reset(true); // numberScore = 0 (When given the argument "true", the record score is saved.)
+numberScore.Reset(true); // numberScore = 0
 
 int n = numberScore.GetTempScore(); // n = 0
 ```
@@ -364,7 +362,7 @@ Score quizScore = new RangeScore(
 Score shootingScore = new RangeScore(
   "shootingRange",                      // ID
   "Shooting Range Score",               // Name
-  true,                                 // ascending (higher is better)
+  true,                                 // Ascending (higher is better)
   new RangeScore.SRange(10, 100)        // Range
 );
 ```
@@ -454,7 +452,7 @@ isOpen = bGate.IsOpen();  // False because the muffin balance hasn't
 
 StoreInventory.GiveItem(muffin.ID, 5);
 
-balance = StoreInventory.GetItemBalance(muffin.ID); // now balance = 5
+balance = StoreInventory.GetItemBalance(muffin.ID); // Now balance = 5
 
 isOpen = bGate.IsOpen();  // True because the balance has reached the desired balance (5).
 ```
@@ -474,7 +472,7 @@ VirtualGood shield = new SingleUseVG(
   new PurchaseWithMarket("product_ID", 1.99)
 );
 
-//The user must buy the 'itemToBuy' in order to open this Gate.
+// The user must buy the 'itemToBuy' in order to open this Gate.
 Gate pGate = new PurchasableGate(
   "purchaseGate",              // ID
   shield.ID                    // Associated item ID
@@ -506,7 +504,7 @@ A RecordGate has an associated score and a desired record. The `Gate` opens once
 ``` cs
 Score numberScore = new Score("numberScore", "Score", true);
 
-//The user needs to reach a record of 5000 for numberScore in order to open this Gate.
+// The user needs to reach a record of 5000 for numberScore in order to open this Gate.
 Gate rGate = new RecordGate(
   "rGate",                      // ID
   numberScore.ID,               // Associated score ID
@@ -521,17 +519,18 @@ Gate rGate = new RecordGate(
 bool isOpen;
 bool reachedRecord;
 
-reachedRecord = numberScore.HasRecordReached(5000.0); // False because numberScore's record is 0.0
+reachedRecord = numberScore.HasRecordReached(5000.0); // False because numberScore has
+                                                      // a record of 0
 
-isOpen = rGate.IsOpen();  // False, because numberScore hasn't reached a record of 5000.0
+isOpen = rGate.IsOpen();  // False, because numberScore hasn't reached a record of 5000
 
-numberScore.Inc(5000.0); // Now, the value of numberScore is 5000.0
+numberScore.Inc(5000.0); // Now, the value of numberScore is 5000
 
 numberScore.Reset(true); // Saves the score and its new record in the storage
 
 reachedRecord = numberScore.HasRecordReached(5000); // True!
 
-isOpen = rGate.IsOpen();  // True because numberScore has reached the record of 5000.0
+isOpen = rGate.IsOpen();  // True because numberScore has reached the record of 5000
 ```
 
 <br>
@@ -546,9 +545,15 @@ A specific type of `Gate` that has a schedule that defines when the `Gate` can b
 
 ``` cs
 // Note that there are multiple ways to declare a schedule. This is just one of them.
-Schedule schedule = new Schedule(DateTime.Now, DateTime.Now.AddHours(2), Schedule.Recurrence.EVERY_DAY, 1);
+Schedule schedule = new Schedule(
+  DateTime.Now,                         // Start time
+  DateTime.Now.AddHours(2),             // End time
+  Schedule.Recurrence.EVERY_DAY,        // Recurrence
+  1                                     // Activation limit
+);
 
-// The user can open this Gate within the time frame defined in schedule.
+// The user can open this Gate if he/she is attempting
+// to do so within the time frame defined in schedule.
 Gate sGate = new ScheduleGate("ID", schedule);
 ```
 
@@ -627,7 +632,9 @@ Gate wGateANDrGate = new GatesListAND(
 ####**USE CASE**
 
 ``` cs
-///The user needs to meet the criteria of bGate AND of sGate in order to open this Gate.
+// The user needs to meet the criteria of wGate AND of rGate
+// in order to open this Gate. For the definitions of bGate and
+// sGate, see the topics WorldCompletionGate and RecordGate above.
 
 int isOpen;
 bool wGateIsOpen;
@@ -662,7 +669,7 @@ A specific type of `GatesList` that can be opened if AT LEAST ONE `Gate` in its 
 ####**HOW TO DEFINE**
 
 ``` cs
-///NOTE: wGate and rGate are defined in the sections above.
+// NOTE: wGate and rGate are defined in the sections above.
 Gate wGateORpGate = new GatesListOR(
   "",                                   // ID
   new List<Gate>() { wGate, rGate }     // List of Gates
@@ -673,7 +680,9 @@ Gate wGateORpGate = new GatesListOR(
 ####**USE CASE**
 
 ``` cs
-///The user needs to meet the criteria of wGate OR of rGate in order to open this Gate.
+// The user needs to meet the criteria of wGate AND of rGate
+// in order to open this Gate. For the definitions of bGate and
+// sGate, see the topics WorldCompletionGate and RecordGate above.
 
 bool isOpen;
 bool wGateIsOpen;
@@ -803,7 +812,7 @@ This function determines whether a `Mission` is available to be set as completed
 
 ``` cs
 if (someMission.IsAvailable()) {
-  // do something...
+  // Do something...
 }
 ```
 
@@ -811,7 +820,7 @@ if (someMission.IsAvailable()) {
 
 ``` cs
 if (someMission.IsCompleted()) {
-  // do something...
+  // Do something...
 }
 ```
 
@@ -826,8 +835,8 @@ A specific type of `Mission` that has an associated virtual item and a desired b
 Reward reward = new ...
 VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_currency");
 
-///To complete this mission the user needs to collects 250 coins.
-///Once the mission is complete he/she will receive the reward.
+// To complete this mission the user needs to collects 250 coins.
+// Once the mission is complete he/she will receive the reward.
 Mission bMission = new BalanceMission(
   "coinMission",                        // ID
   "Coin Mission",                       // Name
@@ -853,8 +862,8 @@ StoreInventory.GiveItem(coin.ID, 250);
 
 balance = StoreInventory.GetItemBalance(coin.ID); // Now balance = 250
 
-isCompleted = bMission.IsCompleted();  // True because the balance has reached
-                                       // the desired balance (250).
+isCompleted = bMission.IsCompleted(); // True because the balance has reached
+                                      // the desired balance (250).
 ```
 
 ###**RecordMission**
@@ -866,8 +875,8 @@ A specific type of `Mission` that has an associated score and a desired record. 
 
 ``` cs
 
-///To complete this mission the user needs his coinScore to reach a record of 5000.
-///Once the mission is complete he/she will receive the reward(s).
+// To complete this mission the user needs the coinScore to reach a record of 5000.
+// Once the mission is complete he/she will receive the reward(s).
 Mission rMission = new RecordMission(
   "rMission",                           // ID
   "Coin Record Score",                  // Name
@@ -884,17 +893,20 @@ Mission rMission = new RecordMission(
 bool isCompleted;
 bool reachedRecord;
 
-reachedRecord = coinScore.HasRecordReached(2000.0); // False because numberScore's record is 0.0
+reachedRecord = coinScore.HasRecordReached(2000.0); // False because numberScore
+                                                    // has a record of 0
 
-isCompleted = rMission.IsCompleted();  // False, because numberScore hasn't reached a record of 2000.0
+isCompleted = rMission.IsCompleted();  // False, because numberScore hasn't reached
+                                       //a record of 2000
 
-coinScore.Inc(2000.0); // Now, the value of numberScore is 2000.0
+coinScore.Inc(2000.0); // Now, the value of numberScore is 2000
 
 coinScore.Reset(true); // Saves the score and its new record in the storage
 
-reachedRecord = coinScore.HasRecordReached(2000.0); // True!
+reachedRecord = coinScore.HasRecordReached(2000.0); // True because numberScore has
+                                                    // reached the record of 2000
 
-isCompleted = rMission.IsCompleted();  // True because numberScore has reached the record of 2000.0
+isCompleted = rMission.IsCompleted();  // TRUE!
 ```
 
 ###**PurchasingMission**
@@ -907,8 +919,8 @@ A specific type of `Mission` that has an associated market item. The `Mission` i
 ``` cs
 VirtualGood itemToBuy = new SingleUseVG("name", "description", "ID", new PurchaseWithMarket("product_ID", 1.99));
 
-///To complete this mission the user needs to buy the item.
-///Once the mission is complete he/she will receive the reward(s).
+// To complete this mission the user needs to buy the item.
+// Once the mission is complete he/she will receive the reward(s).
 Mission pMission = new PurchasingMission(
   "pMission",                           // ID
   "Purchasing Mission",                 // Name
@@ -941,8 +953,8 @@ A specific type of `Mission` that has an associated `World`. The `Mission` is co
 ``` cs
 World worldA = new World("worldA");
 
-///To complete this mission the user needs to complete worldA.
-///Once the mission is complete he/she will receive the reward(s).
+// To complete this mission the user needs to complete worldA.
+// Once the mission is complete he/she will receive the reward(s).
 Mission wMission = new WorldCompletionMission(
   "wMission",                           // ID
   "World completion Mission",           // Name
@@ -1057,9 +1069,9 @@ Missions can be aggregated into challenges which can contain a single mission or
 ####**HOW TO DEFINE**
 
 ``` cs
-/// To complete this challenge, the user must complete both missions.
-/// Once the challenge is complete, he/she will receive the reward(s).
-/// Note that wMission and rMission are defined in the examples above.
+// To complete this challenge, the user must complete both missions.
+// Once the challenge is complete, he/she will receive the reward(s).
+// Note that wMission and rMission are defined in the examples above.
 Challenge challenge = new Challenge(
   "challenge",                                    // ID
   "2 Mission Challenge",                          // Name
@@ -1096,13 +1108,13 @@ Before we begin, let's define what a `Schedule` is, as you will see it used a fe
 
 - `RequiredRecurrence` - How often is this entity available? Every month, week, day, hour? **For example:** A `Mission` that is available to be completed every Monday.
 
-- `TimeRanges` - A range of time that this entity is available, with a start time and an end time. **For example:** A `Reward` that can be given starting when the user finishes a certain `Level` and ending 8 seconds later.
+- `TimeRanges` - A range of time that this entity is available, with a start time and an end time. **For example:** A `Reward` that can be given starting when the user finishes a certain `Level` and ending 1 hour later.
 
 - `ActivationLimit` - The number of times that this entity is available for use. **For example:** A `Mission` that can be attempted 10 times throughout gameplay.
 
 ###**Reward**
 
-<div class="info-box">Note that `Reward` is a part of soomla-unity3d-core, and *not* part of the LevelUp module. However, because `Reward`s are used very often throughout unity3d-levelup, it's important that you are familiar with the different `Reward` types.</div>
+<div class="info-box">Note that `Reward` is a part of soomla-unity3d-core, and *not* part of the LevelUp module. However, because `Reward`s are used very often throughout Levelup, it's important that you are familiar with the different `Reward` types.</div>
 
 A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress. For example - a user can earn a badge for completing a `Mission`. Dealing with `Reward`s is very similar to dealing with `VirtualItem`s: grant a `Reward` by giving it, and recall a `Reward` by taking it.
 
@@ -1123,7 +1135,7 @@ coinReward.Give();
 
 **Take a `Reward`:**
 
-Use this to redeem a `Reward` from your user.
+Use this to recall a `Reward` from your user.
 
 ``` cs
 reward.Take();
@@ -1173,7 +1185,7 @@ Reward blueBelt = new BadgeReward(
   "blueBelt",                           // ID
   "Karate blue belt"                    // Name
 );
-//Assume the same instantiation for the rest of the belts.
+// Assume the same instantiation for the rest of the belts.
 
 Reward beltReward = new SequenceReward(
   "beltReward",                         // ID

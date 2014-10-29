@@ -50,7 +50,7 @@ collection: 'platforms_unity'
 
   <div class="warning-box">Initialize _LevelUp_ ONLY ONCE when your application loads, in the "Start()" function of a 'MonoBehaviour' and **NOT** in the "Awake()" function. SOOMLA has its own 'MonoBehaviour' and it needs to be "Awakened" before you initialize.</div>
 
-6. You'll need an event handler in order to be notified about _LevelUp_ related events. refer to the [Event Handling](#event-handling) section for more information.
+6. You'll need to create event handler functions in order to be notified about (and handle) _LevelUp_ related events. Refer to the [Event Handling](/docs/platforms/unity/LevelUp_Events) section for more information.
 
 And that's it! You have game architecture capabilities at your fingertips.
 
@@ -58,24 +58,24 @@ And that's it! You have game architecture capabilities at your fingertips.
 ###SOOMLA's unity3d-store Integration
 
 Please follow the steps in [unity3d-store](https://github.com/soomla/unity3d-store) for the _Store_ part of the setup.
-Then, you can use the **store-related _LevelUp_ classes**, such as _VirtualItemScore_ or _VirtualItemReward_ or _BalanceGate_.
+Then, you can use the **store-related _LevelUp_ classes**, such as `VirtualItemScore` or `VirtualItemReward` or `BalanceGate`.
 
 ###SOOMLA's unity3d-profile Integration
 
 Please follow the steps in [unity3d-profile](https://github.com/soomla/unity3d-profile) for the _Profile_ part of the setup.
-Then, you can use the **profile-related _LevelUp_ classes**, such as _SocialLikeMission_.
+Then, you can use the **profile-related _LevelUp_ classes**, such as `SocialLikeMission`.
 
 ##Contribution
 
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the social capabilities of the SOOMLA Profile module, by adding support to any social provider you wish (Twitter, Google+, etc.), and connect the new provider to SOOMLA's Store module.
+**SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of the SOOMLA LevelUp module.
 
 <div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/unity3d-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
 
 ##Example Usages
 
-  Examples using virtual items are dependent on unity3d-store module, with proper `SoomlaStore` initialization and `IStoreAssets` definitions. See the unity3d-store integration section for more details.
+Examples using virtual items are dependent on unity3d-store module, with proper `SoomlaStore` initialization and `IStoreAssets` definitions. See the unity3d-store integration section above for more details.
 
-* Mission with Reward (collect 5 stars to get 1 mega star)
+* `Mission` with `Reward` (collect 5 stars to get 1 mega star)
 
 	```cs
   VirtualItemReward virtualItemReward = new VirtualItemReward("mega_star_reward_id",
@@ -101,7 +101,7 @@ Then, you can use the **profile-related _LevelUp_ classes**, such as _SocialLike
   virtualItemReward.Owned; // true
 	```
 
-* RecordGate with RangeScore
+* `RecordGate` with `RangeScore`
 
 	```cs
   Level lvl1 = new Level("lvl1_recordgate_rangescore");
@@ -151,7 +151,7 @@ Then, you can use the **profile-related _LevelUp_ classes**, such as _SocialLike
   lvl2.IsCompleted(); // true
 	```
 
-* VirtualItemScore
+* `VirtualItemScore`
 
 	```cs
   Level lvl1 = new Level("lvl1_viscore");
@@ -182,7 +182,7 @@ Then, you can use the **profile-related _LevelUp_ classes**, such as _SocialLike
   // currentBalance == 2
 	```
 
-* Challenge (Multi-Mission)
+* `Challenge` (Multi-Mission)
 
   ```cs
   string scoreId = "main_score";
@@ -227,8 +227,9 @@ Then, you can use the **profile-related _LevelUp_ classes**, such as _SocialLike
 	badgeReward.Owned; // true
   ```
 
-* GatesList
-> Note that currently a `GatesList` gate is automatically opened when sub-gates fulfill the `GatesList` requirement.
+* `GatesList`
+
+  Note that currently a `GatesList` gate is automatically opened when its sub-gates fulfill the `GatesList` requirement.
 
   ```cs
   string recordGateId1 = "gates_list_record_gate_id1";
