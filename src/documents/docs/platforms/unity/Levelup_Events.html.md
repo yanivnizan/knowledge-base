@@ -7,54 +7,160 @@ position: 13
 theme: 'platforms'
 collection: 'platforms_unity'
 ---
-
 #LEVELUP: Event Handling
 
 ##About
 
 LevelUp allows you to subscribe to events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur.
 
-##Triggering Events
+<div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
-In the LevelUp code events are fired in some functions. Of course, you can also fire the events from your code where you see fit.
+###Tips & Reminders
 
-**For Example:** In `WorldStorage.cs` the function `_setCompleted` triggers the event `OnWorldCompleted`.
+- As mentioned in [Getting Started](/docs/platforms/unity/LevelUp_GettingStarted), make sure you add the event prefabs (LevelUpEvents, ProfileEvents, StoreEvents, CoreEvents) to your earliest loading scene.
 
-``` cs
-protected virtual void _setCompleted(World world, bool completed, bool notify) {
-  ...
-  if (notify) {
-    LevelUpEvents.OnWorldCompleted(world);
-  }
-  ...
-}
-```
+- It is recommended that you register all events before initializing LevelUp.
 
-<div class="info-box">**What will happen next:** A class that "listens" for this event will be notified, and will contain a function that handles the event of world completion. Read below to learn how to "listen" for and handle events.</div>
+##How it works
+
+Events are triggered when SOOMLA wants to notify you about different things that happen involving LevelUp operations.
+
+For example, when a user completes a `World`, an `OnWorldCompleted` event is fired as a result.
 
 ##Observing & Handling Events
 
 The `LevelUpEvents` class is where all events go through. To handle various events, just add your game-specific behavior to the delegates in the `LevelUpEvents` class.
 
-**For example:** The code below "listens" for an `onWorldCompleted` event and handles it.
+**For example:** To "listen" for an `onWorldCompleted` event:
 
 ``` cs
-// Observe
+// Sign up for the event
 LevelUpEvents.OnWorldCompleted += onWorldCompleted;
 
-// Handle
-public void onWorldCompleted(string message) {
-  SoomlaUtils.LogDebug(TAG, "SOOMLA/UNITY onWorldCompleted with message: " + message);
-
-  // message is World as JSON
-  JSONObject json = new JSONObject (message);
-  World world = World.fromJSONObject (json);
-
-  LevelUpEvents.OnWorldCompleted(world);
+// Handle the event with your game-specific behavior:
+public void onWorldCompleted(World world) {
+  // Do something...
 }
-
-// Add your game-specific behavior:
-public static Action<World> OnWorldCompleted = delegate {};
 ```
 
-<div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
+##LevelUp Events
+
+This is a list of all events of SOOMLA LevelUp and an example of how to listen to them:
+
+###OnLevelUpInitialized
+
+This event will be thrown when the Soomla LevelUp module is initialized and ready.
+
+``` cs
+public void onLevelUpInitialized() {
+  // ... your game specific implementation here ...
+}
+```  
+
+###OnWorldCompleted
+
+This event will be thrown when a `World` has been completed.
+
+``` cs
+public void onWorldCompleted(World world) {
+  // world is the world that was completed
+
+  // ... your game specific implementation here ...
+}
+```
+
+###OnWorldAssignedReward
+
+This event will be thrown when a `Reward` is assigned to a `World`.
+
+``` cs
+public void onWorldAssignedReward(World world) {
+  // world is the world who had a reward assigned to it
+
+  // ... your game specific implementation here ...
+}
+```  
+
+###OnLevelStarted
+
+This event will be thrown when a `Level` has started.
+
+``` cs
+public void onLevelStarted(Level level) {
+  // level is the level that has started
+
+  // ... your game specific implementation here ...
+}
+```
+
+###OnLevelEnded
+
+This event will be thrown when a `Level` has been completed.
+
+``` cs
+public void onLevelEnded(Level level) {
+  // level is the level that has ended
+
+  // ... your game specific implementation here ...
+}
+```
+
+###OnScoreRecordReached
+
+This event will be thrown when a `Score`'s record has been reached.
+
+``` cs
+public void onScoreRecordReached(Score score) {
+  // score is the score whose record has been reached
+
+  // ... your game specific implementation here ...
+}
+```
+
+###OnScoreRecordChanged
+
+This event will be thrown when a `Score`'s record has changed.
+
+``` cs
+public void onScoreRecordChanged(Score score) {
+  // score is the score whose record has changed
+
+  // ... your game specific implementation here ...
+}
+```
+
+###OnGateOpened
+
+This event will be thrown when a `Gate` has opened.
+
+``` cs
+public void onGateOpened(Gate gate) {
+  // gate is the gate that was opened
+
+  // ... your game specific implementation here ...
+}
+```
+
+###OnMissionCompleted
+
+This event will be thrown when a `Mission` has been completed.
+
+``` cs
+public void onMissionCompleted(Mission mission) {
+  // mission is the mission that was completed
+
+  // ... your game specific implementation here ...
+}
+```
+
+###OnMissionCompletionRevoked
+
+This event will be thrown when a `Mission` has been revoked.
+
+``` cs
+public void onMissionCompletionRevoked((Mission mission) {
+  // mission is the mission that was revoked
+
+  // ... your game specific implementation here ...
+}
+```
