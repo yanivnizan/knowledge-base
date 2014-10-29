@@ -14,13 +14,13 @@ collection: 'platforms_unity'
 
 `LevelUp` models out worlds, levels, scores, missions, and more, all in one framework that allows game developers to build their game structure and progressions behavior easily and effectively. The sense of progress that users feel in a game is what creates retention and long-term use, which usually lead to monetization.
 
-In this document, you will find definitions of each of the entities of `LevelUp`, the connections between them, and code examples that demonstrate how to use them.
+In this document, you will find definitions of each of the entities of LevelUp, the connections between them, and code examples that demonstrate how to use them.
 
 ###LevelUp Hierarchy
 
-After observing dozens of games, the SOOMLA team realized that most game progress and accomplishment can be packed into worlds. Worlds can contain both levels and worlds, and may have missions that can be completed in order to receive rewards.
+The SOOMLA team has examined dozens of games and has observed that most game progress and accomplishment can be packed into worlds. Worlds can contain both levels and worlds internally, and may have missions that can be completed in order to receive rewards.
 
-![alt text](/img/tutorial_img/soomla_diagrams/LevelUpModel.png "Soomla LevelUp Model")
+![alt text](/img/tutorial_img/soomla_diagrams/LevelUp.png "Soomla LevelUp Model")
 
 ###Prerequisites
 
@@ -35,54 +35,30 @@ This class is the top level container for the unity-levelup model and definition
 `SoomlaLevelUp` is the central point of initialization. To use `LevelUp` you'll need to compose `World`s, `Level`s, `Mission`s, `Score`s, `Gate`s, `Reward`s, and then instantiate `SoomlaLevelUp` with your root `World`.
 
 <br>
-
 ####**Useful Functions**
 
 ``` cs
 /// Retrieve a `Score` according to its ID
-Score score = LevelUp.GetInstance().GetScore(numberScore.ID);
+Score score = SoomlaLevelUp.GetScore(numberScore.ID);
 
 /// Retrieve a specific `Gate`
 PurchasableGate gate1 = new PurchasableGate("", "");
-Gate myGate = LevelUp.GetInstance().GetGate(gate1.ID);
+Gate myGate = SoomlaLevelUp.GetGate(gate1.ID);
 
 /// Retrieve a specific `Mission`
 BalanceMission mission1 = new BalanceMission("","","",0);
-Mission myMission = LevelUp.GetInstance().GetMission(mission1.ID);
+Mission myMission = SoomlaLevelUp.GetMission(mission1.ID);
 
 /// Retrieve a Reward
-Reward reward = LevelUp.GetInstance().GetReward(coinReward.ID);
-
-/// Retrieve the number of Worlds in the game.
-/// (the given bool signifies if to include all levels in the count)
-int numOfWorlds = LevelUp.GetInstance().GetWorldCount(true);
-
-/// Retrieve the number of completed Worlds in the game.
-int numOfCompletedWorlds = LevelUp.GetInstance().GetCompletedWorldCount();
-
-/// Retrieve the World by its ID.
-World world = LevelUp.GetInstance().GetWorld("worldA");
-
-/// Retrieve the number of Levels in the given World.
-int d = LevelUp.GetInstance().GetLevelCountInWorld(jungleWorld);
-
-/// Retrieve a specific `Level` according to its ID (use the GetWorld()  
-/// function with casting, because Level is actually a (extends) World.
-Level level1 = (Level)LevelUp.GetInstance().GetWorld("worldA_level_1");
-
-/// Get the number of `Level`s in the game
-int totalLevels = LevelUp.GetInstance().GetLevelCount();
-
-/// Get the number of completed `Level`s
-int completedLevels = LevelUp.GetInstance().GetCompletedLevelCount();
+Reward reward = SoomlaLevelUp.GetReward(coinReward.ID);
 ```
 
 <br>
 ##**World**
 
-A game can have multiple `World`s or a single one, and `World`s can also contain other `World`s in them. In some games, these are referred to as level packs. Often, a `World` contains a set of `Level`s, or multiple sets. A `World` can also have a potential `Gate` that defines the criteria to enter it. Games that don’t have the concept of `World`s can be modeled as single `World` games (SLM games).
+A game can have multiple `World`s or a single one, and `World`s can also contain other `World`s in them. In some games, these are referred to as level packs. Often, a `World` contains a set of `Level`s, or multiple sets. A `World` can also have a potential `Gate` that defines the criteria to enter it. Games that don’t have the concept of `World`s can be modeled as single `World` games.
 
-**A `World` contains the following elements:**
+**A `World` contains the following *optional* elements:**
 
 - `Gate` - The `Gate` that defines the criteria to enter this `World`.
 
@@ -98,11 +74,11 @@ A game can have multiple `World`s or a single one, and `World`s can also contain
 For your convenience, there are multiple ways to define a `World`.
 
 ``` cs
-/// Simple constructor that receives only an ID.
+// Simple constructor that receives only an ID.
 World jungleWorld = new World("jungleWorld");
 
-/// Instantiation of gates, scores, and missions will
-/// be demonstrated in the relevant sections below.
+// Instantiation of gates, scores, and missions will
+// be demonstrated in the relevant sections below.
 World lakeWorld = new World(
   "lakeWorld",                          // ID
   gate,                                 // Gate to enter this world
@@ -116,27 +92,35 @@ World lakeWorld = new World(
 ####**COMMON USE**
 
 **Add `World`s or `Levels` to a `World`**:
-`BatchAddLevelsWithTemplates` creates a batch of `Level`s and adds them to the `World`. This function will save you a lot of time. Instead of creating many levels one by one, you can create them all at once.
 
 ``` cs
-World innerWorld = new World("innerWorld");
-jungleWorld.AddInnerWorld(innerWorld.ID);
-
+//`BatchAddLevelsWithTemplates` creates a batch of `Level`s and adds them to the `World`.
+// This function will save you a lot of time. Instead of creating many levels one by one,
+// you can create them all at once.
 jungleWorld.BatchAddLevelsWithTemplates(
   10,                                   // Number of levels in this world
-  some_gate,                            // Gate for each of the levels
+  someGate,                             // Gate for each of the levels
   new List<Score>() { ... },            // Scores for each of the levels
   new List<Mission>() { ... }           // Missions for each of levels
 );
+
+// Add an inner world
+World jungleWorldInner = new World("innerWorld");
+jungleWorld.AddInnerWorld(jungleWorldInner.ID);
+
+// Fetch an inner world
+World innerWorld = jungleWorld.GetInnerWorldAt(0);
 ```
 
 <br>
 **Get/Set completion status:**
 
 ``` cs
-jungleWorld.SetCompleted(true); //set as completed
+bool canStart = jungleWorld.CanStart();
 
-bool isComplete = jungleWorld.IsCompleted(); //check if complete
+jungleWorld.SetCompleted(true); // set as completed
+
+bool isComplete = jungleWorld.IsCompleted(); // check if complete
 ```
 
 <br>
@@ -159,20 +143,22 @@ Use the different functions provided in `World` to get, set, increase, and decre
 ``` cs
 /** For a World with a single Score: **/
 
-jungleWorld.SetSingleScoreValue(300); //set score to 300
+jungleWorld.SetSingleScoreValue(300); // set score to 300
 
-jungleWorld.IncSingleScore(100); //increase score by 100
+jungleWorld.IncSingleScore(100); // increase score by 100
 
-Score score =  jungleWorld.getSingleScore(); //get score - value is 400
+jungleWorld.DecSingleScore(50); // increase score by 50
 
-double total = jungleWorld.SumInnerWorldsRecords(); //get the total score of all inner world (levels) scores
+Score score = jungleWorld.GetSingleScore(); // get score - value is now 350
+
+double total = jungleWorld.SumInnerWorldsRecords(); // get the total score of all inner world (levels) scores
+
+jungleWorld.ResetScores(true); // reset score values and save
 
 
 /** For a World with multiple Scores: **/
 
-jungleWorld.SetScoreValue(someScore.ID, 200); //set SomeScore to 200
-
-jungleWorld.ResetScores(true); //reset score values
+jungleWorld.SetScoreValue(someScore.ID, 200); // set someScore to 200
 
 jungleWorld.IncScore(coinScore.ID, 250);
 
@@ -184,20 +170,45 @@ jungleWorld.DecScore(coinScore.ID, 150);
 
 ``` cs
 Reward coinReward = new ...
-jungleWorld.AssignReward(coinReward); //assign this reward to this World
+jungleWorld.AssignReward(coinReward); // assign this reward to this World
 
-String rewardID = jungleWorld.getAssignedRewardID(); //get reward ID
+String rewardID = jungleWorld.getAssignedRewardID(); // get reward ID
 ```
 
 <br>
-**More `World` Query functions:**
+**Example: Print all Record scores and Latest Scores**
 
 ``` cs
-World innerWorld = worldA.GetInnerWorldAt(0);
+string scoreName;
+double scoreVal;
+string message;
 
-bool canStart = innerWorld.CanStart();
+// Create a World
+World worldA = new World("worldA");
 
-TODO!!!
+// Add a few scores to worldA
+
+// Print all the record values of the scores of worldA
+Dictionary<string, double> recordScores = worldA.GetRecordScores();
+foreach(KeyValuePair<string, double> entry in recordScores)
+{
+	scoreName = entry.Key;
+	scoreVal = entry.Value;
+	message = scoreName + ": " + scoreVal;
+	//SoomlaUtils.LogDebug("", message);
+	Assert.AreEqual("", message);
+}
+
+// Print all the latest values of the scores of worldA
+Dictionary<string, double> latestScores = worldA.GetLatestScores();
+foreach(KeyValuePair<string, double> entry in latestScores)
+{
+	scoreName = entry.Key;
+	scoreVal = entry.Value;
+	message = scoreName + ": " + scoreVal;
+	//SoomlaUtils.LogDebug("", message);
+	Assert.AreEqual("", message);
+}
 ```
 
 <br>
@@ -284,15 +295,16 @@ Represents a score in the game. A simple game usually has one generic numeric sc
 <br>
 ####**HOW TO DEFINE**
 
-For your convenience, there are multiple ways to define a `Score`.
+There are multiple ways to define a `Score`.
 
 ``` cs
+// Simple constructor that receives only an ID.
 Score score = new Score("score_ID");
 
 Score numberScore = new Score(
   "numberScore",                        // ID
   "Number Score",                       // Name
-  true                                  // Higher is better
+  true                                  // ascending(higher is better)
 );
 ```
 
@@ -314,9 +326,9 @@ if (numberScore.HasTempReached(5000)) {
 **Check if the `Score` has reached a record:**
 
 ``` cs
-//Checks if a value of 300 breaks numberScore's record.
+// Checks if a value of 300 breaks numberScore's record.
 if (numberScore.HasRecordReached(300)) {
-  //do something...
+  // do something...
 }
 ```
 
@@ -352,7 +364,7 @@ Score quizScore = new RangeScore(
 Score shootingScore = new RangeScore(
   "shootingRange",                      // ID
   "Shooting Range Score",               // Name
-  true,                                 // Higher is better
+  true,                                 // ascending (higher is better)
   new RangeScore.SRange(10, 100)        // Range
 );
 ```
@@ -382,7 +394,7 @@ VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_currency");
 Score coinScore = new VirtualItemScore(
   "coinScore",                          // ID
   "Coin Score",                         // Name
-  true,                                 // Higher is better
+  true,                                 // Ascending (higher is better)
   coin.ID                               // Associated item ID
 );
 ```
@@ -403,10 +415,11 @@ All gates have the same functionality.
 
 ``` cs
 if (someGate.IsOpen()) {
-  //do something
+  // do something
 }
 ```
 
+<br>
 ###**BalanceGate**
 
 A specific type of `Gate` that has an associated virtual item and a desired balance. The`Gate` opens once the item's balance has reached the desired balance.
@@ -483,7 +496,7 @@ isOpen = pGate.IsOpen();  // True because the shield item has been purchased.
 
 ###**RecordGate**
 
-A RecordGate has an associated score and a desired record. The `Gate` opens once the player achieves the desired record for the given score.
+A RecordGate has an associated score and a desired record. The `Gate` opens once the player achieves the desired record.
 
 `RecordGate` can be used to highly promote game progression. For example, if there is `RecordGate` for each level in the game, the user will be encouraged to continuously beat his/her own score.
 
@@ -495,9 +508,9 @@ Score numberScore = new Score("numberScore", "Score", true);
 
 //The user needs to reach a record of 5000 for numberScore in order to open this Gate.
 Gate rGate = new RecordGate(
-  "rGate",
-  numberScore.ID,
-  5000
+  "rGate",                      // ID
+  numberScore.ID,               // Associated score ID
+  5000                          // Score record that opens the gate
 );
 ```
 
@@ -603,7 +616,7 @@ This gate is very demanding since it requires multiple criteria in order to be o
 ####**HOW TO DEFINE**
 
 ``` cs
-///NOTE: wGate and rGate are defined in the sections above.
+// NOTE: wGate and rGate are defined in the sections above.
 Gate wGateANDrGate = new GatesListAND(
 	"",                                   // ID
 	new List<Gate>() { wGate, rGate }     // List of Gates
@@ -639,6 +652,7 @@ numberScore.Reset(true); // Save the score and its record in the storage
 isOpen = wGateANDrGate.IsOpen(); // TRUE! because both gates have been opened
 ```
 
+<br>
 ####**GatesListOR**
 A specific type of `GatesList` that can be opened if AT LEAST ONE `Gate` in its list is open.
 
@@ -789,7 +803,7 @@ This function determines whether a `Mission` is available to be set as completed
 
 ``` cs
 if (someMission.IsAvailable()) {
-  //do something...
+  // do something...
 }
 ```
 
@@ -797,7 +811,7 @@ if (someMission.IsAvailable()) {
 
 ``` cs
 if (someMission.IsCompleted()) {
-  //do something...
+  // do something...
 }
 ```
 
@@ -830,14 +844,14 @@ Mission bMission = new BalanceMission(
 int balance;
 bool isCompleted;
 
-balance = StoreInventory.GetItemBalance(coin.ID); // balance = 0
+balance = StoreInventory.GetItemBalance(coin.ID); // Balance = 0
 
 isCompleted = bMission.IsCompleted(); // False because the coin balance hasn't
                                       // reached the desired balance (250).
 
 StoreInventory.GiveItem(coin.ID, 250);
 
-balance = StoreInventory.GetItemBalance(coin.ID); // now balance = 250
+balance = StoreInventory.GetItemBalance(coin.ID); // Now balance = 250
 
 isCompleted = bMission.IsCompleted();  // True because the balance has reached
                                        // the desired balance (250).
@@ -851,6 +865,7 @@ A specific type of `Mission` that has an associated score and a desired record. 
 ####**HOW TO DEFINE**
 
 ``` cs
+
 ///To complete this mission the user needs his coinScore to reach a record of 5000.
 ///Once the mission is complete he/she will receive the reward(s).
 Mission rMission = new RecordMission(
@@ -929,7 +944,7 @@ World worldA = new World("worldA");
 ///To complete this mission the user needs to complete worldA.
 ///Once the mission is complete he/she will receive the reward(s).
 Mission wMission = new WorldCompletionMission(
-  "wMission",                          // ID
+  "wMission",                           // ID
   "World completion Mission",           // Name
   new List<Reward>() { someReward },    // Reward(s)
   worldA.ID                             // Associated World ID
@@ -998,8 +1013,9 @@ A specific type of `Mission` that has an associated story that includes a messag
 **HOW TO DEFINE**
 
 ``` cs
+
 Mission storyMission = new SocialStoryMission(
-  "storyMission",                      // ID
+  "storyMission",                       // ID
   "Story Mission",                      // Name
   new List<Reward>() { r1, r2 },        // Rewards
   Soomla.Profile.Provider.FACEBOOK,     // Social provider

@@ -72,9 +72,6 @@ public void onGateOpened(Gate gate) {
 }
 ```
 
-
-
-
 We need to have a comprehensive list of all events here, with really short code examples for each
 one. Something concise and easy to digest - for example show for each event an event handler that takes
 the entity's ID, fetches it from the SoomlaLevelUp class, and prints it's JSON representation.
