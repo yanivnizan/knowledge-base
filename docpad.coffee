@@ -138,8 +138,8 @@ docpadConfig = {
 		platforms_unity: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'unity')},[position:1])
 
-		soomla_blueprint: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','soomla', 'blueprint')},[position:1])
+		soomla_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','soomla', 'levelup')},[position:1])
 
 		soomla_store: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','soomla', 'store')},[position:1])
