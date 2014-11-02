@@ -8,7 +8,7 @@ theme: 'platforms'
 collection: 'platforms_unity'
 ---
 
-#**STORE: Main Classes**
+#STORE: Main Classes
 
 Here you can find descriptions of some of the main classes and interfaces of unity3d-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
 

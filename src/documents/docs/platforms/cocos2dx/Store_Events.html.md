@@ -8,7 +8,7 @@ theme: 'platforms'
 collection: 'platforms_cocos2dx'
 ---
 
-#**STORE: Event Handling**
+#STORE: Event Handling
 
 ##About
 

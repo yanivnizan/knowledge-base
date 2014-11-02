@@ -18,7 +18,7 @@ Here you can find descriptions of some of the main classes and interfaces of coc
 
 ###Important Functions
 
-**`CCSoomlaStore::refreshInventory()`**
+`CCSoomlaStore::refreshInventory()`
 
 This function queries the Market’s inventory, and creates a list of all metadata stored in the Market (the items that have been purchased). The metadata includes the item’s name, description, price, product ID, etc.
 
@@ -32,7 +32,6 @@ StoreInfo is the mother of all metadata information about your specific game.
 - Virtual currency packs
 - Virtual goods of all kinds
 - Virtual categories
-- Non-consumable items
 
 StoreInfo can be questioned about the existence of `VirtualItem`s and the associations between them.
 
@@ -52,7 +51,7 @@ CCUpgradeVG *firstUpgrade = soomla::CCStoreInfo::sharedStoreInfo()->getFirstUpgr
 
 ###Important Functions
 
-**`buyItem(const char *itemId, CCSoomlaError **soomlaError)`**
+`buyItem(const char *itemId, CCSoomlaError **soomlaError)`
 
 Buys the item with the given `itemId` according to its purchase type - either with real money ($$$) or with other virtual items. Read more about `PurchaseTypes` in Economy Model.
 
@@ -65,7 +64,7 @@ CCStoreInventory::sharedStoreInventory()->buyItem("blue_hat", &soomlaError);
 ```
 <br>
 
-**`giveItem(const char *itemId, int amount, CCSoomlaError **soomlaError)`**
+`giveItem(const char *itemId, int amount, CCSoomlaError **soomlaError)`
 
 Gives your user the given amount of the virtual item with the given item ID, and gets nothing in return. For example, when your user plays your game for the first time you can GIVE him 1000 free gems to start out with.
 
@@ -78,7 +77,7 @@ CCStoreInventory::sharedStoreInventory()->giveItem("currency_coin", 10, &soomlaE
 ```
 <br>
 
-**`takeItem(const char *itemId, int amount, CCSoomlaError **soomlaError)`**
+`takeItem(const char *itemId, int amount, CCSoomlaError **soomlaError)`
 
 Takes from your user the given amount of the virtual item with the given item ID. For example, when your user requests a refund you TAKE the item he/she is returning.
 

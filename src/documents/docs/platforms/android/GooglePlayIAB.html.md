@@ -46,6 +46,10 @@ collection: 'platforms_android'
 
 ##Newbie?
 
+**NOTE:** After publishing your game (to alpha or beta), you must wait a few hours (about 1-2 hours) until you can test your in-app products.
+
+  ![alt text](/img/tutorial_img/google_play_iab/iap_testing.png "IAP testing")
+
 ###Useful links
 
 - Make sure you have a [test account](http://developer.android.com/google/play/licensing/setting-up.html#test-acct-setup) defined in Google Play and a device using that test account.

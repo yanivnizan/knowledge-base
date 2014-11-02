@@ -12,7 +12,7 @@ collection: 'platforms_cocos2dx'
 
 ##Integrate cocos2dx-store
 
-###**With pre-built libraries**
+###With pre-built libraries
 
 *If you want to develop with sources, refer to the "Working with Sources" section below.*
 
@@ -21,7 +21,9 @@ collection: 'platforms_cocos2dx'
 1. Clone [soomla-cocos2dx-core](https://github.com/soomla/soomla-cocos2dx-core) and cocos2dx-store into the `extensions` folder located at the root of your Cocos2d-x framework.
 
 	```
-	$ git clone git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core $ git clone git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
+	$ git clone git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
+
+  $ git clone git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
 	```
 
 2. cocos2dx-store uses a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing. Clone it into the `external` directory at the root of your Cocos2d-x framework.
@@ -39,11 +41,11 @@ collection: 'platforms_cocos2dx'
 	``` cpp
 	__Dictionary *commonParams = __Dictionary::create();
 	commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-	soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-	```
 
-	``` cpp
-	__Dictionary *storeParams = __Dictionary::create();
+  __Dictionary *storeParams = __Dictionary::create();
+
+	soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+
 	storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
 
 	soomla::CCStoreService::initShared(assets, storeParams);
@@ -80,11 +82,14 @@ In your XCode project, perform the following steps:
 
 2. For each of the following XCode projects:
 
- * `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).  
+ * `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).
+
  * `Cocos2dXStore.xcodeproj` (**extensions/cocos2dx-store/**).
 
     a. Drag the project into your project.
+
     b. Add its targets to your **Build Phases->Target Dependencies**.
+
     c. Add its *.a files to **Build Phases->Link Binary With Libraries**.
 
     ![alt text](/img/tutorial_img/cocos2dx_getting_started/iOS_steps1to4.png "iOS Integration")
@@ -95,14 +100,24 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers/**`
 
-4. Add `-ObjC` to your project under **Build Setting->Other Linker Flags**.
+4. Add `-ObjC` to your project **Build Settings** > **Other Linker Flags**.
 
-5. Register the native `StoreService` by adding:
+5. To register services on the native application (AppController):
+
+  a. import the following headers:
+
+    ``` cpp
+    #import "ServiceManager.h"
+    #import "StoreService.h"
+    ```
+
+  b. Register the native `StoreService` by adding:
 
     ```cpp
     [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
     ```
-at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
+
+    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
 6. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
@@ -127,7 +142,7 @@ at the begining of the method `application: didFinishLaunchingWithOptions:` of `
 
     - SoomlaAndroidCore.jar
     - Cocos2dxAndroidCore.jar
-	- square-otto-1.3.2.jar
+    - square-otto-1.3.2.jar
 
   From `extensions/cocos2dx-store/build/android`:
 
@@ -136,15 +151,18 @@ at the begining of the method `application: didFinishLaunchingWithOptions:` of `
 
 3. In your game's main Cocos2dxActivity, call the following in the `onCreateView` method:
 
-     ``` java
-	     public Cocos2dxGLSurfaceView onCreateView() {
+    ``` java
+    public Cocos2dxGLSurfaceView onCreateView() {
 
-        // initialize services
-        final ServiceManager serviceManager = ServiceManager.getInstance();
-        serviceManager.setActivity(this);
-        serviceManager.setGlSurfaceView(glSurfaceView);
-        serviceManager.registerService(StoreService.getInstance());
-     ```
+      // initialize services
+      final ServiceManager serviceManager = ServiceManager.getInstance();
+      serviceManager.setActivity(this);
+      serviceManager.setGlSurfaceView(glSurfaceView);
+      serviceManager.registerService(StoreService.getInstance());
+
+      ...
+    }  
+    ```
 
 4. Override `onPause`, `onResume`:
 
@@ -282,8 +300,6 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 	```
 
 **That's it! Now all you have to do is run the *build_native.sh* script and you can begin using cocos2dx-store in your game.**
-
-
 
 
 ##**Example**
