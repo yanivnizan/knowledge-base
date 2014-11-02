@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "Getting Started & In-app Billing"
+title: "STORE: Getting Started"
 text: "Get started with cocos2dx-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
 position: 1
 theme: 'platforms'
 collection: 'platforms_cocos2dx'
 ---
 
-#**Getting Started**
+#STORE: Getting Started
 
 ##Integrate cocos2dx-store (C++)
 
