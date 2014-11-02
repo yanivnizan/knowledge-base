@@ -16,13 +16,13 @@ collection: 'platforms_unity'
 
 In this document, you will find definitions of each of the entities of LevelUp, the connections between them, and code examples that demonstrate how to use them.
 
-###LevelUp Hierarchy
+###**LevelUp Hierarchy**
 
 The SOOMLA team has examined dozens of games and has observed that most game progress and accomplishment can be packed into worlds. Worlds can contain both levels and worlds internally, and may have missions that can be completed in order to receive rewards.
 
 ![alt text](/img/tutorial_img/soomla_diagrams/LevelUp.png "Soomla LevelUp Model")
 
-###Prerequisites
+###**Prerequisites**
 
 This document assumes that you have a good understanding of SOOMLA's Store module. If not, please take time to read about the [Economy Model](/docs/platforms/unity/EconomyModel), and then come back to this document.
 
@@ -30,7 +30,7 @@ The `Schedule` and `Reward` entities are widely used in the examples of this doc
 
 ##SoomlaLevelUp
 
-This class is the top level container for the unity-levelup model and definitions. It stores the configurations of the game's world-hierarchy and provides lookup functions for `LevelUp` model elements.
+This class is the top level container for the unity3d-levelup model and definitions. It stores the configurations of the game's world-hierarchy and provides lookup functions for `LevelUp` model elements.
 
 `SoomlaLevelUp` is the central point of initialization. To use `LevelUp` you'll need to compose `World`s, `Level`s, `Mission`s, `Score`s, `Gate`s, `Reward`s, and then instantiate `SoomlaLevelUp` with your root `World`.
 
@@ -38,19 +38,32 @@ This class is the top level container for the unity-levelup model and definition
 **Useful Functions**
 
 ``` cs
+// Retrieve a `World` by its ID:
+World world = SoomlaLevelUp.GetWorld(someWorld.ID);
+
 // Retrieve a `Score` by its ID:
-Score score = SoomlaLevelUp.GetScore(numberScore.ID);
+Score score = SoomlaLevelUp.GetScore(someScore.ID);
 
 // Retrieve a `Gate` by its ID:
-PurchasableGate gate1 = new PurchasableGate("", "");
-Gate myGate = SoomlaLevelUp.GetGate(gate1.ID);
+Gate gate = SoomlaLevelUp.GetGate(someGate.ID);
 
 // Retrieve a `Mission` by its ID:
-BalanceMission mission1 = new BalanceMission("","","",0);
-Mission myMission = SoomlaLevelUp.GetMission(mission1.ID);
+Mission mission = SoomlaLevelUp.GetMission(someMission.ID);
 
 // Retrieve a `Reward` by its ID:
-Reward reward = SoomlaLevelUp.GetReward(coinReward.ID);
+Reward reward = SoomlaLevelUp.GetReward(someReward.ID);
+
+// Retrieve the number of Worlds in your game:
+int numOfWorlds = SoomlaLevelUp.GetWorldCount(true);
+
+// Retrieve the number of Levels in a given World:
+int levels = SoomlaLevelUp.GetLevelCountInWorld(someWorld);
+
+// Retrieve the number of `Level`s in the game:
+int totalLevels = SoomlaLevelUp.GetLevelCount();
+
+// Retrieve the number of completed `Level`s:
+int completedLevels = SoomlaLevelUp.GetCompletedWorldCount();
 ```
 
 <br>
@@ -94,14 +107,14 @@ World lakeWorld = new World(
 **Add `World`s or `Levels` to a `World`**:
 
 ``` cs
-//`BatchAddLevelsWithTemplates` creates a batch of `Level`s and adds them to the `World`.
-// This function will save you a lot of time. Instead of creating many levels one by one,
-// you can create them all at once.
+// Create a batch of `Level`s and add them to the `World`. Instead
+// of creating many levels one by one, you can create them all at
+// once, and save time.
 jungleWorld.BatchAddLevelsWithTemplates(
   10,                                   // Number of levels in this world
   someGate,                             // Gate for each of the levels
   new List<Score>() { ... },            // Scores for each of the levels
-  new List<Mission>() { ... }           // Missions for each of levels
+  new List<Mission>() { ... }           // Missions for each of the levels
 );
 
 // Add an inner world
@@ -116,7 +129,7 @@ World innerWorld = jungleWorld.GetInnerWorldAt(0);
 **Get/Set completion status:**
 
 ``` cs
-bool canStart = jungleWorld.CanStart();
+bool canStart = jungleWorld.CanStart(); // check world's status
 
 jungleWorld.SetCompleted(true); // set as completed
 
@@ -128,7 +141,7 @@ bool isComplete = jungleWorld.IsCompleted(); // check if complete
 You can add `Mission`s and `Score`s to an existing `World`.
 
 ``` cs
-BalanceMission mission = new ... ;
+Mission mission = new ... ;
 jungleWorld.AddMission(mission);
 
 Score score = new ... ;
@@ -149,7 +162,7 @@ jungleWorld.IncSingleScore(100); // increase score by 100
 
 jungleWorld.DecSingleScore(50); // increase score by 50
 
-Score score = jungleWorld.GetSingleScore(); // get score - value is now 350
+Score score = jungleWorld.GetSingleScore(); // get score: value is 350
 
 double total = jungleWorld.SumInnerWorldsRecords(); // get the total score of all inner world (levels) scores
 
@@ -228,10 +241,10 @@ One of the most common ways to create a sense of progress and accomplishment in 
 `Level` has a few different constructors, 2 of which are shown here. The section about `World`s, above, demonstrates the use of a function called `BatchAddLevelsWithTemplates` which is much more convenient to use than the `Level` constructors.
 
 ``` cs
-Level lvl1 = new Level("level1_ID");
+Level level1 = new Level("level1ID");
 
-Level l1 = new Level(
-		"id",
+Level level2 = new Level(
+		"level2ID",
 		someGate,
 		new Dictionary<string, Score> {{ "", score }},
 		new List<Mission> () { someMission }
@@ -380,15 +393,13 @@ A specific type of `Score` that has an associated virtual item, whose balance is
 There are multiple ways to define a `VirtualItemScore`.
 
 ``` cs
-VirtualCurrency diamond = new VirtualCurrency("Diamond", "", "diamond");
-
+VirtualCurrency diamond = new ...
 Score diamondScore = new VirtualItemScore(
   "diamondScore1",                      // ID
   diamond.ID                            // Associated item ID
 );
 
-VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_currency");
-
+VirtualCurrency coin = new ...
 Score coinScore = new VirtualItemScore(
   "coinScore",                          // ID
   "Coin Score",                         // Name
@@ -428,7 +439,7 @@ This type of gate encourages the user to collect more of some virtual item, such
 ####**HOW TO DEFINE**
 
 ``` cs
-VirtualCurrency muffin = new VirtualCurrency("Muffin", "", "muffin");
+VirtualCurrency muffin = new ...
 
 // Collect 5 muffins to open the gate
 Gate bGate = new BalanceGate(
@@ -544,7 +555,8 @@ A specific type of `Gate` that has a schedule that defines when the `Gate` can b
 ####**HOW TO DEFINE**
 
 ``` cs
-// Note that there are multiple ways to declare a schedule. This is just one of them.
+// Note that there are multiple ways to declare a schedule.
+// This is just one of them.
 Schedule schedule = new Schedule(
   DateTime.Now,                         // Start time
   DateTime.Now.AddHours(2),             // End time
@@ -611,6 +623,7 @@ A list of one or more `Gate`s that together define a composite criteria for prog
 
 There are two kinds of `GatesList`s:
 
+<br>
 ####**GatesListAND**
 
 A specific type of `GatesList` that can be opened only if ALL `Gate`s in its list are open.
@@ -623,7 +636,7 @@ This gate is very demanding since it requires multiple criteria in order to be o
 ``` cs
 // NOTE: wGate and rGate are defined in the sections above.
 Gate wGateANDrGate = new GatesListAND(
-	"",                                   // ID
+	"wGateANDrGate",                      // ID
 	new List<Gate>() { wGate, rGate }     // List of Gates
 );
 ```
@@ -633,10 +646,11 @@ Gate wGateANDrGate = new GatesListAND(
 
 ``` cs
 // The user needs to meet the criteria of wGate AND of rGate
-// in order to open this Gate. For the definitions of bGate and
-// sGate, see the topics WorldCompletionGate and RecordGate above.
+// in order to open this Gate. For the definitions of wGate and
+// rGate, see the topics WorldCompletionGate and RecordGate above.
 
 int isOpen;
+bool isCompleted;
 bool wGateIsOpen;
 bool rGateIsOpen;
 
@@ -680,9 +694,9 @@ Gate wGateORpGate = new GatesListOR(
 ####**USE CASE**
 
 ``` cs
-// The user needs to meet the criteria of wGate AND of rGate
-// in order to open this Gate. For the definitions of bGate and
-// sGate, see the topics WorldCompletionGate and RecordGate above.
+// The user needs to meet the criteria of wGate OR of rGate
+// in order to open this Gate. For the definitions of wGate and
+// rGate, see the topics WorldCompletionGate and RecordGate above.
 
 bool isOpen;
 bool wGateIsOpen;
@@ -808,7 +822,7 @@ All missions have the same functionality.
 
 This function determines whether a `Mission` is available to be set as completed, by checking the criteria that makes the `Mission` available, as well as the number of times that this `Mission` can be completed.
 
-**For example:** You will read below about `SocialLikeMission` and `SocialUploadMission`. These allow the user to "like" your page or upload an image for a reward. Let's say that you allow your user to complete `SocialLikeMission` once, and `SocialUploadMission` an unlimited number of times. In this case, if you call `IsAvailable()` on `SocialLikeMission`, it'll return true before the user has completed the mission, and then false afterwards. Every time you call `IsAvailable()` on `SocialUploadMission`, it'll return true, no matter how many times the mission has been completed.
+For example, let's say that you allow your user to complete "mission A" once, and "Mission B" an unlimited number of times. In this case, when you call `IsAvailable()` on "mission A", it'll return true before the user has completed the mission, and false afterwards. However, every time you call `IsAvailable()` on "mission B", it'll return true, no matter how many times the mission has been completed.
 
 ``` cs
 if (someMission.IsAvailable()) {
@@ -833,7 +847,7 @@ A specific type of `Mission` that has an associated virtual item and a desired b
 
 ``` cs
 Reward reward = new ...
-VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_currency");
+VirtualCurrency coin = new ...
 
 // To complete this mission the user needs to collects 250 coins.
 // Once the mission is complete he/she will receive the reward.
@@ -1102,15 +1116,21 @@ isCompleted = challenge.IsCompleted(); // TRUE! Both missions have been complete
 
 ###**Schedule**
 
-Before we begin, let's define what a `Schedule` is, as you will see it used a few times in the descriptions below. A `Schedule` defines any time restrictions that an entity may have.
+A `Schedule` defines any time restrictions that an entity may have.
 
 **A `Schedule` contains the following restrictions:**
 
-- `RequiredRecurrence` - How often is this entity available? Every month, week, day, hour? **For example:** A `Mission` that is available to be completed every Monday.
+- `RequiredRecurrence` - How often is this entity available? Every month, week, day, hour?
 
-- `TimeRanges` - A range of time that this entity is available, with a start time and an end time. **For example:** A `Reward` that can be given starting when the user finishes a certain `Level` and ending 1 hour later.
+  **For example:** A `Mission` that is available to be completed every Monday.
 
-- `ActivationLimit` - The number of times that this entity is available for use. **For example:** A `Mission` that can be attempted 10 times throughout gameplay.
+- `TimeRanges` - A range of time that this entity is available, with a start time and an end time.
+
+  **For example:** A `Reward` that can be given starting when the user finishes a certain `Level` and ending 1 hour later.
+
+- `ActivationLimit` - The number of times that this entity is available for use.
+
+  **For example:** A `Mission` that can be attempted 10 times throughout gameplay.
 
 ###**Reward**
 
