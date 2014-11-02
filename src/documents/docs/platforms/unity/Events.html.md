@@ -51,6 +51,15 @@ public void onSoomlaStoreInitialized() {
     // ... your game specific implementation here ...
 }
 ```
+**NOTE:** One thing you need to notice is that if you want to listen to OnSoomlaStoreInitialized event you have to set up the listener before you initialize SoomlaStore.
+So you'll need to do:
+````
+StoreEvents.OnSoomlaStoreInitialized += onSoomlaStoreInitialized;
+````
+before
+````
+Soomla.SoomlaStore.Initialize(new Soomla.Example.MuffinRushAssets());
+````
 
 ###OnCurrencyBalanceChanged
 
