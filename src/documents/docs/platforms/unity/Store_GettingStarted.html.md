@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "Getting Started & In-app Billing"
+title: "STORE: Getting Started"
 text: "Get started with unity3d-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
 position: 1
 theme: 'platforms'
 collection: 'platforms_unity'
 ---
 
-#**Getting Started**
+#STORE: Getting Started
 
 ##Integrate unity3d-store
 
