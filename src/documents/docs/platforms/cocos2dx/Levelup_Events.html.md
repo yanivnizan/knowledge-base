@@ -69,9 +69,9 @@ namespace soomla {
 
 ``` cs
 #include "CCSimpleLevelUpEventHandler.h"
-#include "CCScore.h"
-#include "CCWorld.h"
-#include "CCLevel.h"
+...
+
+...
 
 // This event will be thrown when the Soomla LevelUp module is initialized and ready.
 void soomla::CCSimpleLevelUpEventHandler::onLevelUpInitialized() {

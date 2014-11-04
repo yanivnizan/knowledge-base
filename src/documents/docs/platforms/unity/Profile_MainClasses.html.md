@@ -10,23 +10,32 @@ collection: 'platforms_unity'
 
 #PROFILE: Main Classes & Operations
 
-In this document you can find descriptions of most of the main classes and interfaces of unity3d-profile. Some of these classes represent the different social elements used in the Profile module, while others contain functionality to perform social-related operations.
+In this document you'll find descriptions of most of the main classes and interfaces of unity3d-profile. Some of these classes represent the different social elements used in the Profile module, while others contain functionality to perform social-related operations.
+
+![alt text](/img/profile/ProfileDiagram.png "Profile Diagram")
+
+<br>
+Social actions allow you to enforce social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or upload a specific status about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
+
+<div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many functions of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
 ##Provider
 
-This class represents the different social networks that exist today, such as Facebook, Twitter, Linkedin, Google+, and more. Currently, SOOMLA supports only Facebook, but in the near future, more social providers will be available.
+This class represents the different social networks that exist today, such as Facebook, Twitter, Google+, and more. Currently, SOOMLA supports only Facebook, but in the near future, more social providers will be available.
 
 The `Provider` class simply holds a string enumeration of the various providers that are available (or *will be* available).
 
 ##SocialActionType
 
-This class represents various social actions that can be performed in social networks, such as posting a status, posting a story, uploading an image, and more.
+This class represents various social actions that can be performed in social networks, such as liking a page, posting a status or story, or uploading an image.
 
 The `SocialActionType` class simply holds a string enumeration of the different social actions.
 
 ##UserProfile
 
-This class holds information about the user for a specific `Provider`.
+This class holds information about a user for a specific `Provider`.
+
+<div class="info-box">Note that each social `Provider` gives access to different information, so you won't necessarily receive all the fields mentioned below.</div>
 
 **A `UserProfile` contains the following elements:**
 
@@ -43,23 +52,33 @@ This class holds information about the user for a specific `Provider`.
 
 ##SoomlaProfile
 
-This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The `Profile` module will work with the social and authentication plugins you provide and define in AndroidManifest.xml or your iOS project's plist.
+This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The `Profile` module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 6b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
+
+<div class="info-box">Notice that most of the functions in this class call relevant functions from the social provider's SDK. Such `SoomlaProfile` functions do not return a value, but rather fire the appropriate events, which contain the return values, depending on whether the operation succeeded or failed. To read more about the different events and event handling, click [here](/docs/platforms/unity/Profile_Events).</div>
 
 <br>
-**Useful Functions:**
+The diagram below depicts the flow that takes place when a `SoomlaProfile` function is called. In the diagram, the example function shown is `Login`, but this principle holds for all functions.
 
-<div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many functions of Profile. For almost every social action, you have the option of giving a reward to your users who complete the action.</div>
+![alt text](/img/profile/profile_func_diagram.png "Function Flow")
 
-###`login / logout`
+###**`Initialize`**
 
-This function will log the user into the specified provider, and will give the user a reward if one was provided.
+`SoomlaProfile` is the class that needs to be initialized in order to begin using Profile. This is covered in unity3d-profile's [Getting Started](/docs/platforms/unity/Profile_GettingStarted) tutorial.
 
-Most of the social actions provided in Profile depend on the user being logged in. Therefore, upon successful login, you'll want to enable the rest of your social action buttons. For example, after the user is successfully logged in, you can display "Like" and "Post Status" buttons.
+```cs
+SoomlaProfile.Initialize();
+```
 
-`logout` simply logs the user out of the specified provider. Don't forget to disable the social action buttons in your UI once your user is logged out.
+###**`Login / Logout`**
+
+The `Login` function will log the user into the specified provider, and will give the user a reward if one was provided.
+
+Most of the social actions provided in Profile depend on the user being logged in. Therefore, upon successful login (which means the `OnLoginFinished` event has fired), you'll want to enable the rest of your social action buttons. For example, after the user is successfully logged in, you can display "Like" and "Post Status" buttons.
+
+`Logout` simply logs the user out of the specified provider. Don't forget to disable the social action buttons in your UI once your user is logged out.
 
 ``` cs
-// If the user clicks on the login button you provide, call the login function:
+// If the user clicks on the login button you provide, call the Login function:
 SoomlaProfile.Login(
 	Provider.FACEBOOK                        // Provider
 );
@@ -78,7 +97,7 @@ SoomlaProfile.Logout(
 ```
 
 <br>
-###`isLoggedIn`
+###**`IsLoggedIn`**
 
 As its name implies, this function checks if the user is logged in and returns a boolean value.
 
@@ -89,105 +108,228 @@ if (SoomlaProfile.IsLoggedIn(Provider.FACEBOOK)) {
 }
 ```
 
-<div class="info-box">If the user is not logged in, please notice that `isLoggedIn` will not log the user in, you'll need to call the `login` function yourself. </div>
+<div class="info-box">If the user is not logged in, please notice that `IsLoggedIn` will not log the user in, you'll need to call the `Login` function yourself. </div>
 
 <br>
-###`like`
+###**`Like`**
 
-This function opens up the provider page to "like" (an external page), and grants the user the supplied reward. Note that `like()` opens the page to like, but does not track if the user *actually* liked the page or not. The user is given the reward just for clicking `like` from the application. Hopefully, after he/she is navigated to the page to like, he/she will like the page.
+This function opens up the provider page to "like" (a web page in a browser), and grants the user the supplied reward. For example, give the user 100 coins for liking your page.
 
 ``` cs
-// If the user clicks the "Like" button provided in your game, call the like function:
+public const string COIN_ID = "coin_ID";
+
+// Virtual currency, coin
+VirtualCurrency coin = new VirtualCurrency("coin", "", COIN_ID);
+
+// A reward of 100 virtual coins.
+Reward hundredCoinReward = new VirtualItemReward("hundredCoinReward_ID", "100 Coin Reward", COIN_ID, 100);
+
+// If the user clicks the "Like" button provided in your game, call the Like function and reward him/her with 100 coins.
 SoomlaProfile.Like(
-	Provider.FACEBOOK,                       // Provider  
-	"The.Soomla.Project",                    // Page to like
-	likePageReward                           // Reward for liking
+	Provider.FACEBOOK,                 // Provider  
+	"The.Soomla.Project",              // Page to like
+	hundredCoinReward                  // Reward for liking
 );
 ```
 
-<br>
-###`updateStatus`
+<div class="info-box">Note that the user is given the reward just for clicking `Like` from the application. The `Like` function opens the page to like, but does not track if the user *actually* liked the page or not.</div>
 
-This function updates the user's status, which is simply a message, on the supplied social provider. Upon a successful update, the user will receive the supplied reward.
+<br>
+###**`UpdateStatus`**
+
+This function updates the user's status, which is simply a message, on the supplied social provider. Upon a successful update, the user will receive the supplied reward. For example, reward users that post a specific status with a `SingleUseVG`, such as a sword.
 
 ``` cs
+// Virtual currency, coin
+VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_ID");
+
+// A single-use virtual item, sword, that can be purchased for 200 virtual coins.
+VirtualItem sword = new SingleUseVG("Sword", "", "sword_ID", new PurchaseWithVirtualItem(coin.ID, 200));
+
+// A reward of 1 FREE sword (no need to purchase it for 200 coins!)
+Reward swordReward = new VirtualItemReward("swordReward_ID", "Sword Reward", sword.ID, 1);
+
+// When a user updates his/her status, they'll receive a statusReward (free sword).
 SoomlaProfile.UpdateStatus(
-	Provider.FACEBOOK,                       // Provider
-	"I LOVE SOOMLA!  http://www.soom.la",    // Message to post as status
-	"",                                      // Payload
-	statusReward                             // Reward for updating status
+	Provider.FACEBOOK,                      // Provider
+	"I LOVE SOOMLA!  http://www.soom.la",   // Message to post as status
+	"",                                     // Payload
+	swordReward                             // Reward for updating status
 );
 ```
 
 ![alt text](/img/profile/socialStatus.png "Update Status")
 
 <br>
-###`updateStory`
+###**`UpdateStory`**
 This function posts a story to the user's profile on the supplied provider. A Story is a more detailed status (very Facebook-oriented). Upon a successful update, the user will receive the supplied reward.
 
-For example, once your user reaches a high score, you could display a popup that allows him/her to share their high score on Facebook with a click of a button. Don't forget to give them an awesome reward for doing so.
+For example, once your user reaches a high score, you could display a popup that allows them to share their high score on Facebook with a click of a button. Once he/she shares the story, you can give them a reward such as a free character.
 
 ``` cs
+// Equippable virtual good - a soombot character with super powers that can be purchased for 2.99.
+VirtualItem soombot = new EquippableVG(
+	EquippableVG.EquippingModel.GLOBAL,
+	"Soombot character",
+	"Soombot has super powers!",
+	"soombot_ID",
+	new PurchaseWithMarket("productID", 2.99)
+);
+
+// A reward of receiving "Soombot" for FREE (no need to pay 2.99!)
+Reward soombotReward = new VirtualItemReward("soombotReward_ID", "Soombot Reward", soombot.ID, 1);
+
+// When a user updates this story, they'll receive a soombotReward (free "Soombot" character).
 SoomlaProfile.UpdateStory(
-	Provider.FACEBOOK,                       // Provider
-	"This is the story.",                    // Text of the story to post
-	"The story of SOOMBOT (Profile Test App)", // Name
-	"SOOMBOT Story",                         // Caption
-	"http://about.soom.la/soombots",         // Link to post
-	"http://about.soom.la/.../spockbot.png", // Image URL
-	"",                                      // Payload
-	storyReward                              // Reward for posting a story
+	Provider.FACEBOOK,                       		// Provider
+	"This is the story.",												// Text of the story to post
+	"The story of SOOMBOT (Profile Test App)",	// Name
+	"SOOMBOT Story",                         		// Caption
+	"http://about.soom.la/soombots",         		// Link to post
+	"http://about.soom.la/.../spockbot.png", 		// Image URL
+	"",                                      		// Payload
+	soombotReward                              	// Reward for posting a story
 );
 ```
 
 ![alt text](/img/profile/socialStory.png "Post Story")
 
 <br>
-###`uploadImage`
+###**`UploadImage`**
 
 This function uploads an image to the user's profile in the supplied provider. Upon a successful upload, the user will receive the supplied reward.
 
-For example, when your user finishes a level in your game, you can offer him/her to upload a screenshot of their screen and be rewarded with 100 coins. This is a win-win situation where the user gets free coins and your game is advertised for free.
+For example, when your user finishes a level in your game, you can offer him/her to upload an image (perhaps a screenshot of the finished level) and receive a reward.
 
 ``` cs
+// A random reward that is selected from the given list - in this case it'll be one of the rewards defines above.
+Reward mysteryReward = new RandomReward(
+	"mysterReward_ID",
+	"Mystery Reward",
+	new List<Reward>{hundredCoinReward, swordReward, soombotReward}
+);
+
+// Once the user uploads the image, give him/her a mysterReward.
 SoomlaProfile.UploadImage(
-	Provider.FACEBOOK,                       // Provider
-	new Texture2D(1,1),
-	"/path/to/image.png",                    // Name of image file path
-	"I love SOOMLA! http://www.soom.la",     // Message to post with image
-	"",                                      // Payload
-	imageReward                              // Reward for posting a story
+	Provider.FACEBOOK,                    // Provider
+	(a texture),                          // The image as a texture
+	"Image title",                        // Name of image
+	"I love SOOMLA! http://www.soom.la",  // Message to post with image
+	"",                                   // Payload
+	mysteryReward                         // Reward for posting a story
 );
 ```
 
 ![alt text](/img/profile/socialUpload.png "Upload Image")
 
-<div class="info-box">The image to upload should be on the device already; the path supplied needs to be a full path to the image on the device.</div>
-
 <br>
-####`getStoredUserProfile`
+###**`GetStoredUserProfile`**
 
-This function retrieves the user's profile for the given provider from the local device storage. This function allows you to get user information without the user being online.
+This function retrieves the user's profile for the given provider from the **local device storage** (`GetStoredUserProfile` does not call any social provider function, it retrieves and returns its information from the storage, contrary to what is depicted in the diagram at the beginning of this section). This function allows you to get user information even if the user is offline.
 
-For example, you could use `getStoredUserProfile` to get the user's birthday, and if today is their birthday, give him/her a "birthday reward" (extra lives,  free coins, etc.).
+For example, you could use `GetStoredUserProfile` to get the user's `FirstName`, and welcome him to the game.
 
 ``` cs
-SoomlaProfile.GetStoredUserProfile(
-	Provider.FACEBOOK,                       // Provider
+UserProfile userProf = SoomlaProfile.GetStoredUserProfile(Provider.FACEBOOK);
+
+string firstName = userProf.FirstName;
+```
+
+<div class="info-box">This functionality is only available if the user has already logged into the provider once.</div>
+
+<br>
+###**`GetContacts`**
+
+This function retrieves a list of the user's contacts from the supplied provider.
+
+<div class="info-box">FB - app users, other- all contacts</div>
+
+You could use `GetContacts`, for example, to show your users a personalized screen where they can see which of their friends are also playing your game. Then you could use that information to allow your users to send their friends a message, or share their best scores with their relevant friends.
+
+``` cs
+SoomlaProfile.GetContacts(Provider.FACEBOOK);
+```
+
+<br>
+###**`OpenAppRatingPage`**
+
+`OpenAppRatingPage` opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store). This function is just for convenience so you can easily open the app's page.
+
+``` cs
+SoomlaProfile.OpenAppRatingPage();
+```
+
+<br>
+##Auxiliary Model: Reward
+
+A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress.
+
+<div class="info-box">Note that `Reward` is a part of soomla-unity3d-core, and *not* part of the Profile module. However, because `Reward`s are used very often throughout Profile, it's important that you are familiar with the different `Reward` types.</div>
+
+`Reward` is an abstract class. Below are several types of rewards that implement `Reward`.
+
+###**VirtualItemReward**
+
+A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) when they complete a `Mission`.
+
+``` cs
+VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_currency");
+
+Reward coinReward = new VirtualItemReward(
+	"vReward",                            // ID
+	"Coin Reward",                        // Name
+	coin.ID,                              // Associated item ID
+	100                                   // Amount
 );
 ```
 
-<div class="info-box">This functionality is only available if the user has already logged into the provider.</div>
-
 <br>
-###`getContacts`
+###**BadgeReward**
 
-This function retrieves a list of the user's contacts from the supplied provider who also use your app.
-
-You could use `getContacts`, for example, to show your users a personalized screen where they can see which of their friends are also playing your game. Then you could use that information to allow your users to send their friends a message, or share their best scores with their relevant friends.
+A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score,  the user can earn a "Highest Score" badge reward.
 
 ``` cs
-SoomlaProfile.GetContacts(
-	Provider.FACEBOOK,                       // Provider
+Reward goldMedal = new BadgeReward(
+	"badge_goldMedal",                    // ID
+	"Gold Medal"                          // Name
+);
+```
+
+<br>
+###**SequenceReward**
+
+A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
+
+``` cs
+Reward blueBelt = new BadgeReward(
+	"blueBelt",                           // ID
+	"Karate blue belt"                    // Name
+);
+// Assume the same instantiation for the rest of the belts.
+
+Reward beltReward = new SequenceReward(
+	"beltReward",                         // ID
+	"Belt Reward",                        // Name
+	new List<Reward>() {                  // Rewards in sequence
+		blueBelt,
+		yellowBelt,  
+		greenBelt,  
+		brownBelt,  
+		blackBelt }
+);
+```
+
+<br>
+###**RandomReward**
+
+A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** A user can earn a mystery box `Reward` that grants him/her a random `Reward`.
+
+``` cs
+Reward mysteryReward = new RandomReward(
+	"mysteryReward",                      // ID
+	"Mystery Box Reward",                 // Name
+	new List<Reward>() {                  // Rewards to choose from
+		goldMedal,
+		coinReward }
 );
 ```

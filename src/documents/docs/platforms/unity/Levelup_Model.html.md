@@ -1179,6 +1179,7 @@ Reward coinReward = new VirtualItemReward(
   100                                   // Amount
 );
 ```
+
 <br>
 ####**BadgeReward**
 

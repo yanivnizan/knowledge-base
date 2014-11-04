@@ -10,47 +10,47 @@ collection: 'platforms_unity'
 
 #PROFILE: Getting Started
 
-##Download or Clone
+##Getting Started
 
-###Pre-baked package
+1. Download and import the official [Facebook SDK](https://developers.facebook.com/docs/unity/getting-started/canvas).
 
-Download [unity3d-profile v1.0](http://bit.ly/1sUDdG0).
+	<div class="info-box">Make sure to use **Facebook Unity SDK v5.1** (SOOMLA's unity3d-profile support for v6.0 is in the works)</div>
 
-###Working with sources
+2. Create an empty folder named `Facebook` under `Assets/Plugins`.
 
-For those of you who want to [contribute](#contribution) code, please use our "sources environment".
+3. Move the "Facebook" folder from "Assets" to "Assets/Plugins" - SOOMLA works from the "Plugins" folder so that it'll be available to UnityScript developers. This is why you need to move "Facebook" into "Plugins" as well.
 
-```
-$ git clone --recursive git@github.com:soomla/unity3d-profile.git
-```
+    <div class="info-box">**NOTE:** When working with Unity version > 4.5.0 (targeting iOS) please follow these extra steps:<br>
 
-<div class="info-box">There are some necessary files in "submodules" linked with symbolic links. If you're cloning the project, make sure you clone it with the `--recursive` flag.</div>
+    1. Edit the file `Assets/Facebook/Editor/iOS/fixup.projmods`<br>
 
-## Getting Started
+    2. Under `headerpaths` change `Facebook/Scripts` to `Plugins/Facebook/Scripts`</div>
 
-1. Go over the guidelines for downloading and importing the official [Facebook SDK](https://developers.facebook.com/docs/unity/getting-started/canvas).
+4. Download and import:
 
-	<div class="warning-box">You do NOT need to initialize FB - `SoomlaProfile` will initialize it for you. (for example, **don't** call `FB.Init()`!).</div>
+	a. [soomla-unity3d-core.unitypackage](https://github.com/soomla/unity3d-profile/blob/master/soomla-unity3d-core.unitypackage)
 
-2. Move the "Facebook" folder from "Assets" to "Assets/Plugins"  -  SOOMLA works from the "Plugins" folder so that it'll be available to UnityScript developers. This is why you need to move "Facebook" into "Plugins" as well.
+	b. [unity3d-profile.unitypackage](http://bit.ly/1sUDdG0)
 
-3. Download and import [soomla-unity3d-core.unitypackage](https://github.com/soomla/unity3d-profile/blob/master/soomla-unity3d-core.unitypackage) and [unity3d-profile.unitypackage](http://bit.ly/1sUDdG0). If you also want to use Store related rewards, you'll need to go over the instructions of [unity3d-store](https://github.com/soomla/unity3d-store).
+	If you want to use Store-related rewards you'll need to go over the instructions of [unity3d-store](https://github.com/soomla/unity3d-store).
 
-4. Drag the "CoreEvents" and "ProfileEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel. **IMPORTANT:** This step MUST be done for unity3d-profile to work properly!
+5. Drag the "CoreEvents" and "ProfileEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel. **IMPORTANT:** This step MUST be done for unity3d-profile to work properly!
 
 	![alt text](/img/profile/unityPrefabs.png "Prefabs")
 
-5. On the menu bar click "Window" > "Soomla" > "Edit Settings" and change the value for "Soomla Secret".
+6. Go to the menu bar, under "Window" > "Soomla" > "Edit Settings":
 
-	<div class="info-box">**Custom Secret** is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game! NOTE: If you used unity3d-store versions before v1.5.2 this secret MUST be the same as "Custom Secret". </div>
+	a. Change the value for **Soomla Secret**. "Soomla Secret" is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game! (NOTE: If you used unity3d-store versions before v1.5.2 this secret MUST be the same as "Custom Secret".)
+
+	b. Select the **Social Platform** that you want to integrate with. Currently Facebook is available, and Google+ and Twitter are in the works.
 
 	![alt text](/img/profile/soomlaSettings.png "Soomla Settings")
 
-6. Initialize `SoomlaProfile`:
+7. Initialize `SoomlaProfile`:
 
-    ```cs
-    SoomlaProfile.Initialize();
-    ```
+		```cs
+		SoomlaProfile.Initialize();
+		```
 
 	<div class="warning-box">IMPORTANT NOTES:<br>
 
@@ -58,22 +58,23 @@ $ git clone --recursive git@github.com:soomla/unity3d-profile.git
 
 	Initialize `SoomlaProfile` in the `Start()` function of a `MonoBehaviour` and **NOT** in the `Awake()` function. SOOMLA has its own `MonoBehaviour` and it needs to be "Awakened" before you initialize.<br>
 
-7. Call all the social functions you can from the `SoomlaProfile` class (functions such as `Like()`, `UpdateStatus()`, etc.). If you try to call these functions from the `FB` class, you won't be able to work with SOOMLA correctly. You can still call functions from the `FB` class, but only those that are not provided by `SoomlaProfile`.
+	Do not initialize Facebook; `SoomlaProfile` will initialize it for you. (Do **not** call `FB.Init()`).
 
-8. You'll need event handlers in order to be notified about in-app purchasing-related events and social-related event. refer to the [Event Handling](/docs/platforms/unity/Profile_Events) section for more information.
+8. Call all the social functions you can from `SoomlaProfile` class (and not from the `FB` class). Otherwise, you won't be able to work with SOOMLA correctly. You can still call functions from the `FB` class but only those that are not provided by `SoomlaProfile`.
+
+9. You'll need event handlers in order to be notified about in-app purchasing-related events and social-related events. refer to the [Event Handling](/docs/platforms/unity/Profile_Events) section for more information.
 
 And that's it! unity3d-profile knows how to contact Facebook and perform social actions with the information you provide.
 
 ##Contribution
 
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the social capabilities of the SOOMLA Profile module, by adding support to any social provider you wish (Twitter, Google+, etc.), and connect the new provider to SOOMLA's Store module.
+**SOOMLA appreciates code contributions!** You are more than welcome to extend the social capabilities of the SOOMLA Profile module.
 
-<div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/cocos2dx-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
+<div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/unity3d-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
 
 ##Example
 
 Here is an example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/unity/Profile_MainClasses).
-
 
 <br>
 Initialize `SoomlaProfile`.
