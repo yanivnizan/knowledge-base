@@ -27,7 +27,7 @@ The `Provider` class simply holds a string enumeration of the various providers 
 
 ##SocialActionType
 
-This class represents various social actions that can be performed in social networks, such as liking a page, posting a status or story, or uploading an image.
+This class represents various social actions that can be performed in social networks, such as posting a status or story, or uploading an image.
 
 The `SocialActionType` class simply holds a string enumeration of the different social actions.
 
@@ -35,7 +35,7 @@ The `SocialActionType` class simply holds a string enumeration of the different 
 
 This class holds information about a user for a specific `Provider`.
 
-<div class="info-box">Note that each social `Provider` gives access to different information, so you won't necessarily receive all the fields mentioned below.</div>
+<div class="info-box">Note that each social `Provider` (FB, G+, Twitter, etc..) gives access to different information, so you won't necessarily receive all the fields mentioned below.</div>
 
 **A `UserProfile` contains the following elements:**
 
@@ -52,7 +52,7 @@ This class holds information about a user for a specific `Provider`.
 
 ##SoomlaProfile
 
-This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The `Profile` module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 6b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
+This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The Profile module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 6b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
 
 <div class="info-box">Notice that most of the functions in this class call relevant functions from the social provider's SDK. Such `SoomlaProfile` functions do not return a value, but rather fire the appropriate events, which contain the return values, depending on whether the operation succeeded or failed. To read more about the different events and event handling, click [here](/docs/platforms/unity/Profile_Events).</div>
 
@@ -61,7 +61,8 @@ The diagram below depicts the flow that takes place when a `SoomlaProfile` funct
 
 ![alt text](/img/profile/profile_func_diagram.png "Function Flow")
 
-###**`Initialize`**
+<br>
+###`Initialize`
 
 `SoomlaProfile` is the class that needs to be initialized in order to begin using Profile. This is covered in unity3d-profile's [Getting Started](/docs/platforms/unity/Profile_GettingStarted) tutorial.
 
@@ -69,7 +70,7 @@ The diagram below depicts the flow that takes place when a `SoomlaProfile` funct
 SoomlaProfile.Initialize();
 ```
 
-###**`Login / Logout`**
+###`Login / Logout`
 
 The `Login` function will log the user into the specified provider, and will give the user a reward if one was provided.
 
@@ -97,7 +98,7 @@ SoomlaProfile.Logout(
 ```
 
 <br>
-###**`IsLoggedIn`**
+###`IsLoggedIn`
 
 As its name implies, this function checks if the user is logged in and returns a boolean value.
 
@@ -111,7 +112,7 @@ if (SoomlaProfile.IsLoggedIn(Provider.FACEBOOK)) {
 <div class="info-box">If the user is not logged in, please notice that `IsLoggedIn` will not log the user in, you'll need to call the `Login` function yourself. </div>
 
 <br>
-###**`Like`**
+###`Like`
 
 This function opens up the provider page to "like" (a web page in a browser), and grants the user the supplied reward. For example, give the user 100 coins for liking your page.
 
@@ -135,7 +136,7 @@ SoomlaProfile.Like(
 <div class="info-box">Note that the user is given the reward just for clicking `Like` from the application. The `Like` function opens the page to like, but does not track if the user *actually* liked the page or not.</div>
 
 <br>
-###**`UpdateStatus`**
+###`UpdateStatus`
 
 This function updates the user's status, which is simply a message, on the supplied social provider. Upon a successful update, the user will receive the supplied reward. For example, reward users that post a specific status with a `SingleUseVG`, such as a sword.
 
@@ -161,7 +162,7 @@ SoomlaProfile.UpdateStatus(
 ![alt text](/img/profile/socialStatus.png "Update Status")
 
 <br>
-###**`UpdateStory`**
+###`UpdateStory`
 This function posts a story to the user's profile on the supplied provider. A Story is a more detailed status (very Facebook-oriented). Upon a successful update, the user will receive the supplied reward.
 
 For example, once your user reaches a high score, you could display a popup that allows them to share their high score on Facebook with a click of a button. Once he/she shares the story, you can give them a reward such as a free character.
@@ -195,7 +196,7 @@ SoomlaProfile.UpdateStory(
 ![alt text](/img/profile/socialStory.png "Post Story")
 
 <br>
-###**`UploadImage`**
+###`UploadImage`
 
 This function uploads an image to the user's profile in the supplied provider. Upon a successful upload, the user will receive the supplied reward.
 
@@ -223,7 +224,7 @@ SoomlaProfile.UploadImage(
 ![alt text](/img/profile/socialUpload.png "Upload Image")
 
 <br>
-###**`GetStoredUserProfile`**
+###`GetStoredUserProfile`
 
 This function retrieves the user's profile for the given provider from the **local device storage** (`GetStoredUserProfile` does not call any social provider function, it retrieves and returns its information from the storage, contrary to what is depicted in the diagram at the beginning of this section). This function allows you to get user information even if the user is offline.
 
@@ -238,20 +239,20 @@ string firstName = userProf.FirstName;
 <div class="info-box">This functionality is only available if the user has already logged into the provider once.</div>
 
 <br>
-###**`GetContacts`**
+###`GetContacts`
 
 This function retrieves a list of the user's contacts from the supplied provider.
 
-<div class="info-box">FB - app users, other- all contacts</div>
+<div class="info-box">Notice that some social providers (FB, G+, Twitter) supply all of the user's contacts and some supply only the contacts that use your app.</div>
 
-You could use `GetContacts`, for example, to show your users a personalized screen where they can see which of their friends are also playing your game. Then you could use that information to allow your users to send their friends a message, or share their best scores with their relevant friends.
+You could use `GetContacts` to show your users a personalized screen where they can see which of their friends are also playing your game, or you could offer the contacts that don't play your game to download your game and receive some free coins.
 
 ``` cs
 SoomlaProfile.GetContacts(Provider.FACEBOOK);
 ```
 
 <br>
-###**`OpenAppRatingPage`**
+###`OpenAppRatingPage`
 
 `OpenAppRatingPage` opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store). This function is just for convenience so you can easily open the app's page.
 

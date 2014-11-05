@@ -17,15 +17,23 @@ In this document you'll find descriptions of most of the main classes and interf
 <br>
 Social actions allow you to enforce social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or upload a specific status about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
 
-<div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many functions of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
+<div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many methods of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
 ##CCUserProfileUtils
 
 This class lists the different social networks that exist today, such as *Facebook, Twitter, Linkedin, Google+*, and more. Currently, SOOMLA supports only Facebook, but in the near future, more social providers will be available.
 
+##CCSocialActionUtils
+
+`CCSocialActionUtils` represents various social actions that can be performed in social networks, such as posting a status or story, or uploading an image.
+
+This class simply holds a string enumeration of the different social actions.
+
 ##CCUserProfile
 
-This class represents a profile of a user from a social network (provider). This class holds information about the user for a specific `Provider` (`Provider` is an enum in the `CCUserProfileUtils` class).
+This class represents a profile of a user from a social network (provider).
+
+<div class="info-box">Note that each social provider (FB, G+, Twitter, etc..) gives access to different information, so you won't necessarily receive all the fields mentioned below.</div>
 
 **A `CCUserProfile` contains the following elements:**
 
@@ -41,15 +49,21 @@ This class represents a profile of a user from a social network (provider). This
 - `Language`
 - `Birthday`
 
-##CCProfileController
+##CCSoomlaProfile
 
-An interface to the native `SoomlaProfile` class, which is the main class that controls the entire SOOMLA Profile module. Use this class access the native `SoomlaProfile` functionality, which allows you to perform various social and authentication operations on users. Below are explanations and usage examples of the various methods of this class.
+This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The Profile module will work with the social and authentication plugins of the integrated social provider (FB, G+, Twitter, etc..).
 
-<div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many methods of Profile. For almost every social action, you have the option of giving a reward to your users who complete the action. Read about the different types of `Rewards` [here](/docs/platforms/cocos2dx/Levelup_Model#auxiliary-models).</div>
+<div class="info-box">Notice that most of the methods in this class call relevant methods from the social provider's SDK. Such `CCSoomlaProfile` methods do not return a value, but rather fire the appropriate events, which contain the return values, depending on whether the operation succeeded or failed. To read more about the different events and event handling, click [here](/docs/platforms/cocos2dx/Profile_Events).</div>
 
+<br>
+The diagram below depicts the flow that takes place when a `CCSoomlaProfile` method is called. In the diagram, the example method shown is `login`, but this principle holds for all methods.
+
+![alt text](/img/profile/profile_cocos_flow.png "Method Flow")
+
+<br>
 ###`login / logout`
 
-`login`requires the parameters: "provider" and an optional "reward". The `login` method will log the user into the specified provider, and will give the user a reward if one was provided.
+The `login` function will log the user into the specified provider, and will give the user a reward if one was provided.
 
 Most of the social actions provided in Profile depend on the user being logged in. Therefore, upon successful login, you'll want to enable the rest of your social action buttons. For example, after the user is successfully logged in, you can display "Like" and "Post Status" buttons.
 
@@ -57,20 +71,20 @@ Most of the social actions provided in Profile depend on the user being logged i
 
 ``` cs
 // If the user clicks on the login button you provide, call the login method:
-soomla::CCProfileController::getInstance()->login(
+soomla::CCSoomlaProfile::getInstance()->login(
 	soomla::FACEBOOK,                     // Provider
 	loginReward,                          // Reward for logging in
 	&profileError                         // Used for error handling
 );
 
 // If you choose not to give a reward upon login, use this instead:
-soomla::CCProfileController::getInstance()->login(
+soomla::CCSoomlaProfile::getInstance()->login(
 	soomla::FACEBOOK,                     // Provider
 	&profileError                         // Used for error handling
 );
 
 // If the user would like to logout:
-soomla::CCProfileController::getInstance()->logout(
+soomla::CCSoomlaProfile::getInstance()->logout(
 	soomla::FACEBOOK,                     // Provider
 	&profileError                         // Used for error handling
 );
@@ -82,7 +96,7 @@ soomla::CCProfileController::getInstance()->logout(
 As its name implies, this method checks if the user is logged in and returns a boolean value.
 
 ``` cpp
-bool isLoggedIn = soomla::CCProfileController::getInstance()->isLoggedIn(
+bool isLoggedIn = soomla::CCSoomlaProfile::getInstance()->isLoggedIn(
 	 soomla::FACEBOOK,                    // Provider
 	 &profileError                        // Used for error handling
 );
@@ -98,25 +112,48 @@ if (isLoggedIn) {
 <br>
 ###`like`
 
-This method opens up the provider page to "like" (an external page), and grants the user the supplied reward. Note that `like()` opens the page to like, but does not track if the user *actually* liked the page or not. The user is given the reward just for clicking `like` from the application. Hopefully, after he/she is navigated to the page to like, he/she will like the page.
+This function opens up the provider page to "like" (a web page in a browser), and grants the user the supplied reward. For example, give the user 100 coins for liking your page.
 
 ``` cpp
-// If the user clicks the "Like" button provided in your game, call the like method:
-soomla::CCProfileController::getInstance()->like(
+// A reward of 100 virtual coins
+likeReward = soomla::CCVirtualItemReward::create(
+	__String::create("like_reward"),
+  __String::create("Like Reward"),
+  __Integer::create(100),
+	__String::create(COIN_CURRENCY_ITEM_ID)
+);
+
+...
+
+// If the user clicks the "Like" button provided in your game, call the
+// like method and reward him/her with 100 coins.
+soomla::CCSoomlaProfile::getInstance()->like(
 	soomla::FACEBOOK,                     // Provider
 	"The.SOOMLA.Project",                 // Page to like
-	likePageReward,                       // Reward for liking
+	likeReward,                           // Reward for liking
 	&profileError                         // Used for error handling
 );
 ```
 
+<div class="info-box">Note that the user is given the reward just for clicking `Like` from the application. The `Like` function opens the page to like, but does not track if the user *actually* liked the page or not.</div>
+
 <br>
 ###`updateStatus`
 
-This method updates the user's status, which is simply a message, on the supplied social provider. Upon a successful update, the user will receive the supplied reward.
+This function updates the user's status, which is simply a message, on the supplied social provider. Upon a successful update, the user will receive the supplied reward. For example, reward users that post a specific status with a `CCSingleUseVG`, such as a sword.
 
 ``` cpp
-soomla::CCProfileController::getInstance()->updateStatus(
+// A reward of a FREE sword
+statusReward = soomla::CCVirtualItemReward::create(
+	__String::create("status_reward"),
+	__String::create("Status Reward"),
+	__Integer::create(1),
+	__String::create(SWORD_ITEM_ID)
+);
+
+...
+
+soomla::CCSoomlaProfile::getInstance()->updateStatus(
 	soomla::FACEBOOK,                     // Provider
 	"I love SOOMLA! http://www.soom.la",  // Message to post as status
 	statusReward,                         // Reward for updating status
@@ -128,12 +165,22 @@ soomla::CCProfileController::getInstance()->updateStatus(
 
 <br>
 ###`updateStory`
-This method posts a story to the user's profile on the supplied provider. A Story is a more detailed status (very Facebook-oriented). Upon a successful update, the user will receive the supplied reward.
+This function posts a story to the user's profile on the supplied provider. A Story is a more detailed status (very Facebook-oriented). Upon a successful update, the user will receive the supplied reward.
 
-For example, once your user reaches a high score, you could display a popup that allows him/her to share their high score on Facebook with a click of a button. Don't forget to give them an awesome reward for doing so.
+For example, once your user reaches a high score, you could display a popup that allows them to share their high score on Facebook with a click of a button. Once he/she shares the story, you can give them a reward such as a free character.
 
 ``` cpp
-soomla::CCProfileController::getInstance()->updateStory(
+// A reward of a FREE Soombot character
+storyReward = soomla::CCVirtualItemReward::create(
+	__String::create("story_reward"),
+	__String::create("Story Reward"),
+	__Integer::create(1),
+	__String::create(SOOMBOT_ITEM_ID)
+);
+
+...
+
+soomla::CCSoomlaProfile::getInstance()->updateStory(
 	soomla::FACEBOOK,                          // Provider
 	"This is the story.",                      // Story message
 	"The story of SOOMBOT (Profile Test App)", // Name (title of the story)
@@ -151,19 +198,37 @@ soomla::CCProfileController::getInstance()->updateStory(
 <br>
 ###`uploadImage`
 
-This method uploads an image to the user's profile in the supplied provider. Upon a successful upload, the user will receive the supplied reward.
+This function uploads an image to the user's profile in the supplied provider. Upon a successful upload, the user will receive the supplied reward.
 
-For example, when your user finishes a level in your game, you can offer him/her to upload a screenshot of their screen and be rewarded with 100 coins. This is a win-win situation where the user gets free coins and your game is advertised for free.
+For example, when your user finishes a level in your game, you can offer him/her to upload an image (perhaps a screenshot of the finished level) and receive a reward.
+
 
 ``` cpp
-// Assume that saveScreenShot() is a private method that returns a string representation of the current screenshot.
+__Array *rewards = __Array::create();
+rewards->addObject(likeReward);
+rewards->addObject(statusReward);
+rewards->addObject(storyReward);
+
+soomla::CCSchedule *schedule = soomla::CCSchedule::createAnyTimeUnlimited();
+
+imageReward = soomla::CCRandomReward::create(
+	__String::create("imageReward_ID"),
+	__String::create("Upload Image Reward"),
+	rewards,
+	schedule
+);
+
+...
+
+// Assume that saveScreenShot() is a private method that returns
+// a string representation of the current screenshot.
 std::string screenshotPath = saveScreenshot();
 
-soomla::CCProfileController::getInstance()->uploadImage(
+soomla::CCSoomlaProfile::getInstance()->uploadImage(
 	soomla::FACEBOOK,                     // Provider
 	"I love SOOMLA! http://www.soom.la",  // Message
 	screenshotPath.c_str(),               // Name of image file path
-	uploadReward,                         // Reward for uploading an image
+	imageReward,                          // Reward for uploading an image
 	&profileError                         // Used for error handling
 );
 ```
@@ -175,15 +240,18 @@ soomla::CCProfileController::getInstance()->uploadImage(
 <br>
 ###`getStoredUserProfile`
 
-This method retrieves the user's profile for the given provider from the local device storage. This method allows you to get user information without the user being online.
+This function retrieves the user's profile for the given provider from the **local device storage** (`GetStoredUserProfile` does not call any social provider function, it retrieves and returns its information from the storage, contrary to what is depicted in the diagram at the beginning of this section). This function allows you to get user information even if the user is offline.
 
-For example, you could use `getStoredUserProfile` to get the user's birthday, and if today is their birthday, give him/her a "birthday reward" (extra lives,  free coins, etc.).
+For example, you could use `GetStoredUserProfile` to get the user's `FirstName`, and welcome him to the game.
 
 ``` cpp
-soomla::CCProfileController::getInstance()->getStoredUserProfile(
+soomla::CCUserProfile *userProf = soomla::CCSoomlaProfile::getInstance()->getStoredUserProfile(
 	soomla::FACEBOOK,                     // Provider
 	&profileError                         // Used for error handling
 );
+
+// Get the user's first name
+userProf->getFirstName();
 ```
 
 <div class="info-box">This functionality is only available if the user has already logged into the provider.</div>
@@ -191,14 +259,97 @@ soomla::CCProfileController::getInstance()->getStoredUserProfile(
 <br>
 ###`getContacts`
 
-This method retrieves a list of the user's contacts from the supplied provider who also use your app.
+This function retrieves a list of the user's contacts from the supplied provider.
 
-You could use `getContacts`, for example, to show your users a personalized screen where they can see which of their friends are also playing your game. Then you could use that information to allow your users to send their friends a message, or share their best scores with their relevant friends.
+<div class="info-box">Notice that some social providers (FB, G+, Twitter) supply all of the user's contacts and some supply only the contacts that use your app.</div>
+
+You could use `GetContacts` to show your users a personalized screen where they can see which of their friends are also playing your game, or you could offer the contacts that don't play your game to download your game and receive some free coins.
 
 ``` cpp
-soomla::CCProfileController::getInstance()->getContacts(
+soomla::CCSoomlaProfile::getInstance()->getContacts(
 	soomla::FACEBOOK,                     // Provider
 	contactsReward,                       // Reward upon success of getting contacts
 	&profileError                         // Used for error handling
+);
+```
+
+<br>
+###`openAppRatingPage`
+
+`OpenAppRatingPage` opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store). This function is just for convenience so you can easily open the app's page.
+
+``` cs
+soomla::CCSoomlaProfile::openAppRatingPage(&profileError);
+```
+
+##Auxiliary Model: Reward
+
+A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress.
+
+<div class="info-box">Note that `Reward` is a part of soomla-cocos2dx-core, and not part of the Profile module. However, because `Reward`s are used very often throughout Profile, it's important that you are familiar with the different `Reward` types.</div>
+
+`Reward` itself cannot be instantiated, but there are many types of rewards, all explained below.
+
+<br>
+###**VirtualItemReward**
+
+A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users a reward of 100 coins (virtual currency).
+
+``` cpp
+CCReward *coinReward = CCVirtualItemReward::create(
+	CCString::create("coinReward"),         // ID
+	CCString::create("Coin Reward"),        // Name
+	CCString::create("coinCurrency_ID")     // Associated item ID
+	CCInteger::create(100)                  // Amount
+);
+```
+
+<br>
+###**BadgeReward**
+
+A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score,  the user can earn a "Highest Score" badge reward.
+
+``` cpp
+CCReward *goldMedal = CCBadgeReward::create(
+	CCString::create("badge_goldMedal"),   // ID
+	CCString::create("Gold Medal"),        // Name
+);
+```
+
+<br>
+###**SequenceReward**
+
+A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
+
+``` cpp
+cocos2d::__Array *belts = cocos2d::__Array::create();
+// Assume that the below belts are BadgeRewards that have been defined.
+belts->addObject(blueBelt);
+belts->addObject(yellowBelt);
+belts->addObject(greenBelt);
+belts->addObject(brownBelt);
+belts->addObject(blackBelt);
+
+CCReward *beltReward = CCSequenceReward::create(
+	CCString::create("beltReward"),         // ID
+	CCString::create("Belt Reward"),        // Name
+	belts                                   // Sequence of rewards
+);
+```
+
+<br>
+###**RandomReward**
+
+A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** A user can earn a mystery box `Reward` that grants him/her a random `Reward`.
+
+``` cpp
+cocos2d::__Array *rewards = cocos2d::__Array::create();
+rewards->addObject(rewardA);
+rewards->addObject(rewardB);
+
+CCReward *mysteryReward = CCRandomReward::create(
+	CCString::create("mysteryReward"),        // ID
+	CCString::create("Mystery Box Reward"),   // Name
+	rewards                                   // Rewards to choose from
 );
 ```
