@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "LEVELUP: Getting Started"
 text: "Get started with unity3d-levelup. Here you'll learn how to easily integrate LevelUp into your game, as well as see a basic example of initialization."
-position: 11
+position: 8
 theme: 'platforms'
 collection: 'platforms_unity'
 ---

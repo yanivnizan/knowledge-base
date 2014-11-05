@@ -3,7 +3,7 @@ layout: "content"
 image: "InAppPurchase"
 title: "Create Your Own Billing Plugin"
 text: "Not all Android users pay with Google Play. Learn how to create new billing plugins for android-store to allow alternative payment methods."
-position: 10
+position: 11
 theme: 'platforms'
 collection: 'platforms_unity'
 ---
