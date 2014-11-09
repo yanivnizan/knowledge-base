@@ -3,7 +3,7 @@ layout: "content"
 image: "Modeling"
 title: "LEVELUP: Model & Operations"
 text: "Learn about the different entities of LevelUp. See examples of how to initialize and use them."
-position: 10
+position: 9
 theme: 'platforms'
 collection: 'platforms_cocos2dx'
 ---
@@ -38,7 +38,7 @@ This class is the top level container for the cocos2dx-levelup model and definit
 <br>
 **Useful methods**
 
-``` cs
+``` cpp
 // Retrieve a `World` by its ID:
 CCWorld *world = CCSoomlaLevelUp::getInstance()->getWorld(WORLD_ITEM_ID);
 
@@ -187,7 +187,7 @@ cocos2d::__String rewardID = worldA->getAssignedRewardID(); // get reward ID
 <br>
 **Retrieve World Scores**
 
-``` cs
+``` cpp
 // Retrieve the record scores of worldA
 __Dictionary *recordScores = worldA->getRecordScores();
 DictElement *el = NULL;
@@ -259,7 +259,7 @@ level1->setCompleted(true);
 <br>
 **Query a specific level**
 
-``` cs
+``` cpp
 int timesPlayed = level1->getTimesPlayed();
 
 int timesStarted = level1->getTimesStarted();
@@ -379,10 +379,10 @@ CCScore *diamondScore = CCVirtualItemScore::create(
 
 CCVirtualCurrency *coin = CCVirtualCurrency::create(...);
 CCScore *coinScore = CCVirtualItemScore::create(
-	CCString::create("coinScore"),       		// ID
-	CCString::create("Coin Score"),      		// Name
+	CCString::create("coinScore"),          // ID
+	CCString::create("Coin Score"),         // Name
 	CCBool::create(true),                   // Higher is better
-	CCString::create("coin_ID")          		// Associated item ID
+	CCString::create("coin_ID")             // Associated item ID
 );
 ```
 
@@ -394,20 +394,14 @@ A `Gate` is an object that defines certain criteria for progressing between the 
 <div class="info-box">`Gate` is an abstract class. Below are explanations of several types of `Gate`s that implement `Gate` and how to instantiate them.</div>
 
 <br>
-**COMMON USE**
+####**HOW TO OPEN**
 
-**Check if the `Gate` is open:**
-
-``` cpp
-if (someGate->isOpen()) {
-	//do something
-}
-```
+All `Gate`s share the same definition, as explained above, but each `Gate` opens in a different way. Some `Gate`s need to be opened manually by the developer, and others will open automatically when a specific event is thrown. You'll find below an explanation of each type of `Gate` including how it opens.
 
 <br>
 ###**BalanceGate**
 
-A specific type of `Gate` that has an associated virtual item and a desired balance. The`Gate` opens once the item's balance has reached the desired balance.
+A specific type of `Gate` that has an associated virtual item and a desired balance. The`Gate` opens **automatically** once the item's balance has reached the desired balance.
 
 This type of gate encourages the user to collect more of some virtual item, such as coins or diamonds, and therefore creates motivation for the user to keep playing.  
 
@@ -419,16 +413,16 @@ CCVirtualCurrency *coin = CCVirtualCurrency::create(...);
 
 // Collect 50 coins to open the gate
 CCGate *bGate = CCBalanceGate::create(
-	CCString::create("bGate"),					// ID
-	CCString::create("coin_ID"),					// Associated item ID
-	CCInteger::create(50)									// Desired balance
+	CCString::create("bGate"),           // ID
+	CCString::create("coin_ID"),         // Associated item ID
+	CCInteger::create(50)                // Desired balance
 );
 ```
 
 <br>
 ####**USE CASE**
 
-``` cs
+``` cpp
 int balance;
 bool isOpen;
 
@@ -439,7 +433,7 @@ balance = CCStoreInventory::sharedStoreInventory()->getItemBalance(
 // balance = 0
 
 isOpen = bGate->isOpen();
-False because the coin balance hasn't reached the desired balance (50).
+//False because the coin balance hasn't reached the desired balance (50).
 
 CCStoreInventory::sharedStoreInventory()->giveItem(
 	"coin",
@@ -460,9 +454,11 @@ isOpen = bGate->isOpen();
 <br>
 ###**PurchasableGate**
 
-A specific type of `Gate` that has an associated Virtual item. The `Gate` opens once the item has been purchased. This `Gate` is useful when you want to allow unlocking of certain `Level`s or `World`s only if they are purchased.
+A specific type of `Gate` that has an associated Virtual item. This `Gate` is useful when you want to allow unlocking of certain `Level`s or `World`s only if they are purchased.
 
 `PurchasableGate` can be used either to monetize your game, by making the user pay real money, or to create retention by giving the user motivation to collect enough currencies to make the needed purchase.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant item has been purchased, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `open()`), the purchase process of the associated virtual item begins. See "Use Case" below.</div>
 
 <br>
 **HOW TO DEFINE**
@@ -479,7 +475,7 @@ CCVirtualGood *itemToBuy = CCSingleUseVG::create(
 
 // The user must buy the 'itemToBuy' in order to open this Gate.
 CCGate *pGate = CCPurchasableGate::create(
-	CCString::create("pGate"),     // ID
+	CCString::create("pGate"),             // ID
 	CCString::create("itemToBuy_ID")       // Associated item ID
 );
 ```
@@ -487,20 +483,20 @@ CCGate *pGate = CCPurchasableGate::create(
 <br>
 **USE CASE**
 
-```cs
+``` cpp
 bool isOpen;
 
 isOpen = gate->isOpen();  // False
 
-CCStoreInventory::sharedStoreInventory()->buyItem("itemToBuy_ID", &error);
+pGate->open(); // Eventually, open() calls CCStoreInventory::sharedStoreInventory()->buyItem("itemToBuy_ID", &error);
 
-isOpen = gate->isOpen();  // True because the shield has been purchased.
+isOpen = gate->isOpen(); // True because the shield has been purchased.
 ```
 
 <br>
 ###**RecordGate**
 
-A RecordGate has an associated score and a desired record. The `Gate` opens once the player achieves the desired record.
+A RecordGate has an associated score and a desired record. The `Gate` opens **automatically** once the player achieves the desired record.
 
 `RecordGate` can be used to highly promote game progression. For example, if there is `RecordGate` for each level in the game, the user will be encouraged to continuously beat his/her own score.
 
@@ -510,7 +506,7 @@ A RecordGate has an associated score and a desired record. The `Gate` opens once
 ``` cpp
 //The user needs to reach a record of 5000 for numberScore in order to open this Gate.
 CCGate *rGate = CCRecordGate::create(
-	CCString::create("rGate"),						// ID
+	CCString::create("rGate"),            // ID
 	CCString::create("scoreID"),          // Associated score ID
 	CCDouble::create(5000)                // Desired record
 );
@@ -519,11 +515,11 @@ CCGate *rGate = CCRecordGate::create(
 <br>
 **USE CASE**
 
-```cs
+``` cpp
 bool isOpen;
 bool reachedRecord;
 
-isOpen = rGate->isOpen();  // False, because numberScore hasn't reached a record of 5000
+isOpen = rGate->isOpen(); // False, because numberScore hasn't reached a record of 5000
 
 numberScore->inc(5000.0); // Now, the value of numberScore is 5000
 
@@ -531,13 +527,13 @@ numberScore->reset(true); // Saves the score and its new record in the storage
 
 reachedRecord = numberScore->hasRecordReached(5000); // True!
 
-isOpen = rGate->isOpen();  // True because numberScore has reached the record of 5000
+isOpen = rGate->isOpen(); // True because numberScore has reached the record of 5000
 ```
 
 <br>
 ###**ScheduleGate**
 
-A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens once the player tries to open it within the time frame of the defined schedule.
+A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens **automatically** according to the defined schedule.
 
 `ScheduleGate` can be used to create suspense and reel in the user to play at specific times that you define. For example, you can define a `ScheduleGate` that unlocks a bonus level on Friday at 5pm. Chances are that the exclusivity of the bonus level (that can only be unlocked once a week), will cause the user to make himself/herself available for play on the time you specified.
 
@@ -545,27 +541,26 @@ A specific type of `Gate` that has a schedule that defines when the `Gate` can b
 **HOW TO DEFINE**
 
 ``` cpp
-// The user can open this Gate if he/she is attempting to do so
-// in the time frame defined in schedule. In this case the gate
-// can be opened an unlimited number of times.
+// This Gate is open if we are within the time frame defined
+// in the schedule. In this case the gate is always open.
 CCGate *sGate = CCScheduleGate::create(
 	CCString::create("scheduleGate"),      			// ID
-	CCSchedule::createAnyTimeUnLimited()   		 	// Schedule
+	CCSchedule::createAnyTimeUnLimited()        // Schedule
 );
 ```
 
 <br>
 ####**USE CASE**
 
-``` cs
-// The schedule will allow us to open this gate anytime we like.
+``` cpp
+// The schedule defines this gate to be open all the time.
 bool isOpen = sGate->isOpen();  // TRUE!
 ```
 
 <br>
 ###**WorldCompletionGate**
 
-A `WorldCompletionGate` has an associated `World` that, once complete, the `Gate` opens.
+A `WorldCompletionGate` has an associated `World` that. Once the `World` is completed, the `Gate` **automatically** opens.
 
 This gate is perhaps, the simplest of the gates, in that its only requirement is that the user finish the previous World in order to move on to the next.
 
@@ -576,7 +571,7 @@ This gate is perhaps, the simplest of the gates, in that its only requirement is
 CCWorld *worldA = CCWorld::create(__String::create("worldA"));
 
 CCGate *wGate = CCWorldCompletionGate::create(
-	CCString::create("wGate"),     			// ID
+	CCString::create("wGate"),          // ID
 	CCString::create("worldA")       		// Associated world ID
 );
 ```
@@ -584,7 +579,7 @@ CCGate *wGate = CCWorldCompletionGate::create(
 <br>
 ####**USE CASE**
 
-``` cs
+``` cpp
 bool isOpen;
 bool isCompleted;
 
@@ -628,7 +623,7 @@ CCGatesList *wGateANDrGate = CCGatesListAnd::create(
 <br>
 ####**USE CASE**
 
-``` cs
+``` cpp
 // The user needs to meet the criteria of wGate AND of rGate
 // in order to open this Gate. For the definitions of wGate and
 // rGate, see the topics WorldCompletionGate and RecordGate above.
@@ -678,7 +673,7 @@ CCGatesList *wGateORrGate = CCGatesListOr::create(
 <br>
 ####**USE CASE**
 
-``` cs
+``` cpp
 // The user needs to meet the criteria of wGate OR of rGate
 // in order to open this Gate. For the definitions of wGate and
 // rGate, see the topics WorldCompletionGate and RecordGate above.
@@ -716,7 +711,9 @@ Also, please note that `SocialActionGate`s are dependent on SOOMLA's [cocos2dx-p
 <br>
 ###**SocialLikeGate**
 
-A specific type of `Gate` that has an associated page name. The `Gate` opens once the player "Likes" the associated page.
+A specific type of `Gate` that has an associated page name.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant page has been liked, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `open()`), the `like()` function is called.</div>
 
 <br>
 **HOW TO DEFINE**
@@ -732,7 +729,9 @@ CCGate *likeGate = CCSocialLikeGate::create(
 <br>
 ###**SocialStatusGate**
 
-A specific type of `Gate` that has an associated status. The `Gate` opens once the player posts the status.
+A specific type of `Gate` that has an associated status.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant status has been posted, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `open()`), the `updateStatus()` function is called.</div>
 
 <br>
 **HOW TO DEFINE**
@@ -748,7 +747,9 @@ CCGate *statusGate = CCSocialStatusGate::create(
 <br>
 ###**SocialStoryGate**
 
-A specific type of `Gate` that has an associated story. The `Gate` opens once the player posts the story.
+A specific type of `Gate` that has an associated story.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant story has been posted, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `open()`), the `updateStory()` function is called.</div>
 
 <br>
 **HOW TO DEFINE**
@@ -768,7 +769,9 @@ CCGate *storyGate = CCSocialStoryGate::create(
 <br>
 ###**SocialUploadGate**
 
-A specific type of `Gate` that has an associated image. The `Gate` opens once the player uploads the image.
+A specific type of `Gate` that has an associated image.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant image has been uploaded, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `open()`), the `uploadImage()` function is called.</div>
 
 <br>
 **HOW TO DEFINE**
@@ -843,7 +846,7 @@ CCMission *bMission = CCBalanceMission::create(
 <br>
 ####**USE CASE**
 
-``` cs
+``` cpp
 int balance;
 bool isCompleted;
 soomla::CCError *error = NULL;
@@ -885,7 +888,7 @@ CCMission *rMission = CCRecordMission::create(
 <br>
 ####**USE CASE**
 
-``` cs
+``` cpp
 bool isCompleted;
 bool reachedRecord;
 
@@ -934,7 +937,7 @@ CCMission *pMission = CCPurchasingMission::create(
 <br>
 ####**USE CASE**
 
-``` cs
+``` cpp
 bool isCompleted;
 
 isCompleted = pMission->isCompleted();  // False
@@ -965,7 +968,7 @@ CCMission *wMission = CCWorldCompletionMission::create(
 
 ####**USE CASE**
 
-``` cs
+``` cpp
 bool isMissionComplete;
 bool isWorldComplete;
 
@@ -1085,7 +1088,7 @@ CCChallenge *challenge = CCChallenge::create(
 <br>
 ####**USE CASE**
 
-``` cs
+``` cpp
 bool isCompleted;
 
 isCompleted = challenge->isCompleted(); // False because the missions haven't been completed
@@ -1175,8 +1178,8 @@ A specific type of `Reward` that represents a badge with an icon. **For example:
 
 ``` cpp
 CCReward *goldMedal = CCBadgeReward::create(
-	CCString::create("badge_goldMedal"),   // ID
-	CCString::create("Gold Medal"),        // Name
+	CCString::create("badge_goldMedal"),    // ID
+	CCString::create("Gold Medal"),         // Name
 );
 ```
 

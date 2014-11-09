@@ -3,7 +3,7 @@ layout: "content"
 image: "Events"
 title: "LEVELUP: Events"
 text: "Sign up to be notified about cocos2dx-levelup events, and handle them with your game-specific behavior."
-position: 11
+position: 10
 theme: 'platforms'
 collection: 'platforms_cocos2dx'
 ---
@@ -38,7 +38,7 @@ soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(CCExampleEventH
 
 **CCExampleEventHandler.h**
 
-``` cs
+``` cpp
 #include "CCLevelUpEventHandler.h"
 
 namespace soomla {
@@ -67,11 +67,11 @@ namespace soomla {
 
 **CCExampleEventHandler.cpp**
 
-``` cs
+``` cpp
 #include "CCSimpleLevelUpEventHandler.h"
-#include "CCScore.h"
-#include "CCWorld.h"
-#include "CCLevel.h"
+...
+
+...
 
 // This event will be thrown when the Soomla LevelUp module is initialized and ready.
 void soomla::CCSimpleLevelUpEventHandler::onLevelUpInitialized() {

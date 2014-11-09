@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "InAppPurchase"
-title: "Amazon In-app Billing"
+title: "STORE: Amazon In-app Billing"
 text: "Amazon in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
 position: 3
 theme: 'platforms'
 collection: 'platforms_android'
 ---
 
-#**Amazon IAB**
+#**STORE: Amazon IAB**
 
 ##Follow these steps
 

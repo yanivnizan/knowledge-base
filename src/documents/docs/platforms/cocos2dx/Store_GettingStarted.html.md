@@ -117,7 +117,7 @@ In your XCode project, perform the following steps:
     [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
     ```
 
-    at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
+    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
 6. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
@@ -300,8 +300,6 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 	```
 
 **That's it! Now all you have to do is run the *build_native.sh* script and you can begin using cocos2dx-store in your game.**
-
-
 
 
 ##**Example**

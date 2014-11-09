@@ -8,7 +8,7 @@ theme: 'platforms'
 collection: 'platforms_cocos2dx'
 ---
 
-#STORE: Economy Model & Operations
+#**STORE: Economy Model & Operations**
 
 SOOMLA’s cocos2dx-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items.
 
