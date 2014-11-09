@@ -38,7 +38,7 @@ soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(CCExampleEventH
 
 **CCExampleEventHandler.h**
 
-``` cs
+``` cpp
 #include "CCLevelUpEventHandler.h"
 
 namespace soomla {
@@ -67,7 +67,7 @@ namespace soomla {
 
 **CCExampleEventHandler.cpp**
 
-``` cs
+``` cpp
 #include "CCSimpleLevelUpEventHandler.h"
 ...
 

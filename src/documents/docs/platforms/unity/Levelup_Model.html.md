@@ -413,25 +413,17 @@ Score coinScore = new VirtualItemScore(
 
 A `Gate` is an object that defines certain criteria for progressing between the game's `World`s or `Level`s. The `Gate` is a criteria or list of rules which which must be met in order to enter the `World` or `Level`. The rules are based on components of the previous `World` or `Level`: scores achieved, missions completed, etc. The `Gate` is opened once the logical conditions are met. In some games, `Gate`s can be opened with a payment or social task, such as sharing the game on Facebook.
 
-<div class="info-box">`Gate` is an abstract class. Below are explanations of several types of `Gate`s that implement `Gate` and how to instantiate them.</div>
+<div class="info-box">`Gate` is an abstract class. Below are explanations of several types of `Gate`s that implement `Gate` and examples of how to use them.</div>
 
 <br>
-####**COMMON USE**
+####**HOW TO OPEN**
 
-All gates have the same functionality.
-
-**Check if the `Gate` is open:**
-
-``` cs
-if (someGate.IsOpen()) {
-  // do something
-}
-```
+All `Gate`s share the same definition, as explained above, but each `Gate` opens in a different way. Some `Gate`s need to be opened manually by the developer, and others will open automatically when a specific event is thrown. You'll find below an explanation of each type of `Gate` including how it opens.
 
 <br>
 ###**BalanceGate**
 
-A specific type of `Gate` that has an associated virtual item and a desired balance. The`Gate` opens once the item's balance has reached the desired balance.
+A specific type of `Gate` that has an associated virtual item and a desired balance. The`Gate` **automatically** opens once the item's balance has reached the desired balance.
 
 This type of gate encourages the user to collect more of some virtual item, such as coins or diamonds, and therefore creates motivation for the user to keep playing.  
 
@@ -465,14 +457,17 @@ StoreInventory.GiveItem(muffin.ID, 5);
 
 balance = StoreInventory.GetItemBalance(muffin.ID); // Now balance = 5
 
-isOpen = bGate.IsOpen();  // True because the balance has reached the desired balance (5).
+isOpen = bGate.IsOpen(); // True because the balance has reached the desired balance (5).
 ```
 
+<br>
 ###**PurchasableGate**
 
-A specific type of `Gate` that has an associated Virtual item. The `Gate` opens once the item has been purchased. This `Gate` is useful when you want to allow unlocking of certain `Level`s or `World`s only if they are purchased.
+A specific type of `Gate` that has an associated Virtual item. This `Gate` is useful when you want to allow unlocking of certain `Level`s or `World`s only if they are purchased.
 
 `PurchasableGate` can be used either to monetize your game, by making the user pay real money, or to create retention by giving the user motivation to collect enough currencies to make the needed purchase.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant item has been purchased, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `Open()`), the purchase process of the associated virtual item begins. See "Use Case" below.</div>
 
 <br>
 ####**HOW TO DEFINE**
@@ -498,14 +493,15 @@ bool isOpen;
 
 isOpen = pGate.IsOpen();  // False
 
-StoreInventory.BuyItem(shield.ID, pGate.ID);
+pGate.Open(); // Eventually, Open() calls StoreInventory.BuyItem(shield.ID, pGate.ID);
 
 isOpen = pGate.IsOpen();  // True because the shield item has been purchased.
 ```
 
+<br>
 ###**RecordGate**
 
-A RecordGate has an associated score and a desired record. The `Gate` opens once the player achieves the desired record.
+A RecordGate has an associated score and a desired record. The `Gate` opens **automatically** once the player achieves the desired record.
 
 `RecordGate` can be used to highly promote game progression. For example, if there is `RecordGate` for each level in the game, the user will be encouraged to continuously beat his/her own score.
 
@@ -533,7 +529,7 @@ bool reachedRecord;
 reachedRecord = numberScore.HasRecordReached(5000.0); // False because numberScore has
                                                       // a record of 0
 
-isOpen = rGate.IsOpen();  // False, because numberScore hasn't reached a record of 5000
+isOpen = rGate.IsOpen(); // False, because numberScore hasn't reached a record of 5000
 
 numberScore.Inc(5000.0); // Now, the value of numberScore is 5000
 
@@ -541,13 +537,13 @@ numberScore.Reset(true); // Saves the score and its new record in the storage
 
 reachedRecord = numberScore.HasRecordReached(5000); // True!
 
-isOpen = rGate.IsOpen();  // True because numberScore has reached the record of 5000
+isOpen = rGate.IsOpen(); // True because numberScore has reached the record of 5000
 ```
 
 <br>
 ###**ScheduleGate**
 
-A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens once the player tries to open it within the time frame of the defined schedule.
+A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens **automatically** according to the defined schedule.
 
 `ScheduleGate` can be used to create suspense and reel in the user to play at specific times that you define. For example, you can define a `ScheduleGate` that unlocks a bonus level on Friday at 5pm. Chances are that the exclusivity of the bonus level (that can only be unlocked once a week), will cause the user to make himself/herself available for play on the time you specified.
 
@@ -564,8 +560,8 @@ Schedule schedule = new Schedule(
   1                                     // Activation limit
 );
 
-// The user can open this Gate if he/she is attempting
-// to do so within the time frame defined in schedule.
+// This Gate is open if we are within the time frame defined
+// in the schedule.
 Gate sGate = new ScheduleGate("ID", schedule);
 ```
 
@@ -582,9 +578,10 @@ isOpen = sGate.IsOpen();  // True because we are within the defined time frame.
 isOpen = sGate.IsOpen();  // False because we are NOT within the defined time frame.
 ```
 
+<br>
 ###**WorldCompletionGate**
 
-A `WorldCompletionGate` has an associated `World` that, once complete, the `Gate` opens.
+A `WorldCompletionGate` has an associated `World` that. Once the `World` is completed, the `Gate` **automatically** opens.
 
 This gate is perhaps, the simplest of the gates, in that its only requirement is that the user finish the previous World in order to move on to the next.
 
@@ -617,6 +614,7 @@ worldA.SetCompleted(true); // Set worldA as completed.
 isOpen = wGate.IsOpen(); // True because worldA has been completed.
 ```
 
+<br>
 ###**GatesList**
 
 A list of one or more `Gate`s that together define a composite criteria for progressing between the game's `World`s or `Level`s.
@@ -731,7 +729,9 @@ Also, please note that `SocialActionGate`s are dependent on SOOMLA's [unity3d-pr
 <br>
 ###**SocialLikeGate**
 
-A specific type of `Gate` that has an associated page name. The `Gate` opens once the player "Likes" the associated page.
+A specific type of `Gate` that has an associated page name.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant page has been liked, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `Open()`), the `Like()` function is called.</div>
 
 <br>
 ####**HOW TO DEFINE**
@@ -747,7 +747,9 @@ SocialActionGate likeGate = new SocialLikeGate(
 <br>
 ###**SocialStatusGate**
 
-A specific type of `Gate` that has an associated status. The `Gate` opens once the player posts the status.
+A specific type of `Gate` that has an associated status.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant status has been posted, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `Open()`), the `UpdateStatus()` function is called.</div>
 
 <br>
 ####**HOW TO DEFINE**
@@ -763,7 +765,9 @@ SocialActionGate statusGate = new SocialStatusGate(
 <br>
 ###**SocialStoryGate**
 
-A specific type of `Gate` that has an associated story. The `Gate` opens once the player posts the story.
+A specific type of `Gate` that has an associated story.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant story has been posted, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `Open()`), the `UpdateStory()` function is called.</div>
 
 <br>
 ####**HOW TO DEFINE**
@@ -783,7 +787,9 @@ SocialActionGate storyGate = new SocialStoryGate(
 <br>
 ###**SocialUploadGate**
 
-A specific type of `Gate` that has an associated image. The `Gate` opens once the player uploads the image.
+A specific type of `Gate` that has an associated image.
+
+<div class="info-box">**IMPORTANT:** This `Gate` does not open automatically when the relevant image has been uploaded, but rather the developer has to *manually* open it. Once the `Gate` is opened (by calling `Open()`), the `UploadImage()` function is called.</div>
 
 <br>
 ####**HOW TO DEFINE**
@@ -838,6 +844,7 @@ if (someMission.IsCompleted()) {
 }
 ```
 
+<br>
 ###**BalanceMission**
 
 A specific type of `Mission` that has an associated virtual item and a desired balance. The `Mission` is complete once the item's balance reaches the desired balance.
@@ -880,6 +887,7 @@ isCompleted = bMission.IsCompleted(); // True because the balance has reached
                                       // the desired balance (250).
 ```
 
+<br>
 ###**RecordMission**
 
 A specific type of `Mission` that has an associated score and a desired record. The `Mission` is complete once the player achieves the desired record for the given score.
@@ -923,6 +931,7 @@ reachedRecord = coinScore.HasRecordReached(2000.0); // True because numberScore 
 isCompleted = rMission.IsCompleted();  // TRUE!
 ```
 
+<br>
 ###**PurchasingMission**
 
 A specific type of `Mission` that has an associated market item. The `Mission` is complete once the item has been purchased.
@@ -957,6 +966,7 @@ StoreInventory.BuyItem(itemToBuy.ID, pMission.ID);
 isCompleted = pMission.IsCompleted();  // True because the item has been purchased.
 ```
 
+<br>
 ###**WorldCompletionMission**
 
 A specific type of `Mission` that has an associated `World`. The `Mission` is complete once the `World` has been completed.
@@ -977,6 +987,7 @@ Mission wMission = new WorldCompletionMission(
 );
 ```
 
+<br>
 ####**USE CASE**
 
 ``` cs
@@ -995,6 +1006,7 @@ isMissionComplete = wMission.IsCompleted(); // True because worldA has been comp
 <br>
 <div class="info-box">The following `Mission`s require the user to perform a specific social action in order to receive a `Reward`. Currently, the social provider that's available is Facebook, so the `Mission`s are FB-oriented. In the future, more social providers will be added. Please note that `SocialActionGate`s are dependent on SOOMLA's [unity3d-profile](https://github.com/soomla/unity3d-profile).</div>
 
+<br>
 ###**SocialLikeMission**
 
 A specific type of `Mission` that has an associated page name. The `Mission` is complete once the player "Likes" the page.  
@@ -1031,7 +1043,6 @@ Mission statusMission = new SocialStatusMission(
 ```
 
 <br>
-
 ###**SocialStoryMission**
 A specific type of `Mission` that has an associated story that includes a message, story name, caption, link, and image. The `Mission` is complete once the player posts the story.  
 
@@ -1054,7 +1065,6 @@ Mission storyMission = new SocialStoryMission(
 ```
 
 <br>
-
 ###**SocialUploadMission**
 A specific type of `Mission` that has an associated filename and message. The `Mission` is complete once the player uploads the image.  
 
@@ -1132,6 +1142,7 @@ A `Schedule` defines any time restrictions that an entity may have.
 
   **For example:** A `Mission` that can be attempted 10 times throughout gameplay.
 
+<br>
 ###**Reward**
 
 <div class="info-box">Note that `Reward` is a part of soomla-unity3d-core, and *not* part of the LevelUp module. However, because `Reward`s are used very often throughout Levelup, it's important that you are familiar with the different `Reward` types.</div>
@@ -1162,7 +1173,6 @@ reward.Take();
 ```
 
 <br>
-
 ####**VirtualItemReward**
 
 A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) when they complete a `Mission`.
