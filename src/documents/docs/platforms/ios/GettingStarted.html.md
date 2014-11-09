@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "Getting Started"
+title: "STORE: Getting Started"
 text: "Get started with iOS-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
 position: 1
 theme: 'platforms'
 collection: 'platforms_ios'
 ---
 
-#**Getting Started**
+#**STORE: Getting Started**
 
 Before doing anything, SOOMLA recommends that you go through Apple's [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
 
@@ -35,7 +35,7 @@ Before doing anything, SOOMLA recommends that you go through Apple's [Selling wi
 4. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets.
 
   - For a brief example, see the [example](#example) at the bottom.
-  
+
   - For a more detailed example, see our [Muffin Rush Example](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStoreExample/SoomlaiOSStoreExample/MuffinRushAssets.m).
 
 5. Initialize `SoomlaStore` with the class you just created:

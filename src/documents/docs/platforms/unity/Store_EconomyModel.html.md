@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "Economy Model & Operations"
+title: "STORE: Economy Model & Operations"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 2
 theme: 'platforms'
 collection: 'platforms_unity'
 ---
 
-#**Economy Model & Operations**
+#STORE: Economy Model & Operations
 
 SOOMLA's unity3d-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course.
 
