@@ -14,11 +14,11 @@ Before doing anything, SOOMLA recommends that you go through [Android In-app Bil
 
 ##Integrate android-store
 
-1. First, you'll need to either add the jars from the build folder to your project (RECOMMENDED), or, if you're planning to [contribute](#contribution) code, then you should clone android-store.
+1. First, you'll need to either add the jars from the build folder to your project (RECOMMENDED), or clone android-store.
 
   - RECOMMENDED: Add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder to your project.
 
-    OR
+    OR, if you'd like to work with sources:
 
   - Recursively clone android-store.
 
@@ -152,12 +152,6 @@ Once you complete the following steps, see the [Amazon IAB](/docs/platforms/andr
   </receiver>
   <meta-data android:name="billing.service" android:value="amazon.AmazonIabService" />
   ```
-
-##Contribution
-
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of the SOOMLA Store module. To contribute, make sure that in step 1 of integrating android-store, you cloned the project from Github.
-
-<div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/android-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
 
 ##Example
 

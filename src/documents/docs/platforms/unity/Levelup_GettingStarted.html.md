@@ -25,8 +25,7 @@ collection: 'platforms_unity'
   ``` cs
   git clone --recursive https://github.com/soomla/unity3d-levelup.git
   ```
-  See our [contribution](#contribution) section.
-
+  
 2. Double-click on them following the order they appear above. It'll import all the necessary files into your project.
 
   <div class="info-box">If you are completely new to SOOMLA you can use the [All-in-One](https://github.com/soomla/unity3d-levelup/raw/master/soomla-unity3d-all-in-one.unitypackage) unitypackage which contains all the above packages in one package. Importing it is equivalent to preforming the above steps.</div>
@@ -64,12 +63,6 @@ Then, you can use the **store-related _LevelUp_ classes**, such as `VirtualItemS
 
 Please follow the steps in [unity3d-profile](https://github.com/soomla/unity3d-profile) for the _Profile_ part of the setup.
 Then, you can use the **profile-related _LevelUp_ classes**, such as `SocialLikeMission`.
-
-##Contribution
-
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of the SOOMLA LevelUp module.
-
-<div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/unity3d-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
 
 ##Example Usages
 

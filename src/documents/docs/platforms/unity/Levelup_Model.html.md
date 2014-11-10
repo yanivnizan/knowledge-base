@@ -817,7 +817,12 @@ A `Mission` is a task your users need to complete in your game. `Mission`s are t
 
 - `Gate` - A `Gate` that needs to be opened in order to complete this `Mission`.
 
-<div class="info-box">`Mission` is an abstract class. Below are several types of missions that implement `Mission`.</div>
+<br>
+####**HOW TO COMPLETE**
+
+All `Mission`s share the same definition, as explained above, but each `Mission` is completed in a different way. Some `Mission`s need to be completed manually by the developer (by calling `Complete()`), and others will automatically be completed when a specific event is thrown. You'll find below an explanation of each type of `Mission` including how it's completed.
+
+<div class="info-box">NOTICE: `Mission` is an abstract class. Below are several types of missions that implement `Mission`.</div>
 
 <br>
 ####**COMMON USE**
@@ -847,7 +852,7 @@ if (someMission.IsCompleted()) {
 <br>
 ###**BalanceMission**
 
-A specific type of `Mission` that has an associated virtual item and a desired balance. The `Mission` is complete once the item's balance reaches the desired balance.
+A specific type of `Mission` that has an associated virtual item and a desired balance. The `Mission` is **automatically** complete once the item's balance reaches the desired balance.
 
 <br>
 ####**HOW TO DEFINE**
@@ -890,7 +895,7 @@ isCompleted = bMission.IsCompleted(); // True because the balance has reached
 <br>
 ###**RecordMission**
 
-A specific type of `Mission` that has an associated score and a desired record. The `Mission` is complete once the player achieves the desired record for the given score.
+A specific type of `Mission` that has an associated score and a desired record. The `Mission` is **automatically** complete once the player achieves the desired record for the given score.
 
 <br>
 ####**HOW TO DEFINE**
@@ -934,7 +939,9 @@ isCompleted = rMission.IsCompleted();  // TRUE!
 <br>
 ###**PurchasingMission**
 
-A specific type of `Mission` that has an associated market item. The `Mission` is complete once the item has been purchased.
+A specific type of `Mission` that has an associated market item.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant item has been purchased, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `Complete()`), the purchase process of the associated virtual item begins. See "Use Case" below.</div>
 
 <br>
 ####**HOW TO DEFINE**
@@ -961,7 +968,7 @@ bool isCompleted;
 
 isCompleted = pMission.IsCompleted();  // False
 
-StoreInventory.BuyItem(itemToBuy.ID, pMission.ID);
+pMission.Complete(); // Eventually, Complete() calls StoreInventory.BuyItem(itemToBuy.ID, pMission.ID);
 
 isCompleted = pMission.IsCompleted();  // True because the item has been purchased.
 ```
@@ -969,7 +976,7 @@ isCompleted = pMission.IsCompleted();  // True because the item has been purchas
 <br>
 ###**WorldCompletionMission**
 
-A specific type of `Mission` that has an associated `World`. The `Mission` is complete once the `World` has been completed.
+A specific type of `Mission` that has an associated `World`. The `Mission` is **automatically** complete once the `World` has been completed.
 
 <br>
 ####**HOW TO DEFINE**
@@ -1009,7 +1016,9 @@ isMissionComplete = wMission.IsCompleted(); // True because worldA has been comp
 <br>
 ###**SocialLikeMission**
 
-A specific type of `Mission` that has an associated page name. The `Mission` is complete once the player "Likes" the page.  
+A specific type of `Mission` that has an associated page name.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant page has been liked, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `Complete()`), the `Like()` function is called.</div>
 
 <br>
 ####**HOW TO DEFINE**
@@ -1027,7 +1036,9 @@ Mission likeMission = new SocialLikeMission(
 <br>
 ###**SocialStatusMission**
 
-A specific type of `Mission` that has an associated status. The `Mission` is complete once the player posts the status.  
+A specific type of `Mission` that has an associated status.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant status has been posted, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `Complete()`), the `UpdateStatus()` function is called.</div>
 
 <br>
 ####**HOW TO DEFINE**
@@ -1044,13 +1055,14 @@ Mission statusMission = new SocialStatusMission(
 
 <br>
 ###**SocialStoryMission**
-A specific type of `Mission` that has an associated story that includes a message, story name, caption, link, and image. The `Mission` is complete once the player posts the story.  
+A specific type of `Mission` that has an associated story that includes a message, story name, caption, link, and image.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant story has been posted, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `Complete()`), the `UpdateStory()` function is called.</div>
 
 <br>
 **HOW TO DEFINE**
 
 ``` cs
-
 Mission storyMission = new SocialStoryMission(
   "storyMission",                       // ID
   "Story Mission",                      // Name
@@ -1066,11 +1078,12 @@ Mission storyMission = new SocialStoryMission(
 
 <br>
 ###**SocialUploadMission**
-A specific type of `Mission` that has an associated filename and message. The `Mission` is complete once the player uploads the image.  
+A specific type of `Mission` that has an associated filename and message.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant image has been uploaded, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `Complete()`), the `UploadImage()` function is called.</div>
 
 <br>
 ####**HOW TO DEFINE**
-
 
 ``` cs
 Mission uploadMission = new SocialUploadMission(

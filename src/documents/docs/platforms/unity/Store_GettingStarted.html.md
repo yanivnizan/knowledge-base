@@ -12,11 +12,11 @@ collection: 'platforms_unity'
 
 ##Integrate unity3d-store
 
-1. First, you'll need to either download (RECOMMENDED) the unity3d-store pre-baked packages, or, if you're planning to [contribute](#contribution) code, then you should clone unity3d-store.
+1. First, you'll need to either download (RECOMMENDED) the unity3d-store pre-baked packages, or clone unity3d-store.
 
   - RECOMMENDED: Download [soomla-unity3d-core](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-core.unitypackage?raw=true) and [unity3d-store v1.5.4](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-store.unitypackage)
 
-    OR
+    OR, if you'd like to work with sources:
 
   - Clone unity3d-store from SOOMLA's github page.
 
@@ -85,13 +85,7 @@ In many games the user has to navigate into the in-game store, or start a game s
   ![alt text](/img/tutorial_img/unity_debugging/switchPlatform.png "Tip")
 
 
-##Contribution
-
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of the SOOMLA Store module. To contribute, make sure that in step 1 of integrating unity3d-store, you cloned and did not download.
-
-<div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/unity3d-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
-
-## Example
+##Example
 
 ``` cs
 //Create your implementation of IStoreAssets

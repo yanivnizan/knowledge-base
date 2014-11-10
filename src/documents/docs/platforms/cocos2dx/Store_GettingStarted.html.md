@@ -195,8 +195,6 @@ In your XCode project, perform the following steps:
 
 ###**Working with sources**
 
-SOOMLA appreciates code contributions, so we try to make contributing an easy task. For those of you who want to contribute, please use our "sources environment".
-
 To integrate cocos2dx-store into your game, follow these steps.
 
 1. **Recursively** clone cocos2dx-core and cocos2dx-store.
