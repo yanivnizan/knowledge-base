@@ -256,10 +256,6 @@ Then, you can use the **profile-related _LevelUp_ classes**, such as _CCSocialLi
 
 ##Working with sources
 
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of cocos2dx-levelup.
-
-<div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/cocos2dx-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
-
 **To integrate cocos2dx-levelup into your game, follow these steps:**
 
 1. **Recursively** clone soomla-cocos2dx-core, cocos2dx-store, cocos2dx-profile, and cocos2dx-levelup.

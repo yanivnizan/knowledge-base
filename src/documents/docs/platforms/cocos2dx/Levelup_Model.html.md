@@ -799,6 +799,11 @@ A `Mission` is a task your users need to complete in your game. `Mission`s are t
 - `mGate` - A `Gate` that needs to be opened in order to complete this `Mission`.
 
 <br>
+####**HOW TO COMPLETE**
+
+All `Mission`s share the same definition, as explained above, but each `Mission` is completed in a different way. Some `Mission`s need to be completed manually by the developer (by calling `Complete()`), and others will automatically be completed when a specific event is thrown. You'll find below an explanation of each type of `Mission` including how it's completed.
+
+<br>
 ####**COMMON USE**
 
 All missions have the same functionality.
@@ -826,7 +831,7 @@ if (someMission->isCompleted()) {
 <br>
 ###**BalanceMission**
 
-A specific type of `Mission` that has an associated virtual item and a desired balance. The `Mission` is complete once the item's balance reaches the desired balance.
+A specific type of `Mission` that has an associated virtual item and a desired balance. The `Mission` is **automatically** complete once the item's balance reaches the desired balance.
 
 <br>
 **HOW TO DEFINE**
@@ -869,7 +874,7 @@ isCompleted = bMission->isCompleted();
 <br>
 ###**RecordMission**
 
-A specific type of `Mission` that has an associated score and a desired record. The `Mission` is complete once the player achieves the desired record for the given score.
+A specific type of `Mission` that has an associated score and a desired record. The `Mission` is **automatically** complete once the player achieves the desired record for the given score.
 
 <br>
 **HOW TO DEFINE**
@@ -911,7 +916,10 @@ isCompleted = rMission->isCompleted();  // TRUE!
 <br>
 ###**PurchasingMission**
 
-A specific type of `Mission` that has an associated market item. The `Mission` is complete once the item has been purchased.
+A specific type of `Mission` that has an associated market item.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant item has been purchased, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `complete()`), the purchase process of the associated virtual item begins. See "Use Case" below.</div>
+
 
 <br>
 **HOW TO DEFINE**
@@ -942,7 +950,7 @@ bool isCompleted;
 
 isCompleted = pMission->isCompleted();  // False
 
-CCStoreInventory::sharedStoreInventory()->buyItem("itemToBuy_ID", &error);
+pMission->complete(); // Eventually, complete() calls CCStoreInventory::sharedStoreInventory()->buyItem("itemToBuy_ID", &error)
 
 isCompleted = pMission->isCompleted();  // True because the item has been purchased.
 ```
@@ -950,7 +958,7 @@ isCompleted = pMission->isCompleted();  // True because the item has been purcha
 <br>
 ###**WorldCompletionMission**
 
-A specific type of `Mission` that has an associated `World`. The `Mission` is complete once the `World` has been completed.
+A specific type of `Mission` that has an associated `World`. The `Mission` is **automatically** complete once the `World` has been completed.
 
 <br>
 **HOW TO DEFINE**
@@ -986,7 +994,9 @@ isMissionComplete = wMission->isCompleted(); // True because worldA has been com
 <br>
 ###**SocialLikeMission**
 
-A specific type of `Mission` that has an associated page name. The `Mission` is complete once the player "Likes" the page.  
+A specific type of `Mission` that has an associated page name.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant page has been liked, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `complete()`), the `like()` function is called.</div>
 
 <br>
 **HOW TO DEFINE**
@@ -1004,7 +1014,9 @@ CCMission *likeMission = CCSocialLikeMission::create(
 <br>
 ###**SocialStatusMission**
 
-A specific type of `Mission` that has an associated status. The `Mission` is complete once the player posts the status.  
+A specific type of `Mission` that has an associated status.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant status has been posted, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `complete()`), the `updateStatus()` function is called.</div>
 
 <br>
 **HOW TO DEFINE**
@@ -1022,7 +1034,10 @@ CCMission *statusMission = CCSocialStatusMission::create(
 <br>
 
 ###**SocialStoryMission**
-A specific type of `Mission` that has an associated story that includes a message, story name, caption, link, and image. The `Mission` is complete once the player posts the story.  
+A specific type of `Mission` that has an associated story that includes a message, story name, caption, link, and image.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant story has been posted, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `complete()`), the `updateStory()` function is called.</div>
+
 
 <br>
 **HOW TO DEFINE**
@@ -1044,7 +1059,9 @@ CCMission *storyMission = CCSocialStoryMission::create(
 <br>
 
 ###**SocialUploadMission**
-A specific type of `Mission` that has an associated filename and message. The `Mission` is complete once the player uploads the image.  
+A specific type of `Mission` that has an associated filename and message.
+
+<div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant image has been uploaded, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `complete()`), the `uploadImage()` function is called.</div>
 
 <br>
 **HOW TO DEFINE**
@@ -1172,7 +1189,7 @@ CCReward *coinReward = CCVirtualItemReward::create(
 <br>
 ####**BadgeReward**
 
-A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score,  the user can earn a "Highest Score" badge reward.
+A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score, the user can earn a "Highest Score" badge reward.
 
 **HOW TO DEFINE**
 
