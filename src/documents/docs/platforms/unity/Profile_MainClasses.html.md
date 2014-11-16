@@ -12,7 +12,7 @@ collection: 'platforms_unity'
 
 In this document you'll find descriptions of most of the main classes and interfaces of unity3d-profile. Some of these classes represent the different social elements used in the Profile module, while others contain functionality to perform social-related operations.
 
-![alt text](/img/profile/ProfileDiagram.png "Profile Diagram")
+![alt text](/img/tutorial_img/soomla_diagrams/Profile.png "Profile Diagram")
 
 <br>
 Social actions allow you to enforce social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or upload a specific status about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
@@ -21,9 +21,9 @@ Social actions allow you to enforce social engagement by offering your users rew
 
 ##Provider
 
-This class represents the different social networks that exist today, such as Facebook, Twitter, Google+, and more. Currently, SOOMLA supports only Facebook, but in the near future, more social providers will be available.
+This class represents the different social networks that exist today. Currently, SOOMLA supports Facebook, Twitter, and Google+.
 
-The `Provider` class simply holds a string enumeration of the various providers that are available (or *will be* available).
+The `Provider` class simply holds a string enumeration of the various providers that are currently available, as well as those that will be available in the future.
 
 ##SocialActionType
 
@@ -54,9 +54,24 @@ This class holds information about a user for a specific `Provider`.
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The Profile module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 6b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
 
-<div class="info-box">Notice that most of the functions in this class call relevant functions from the social provider's SDK. Such `SoomlaProfile` functions do not return a value, but rather fire the appropriate events, which contain the return values, depending on whether the operation succeeded or failed. To read more about the different events and event handling, click [here](/docs/platforms/unity/Profile_Events).</div>
+**NOTE:** Most of the functions in this class call relevant functions from the social provider's SDK, and do NOT return a value, but rather fire appropriate events that contain the return values.
 
-<br>
+For example, observe the signature and code of `SoomlaProfile`'s function, `GetContacts`:
+
+``` cs
+public static void GetContacts(Provider provider, string payload="") {
+	ProfileEvents.OnGetContactsStarted(provider, payload);
+	providers[provider].GetContacts(
+	/* success */	(List<UserProfile> profiles) => {
+								ProfileEvents.OnGetContactsFinished(provider, profiles, payload);
+							},
+	/* fail */		(string message) => {  ProfileEvents.OnGetContactsFailed(provider, message, payload); }
+	);
+}
+```
+
+To read more about the different events and event handling, click [here](/docs/platforms/unity/Profile_Events).
+
 The diagram below depicts the flow that takes place when a `SoomlaProfile` function is called. In the diagram, the example function shown is `Login`, but this principle holds for all functions.
 
 ![alt text](/img/profile/profile_func_diagram.png "Function Flow")

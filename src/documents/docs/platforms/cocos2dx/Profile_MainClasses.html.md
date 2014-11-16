@@ -12,7 +12,7 @@ collection: 'platforms_cocos2dx'
 
 In this document you'll find descriptions of most of the main classes and interfaces of cocos2dx-profile. Some of these classes represent the different social elements used in the Profile module, while others contain functionality to perform social-related operations.
 
-![alt text](/img/profile/ProfileDiagram.png "Profile Diagram")
+![alt text](/img/tutorial_img/soomla_diagrams/Profile.png "Profile Diagram")
 
 <br>
 Social actions allow you to enforce social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or upload a specific status about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
@@ -21,7 +21,7 @@ Social actions allow you to enforce social engagement by offering your users rew
 
 ##CCUserProfileUtils
 
-This class lists the different social networks that exist today, such as *Facebook, Twitter, Linkedin, Google+*, and more. Currently, SOOMLA supports only Facebook, but in the near future, more social providers will be available.
+This class lists the different social networks that exist today. Currently, SOOMLA supports Facebook, Twitter, and Google+.
 
 ##CCSocialActionUtils
 
@@ -53,10 +53,10 @@ This class represents a profile of a user from a social network (provider).
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The Profile module will work with the social and authentication plugins of the integrated social provider (FB, G+, Twitter, etc..).
 
-<div class="info-box">Notice that most of the methods in this class call relevant methods from the social provider's SDK. Such `CCSoomlaProfile` methods do not return a value, but rather fire the appropriate events, which contain the return values, depending on whether the operation succeeded or failed. To read more about the different events and event handling, click [here](/docs/platforms/cocos2dx/Profile_Events).</div>
+<div class="info-box">Most of the functions in this class call relevant functions from the social provider's SDK, and do NOT return a value, but rather fire appropriate events that contain the return values. To read more about the different events and event handling, click [here](/docs/platforms/cocos2dx/Profile_Events).</div>
 
 <br>
-The diagram below depicts the flow that takes place when a `CCSoomlaProfile` method is called. In the diagram, the example method shown is `login`, but this principle holds for all methods.
+The diagram below depicts the flow that takes place when a `CCSoomlaProfile` function is called. In the diagram, the example function shown is `login`, but this principle holds for all functions.
 
 ![alt text](/img/profile/profile_cocos_flow.png "Method Flow")
 
