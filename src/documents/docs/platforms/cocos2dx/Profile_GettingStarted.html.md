@@ -10,11 +10,11 @@ collection: 'platforms_cocos2dx'
 
 #PROFILE: Getting Started
 
-##Getting Started
-
 *If you want to develop with sources, refer to the [Working with sources](#working-with-sources) section below*.
 
 <div class="info-box">Profile depends on SOOMLA's Core module. This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already have Core & Store, please follow these directions only for the Profile module.</div>
+
+##General Instructions
 
 1. If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by cocos2dx-store (the tag is the version).
 
@@ -39,32 +39,55 @@ collection: 'platforms_cocos2dx'
   ``` cpp
   __Dictionary *commonParams = __Dictionary::create();
   commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-
-  __Dictionary *profileParams = __Dictionary::create();
-
   soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+  ```
 
+  ``` cpp
+  __Dictionary *profileParams = __Dictionary::create();
   soomla::CCProfileService::initShared(profileParams);
   ```
 
     <div class="warning-box">Initialize `CCProfileService` ONLY ONCE when your application loads.</div>
 
-6. Make sure to include the `Cocos2dxProfile.h` header whenever you use any of the **cocos2dx-profile** methods:
+6. Note that some social providers need special parameters to be passed in order for them to work:
 
-    ``` cpp
-    #include "Cocos2dxProfile.h"
-    ```
+  a. **Facebook** - No special parameters
 
-7. Add an instance of your event handler to `CCProfileEventDispatcher` after `CCProfileService` initialization:
+  b. **Google+** - Please provide Client ID from the "API&Auth, credentials" section like so:
 
-    ``` cpp
-    soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(handler);
-    ```
+  ``` cpp
+  __Dictionary *googleParams = __Dictionary::create();
+  googleParams->setObject(__String::create("[YOUR CLIENT ID]"), "clientId");
+
+  profileParams->setObject(googleParams, soomla::CCUserProfileUtils::providerEnumToString(soomla::GOOGLE)->getCString());
+  ```
+
+  c. **Twitter** - Please provide a "Consumer Key" and a "Consumer Secret" from the "Keys and Access Tokens" section in [Twitter Apps](https://apps.twitter.com/), like so:
+
+  ``` cpp
+  __Dictionary *twitterParams = __Dictionary::create();
+  twitterParams->setObject(__String::create("[YOUR CONSUMER KEY]"), "consumerKey");
+  twitterParams->setObject(__String::create("[YOUR CONSUMER SECRET]"), "consumerSecret");
+
+  profileParams->setObject(twitterParams, soomla::CCUserProfileUtils::providerEnumToString(soomla::TWITTER)->getCString());
+  ```
+
+7. Make sure to include the `Cocos2dxProfile.h` header whenever you use any of the **cocos2dx-profile** methods:
+
+  ``` cpp
+  #include "Cocos2dxProfile.h"
+  ```
+
+8. Add an instance of your event handler to `CCProfileEventDispatcher` after `CCProfileService` initialization:
+
+  ``` cpp
+  soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(handler);
+  ```
 
 <br>
 <div class="info-box">The next steps are different according to which platform you're using.</div>
 
-###**Instructions for iOS**
+##Instructions for iOS
 
 In your XCode project, perform the following steps:
 
@@ -80,9 +103,9 @@ In your XCode project, perform the following steps:
 
     a. Drag the project into your project.
 
-    b. Add its targets to your "Build Phases" > "Target Dependencies".
+    b. Add its targets to your **Build Phases->Target Dependencies**.
 
-    c. Add the Products (\*.a) of the project to "Build Phases" > "Link Binary With Libraries".
+    c. Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
 3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
@@ -94,35 +117,89 @@ In your XCode project, perform the following steps:
 
   a. Import the following headers:
 
-    ```cpp
-    #import "ServiceManager.h"
-    #import "ProfileService.h"
-    ```
+  ```cpp
+  #import "ServiceManager.h"
+  #import "ProfileService.h"
+  ```
 
   b. Register the native `ProfileService` by adding:
 
-    ```cpp
-    [[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
-    ```
+  ```cpp
+  [[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
+  ```
 
-    at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
+  at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
+
+  c. To support browser-based authentication read [here](#browser-based-authentication).
 
 5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
-6. The following steps should be done according to the target social network:
+6. Go to **Build Settings->Library Search Paths**, set the library search paths to `extensions/cocos2dx-profile/build/ios` with the `recursive` option.
 
-  ####**Facebook**
+<div class="info-box">The following steps should be done according to the target social network.</div>
 
-  a. Add the `libSoomlaiOSProfileFacebook.a` from `extensions/cocos2dx-profile/build/ios` to your **BuildPhases->Link Binary With Libraries**.
+###Facebook
 
-  b. Add the Facebook SDK for iOS to the project's Frameworks and make sure your project links to the project.
-    i. Refer to [Getting Started with the Facebook iOS SDK](https://developers.facebook.com/docs/ios/getting-started/) for more information.
+Facebook is supported out-of-the-box, you just have to follow the next steps to make it work:
 
-  <div class="info-box">To see a working Facebook example, try our [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example) project.</div>
+1. Add the Facebook SDK for iOS to the project's Frameworks and make sure your project links to the project
+
+2. Refer to [Getting Started with the Facebook iOS SDK](https://developers.facebook.com/docs/ios/getting-started/) for more information
+
+3. Add `-lSoomlaiOSProfileFacebook` to your project's **Build Settings->Other Linker Flags**
+
+###Google+
+
+Google+ is supported out-of-the-box, authentication is done either through the signed in Google+ account or through the web browser (fallback). Follow the next steps to make it work:
+
+1. Click [here](https://console.developers.google.com/project) to create your Google Plus app.
+
+2. Add a URL scheme to your application:
+
+  a. Go to your project's **Info->URL Types**.
+
+  b. Add a new URL type and enter your bundle ID as the identifier and scheme.
+
+4. Make sure you have the following frameworks in your application's project: **GooglePlus, GoogleOpenSource, GooglePlus.bundle**.
+
+5. Add additional frameworks if you still haven't:
+
+    * AddressBook.framework
+    * AssetsLibrary.framework
+    * Foundation.framework
+    * CoreLocation.framework
+    * CoreMotion.framework
+    * CoreGraphics.framework
+    * CoreText.framework
+    * MediaPlayer.framework
+    * Security.framework
+    * SystemConfiguration.framework
+    * UIKit.framework
+
+6. Add `-lSoomlaiOSProfileGoogle` to your project's **Build Settings->Other Linker Flags**.
+
+###Twitter
+
+Twitter is supported out-of-the-box, authentication is done either through the signed in Twitter account (iOS 5+) or through web browser (fallback). Follow the next steps to make it work:
+
+1. Click [here](https://apps.twitter.com/) to create your Twitter app.
+
+2. Add a URL scheme to your application:
+
+  a. Go to your project's **Info->URL Types**.
+
+  b. Add a new URL type and enter `tw<Your Twitter app consumer key>` (without the braces) as your scheme.
+
+3. Make sure you have the following frameworks in your application's project: **Twitter, Social, Accounts**.
+
+4. Add `-lSoomlaiOSProfileTwitter -lSTTwitter` to your project's **Build Settings->Other Linker Flags**.
+
+  NOTE: **ios-profile** uses the [STTWitter](https://github.com/nst/STTwitter) library (v 0.1.5) to support Twitter integration.  
 
 That's it! Now all you have to do is build your XCode project and run your game with cocos2dx-profile.
 
-###**Instructions for Android**
+
+##Instructions for Android
 
 1. Import cocos2dx-profile module into your project's Android.mk by adding the following:
 
@@ -142,7 +219,6 @@ That's it! Now all you have to do is build your XCode project and run your game 
   From `extensions/cocos2dx-profile/build/android`:
   - AndroidProfile.jar
   - Cocos2dxAndroidProfile.jar
-  - simple.facebook-2.1.jar
 
 3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
 
@@ -187,91 +263,211 @@ That's it! Now all you have to do is build your XCode project and run your game 
     </application>
     ```
 
-6. The following steps should be done according to the target social network (Currently, SOOMLA only supports Facebook, but in the future there will be more social providers available):
+<div class="info-box">The following steps should be done according to the target social network.</div>
 
-  ####**Facebook**
+<br>
+<div class="info-box">NOTE: All jars for social providers are located at the following path: `extensions/cocos2dx-profile/build/android`</div>
 
-  a. Add the `AndroidProfileFacebook.jar` to your android project's classpath from `extensions/cocos2dx-profile/build/android`
+###Facebook
 
-  b. Import the Facebook SDK for Android into your project
+Facebook is supported out-of-the-box, you just have to follow the next steps to make it work:
 
-    - For more information regarding this refer to [Facebook SDK for Android](https://developers.facebook.com/docs/android).
+1. Add the following jars from the [build](https://github.com/soomla/android-profile/tree/master/build) folder:
 
-    - SOOMLA uses [Android Studio](https://developer.android.com/sdk/installing/studio.html), in this case you can extract the Facebook SDK into a folder and copy over the facebook folder into `proj.android`.
+  - `AndroidProfileFacebook.jar`
 
-    - Then import the facebook module from existing sources (File -> Project Structure -> + button -> select the facebook folder).
+  - `simple.facebook-2.1.jar`
 
-    - Follow the wizard until the module is created (at this point you might want to mark the generated folder in facebook as generated sources because the wizard sometime misses that).
+2. Import the Facebook SDK for Android into your project and setup all the relevant information (Application ID, etc).
 
-    - Add the new facebook module as a dependency for your main project.
+    a. For more information regarding this refer to [Facebook SDK for Android](https://developers.facebook.com/docs/android)
 
-  c. Update your AndroidManifest.xml:
+    b. SOOMLA uses [Android Studio](https://developer.android.com/sdk/installing/studio.html), in this case you can extract the Facebook SDK into your project folder and then it's simply a case of importing the `iml` file in the Facebook SDK folder into your project.
 
-      ```xml
+3. Make the following changes in `AndroidManifest.xml`:
+
+      ``` xml
       ...
+
       <application ...
-
-          <activity android:name="com.facebook.LoginActivity" />
-          <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/fb_app_id" />
-
           <activity android:name="com.soomla.profile.social.facebook.SoomlaFacebook$SoomlaFBActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-          </activity>
+        </activity>
       </application>
       ```
 
-  d. Update your `res/values/strings.xml`:
+###Google+
+
+1. Add the following jars from the [build](https://github.com/soomla/android-profile/tree/master/build) folder:
+
+  - `AndroidProfileGoogle.jar`
+
+2. Follow the steps in [Getting started with GooglePlus API for Android](https://developers.google.com/+/mobile/android/getting-started).
+
+    1. Import the `iml` file of the `google-play-services_lib` project to your project. You can either use the existing `google-play-services_lib` located under social-providers/android-profile-google/libs or create `google-play-services_lib` project by yourself
+       as the link above states.
+
+3. Make further changes to `AndroidManifest.xml`:
+
+      ``` xml
+      ...
+
+      <application ...
+          <activity android:name="com.soomla.profile.social.google.SoomlaGooglePlus$SoomlaGooglePlusActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+        </activity>
+      </application>
+      ```
+
+4. Add the following permissions in `AndroidManifest.xml`:
+
+    ``` xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    ```
+
+###Twitter
+
+Twitter is supported out-of-the-box, authentication is done via web view. Follow the next steps to make it work:
+
+<div class="info-box">SOOMLA uses the [Twitter4J](https://github.com/yusuke/twitter4j) library (v 4.0.2) to support Twitter integration.</div>
+
+1. Add the following jars from the [build](https://github.com/soomla/android-profile/tree/master/build) folder:
+
+  - `AndroidProfileTwitter.jar`
+
+  - `twitter4j-core-4.0.2.jar`
+
+  - `twitter4j-asyc-4.0.2.jar`
+
+2. Click [here](https://apps.twitter.com/) to create your Twitter app.
+
+3. Make the following changes in `AndroidManifest.xml`:
 
       ```xml
       ...
-      <resources>
-          ...
-          <string name="fb_app_id">your facebook app id here</string>
-      </resources>
+
+      <application ...
+          <activity android:name="com.soomla.profile.social.twitter.SoomlaTwitter$SoomlaTwitterActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+        </activity>
+      </application>
       ```
-
-  <div class="info-box">To see a working Facebook example, try our [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example) project.</div>
-
 
 That's it! Don't forget to run the **build_native.sh** script so cocos2dx-profile sources will be built with cocos2d-x.
 
 ##Working with sources
 
-For those of you who want to [contribute](#contribution) code, please use our "sources environment".
+For those of you who want to contribute code, please use our "sources environment".
 
-To integrate cocos2dx-profile into your game, follow these steps:
+1. Fetch submodules of repositories by recursively cloning them:
 
-1. **Recursively** clone cocos2dx-core and cocos2dx-profile
+  ```
+  $ git clone --recursive git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
 
-	```
-	$ git clone --recursive git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
+  $ git clone --recursive git@github.com:soomla/cocos2dx-profile.git extensions/cocos2dx-profile
+  ```
 
-	$ git clone --recursive git@github.com:soomla/cocos2dx-profile.git extensions/cocos2dx-profile
-	```
+  or, if you have repositories already cloned, fetch the submodules with this command:
 
-    **OR:** If you have already cloned the repositories, to obtain submodules, use command:
+  ```
+  $ git submodule update --init --recursive
+  ```
 
+  <div class="info=box">**IMPORTANT:** You should run this command in every repository.</div>
+
+2. For iOS: Use a sourced versions of linked projects (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.xcodeproj`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.xcodeproj`)
+
+3. For Android: You can use our "sourced" modules for Android Studio (or IntelliJ IDEA) (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.iml`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.iml`), just include them in your project.
+
+##Caveats
+
+###Facebook Caveats
+
+####**iOS**
+
+1. **Facebook Application** - You must create a Facebook application and use its details in your Profile-based application (with Facebook)
+
+2. **Facebook ID and Display name** - The Facebook application's ID and Name must be used in your application, this information must be added to the application's `plist` file, under `FacebookAppID` (App ID) and `FacebookDisplayName` (Application name)
+
+3. **URL Schemes and openURL** - To support web-based authorization and dialogs the application needs to handle URL schemes (see [here](https://developers.facebook.com/docs/facebook-login/ios/v2.1) for more information):
+
+  a. Under the project's info add an entry to `URL Types` and under `URL Schemes` add the string `fbxxxxxxx` the x's should be replaced with your Facebook App ID.
+
+  b. See [Browser-based Authentication](#browser-based-authentication)
+
+4. **Facebook Permissions** - Profile will request `publish_actions` from the user of the application, to test the application please make sure you test with either Admin, Developer or Tester roles
+
+####**Android**
+
+1. **Facebook Application** - You must create a Facebook application and use its details in your Profile-based application (with Facebook)
+
+2. **Facebook ID** - The Facebook application's ID must be used in your application, this information should be added to the application's `strings.xml` file, under `fb_app_id` (App ID). In the `AndroidManifest.xml` file add the following:
+    ```xml
+        <application ...
+            <activity android:name="com.facebook.LoginActivity" />
+            <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/fb_app_id" />
+        </application>
     ```
-    $ git submodule update --init --recursive
-    ```
-	**NOTE:** You should run this command in every repository.
 
-2. For iOS: Use sourced versions of Linked projects (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.xcodeproj`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.xcodeproj`)
+3. **Facebook Permissions** - Profile will request `publish_actions` from the user of the application, to test the application please make sure you test with either Admin, Developer or Tester roles
 
-3. For Android: You can use our "sourced" modules for Android Studio (or IntelliJ IDEA) (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.iml`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.iml`), just including them to your project.
+###Google+ Caveats
 
-##Contribution
+####**iOS**
 
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the social capabilities of the SOOMLA Profile module, by adding support to any social provider you wish (Twitter, Google+, etc.), and connect the new provider to SOOMLA's Store module.
+1. You get the error: **401. That's an error. Error:invalid_client** - this could be the result of:
 
-<div class="info-box">If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/cocos2dx-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.</div>
+  a. Have you supplied the correct client ID?
+
+###Twitter Caveats
+
+####**iOS**
+
+1. **Login method returns 401 error** - this could be the result of a few issues:
+
+  a. Have you supplied the correct consumer key and secret SoomlaProfile initialization?
+
+  b. Have you supplied a `Callback URL` in your Twitter application settings?
+
+####**Android**
+
+1. **Login method returns 401 error** - this could be the result of a few issues:
+
+  a. Have you supplied the correct consumer key and secret SoomlaProfile initialization?
+
+  b. Have you supplied a `Callback URL` in your Twitter application settings?
+
+
+##Browser-based Authentication
+
+Most social framework SDKs support authentication through your web browser, when the user finishes authenticating through the browser your application will be called dependent on the URL schemes you have defined.
+
+The callback to this process is `openURL` which should be defined in your `AppDelegate`, **ios-profile** provides you with a helper method to handle the `openURL` callback through its providers. Add the following code to your `AppDelegate` to handle this properly:
+
+```objective-c
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    BOOL urlWasHandled = [[SoomlaProfile getInstance] tryHandleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
+
+    if (urlWasHandled) {
+        return urlWasHandled;
+    }
+
+    // Profile was unable to handle callback, do some custom handling
+    return NO;
+}
+```
 
 ##Example
 
-Here is an example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To see a full example, please see [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example/tree/master/Classes). To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/cocos2dx/Profile_MainClasses).
+Below is an example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To see a full example, please see [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example). To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/cocos2dx/Profile_MainClasses).
 
 <br>
 
 Initialize ServiceManager and Profile in `AppDelegate.cpp`.
+
 ``` cpp
 __Dictionary *commonParams = __Dictionary::create();
 commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
@@ -291,14 +487,17 @@ soomla::CCMyEventHandler *myHandler = new MyEventHandler();
 ...
 soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myHandler);
 ```
+
 <br>
 Log the user into Facebook.
 
 ``` cpp
 soomla::CCProfileController::getInstance()->login(soomla::FACEBOOK, loginReward, &profileError);
 ```
+
 <br>
 Share a story on the user's Facebook wall.
+
 ``` cpp
 soomla::CCProfileController::getInstance()->updateStory(
     soomla::FACEBOOK,
