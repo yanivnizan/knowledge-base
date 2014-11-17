@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "GROW: Getting Started"
-text: "Get started with Grow for Unity3d. GROW includes all of SOOMLA's modules: Core, Store, Profile, LevelUp, and Highway. Learn how to easily integrate all that SOOMLA offers into your game."
+text: "Get started with unity3d-grow..."
 position: 14
 theme: 'platforms'
 collection: 'platforms_unity'
@@ -10,83 +10,92 @@ collection: 'platforms_unity'
 
 #GROW: Getting Started
 
-**GROW** is a combination of all of SOOMLA's products. It's composed of the different modules that SOOMLA provides: [Store](/docs/soomla/store), [Profile](/docs/soomla/profile), [LevelUp](/docs/soomla/levelup), and [Highway](/docs/soomla/highway). Some of these modules can be used individually, while some are dependent on other modules. If you're new to SOOMLA, we recommend using GROW, because it allows you to enjoy all that SOOMLA has to offer.
+##Getting started
 
-##Integrate GROW
+Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
-###Download
+1. Click on "Demo Game" > "Add New App" and fill in the required fields.
 
-1. Download the [all-in-one package](https://github.com/soomla/unity3d-levelup/raw/master/soomla-unity3d-all-in-one.unitypackage). This package contains all of the SOOMLA modules you need: Core, Store, Profile, and LevelUp.
+	  ![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
-2. When the download is finished, double-click on the project and it'll import all the necessary files into your project.
+2. Download the SOOMLA Framework. Go to the "Download" window on the left side-panel, or click [here](http://dashboard.soom.la/downloads), and choose "Unity".
 
-3. Drag the "CoreEvents", "StoreEvents", "ProfileEvents", and "LevelUpEvents" Prefabs from ../Assets/Soomla/Prefabs into your scene. You should see all four of them listed in the "Hierarchy" panel.
+3. Choose the "GROW BUNDLE" by clicking the "Download" button. (NOTE: The "SOOMLA Bundle" contains the modules Store, Profile, & LevelUp, but does not contain Highway, meaning that it doesn't enable you to share data and participate in the data sharing community.)
 
-  ![alt text](/img/tutorial_img/grow/prefabs.png "Prefabs")
+4. Download the package and double-click on the downloaded link, it'll import all the necessary files into your project.
 
-4. Download and import [unity3d-highway](https://github.com/soomla/unity3d-highway/blob/master/soomla-unity3d-highway.unitypackage) into your project.
+	![alt text](/img/tutorial_img/unity_grow/import.png "import")
 
-  ![alt text](/img/tutorial_img/grow/importHW.png "Import Highway")
+5. Download and import the official [Facebook SDK](https://developers.facebook.com/docs/unity/getting-started/canvas).
 
-###Setup
+	<div class="info-box">Currently, SOOMLA supports **[Facebook Unity SDK v5.1](https://www.facebook.com/campaign/landing.php?campaign_id=282184128580929&placement=SDK_5.0.4&url=https%3A%2F%2Fdevelopers.facebook.com%2Fresources%2FFacebookSDK-140401.unitypackage)** so make sure to use this one!</div>
 
-5. **Facebook Setup**:
+	Double-click on the downloaded link, it'll import the Facebook SDK into your project.
 
-	a. Download and import the [Official Facebook SDK](https://developers.facebook.com/docs/unity/getting-started/canvas). **NOTE:** You don't need to initialize FB, SoomlaProfile will initialize it for you!
+6. Move the "Facebook" folder from "Assets" to "Assets/Plugins" - SOOMLA works from the "Plugins" folder so that it'll be available to UnityScript developers. This is why you need to move "Facebook" into "Plugins" as well.
 
-	b. Create an empty folder named "Facebook" under Assets/Plugins.
+    <div class="info-box">**NOTE:** When working with Unity version > 4.5.0 (targeting iOS) please follow these extra steps:<br>
 
-	c. Move the folder Scripts from Assets/Facebook to Assets/Plugins/Facebook - SOOMLA works from the Plugins folder in order to be available to UnityScript developers. So, you'll have to move Facebook in there as well.
+    1. Edit the file `Assets/Facebook/Editor/iOS/fixup.projmods`<br>
 
-  ![alt text](/img/tutorial_img/grow/FBfolder.png "Facebook folder")
+    2. Under `headerpaths` change `Facebook/Scripts` to `Plugins/Facebook/Scripts`</div>
 
-	<div class="info-box">
-	**iOS users:** When working with Unity version > 4.5.0 follow these extra steps: <br>
+7. Drag the "CoreEvents", "StoreEvents", "ProfileEvents" and "LevelUpEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel. [This step is CRITICAL for proper setup]
 
-	1. Edit the file Assets/Facebook/Editor/iOS/fixup.projmods <br>
+	![alt text](/img/tutorial_img/unity_grow/prefabs.png "Prefabs")
 
-	2. Under headerpaths, change Facebook/Scripts to Plugins/Facebook/Scripts
-  </div>
+8. In the menu bar go to "Window -> Soomla -> Edit Settings" and change the value for "Soomla Secret" (also setup Public Key if you're building for Google Play):
 
-6. In the Unity editor menu bar, click "Window" -> "Soomla" -> "Edit Settings".
+    - _Soomla Secret_ - is an encryption secret you provide that will be used to secure your data. (If you used versions before v1.5.2 this secret MUST be the same as Custom Secret)  
+    **Choose this secret wisely, you can't change it after you launch your game!**
 
-  ![alt text](/img/tutorial_img/grow/soomlaSettings.png "Soomla Settings")
+    - _Public Key_ - is the public key given to you from Google (iOS doesn't have a public key).
 
-	a. Change the value for "Soomla Secret" to a secret of your choice. This is an encryption secret you must provide that will be used to secure your data. **Choose this secret wisely** - you cannot change it after you launch your game!
-
-	b. Change the "Game Key" and "Env Key". These keys define the Highway.
-
-	c. Under Android Settings, setup the "Android Public Key" if you're building for Google Play. This is the public key given to you from Google. (iOS doesn't have a public key).
-
-	d. Under iOS Build Settings, check "Receipt Validation" to validate your purchases with SOOMLA's Server Side Protection Service.
-
-###Create & Initialize
-
-7. Create your own implementation of `IStoreAssets` in order to describe your game's specific assets (see the [example](#example) below).
-
-8. Create your own Initial World which should contain all the LevelUp entities of the game (see the [example](#example) below.)
-
-9.  Initialize all modules: Highway, Store (with the `IStoreAssets` you just created),  Profile, and LevelUp (with the class you just created):
+9. Initialize Highway:
 
 	``` cs
-	SoomlaHighway.Initialize ();
-	SoomlaStore.Initialize(new yourStoreAssets());
+	using Soomla.Highway;
+
+	// Make sure to make this call before initializing any other SOOMLA components
+	SoomlaHighway.Initialize();
+
+	// Initialization of store, profile and levelup to come after.
+	```
+
+10. Initialize the rest of the modules: Store, Profile and LevelUp. Make sure to initialize each module ONLY ONCE when your application loads, in the "Start()" function of a 'MonoBehaviour' and **NOT** in the "Awake()" function. SOOMLA has its own 'MonoBehaviour' and it needs to be "Awakened" before you initialize.
+
+	a. **Initialize STORE:** Create your own implementation of `IStoreAssets` in order to describe your specific game's assets ([example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Examples/MuffinRush/MuffinRushAssets.cs)). Initialize SoomlaStore with the class you just created:
+
+		``` cs
+		SoomlaStore.Initialize(new YourStoreAssetsImplementation());
+		```
+
+	b. **Initialize PROFILE:** SoomlaProfile will initialize the social providers for you. IMPORTANT: Do not initialize them on your own (for example, don't call FB.Init() !).
+
+	``` cs
 	SoomlaProfile.Initialize();
-	LevelUp.GetInstance().Initialize(yourInitialWorld);
 	```
 
-10. You'll need an event handler class in order to be notified about in-app purchasing/social-action/LeveUp - related events. You can choose to create *one* class with functions that handle events from all modules (Store, Profile, LevelUp), or create an event handler class for each module. Refer to the [Event Handling]() section for more information.
+	c. **Initialize LEVELUP:** Create your own _Initial World_ which should contain the entire 'blueprint' of the game (see [Model Overview](/docs/platforms/unity/Levelup_Model)). Initialize _LevelUp_ with the class you just created:
 
-11. Once you've created your event handler(s), you'll need to initialize them:
+    ``` cs
+    SoomlaLevelUp.Initialize(initialWorld);
+    ```
 
-	``` cs
-	private static LevelUpEventHandler h1 = new LevelUpEventHandler();
-	private static ExampleEventHandler h2 = new ExampleEventHandler();
-	```
+11. You'll need to create event handler functions in order to be notified about (and handle) SOOMLA-related events. Refer to the following sections for more information:
+	- [Store Event Handling](/docs/...TODO)
+	- [Profile Event Handling](/docs/...TODO)
+	- [LevelUp Event Handling](/docs/...TODO)
+
+And that's it! You have in-app purchasing capabilities, social and game architecture capabilities at your fingertips.
+
+
 
 ##Example
 
-Below is a short example of how to initialize SOOMLA's modules. We suggest you read about the different modules and their entities in SOOMLA's [Knowledge Base](/docs/soomla).
+Below is a short example of how to initialize SOOMLA's modules. We suggest you read about the different modules and their entities in SOOMLA's Knowledge Base: [Store](/docs/platforms/unity/EconomyModel), [Profile](/docs/platforms/unity/Levelup_Model), and [LevelUp](/docs/platforms/unity/Profile_MainClasses).
+
+###IStoreAssets
 
 ``` cs
 public class ExampleAssets : IStoreAssets{
@@ -137,6 +146,7 @@ public class ExampleAssets : IStoreAssets{
 ```
 
 <br>
+###Initialization
 
 ``` cs
 public class ExampleWindow : MonoBehaviour {
@@ -146,11 +156,17 @@ public class ExampleWindow : MonoBehaviour {
 
 	Score score = new Score("numberScore");
 
-	/// Add 10 levels to each world
-	worldA.BatchAddLevelsWithTemplates(10, null, score, null);
-	worldB.BatchAddLevelsWithTemplates(10, null, score, null);
+    SocialActionGate likeGate = new SocialLikeGate(
+      "likeGate",                           // ID
+      Soomla.Profile.Provider.FACEBOOK,     // Social Provider
+      "[page name]"                         // Page to "Like"
+    );
 
-	///Create a world that will contain all worlds of the game
+	// Add 10 levels to each world
+	worldA.BatchAddLevelsWithTemplates(10, likeGate, score, null);
+	worldB.BatchAddLevelsWithTemplates(10, likeGate, score, null);
+
+	// Create a world that will contain all worlds of the game
 	World mainWorld = new World("main_world");
 	mainWorld.InnerWorldsMap.Add(worldA.ID, worldA);
 	mainWorld.InnerWorldsMap.Add(worldB.ID, worldB);
@@ -160,7 +176,7 @@ public class ExampleWindow : MonoBehaviour {
 		SoomlaHighway.Initialize ();
 		SoomlaStore.Initialize(new ExampleAssets());
 		SoomlaProfile.Initialize();
-		LevelUp.GetInstance().Initialize(mainWorld);
+		SoomlaLevelup.Initialize(mainWorld);
 	}
 }
 ```
