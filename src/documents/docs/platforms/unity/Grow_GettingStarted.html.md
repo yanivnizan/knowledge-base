@@ -66,17 +66,19 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashb
 
 	a. **Initialize STORE:** Create your own implementation of `IStoreAssets` in order to describe your specific game's assets ([example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Examples/MuffinRush/MuffinRushAssets.cs)). Initialize SoomlaStore with the class you just created:
 
-		``` cs
-		SoomlaStore.Initialize(new YourStoreAssetsImplementation());
-		```
+	``` cs
+	SoomlaStore.Initialize(new YourStoreAssetsImplementation());
+	```
 
-	b. **Initialize PROFILE:** SoomlaProfile will initialize the social providers for you. IMPORTANT: Do not initialize them on your own (for example, don't call FB.Init() !).
+	b. **Initialize PROFILE:**
+
+    **NOTE:** SoomlaProfile will initialize the social providers for you. Do NOT initialize them on your own (for example, don't call FB.Init()).
 
 	``` cs
 	SoomlaProfile.Initialize();
 	```
 
-	c. **Initialize LEVELUP:** Create your own _Initial World_ which should contain the entire 'blueprint' of the game (see [Model Overview](/docs/platforms/unity/Levelup_Model)). Initialize _LevelUp_ with the class you just created:
+	c. **Initialize LEVELUP:** Create your own _Initial World_ which should contain the entire 'blueprint' of the game (see [Model Overview](/docs/platforms/unity/Levelup_Model)). Initialize _LevelUp_ with the world you just created:
 
     ``` cs
     SoomlaLevelUp.Initialize(initialWorld);
