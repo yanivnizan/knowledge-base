@@ -20,7 +20,7 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashb
 
 2. Download the SOOMLA Framework. Go to the "Download" window on the left side-panel, or click [here](http://dashboard.soom.la/downloads), and choose "Unity".
 
-3. Choose the "GROW BUNDLE" by clicking the "Download" button. (NOTE: The "SOOMLA Bundle" contains the modules Store, Profile, & LevelUp, but does not contain Highway, meaning that it doesn't enable you to share data and participate in the data sharing community.)
+3. Download the **GROW Bundle**. (NOTE: The "SOOMLA Bundle" contains the modules Store, Profile, & LevelUp, but does not contain Highway, meaning that it doesn't enable you to share data and participate in the data sharing community.)
 
 4. Download the package and double-click on the downloaded link, it'll import all the necessary files into your project.
 
@@ -44,12 +44,17 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashb
 
 	![alt text](/img/tutorial_img/unity_grow/prefabs.png "Prefabs")
 
-8. In the menu bar go to "Window -> Soomla -> Edit Settings" and change the value for "Soomla Secret" (also setup Public Key if you're building for Google Play):
+8. In the menu bar go to **Window->Soomla->Edit Settings**
 
-    - _Soomla Secret_ - is an encryption secret you provide that will be used to secure your data. (If you used versions before v1.5.2 this secret MUST be the same as Custom Secret)  
-    **Choose this secret wisely, you can't change it after you launch your game!**
+	![alt text](/img/tutorial_img/unity_grow/soomlaSettings.png "SOOMLA Settings")
 
-    - _Public Key_ - is the public key given to you from Google (iOS doesn't have a public key).
+	a. Change the value for "Soomla Secret", which is an encryption secret you provide that will be used to secure your data. **NOTE:** Choose this secret wisely, you can't change it after you launch your game!
+
+	b. Enter the "Game Key" and "Environment Key" given to you from the [dashboard](dashboard.soom.la) into the fields in the settings pane (see in image above).  
+
+	![alt text](/img/tutorial_img/unity_grow/dashboardKeys.png "Game key and Env key")
+
+	c. If you're building for Android, click on the "Android Settings" option, and choose your billing provider. If you choose Google Play, you need to provide the Public Key, which is given to you from Google.
 
 9. Initialize Highway:
 
@@ -58,11 +63,11 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashb
 
 	// Make sure to make this call before initializing any other SOOMLA components
 	SoomlaHighway.Initialize();
-
-	// Initialization of store, profile and levelup to come after.
 	```
 
-10. Initialize the rest of the modules: Store, Profile and LevelUp. Make sure to initialize each module ONLY ONCE when your application loads, in the "Start()" function of a 'MonoBehaviour' and **NOT** in the "Awake()" function. SOOMLA has its own 'MonoBehaviour' and it needs to be "Awakened" before you initialize.
+10. Initialize the rest of the modules: Store, Profile & LevelUp (**AFTER** the initialization of Highway).
+
+	<div class="info-box">Make sure to initialize each module ONLY ONCE when your application loads, in the "Start()" function of a 'MonoBehaviour' and **NOT** in the "Awake()" function. SOOMLA has its own 'MonoBehaviour' and it needs to be "Awakened" before you initialize.</div>
 
 	a. **Initialize STORE:** Create your own implementation of `IStoreAssets` in order to describe your specific game's assets ([example](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Examples/MuffinRush/MuffinRushAssets.cs)). Initialize SoomlaStore with the class you just created:
 
@@ -85,9 +90,9 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashb
     ```
 
 11. You'll need to create event handler functions in order to be notified about (and handle) SOOMLA-related events. Refer to the following sections for more information:
-	- [Store Event Handling](/docs/...TODO)
-	- [Profile Event Handling](/docs/...TODO)
-	- [LevelUp Event Handling](/docs/...TODO)
+	- [Store Event Handling](/docs/platforms/unity/Events)
+	- [Profile Event Handling](/docs/platforms/unity/Profile_Events)
+	- [LevelUp Event Handling](/docs/platforms/unity/Levelup_Events)
 
 And that's it! You have in-app purchasing capabilities, social and game architecture capabilities at your fingertips.
 
@@ -104,43 +109,43 @@ public class ExampleAssets : IStoreAssets{
 
 	/** Virtual Currencies **/
 	public static VirtualCurrency COIN_CURRENCY = new VirtualCurrency(
-	      "Coin currency",                  // name
-	      "Collect coins to buy items",     // description
-	      "currency_coin"                   // item ID
+	      "Coin currency",                  // Name
+	      "Collect coins to buy items",     // Description
+	      "currency_coin"                   // Item ID
 	 );
 
     /** Virtual Currency Packs **/
     public static VirtualCurrencyPack TEN_COIN_PACK = new VirtualCurrencyPack(
-        "10 Coins",                         // name
-	    "This is a 10-coin pack",           // description
-	    "coins_10",                         // item ID
-        10,                                 // number of currencies in the pack
-        "currency_coin",                    // the currency associated with this pack
-        new PurchaseWithMarket(             // purchase type
-            TEN_COIN_PACK_PRODUCT_ID,          // product ID
-            0.99)                              // initial price
+        "10 Coins",                         // Name
+	    "This is a 10-coin pack",           // Description
+	    "coins_10",                         // Item ID
+        10,                                 // Number of currencies in the pack
+        "currency_coin",                    // The currency associated with this pack
+        new PurchaseWithMarket(             // Purchase type
+            TEN_COIN_PACK_PRODUCT_ID,       // Product ID
+            0.99)                           // Initial price
     );
 
     /** Virtual Goods **/
 
     // Shield that can be purchased for 150 coins.
     public static VirtualGood SHIELD_GOOD = new SingleUseVG(
-        "Shield",                           // name
-	    "Shields you from monsters",        // description
-	    "shield_good",                      // item ID
-        new PurchaseWithVirtualItem(        // purchase type
-            "currency_coin",                // virtual item to pay with
-            150)                            // payment amount
+        "Shield",                           // Name
+	    "Shields you from monsters",        // Description
+	    "shield_good",                      // Item ID
+        new PurchaseWithVirtualItem(        // Purchase type
+            "currency_coin",                // Virtual item to pay with
+            150)                            // Payment amount
     );
 
     // Pack of 5 shields that can be purchased for $2.99.
     public static VirtualGood 5_SHIELD_GOOD = new SingleUsePackVG(
-        "5 Shields",                        // name
-	    "This is a 5-shield pack",          // description
-	    "shield_5",                         // item ID
-        new PurchaseWithMarket(             // purchase type
-            SHIELD_PACK_PRODUCT_ID,         // product ID
-            2.99)                           // initial price
+        "5 Shields",                        // Name
+	    "This is a 5-shield pack",          // Description
+	    "shield_5",                         // Item ID
+        new PurchaseWithMarket(             // Purchase type
+            SHIELD_PACK_PRODUCT_ID,         // Product ID
+            2.99)                           // Initial price
     );
 
     ...
@@ -156,23 +161,31 @@ public class ExampleWindow : MonoBehaviour {
 	World worldA = new World("world_a");
 	World worldB = new World("world_b");
 
-	Score score = new Score("numberScore");
+	Reward coinReward = new VirtualItemReward(
+		"coinReward",                       // ID
+		"100 Coins",                        // Name
+		COIN_CURRENCY.ID,                   // Associated item ID
+		100                                 // Amount
+	);
 
-    SocialActionGate likeGate = new SocialLikeGate(
-      "likeGate",                           // ID
-      Soomla.Profile.Provider.FACEBOOK,     // Social Provider
-      "[page name]"                         // Page to "Like"
-    );
+	Mission likeMission = new SocialLikeMission(
+		"likeMission",                      // ID
+		"Like Mission",                     // Name
+		new List<Reward>(){coinReward},     // Reward
+		Soomla.Profile.Provider.FACEBOOK,   // Social Provider
+		"[page name]"                       // Page to "Like"
+	);
 
 	// Add 10 levels to each world
-	worldA.BatchAddLevelsWithTemplates(10, likeGate, score, null);
-	worldB.BatchAddLevelsWithTemplates(10, likeGate, score, null);
+	worldA.BatchAddLevelsWithTemplates(10, null, null, new List<Mission>(){likeMission});
+	worldB.BatchAddLevelsWithTemplates(10, null, null, new List<Mission>(){likeMission});
 
 	// Create a world that will contain all worlds of the game
 	World mainWorld = new World("main_world");
 	mainWorld.InnerWorldsMap.Add(worldA.ID, worldA);
 	mainWorld.InnerWorldsMap.Add(worldB.ID, worldB);
 
+	// Initialize all of SOOMLA's modules
 	void Start () {
 		...
 		SoomlaHighway.Initialize ();
