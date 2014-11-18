@@ -436,14 +436,13 @@ For those of you who want to contribute code, please use our "sources environmen
 
   b. Have you supplied a `Callback URL` in your Twitter application settings?
 
-
 ##Browser-based Authentication
 
 Most social framework SDKs support authentication through your web browser, when the user finishes authenticating through the browser your application will be called dependent on the URL schemes you have defined.
 
 The callback to this process is `openURL` which should be defined in your `AppDelegate`, **ios-profile** provides you with a helper method to handle the `openURL` callback through its providers. Add the following code to your `AppDelegate` to handle this properly:
 
-```objective-c
+``` objectivec
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
