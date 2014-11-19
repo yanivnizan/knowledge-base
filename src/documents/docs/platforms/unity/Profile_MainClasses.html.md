@@ -58,7 +58,7 @@ This is the main class that controls the entire SOOMLA Profile module. Use this 
 
 The diagram below depicts the flow that takes place when a `SoomlaProfile` function is called. In the diagram, the example function shown is `Login`, but this principle holds for all functions.
 
-![alt text](/img/profile/profile_func_diagram.png "Function Flow")
+![alt text](/img/tutorial_img/unity-profile/profile_func_diagram.png "Function Flow")
 
 <br>
 ###`Initialize`
@@ -158,7 +158,7 @@ SoomlaProfile.UpdateStatus(
 );
 ```
 
-![alt text](/img/profile/socialStatus.png "Update Status")
+![alt text](/img/tutorial_img/unity-profile/socialStatus.png "Update Status")
 
 <br>
 ###`UpdateStory`
@@ -200,7 +200,7 @@ SoomlaProfile.UpdateStory(
 );
 ```
 
-![alt text](/img/profile/socialStory.png "Post Story")
+![alt text](/img/tutorial_img/unity-profile/socialStory.png "Post Story")
 
 <br>
 ###`UploadImage`
@@ -230,7 +230,7 @@ SoomlaProfile.UploadImage(
 );
 ```
 
-![alt text](/img/profile/socialUpload.png "Upload Image")
+![alt text](/img/tutorial_img/unity-profile/socialUpload.png "Upload Image")
 
 <br>
 ###`GetStoredUserProfile`

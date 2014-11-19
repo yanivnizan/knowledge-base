@@ -58,7 +58,7 @@ This is the main class that controls the entire SOOMLA Profile module. Use this 
 <br>
 The diagram below depicts the flow that takes place when a `CCSoomlaProfile` function is called. In the diagram, the example function shown is `login`, but this principle holds for all functions.
 
-![alt text](/img/profile/profile_cocos_flow.png "Method Flow")
+![alt text](/img/tutorial_img/profile/profile_cocos_flow.png "Method Flow")
 
 <br>
 ###`login / logout`
@@ -161,7 +161,7 @@ soomla::CCSoomlaProfile::getInstance()->updateStatus(
 );
 ```
 
-![alt text](/img/profile/socialStatus.png "Update Status")
+![alt text](/img/tutorial_img/profile/socialStatus.png "Update Status")
 
 <br>
 ###`updateStory`
@@ -195,7 +195,7 @@ soomla::CCSoomlaProfile::getInstance()->updateStory(
 );
 ```
 
-![alt text](/img/profile/socialStory.png "Post Story")
+![alt text](/img/tutorial_img/profile/socialStory.png "Post Story")
 
 <br>
 ###`uploadImage`
@@ -236,7 +236,7 @@ soomla::CCSoomlaProfile::getInstance()->uploadImage(
 );
 ```
 
-![alt text](/img/profile/socialUpload.png "Upload Image")
+![alt text](/img/tutorial_img/profile/socialUpload.png "Upload Image")
 
 <div class="info-box">The image to upload should be on the device already; the path supplied needs to be a full path to the image on the device.</div>
 
