@@ -15,7 +15,7 @@ In this document you'll find descriptions of most of the main classes and interf
 ![alt text](/img/tutorial_img/soomla_diagrams/Profile.png "Profile Diagram")
 
 <br>
-Social actions allow you to enforce social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or upload a specific status about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
+Social actions allow you to entice social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or share a specific status about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
 
 <div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many functions of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
@@ -52,7 +52,7 @@ This class holds information about a user for a specific `Provider`.
 
 ##SoomlaProfile
 
-This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The Profile module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 3b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
+This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations for users. The Profile module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 3b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
 
 **NOTE:** Most of the functions in this class call relevant functions from the social provider's SDK, and do NOT return a value, but rather fire appropriate events that contain the return values. Read more about [Events](/docs/platforms/unity/Profile_Events).
 
@@ -99,7 +99,7 @@ SoomlaProfile.Logout(
 <br>
 ###`IsLoggedIn`
 
-As its name implies, this function checks if the user is logged in and returns a boolean value.
+Checks if the user is logged in and returns a boolean value.
 
 ``` cs
 if (SoomlaProfile.IsLoggedIn(Provider.FACEBOOK)) {
@@ -212,7 +212,7 @@ For example, when your user finishes a level in your game, you can offer him/her
 **NOTE:** This functionality is supported in Facebook only.
 
 ``` cs
-// A random reward that is selected from the given list - in this case it'll be one of the rewards defines above.
+// A random reward that is selected from the given list - in this case it'll be one of the rewards defined above.
 Reward mysteryReward = new RandomReward(
 	"mysterReward_ID",
 	"Mystery Reward",
