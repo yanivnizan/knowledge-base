@@ -53,7 +53,7 @@ This class represents a profile of a user from a social network (provider).
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The Profile module will work with the social and authentication plugins of the integrated social provider (FB, G+, Twitter, etc..).
 
-<div class="info-box">Most of the functions in this class call relevant functions from the social provider's SDK, and do NOT return a value, but rather fire appropriate events that contain the return values. To read more about the different events and event handling, click [here](/docs/platforms/cocos2dx/Profile_Events).</div>
+<div class="info-box">Most of the functions in this class call relevant functions from the social provider's SDK, and do NOT return a value, but rather fire appropriate events that contain the return values. Read more about [Event Handling](/docs/platforms/cocos2dx/Profile_Events).</div>
 
 <br>
 The diagram below depicts the flow that takes place when a `CCSoomlaProfile` function is called. In the diagram, the example function shown is `login`, but this principle holds for all functions.
@@ -165,9 +165,11 @@ soomla::CCSoomlaProfile::getInstance()->updateStatus(
 
 <br>
 ###`updateStory`
-This function posts a story to the user's profile on the supplied provider. A Story is a more detailed status (very Facebook-oriented). Upon a successful update, the user will receive the supplied reward.
+This function posts a story (which is a detailed status) on the user's wall in the supplied social provider. Upon a successful update, the user will receive the supplied reward.
 
 For example, once your user reaches a high score, you could display a popup that allows them to share their high score on Facebook with a click of a button. Once he/she shares the story, you can give them a reward such as a free character.
+
+**NOTE:** This functionality is supported in Facebook only.
 
 ``` cpp
 // A reward of a FREE Soombot character
@@ -198,10 +200,11 @@ soomla::CCSoomlaProfile::getInstance()->updateStory(
 <br>
 ###`uploadImage`
 
-This function uploads an image to the user's profile in the supplied provider. Upon a successful upload, the user will receive the supplied reward.
+This function uploads an image on the user's wall in the supplied social provider. Upon a successful upload, the user will receive the supplied reward.
 
 For example, when your user finishes a level in your game, you can offer him/her to upload an image (perhaps a screenshot of the finished level) and receive a reward.
 
+**NOTE:** This functionality is supported in Facebook only.
 
 ``` cpp
 __Array *rewards = __Array::create();
@@ -240,7 +243,7 @@ soomla::CCSoomlaProfile::getInstance()->uploadImage(
 <br>
 ###`getStoredUserProfile`
 
-This function retrieves the user's profile for the given provider from the **local device storage** (`GetStoredUserProfile` does not call any social provider function, it retrieves and returns its information from the storage, contrary to what is depicted in the diagram at the beginning of this section). This function allows you to get user information even if the user is offline.
+This function retrieves the user's page for the given social provider from the **local device storage** (`GetStoredUserProfile` does not call any social provider function, it retrieves and returns its information from the storage, contrary to what is depicted in the diagram at the beginning of this section). This function allows you to get user information even if the user is offline.
 
 For example, you could use `GetStoredUserProfile` to get the user's `FirstName`, and welcome him to the game.
 
@@ -276,7 +279,7 @@ soomla::CCSoomlaProfile::getInstance()->getContacts(
 <br>
 ###`openAppRatingPage`
 
-`OpenAppRatingPage` opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store). This function is just for convenience so you can easily open the app's page.
+`OpenAppRatingPage` conveniently opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store) so that it's simple to rate the app. You can offer your users to rate your app after they've completed a level successfully or have progressed significantly in your game.
 
 ``` cs
 soomla::CCSoomlaProfile::openAppRatingPage(&profileError);
@@ -293,7 +296,7 @@ A `Reward` is an entity which can be earned by the user for meeting certain crit
 <br>
 ###**VirtualItemReward**
 
-A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users a reward of 100 coins (virtual currency).
+A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) for liking your page.
 
 ``` cpp
 CCReward *coinReward = CCVirtualItemReward::create(
@@ -307,7 +310,7 @@ CCReward *coinReward = CCVirtualItemReward::create(
 <br>
 ###**BadgeReward**
 
-A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score,  the user can earn a "Highest Score" badge reward.
+A specific type of `Reward` that represents a badge with an icon. **For example:** Give the user a badge reward for posting a status on his/her wall.
 
 ``` cpp
 CCReward *goldMedal = CCBadgeReward::create(
@@ -340,7 +343,7 @@ CCReward *beltReward = CCSequenceReward::create(
 <br>
 ###**RandomReward**
 
-A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** A user can earn a mystery box `Reward` that grants him/her a random `Reward`.
+A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** Give users a mystery box `Reward` for uploading an image, that grants him/her a random `Reward`.
 
 ``` cpp
 cocos2d::__Array *rewards = cocos2d::__Array::create();

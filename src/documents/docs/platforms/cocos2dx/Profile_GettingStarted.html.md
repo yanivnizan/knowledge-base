@@ -138,7 +138,7 @@ In your XCode project, perform the following steps:
 
 <div class="info-box">The following steps should be done according to the target social network.</div>
 
-###Facebook
+###Facebook for iOS
 
 Facebook is supported out-of-the-box, you just have to follow the next steps to make it work:
 
@@ -148,7 +148,7 @@ Facebook is supported out-of-the-box, you just have to follow the next steps to 
 
 3. Add `-lSoomlaiOSProfileFacebook` to your project's **Build Settings->Other Linker Flags**
 
-###Google+
+###Google+ for iOS
 
 Google+ is supported out-of-the-box, authentication is done either through the signed in Google+ account or through the web browser (fallback). Follow the next steps to make it work:
 
@@ -178,7 +178,7 @@ Google+ is supported out-of-the-box, authentication is done either through the s
 
 6. Add `-lSoomlaiOSProfileGoogle` to your project's **Build Settings->Other Linker Flags**.
 
-###Twitter
+###Twitter for iOS
 
 Twitter is supported out-of-the-box, authentication is done either through the signed in Twitter account (iOS 5+) or through web browser (fallback). Follow the next steps to make it work:
 
@@ -268,7 +268,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 <br>
 <div class="info-box">NOTE: All jars for social providers are located at the following path: `extensions/cocos2dx-profile/build/android`</div>
 
-###Facebook
+###Facebook for Android
 
 Facebook is supported out-of-the-box, you just have to follow the next steps to make it work:
 
@@ -295,7 +295,7 @@ Facebook is supported out-of-the-box, you just have to follow the next steps to 
       </application>
       ```
 
-###Google+
+###Google+ for Android
 
 1. Add the following jars from the [build](https://github.com/soomla/android-profile/tree/master/build) folder:
 
@@ -325,7 +325,7 @@ Facebook is supported out-of-the-box, you just have to follow the next steps to 
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     ```
 
-###Twitter
+###Twitter for Android
 
 Twitter is supported out-of-the-box, authentication is done via web view. Follow the next steps to make it work:
 

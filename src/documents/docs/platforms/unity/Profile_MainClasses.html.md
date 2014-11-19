@@ -52,25 +52,9 @@ This class holds information about a user for a specific `Provider`.
 
 ##SoomlaProfile
 
-This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The Profile module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 6b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
+This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations on users. The Profile module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 3b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
 
-**NOTE:** Most of the functions in this class call relevant functions from the social provider's SDK, and do NOT return a value, but rather fire appropriate events that contain the return values.
-
-For example, observe the signature and code of `SoomlaProfile`'s function, `GetContacts`:
-
-``` cs
-public static void GetContacts(Provider provider, string payload="") {
-	ProfileEvents.OnGetContactsStarted(provider, payload);
-	providers[provider].GetContacts(
-	/* success */	(List<UserProfile> profiles) => {
-								ProfileEvents.OnGetContactsFinished(provider, profiles, payload);
-							},
-	/* fail */		(string message) => {  ProfileEvents.OnGetContactsFailed(provider, message, payload); }
-	);
-}
-```
-
-To read more about the different events and event handling, click [here](/docs/platforms/unity/Profile_Events).
+**NOTE:** Most of the functions in this class call relevant functions from the social provider's SDK, and do NOT return a value, but rather fire appropriate events that contain the return values. Read more about [Events](/docs/platforms/unity/Profile_Events).
 
 The diagram below depicts the flow that takes place when a `SoomlaProfile` function is called. In the diagram, the example function shown is `Login`, but this principle holds for all functions.
 
@@ -178,12 +162,15 @@ SoomlaProfile.UpdateStatus(
 
 <br>
 ###`UpdateStory`
-This function posts a story to the user's profile on the supplied provider. A Story is a more detailed status (very Facebook-oriented). Upon a successful update, the user will receive the supplied reward.
+This function posts a story (which is a detailed status) on the user's wall in the supplied social provider. Upon a successful update, the user will receive the supplied reward.
 
 For example, once your user reaches a high score, you could display a popup that allows them to share their high score on Facebook with a click of a button. Once he/she shares the story, you can give them a reward such as a free character.
 
+**NOTE:** This functionality is supported in Facebook only.
+
 ``` cs
-// Equippable virtual good - a soombot character with super powers that can be purchased for 2.99.
+// Equippable virtual good - a soombot character with super powers
+// that can be purchased for 2.99.
 VirtualItem soombot = new EquippableVG(
 	EquippableVG.EquippingModel.GLOBAL,
 	"Soombot character",
@@ -193,18 +180,23 @@ VirtualItem soombot = new EquippableVG(
 );
 
 // A reward of receiving "Soombot" for FREE (no need to pay 2.99!)
-Reward soombotReward = new VirtualItemReward("soombotReward_ID", "Soombot Reward", soombot.ID, 1);
+Reward soombotReward = new VirtualItemReward(
+	"soombotReward_ID",
+	"Soombot Reward",
+	soombot.ID,
+	1
+);
 
-// When a user updates this story, they'll receive a soombotReward (free "Soombot" character).
+// When a user updates this story, they'll receive a soombotReward (free "Soombot").
 SoomlaProfile.UpdateStory(
-	Provider.FACEBOOK,                       		// Provider
-	"This is the story.",												// Text of the story to post
-	"The story of SOOMBOT (Profile Test App)",	// Name
-	"SOOMBOT Story",                         		// Caption
-	"http://about.soom.la/soombots",         		// Link to post
-	"http://about.soom.la/.../spockbot.png", 		// Image URL
-	"",                                      		// Payload
-	soombotReward                              	// Reward for posting a story
+	Provider.FACEBOOK,                          // Provider
+	"This is the story.",                       // Text of the story to post
+	"The story of SOOMBOT (Profile Test App)",  // Name
+	"SOOMBOT Story",                            // Caption
+	"http://about.soom.la/soombots",            // Link to post
+	"http://about.soom.la/.../spockbot.png",    // Image URL
+	"",                                         // Payload
+	soombotReward,                              // Reward for posting a story
 );
 ```
 
@@ -213,9 +205,11 @@ SoomlaProfile.UpdateStory(
 <br>
 ###`UploadImage`
 
-This function uploads an image to the user's profile in the supplied provider. Upon a successful upload, the user will receive the supplied reward.
+This function uploads an image to the user's wall in the social provider. Upon a successful upload, the user will receive the supplied reward.
 
 For example, when your user finishes a level in your game, you can offer him/her to upload an image (perhaps a screenshot of the finished level) and receive a reward.
+
+**NOTE:** This functionality is supported in Facebook only.
 
 ``` cs
 // A random reward that is selected from the given list - in this case it'll be one of the rewards defines above.
@@ -241,7 +235,7 @@ SoomlaProfile.UploadImage(
 <br>
 ###`GetStoredUserProfile`
 
-This function retrieves the user's profile for the given provider from the **local device storage** (`GetStoredUserProfile` does not call any social provider function, it retrieves and returns its information from the storage, contrary to what is depicted in the diagram at the beginning of this section). This function allows you to get user information even if the user is offline.
+This function retrieves the user's page for the given social provider from the **local device storage** (`GetStoredUserProfile` does not call any social provider function, it retrieves and returns its information from the storage, contrary to what is depicted in the diagram at the beginning of this section). This function allows you to get user information even if the user is offline.
 
 For example, you could use `GetStoredUserProfile` to get the user's `FirstName`, and welcome him to the game.
 
@@ -269,7 +263,7 @@ SoomlaProfile.GetContacts(Provider.FACEBOOK);
 <br>
 ###`OpenAppRatingPage`
 
-`OpenAppRatingPage` opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store). This function is just for convenience so you can easily open the app's page.
+`OpenAppRatingPage` conveniently opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store) so that it's simple to rate the app. You can offer your users to rate your app after they've completed a level successfully or have progressed significantly in your game.
 
 ``` cs
 SoomlaProfile.OpenAppRatingPage();
@@ -286,7 +280,7 @@ A `Reward` is an entity which can be earned by the user for meeting certain crit
 
 ###**VirtualItemReward**
 
-A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) when they complete a `Mission`.
+A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) for liking your page.
 
 ``` cs
 VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_currency");
@@ -302,7 +296,7 @@ Reward coinReward = new VirtualItemReward(
 <br>
 ###**BadgeReward**
 
-A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score,  the user can earn a "Highest Score" badge reward.
+A specific type of `Reward` that represents a badge with an icon. **For example:** Give the user a badge reward for posting a status on his/her wall.
 
 ``` cs
 Reward goldMedal = new BadgeReward(
@@ -338,7 +332,7 @@ Reward beltReward = new SequenceReward(
 <br>
 ###**RandomReward**
 
-A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** A user can earn a mystery box `Reward` that grants him/her a random `Reward`.
+A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** Give users a mystery box `Reward` for uploading an image, that grants him/her a random `Reward`.
 
 ``` cs
 Reward mysteryReward = new RandomReward(
