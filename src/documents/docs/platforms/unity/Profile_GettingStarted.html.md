@@ -22,7 +22,7 @@ collection: 'platforms_unity'
 
 	If you want to use Store-related rewards you'll need to go over the instructions of [unity3d-store](https://github.com/soomla/unity3d-store).
 
-2. Drag the "CoreEvents" and "ProfileEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel. **IMPORTANT:** This step MUST be done for unity3d-profile to work properly!
+2. Drag the `CoreEvents` and `ProfileEvents` Prefabs from `Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel. **IMPORTANT:** This step MUST be done for unity3d-profile to work properly!
 
 	![alt text](/img/tutorial_img/unity-profile/prefabs.png "Prefabs")
 
@@ -30,7 +30,7 @@ collection: 'platforms_unity'
 
 	a. Change the value for **Soomla Secret**. "Soomla Secret" is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game! (NOTE: If you used unity3d-store versions before v1.5.2 this secret MUST be the same as "Custom Secret".)
 
-	b. Select the **Social Platform** that you want to integrate with. Currently available are Facebook, Google+ and Twitter. (Later in this document, you'll find integration instructions for each social provider)
+	b. Select the **Social Platform** that you want to integrate with. The current available social platforms are Facebook, Twitter & Google+.
 
 	![alt text](/img/tutorial_img/unity-profile/soomlaSettings.png "Soomla Settings")
 
@@ -48,9 +48,9 @@ collection: 'platforms_unity'
 
 5. Call all the social functions you can from the `SoomlaProfile` class (not from the social provider class). Otherwise, you won't be able to work with SOOMLA correctly. You can still call functions from the social provider, such as the `FB` class, but only those that are not provided by `SoomlaProfile`.
 
-6. You'll need event handlers in order to be notified about in-app purchasing-related events and social-related events. refer to the [Event Handling](/docs/platforms/unity/Profile_Events) section for more information.
+6. You'll need event handlers in order to be notified about in-app purchasing-related events and social-related events. Refer to the [Event Handling](/docs/platforms/unity/Profile_Events) document for more information.
 
-And that's it! Your game now has social capabilities.
+And that's it! unity3d-profile knows how to contact the social provider (Facebook, Twitter, Google+ etc.) and perform social actions with the information you provide.
 
 <div class="info-box">The following steps should be done according to the target social network.</div>
 
@@ -62,7 +62,7 @@ And that's it! Your game now has social capabilities.
 
 2. Create an empty folder named `Facebook` under `Assets/Plugins`.
 
-3. Move the "Facebook" folder from "Assets" to "Assets/Plugins" - SOOMLA works from the "Plugins" folder so that it'll be available to UnityScript developers. This is why you need to move "Facebook" into "Plugins" as well.
+3. Move the `Facebook` folder from `Assets` to `Assets/Plugins` - SOOMLA works from the `Plugins` folder so that it'll be available to UnityScript developers. This is why you need to move `Facebook` into `Plugins` as well.
 
   <div class="info-box">**NOTE:** When working with Unity version > 4.5.0 (targeting iOS) please follow these extra steps:<br>
 
@@ -173,12 +173,12 @@ Share a story on the user's Facebook wall.
 
 ``` cs
 SoomlaProfile.UpdateStory(
-	Provider.FACEBOOK,
-	"Check out this great story by SOOMLA !",  
-	"SOOMLA is 2 years young!",
-	"soomla_2_years",
-	"http://blog.soom.la/2014/08/congratulations-soomla-is-2-years-young.html",
-	"http://blog.soom.la/wp-content/uploads/2014/07/Birthday-bot-300x300.png",
-	new BadgeReward("sheriff", "Sheriff")
+	"Check out this great story by SOOMLA!",   // Message
+	"SOOMLA is 2 years young!",                // Name
+	"SOOMLA is GROWing",                       // Caption
+	"soomla_2_years",                          // Desc
+	"http://blog.soom.la",                     // Link
+	"http://blog.soom.la.../soombot.png",      // Image
+	new BadgeReward("sheriff", "Sheriff")      // Reward
 );
 ```

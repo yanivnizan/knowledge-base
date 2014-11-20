@@ -510,4 +510,4 @@ soomla::CCProfileController::getInstance()->updateStory(
 );
 ```
 
-And that's it! cocos2dx-profile knows how to contact Facebook and perform social actions with the information you provide.
+And that's it! cocos2dx-profile knows how to contact the social provider (Facebook, Twitter, Google+ etc.) and perform social actions with the information you provide.
