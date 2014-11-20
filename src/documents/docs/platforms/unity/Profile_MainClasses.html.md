@@ -58,7 +58,7 @@ This is the main class that controls the entire SOOMLA Profile module. Use this 
 
 The diagram below depicts the flow that takes place when a `SoomlaProfile` function is called. In the diagram, the example function shown is `Login`, but this principle holds for all functions.
 
-![alt text](/img/tutorial_img/unity-profile/profile_func_diagram.png "Function Flow")
+![alt text](/img/tutorial_img/unity-profile/functionFlow.png "Function Flow")
 
 <br>
 ###`Initialize`

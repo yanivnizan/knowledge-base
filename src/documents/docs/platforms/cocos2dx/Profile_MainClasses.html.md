@@ -58,7 +58,7 @@ This is the main class that controls the entire SOOMLA Profile module. Use this 
 <br>
 The diagram below depicts the flow that takes place when a `CCSoomlaProfile` function is called. In the diagram, the example function shown is `login`, but this principle holds for all functions.
 
-![alt text](/img/tutorial_img/profile/profile_cocos_flow.png "Method Flow")
+![alt text](/img/tutorial_img/profile/functionFlow.png "Method Flow")
 
 <br>
 ###`login / logout`
