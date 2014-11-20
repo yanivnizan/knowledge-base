@@ -491,7 +491,7 @@ soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myHandler);
 Log the user into Facebook.
 
 ``` cpp
-soomla::CCProfileController::getInstance()->login(soomla::FACEBOOK, loginReward, &profileError);
+soomla::CCProfileController::getInstance()->login(soomla::FACEBOOK, &profileError);
 ```
 
 <br>

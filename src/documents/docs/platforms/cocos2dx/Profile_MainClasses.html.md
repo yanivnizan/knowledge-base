@@ -73,13 +73,6 @@ Most of the social actions provided in Profile depend on the user being logged i
 // If the user clicks on the login button you provide, call the login method:
 soomla::CCSoomlaProfile::getInstance()->login(
 	soomla::FACEBOOK,                     // Provider
-	loginReward,                          // Reward for logging in
-	&profileError                         // Used for error handling
-);
-
-// If you choose not to give a reward upon login, use this instead:
-soomla::CCSoomlaProfile::getInstance()->login(
-	soomla::FACEBOOK,                     // Provider
 	&profileError                         // Used for error handling
 );
 
