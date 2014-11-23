@@ -112,7 +112,7 @@ IF !ERRORLEVEL! NEQ 0 goto error
 echo Bower installation successful
 call node_modules\.bin\bower install
 echo Bower components installation successful
-IF !ERRORLEVEL! NEQ 0 goto error
+::IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 4. Build DocPad site
 echo Building DocPad site...
