@@ -12,51 +12,39 @@ collection: 'platforms_unity'
 
 ##Getting started
 
-Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Get started with SOOMLA's Grow. Go to the [Grow dashboard website](dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
 1. Click on "Demo Game" > "Add New App" and fill in the required fields.
 
 	  ![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
-2. Download the SOOMLA Framework. Go to the "Download" window on the left side-panel, or click [here](http://dashboard.soom.la/downloads), and choose "Unity".
+2. Go to the "Download" window on the left side-panel, or click [here](dashboard.soom.la/downloads), and choose "Unity". Download the **GROW Bundle**. (NOTE: The "SOOMLA Bundle" contains the modules Store, Profile, & LevelUp, but does not contain Highway, meaning that it doesn't enable you to share data and participate in the data sharing community.)
 
-3. Download the **GROW Bundle**. (NOTE: The "SOOMLA Bundle" contains the modules Store, Profile, & LevelUp, but does not contain Highway, meaning that it doesn't enable you to share data and participate in the data sharing community.)
-
-4. Download the package and double-click on the downloaded link, it'll import all the necessary files into your project.
+3. Double-click on the downloaded link, it'll import all the necessary files into your project.
 
 	![alt text](/img/tutorial_img/unity_grow/import.png "import")
 
-5. Download and import the official [Facebook SDK](https://developers.facebook.com/docs/unity/getting-started/canvas).
-
-	<div class="info-box">Currently, SOOMLA supports **[Facebook Unity SDK v5.1](https://www.facebook.com/campaign/landing.php?campaign_id=282184128580929&placement=SDK_5.0.4&url=https%3A%2F%2Fdevelopers.facebook.com%2Fresources%2FFacebookSDK-140401.unitypackage)** so make sure to use this one!</div>
-
-	Double-click on the downloaded link, it'll import the Facebook SDK into your project.
-
-6. Move the "Facebook" folder from "Assets" to "Assets/Plugins" - SOOMLA works from the "Plugins" folder so that it'll be available to UnityScript developers. This is why you need to move "Facebook" into "Plugins" as well.
-
-    <div class="info-box">**NOTE:** When working with Unity version > 4.5.0 (targeting iOS) please follow these extra steps:<br>
-
-    1. Edit the file `Assets/Facebook/Editor/iOS/fixup.projmods`<br>
-
-    2. Under `headerpaths` change `Facebook/Scripts` to `Plugins/Facebook/Scripts`</div>
-
-7. Drag the "CoreEvents", "StoreEvents", "ProfileEvents" and "LevelUpEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel. [This step is CRITICAL for proper setup]
+4. Drag the "CoreEvents", "StoreEvents", "ProfileEvents" and "LevelUpEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel. [This step is CRITICAL for proper setup]
 
 	![alt text](/img/tutorial_img/unity_grow/prefabs.png "Prefabs")
 
-8. In the menu bar go to **Window->Soomla->Edit Settings**
+5. In the menu bar go to **Window->Soomla->Edit Settings**:
 
-	![alt text](/img/tutorial_img/unity_grow/soomlaSettings.png "SOOMLA Settings")
+	![alt text](/img/tutorial_img/unity_grow/soomlaSettingsAll.png "SOOMLA Settings")
 
-	a. Change the value for "Soomla Secret", which is an encryption secret you provide that will be used to secure your data. **NOTE:** Choose this secret wisely, you can't change it after you launch your game!
+	a. **Change the value for "Soomla Secret"**: "Soomla Secret" is an encryption secret you provide that will be used to secure your data. **NOTE:** Choose this secret wisely, you can't change it after you launch your game!
 
-	b. Enter the "Game Key" and "Environment Key" given to you from the [dashboard](dashboard.soom.la) into the fields in the settings pane (see in image above).  
+	b. **Copy the "Game Key" and "Environment Key"** given to you from the [dashboard](dashboard.soom.la) into the fields in the settings pane of the Unity Editor. The "game" and "env" keys allow for your game to distinguish multiple environments for the same game. For example - you can choose to have a playground environment for your game's beta testers which will be segregated from your production environment and will thus prevent analytics data from being mixed between the two.
 
 	![alt text](/img/tutorial_img/unity_grow/dashboardKeys.png "Game key and Env key")
 
-	c. If you're building for Android, click on the "Android Settings" option, and choose your billing provider. If you choose Google Play, you need to provide the Public Key, which is given to you from Google.
+	c. **Choose your social platform** by toggling facebook, twitter, or google in the settings. Follow the directions for integrating [Facebook](/docs/platforms/unity/Profile_GettingStarted#facebook), [Twitter](/docs/platforms/unity/Profile_GettingStarted#twitter), or [Google+](/docs/platforms/unity/Profile_GettingStarted#google+).
 
-9. Initialize Highway:
+	Later in this guide, you'll find integration steps for each [social provider](#social-provider-integration).
+
+	d. If you're building for Android, click on the "Android Settings" option, and choose your billing provider. If you choose Google Play, you need to provide the Public Key, which is given to you from Google.
+
+6. Initialize Highway:
 
 	``` cs
 	using Soomla.Highway;
@@ -65,7 +53,7 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashb
 	SoomlaHighway.Initialize();
 	```
 
-10. Initialize the rest of the modules: Store, Profile & LevelUp (**AFTER** the initialization of Highway).
+7. Initialize the rest of the modules: Store, Profile & LevelUp (**AFTER** the initialization of Highway).
 
 	<div class="info-box">Make sure to initialize each module ONLY ONCE when your application loads, in the "Start()" function of a 'MonoBehaviour' and **NOT** in the "Awake()" function. SOOMLA has its own 'MonoBehaviour' and it needs to be "Awakened" before you initialize.</div>
 
@@ -85,18 +73,16 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashb
 
 	c. **Initialize LEVELUP:** Create your own _Initial World_ which should contain the entire 'blueprint' of the game (see [Model Overview](/docs/platforms/unity/Levelup_Model)). Initialize _LevelUp_ with the world you just created:
 
-    ``` cs
-    SoomlaLevelUp.Initialize(initialWorld);
-    ```
+  ``` cs
+  SoomlaLevelUp.Initialize(initialWorld);
+  ```
 
-11. You'll need to create event handler functions in order to be notified about (and handle) SOOMLA-related events. Refer to the following sections for more information:
+8. You'll need to create event handler functions in order to be notified about (and handle) SOOMLA-related events. Refer to the following sections for more information:
 	- [Store Event Handling](/docs/platforms/unity/Events)
 	- [Profile Event Handling](/docs/platforms/unity/Profile_Events)
 	- [LevelUp Event Handling](/docs/platforms/unity/Levelup_Events)
 
 And that's it! You have in-app purchasing capabilities, social and game architecture capabilities at your fingertips.
-
-
 
 ##Example
 

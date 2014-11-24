@@ -12,7 +12,7 @@ collection: 'platforms_cocos2dx'
 
 ##Getting Started
 
-Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Get started with SOOMLA's Grow. Go to the [Grow dashboard website](dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
 <div class="info-box">If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by SOOMLA's modules (the tag is the version).</div>
 
@@ -20,7 +20,7 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](https://dashb
 
   ![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
-2. Download the SOOMLA Framework. Go to the "Download" window on the left side-panel, or click [here](http://dashboard.soom.la/downloads), and choose "Cocos2dx".
+2. Download the SOOMLA Framework. Go to the "Download" window on the left side-panel, or click [here](dashboard.soom.la/downloads), and choose "Cocos2dx".
 
 3. Download the **GROW Bundle**. (NOTE: The "SOOMLA Bundle" contains the modules Store, Profile, & LevelUp, but does not contain Highway, meaning that you will not be able to participate in the data sharing community.)
 
