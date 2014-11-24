@@ -2,7 +2,7 @@
 layout: "content"
 image: "Modeling"
 title: "Main Classes"
-text: "Use the main classes of the Profile module to perform social and authentication operations on users."
+text: "Use the main classes of the Profile module to perform social and authentication operations for users."
 position: 1
 theme: 'soomla'
 collection: 'soomla_storefront'
@@ -35,7 +35,7 @@ The Profile module has a class that holds information about the user for a speci
 
 ##Important Functions
 
-Each platform has a class (its name varies across the platforms) that provides useful functions of Profile. Use these functions to perform various social and authentication operations on users.
+Each platform has a class (its name varies across the platforms) that provides useful functions of Profile. Use these functions to perform various social and authentication operations for users.
 
 ###`login / logout`
 
@@ -48,7 +48,7 @@ Most of the social actions provided in Profile depend on the user being logged i
 <br>
 ###`isLoggedIn`
 
-As its name implies, this function checks if the user is logged in and returns a boolean value.
+Checks if the user is logged in and returns a boolean value.
 
 <div class="info-box">If the user is not logged in, please notice that `isLoggedIn` will not log the user in, you'll need to call the `login` function yourself. </div>
 

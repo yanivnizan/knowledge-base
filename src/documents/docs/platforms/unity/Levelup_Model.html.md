@@ -720,7 +720,7 @@ isOpen = wGateORrGate.IsOpen(); // TRUE! We only need one of the gates to be ope
 
 `SocialActionGate`s require the user to perform a specific social action in order to open the `Gate`s. Currently, the social provider that's available is Facebook, so the `Gate`s are FB-oriented. In the future, more social providers will be added.
 
-`SocialActionGate`s allow you to enforce social engagement by locking certain levels or worlds behind social interactions. For example, you can ask your users to like your page or upload a specific status about your game, and in return unlock a bonus level or world for them. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
+`SocialActionGate`s allow you to enforce social engagement by locking certain levels or worlds behind social interactions. For example, you can ask your users to like your page or share a specific status about your game, and in return unlock a bonus level or world for them. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
 
 <div class="info-box">`SocialActionGate` is an abstract class. Below are explanations of the four types of social `Gate`s that implement `SocialActionGate`. All types of `Gate`s implement the superclass `Gate` and therefore, implement its functionality and behavior.
 
