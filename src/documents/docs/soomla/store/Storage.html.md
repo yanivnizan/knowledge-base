@@ -67,7 +67,6 @@ This class holds all of the metadata information about your specific game. It is
 - Virtual currency packs
 - Virtual goods of all kinds
 - Virtual categories
-- Non-consumable items
 
 `StoreInfo` can be questioned about the existence of `VirtualItem`s and the associations between them.
 `StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
@@ -82,7 +81,6 @@ Here all the storage-related instances of your game are created. These include t
 - `KeyValueStorage`
 - `VirtualCurrencyStorage`
 - `VirtualGoodsStorage`
-- `NonConsumableItemsStorage`
 
 You use the `StorageManager`’s getter functions to access these different storages. Then you will be able to use the different storages’ available functions to perform actions such as set/get an item’s balance, add/remove an item from the storage, etc…
 

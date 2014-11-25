@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "InAppPurchase"
-title: "Google Play In-app Billing"
+title: "STORE: Google Play In-app Billing"
 text: "Google Play in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
 position: 2
 theme: 'platforms'
 collection: 'platforms_android'
 ---
 
-#**Google Play IAB**
+#**STORE: Google Play IAB**
 
 ##Follow these steps
 
@@ -45,6 +45,10 @@ collection: 'platforms_android'
     ![alt text](/img/tutorial_img/google_play_iab/licenseKey.png "License key")
 
 ##Newbie?
+
+**NOTE:** After publishing your game (to alpha or beta), you must wait a few hours (about 1-2 hours) until you can test your in-app products.
+
+  ![alt text](/img/tutorial_img/google_play_iab/iap_testing.png "IAP testing")
 
 ###Useful links
 

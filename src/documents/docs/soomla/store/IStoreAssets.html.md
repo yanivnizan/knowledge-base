@@ -35,12 +35,12 @@ public class MuffinRushAssets implements IStoreAssets {
     /** Virtual Currency Packs **/
 
     public static final VirtualCurrencyPack TENMUFF_PACK = new VirtualCurrencyPack(
-        "10 Muffins",                                           // name
-        "Test refund of an item",                               // description
-        "muffins_10",                                           // item id
-        10,                                                     // number of currencies in the pack
-        MUFFIN_CURRENCY_ITEM_ID,                                // the currency associated with this pack
-        new PurchaseWithMarket(TENMUFF_PACK_PRODUCT_ID, 0.99)); // purchase type
+        "10 Muffins",                                               // name
+        "Test refund of an item",                                   // description
+        "muffins_10",                                               // item id
+        10,                                                         // number of currencies in the pack
+        MUFFIN_CURRENCY_ITEM_ID,                                    // the currency associated with this pack
+        new PurchaseWithMarket(TENMUFF_PACK_PRODUCT_ID, 0.99));     // purchase type
 
 
     /** Virtual Goods **/
@@ -56,12 +56,13 @@ public class MuffinRushAssets implements IStoreAssets {
 
     /** Market Non-Consumable (MANAGED) Items **/
 
-    public static final NonConsumableItem NO_ADDS_NONCONS  = new NonConsumableItem(
-        "No Ads",                                                           // name
-        "Test purchase of MANAGED item.",                                   // description
-        "no_ads",                                                           // item id
-        new PurchaseWithMarket(new MarketItem(
-            NO_ADDS_NONCONS_PRODUCT_ID, MarketItem.Managed.MANAGED , 1.99)) // purchase type
+    public static final VirtualGood NO_ADS_GOOD = new LifetimeVG(
+        "No Ads",                                                     // name
+        "No More Ads!",                                               // description
+        "no_ads",                                                     // item id
+        new PurchaseWithMarket(new MarketItem(                        // purchase type
+                NO_ADS_PRODUCT_ID, MarketItem.Managed.MANAGED, 1.99))
+
     );
     ...
 }
@@ -116,7 +117,7 @@ This brief example (taken from our [MuffinRush](https://github.com/soomla/ios-st
       andPurchaseType:[[PurchaseWithMarket alloc]
         initWithMarketItem:[[MarketItem alloc]
         initWithProductId:MARRIAGE_PRODUCT_ID
-        andConsumable:kConsumable
+        andConsumable:kNonConsumable
         andPrice:9.99]]];
 
 @end
@@ -144,12 +145,12 @@ Create an instance of all your desired virtual currencies. For every `VirtualCur
 
 ###getCurrencyPacks
 
-Create an instance of all your desired `VirtualCurrencyPack`s. For every `VirtualCurrencyPack`, you'll have to provide: name, description, item Id, purchase type, currency amount (the amount of currencies in the pack), and currency item Id (the item Id of the associated currency). Use this functions to access your game's currency packs.
+Create an instance of all your desired `VirtualCurrencyPack`s. For every `VirtualCurrencyPack`, you'll have to provide: name, description, item Id, purchase type, currency amount (the amount of currencies in the pack), and currency item ID (the item ID of the associated currency). Use this functions to access your game's currency packs.
 
 
 ###getGoods
 
-Create an instance of all your desired `VirtualGood`s. For every good, you'll have to provide: name, description, item Id and purchase type. Use this functions to access your game's virtual goods.
+Create an instance of all your desired `VirtualGood`s. For every good, you'll have to provide: name, description, item ID and purchase type. Use this functions to access your game's virtual goods.
 
 
 ###getCategories
@@ -157,10 +158,3 @@ Create an instance of all your desired `VirtualGood`s. For every good, you'll ha
 Create an instance of all your desired virtual categories. For every `VirtualCategory`, you'll have to provide: name and goods item Ids (list of item Ids of the `VirtualGood`s in this category). Use this functions to access your game's categories.
 
 <div class="info-box">If you don't want to categorize your `VirtualGood`s, just add one 'GENERAL' `VirtualCategory`.</div>
-
-
-###getNonConsumableItems
-
-Create an instance of all your desired `NonConsumableItem`s. For every `NonConsumableItem`, you'll have to provide: name, description, itemId and purchase type. Use this function to access your game's non-consumable items.
-
-<div class="info-box">Make sure to set the type of the items (in `NonConsumableItem[]`) as Non-Consumables according to the Billing service provider that you’re working with (in Google Play store: MANAGED, in Apple App Store: Non-Consumable, etc..). Read more about this in [android-store’s MarketItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/MarketItem.java) or [iOS-store’s MarketItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/MarketItem.h).</div>

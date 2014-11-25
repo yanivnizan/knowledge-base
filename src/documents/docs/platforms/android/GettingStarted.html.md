@@ -1,24 +1,32 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "Getting Started"
+title: "STORE: Getting Started"
 text: "Get started with android-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
 position: 1
 theme: 'platforms'
 collection: 'platforms_android'
 ---
 
-#**Getting Started**
+#**STORE: Getting Started**
 
 Before doing anything, SOOMLA recommends that you go through [Android In-app Billing](http://developer.android.com/guide/google/play/billing/index.html) or [Amazon In App Purchasing](https://developer.amazon.com/public/apis/earn/in-app-purchasing) according to the billing service provider you choose.
 
 ##Integrate android-store
 
-1. Add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder to your project.
+1. First, you'll need to either add the jars from the build folder to your project (RECOMMENDED), or clone android-store.
 
-    > **NOTE:** You can choose to clone android-store instead. If you choose this option, you need to add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder, except for AndroidStore.jar.
+  - RECOMMENDED: Add the jars from the [build](https://github.com/soomla/android-store/tree/master/build) folder to your project.
 
-    > `git clone git@github.com:soomla/android-store.git`
+    OR, if you'd like to work with sources:
+
+  - Recursively clone android-store.
+
+    ```
+    $ git clone --recursive git@github.com:soomla/android-store.git
+    ```
+
+    <div class="info-box">There are some necessary files in submodules linked with symbolic links. If you're cloning the project make sure to include the `--recursive` flag.</div>
 
 2. Make the following changes to your AndroidManifest.xml:
 
@@ -197,13 +205,15 @@ public class StoreExampleActivity extends Activity {
 
         IStoreAssets storeAssets = new ExampleStoreAssets();
 
-        // This value is a secret of your choice. You can't change it after you publish your game.
+        // This value is a secret of your choice.
+        // You can't change it after you publish your game.
         Soomla.initialize("[CUSTOM SECRET HERE]");
         SoomlaStore.getInstance().initialize(storeAssets);
 
         /** The following are relevant only if your Billing Provider is Google Play **/
 
-        // When you create your app in Google play Developer Console, you'll find this key under the "Services & APIs" tab.
+        // When you create your app in Google play Developer Console,
+        // you'll find this key under the "Services & APIs" tab.
         GooglePlayIabService.getInstance().setPublicKey("[YOUR PUBLIC KEY FROM THE MARKET]");
         GooglePlayIabService.AllowAndroidTestPurchases = true;
         ...

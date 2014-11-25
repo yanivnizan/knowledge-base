@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "Economy Model & Operations"
+title: "STORE: Economy Model & Operations"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
-position: 3
+position: 2
 theme: 'platforms'
 collection: 'platforms_ios'
 ---
 
-#**Economy Model & Operations**
+#**STORE: Economy Model & Operations**
 
 SOOMLA's iOS-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items.
 
@@ -28,7 +28,7 @@ This type of purchase is with money. Items with this purchase type must be defin
 There are 2 ways to define this purchase type.
 
 ``` objectivec
-NO_ADS_NON_CONS = [[NonConsumableItem alloc]
+NO_ADS = [[LifetimeVG alloc]
     ...
     andPurchaseType:[[PurchaseWithMarket alloc]
         initWithMarketItem:[[MarketItem alloc]
@@ -163,14 +163,15 @@ Take back the 50-muffin pack that the user owns:
 ```
 
 ####**Get the balance**
+
 `VirtualCurrencyPack`s do not have a balance of their own in the database. When a user purchases a `VirtualCurrencyPack`, the balance of the associated `VirtualCurrency` is increased.
 
 ``` objectivec
 [StoreInventory getItemBalance:@"currency_muffin"];
 ```
 
-
 ##Virtual Goods
+
 Virtual goods need to be declared in your implementation of `IStoreAssets`.
 
 ###[SingleUseVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/SingleUseVG.h)
@@ -235,7 +236,7 @@ FRUIT_CAKE_GOOD_PACK = [SingleUsePackVG alloc]
     andPurchaseType:[[PurchaseWithMarket alloc]
         initWithMarketItem:[[MarketItem alloc]
             initWithProductId:FRUIT_CAKE_5PACK_PRODUCT_ID
-            andConsumable:kNonConsumable
+            andConsumable:kConsumable
             andPrice:2.99]]];
 ```
 
@@ -272,6 +273,14 @@ Query the balance of the virtual good with item ID "fruit_cake":
 
 ###[LifetimeVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/LifetimeVG.h)
 
+A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
+
+Read a detailed description about `LifetimeVG`s [here](/docs/soomla/store/EconomyModel#lifetimevg).
+
+<div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/docs/platforms/ios/appStoreIAB) for defining IAP products in the App Store.</div>
+
+<br>
+
 ####**How to define**
 
 ``` objectivec
@@ -282,7 +291,7 @@ MARRIAGE_GOOD = [[LifetimeVG alloc]
     andPurchaseType:[[PurchaseWithMarket alloc]
         initWithMarketItem:[[MarketItem alloc]
             initWithProductId:MARRIAGE_PRODUCT_ID
-            andConsumable:kConsumable andPrice:9.99]]];
+            andConsumable:kNonConsumable andPrice:9.99]]];
 ```
 
 ####**How to use**
@@ -499,59 +508,7 @@ To find out the upgrade level of a virtual good use `goodUpgradeLevel`. If the g
 [StoreInventory goodUpgradeLevel:MUFFIN_CAKE_GOOD_ITEM_ID];
 ```
 
-##Other Entities
-
-###[NonConsumableItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/NonConsumableItem.h)
-
-A `NonConsumableItem` is a representation of a non-consumable item in the App Store. These kinds of items are bought by the user once and kept forever.
-
-####**How to define**
-`NonConsumableItem`s need to be declared in your implementation of `IStoreAssets`.
-``` objectivec
-NO_ADS_NON_CONS = [[NonConsumableItem alloc]
-    initWithName:@"No Ads"
-    andDescription:@"No more ads"
-    andItemId:@"no_ads"  
-    andPurchaseType:[[PurchaseWithMarket alloc]
-        initWithMarketItem:[[MarketItem alloc]
-            initWithProductId:NO_ADS_PRODUCT_ID
-            andConsumable:kNonConsumable
-            andPrice:1.99]]];
-```
-
-####**How to use**
-
-**Buy:**
-
-Non-consumables can only be purchased once and are kept forever for the user. When a user buys a non-consumable item, a check is performed to see that he/she doesn't already own this item.
-
-``` objectivec
-[StoreInventory buyItemWithItemId:@"no_ads"];
-```
-
-**Give:**
-
-Give your users the "No Ads" feature for free.
-
-``` objectivec
-[StoreInventory giveAmount:1 ofItem:@"no_ads"];
-```
-
-**Take:**
-
-This function simply deducts the user's balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
-
-``` objectivec
-[StoreInventory takeAmount:1 ofItem:@"no_ads"];
-```
-
-####**Check existence**
-
-``` objectivec
-[StoreInventory nonConsumableItemExists:@"no_ads"];
-```
-
-###[VirtualCategory](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/VirtualCategory.h)
+##[VirtualCategory](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/VirtualCategory.h)
 
 Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
 

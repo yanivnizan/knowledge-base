@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "InAppPurchase"
-title: "In-app Billing"
+title: "STORE: In-app Billing"
 text: "iTunes Connect in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
-position: 2
+position: 5
 theme: 'platforms'
 collection: 'platforms_ios'
 ---
 
-#**App Store IAB**
+#**STORE: App Store IAB**
 
 ##Define your IAP products
 
@@ -20,7 +20,7 @@ collection: 'platforms_ios'
 
     - Click on "Create New".
 
-    - Choose the type of the product you would like (Consumable or Non-Consumable). To learn more about Apples’ Consumable/Non-Consumable products please see [Getting Started with In-App Purchase on iOS and OS X](https://developer.apple.com/in-app-purchase/In-App-Purchase-Guidelines.pdf).
+    - Choose the type of the product you would like, Consumable or Non-Consumable (For `SingleUseVG`s choose Consumable, for `LifetimeVG`s choose NonConsumable). To learn more about Apples’ Consumable/Non-Consumable products please see [Getting Started with In-App Purchase on iOS and OS X](https://developer.apple.com/in-app-purchase/In-App-Purchase-Guidelines.pdf).
 
       <div class="warning-box">Please note that SOOMLA does not support Subscription products, so do not choose these options.</div>
 

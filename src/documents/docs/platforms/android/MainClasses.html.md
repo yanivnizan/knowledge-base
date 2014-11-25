@@ -1,14 +1,14 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "Main Classes"
+title: "STORE: Main Classes"
 text: "The main classes of android-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
 position: 5
 theme: 'platforms'
 collection: 'platforms_android'
 ---
 
-#**Main Classes**
+#**STORE: Main Classes**
 
 Here you can find descriptions of some of the main classes and interfaces of android-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
 
@@ -22,8 +22,7 @@ Taken from StoreExampleActivity.java of our Muffin Rush [Example](https://github
 
 ``` java
 IStoreAssets storeAssets = new MuffinRushAssets();
-SoomlaStore.getInstance().initialize(storeAssets,
-    "MIIBIjANBgkqhkiG9w...");
+SoomlaStore.getInstance().initialize(storeAssets, "MIIBIjANBgkqhkiG9w...");
 ```
 
 <br>
@@ -44,7 +43,6 @@ This class holds your store's
 - Virtual currency packs
 - Virtual goods of all kinds
 - Virtual categories
-- Non-consumable items
 
 `StoreInfo` can be questioned about the existence of `VirtualItem`s and the associations between them.
 
@@ -104,14 +102,14 @@ StoreInventory.takeVirtualItem("green_hat", 1);
 
 <div class="warning-box">SOOMLA discourages the use of StorageManager's functions, and suggests you use StoreInventory's functions instead to perform the same actions.</div>
 
-`StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodsStorage`, `NonConsumableItemsStorage`, and `KeyValueStorage`.
+`StorageManager` creates all the storage-related instances in your game. These include: `VirtualCurrencyStorage`, `VirtualGoodsStorage`, and `KeyValueStorage`.
 
 You can use the `StorageManager`’s functions to access the different storage bases, and then use the different storages’ available functions to perform actions such as set/get an item’s balance, add/remove an item from the storage, etc…
 
 **Example:**
 
 ``` java
-StorageManager.getNonConsumableItemsStorage().add(nonConsumableItem);
+StorageManager.getVirtualItemStorage().add(some_VI_ID, 1);
 ```
 
 
