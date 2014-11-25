@@ -1,7 +1,4 @@
 <div class="col-lg-6 col-md-6 menu-option">
-    <% if @new == "true": %>
-        <div id="new-container"> </div>
-    <% end %>
     <a href="<%= @link %>">
         <div class="link-container">
             <div class="option-image col-lg-4 col-md-4">
