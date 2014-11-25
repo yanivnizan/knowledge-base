@@ -82,6 +82,10 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](dashboard.soo
 	- [Profile Event Handling](/docs/platforms/unity/Profile_Events)
 	- [LevelUp Event Handling](/docs/platforms/unity/Levelup_Events)
 
+9. Once your app is running, you can go back to the SOOMLA [dashboard](dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
+
+	![alt text](/img/tutorial_img/unity_grow/verifyIntegration.png "Verify Integration")
+
 And that's it! You have in-app purchasing capabilities, social and game architecture capabilities at your fingertips.
 
 ##Example
