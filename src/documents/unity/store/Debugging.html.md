@@ -5,7 +5,9 @@ title: "Debugging"
 text: "Debugging methods and tips for unity3d-store and unity3d-profile."
 position: 12
 theme: 'platforms'
-collection: 'platforms_unity'
+collection: 'unity_store'
+module: 'store'
+platform: 'unity'
 ---
 
 #**Debugging**

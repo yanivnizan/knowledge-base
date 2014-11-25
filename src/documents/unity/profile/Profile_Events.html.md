@@ -5,7 +5,9 @@ title: "PROFILE: Events"
 text: "Handle unity3d-profile (social-related) events with your game-specific behavior."
 position: 7
 theme: 'platforms'
-collection: 'platforms_unity'
+collection: 'unity_profile'
+module: 'profile'
+platform: 'unity'
 ---
 
 #PROFILE: Event Handling

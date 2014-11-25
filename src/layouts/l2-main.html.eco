@@ -4,8 +4,9 @@ layout: 'knowledge-base'
 
 <div class="jumbotron" id="know-soomla">
     <div id="jumbo-main-text">
-        <div id="hierarchy-nav"><%- @partial('nav-menu-l1', {current:@document.theme}) %>
-        <%- @partial('nav-menu-l2', {collection:@document.collection, current:@document.theme}) %></div>
+        <div id="hierarchy-nav">
+          <%- @partial('nav-menu-l1', {current: @document.platform}) %>
+          <%- @partial('nav-menu-l2', {collection:@document.collection, platform: @document.platform, module: @document.module, theme: @document.theme}) %></div>
         WHAT WOULD YOU LIKE TO KNOW?
     </div>
     <div id="jumbo-small-text">

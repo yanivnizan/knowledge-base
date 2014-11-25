@@ -5,7 +5,9 @@ title: "STORE: Events"
 text: "Event handling in unity3d-store follows the publish-subscribe pattern."
 position: 4
 theme: 'platforms'
-collection: 'platforms_unity'
+collection: 'unity_store'
+module: 'store'
+platform: 'unity'
 ---
 
 #STORE: Event Handling

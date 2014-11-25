@@ -13,6 +13,16 @@ title: 'Soomla Knowledge Base'
         </div>
     </div>
 
+    <div id="platform-options">
+      <div class="container">
+        <%- @partial('platform-selection', {image:"img/Level2-Unity.png", link:"/unity", title: "Unity3D"}) %>
+        <%- @partial('platform-selection', {image:"img/Level2-Cocos2dx.png", link:"/cocos2dx", title: "Cocos2d-x"}) %>
+        <%- @partial('platform-selection', {image:"img/Level2-iOS.png", link:"/ios", title: "iOS"}) %>
+        <%- @partial('platform-selection', {image:"img/Level2-Android.png", link:"/android", title: "Android"}) %>
+      </div>
+    </div>
+
+    <!--This section will be shrinked only to downloads and university-->
     <div class="nav-options kb-main-menu">
       <div class="container">
         <%- @partial('grid-option', {image:"img/Level1-Soomla.png",link:"/soomla",title: "SOOMLA",text: "Learn about the several game economy components that SOOMLA offers that can easily be integrated into your games.", selectorid:"test"}) %>
@@ -20,5 +30,4 @@ title: 'Soomla Knowledge Base'
         <%- @partial('grid-option', {image:"img/Level1-Downloads.png",link:"//soom.la/getting-started/",title: "DOWNLOADS",text: "Download links to the latest (and previous) store versions of each of the platforms SOOMLA supports."}) %>
         <%- @partial('grid-option', {image:"img/Level1-University-green.png",link:"/docs/university/videos",title: "UNIVERSITY",text: "Watch our new video tutorials to get started with SOOMLA. More videos coming soon!", new:"true"}) %>
       </div>
-
     </div>

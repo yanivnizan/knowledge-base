@@ -5,7 +5,9 @@ title: "STORE: Main Classes"
 text: "The main classes of unity3d-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
 position: 3
 theme: 'platforms'
-collection: 'platforms_unity'
+collection: 'unity_store'
+module: 'store'
+platform: 'unity'
 ---
 
 #STORE: Main Classes

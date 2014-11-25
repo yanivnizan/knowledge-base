@@ -5,7 +5,9 @@ title: "PROFILE: Main Classes & Operations"
 text: "Read descriptions of the various social entities unity3d-profile provides, and see usage examples of operations that can be done to the different entities."
 position: 6
 theme: 'platforms'
-collection: 'platforms_unity'
+collection: 'unity_profile'
+module: 'profile'
+platform: 'unity'
 ---
 
 #PROFILE: Main Classes & Operations

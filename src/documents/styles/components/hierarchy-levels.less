@@ -28,6 +28,54 @@
 #hierarchy-nav {
   display: inline-block;
 }
+
+
+#platform-options {
+  .user-select(none);
+  background-color: @nav-grid-bg-color;
+  a {
+    text-decoration: none;
+  }
+  @media all and (min-width: 1125px) {
+    padding-top:120px;
+  }
+  @media all and (max-width: 1124px) {
+    padding-top:80px;
+  }
+
+  .menu-option {
+
+    margin-bottom:150px;
+    min-height:160px;
+    text-align: center;
+
+    .link-container {
+      display: inline-block;
+
+      .option-image {
+        @edge: 118px;
+        .square(@edge);
+        margin-bottom: 15px;
+        background-repeat: no-repeat;
+
+        &:hover {
+          background-position-y: -1 * @edge;
+        }
+        &:active {
+          background-position-y: -2 * @edge;
+        }
+      }
+
+      .option-head-text {
+        font-family: 'Open Sans', sans-serif;
+        font-weight:600;
+        font-size: 22px;
+        color: #4D4D4D;
+      }
+    }
+  }
+}
+
 //
 // Subject navigation links
 //
@@ -61,7 +109,7 @@
         height:354px;
         top:0;
         left:0;
-        &.hover {
+        &:hover {
           top:-118px;
         }
         &:active {

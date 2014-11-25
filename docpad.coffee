@@ -55,6 +55,100 @@ docpadConfig = {
 			]
 
 
+		topLevelNavItems: [
+			{
+				id: 'unity',
+				title: 'Unity',
+				link: '/unity'
+			}
+			{
+				id: 'cocos2dx',
+				title: 'Cocos2d-x',
+				link: '/cocos2dx'
+			}
+			{
+				id: 'ios',
+				title: 'iOS',
+				link: '/ios'
+			}
+			{
+				id: 'android',
+				title: 'Android',
+				link: '/android'
+			}
+			{
+				id: 'university',
+				title: 'University',
+				link: '/university'
+			}
+			{
+				id: 'download',
+				title: 'Download',
+				link: '/download'
+			}
+		]
+
+		soomlaModules: {
+			'unity': [
+				{
+					id: 'store',
+					title: 'Store'
+				}
+				{
+					id: 'profile',
+					title: 'Profile'
+				}
+				{
+					id: 'levelup',
+					title: 'LevelUp'
+				}
+				{
+					id: 'grow',
+					title: 'GROW'
+				}
+			],
+			'cocos2dx': [
+				{
+					id: 'store',
+					title: 'Store'
+				}
+				{
+					id: 'profile',
+					title: 'Profile'
+				}
+				{
+					id: 'levelup',
+					title: 'LevelUp'
+				}
+				{
+					id: 'grow',
+					title: 'GROW'
+				}
+			],
+			'ios': [
+				{
+					id: 'store',
+					title: 'Store'
+				}
+				{
+					id: 'profile',
+					title: 'Profile'
+				}
+			],
+			'android': [
+				{
+					id: 'store',
+					title: 'Store'
+				}
+				{
+					id: 'profile',
+					title: 'Profile'
+				}
+			]
+		}
+
+
+
 	# -----------------------------
 	# Helper Functions
 
@@ -135,8 +229,14 @@ docpadConfig = {
 		platforms_cocos2dx: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'cocos2dx')},[position:1])
 
-		platforms_unity: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'unity')},[position:1])
+		unity_store: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','store')},[position:1])
+
+		unity_profile: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','profile')},[position:1])
+
+		unity_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','levelup')},[position:1])
 
 		soomla_levelup: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','soomla', 'levelup')},[position:1])

@@ -5,7 +5,9 @@ title: "LEVELUP: Model & Operations"
 text: "Learn about the different entities of LevelUp. See examples of how to initialize and use them."
 position: 9
 theme: 'platforms'
-collection: 'platforms_unity'
+collection: 'unity_levelup'
+module: 'levelup'
+platform: 'unity'
 ---
 
 #LEVELUP: Model & Operations
