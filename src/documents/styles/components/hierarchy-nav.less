@@ -1,20 +1,6 @@
 #hierarchy-nav {
   margin-bottom: 0px;
   padding-bottom: 0px;
-  #article-header {
-    display: inline-block;
-
-    #article-name {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 600;
-      font-size: 40px;
-      color: #4D4D4D;
-      display: inline-block;
-      vertical-align: middle;
-      margin-left: 10px;
-    }
-
-  }
 
   .dropdown-toggle {
     display: inline-block;
@@ -30,26 +16,18 @@
   }
 }
 
-#knowledge-navbar #hierarchy-nav {
-  vertical-align: top;
-  margin-top: 7px;
+#article-header {
   display: inline-block;
-  .clearfix;
-  margin-top: 6px;
+}
 
-  .dropdown-menu-icon {
-    .square(36px);
-  }
-
-  #article-name {
-    display: none;
-  }
-
-  // Space the dropdown menu downwards a bit
-
-  .dropdown-container .dropdown-menu, #nav-list-l3 {
-    margin-top:20px;
-  }
+#article-name {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  color: #4D4D4D;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
 }
 
 .dropdown-container {
@@ -170,7 +148,24 @@
   margin-top: 5px;
 }
 
-#knowledge-navbar #university-hierarchy-nav {
+
+//
+// The hierarchy nav changes position to the top navbar when scrolling down
+//
+
+#knowledge-navbar #hierarchy-nav {
+
+  #article-name {
+    display: none;
+  }
+
+  // Space the dropdown menu downwards a bit
+  .dropdown-container .dropdown-menu, #nav-list-l3 {
+    margin-top:20px;
+  }
+}
+
+#knowledge-navbar #university-hierarchy-nav, #knowledge-navbar #hierarchy-nav {
   vertical-align: top;
   margin-top: 7px;
   display: inline-block;
@@ -179,5 +174,10 @@
 
   .dropdown-menu-icon {
     .square(36px);
+  }
+
+  // Prevent the last breadcrumb from showing
+  .breadcrumb-icon:last-child {
+    display: none;
   }
 }
