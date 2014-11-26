@@ -79,7 +79,7 @@ docpadConfig = {
 			{
 				id: 'university',
 				title: 'University',
-				link: '/university'
+				link: '/docs/university/videos'
 			}
 			{
 				id: 'download',
