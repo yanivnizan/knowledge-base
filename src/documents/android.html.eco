@@ -17,8 +17,8 @@ theme: 'platforms'
 <div class="nav-options">
   <div class="container">
     <%- @partial('grid-option', {image:"/img/Level2-Store.png",link:"android/store",title: "STORE",text: "SOOMLA provides the building blocks for all free-to-play games. Read about them here."}) %>
-    <%- @partial('grid-option', {image:"/img/Level2-LevelUp-ComingSoon.png",link:"javascript:;",title: "LEVELUP",text: "SOOMLA's game progression framework includes levels, worlds, achievements, rewards, and scores, that can easily be implemented into your game."}) %>
-    <%- @partial('grid-option', {image:"/img/Level2-Highway-ComingSoon.png",link:"javascript:;",title: "HIGHWAY",text: "SOOMLA Highway allows you to sync your users' balances to the cloud and remotely control your in-game economy."}) %>
-    <%- @partial('grid-option', {image:"/img/Level2-Profile-ComingSoon.png",link:"javascript:;",title: "PROFILE",text: "SOOMLA offers a complete social-based solution to integrate with your in-game economy."}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-LevelUp.png",link:"javascript:;",title: "LEVELUP",text: "SOOMLA's game progression framework includes levels, worlds, missions and scores, that can easily be implemented into your game."}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-Highway.png",link:"javascript:;",title: "HIGHWAY",text: "SOOMLA Highway allows you to sync your users' balances to the cloud and remotely control your in-game economy."}) %>
+    <%- @partial('grid-option', {image:"/img/Level2-Profile.png",link:"javascript:;",title: "PROFILE",text: "SOOMLA offers a complete social-based solution to integrate with your in-game economy."}) %>
   </div>
 </div>
