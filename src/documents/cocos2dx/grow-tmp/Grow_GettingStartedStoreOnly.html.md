@@ -16,11 +16,11 @@ platform: 'cocos2dx'
 
 ##Integrate STORE & GROW
 
-Get started with SOOMLA's Grow. Go to the [Grow dashboard website](dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Get started with SOOMLA's Grow. Go to the [Grow dashboard website](http://dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
 <div class="info-box">If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by SOOMLA's modules (the tag is the version).</div>
 
-1. In the [dashboard](dashboard.soom.la), click on **Demo Game->Add New App** and fill in the required fields.
+1. In the [dashboard](http://dashboard.soom.la), click on **Demo Game->Add New App** and fill in the required fields.
 
   ![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
@@ -62,7 +62,7 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](dashboard.soo
     #include "Cocos2dxHighway.h"
     ```
 
-9. Initialize `CCHighwayService` with the "Game Key" and "Env Key" given to you in the [dashboard](dashboard.soom.la).
+9. Initialize `CCHighwayService` with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la).
 
   ![alt text](/img/tutorial_img/cocos_grow/dashboardKeys.png "Keys")
 
@@ -88,7 +88,7 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](dashboard.soo
   soomla::CCStoreService::initShared(assets, storeParams);
   ```
 
-11. Once your app is running, you can go back to the SOOMLA [dashboard](dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
+11. Once your app is running, you can go back to the SOOMLA [dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
 
   ![alt text](/img/tutorial_img/unity_grow/verifyIntegration.png "Verify Integration")
 

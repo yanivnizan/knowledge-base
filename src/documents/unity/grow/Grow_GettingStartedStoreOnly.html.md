@@ -16,7 +16,7 @@ platform: 'unity'
 
 ##Setup GROW
 
-Go to the [Grow dashboard](dashboard.soom.la). Upon signing up, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Go to the [Grow dashboard](http://dashboard.soom.la). Upon signing up, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
 1. Click on "Demo Game" > "Add New App" and fill in the required fields.
 
@@ -63,7 +63,7 @@ Go to the [Grow dashboard](dashboard.soom.la). Upon signing up, you will be dire
 	SoomlaHighway.Initialize();
 	```
 
-6. Build your app to a target platform (either iOS or Android) and run it once on a device.  Once your app is running, you can go back to the SOOMLA [dashboard](dashboard.soom.la) to verify the integration. Just refresh the page, and the active users and game events should appear.
+6. Build your app to a target platform (either iOS or Android) and run it once on a device.  Once your app is running, you can go back to the SOOMLA [dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the active users and game events should appear.
 
 	![alt text](/img/tutorial_img/unity_grow/verifyIntegration.png "Verify Integration")
 

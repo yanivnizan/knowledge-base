@@ -14,13 +14,13 @@ platform: 'unity'
 
 ##Getting started
 
-Get started with SOOMLA's Grow. Go to the [Grow dashboard](dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Get started with SOOMLA's Grow. Go to the [Grow dashboard](http://dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
 1. Click on "Demo Game" > "Add New App" and fill in the required fields.
 
 	  ![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
-2. Go to the "Download" window on the left side-panel, or click [here](dashboard.soom.la/downloads), and choose "Unity". Download the **GROW Bundle**. (NOTE: The "SOOMLA Bundle" contains the modules Store, Profile, & LevelUp, but does not contain Highway, meaning that it doesn't enable you to share data and participate in the data sharing community.)
+2. Go to the "Download" window on the left side-panel, or click [here](http://dashboard.soom.la/downloads), and choose "Unity". Download the **GROW Bundle**. (NOTE: The "SOOMLA Bundle" contains the modules Store, Profile, & LevelUp, but does not contain Highway, meaning that it doesn't enable you to share data and participate in the data sharing community.)
 
 3. Double-click on the downloaded link, it'll import all the necessary files into your project.
 
@@ -84,7 +84,7 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard](dashboard.soom.la) an
 	- [Profile Event Handling](/docs/platforms/unity/Profile_Events)
 	- [LevelUp Event Handling](/docs/platforms/unity/Levelup_Events)
 
-9. Once your app is running, you can go back to the SOOMLA [dashboard](dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
+9. Once your app is running, you can go back to the SOOMLA [dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
 
 	![alt text](/img/tutorial_img/unity_grow/verifyIntegration.png "Verify Integration")
 
