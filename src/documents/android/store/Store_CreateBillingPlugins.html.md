@@ -76,4 +76,4 @@ Developers usually feel better with using a prebuilt jar file in their project. 
 * Provide a simple 1-2-3 "Getting Started" with textual guidelines and code blocks. Don't forget to state what should be the name of the meta-data tag in `AndroidManifest.xml`.
 * Add inline documentation inside the code. Explain what your methods do and why. See SOOMLA's [Android inline documentation guidelines](https://github.com/soomla/android-store/blob/master/documentation.md).
 
-Your billing service is ready for *android-store*? Great! Now it's time to [Make your Android billing service available on unity3d-store](/unity/store/CreateBillingPlugins).
+Your billing service is ready for *android-store*? Great! Now it's time to [Make your Android billing service available on unity3d-store](/unity/store/Store_CreateBillingPlugins).

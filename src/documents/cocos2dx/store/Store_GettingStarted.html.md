@@ -36,7 +36,7 @@ platform: 'cocos2dx'
 
 3. Create your own implementation of `CCStoreAssets` that will represent the assets in your specific game. For a brief example, refer to the example below. For a complete example refer to [cocos2dx-store-example](https://github.com/soomla/cocos2dx-store-example/blob/master/Classes/MuffinRushAssets.cpp).
 
-4. Implement your `CCStoreEventHandler` in order to be notified about in-app purchase related events. Refer to the [Event Handling](/cocos2dx/store/Events) section for more information.
+4. Implement your `CCStoreEventHandler` in order to be notified about in-app purchase related events. Refer to the [Event Handling](/cocos2dx/store/Store_Events) section for more information.
 
 5. Initialize `CCServiceManager`, `CCStoreService`, `CCStoreAssets` (the the class you just created), a `customSecret` and other params:
 
@@ -242,7 +242,7 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 	</application>
 	```
 
-3. Read our [tutorial](/android/store/GooglePlayIAB) on how to define your in-app products in Google Play.
+3. Read our [tutorial](/android/store/Store_GooglePlayIAB) on how to define your in-app products in Google Play.
 
 4. Start IAB Service in background **(optional)**
 
@@ -282,11 +282,11 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 	<meta-data android:name="billing.service" android:value="amazon.AmazonIabService" />
 	```
 
-3. Read our [tutorial](/android/store/AmazonIAB) on how to define your in-app products in the Amazon Appstore.
+3. Read our [tutorial](/android/store/Store_AmazonIAB) on how to define your in-app products in the Amazon Appstore.
 
 ###Apple App Store
 
-1. Read our [tutorial](/ios/store/AppStoreIAB) on how to define your in-app products in the App Store.
+1. Read our [tutorial](/ios/store/Store_AppStoreIAB) on how to define your in-app products in the App Store.
 
 2. Use SOOMLA's iOS Server Side Verification **(Optional)**
 

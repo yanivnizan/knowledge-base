@@ -24,7 +24,7 @@ Purchase types are used to indicate whether an item will be purchased with money
 
 ###[PurchaseWithMarket](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithMarket.java)
 
-This type of purchase is with money. Items with this purchase type must be defined in the Market (for more info see one of our tutorials on IAB: [Google Play IAB](/android/store/GooglePlayIAB) or [Amazon IAB](/android/store/AmazonIAB)).
+This type of purchase is with money. Items with this purchase type must be defined in the Market (for more info see one of our tutorials on IAB: [Google Play IAB](/android/store/Store_GooglePlayIAB) or [Amazon IAB](/android/store/Store_AmazonIAB)).
 
 There are 2 ways to define this purchase type.
 

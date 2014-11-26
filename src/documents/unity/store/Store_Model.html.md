@@ -28,8 +28,8 @@ This type of purchase is with money. Items with this purchase type must be defin
 
 For more info see one of our tutorials on In-app Billing:
 
-- For Android: [Google Play IAB](/android/store/GooglePlayIAB) or [Amazon IAB](/android/store/AmazonIAB)
-- For iOS: [App Store IAB](/ios/store/AppStoreIAB)
+- For Android: [Google Play IAB](/android/store/Store_GooglePlayIAB) or [Amazon IAB](/android/store/Store_AmazonIAB)
+- For iOS: [App Store IAB](/ios/store/Store_AppStoreIAB)
 
 There are 2 ways to define this purchase type.
 
@@ -279,7 +279,7 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 
 A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
 
-<div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/ios/store/appStoreIAB) for defining IAP products in the App Store.</div>
+<div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/ios/store/Store_AppStoreIAB) for defining IAP products in the App Store.</div>
 
 <br>
 

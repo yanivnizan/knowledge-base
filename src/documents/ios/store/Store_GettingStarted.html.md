@@ -141,6 +141,6 @@ In order to define the way your various virtual items (Coins, swords, hats...) a
 
 When your users buy products, iOS-store knows how to contact the App Store for you and redirect the users to their purchasing system to complete the transaction.
 
-Don't forget to subscribe to events of successful or failed purchases (see [Event Handling](/ios/store/Events)).
+Don't forget to subscribe to events of successful or failed purchases (see [Event Handling](/ios/store/Store_Events)).
 
-<div class="info-box">To read about iTunes Connect in-app-purchase setup and integration with SOOMLA see our [iOS IAB tutorial](/ios/store/AppStoreIAB).</div>
+<div class="info-box">To read about iTunes Connect in-app-purchase setup and integration with SOOMLA see our [iOS IAB tutorial](/ios/store/Store_AppStoreIAB).</div>
