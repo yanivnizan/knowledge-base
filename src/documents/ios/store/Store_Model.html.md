@@ -23,7 +23,7 @@ Purchase types are used to indicate whether an item will be purchased with money
 
 ###[PurchaseWithMarket](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/PurchaseTypes/PurchaseWithMarket.h)
 
-This type of purchase is with money. Items with this purchase type must be defined in the App Store (To learn more see our [App Store IAB](/ios/store/AppStoreIAB) tutorial).
+This type of purchase is with money. Items with this purchase type must be defined in the App Store (To learn more see our [App Store IAB](/ios/store/Store_AppStoreIAB) tutorial).
 
 There are 2 ways to define this purchase type.
 

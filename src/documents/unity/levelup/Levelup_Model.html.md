@@ -26,7 +26,7 @@ The SOOMLA team has examined dozens of games and has observed that most game pro
 
 ###**Prerequisites**
 
-This document assumes that you have a good understanding of SOOMLA's Store module. If not, please take time to read about the [Economy Model](/unity/store/EconomyModel), and then come back to this document.
+This document assumes that you have a good understanding of SOOMLA's Store module. If not, please take time to read about the [Economy Model](/unity/store/Store_Model), and then come back to this document.
 
 The `Schedule` and `Reward` entities are widely used in the examples of this document. You can read about them [here](#auxiliary-models).
 

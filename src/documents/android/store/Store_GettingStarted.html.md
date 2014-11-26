@@ -77,7 +77,7 @@ You must select a billing service for android-store to work properly. The integr
 
 ### [Google Play](https://github.com/soomla/android-store-google-play)
 
-Once you complete the following steps, see the [Google Play IAB](/android/store/GooglePlayIAB) tutorial for information about in-app-purchase setup, integration with SOOMLA, and how to define your in-app purchase items.
+Once you complete the following steps, see the [Google Play IAB](/android/store/Store_GooglePlayIAB) tutorial for information about in-app-purchase setup, integration with SOOMLA, and how to define your in-app purchase items.
 
 1. Add `AndroidStoreGooglePlay.jar` from the folder `billing-services/google-play` to your project.
 
@@ -137,7 +137,7 @@ SoomlaStore.getInstance().stopIabServiceInBg();
 
 ### [Amazon](https://github.com/soomla/android-store-amazon)
 
-Once you complete the following steps, see the [Amazon IAB](/android/store/AmazonIAB) tutorial for information about in-app-purchase setup, integration with SOOMLA, and how to define your in-app purchase items.
+Once you complete the following steps, see the [Amazon IAB](/android/store/Store_AmazonIAB) tutorial for information about in-app-purchase setup, integration with SOOMLA, and how to define your in-app purchase items.
 
 1. Add `in-app-purchasing-1.0.3.jar` and `AndroidStoreAmazon.jar` from the folder `billing-services/amazon` to your project.
 
