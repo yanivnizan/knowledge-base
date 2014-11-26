@@ -34,7 +34,7 @@ platform: 'cocos2dx'
     $ git clone git@github.com:soomla/cocos2dx-levelup.git extensions/cocos2dx-levelup
     ```
 
-3. We use a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing, clone our fork into the `external` directory at the root of your framework:
+3. We use a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing. Clone our fork into the `external` directory at the root of your framework:
 
     ```
     $ git clone git@github.com:vedi/jansson.git external/jansson
@@ -93,12 +93,15 @@ In your XCode project, perform the following steps:
 
 2. For each of the following XCode projects:
 
-  - `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).  
-  - `Cocos2dXStore.xcodeproj` (**extensions/cocos2dx-store/**).
-  - `Cocos2dXProfile.xcodeproj` (**extensions/soomla-cocos2dx-profile/**).  
-  - `Cocos2dXLevelUp.xcodeproj` (**extensions/cocos2dx-levelup/**).
+	- `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**)
 
-  Perform the following:
+	- `Cocos2dXStore.xcodeproj` (**extensions/cocos2dx-store/**)
+
+	- `Cocos2dXProfile.xcodeproj` (**extensions/soomla-cocos2dx-profile/**)
+
+	- `Cocos2dXLevelUp.xcodeproj` (**extensions/cocos2dx-levelup/**)
+
+    Perform the following:
 
     - Drag the project into your project
     - Add its targets to your **Build Phases->Target Dependencies**
@@ -148,7 +151,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 
 ###**Instructions for Android**
 
-1. Import cocos2dx-store, cocos2dx-profile, and cocos2dx-levelup module into your project's Android.mk by adding the following:
+1. Import cocos2dx-store, cocos2dx-profile, and cocos2dx-levelup into your project's Android.mk by adding the following:
 
     ```
     LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_store_static
@@ -194,6 +197,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
     - AndroidLevelUp.jar
 
     - Cocos2dxAndroidLevelUp.jar
+
 
 3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
 
