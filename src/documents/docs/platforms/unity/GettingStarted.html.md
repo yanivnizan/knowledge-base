@@ -14,7 +14,7 @@ collection: 'platforms_unity'
 
 1. First, you'll need to either download (RECOMMENDED) the unity3d-store pre-baked packages, or clone unity3d-store.
 
-  - RECOMMENDED: Download [soomla-unity3d-core](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-core.unitypackage?raw=true) and [unity3d-store v1.5.4](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-store.unitypackage)
+  - RECOMMENDED: Download [soomla-unity3d-core](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-core.unitypackage?raw=true) and [unity3d-store](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-store.unitypackage)
 
     OR, if you'd like to work with sources:
 
