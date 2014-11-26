@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "Getting Started"
-text: "Get started with unity3d-grow..."
+text: "Get started with GROW open analytics for Unity. Includes all of SOOMLA's modules: Core, Store, Profile, LevelUp, and Highway. Learn how to easily integrate all that SOOMLA offers into your game."
 position: 14
 theme: 'platforms'
 collection: 'unity_grow'
