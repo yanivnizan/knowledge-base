@@ -27,7 +27,7 @@ platform: 'unity'
   ``` cs
   git clone --recursive https://github.com/soomla/unity3d-levelup.git
   ```
-  
+
 2. Double-click on them following the order they appear above. It'll import all the necessary files into your project.
 
   <div class="info-box">If you are completely new to SOOMLA you can use the [All-in-One](https://github.com/soomla/unity3d-levelup/raw/master/soomla-unity3d-all-in-one.unitypackage) unitypackage which contains all the above packages in one package. Importing it is equivalent to preforming the above steps.</div>
@@ -43,7 +43,7 @@ platform: 'unity'
 
     - _Public Key_ - is the public key given to you from Google (iOS doesn't have a public key).
 
-5. Create your own _Initial World_ which should contain the entire 'blueprint' of the game (see [Model Overview](/docs/platforms/unity/Levelup_Model)). Initialize _LevelUp_ with the class you just created:
+5. Create your own _Initial World_ which should contain the entire 'blueprint' of the game (see [Model Overview](/unity/levelup/Levelup_Model)). Initialize _LevelUp_ with the class you just created:
 
     ```cs
     SoomlaLevelUp.Initialize (initialWorld);
@@ -51,7 +51,7 @@ platform: 'unity'
 
   <div class="warning-box">Initialize _LevelUp_ ONLY ONCE when your application loads, in the "Start()" function of a 'MonoBehaviour' and **NOT** in the "Awake()" function. SOOMLA has its own 'MonoBehaviour' and it needs to be "Awakened" before you initialize.</div>
 
-6. You'll need to create event handler functions in order to be notified about (and handle) _LevelUp_ related events. Refer to the [Event Handling](/docs/platforms/unity/LevelUp_Events) section for more information.
+6. You'll need to create event handler functions in order to be notified about (and handle) _LevelUp_ related events. Refer to the [Event Handling](/unity/levelup/LevelUp_Events) section for more information.
 
 And that's it! You have game architecture capabilities at your fingertips.
 

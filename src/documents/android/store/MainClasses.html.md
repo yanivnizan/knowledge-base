@@ -18,7 +18,7 @@ Here you can find descriptions of some of the main classes and interfaces of and
 
 SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon Appstore, etc…).
 
-<div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/docs/platforms/android/GettingStarted).</div>
+<div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/android/store/GettingStarted).</div>
 
 Taken from StoreExampleActivity.java of our Muffin Rush [Example](https://github.com/soomla/android-store/tree/master/SoomlaAndroidExample/src/com/soomla/example).
 
@@ -68,7 +68,7 @@ int greenHatsBalance = StorageManager.getVirtualGoodsStorage().getBalance(greenH
 
 **`buy(String itemId)`**
 
-Buys the item that has the given itemId according to its purchase type - either with real money ($$$) or with other virtual items. Read more about PurchaseTypes in [Economy Model](/docs/platforms/android/EconomyModel).
+Buys the item that has the given itemId according to its purchase type - either with real money ($$$) or with other virtual items. Read more about PurchaseTypes in [Economy Model](/android/store/EconomyModel).
 
 **Example:** Buy a virtual item with `itemId` "blue_hat":
 

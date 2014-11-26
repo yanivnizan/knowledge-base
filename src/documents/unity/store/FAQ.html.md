@@ -86,8 +86,6 @@ Yes, a product with an item ID and a product ID can have the same value if you w
 
 The only way to delete this kind of item is to refund it in the market.
 
-Read more about `LifetimeVG`s [here](/docs/soomla/store/EconomyModel#lifetimevg).
-
 ---
 
 **How can I test purchases of `LifetimeVG`s that are defined in Google Play?**

@@ -43,7 +43,7 @@ In cocos2dx-levelup, to be notified of events and handle them, you need to creat
 soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(myLevelUpEventHandler);
 ```
 
-Read more about [cocos2dx-levelup event handling](docs/platforms/cocos2dx/Levelup_Events).
+Read more about [cocos2dx-levelup event handling](/cocos2dx/levelup/Levelup_Events).
 
 ###In unity3d-levelup
 
@@ -53,7 +53,7 @@ The `LevelUpEvents` class is where all events go through. To listen for and hand
 LevelUpEvents.OnWorldCompleted += onWorldCompleted;
 ```
 
-Read more about [unity3d-levelup event handling](docs/platforms/unity/Levelup_Events).
+Read more about [unity3d-levelup event handling](/unity/levelup/Levelup_Events).
 
 <br>
 

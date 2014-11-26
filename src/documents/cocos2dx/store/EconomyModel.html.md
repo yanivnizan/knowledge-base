@@ -306,8 +306,6 @@ CCStoreInventory::sharedStoreInventory()->getItemBalance("fruit_cake_5pack", &so
 
 A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
 
-Read a detailed description about `LifetimeVG`s [here](/docs/soomla/store/EconomyModel#lifetimevg).
-
 <div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/docs/platforms/ios/appStoreIAB) for defining IAP products in the App Store.</div>
 
 <br>

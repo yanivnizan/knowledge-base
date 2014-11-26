@@ -34,7 +34,7 @@ platform: 'cocos2dx'
     $ git clone git@github.com:vedi/jansson.git external/jansson
     ```
 
-4. Implement your `CCProfileEventHandler` class in order to be notified about social-network-related events. Refer to the [Event Handling](/docs/platforms/cocos2dx/Profile_Events) section for more information.
+4. Implement your `CCProfileEventHandler` class in order to be notified about social-network-related events. Refer to the [Event Handling](/cocos2dx/profile/Profile_Events) section for more information.
 
 5. Initialize `CCServiceManager` and `CCProfileService` with the class you just created, a `customSecret` and other params. **Custom Secret** is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game!
 

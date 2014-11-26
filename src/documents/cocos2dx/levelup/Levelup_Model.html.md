@@ -26,7 +26,7 @@ After observing dozens of games, the SOOMLA team realized that most game progres
 
 ###**Prerequisites**
 
-This document assumes that you have a good understanding of SOOMLA's Store module. If not, please take time to read about the [Economy Model](/docs/platforms/cocos2dx/EconomyModel), and then come back to this document.
+This document assumes that you have a good understanding of SOOMLA's Store module. If not, please take time to read about the [Economy Model](/cocos2dx/store/EconomyModel), and then come back to this document.
 
 The `Schedule` and `Reward` entities are widely used in the examples of this document. You can read about them [here](#auxiliary-models).
 
