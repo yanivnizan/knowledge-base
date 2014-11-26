@@ -102,6 +102,10 @@ docpadConfig = {
 					id: 'levelup',
 					title: 'LevelUp'
 				}
+				{
+					id: 'grow',
+					title: 'GROW'
+				}
 			],
 			'cocos2dx': [
 				{
@@ -115,6 +119,10 @@ docpadConfig = {
 				{
 					id: 'levelup',
 					title: 'LevelUp'
+				}
+				{
+					id: 'grow',
+					title: 'GROW'
 				}
 			],
 			'ios': [
@@ -231,6 +239,9 @@ docpadConfig = {
 		cocos2dx_levelup: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','levelup')},[position:1])
 
+		cocos2dx_grow: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','grow')},[position:1])
+
 		unity_store: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','store')},[position:1])
 
@@ -239,6 +250,9 @@ docpadConfig = {
 
 		unity_levelup: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','levelup')},[position:1])
+
+		unity_grow: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','grow')},[position:1])
 
 		soomla_levelup: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','soomla', 'levelup')},[position:1])

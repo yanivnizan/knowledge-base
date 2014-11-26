@@ -1,18 +1,20 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "GROW: Getting Started"
+title: "Getting Started"
 text: "Get started with unity3d-grow..."
 position: 14
 theme: 'platforms'
-collection: 'platforms_unity'
+collection: 'unity_grow'
+module: 'grow'
+platform: 'unity'
 ---
 
 #GROW: Getting Started
 
 ##Getting started
 
-Get started with SOOMLA's Grow. Go to the [Grow dashboard website](dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Get started with SOOMLA's Grow. Go to the [Grow dashboard](dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
 1. Click on "Demo Game" > "Add New App" and fill in the required fields.
 
@@ -24,17 +26,17 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard website](dashboard.soo
 
 	![alt text](/img/tutorial_img/unity_grow/import.png "import")
 
-4. Drag the "CoreEvents", "StoreEvents", "ProfileEvents" and "LevelUpEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel. [This step is CRITICAL for proper setup]
+4. Drag the `CoreEvents`, `StoreEvents`, `ProfileEvents` and `LevelUpEvents` Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
 	![alt text](/img/tutorial_img/unity_grow/prefabs.png "Prefabs")
 
-5. In the menu bar go to **Window->Soomla->Edit Settings**:
+5. In the menu bar go to **Window > Soomla > Edit Settings**:
 
 	![alt text](/img/tutorial_img/unity_grow/soomlaSettingsAll.png "SOOMLA Settings")
 
 	a. **Change the value for "Soomla Secret"**: "Soomla Secret" is an encryption secret you provide that will be used to secure your data. **NOTE:** Choose this secret wisely, you can't change it after you launch your game!
 
-	b. **Copy the "Game Key" and "Environment Key"** given to you from the [dashboard](dashboard.soom.la) into the fields in the settings pane of the Unity Editor. The "game" and "env" keys allow for your game to distinguish multiple environments for the same game. For example - you can choose to have a playground environment for your game's beta testers which will be segregated from your production environment and will thus prevent analytics data from being mixed between the two.
+	b. **Copy the "Game Key" and "Environment Key"** given to you from the [dashboard](http://dashboard.soom.la) into the fields in the settings pane of the Unity Editor. The "game" and "env" keys allow for your game to distinguish multiple environments for the same game. For example - you can choose to have a playground environment for your game's beta testers which will be isolated from your production environment and will thus prevent analytics data from being mixed between the two.
 
 	![alt text](/img/tutorial_img/unity_grow/dashboardKeys.png "Game key and Env key")
 
