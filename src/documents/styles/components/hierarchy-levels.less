@@ -98,23 +98,35 @@
     margin-bottom:150px;
     background-color:inherit;
     min-height:160px;
-    .option-image {
-      position:relative;
-      overflow:hidden;
-      height:118px;
-      width:118px;
-      img {
-        position:absolute;
-        width:118px;
-        height:354px;
-        top:0;
-        left:0;
-        &:hover {
-          top:-118px;
-        }
-        &:active {
-          top:-236px;
-        }
+
+
+    .link-container {
+      @edge: 118px;
+      display: inline-block;
+
+      .option-image {
+        .square(@edge);
+        margin-bottom: 15px;
+        background-repeat: no-repeat;
+      }
+
+      .option-head-text {
+        font-family: 'Open Sans', sans-serif;
+        font-weight:600;
+        font-size: 22px;
+        color: #4D4D4D;
+      }
+
+      //
+      // Highlight the internal image when hovering or clicking the link
+      //
+
+      &:hover .option-image {
+        background-position-y: -1 * @edge;
+      }
+
+      &:active .option-image {
+        background-position-y: -2 * @edge;
       }
     }
 
@@ -150,37 +162,39 @@
   padding-top:90px;
 
   a {
+    display: inline-block;
     text-decoration: none;
+
+    // Color the article's head text with the theme color
+    &:hover .option-head-text {
+
+      &.soomla {
+        color: @soomla-color;
+      }
+      &.university {
+        color: @university-color;
+      }
+      &.downloads {
+        color: @downloads-color;
+      }
+      &.platforms {
+        color:@platforms-color;
+      }
+    }
   }
+
   .menu-option {
     border:none;
     margin-bottom:50px;
     background-color:inherit;
     min-height:300px;
+    @edge: 59px;
+
     .option-image {
-      position:relative;
-      overflow:hidden;
-      .square(59px);
+      .square(@edge);
+      background-repeat: no-repeat;
       margin-bottom:5px;
       margin-left:10px;
-      img {
-        position:absolute;
-        .size(59px, 295px);
-        top:0;
-        left:0;
-        &.soomla.hover {
-          top:-59px;
-        }
-        &.university.hover {
-          top:-118px;
-        }
-        &.downloads.hover {
-          top:-177px;
-        }
-        &.platforms.hover {
-          top:-236px;
-        }
-      }
     }
     .option-text-container {
 
@@ -189,18 +203,6 @@
         font-weight:600;
         font-size: 22px;
         color: #4D4D4D;
-        &.soomla.hover {
-          color: @soomla-color;
-        }
-        &.university.hover {
-          color: @university-color;
-        }
-        &.downloads.hover {
-          color: @downloads-color;
-        }
-        &.platforms.hover {
-          color:@platforms-color;
-        }
       }
       .option-text {
         font-family: 'Open Sans', sans-serif;
@@ -209,6 +211,29 @@
         color: #666666;
         margin-top:10px;
         line-height:26px;
+      }
+    }
+
+    //
+    // On hover, highlight the image with the theme
+    // Themes are soomla, university, downloads, platforms
+    //
+    .link-container:hover {
+
+      .option-image {
+
+        &.soomla {
+          background-position-y: -1 * @edge;
+        }
+        &.university {
+          background-position-y: -2 * @edge;
+        }
+        &.downloads {
+          background-position-y: -3 * @edge;
+        }
+        &.platforms {
+          background-position-y: -4 * @edge;
+        }
       }
     }
   }

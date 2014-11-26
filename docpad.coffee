@@ -79,7 +79,7 @@ docpadConfig = {
 			{
 				id: 'university',
 				title: 'University',
-				link: '/university'
+				link: '/docs/university/videos'
 			}
 			{
 				id: 'download',
@@ -102,10 +102,6 @@ docpadConfig = {
 					id: 'levelup',
 					title: 'LevelUp'
 				}
-				{
-					id: 'grow',
-					title: 'GROW'
-				}
 			],
 			'cocos2dx': [
 				{
@@ -120,29 +116,17 @@ docpadConfig = {
 					id: 'levelup',
 					title: 'LevelUp'
 				}
-				{
-					id: 'grow',
-					title: 'GROW'
-				}
 			],
 			'ios': [
 				{
 					id: 'store',
 					title: 'Store'
 				}
-				{
-					id: 'profile',
-					title: 'Profile'
-				}
 			],
 			'android': [
 				{
 					id: 'store',
 					title: 'Store'
-				}
-				{
-					id: 'profile',
-					title: 'Profile'
 				}
 			]
 		}
