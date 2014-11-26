@@ -20,7 +20,7 @@ Profile allows you to subscribe to events, be notified when they occur, and impl
 
 ###Tips & Reminders
 
-- As mentioned in [Getting Started](/docs/platforms/unity/Profile_GettingStarted), make sure you add the event prefabs (ProfileEvents and CoreEvents) to your earliest loading scene.
+- As mentioned in [Getting Started](/unity/profile/Profile_GettingStarted), make sure you add the event prefabs (ProfileEvents and CoreEvents) to your earliest loading scene.
 
 - It is recommended that you register all events before initializing Profile.
 

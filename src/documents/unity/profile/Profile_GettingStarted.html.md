@@ -50,7 +50,7 @@ platform: 'unity'
 
 5. Call all the social functions you can from the `SoomlaProfile` class (not from the social provider class). Otherwise, you won't be able to work with SOOMLA correctly. You can still call functions from the social provider, such as the `FB` class, but only those that are not provided by `SoomlaProfile`.
 
-6. You'll need event handlers in order to be notified about in-app purchasing-related events and social-related events. Refer to the [Event Handling](/docs/platforms/unity/Profile_Events) document for more information.
+6. You'll need event handlers in order to be notified about in-app purchasing-related events and social-related events. Refer to the [Event Handling](/unity/profile/Profile_Events) document for more information.
 
 And that's it! unity3d-profile knows how to contact the social provider (Facebook, Twitter, Google+ etc.) and perform social actions with the information you provide.
 
@@ -113,7 +113,7 @@ Twitter is supported out-of-the-box, authentication is done either through the s
 
   a. Under the project's info add an entry to `URL Types` and under `URL Schemes` add the string `fbxxxxxxx` the x's should be replaced with your Facebook App ID.
 
-	b. See [Browser-based Authentication](/docs/platforms/cocos2dx/Profile_GettingStarted#browser-based-authentication)
+	b. See [Browser-based Authentication](/cocos2dx/profile/Profile_GettingStarted#browser-based-authentication)
 
 4. **Facebook Permissions** - Profile will request `publish_actions` from the user of the application, to test the application please make sure you test with either Admin, Developer or Tester roles.
 
@@ -151,7 +151,7 @@ Twitter is supported out-of-the-box, authentication is done either through the s
 
 Below is a brief example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To see a full example, check out the [Muffin Rush Example](https://github.com/soomla/unity3d-profile/tree/master/Soomla/Assets/Examples/MuffinRush) that comes with unity3d-profile when you download it.
 
-To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/unity/Profile_MainClasses).
+To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/unity/profile/Profile_MainClasses).
 
 <br>
 Initialize `SoomlaProfile`.

@@ -220,14 +220,32 @@ docpadConfig = {
 		university: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','university')},[position:1])
 
-		platforms_ios: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'ios')},[position:1])
+		ios_store: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('ios','store')},[position:1])
 
-		platforms_android: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'android')},[position:1])
+		ios_profile: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('ios','profile')},[position:1])
 
-		platforms_cocos2dx: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'cocos2dx')},[position:1])
+		ios_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('ios','levelup')},[position:1])
+
+		android_store: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('android','store')},[position:1])
+
+		android_profile: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('android','profile')},[position:1])
+
+		android_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('android','levelup')},[position:1])
+
+		cocos2dx_store: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','store')},[position:1])
+
+		cocos2dx_profile: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','profile')},[position:1])
+
+		cocos2dx_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','levelup')},[position:1])
 
 		unity_store: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','store')},[position:1])

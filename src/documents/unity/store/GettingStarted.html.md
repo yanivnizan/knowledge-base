@@ -36,7 +36,7 @@ platform: 'unity'
 
   - **Soomla Secret** - This is an encryption secret you provide that will be used to secure your data. (If you used versions before v1.5.2 this secret MUST be the same as Custom Secret)
 
-  - **Public Key** - If your billing service provider is Google Play, you'll need to insert the public key given to you from Google. (Learn more in step 4 [here](/docs/platforms/android/GooglePlayIAB)). **Choose both secrets wisely. You can't change them after you launch your game!**
+  - **Public Key** - If your billing service provider is Google Play, you'll need to insert the public key given to you from Google. (Learn more in step 4 [here](/android/store/GooglePlayIAB)). **Choose both secrets wisely. You can't change them after you launch your game!**
 
   ![alt text](/img/tutorial_img/unity_getting_started/soomlaSettings.png "Soomla Settings")
 
@@ -56,7 +56,7 @@ platform: 'unity'
 
     <div class="warning-box">Initialize SoomlaStore ONLY ONCE when your application loads.</div>
 
-6. You'll need an event handler in order to be notified about in-app purchasing related events. Refer to the document about [Event Handling](/docs/platforms/unity/Events) for more information.
+6. You'll need an event handler in order to be notified about in-app purchasing related events. Refer to the document about [Event Handling](/unity/store/Events) for more information.
 
 That's it! You now have storage and in-app purchasing capabilities ALL-IN-ONE!
 
@@ -152,11 +152,11 @@ Define your economy in Google Play or Amazon Appstore.
 
 See our tutorials:
 
-- [Google Play](/docs/platforms/android/GooglePlayIAB)
-- [Amazon Appstore](/docs/platforms/android/AmazonIAB)
+- [Google Play](/android/store/GooglePlayIAB)
+- [Amazon Appstore](/android/store/AmazonIAB)
 
 ###iOS
 
 Define your economy in the App Store.
 
-See our tutorial: [App Store](/docs/platforms/ios/AppStoreIAB)
+See our tutorial: [App Store](/ios/store/AppStoreIAB)
