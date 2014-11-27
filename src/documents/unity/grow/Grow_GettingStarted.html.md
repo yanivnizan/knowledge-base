@@ -26,7 +26,7 @@ Get started with SOOMLA's Grow. Go to the [Grow dashboard](http://dashboard.soom
 
 	![alt text](/img/tutorial_img/unity_grow/import.png "import")
 
-4. Drag the `CoreEvents`, `StoreEvents`, `ProfileEvents` and `LevelUpEvents` Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
+4. Drag the `CoreEvents`, `StoreEvents`, `ProfileEvents` and `LevelUpEvents` Prefabs from `Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
 	![alt text](/img/tutorial_img/unity_grow/prefabs.png "Prefabs")
 

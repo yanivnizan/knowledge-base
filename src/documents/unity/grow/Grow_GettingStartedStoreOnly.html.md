@@ -30,7 +30,7 @@ Go to the [Grow dashboard](http://dashboard.soom.la). Upon signing up, you will 
 
 	- [unity3d-highway](http://library.soom.la/fetch/unity3d-highway/latest)
 
-3. Drag the `CoreEvents` & `StoreEvents` Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
+3. Drag the `CoreEvents` & `StoreEvents` Prefabs from `Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
 	![alt text](/img/tutorial_img/unity_grow/prefabsStoreOnly.png "Prefabs")
 

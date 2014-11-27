@@ -28,7 +28,7 @@ platform: 'unity'
 
     <div class="info-box">There are some necessary files in submodules linked with symbolic links. If you're cloning the project make sure to include the `--recursive` flag.</div>
 
-2. Drag the "StoreEvents" and "CoreEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
+2. Drag the "StoreEvents" and "CoreEvents" Prefabs from `Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
   ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
 
