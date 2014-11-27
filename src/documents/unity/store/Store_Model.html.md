@@ -47,7 +47,7 @@ public static LifetimeVG NO_AD = new LifetimeVG(
 
 OR
 
-```  cs
+``` cs
 public const string THOUSANDMUFF_PACK_PRODUCT_ID = "1000_pack";
 
 public static VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyPack(
@@ -64,7 +64,7 @@ public static VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyPack(
 
 This type of purchase is with some amount of other virtual items.
 
-```  cs
+``` cs
 public const string MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
 
 public static VirtualGood PAVLOVA_GOOD = new SingleUseVG(
