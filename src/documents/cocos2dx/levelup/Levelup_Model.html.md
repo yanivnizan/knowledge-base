@@ -1,16 +1,16 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "LEVELUP: Model & Operations"
+title: "Model & Operations"
 text: "Learn about the different entities of LevelUp. See examples of how to initialize and use them."
-position: 9
+position: 2
 theme: 'platforms'
 collection: 'cocos2dx_levelup'
 module: 'levelup'
 platform: 'cocos2dx'
 ---
 
-#LEVELUP: Model & Operations
+#Model & Operations
 
 ##LevelUp
 

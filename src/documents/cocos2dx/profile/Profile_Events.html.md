@@ -1,16 +1,16 @@
 ---
 layout: "content"
 image: "Events"
-title: "PROFILE: Events"
+title: "Events"
 text: "Handle cocos2dx-profile (social-related) events with your game-specific behavior."
-position: 7
+position: 3
 theme: 'platforms'
 collection: 'cocos2dx_profile'
 module: 'profile'
 platform: 'cocos2dx'
 ---
 
-#PROFILE: Event Handling
+#Event Handling
 
 ##About
 

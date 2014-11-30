@@ -1,31 +1,45 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "STORE: Economy Model & Operations"
+title: "Economy Model & Operations"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
-position: 2
+position: 3
 theme: 'platforms'
 collection: 'ios_store'
 module: 'store'
 platform: 'ios'
 ---
 
-#**STORE: Economy Model & Operations**
+#Economy Model & Operations
 
-SOOMLA's iOS-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. This tutorial contains descriptions of each entity in the economy model, along with examples.
+SOOMLA's ios-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course. This tutorial contains descriptions of each entity in the economy model, along with examples.
 
 ![alt text](/img/tutorial_img/soomla_diagrams/EconomyModel.png "Soomla Economy Model")
 
-## Purchase Types
-Purchase types are used to indicate whether an item will be purchased with money or with other virtual items.
+## Virtual Items
+
+Almost every entity in your virtual economy will be a Virtual Item. There are many types of Virtual Items and you can select the ones that fit your needs. Each one of the various types extends the class `VirtualItem` and adds its own behavior.
+
+Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeVirtualItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
+
+Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeVirtualItem` when you want to take something from your user, for example in the case of a refund.
+
+Every virtual item has an `itemId`, a unique string that we use to identify the different items.
+
+## PurchaseTypes
+
+As stated above, almost all Virtual Items are purchasable, or as we call them, `PurchasableVirtualItem`s. Purchase types are used to indicate whether an item will be purchased with money or with other virtual items: there are 2 different purchase types described below.
 
 <div class="info-box">In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.</div>
 
 ###[PurchaseWithMarket](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/PurchaseTypes/PurchaseWithMarket.h)
 
-This type of purchase is with money. Items with this purchase type must be defined in the App Store (To learn more see our [App Store IAB](/ios/store/Store_AppStoreIAB) tutorial).
+This kind of `PurchaseType` should be attached to items that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market.
 
-There are 2 ways to define this purchase type.
+**NOTE:** The product ID you define in your implementation of `IStoreAssets` should be the same as you define in the Market.
+
+####**For Example**
+Suppose that in your game, you offer a “No-Ads” feature for $1.99 in the Market. The code below shows how you need to declare the `PurchaseType` parameter of your “No-Ads” item.
 
 ``` objectivec
 NO_ADS = [[LifetimeVG alloc]
@@ -37,7 +51,7 @@ NO_ADS = [[LifetimeVG alloc]
             andPrice:1.99]]];
 ```
 
-OR
+There is another way to define this purchase type:
 
 ``` objectivec
 _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
@@ -47,12 +61,14 @@ _1000_MUFFINS_PACK = [[VirtualCurrencyPack alloc]
         andPrice:8.99]];
 ```
 
-<div class="info-box">The `productId` that is used to define a new `MarketItem` must match the product ID defined in the App Store.</div>
-
+For more info on how to declare your items in the Market, see our tutorial on App Store [In-app billing](/ios/store/Store_AppStoreIAB).
 
 ###[PurchaseWithVirtualItem](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/PurchaseTypes/PurchaseWithVirtualItem.h)
 
-This type of purchase is with some amount of other virtual items.
+Any item with purchase type `PurchaseWithVirtualItem` can be purchased with any `VirtualItem`, like a sort of trade. When creating an instance of `PurchaseWithVirtualItem`, you need to provide the ID of the virtual item that you want to be paid with and the amount of that virtual item.
+
+####**For Example**
+Suppose that in your game, you offer a chocolate cake that can be bought by paying 250 “Muffins”. The item being purchased is a `chocolateCakeGood`, the item (virtual currency) to pay with is “Muffin”, and the amount is 250.
 
 ``` objectivec
 // A chocolate cake good can be purchased with 250 muffin currencies
@@ -63,11 +79,11 @@ CHOCOLATE_CAKE_GOOD = [[SingleUseVG alloc]
         andAmount:250]];
 ```
 
-
 ##Virtual Currencies
-Virtual currencies need to be declared in your implementation of `IStoreAssets`.
 
 ###[VirtualCurrency](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualCurrencies/VirtualCurrency.h)
+
+Every game that has an economy has at least one `VirtualCurrency`. `VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` (explained later in this document). If for some reason you *do* want to sell a single currency you can do so by providing a `VirtualCurrencyPack` with an amount of 1.
 
 ####**How to define**
 
@@ -119,6 +135,8 @@ Get the balance of a specific `VirtualCurrency`.
 ```
 
 ###[VirtualCurrencyPack](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualCurrencies/VirtualCurrencyPack.h)
+
+As mentioned above, in game stores you never buy just a "Gold Coin" or a "Muffin", you always buy a pack of the game's `VirtualCurrency`. This class represents exactly that: a pack of `VirtualCurrency`. Use this class to define various currency packs in your game.
 
 ####**How to define**
 
@@ -172,9 +190,33 @@ Take back the 50-muffin pack that the user owns:
 
 ##Virtual Goods
 
+Every virtual good is a `PurchasableVirtualItem`. You can buy it with other `VirtualItem`s, or in the market with money. Virtual goods are the heart of every virtual economy. These are the game objects you’re going to want to sell in your game's store.
+
 Virtual goods need to be declared in your implementation of `IStoreAssets`.
 
+Every virtual good belongs to one of the following groups:
+
+1. Single Use
+
+2. Single Use Pack
+
+3. Lifetime
+
+4. Equippables
+
+5. Upgradables
+
+Below are detailed descriptions of each category.
+
 ###[SingleUseVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/SingleUseVG.h)
+
+The most basic and common kind of a `VirtualGood` is a `SingleUseVG`. `SingleUseVG`s can be purchase by your users multiple times. No limits!
+
+**The SingleUseVG's characteristics are:**
+
+- Can be purchased an unlimited number of times.
+
+- Has a balance that is saved in the database. Its balance goes up when you "give" it or "buy" it. The balance goes down when you “take” it (for example in the case of a refund).
 
 ####**How to define**
 
@@ -222,8 +264,18 @@ Get the balance of a specific `SingleUseVG`.
 [StoreInventory getItemBalance:@"fruit_cake"];
 ```
 
-
 ###[SingleUsePackVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/SingleUsePackVG.h)
+
+Sometimes, you'll want to to sell packs of `SingleUseVG`s. To support these cases, we've created `SingleUsePackVG`.
+
+**The SingleUsePackVG's characteristics are:**
+
+- Can be purchased an unlimited number of times.
+
+- Doesn't have a balance in the database. The `SingleUseVG` that's associated with this pack has its own balance. When your users buy a `SingleUsePackVG`, the balance of the associated `SingleUseVG` goes up in the amount you defined for the pack.
+
+**For Example:**
+Suppose you offer a `SingleUsePackVG` of “5 fruit cakes”. The `SingleUseVG` that’s associated with this Pack is "fruit_cake". When your user buys a “5 fruit cake" Pack, the balance of fruit_cake is increased by 5 in the storage.
 
 ####**How to define**
 
@@ -270,12 +322,45 @@ Query the balance of the virtual good with item ID "fruit_cake":
 [StoreInventory getItemBalance:@"fruit_cake"];
 ```
 
-
 ###[LifetimeVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/LifetimeVG.h)
 
-A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
+A `LifetimeVG` is a `VirtualGood` that can be bought once and is kept forever.
 
-<div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/docs/platforms/ios/appStoreIAB) for defining IAP products in the App Store.</div>
+**The LifetimeVG's characteristics are:**
+
+- Can only be purchased once.
+
+- Your users can't have more than one of this item. In other words, they can have either 0 or 1 of this item at any given time.
+
+If you declare a `LifetimeVG` with a purchase type of `PurchaseWithMarket`, it represents a non-consumable item in the market, i.e., it cannot be consumed and is owned by the user forever. (The Market saves this information forever)
+
+However, notice that if you declare a `LifetimeVG` with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` **as long as the local storage of the game has NOT been deleted** (the version has been updated, or the game was deleted and re-downloaded, etc..).
+
+####**For Example**
+
+``` cs
+// A blue car that is purchased with virtual coins.
+BLUE_CAR = [[LifetimeVG alloc]
+    initWithName:@"Blue Car"
+    andDescription:@"This car is yours as long as the game's storage doesn't change!"
+    andItemId:@"blueCar_ID"
+    andPurchaseType:[[PurchaseWithVirtualItem alloc]
+        initWithVirtualItem:COIN_CURRENCY_ITEM_ID
+        andAmount:3000]];
+
+// A red car that is purchased with money in the market.
+RED_CAR = [[LifetimeVG alloc]
+    initWithName:@"Red Car"
+    andDescription:@"This car is yours FOREVER!!!"
+    andItemId:@"redCar_ID"
+    andPurchaseType:[[PurchaseWithMarket alloc]
+        initWithProductId:RED_CAR_PROD_ID
+        andPrice:4.99]];
+```
+
+Let's say a user purchases both cars. Even if the game's local storage is deleted, the user will still own the red car and will receive it upon `refreshInventory` process. However, the user will not own the blue car any longer.
+
+<div class="info-box">IMPORTANT: When defining a `LifetimeVG` in the App Store, you MUST define its type as a Non-Consumable! For more information see our guide for [defining IAP products in the App Store](/ios/store/Store_AppStoreIAB).</div>
 
 <br>
 
@@ -327,11 +412,29 @@ Check the ownership of a lifetime good:
 [StoreInventory getItemBalance:@"marriage"];
 ```
 
+### [EquippableVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/EquippableVG.h)
 
-###[EquippableVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/EquippableVG.h)
+An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact that an `EquippableVG` can be purchased once, it can also be equipped by your users. Equipping means that the user decides to currently use a specific `EquippableVG`.
+
+**The EquippableVG's characteristics are:**
+
+- Can be purchased only once.
+
+- Can be equipped by the user.
+
+- Inherits the definition of `LifetimeVG`.
+
+**There are 3 equipping models:**
+
+- `kLocal` - The current `EquippableVG`'s equipping status doesn't affect any other `EquippableVG`.
+
+- `kCategory` - In the containing category, if this `EquippableVG` is equipped, all other `EquippableVG`s are unequipped.
+
+- `kGlobal` - In the whole game, if this `EquippableVG` is equipped, all other `EquippableVG`s are unequipped.
 
 ####**How to define**
-There are 3 types of Equipping models: `GLOBAL`, `CATEGORY`, and `LOCAL`. In this example we're defining 2 characters, George and Kramer. These are `CATEGORY` equippable goods because the user can own both characters but can play only as one at a time.
+
+In this example we're defining 2 characters, George and Kramer. These are `kCategory` equippable goods because the user can own both characters but can play only as one at a time.
 
 ``` objectivec
 // Character "George" can be purchased for 350 Muffins.
@@ -410,46 +513,74 @@ Check if Kramer is currently equipped:
 [StoreInventory isVirtualGoodWithItemIdEquipped:@"kramer"];
 ```
 
+### [UpgradeVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/UpgradeVG.h)
 
-###[UpgradeVG](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/virtualGoods/UpgradeVG.h)
+An `UpgradeVG` is a `VirtualGood` in a series of `UpgradeVG`s that define an upgrade sequence for a given `VirtualGood`. The associated `VirtualGood` can be of any type (`SingleUseVG`, `EquippableVG`, etc..).
+
+When the user buys an`UpgradeVG`, a check is performed to make sure the appropriate conditions are met.
+
+**`UpgradeVG`'s characteristics:**
+
+- Can be purchased whenever it's not the current upgrade.
+
+- Doesn't have a balance in the database.
+
+**Important `UpgradeVG` class members:**
+
+- `goodItemId` - the itemId of the `VirtualGood` associated with this upgrade.
+
+- `prevItemId` - the itemId of the `UpgradeVG` that comes before this one, or if this is the first `UpgradeVG` in the scale then this value is null.
+
+- `nextItemId` - the itemId of the `UpgradeVG` that comes after this one, or if this is the last `UpgradeVG` in the scale then the value is null.
 
 ####**How to define**
-In the following example there is a `SingleUseVG` for "Muffin Cake" and 2 levels to upgrade the Muffin Cake.
+
+Say you have a strength attribute in your game and that strength is upgradeable on a scale of 1-3.  This is what you'll need to create:
+
+1. SingleUseVG for 'strength'
+
+2. UpgradeVG for strength 'level 1'
+
+3. UpgradeVG for strength 'level 2'
+
+4. UpgradeVG for strength 'level 3'
+
+In the following example there is a `SingleUseVG` for "Strength" and 3 upgrade levels for it.
 
 ``` objectivec
-// Create a SingleUseVG for "Muffin Cake"
+// Create a SingleUseVG for "Strength"
+STRENGTH_GOOD = [[SingleUseVG alloc]
+    initWithName:@"Strength Attribute"
+    andDescription:@"Be strong!"
+    andItemId:@"strength_ID"
+    andPurchaseType:[[PurchaseWithMarket alloc]
+        initWithProductId:STRENGTH_PROD_ID
+        andPrice:1.99]];
 
-MUFFIN_CAKE_GOOD = [[SingleUseVG alloc]
-    initWithName:@"Muffin Cake"
-    andDescription:@"Customers buy a double portion on each purchase of this cake"
-    andItemId:MUFFIN_CAKE_GOOD_ITEM_ID
-    andPurchaseType:[[PurchaseWithVirtualItem alloc]
-        initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
-        andAmount:225]];
-
-// Create 2 UpgradeVGs that represent 2 levels for the Muffin Cake good.
-
-LEVEL_1_GOOD = [[UpgradeVG alloc]
-    initWithName:@"Level 1"
-    andDescription:@"Muffin Cake Level 1"
-    andItemId:LEVEL_1_GOOD_ITEM_ID
+// Create 2 UpgradeVGs that represent 2 upgrade levels for strength.
+STRENGTH_UPGRADE_1 = [[UpgradeVG alloc]
+    initWithName:@"Strength Upgrade 1"
+    andDescription:@"Upgrade Level 1"
+    andItemId:@"strength_upgrade_1_ID"
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
         initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
         andAmount:50]
-    andLinkedGood:MUFFIN_CAKE_GOOD_ITEM_ID
+    andLinkedGood:@"strength_ID"
     andPreviousUpgrade:@""
-    andNextUpgrade:LEVEL_2_GOOD_ITEM_ID];
+    andNextUpgrade:@"strength_upgrade_2_ID"];
 
-LEVEL_2_GOOD = [[UpgradeVG alloc]
-    initWithName:@"Level 2"
-    andDescription:@"Muffin Cake Level 2"
-    andItemId:LEVEL_2_GOOD_ITEM_ID
+STRENGTH_UPGRADE_2 = [[UpgradeVG alloc]
+    initWithName:@"Strength Upgrade 2"
+    andDescription:@"Upgrade Level 2"
+    andItemId:@"strength_upgrade_2_ID"
     andPurchaseType:[[PurchaseWithVirtualItem alloc]
         initWithVirtualItem:MUFFINS_CURRENCY_ITEM_ID
         andAmount:250]
-    andLinkedGood:MUFFIN_CAKE_GOOD_ITEM_ID
-    andPreviousUpgrade:LEVEL_1_GOOD_ITEM_ID
-    andNextUpgrade:@""];
+    andLinkedGood:@"strength_ID"
+    andPreviousUpgrade:@"strength_upgrade_1_ID"
+    andNextUpgrade:@"strength_upgrade_3_ID"];
+
+// UpgradeVG for strength level 3...
 ```
 
 ####**How to use**
@@ -508,12 +639,19 @@ To find out the upgrade level of a virtual good use `goodUpgradeLevel`. If the g
 
 ##[VirtualCategory](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/domain/VirtualCategory.h)
 
-Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
+A `VirtualCategory` is used to categorize `VirtualGood`s. Categories are helpful for organizational purposes, but especially come in handy when you have Equippable Virtual Goods.
+
+<div class="info-box">If you don’t have any need for categories, you can just define all of your virtual goods in one category and call it something like “General”.</div>
+
+####**Real Game Examples:**
+
+Let’s suppose your game has the following categories of virtual goods: "Power Ups", "Weapons", and  "Hats". Say you decide to make “Weapons” and “Hats” `CATEGORY` `EquippableVG`s. You can easily implement this functionality once the goods are divided into virtual categories.
 
 ####**How to define**
 
 ``` objectivec
-// Assume that MUFFIN_CAKE_GOOD_ITEM_ID, PAVLOVA_GOOD_ITEM_ID, etc.. are item IDs of virtual goods that have been declared.
+// Assume that MUFFIN_CAKE_GOOD_ITEM_ID, PAVLOVA_GOOD_ITEM_ID, etc. are item IDs
+// of virtual goods that have been declared.
 _MUFFINS_CATEGORY  = [[VirtualCategory alloc]
     initWithName:@"Muffins"
     andGoodsItemIds:@[MUFFIN_CAKE_GOOD_ITEM_ID, PAVLOVA_GOOD_ITEM_ID, MUFFIN_CAKE_GOOD_ITEM_ID]];

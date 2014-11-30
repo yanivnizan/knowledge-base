@@ -3,14 +3,14 @@ layout: "content"
 image: "Wrench"
 title: "Debugging"
 text: "Debugging methods and tips for iOS-store and iOS=profile."
-position: 9
+position: 6
 theme: 'platforms'
 collection: 'ios_store'
 module: 'store'
 platform: 'ios'
 ---
 
-#**Debugging**
+#Debugging
 
 iOS-store provides debug messages that are printed to the log.
 <br>In `StoreConfig.m` you will find:

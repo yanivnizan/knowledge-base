@@ -1,7 +1,7 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "STORE: Economy Model & Operations"
+title: "Economy Model & Operations"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 4
 theme: 'platforms'
@@ -10,36 +10,49 @@ module: 'store'
 platform: 'android'
 ---
 
-#**STORE: Economy Model & Operations**
+#Economy Model & Operations
 
 SOOMLA's android-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course. This tutorial contains descriptions of each entity in the economy model, along with examples.
 
 ![alt text](/img/tutorial_img/soomla_diagrams/EconomyModel.png "Soomla Economy Model")
 
+## Virtual Items
+
+Almost every entity in your virtual economy will be a Virtual Item. There are many types of Virtual Items and you can select the ones that fit your needs. Each one of the various types extends the class `VirtualItem` and adds its own behavior.
+
+Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeVirtualItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
+
+Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeVirtualItem` when you want to take something from your user, for example in the case of a refund.
+
+Every virtual item has an `itemId`, a unique string that we use to identify the different items.
+
 ## PurchaseTypes
-Purchase types are used to indicate whether an item will be purchased with money or with other virtual items.
+
+As stated above, almost all Virtual Items are purchasable, or as we call them, `PurchasableVirtualItem`s. Purchase types are used to indicate whether an item will be purchased with money or with other virtual items: there are 2 different purchase types described below.
 
 <div class="info-box">In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.</div>
 
+### [PurchaseWithMarket](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithMarket.java)
 
-###[PurchaseWithMarket](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithMarket.java)
+This kind of `PurchaseType` should be attached to items that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market.
 
-This type of purchase is with money. Items with this purchase type must be defined in the Market (for more info see one of our tutorials on IAB: [Google Play IAB](/android/store/Store_GooglePlayIAB) or [Amazon IAB](/android/store/Store_AmazonIAB)).
+**NOTE:** The product ID you define in your implementation of `IStoreAssets` should be the same as you define in the Market.
 
-There are 2 ways to define this purchase type.
+####**For Example**
+Suppose that in your game, you offer a “No-Ads” feature for $1.99 in the Market. The code below shows how you need to declare the `PurchaseType` parameter of your “No-Ads” item.
 
 ``` java
 public static final LifetimeVG NO_ADS_NONCONS  = new LifetimeVG(
     ...
     new PurchaseWithMarket(new MarketItem(
-        "soomla_no_ads",              // product ID
-        MarketItem.Managed.MANAGED,   // product type
-        1.99                          // initial price
+        "soomla_no_ads",              // Product ID
+        MarketItem.Managed.MANAGED,   // Product type
+        1.99                          // Initial price
    ))
 );
 ```
 
-OR
+There is another way to define this purchase type:
 
 ```  java
 public static final String THOUSANDMUFF_PACK_PRODUCT_ID = "soomla_thousand_muffins";
@@ -47,17 +60,25 @@ public static final String THOUSANDMUFF_PACK_PRODUCT_ID = "soomla_thousand_muffi
 public static final VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyPack(
     ...
     new PurchaseWithMarket(
-        THOUSANDMUFF_PACK_PRODUCT_ID,   // product ID
-        8.99                            // initial price
+        THOUSANDMUFF_PACK_PRODUCT_ID,   // Product ID
+        8.99                            // Initial price
     )
 );
 ```
 
-<div class="info-box">The `productId` that is used to define a new `MarketItem` must must match the product ID defined in the Market (Google Play, Amazon Appstore, etc..).</div>
+For more info on how to declare your items in the Market, see one of our tutorials on In-app Billing:
 
-###[PurchaseWithVirtualItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithVirtualItem.java)
+- [Google Play IAB](/android/store/Store_GooglePlayIAB)
 
-This type of purchase is with some amount of other virtual items.
+- [Amazon IAB](/android/store/Store_AmazonIAB)
+
+
+### [PurchaseWithVirtualItem](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/purchaseTypes/PurchaseWithVirtualItem.java)
+
+Any item with purchase type `PurchaseWithVirtualItem` can be purchased with any `VirtualItem`, like a sort of trade. When creating an instance of `PurchaseWithVirtualItem`, you need to provide the ID of the virtual item that you want to be paid with and the amount of that virtual item.
+
+####**For Example**
+Suppose that in your game, you offer a PAVLOVA_GOOD that can be bought by paying 175 “Muffins”. The item being purchased is a PAVLOVA_GOOD, the item (virtual currency) to pay with is “Muffin”, and the amount is 175.
 
 ```  java
 public static final String MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
@@ -65,16 +86,17 @@ public static final String MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
 public static final VirtualGood PAVLOVA_GOOD = new SingleUseVG(
     ...
     new PurchaseWithVirtualItem(
-        MUFFIN_CURRENCY_ITEM_ID,    // item ID
-        175                         // initial price
+        MUFFIN_CURRENCY_ITEM_ID,    // Item ID
+        175                         // Initial price
     )
 );
 ```
 
-##Virtual Currencies
-Virtual currencies need to be declared in your implementation of `IStoreAssets`.
+## Virtual Currencies
 
-###[VirtualCurrency](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualCurrencies/VirtualCurrency.java)
+### [VirtualCurrency](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualCurrencies/VirtualCurrency.java)
+
+Every game that has an economy has at least one `VirtualCurrency`. `VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` (explained later in this document). If for some reason you *do* want to sell a single currency you can do so by providing a `VirtualCurrencyPack` with an amount of 1.
 
 ####**How to define**
 
@@ -82,25 +104,26 @@ Virtual currencies need to be declared in your implementation of `IStoreAssets`.
 public static final String MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
 
 public static final VirtualCurrency MUFFIN_CURRENCY = new VirtualCurrency(
-    "Muffins",                                  // name
-    "Muffin currency",                          // description
-    MUFFIN_CURRENCY_ITEM_ID                     // item id
+    "Muffins",                                  // Name
+    "Muffin currency",                          // Description
+    MUFFIN_CURRENCY_ITEM_ID                     // Item id
 );
 ```
 
 ####**How to use**
+
 A `VirtualCurrency` by itself is not very useful, because it cannot be sold individually. To sell currency, you need to use a `VirtualCurrencyPack` (see section below).
 
 Use `VirtualCurrency` when defining `VirtualCurrencyPack`s:
 
 ``` java
 public static final VirtualCurrencyPack TENMUFF_PACK = new VirtualCurrencyPack(
-    "10 Muffins",                                          // name
-    "A currency pack of 10 muffins",                       // description
-    "muffins_10",                                          // item ID
-    10,                                                    // number of currency units in this pack
-    "currency_muffin",                                     // the currency associated with this pack
-    new PurchaseWithMarket(TENMUFF_PACK_PRODUCT_ID, 0.99)  // purchase type
+    "10 Muffins",                                          // Name
+    "A currency pack of 10 muffins",                       // Description
+    "muffins_10",                                          // Item ID
+    10,                                                    // Number of currency units in this pack
+    "currency_muffin",                                     // The currency associated with this pack
+    new PurchaseWithMarket(TENMUFF_PACK_PRODUCT_ID, 0.99)  // Purchase type
 );
 ```
 
@@ -121,18 +144,20 @@ Get the balance of a specific `VirtualCurrency`.
 StoreInventory.getVirtualItemBalance("currency_muffin");
 ```
 
-###[VirtualCurrencyPack](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualCurrencies/VirtualCurrencyPack.java)
+### [VirtualCurrencyPack](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualCurrencies/VirtualCurrencyPack.java)
+
+As mentioned above, in game stores you never buy just a "Gold Coin" or a "Muffin", you always buy a pack of the game's `VirtualCurrency`. This class represents exactly that: a pack of `VirtualCurrency`. Use this class to define various currency packs in your game.
 
 ####**How to define**
 
 ``` java
 public static final VirtualCurrencyPack FIFTYMUFF_PACK = new VirtualCurrencyPack(
-    "50 Muffins",                                              // name
-    "A currency pack of 50 muffins",                           // description
-    "muffins_50",                                              // item ID
-    50,                                                        // number of currency units in this pack
-    MUFFIN_CURRENCY_ITEM_ID,                                   // the currency associated with this pack
-    new PurchaseWithMarket(FIFTYMUFF_PACK_PRODUCT_ID, 1.99)    // purchase type
+    "50 Muffins",                                              // Name
+    "A currency pack of 50 muffins",                           // Description
+    "muffins_50",                                              // Item ID
+    50,                                                        // Number of currency units in this pack
+    MUFFIN_CURRENCY_ITEM_ID,                                   // The currency associated with this pack
+    new PurchaseWithMarket(FIFTYMUFF_PACK_PRODUCT_ID, 1.99)    // Purchase type
 );
 ```
 
@@ -171,19 +196,44 @@ StoreInventory.takeVirtualItem("muffins_50", 1);
 StoreInventory.getVirtualItemBalance("currency_muffin");
 ```
 
-##Virtual Goods
+## Virtual Goods
+
+Every virtual good is a `PurchasableVirtualItem`. You can buy it with other `VirtualItem`s, or in the market with money. Virtual goods are the heart of every virtual economy. These are the game objects you’re going to want to sell in your game's store.
+
 Virtual goods need to be declared in your implementation of `IStoreAssets`.
 
-###[SingleUseVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/SingleUseVG.java)
+Every virtual good belongs to one of the following groups:
+
+1. Single Use
+
+2. Single Use Pack
+
+3. Lifetime
+
+4. Equippables
+
+5. Upgradables
+
+Below are detailed descriptions of each category.
+
+### [SingleUseVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/SingleUseVG.java)
+
+The most basic and common kind of a `VirtualGood` is a `SingleUseVG`. `SingleUseVG`s can be purchase by your users multiple times. No limits!
+
+**The SingleUseVG's characteristics are:**
+
+- Can be purchased an unlimited number of times.
+
+- Has a balance that is saved in the database. Its balance goes up when you "give" it or "buy" it. The balance goes down when you “take” it (for example in the case of a refund).
 
 ####**How to define**
 
 ``` java
 public static final VirtualGood FRUITCAKE_GOOD = new SingleUseVG(
-    "Fruit Cake",                                                   // name
-    "Customers buy a double portion on each purchase of this cake", // description
-    "fruit_cake",                                                   // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 225)       // purchase type
+    "Fruit Cake",                                                   // Name
+    "Customers buy a double portion on each purchase of this cake", // Description
+    "fruit_cake",                                                   // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 225)       // Purchase type
 );
 ```
 
@@ -222,17 +272,28 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 
 ###[SingleUsePackVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/SingleUsePackVG.java)
 
+Sometimes, you'll want to to sell packs of `SingleUseVG`s. To support these cases, we've created `SingleUsePackVG`.
+
+**The SingleUsePackVG's characteristics are:**
+
+- Can be purchased an unlimited number of times.
+
+- Doesn't have a balance in the database. The `SingleUseVG` that's associated with this pack has its own balance. When your users buy a `SingleUsePackVG`, the balance of the associated `SingleUseVG` goes up in the amount you defined for the pack.
+
+**For Example:**
+Suppose you offer a `SingleUsePackVG` of “5 fruit cakes”. The `SingleUseVG` that’s associated with this Pack is "fruit_cake". When your user buys a “5 fruit cake" Pack, the balance of fruit_cake is increased by 5 in the storage.
+
 ####**How to define**
 
 ``` java
 // Define a pack of 5 "Fruit cake" goods that costs $2.99.
 public static final VirtualGood FRUITCAKE_GOOD_PACK = new SingleUsePackVG(
-    "fruit_cake",                                           // item ID of associated good
-    5,                                                      // amount of goods in pack
-    "Fruit Cake 5 Pack",                                    // name
-    "A pack of 5 Fruit Cakes",                              // description
-    "fruit_cake_5pack",                                     // item ID
-    new PurchaseWithMarket(FRUITCAKE_PACK_PRODUCT_ID, 2.99) // purchase type
+    "fruit_cake",                                           // Item ID of associated good
+    5,                                                      // Amount of goods in pack
+    "Fruit Cake 5 Pack",                                    // Name
+    "A pack of 5 Fruit Cakes",                              // Description
+    "fruit_cake_5pack",                                     // Item ID
+    new PurchaseWithMarket(FRUITCAKE_PACK_PRODUCT_ID, 2.99) // Purchase type
 );
 ```
 
@@ -268,16 +329,48 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 
 ###[LifetimeVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/LifetimeVG.java)
 
-A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
+A `LifetimeVG` is a `VirtualGood` that can be bought once and is kept forever.
+
+**The LifetimeVG's characteristics are:**
+
+- Can only be purchased once.
+
+- Your users can't have more than one of this item. In other words, they can have either 0 or 1 of this item at any given time.
+
+If you declare a `LifetimeVG` with a purchase type of `PurchaseWithMarket`, it represents a non-consumable item in the market, i.e., it cannot be consumed and is owned by the user forever. (The Market saves this information forever)
+
+However, notice that if you declare a `LifetimeVG` with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` **as long as the local storage of the game has NOT been deleted** (the version has been updated, or the game was deleted and re-downloaded, etc..).
+
+####**For Example**
+
+``` java
+// A blue car that is purchased with virtual coins.
+public static final VirtualGood BLUE_CAR = new LifetimeVG(
+    "Blue Car",                                                            // Name
+    "This car is yours for as long as the game's storage doesn't change!", // Description
+    "blue_car",                                                            // Item ID
+    new PurchaseWithVirtualItem(COIN_CURRENCY_ITEM_ID, 3000)               // Purchase type
+);
+
+// A red car that is purchased with money in the market.
+public static final VirtualGood RED_CAR = new LifetimeVG(
+    "Red Car",                                                             // Name
+    "This car is yours FOREVER!!!",                                        // Description
+    "red_car",                                                             // Item ID
+    new PurchaseWithMarket(RED_CAR_PRODUCT_ID, 4.99)                       // Purchase type
+);
+```
+
+Let's say a user purchases both cars. Even if the game's local storage is deleted, the user will still own the red car and will receive it upon `refreshInventory` process. However, the user will not own the blue car any longer.
 
 ####**How to define**
 
 ``` java
 public static final VirtualGood MARRIAGE_GOOD = new LifetimeVG(
-    "Marriage",                                         // name
-    "This is a lifetime thing",                         // description
-    "marriage",                                         // item ID
-    new PurchaseWithMarket(MARRIAGE_PRODUCT_ID, 7.99)   // purchase type
+    "Marriage",                                         // Name
+    "This is a lifetime thing",                         // Description
+    "marriage",                                         // Item ID
+    new PurchaseWithMarket(MARRIAGE_PRODUCT_ID, 7.99)   // Purchase type
 );
 ```
 
@@ -308,7 +401,6 @@ This function simply deducts the user's balance. In case of a refund request, it
 StoreInventory.takeVirtualItem("marriage", 1);
 ```
 
-
 ####**Check ownership**
 
 ``` java
@@ -322,26 +414,45 @@ if (balance > 0) {
 
 ###[EquippableVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/EquippableVG.java)
 
+An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact that an `EquippableVG` can be purchased once, it can also be equipped by your users. Equipping means that the user decides to currently use a specific `EquippableVG`.
+
+**The EquippableVG's characteristics are:**
+
+- Can be purchased only once.
+
+- Can be equipped by the user.
+
+- Inherits the definition of `LifetimeVG`.
+
+**There are 3 equipping models:**
+
+- `LOCAL` - The current `EquippableVG`'s equipping status doesn't affect any other `EquippableVG`.
+
+- `CATEGORY` - In the containing category, if this `EquippableVG` is equipped, all other `EquippableVG`s are unequipped.
+
+- `GLOBAL` - In the whole game, if this `EquippableVG` is equipped, all other `EquippableVG`s are unequipped.
+
 ####**How to define**
-There are 3 types of Equipping models: `GLOBAL`, `CATEGORY`, and `LOCAL`. In this example we're defining 2 characters, George and Kramer. These are `CATEGORY` equippable goods because the user can own both characters but can play only as one at a time.
+
+In this example we're defining 2 characters, George and Kramer. These are `CATEGORY` equippable goods because the user can own both characters but can play only as one at a time.
 
 ``` java
 // Character "George" can be purchased for 350 Muffins.
 public static final VirtualGood GEORGE_GOOD = new EquippableVG(
-    EquippableVG.EquippingModel.CATEGORY,                       // equipping model
-    "George",                                                   // name
-    "George is the best muffin eater in the north",             // description
-    "george_good",                                              // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 350)   // purchase type
+    EquippableVG.EquippingModel.CATEGORY,                       // Equipping model
+    "George",                                                   // Name
+    "George is the best muffin eater in the north",             // Description
+    "george_good",                                              // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 350)   // Purchase type
 );
 
 // Character "Kramer" can be purchased for 500 Muffins.
 public static final VirtualGood KRAMER_GOOD = new EquippableVG(
-    EquippableVG.EquippingModel.CATEGORY,                       // equipping model
-    "Kramer",                                                   // name
-    "Kramer kicks muffins like a super hero",                   // description
-    "kramer_good",                                              // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 500)   // purchase type
+    EquippableVG.EquippingModel.CATEGORY,                       // Equipping model
+    "Kramer",                                                   // Name
+    "Kramer kicks muffins like a super hero",                   // Description
+    "kramer_good",                                              // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 500)   // Purchase type
 );
 ```
 
@@ -407,41 +518,73 @@ StoreInventory.isVirtualGoodEquipped("kramer");
 
 ###[UpgradeVG](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/virtualGoods/UpgradeVG.java)
 
+An `UpgradeVG` is a `VirtualGood` in a series of `UpgradeVG`s that define an upgrade sequence for a given `VirtualGood`. The associated `VirtualGood` can be of any type (`SingleUseVG`, `EquippableVG`, etc..).
+
+When the user buys an`UpgradeVG`, a check is performed to make sure the appropriate conditions are met.
+
+**`UpgradeVG`'s characteristics:**
+
+- Can be purchased whenever it's not the current upgrade.
+
+- Doesn't have a balance in the database.
+
+**Important `UpgradeVG` class members:**
+
+- `goodItemId` - the itemId of the `VirtualGood` associated with this upgrade.
+
+- `prevItemId` - the itemId of the `UpgradeVG` that comes before this one, or if this is the first `UpgradeVG` in the scale then this value is null.
+
+- `nextItemId` - the itemId of the `UpgradeVG` that comes after this one, or if this is the last `UpgradeVG` in the scale then the value is null.
+
 ####**How to define**
-Suppose you offer a "Strength" attribute to one of the characters in your game and you want to make it upgradeable with 2 levels.
+
+Say you have a strength attribute in your game and that strength is upgradeable on a scale of 1-3.  This is what you'll need to create:
+
+1. SingleUseVG for 'strength'
+
+2. UpgradeVG for strength 'level 1'
+
+3. UpgradeVG for strength 'level 2'
+
+4. UpgradeVG for strength 'level 3'
+
+In the following example there is a `SingleUseVG` for "Strength" and 3 upgrade levels for it.
 
 ``` java
 // Create a SingleUseVG for "Strength"
 public static final VirtualGood STRENGTH_ATTR = new SingleUseVG(
-    "Strength",                                                 // name
-    "Makes Kramer stronger so he can kick more muffins",        // description
-    "strength",                                                 // item ID
-    new PurchaseWithMarket(STRENGTH_PRODUCT_ID, 1.99)           // purchase type
+    "Strength",                                                 // Name
+    "Makes Kramer stronger so he can kick more muffins",        // Description
+    "strength",                                                 // Item ID
+    new PurchaseWithMarket(STRENGTH_PRODUCT_ID, 1.99)           // Purchase type
 );
 
 // Create 2 UpgradeVGs that represent 2 levels for the Strength attribute.
 public static final VirtualGood STRENGTH_UPGRADE_1 = new UpgradeVG(
-    "strength",                   // item ID of the associated good that is being upgraded
-    null,                         // item ID of the upgrade good that comes before this one
-    "strength_upgrade_2",         // item ID of the upgrade good that comes after this one
-    "Strength Upgrade Level 1",                                 // name
-    "Kramer will be able to kick twice as many muffins!",       // description
-    "strength_upgrade_1",                                       // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 50)    // purchase type
+    "strength",                   // Item ID of the associated good that is being upgraded
+    null,                         // Item ID of the upgrade good that comes before this one
+    "strength_upgrade_2",         // Item ID of the upgrade good that comes after this one
+    "Strength Upgrade Level 1",                                 // Name
+    "Kramer will be able to kick twice as many muffins!",       // Description
+    "strength_upgrade_1",                                       // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 50)    // Purchase type
 );
 
 public static final VirtualGood STRENGTH_UPGRADE_2 = new UpgradeVG(
-    "strength",                   // item ID of the associated good that is being upgraded
-    "strength_upgrade_1",         // item ID of the upgrade good that comes before this one
-    null,                         // item ID of the upgrade good that comes after this one
-    "Strength Upgrade Level 2",                                 // name
-    "Kramer will be able to kick 4 times as many muffins!",     // description
-    "strength_upgrade_2",                                       // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 250)   // purchase type
+    "strength",                   // Item ID of the associated good that is being upgraded
+    "strength_upgrade_1",         // Item ID of the upgrade good that comes before this one
+    null,                         // Item ID of the upgrade good that comes after this one
+    "Strength Upgrade Level 2",                                 // Name
+    "Kramer will be able to kick 4 times as many muffins!",     // Description
+    "strength_upgrade_2",                                       // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 250)   // Purchase type
 );
+
+// UpgradeVG for strength level 3...
 ```
 
 ####**How to use**
+
 **Buy:**
 
 When a user buys an upgrade, the `buy` method checks that the upgrade that's being purchased is valid.
@@ -501,16 +644,21 @@ StoreInventory.getGoodUpgradeLevel("strength");
 
 ##[VirtualCategory](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/domain/VirtualCategory.java)
 
-Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
+A `VirtualCategory` is used to categorize `VirtualGood`s. Categories are helpful for organizational purposes, but especially come in handy when you have Equippable Virtual Goods.
+
+<div class="info-box">If you don’t have any need for categories, you can just define all of your virtual goods in one category and call it something like “General”.</div>
+
+####**Real Game Examples:**
+Let’s suppose your game has the following categories of virtual goods: "Power Ups", "Weapons", and  "Hats". Say you decide to make “Weapons” and “Hats” `CATEGORY` `EquippableVG`s. You can easily implement this functionality once the goods are divided into virtual categories.
 
 ####**How to define**
 
 ``` java
 // Assume that MUFFINCAKE_ITEM_ID, PAVLOVA_ITEM_ID, etc.. are item ids of virtual goods that have been declared.
 public static final VirtualCategory SWEETS_CATEGORY = new VirtualCategory(
-    "Cakes and Sweets",                                                                     // name
+    "Cakes and Sweets",                                                                     // Name
     new ArrayList<String>(Arrays.asList(new String[]
-        {MUFFINCAKE_ITEM_ID, PAVLOVA_ITEM_ID, CHOCOLATECAKE_ITEM_ID, CREAMCUP_ITEM_ID}))    //list of good IDs
+        {MUFFINCAKE_ITEM_ID, PAVLOVA_ITEM_ID, CHOCOLATECAKE_ITEM_ID, CREAMCUP_ITEM_ID}))    // List of good IDs
 );
 ```
 

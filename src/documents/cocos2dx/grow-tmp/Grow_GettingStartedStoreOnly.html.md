@@ -1,16 +1,16 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "GROW: Getting Started (Store only)"
+title: "Getting Started (Store only)"
 text: "Using cocos2dx-store already? Drop in one more package to seamlessly connect your game to GROW open analytics."
-position: 12
+position: 1
 theme: 'platforms'
 collection: 'cocos2dx_grow'
 module: 'grow'
 platform: 'cocos2dx'
 ---
 
-#GROW: Getting Started (Store only)
+#Getting Started (Store only)
 
 <div class="info-box">This tutorial is for developers who want to use SOOMLA Store and Grow (without using the other modules, Profile and LevelUp). If you already have Store, skip the store & core-related steps, and follow only the highway-related ones.</div>
 

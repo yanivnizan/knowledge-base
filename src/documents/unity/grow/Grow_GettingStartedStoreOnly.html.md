@@ -3,14 +3,14 @@ layout: "content"
 image: "Tutorial"
 title: "Getting Started (Store only)"
 text: "Using unity3d-store already? Drop in one more package to seamlessly connect your game to GROW open analytics."
-position: 14
+position: 2
 theme: 'platforms'
 collection: 'unity_grow'
 module: 'grow'
 platform: 'unity'
 ---
 
-#GROW: Getting Started (Store only)
+#Getting Started (Store only)
 
 <div class="info-box">This tutorial is for developers who already have unity3d-store imported in their project. Please verify that your SOOMLA version is at least 1.5. Otherwise more actions will be required to remove the old version prior to installing the new one.</div>
 
