@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Getting Started"
 text: "Get started with cocos2dx-profile. Here you can find integration instructions and a basic example of initialization."
-position: 5
+position: 1
 theme: 'platforms'
 collection: 'cocos2dx_profile'
 module: 'profile'

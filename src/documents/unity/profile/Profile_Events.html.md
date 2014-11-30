@@ -3,7 +3,7 @@ layout: "content"
 image: "Events"
 title: "Events"
 text: "Handle unity3d-profile (social-related) events with your game-specific behavior."
-position: 7
+position: 3
 theme: 'platforms'
 collection: 'unity_profile'
 module: 'profile'

@@ -3,7 +3,7 @@ layout: "content"
 image: "Modeling"
 title: "Main Classes & Operations"
 text: "Read descriptions of the various social entities cocos2dx-profile provides, and see usage examples of operations that can be done to the different entities."
-position: 6
+position: 2
 theme: 'platforms'
 collection: 'cocos2dx_profile'
 module: 'profile'

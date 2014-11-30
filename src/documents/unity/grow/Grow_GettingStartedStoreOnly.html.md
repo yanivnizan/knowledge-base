@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Getting Started (Store only)"
 text: "Using unity3d-store already? Drop in one more package to seamlessly connect your game to GROW open analytics."
-position: 14
+position: 2
 theme: 'platforms'
 collection: 'unity_grow'
 module: 'grow'

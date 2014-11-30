@@ -3,7 +3,7 @@ layout: "content"
 image: "Modeling"
 title: "Main Classes & Operations"
 text: "Read descriptions of the various social entities unity3d-profile provides, and see usage examples of operations that can be done to the different entities."
-position: 6
+position: 2
 theme: 'platforms'
 collection: 'unity_profile'
 module: 'profile'

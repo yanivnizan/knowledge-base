@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Getting Started (Store only)"
 text: "Using cocos2dx-store already? Drop in one more package to seamlessly connect your game to GROW open analytics."
-position: 12
+position: 1
 theme: 'platforms'
 collection: 'cocos2dx_grow'
 module: 'grow'

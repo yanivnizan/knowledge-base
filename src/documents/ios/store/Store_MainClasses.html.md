@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Main Classes"
 text: "The main classes of ios-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
-position: 3
+position: 4
 theme: 'platforms'
 collection: 'ios_store'
 module: 'store'
