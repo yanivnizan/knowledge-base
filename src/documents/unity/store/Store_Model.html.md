@@ -16,22 +16,30 @@ SOOMLA's unity3d-store provides a complete data model implementation for virtual
 
 ![alt text](/img/tutorial_img/soomla_diagrams/EconomyModel.png "Soomla Economy Model")
 
+## Virtual Items
+
+Almost every entity in your virtual economy will be a Virtual Item. There are many types of Virtual Items and you can select the ones that fit your needs. Each one of the various types extends the class `VirtualItem` and adds its own behavior.
+
+Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeVirtualItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
+
+Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeVirtualItem` when you want to take something from your user, for example in the case of a refund.
+
+Every virtual item has an `itemId`, a unique string that we use to identify the different items.
+
 ## PurchaseTypes
-Purchase types are used to indicate whether an item will be purchased with money or with other virtual items.
+
+As stated above, almost all Virtual Items are purchasable, or as we call them, `PurchasableVirtualItem`s. Purchase types are used to indicate whether an item will be purchased with money or with other virtual items: there are 2 different purchase types described below.
 
 <div class="info-box">In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.</div>
 
-
 ###[PurchaseWithMarket](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/purchaseTypes/PurchaseWithMarket.cs)
 
-This type of purchase is with money. Items with this purchase type must be defined in the Market.
+This kind of `PurchaseType` should be attached to items that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market.
 
-For more info see one of our tutorials on In-app Billing:
+**NOTE:** The product ID you define in your implementation of `IStoreAssets` should be the same as you define in the Market.
 
-- For Android: [Google Play IAB](/android/store/Store_GooglePlayIAB) or [Amazon IAB](/android/store/Store_AmazonIAB)
-- For iOS: [App Store IAB](/ios/store/Store_AppStoreIAB)
-
-There are 2 ways to define this purchase type.
+####**For Example**
+Suppose that in your game, you offer a “No-Ads” feature for $1.99 in the Market. The code below shows how you need to declare the `PurchaseType` parameter of your “No-Ads” item.
 
 ``` cs
 public const string NO_ADDS_PRODUCT_ID   = "no_ads";
@@ -39,13 +47,13 @@ public const string NO_ADDS_PRODUCT_ID   = "no_ads";
 public static LifetimeVG NO_AD = new LifetimeVG(
     ...
     new PurchaseWithMarket(new MarketItem(
-        NO_ADDS_PRODUCT_ID,                     // product ID
-        MarketItem.Consumable.NONCONSUMABLE,    // product type
-        1.99))                                  // initial price
+        NO_ADDS_PRODUCT_ID,                     // Product ID
+        MarketItem.Consumable.NONCONSUMABLE,    // Product type
+        1.99))                                  // Initial price
 );
 ```
 
-OR
+There is another way to define this purchase type:
 
 ```  cs
 public const string THOUSANDMUFF_PACK_PRODUCT_ID = "1000_pack";
@@ -53,16 +61,23 @@ public const string THOUSANDMUFF_PACK_PRODUCT_ID = "1000_pack";
 public static VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyPack(
     ...
     new PurchaseWithMarket(
-        THOUSANDMUFF_PACK_PRODUCT_ID,           // product ID
-         8.99)                                  // initial price
+        THOUSANDMUFF_PACK_PRODUCT_ID,           // Product ID
+        8.99)                                   // Initial price
 );
 ```
 
-<div class="info-box">The `productId` that is used to define a new `MarketItem` must match the product ID defined in the Market (Google Play, Amazon Appstore, App Store, etc..).</div>
+For more info on how to declare your items in the Market, see one of our tutorials on In-app Billing:
+
+- For Android: [Google Play IAB](/android/store/Store_GooglePlayIAB) or [Amazon IAB](/android/store/Store_AmazonIAB)
+
+- For iOS: [App Store IAB](/ios/store/Store_AppStoreIAB)
 
 ###[PurchaseWithVirtualItem](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/purchaseTypes/PurchaseWithVirtualItem.cs)
 
-This type of purchase is with some amount of other virtual items.
+Any item with purchase type `PurchaseWithVirtualItem` can be purchased with any `VirtualItem`, like a sort of trade. When creating an instance of `PurchaseWithVirtualItem`, you need to provide the ID of the virtual item that you want to be paid with and the amount of that virtual item.
+
+####**For Example**
+Suppose that in your game, you offer a PAVLOVA_GOOD that can be bought by paying 175 “Muffins”. The item being purchased is a PAVLOVA_GOOD, the item (virtual currency) to pay with is “Muffin”, and the amount is 175.
 
 ```  cs
 public const string MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
@@ -70,13 +85,15 @@ public const string MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
 public static VirtualGood PAVLOVA_GOOD = new SingleUseVG(
     ...
     new PurchaseWithVirtualItem(
-        MUFFIN_CURRENCY_ITEM_ID,                // item ID
-        175));                                  // initial price
+        MUFFIN_CURRENCY_ITEM_ID,                // Item ID
+        175));                                  // Initial price
 ```
 
 ##Virtual Currencies
 
 ###[VirtualCurrency](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualCurrencies/VirtualCurrency.cs)
+
+Every game that has an economy has at least one `VirtualCurrency`. `VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` (explained later in this document). If for some reason you *do* want to sell a single currency you can do so by providing a `VirtualCurrencyPack` with an amount of 1.
 
 ####**How to define**
 
@@ -84,25 +101,26 @@ public static VirtualGood PAVLOVA_GOOD = new SingleUseVG(
 public static final String MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
 
 public static final VirtualCurrency MUFFIN_CURRENCY = new VirtualCurrency(
-    "Muffins",                                  // name
-    "Muffin currency",                          // description
-    MUFFIN_CURRENCY_ITEM_ID                     // item id
+    "Muffins",                                  // Name
+    "Muffin currency",                          // Description
+    MUFFIN_CURRENCY_ITEM_ID                     // Item id
 );
 ```
 
 ####**How to use**
-A `VirtualCurrency` by itself is not very useful, because it cannot be sold individually. To sell currency, you need to use a `VirtualCurrencyPack` (see section below).
+
+As explained above, `VirtualCurrency` by itself is not very useful - in this example it is used when declaring a `VirtualCurrencyPack`.
 
 Use `VirtualCurrency` when defining `VirtualCurrencyPack`s:
 
 ``` cs
 public static VirtualCurrencyPack TENMUFF_PACK = new VirtualCurrencyPack(
-    "10 Muffins",                               // name
-    "Pack of 10 muffin currency units",         // description
-    "muffins_10",                               // item id
-    10,                                         // number of currency units in this pack
-    MUFFIN_CURRENCY_ITEM_ID,                    // the currency associated with this pack
-    new PurchaseWithMarket(                     // purchase type
+    "10 Muffins",                               // Name
+    "Pack of 10 muffin currency units",         // Description
+    "muffins_10",                               // Item id
+    10,                                         // Number of currency units in this pack
+    MUFFIN_CURRENCY_ITEM_ID,                    // Associated currency with this pack
+    new PurchaseWithMarket(                     // Purchase type
       TENMUFF_PACK_PRODUCT_ID,
       0.99)
 );
@@ -127,16 +145,18 @@ StoreInventory.GetItemBalance("currency_muffin");
 
 ###[VirtualCurrencyPack](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualCurrencies/VirtualCurrencyPack.cs)
 
+As mentioned above, in game stores you never buy just a "Gold Coin" or a "Muffin", you always buy a pack of the game's `VirtualCurrency`. This class represents exactly that: a pack of `VirtualCurrency`. Use this class to define various currency packs in your game.
+
 ####**How to define**
 
 ``` cs
 public static VirtualCurrencyPack FIFTYMUFF_PACK = new VirtualCurrencyPack(
-    "50 Muffins",                              // name
-    "Pack of 50 muffin currency units",        // description
-    "muffins_50",                              // item id
-    50,                                        // number of currency units in this pack
-    MUFFIN_CURRENCY_ITEM_ID,                   // the currency associated with this pack
-    new PurchaseWithMarket(                    // purchase type
+    "50 Muffins",                              // Name
+    "Pack of 50 muffin currency units",        // Description
+    "muffins_50",                              // Item id
+    50,                                        // Number of currency units in this pack
+    MUFFIN_CURRENCY_ITEM_ID,                   // Associated currency with this pack
+    new PurchaseWithMarket(                    // Purchase type
       FIFTYMUFF_PACK_PRODUCT_ID,
       1.99)
 );
@@ -176,18 +196,43 @@ StoreInventory.GetItemBalance("currency_muffin");
 ```
 
 ##Virtual Goods
+
+Every virtual good is a `PurchasableVirtualItem`. You can buy it with other `VirtualItem`s, or in the market with money. Virtual goods are the heart of every virtual economy. These are the game objects you’re going to want to sell in your game's store.
+
 Virtual goods need to be declared in your implementation of `IStoreAssets`.
+
+Every virtual good belongs to one of the following groups:
+
+1. Single Use
+
+2. Single Use Pack
+
+3. Lifetime
+
+4. Equippables
+
+5. Upgradables
+
+Below are detailed descriptions of each category.
 
 ###[SingleUseVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/SingleUseVG.cs)
 
 ####**How to define**
 
+The most basic and common kind of a `VirtualGood` is a `SingleUseVG`. `SingleUseVG`s can be purchase by your users multiple times. No limits!
+
+**The SingleUseVG's characteristics are:**
+
+- Can be purchased an unlimited number of times.
+
+- Has a balance that is saved in the database. Its balance goes up when you "give" it or "buy" it. The balance goes down when you “take” it (for example in the case of a refund).
+
 ``` cs
 public static VirtualGood MUFFINCAKE_GOOD = new SingleUseVG(
-    "Fruit Cake",                              // name
-    "Customers buy a double portion!",         // description
-    "fruit_cake",                              // item ID
-    new PurchaseWithVirtualItem(               // purchase type
+    "Fruit Cake",                              // Name
+    "Customers buy a double portion!",         // Description
+    "fruit_cake",                              // Item ID
+    new PurchaseWithVirtualItem(               // Purchase type
       MUFFIN_CURRENCY_ITEM_ID,
       225));
 ```
@@ -227,6 +272,17 @@ StoreInventory.GetItemBalance("fruit_cake");
 
 ###[SingleUsePackVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/SingleUsePackVG.cs)
 
+Sometimes, you'll want to to sell packs of `SingleUseVG`s. To support these cases, we've created `SingleUsePackVG`.
+
+**The SingleUsePackVG's characteristics are:**
+
+- Can be purchased an unlimited number of times.
+
+- Doesn't have a balance in the database. The `SingleUseVG` that's associated with this pack has its own balance. When your users buy a `SingleUsePackVG`, the balance of the associated `SingleUseVG` goes up in the amount you defined for the pack.
+
+**For Example:**
+Suppose you offer a `SingleUsePackVG` of “5 fruit cakes”. The `SingleUseVG` that’s associated with this Pack is "fruit_cake". When your user buys a “5 fruit cake" Pack, the balance of fruit_cake is increased by 5 in the storage.
+
 ####**How to define**
 
 ``` cs
@@ -234,12 +290,12 @@ public const string FRUITCAKE_PACK_PRODUCT_ID = "fruitcake_5pack";
 
 // Define a pack of 5 "Fruit cake" goods that costs $2.99.
 public static VirtualGood FRUITCAKE_GOOD_PACK = new SingleUsePackVG(
-    "fruit_cake",                                // item ID of associated good
-    5,                                           // amount of goods in pack
-    "Fruit Cake Pack",                           // name
-    "A pack of 5 Fruit Cakes",                   // description
-    "fruit_cake_5pack",                          // item ID
-    new PurchaseWithMarket(                      // purchase type
+    "fruit_cake",                                // Item ID of associated good
+    5,                                           // Amount of goods in pack
+    "Fruit Cake Pack",                           // Name
+    "A pack of 5 Fruit Cakes",                   // Description
+    "fruit_cake_5pack",                          // Item ID
+    new PurchaseWithMarket(                      // Purchase type
       FRUITCAKE_PACK_PRODUCT_ID,
       2.99)
 );
@@ -277,9 +333,41 @@ StoreInventory.getVirtualItemBalance("fruit_cake");
 
 ###[LifetimeVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/LifetimeVG.cs)
 
-A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
+A `LifetimeVG` is a `VirtualGood` that can be bought once and is kept forever.
 
-<div class="info-box">Notice: When defining a `LifetimeVG` in the App Store (iTunesConnect), you MUST define its type as a Non-Consumable! For more information see our [guide](/ios/store/Store_AppStoreIAB) for defining IAP products in the App Store.</div>
+**The LifetimeVG's characteristics are:**
+
+- Can only be purchased once.
+
+- Your users can't have more than one of this item. In other words, they can have either 0 or 1 of this item at any given time.
+
+If you declare a `LifetimeVG` with a purchase type of `PurchaseWithMarket`, it represents a non-consumable item in the market, i.e., it cannot be consumed and is owned by the user forever. (The Market saves this information forever)
+
+However, notice that if you declare a `LifetimeVG` with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` **as long as the local storage of the game has NOT been deleted** (the version has been updated, or the game was deleted and re-downloaded, etc..).
+
+####**For Example**
+
+``` cs
+// A blue car that is purchased with virtual coins.
+public static VirtualGood BLUE_CAR = new LifetimeVG(
+    "Blue Car",                                                            // Name
+    "This car is yours for as long as the game's storage doesn't change!", // Description
+    "blue_car",                                                            // Item ID
+    new PurchaseWithVirtualItem(COIN_CURRENCY_ITEM_ID, 3000)               // Purchase type
+);
+
+// A red car that is purchased with money in the market.
+public static VirtualGood RED_CAR = new LifetimeVG(
+    "Red Car",                                                             // Name
+    "This car is yours FOREVER!!!",                                        // Description
+    "red_car",                                                             // Item ID
+    new PurchaseWithMarket(RED_CAR_PRODUCT_ID, 4.99)                       // Purchase type
+);
+```
+
+Let's say a user purchases both cars. Even if the game's local storage is deleted, the user will still own the red car and will receive it upon `refreshInventory` process. However, the user will not own the blue car any longer.
+
+<div class="info-box">IMPORTANT: When defining a `LifetimeVG` in the App Store (iOS), you MUST define its type as a Non-Consumable! For more information see our guide for [defining IAP products in the App Store](/ios/store/Store_AppStoreIAB).</div>
 
 <br>
 
@@ -287,10 +375,10 @@ A LifetimeVG is a VirtualGood that is bought exactly once and kept forever.
 
 ``` cs
 public static VirtualGood MARRIAGE_GOOD = new LifetimeVG(
-    "Marriage",                                  // name
-    "This is a lifetime thing",                  // description
-    "marriage",                                  // item ID
-    new PurchaseWithMarket(                      // purchase type
+    "Marriage",                                  // Name
+    "This is a lifetime thing",                  // Description
+    "marriage",                                  // Item ID
+    new PurchaseWithMarket(                      // Purchase type
       MARRIAGE_PRODUCT_ID,
       7.99)
 );
@@ -323,7 +411,6 @@ This function simply deducts the user's balance. In case of a refund request, it
 StoreInventory.TakeItem("marriage", 1);
 ```
 
-
 ####**Check ownership**
 Check the ownership of a lifetime good:
 
@@ -338,26 +425,45 @@ if (balance > 0) {
 
 ###[EquippableVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/EquippableVG.cs)
 
+An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact that an `EquippableVG` can be purchased once, it can also be equipped by your users. Equipping means that the user decides to currently use a specific `EquippableVG`.
+
+**The EquippableVG's characteristics are:**
+
+- Can be purchased only once.
+
+- Can be equipped by the user.
+
+- Inherits the definition of `LifetimeVG`.
+
+**There are 3 equipping models:**
+
+- `LOCAL` - The current `EquippableVG`'s equipping status doesn't affect any other `EquippableVG`.
+
+- `CATEGORY` - In the containing category, if this `EquippableVG` is equipped, all other `EquippableVG`s are unequipped.
+
+- `GLOBAL` - In the whole game, if this `EquippableVG` is equipped, all other `EquippableVG`s are unequipped.
+
 ####**How to define**
-There are 3 types of Equipping models: `GLOBAL`, `CATEGORY`, and `LOCAL`. In this example we're defining 2 characters, George and Kramer. These are `CATEGORY` equippable goods because the user can own both characters but can play only as one at a time.
+
+In this example we're defining 2 characters, George and Kramer as `CATEGORY` equippable goods. This means the user can own both characters but can play only as one at a time.
 
 ``` cs
 // Character "George" can be purchased for 350 Muffins.
 public static VirtualGood GEORGE_GOOD = new EquippableVG(
-    EquippableVG.EquippingModel.CATEGORY,                       // equipping model
-    "George",                                                   // name
-    "George is the best muffin eater in the north",             // description
-    "george_good",                                              // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 350)   // purchase type
+    EquippableVG.EquippingModel.CATEGORY,                       // Equipping model
+    "George",                                                   // Name
+    "George is the best muffin eater in the north",             // Description
+    "george_good",                                              // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 350)   // Purchase type
 );
 
 // Character "Kramer" can be purchased for 500 Muffins.
 public static final VirtualGood KRAMER_GOOD = new EquippableVG(
-    EquippableVG.EquippingModel.CATEGORY,                       // equipping model
-    "Kramer",                                                   // name
-    "Kramer kicks muffins like a super hero",                   // description
-    "kramer_good",                                              // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 500)   // purchase type
+    EquippableVG.EquippingModel.CATEGORY,                       // Equipping model
+    "Kramer",                                                   // Name
+    "Kramer kicks muffins like a super hero",                   // Description
+    "kramer_good",                                              // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 500)   // Purchase type
 );
 ```
 
@@ -423,42 +529,71 @@ Check if Kramer is currently equipped:
 StoreInventory.IsVirtualGoodEquipped("kramer");
 ```
 
-
 ###[UpgradeVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/UpgradeVG.cs)
+
+An `UpgradeVG` is a `VirtualGood` in a series of `UpgradeVG`s that define an upgrade sequence for a given `VirtualGood`. The associated `VirtualGood` can be of any type (`SingleUseVG`, `EquippableVG`, etc..).
+
+When the user buys an`UpgradeVG`, a check is performed to make sure the appropriate conditions are met.
+
+**`UpgradeVG`'s characteristics:**
+
+- Can be purchased whenever it's not the current upgrade.
+
+- Doesn't have a balance in the database.
+
+**Important `UpgradeVG` class members:**
+
+- `goodItemId` - the itemId of the `VirtualGood` associated with this upgrade.
+
+- `prevItemId` - the itemId of the `UpgradeVG` that comes before this one, or if this is the first `UpgradeVG` in the scale then this value is null.
+
+- `nextItemId` - the itemId of the `UpgradeVG` that comes after this one, or if this is the last `UpgradeVG` in the scale then the value is null.
 
 ####**How to define**
 
-Suppose you offer a "Strength" attribute to one of the characters in your game and you want to make it upgradeable with 2 levels.
+Say you have a strength attribute in your game and that strength is upgradeable on a scale of 1-3.  This is what you'll need to create:
+
+1. SingleUseVG for 'strength'
+
+2. UpgradeVG for strength 'level 1'
+
+3. UpgradeVG for strength 'level 2'
+
+4. UpgradeVG for strength 'level 3'
+
+In the following example there is a `SingleUseVG` for "Strength" and 3 upgrade levels for it.
 
 ``` cs
 // Create a SingleUseVG for "Strength"
 public static VirtualGood STRENGTH_ATTR = new SingleUseVG(
-    "Strength",                                                 // name
-    "Makes Kramer stronger so he can kick more muffins",        // description
-    "strength",                                                 // item ID
-    new PurchaseWithMarket(STRENGTH_PRODUCT_ID, 1.99)           // purchase type
+    "Strength",                                                 // Name
+    "Makes Kramer stronger so he can kick more muffins",        // Description
+    "strength",                                                 // Item ID
+    new PurchaseWithMarket(STRENGTH_PRODUCT_ID, 1.99)           // Purchase type
 );
 
 // Create 2 UpgradeVGs that represent 2 levels for the Strength attribute.
 public static VirtualGood STRENGTH_UPGRADE_1 = new UpgradeVG(
-    "strength",                   // item ID of the associated good that is being upgraded
-    null,                         // item ID of the upgrade good that comes before this one
-    "strength_upgrade_2",         // item ID of the upgrade good that comes after this one
-    "Strength Upgrade Level 1",                                 // name
-    "Kramer will be able to kick twice as many muffins!",       // description
-    "strength_upgrade_1",                                       // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 50)    // purchase type
+    "strength",                   // Item ID of the associated good that is being upgraded
+    "strength_upgrade_2",         // Item ID of the next upgrade good
+    null,                         // Item ID of the previous upgrade good
+    "Strength Upgrade Level 1",                                 // Name
+    "Kramer will be able to kick twice as many muffins!",       // Description
+    "strength_upgrade_1",                                       // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 50)    // Purchase type
 );
 
 public static VirtualGood STRENGTH_UPGRADE_2 = new UpgradeVG(
-    "strength",                   // item ID of the associated good that is being upgraded
-    "strength_upgrade_1",         // item ID of the upgrade good that comes before this one
-    null,                         // item ID of the upgrade good that comes after this one
-    "Strength Upgrade Level 2",                                 // name
-    "Kramer will be able to kick 4 times as many muffins!",     // description
-    "strength_upgrade_2",                                       // item ID
-    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 250)   // purchase type
+    "strength",                   // Item ID of the associated good that is being upgraded
+    "strength_upgrade_3",         // Item ID of the next upgrade good
+    "strength_upgrade_1",         // Item ID of the previous upgrade good
+    "Strength Upgrade Level 2",                                 // Name
+    "Kramer will be able to kick 4 times as many muffins!",     // Description
+    "strength_upgrade_2",                                       // Item ID
+    new PurchaseWithVirtualItem(MUFFIN_CURRENCY_ITEM_ID, 250)   // Purchase type
 );
+
+// UpgradeVG for strength level 3...
 ```
 
 ####**How to use**
@@ -522,15 +657,20 @@ StoreInventory.GetGoodUpgradeLevel("strength");
 
 ##[VirtualCategory](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/VirtualCategory.cs)
 
-Divide your store's virtual goods into categories. Virtual categories become essential when you want to include `CATEGORY` `EquippableVG`s in your game.
+A `VirtualCategory` is used to categorize `VirtualGood`s. Categories are helpful for organizational purposes, but especially come in handy when you have Equippable Virtual Goods.
+
+<div class="info-box">If you don’t have any need for categories, you can just define all of your virtual goods in one category and call it something like “General”.</div>
+
+####**Real Game Examples:**
+Let’s suppose your game has the following categories of virtual goods: "Power Ups", "Weapons", and  "Hats". Say you decide to make “Weapons” and “Hats” `CATEGORY` `EquippableVG`s. You can easily implement this functionality once the goods are divided into virtual categories.
 
 ####**How to define**
 
 ``` cs
 // Assume that MUFFINCAKE_ITEM_ID, PAVLOVA_ITEM_ID, etc.. are item ids of virtual goods that have been declared.
 public static VirtualCategory SWEETS_CATEGORY = new VirtualCategory(
-    "Cakes and Sweets",                         // name
-    new List<string>(new string[]               // list of item IDs
+    "Cakes and Sweets",                         // Name
+    new List<string>(new string[]               // List of item IDs
         { MUFFINCAKE_ITEM_ID,
           PAVLOVA_ITEM_ID,
           CHOCLATECAKE_ITEM_ID,
