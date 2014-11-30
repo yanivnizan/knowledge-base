@@ -28,7 +28,7 @@ platform: 'unity'
 
 	![alt text](/img/tutorial_img/unity-profile/prefabs.png "Prefabs")
 
-3. Go to the menu bar, under **Window->Soomla->Edit Settings**:
+3. Go to the menu bar, under **Window > Soomla > Edit Settings**:
 
 	a. Change the value for **Soomla Secret**. "Soomla Secret" is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game! (NOTE: If you used unity3d-store versions before v1.5.2 this secret MUST be the same as "Custom Secret".)
 
@@ -78,14 +78,14 @@ And that's it! unity3d-profile knows how to contact the social provider (Faceboo
 
 1. Follow [Step 1. Creating the Google Developers Console project](https://developers.google.com/+/mobile/ios/getting-started#step_1_creating_the_console_name_project) and create a Google+ app for iOS. Set the BUNDLE ID of your Google+ app to the Bundle Identifier of your Unity3d app.
 
-2. In the menu bar of the Unity editor go to **Window->Soomla->Edit Settings**, toggle the "google" check box and fill the "Client Id" text box with "CLIENT ID" value of your Google+ app.
+2. In the menu bar of the Unity editor go to **Window > Soomla > Edit Settings**, toggle the "google" check box and fill the "Client Id" text box with "CLIENT ID" value of your Google+ app.
 
 ####**Targeting Android**:
 1. Follow [Step 1: Enable the Google+ API](https://developers.google.com/+/mobile/android/getting-started#step_1_enable_the_google_api) and create a Google+ app for Android. Set the PACKAGE NAME of your Google+ app to the value of "Bundle Identifier" of your Unity3d app.
 
 	<div class="info-box">To create a custom keystore file with Unity3d, navigate to **Player Settings->Publishing Settings** and click "Create New Keystore". In your Google+ app page, navigate to **API & Auth->Credentials** and update the value of "CERTIFICATE FINGERPRINT (SHA1)" with the SHA-1 of your new keystore file.</div>
 
-2. Navigate to **Window->Soomla->Edit Settings** and toggle "google" check box (ignore the Client Id text box).
+2. Navigate to **Window > Soomla > Edit Settings** and toggle "google" check box (ignore the Client Id text box).
 
 3. Navigate to "Publishing Settings" and browse for your keystore file (debug.keystore/custom keystore).
 
@@ -95,7 +95,7 @@ Twitter is supported out-of-the-box, authentication is done either through the s
 
 1. Create your Twitter app at https://apps.twitter.com/
 
-2. In the menu bar of the Unity editor go to **Window->Soomla->Edit Settings** and toggle the "twitter" check box. Then fill in "Consumer Key" and "Consumer Secret".
+2. In the menu bar of the Unity editor go to **Window > Soomla > Edit Settings** and toggle the "twitter" check box. Then fill in "Consumer Key" and "Consumer Secret".
 
 	**NOTE:** "Consumer Key" and "Consumer Secret" are located under "Keys and Access Tokens" of your twitter app.
 
@@ -140,7 +140,7 @@ Twitter is supported out-of-the-box, authentication is done either through the s
 
 ###Google Plus Caveats
 
-1. Have you enabled google in **Window->Soomla->Edit Settings**?
+1. Have you enabled google in **Window > Soomla > Edit Settings**?
 
 2. Have you supplied the correct Client Id (when targeting iOS)?
 

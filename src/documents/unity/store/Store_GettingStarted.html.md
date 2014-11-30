@@ -32,7 +32,7 @@ platform: 'unity'
 
   ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
 
-3. On the menu bar click "Window" > "Soomla" > "Edit Settings" and change the values for "Soomla Secret" and "Public Key":
+3. On the menu bar click **Window > Soomla > Edit Settings** and change the values for "Soomla Secret" and "Public Key":
 
   - **Soomla Secret** - This is an encryption secret you provide that will be used to secure your data. (If you used versions before v1.5.2 this secret MUST be the same as Custom Secret)
 

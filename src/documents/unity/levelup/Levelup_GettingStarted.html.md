@@ -36,7 +36,7 @@ platform: 'unity'
 
   ![alt text](/img/tutorial_img/unity_levelup/prefabs.png "Hierarchy")
 
-4. In the menu bar go to "Window -> Soomla -> Edit Settings" and change the value for "Soomla Secret" (also setup Public Key if you're building for Google Play):
+4. In the menu bar go to **Window > Soomla > Edit Settings** and change the value for "Soomla Secret" (also setup Public Key if you're building for Google Play):
 
     - _Soomla Secret_ - is an encryption secret you provide that will be used to secure your data. (If you used versions before v1.5.2 this secret MUST be the same as Custom Secret)  
     **Choose this secret wisely, you can't change it after you launch your game!**
