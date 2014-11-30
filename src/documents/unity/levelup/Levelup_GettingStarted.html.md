@@ -49,7 +49,7 @@ platform: 'unity'
     SoomlaLevelUp.Initialize (initialWorld);
     ```
 
-  <div class="warning-box">Initialize _LevelUp_ ONLY ONCE when your application loads, in the "Start()" function of a 'MonoBehaviour' and **NOT** in the "Awake()" function. SOOMLA has its own 'MonoBehaviour' and it needs to be "Awakened" before you initialize.</div>
+  <div class="warning-box">Initialize _LevelUp_ ONLY ONCE when your application loads, in the `Start()` function of a `MonoBehaviour` and **NOT** in the `Awake()` function. SOOMLA has its own `MonoBehaviour` and it needs to be "Awakened" before you initialize.</div>
 
 6. You'll need to create event handler functions in order to be notified about (and handle) _LevelUp_ related events. Refer to the [Event Handling](/unity/levelup/LevelUp_Events) section for more information.
 
