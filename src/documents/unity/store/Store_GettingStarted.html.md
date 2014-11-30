@@ -1,7 +1,7 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "STORE: Getting Started"
+title: "Getting Started"
 text: "Get started with unity3d-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
 position: 1
 theme: 'platforms'
@@ -10,13 +10,13 @@ module: 'store'
 platform: 'unity'
 ---
 
-#STORE: Getting Started
+#Getting Started
 
 ##Integrate unity3d-store
 
 1. First, you'll need to either download (RECOMMENDED) the unity3d-store pre-baked packages, or clone unity3d-store.
 
-  - RECOMMENDED: Download [soomla-unity3d-core](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-core.unitypackage?raw=true) and [unity3d-store v1.7.4](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-store.unitypackage)
+  - RECOMMENDED: Download [soomla-unity3d-core](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-core.unitypackage?raw=true) and [unity3d-store](https://github.com/soomla/unity3d-store/blob/master/soomla-unity3d-store.unitypackage)
 
     OR, if you'd like to work with sources:
 
@@ -30,7 +30,7 @@ platform: 'unity'
 
 2. Drag the "StoreEvents" and "CoreEvents" Prefabs from `Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
 
-  ![alt text](/img/tutorial_img/unity_getting_started/hierarchyPanel.png "Hierarchy")
+  ![alt text](/img/tutorial_img/unity_getting_started/prefabs.png "Prefabs")
 
 3. On the menu bar click **Window > Soomla > Edit Settings** and change the values for "Soomla Secret" and "Public Key":
 

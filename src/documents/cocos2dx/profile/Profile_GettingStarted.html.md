@@ -1,16 +1,16 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "PROFILE: Getting Started"
+title: "Getting Started"
 text: "Get started with cocos2dx-profile. Here you can find integration instructions and a basic example of initialization."
-position: 5
+position: 1
 theme: 'platforms'
 collection: 'cocos2dx_profile'
 module: 'profile'
 platform: 'cocos2dx'
 ---
 
-#PROFILE: Getting Started
+#Getting Started
 
 *If you want to develop with sources, refer to the [Working with sources](#working-with-sources) section below*.
 

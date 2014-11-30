@@ -1,16 +1,16 @@
 ---
 layout: "content"
 image: "Events"
-title: "STORE: Events"
+title: "Events"
 text: "Event handling in iOS-store follows the publish-subscribe pattern."
-position: 4
+position: 5
 theme: 'platforms'
 collection: 'ios_store'
 module: 'store'
 platform: 'ios'
 ---
 
-#**STORE: Event Handling**
+#Event Handling
 
 ##About
 

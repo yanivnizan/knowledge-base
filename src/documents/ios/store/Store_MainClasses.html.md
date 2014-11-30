@@ -1,16 +1,16 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "STORE: Main Classes"
+title: "Main Classes"
 text: "The main classes of ios-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
-position: 3
+position: 4
 theme: 'platforms'
 collection: 'ios_store'
 module: 'store'
 platform: 'ios'
 ---
 
-#**STORE: Main Classes**
+#Main Classes
 
 Here you can find descriptions of some of the main classes and interfaces of iOS-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
 
