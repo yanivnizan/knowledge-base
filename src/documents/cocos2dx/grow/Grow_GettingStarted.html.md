@@ -12,13 +12,19 @@ platform: 'cocos2dx'
 
 #GROW: Getting Started
 
+##Overview
+
+Soomla GROW is our flagship community driven analytics dashboard.  Developers using GROW can gain valuable insights about their games' performance and compare the data to benchmarks of other games in the GROW community.
+
+**Note:** GROW analytics use all of Soomla's modules: Store, Profile and LevelUp. This document describes how to incorporate all of these modules as part of the setup.  You may choose to use only specific modules, however, to benefit from the full power of GROW analytics we recommend that you integrate Store, Profile and LevelUp.
+
 ##Getting Started
 
-Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Go to the [GROW dashboard](http://dashboard.soom.la) and sign up \ login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
 <div class="info-box">If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by SOOMLA's modules (the tag is the version).</div>
 
-1. Click on **Demo Game->Add New App** and fill in the required fields.
+1. Click on the right pointing arrow next to "Demo Game" > "Add New App" and fill in the required fields.
 
   ![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
@@ -30,13 +36,17 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
 
 5. In your `AppDelegate.cpp` include `Cocos2dxHighway.h`:
 
-  ``` cpp
+  ```cpp
   #include "Cocos2dxHighway.h"
   ```
 
-6. Initialize `CCHighwayService` with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la):
+6. Initialize `CCHighwayService`: with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la):
 
-  ``` cpp
+    **Copy the "Game Key" and "Environment Key"** given to you from the [dashboard](http://dashboard.soom.la) and initialize `CCSoomlaHighway` with them. At this point, you're probably testing your integration and you want to use the **Sandbox** environment key.
+
+	Explanation: The "game" and "env" keys allow for your game to distinguish multiple environments for the same game. The dashboard pre-generates two fixed environments for your game: **Production** and **Sandbox**. When you decide to publish your game, make sure to switch the env key to **Production**.  You can always generate more environments.  For example - you can choose to have a playground environment for your game's beta testers which will be isolated from your production environment and will thus prevent analytics data from being mixed between the two.  Another best practice is to have a separate environment for each version of your game.
+
+  ```cpp
   CCSoomlaHighway::initShared(__String::create("yourGameKey"), __String::create("yourEnvKey"));
   ```
 
@@ -47,7 +57,7 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
   <div class="warning-box">Choose this secret wisely, you can't change it after you launch your game!
   <br>Initialize `CCLevelUpService` ONLY ONCE when your application loads.</div>
 
-  ``` cpp
+  ```cpp
   __Dictionary *commonParams = __Dictionary::create();
   commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
 
@@ -163,11 +173,11 @@ In your XCode project, perform the following steps:
 
 7. Connect the Profile module to a social network provider:
 
-  - [Facebook](/docs/platforms/cocos2dx/Profile_GettingStarted#facebook-for-ios)
+  - [Facebook](/cocos2dx/profile/Profile_GettingStarted#facebook-for-ios)
 
-  - [Google+](/docs/platforms/cocos2dx/Profile_GettingStarted#google+-for-ios)
+  - [Google+](/cocos2dx/profile/Profile_GettingStarted#google-for-ios)
 
-  - [Twitter](/docs/platforms/cocos2dx/Profile_GettingStarted#twitter-for-ios)
+  - [Twitter](/cocos2dx/profile/Profile_GettingStarted#twitter-for-ios)
 
 That's it! Now all you have to do is build your XCode project and run your game.
 
@@ -297,25 +307,38 @@ That's it! Now all you have to do is build your XCode project and run your game.
 
 6. Connect the Store module to your desired billing service:
 
-  - [Google Play](/docs/platforms/cocos2dx/GettingStarted#google-play)
+  - [Google Play](/cocos2dx/store/Store_GettingStarted#google-play)
 
-  - [Amazon Appstore](/docs/platforms/cocos2dx/gettingstarted#amazon-appstore)
+  - [Amazon Appstore](/cocos2dx/store/Store_GettingStarted#amazon)
 
 7. Connect the Profile module to a social network provider:
 
-  - [Facebook](/docs/platforms/cocos2dx/Profile_GettingStarted#facebook-for-android)
+  - [Facebook](/cocos2dx/profile/Profile_GettingStarted#facebook-for-android)
 
-  - [Google+](/docs/platforms/cocos2dx/Profile_GettingStarted#google+-for-android)
+  - [Google+](/cocos2dx/profile/Profile_GettingStarted#google-for-android)
 
-  - [Twitter](/docs/platforms/cocos2dx/Profile_GettingStarted#twitter-for-android)
+  - [Twitter](/cocos2dx/profile/Profile_GettingStarted#twitter-for-android)
 
 That's it! Don't forget to run the **build_native.py** script so that SOOMLA sources will be built with cocos2d-x.
 
+
+
+##Back to the Dashboard
+
+Once your app is running, you can go back to the [GROW dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
+
+![alt text](/img/tutorial_img/unity_grow/verifyIntegration.png "Verify Integration")
+
+And that's it! You have in-app purchasing, social engagement, and game architecture capabilities at your fingertips.
+
+
 ##Example
 
-Below is a short example of how to initialize SOOMLA's modules. We suggest you read about the different modules and their entities in SOOMLA's [Knowledge Base](/docs/platforms/cocos2dx).
+Below is a short example of how to initialize SOOMLA's modules. We suggest you read about the different modules and their entities in SOOMLA's Knowledge Base: [Store](/cocos2dx/store/Store_Model), [Profile](/cocos2dx/profile/Profile_MainClasses), and [LevelUp](/cocos2dx/levelup/Levelup_Model).
 
-``` cpp
+###IStoreAssets
+
+```cpp
 /** ExampleAssets (your implementation of IStoreAssets) **/
 CCVirtualCurrency *coinCurrency = CCVirtualCurrency::create(
   CCString::create("Coins"),
@@ -346,7 +369,9 @@ CCVirtualGood *shieldGood = CCSingleUseVG::create(
 ```
  <br>
 
-``` cpp
+###Initialization
+
+```cpp
 /** World **/
 CCWorld* mainWorld = CCWorld::create(
   CCString::create("mainWorld_ID")
@@ -378,7 +403,7 @@ CCMission *mission = CCBalanceMission::create(
 mainWorld->batchAddLevelsWithTemplates(5, gate, score, mission);
 
 /** Initialize Highway **/
-soomla::CCHighwayService::initShared(__String::create("YOUR MASTER KEY"));
+soomla::CCSoomlaHighway::initShared(__String::create("yourGameKey"), __String::create("yourEnvKey"));
 
 /** Set up and initialize Core, Store, Profile, and LevelUp **/
 ExampleAssets *assets = MuffinRushAssets::create();

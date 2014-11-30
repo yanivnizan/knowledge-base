@@ -16,11 +16,11 @@ platform: 'cocos2dx'
 
 ##Integrate STORE & GROW
 
-Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom.la) and sign up or login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom.la) and sign up \ login. Upon logging in, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
 <div class="info-box">If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by SOOMLA's modules (the tag is the version).</div>
 
-1. In the [dashboard](http://dashboard.soom.la), click on **Demo Game->Add New App** and fill in the required fields.
+1. Click on the right pointing arrow next to "Demo Game" > "Add New App" and fill in the required fields.
 
   ![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
@@ -42,7 +42,7 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
 
 4. Create your own implementation of `CCStoreAssets` that will represent the assets in your specific game. For a brief example, refer to the example below. For a complete example refer to [cocos2dx-store-example](https://github.com/soomla/cocos2dx-store-example/blob/master/Classes/MuffinRushAssets.cpp).
 
-5. Implement your `CCStoreEventHandler` in order to be notified about in-app purchase related events. Refer to the [Event Handling](/docs/platforms/cocos2dx/Events) section for more information.
+5. Implement your `CCStoreEventHandler` in order to be notified about in-app purchase related events. Refer to the [Event Handling](/cocos2dx/store/Store_Events) section for more information.
 
 6. Make sure to include the `Cocos2dxStore.h` header whenever you use any of the *cocos2dx-store* functions:
 
@@ -264,15 +264,15 @@ That's it! Now all you have to do is build your XCode project and run your game.
 
 6. Connect the Store module to your desired billing service:
 
-  - [Google Play](/docs/platforms/cocos2dx/GettingStarted#google-play)
+  - [Google Play](/cocos2dx/store/Store_GettingStarted#google-play)
 
-  - [Amazon Appstore](/docs/platforms/cocos2dx/gettingstarted#amazon-appstore)
+  - [Amazon Appstore](/cocos2dx/store/Store_GettingStarted#amazon-appstore)
 
 That's it! Don't forget to run the **build_native.py** script so that SOOMLA sources will be built with cocos2d-x.
 
 ##Example
 
-Below is a short example of how to initialize SOOMLA's modules. We suggest you read about the different modules and their entities in SOOMLA's [Knowledge Base](/docs/platforms/cocos2dx).
+Below is a short example of how to initialize SOOMLA's modules. We suggest you read about the different modules and their entities in SOOMLA's [Knowledge Base](/cocos2dx).
 
 ``` cpp
 /** ExampleAssets (your implementation of IStoreAssets) **/
