@@ -10,7 +10,7 @@ module: 'store'
 platform: 'ios'
 ---
 
-#**Debugging**
+#Debugging
 
 iOS-store provides debug messages that are printed to the log.
 <br>In `StoreConfig.m` you will find:

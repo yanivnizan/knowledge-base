@@ -10,8 +10,7 @@ module: 'store'
 platform: 'cocos2dx'
 ---
 
-
-#**Error Handling & Debugging**
+#Error Handling & Debugging
 
 This document addresses both cocos2dx-store and cocos2dx-profile.
 

@@ -10,7 +10,7 @@ module: 'store'
 platform: 'unity'
 ---
 
-#**Make your In App Billing Service available on unity3d-store**
+#Make your In App Billing Service available on unity3d-store
 
 ##About this document
 

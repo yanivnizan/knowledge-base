@@ -10,7 +10,7 @@ module: 'grow'
 platform: 'unity'
 ---
 
-#GROW: Getting Started (Store only)
+#Getting Started (Store only)
 
 <div class="info-box">This tutorial is for developers who already have unity3d-store imported in their project. Please verify that your SOOMLA version is at least 1.5. Otherwise more actions will be required to remove the old version prior to installing the new one.</div>
 

@@ -10,7 +10,7 @@ module: 'grow'
 platform: 'unity'
 ---
 
-#GROW: Getting Started
+#Getting Started
 
 ##Getting started
 

@@ -10,7 +10,7 @@ module: 'store'
 platform: 'android'
 ---
 
-#**Create Your Own Billing Plugin**
+#Create Your Own Billing Plugin
 
 SOOMLA's store module is all about game economies and what is more connected to game economies than in-app purchases? IAP in Android is done using the store on the device. On some devices it's Google Play, on others it's Amazon Store and there are lots more.
 

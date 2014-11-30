@@ -1,7 +1,7 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "STORE: Economy Model & Operations"
+title: "Economy Model & Operations"
 text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
 position: 2
 theme: 'platforms'
@@ -10,7 +10,7 @@ module: 'store'
 platform: 'cocos2dx'
 ---
 
-#**STORE: Economy Model & Operations**
+#Economy Model & Operations
 
 SOOMLA's cocos2dx-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course. This tutorial contains descriptions of each entity in the economy model, along with examples.
 

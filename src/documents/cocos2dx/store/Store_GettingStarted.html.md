@@ -1,7 +1,7 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "STORE: Getting Started"
+title: "Getting Started"
 text: "Get started with cocos2dx-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
 position: 1
 theme: 'platforms'
@@ -10,7 +10,7 @@ module: 'store'
 platform: 'cocos2dx'
 ---
 
-#STORE: Getting Started
+#Getting Started
 
 ##Integrate cocos2dx-store
 

@@ -1,7 +1,7 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "STORE: Getting Started"
+title: "Getting Started"
 text: "Get started with iOS-store. Here you can find a basic example of initialization, economy framework integration, and links to downloads and IAP setup."
 position: 1
 theme: 'platforms'
@@ -10,7 +10,7 @@ module: 'store'
 platform: 'ios'
 ---
 
-#**STORE: Getting Started**
+#Getting Started
 
 Before doing anything, SOOMLA recommends that you go through Apple's [Selling with In-App Purchase](https://developer.apple.com/appstore/in-app-purchase/index.html).
 

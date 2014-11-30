@@ -10,7 +10,7 @@ module: 'store'
 platform: 'unity'
 ---
 
-#**Debugging**
+#Debugging
 
 ##Unity Debug Messages
 

@@ -1,7 +1,7 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "PROFILE: Getting Started"
+title: "Getting Started"
 text: "Get started with unity3d-profile. Here you can find integration instructions and a basic example of initialization."
 position: 5
 theme: 'platforms'
@@ -10,7 +10,7 @@ module: 'profile'
 platform: 'unity'
 ---
 
-#PROFILE: Getting Started
+#Getting Started
 
 <div class="info-box">Profile depends on SOOMLA's Core module. This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already have Core & Store, please follow these directions only for the Profile module.</div>
 

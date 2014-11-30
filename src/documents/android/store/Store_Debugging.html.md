@@ -10,7 +10,7 @@ module: 'store'
 platform: 'android'
 ---
 
-#**Debugging**
+#Debugging
 
 ##Debug Messages
 

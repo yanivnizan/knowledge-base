@@ -10,7 +10,7 @@ module: 'store'
 platform: 'unity'
 ---
 
-#**FAQ: unity3d-store**
+#**FAQ**
 
 ##Integration
 

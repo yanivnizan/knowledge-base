@@ -1,7 +1,7 @@
 ---
 layout: "content"
 image: "Tutorial"
-title: "LEVELUP: Getting Started"
+title: "Getting Started"
 text: "Get started with cocos2dx-levelup. Here you can find a detailed description of how to integrate LevelUp into your game, and see a basic example of initialization and functionality usage."
 position: 8
 theme: 'platforms'
@@ -10,7 +10,7 @@ module: 'levelup'
 platform: 'cocos2dx'
 ---
 
-#LEVELUP: Getting Started
+#Getting Started
 
 ##Getting Started
 
