@@ -2,7 +2,7 @@
 layout: "content"
 image: "Events"
 title: "Events"
-text: "Event handling in unity3d-store follows the publish-subscribe pattern."
+text: "Learn how to observe and handle economy events triggered by unity3d-store to customize your game-specific behavior."
 position: 4
 theme: 'platforms'
 collection: 'unity_store'
@@ -26,7 +26,7 @@ For example, When a user buys a currency pack, his currency balance is updated. 
 
 The `StoreEvents` class is where all events go through. To handle various events, just add your game-specific behavior to the delegates in the `StoreEvents` class.
 
-For example, if you want to 'listen' for a `MarketPurchaseStarted` event:
+For example, if you want to listen for a `MarketPurchaseStarted` event:
 
 ``` cs
 StoreEvents.OnMarketPurchaseStarted += onMarketPurchaseStarted;
@@ -95,6 +95,20 @@ public void onGoodBalanceChanged(VirtualGood good, int balance, int amountAdded)
 }
 ```
 
+###OnMarketPurchaseStarted
+
+This event will be thrown when market purchase operation has started.
+
+``` cs
+StoreEvents.OnMarketPurchaseStarted += onMarketPurchaseStarted;
+
+public void onMarketPurchaseStarted(PurchasableVirtualItem pvi) {
+    // pvi is the PurchasableVirtualItem that its purchase operation has just started
+
+    // ... your game specific implementation here ...
+}
+```
+
 ###OnMarketPurchase
 
 This event will be thrown when market purchase operation has completed successfully.
@@ -108,20 +122,6 @@ public void onMarketPurchase(PurchasableVirtualItem pvi, string payload, Diction
     // extra will contain platform specific information about the market purchase.
     //      Android: The "extra" dictionary will contain "orderId" and "purchaseToken".
     //      iOS: The "extra" dictionary will contain "receipt" and "token".
-
-    // ... your game specific implementation here ...
-}
-```
-
-###OnMarketPurchaseStarted
-
-This event will be thrown when market purchase operation has started.
-
-``` cs
-StoreEvents.OnMarketPurchaseStarted += onMarketPurchaseStarted;
-
-public void onMarketPurchaseStarted(PurchasableVirtualItem pvi) {
-    // pvi is the PurchasableVirtualItem that its purchase operation has just started
 
     // ... your game specific implementation here ...
 }
@@ -167,6 +167,20 @@ public void onRestoreTransactionsFinished(bool success) {
 }
 ```
 
+###OnItemPurchaseStarted
+
+This event will be thrown when item purchase operation has started.
+
+``` cs
+StoreEvents.OnItemPurchaseStarted += onItemPurchaseStarted;
+
+public void onItemPurchaseStarted(PurchasableVirtualItem pvi) {
+    // pvi is the PurchasableVirtualItem that its purchase operation has just started
+
+    // ... your game specific implementation here ...
+}
+```
+
 ###OnItemPurchased
 
 This event will be thrown when item purchase operation has completed successfully.
@@ -177,20 +191,6 @@ StoreEvents.OnItemPurchased += onItemPurchased;
 public void onItemPurchased(PurchasableVirtualItem pvi, string payload) {
     // pvi is the PurchasableVirtualItem that was just purchased
     // payload is a text that you can give when you initiate the purchase operation and you want to receive back upon completion
-
-    // ... your game specific implementation here ...
-}
-```
-
-###OnItemPurchaseStarted
-
-This event will be thrown when item purchase operation has started.
-
-``` cs
-StoreEvents.OnItemPurchaseStarted += onItemPurchaseStarted;
-
-public void onItemPurchaseStarted(PurchasableVirtualItem pvi) {
-    // pvi is the PurchasableVirtualItem that its purchase operation has just started
 
     // ... your game specific implementation here ...
 }
@@ -239,20 +239,6 @@ public void onGoodUpgrade(VirtualGood good, UpgradeVG currentUpgrade) {
 }
 ```
 
-###OnBillingNotSupported
-
-This event will be thrown when the billing service fails to initialize.
-
-``` cs
-StoreEvents.OnBillingNotSupported += onBillingNotSupported;
-
-public void onBillingNotSupported() {
-    // your game specific implementation here
-
-    // ... your game specific implementation here ...
-}
-```
-
 ###OnBillingSupported
 
 This event will be thrown when the billing service is initialized and ready.
@@ -261,6 +247,20 @@ This event will be thrown when the billing service is initialized and ready.
 StoreEvents.OnBillingSupported += onBillingSupported;
 
 public void onBillingSupported() {
+    // your game specific implementation here
+
+    // ... your game specific implementation here ...
+}
+```
+
+###OnBillingNotSupported
+
+This event will be thrown when the billing service fails to initialize.
+
+``` cs
+StoreEvents.OnBillingNotSupported += onBillingNotSupported;
+
+public void onBillingNotSupported() {
     // your game specific implementation here
 
     // ... your game specific implementation here ...

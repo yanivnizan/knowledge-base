@@ -2,7 +2,7 @@
 layout: "content"
 image: "Events"
 title: "Events"
-text: "Handle unity3d-profile (social-related) events with your game-specific behavior."
+text: "Learn how to observe and handle social events triggered by unity3d-profile to customize your game-specific behavior."
 position: 3
 theme: 'platforms'
 collection: 'unity_profile'

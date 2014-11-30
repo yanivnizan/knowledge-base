@@ -52,7 +52,7 @@ To further understand how SOOMLA handles storage, below are descriptions about e
 
     <div class="info-box">This action is different than `buy`; You use `give` to give your user something for free. You use `buy` to give your user something and get something in return (either money or other virtual goods).</div>
 
-- **takeVirtualItem(String itemId, int amount)**
+- **takeItem(String itemId, int amount)**
 
   Takes from your user the given `amount` of the virtual item with the given `itemId`.
 

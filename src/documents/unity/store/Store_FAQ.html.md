@@ -100,7 +100,7 @@ Instructions for how to refund items in Google Play:
 
 2. Refund the test item. See Google's [Refund an order](https://support.google.com/wallet/business/answer/2741495?hl=en) instructions for how to do this.
 
-3. Call `StoreInventory.takeVirtualItem("lifetimeVG_ID", 1)` to clear your local inventory.
+3. Call `StoreInventory.takeItem("lifetimeVG_ID", 1)` to clear your local inventory.
 
 Note that Google Play caches purchase statuses locally, so you may have to wait a few minutes for the cancellation to actually take place. If you don't want to wait, a faster option is to clear the cache of the "Google Play Store" app and your app manually, to force the non-consumable item refresh.
 

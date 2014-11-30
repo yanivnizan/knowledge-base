@@ -1,8 +1,8 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "Economy Model & Operations"
-text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
+title: "Economy Model & API"
+text: "Every game economy can be based on SOOMLA's economy model. Learn the building blocks of creating a virtual economy with currencies and virtual goods."
 position: 2
 theme: 'platforms'
 collection: 'cocos2dx_store'
@@ -10,7 +10,7 @@ module: 'store'
 platform: 'cocos2dx'
 ---
 
-#Economy Model & Operations
+#Economy Model & API
 
 SOOMLA's cocos2dx-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course. This tutorial contains descriptions of each entity in the economy model, along with examples.
 
@@ -20,11 +20,11 @@ SOOMLA's cocos2dx-store provides a complete data model implementation for virtua
 
 Almost every entity in your virtual economy will be a Virtual Item. There are many types of Virtual Items and you can select the ones that fit your needs. Each one of the various types extends the class `VirtualItem` and adds its own behavior.
 
-Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeVirtualItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
+Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
 
-Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeVirtualItem` when you want to take something from your user, for example in the case of a refund.
+Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeItem` when you want to take something from your user, for example in the case of a refund.
 
-Every virtual item has an `itemId`, a unique string that we use to identify the different items.
+Every virtual item has an ID, a unique string that we use to identify the different items.
 
 ## PurchaseTypes
 
@@ -371,7 +371,7 @@ A `LifetimeVG` is a `VirtualGood` that can be bought once and is kept forever.
 
 If you declare a `LifetimeVG` with a purchase type of `PurchaseWithMarket`, it represents a non-consumable item in the market, i.e., it cannot be consumed and is owned by the user forever. (The Market saves this information forever)
 
-However, notice that if you declare a `LifetimeVG` with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` **as long as the local storage of the game has NOT been deleted** (the version has been updated, or the game was deleted and re-downloaded, etc..).
+However, notice that if you declare a `LifetimeVG` with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` **as long as the local storage of the game has NOT been deleted** (i.e. the version has been updated, or the game was deleted and re-downloaded, etc..).
 
 ####**For Example**
 

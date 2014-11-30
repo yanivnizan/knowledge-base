@@ -35,26 +35,9 @@ Since Cocos2d-x doesn't support exceptions, we use a different tactic to catch a
 
 ###Examples
 
-####**cocos2dx-profile**
-
-If you call the function `login` and want to make sure that the login finished successfully, you'll call the function like so:
-
-``` cpp
-soomla::CCError *profileError = nullptr;
-soomla::CCProfileController::getInstance()->login(soomla::FACEBOOK, nullptr, &profileError);
-```
-
-Then, if the login failed, you can check and handle the error:
-
-``` cpp
-if (profileError != NULL) {
-     MessageBox(profileError->getInfo(), "Error");
-}
-```
-
 ####**cocos2dx-store**
 
-If you'd like to purchase an item with the item ID "huge_sword", and check if all went well after the purchase, call CCSoomlaStore::buyItem() like this:
+If you'd like to purchase an item with the item ID `huge_sword`, and check if all went well after the purchase, call `CCSoomlaStore::buyItem()` like this:
 
 ``` cpp
 soomla::CCError *err;
@@ -76,5 +59,22 @@ if (err != NULL) {
 ```
 
 You can choose to handle each exception on its own, handle all three at once, or not handle the exceptions at all.
+
+####**cocos2dx-profile**
+
+If you call the function `login` and want to make sure that the login finished successfully, you'll call the function like so:
+
+``` cpp
+soomla::CCError *profileError = nullptr;
+soomla::CCProfileController::getInstance()->login(soomla::FACEBOOK, nullptr, &profileError);
+```
+
+Then, if the login failed, you can check and handle the error:
+
+``` cpp
+if (profileError != NULL) {
+     MessageBox(profileError->getInfo(), "Error");
+}
+```
 
 <div class="warning-box">The CCError parameter is entirely optional, you can pass NULL instead if you do not wish to handle errors. But remember(!), error handling is your responsibility. cocos2dx-store and cocos2dx-profile don't do any external error handling (i.e. error handling that uses CCError) for you.</div>

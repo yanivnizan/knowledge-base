@@ -2,7 +2,7 @@
 layout: "content"
 image: "Events"
 title: "Events"
-text: "Event handling in unity3d-levelup follows the publish-subscribe pattern. Throughout the SOOMLA SDK, events are fired and need to be handled with your game-specific behavior."
+text: "Learn how to observe and handle game progress events triggered by unity3d-levelup to customize your game-specific behavior."
 position: 3
 theme: 'platforms'
 collection: 'unity_levelup'

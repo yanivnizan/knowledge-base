@@ -2,7 +2,7 @@
 layout: "content"
 image: "Events"
 title: "Events"
-text: "Handle cocos2dx-profile (social-related) events with your game-specific behavior."
+text: "Learn how to observe and handle social events triggered by cocos2dx-profile to customize your game-specific behavior."
 position: 3
 theme: 'platforms'
 collection: 'cocos2dx_profile'

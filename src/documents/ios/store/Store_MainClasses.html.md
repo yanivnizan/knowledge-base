@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "Main Classes"
-text: "The main classes of ios-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
+text: "The main classes of ios-store contain functionality for store-related operations such as purchasing, billing, inventory querying and storage."
 position: 4
 theme: 'platforms'
 collection: 'ios_store'
@@ -12,7 +12,7 @@ platform: 'ios'
 
 #Main Classes
 
-Here you can find descriptions of some of the main classes and interfaces of iOS-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
+Here you can find descriptions of some of the main classes and interfaces of iOS-store. These classes contain functionality for store-related operations such as purchasing, billing, inventory querying and storage.
 
 ##[SoomlaStore](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/SoomlaStore.h)
 

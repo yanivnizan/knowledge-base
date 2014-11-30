@@ -2,7 +2,7 @@
 layout: "content"
 image: "Events"
 title: "Events"
-text: "Sign up to be notified about cocos2dx-levelup events, and handle them with your game-specific behavior."
+text: "Learn how to observe and handle game progress events triggered by cocos2dx-levelup to customize your game-specific behavior."
 position: 3
 theme: 'platforms'
 collection: 'cocos2dx_levelup'

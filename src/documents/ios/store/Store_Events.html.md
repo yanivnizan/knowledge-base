@@ -2,7 +2,7 @@
 layout: "content"
 image: "Events"
 title: "Events"
-text: "Event handling in iOS-store follows the publish-subscribe pattern."
+text: "Learn how to observe and handle economy events triggered by ios-store to customize your game-specific behavior."
 position: 5
 theme: 'platforms'
 collection: 'ios_store'

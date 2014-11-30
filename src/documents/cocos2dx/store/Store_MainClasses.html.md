@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "Main Classes"
-text: "The main classes of cocos2dx-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
+text: "The main classes of cocos2dx-store contain functionality for store-related operations such as purchasing, billing, inventory querying and storage."
 position: 3
 theme: 'platforms'
 collection: 'cocos2dx_store'
@@ -12,7 +12,7 @@ platform: 'cocos2dx'
 
 #Main Classes
 
-Here you can find descriptions of some of the main classes and interfaces of cocos2dx-store. These classes contain functionality to perform store-related operations, provide you with various storages, and hold the basic assets needed to operate the store.
+Here you can find descriptions of some of the main classes and interfaces of cocos2dx-store. These classes contain functionality for store-related operations, provide you with various storages, and hold the basic assets needed to operate the store.
 
 ##[CCSoomlaStore](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/CCSoomlaStore.h)
 
