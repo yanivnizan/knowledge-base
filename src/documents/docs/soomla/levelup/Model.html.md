@@ -14,7 +14,7 @@ collection: 'soomla_levelup'
 
 ###Prerequisite: SOOMLA Store
 
-SOOMLA Store provides game developers with an economy model that every game economy can be based upon. The economy model includes currencies, packs of currencies, and several types of virtual items that can be sold for money or in exchange for other items. You need to understand the [Store Economy Model](/docs/platforms/cocos2dx/EconomyModel) before continuing to read about `LevelUp`.
+SOOMLA Store provides game developers with an economy model that every game economy can be based upon. The economy model includes currencies, packs of currencies, and several types of virtual items that can be sold for money or in exchange for other items. You need to understand the [Store Economy Model](/cocos2dx/store/Store_Model) before continuing to read about `LevelUp`.
 
 ###LevelUp
 

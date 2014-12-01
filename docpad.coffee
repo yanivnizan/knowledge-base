@@ -55,6 +55,92 @@ docpadConfig = {
 			]
 
 
+		topLevelNavItems: [
+			{
+				id: 'unity',
+				title: 'Unity',
+				link: '/unity'
+			}
+			{
+				id: 'cocos2dx',
+				title: 'Cocos2d-x',
+				link: '/cocos2dx'
+			}
+			{
+				id: 'ios',
+				title: 'iOS',
+				link: '/ios'
+			}
+			{
+				id: 'android',
+				title: 'Android',
+				link: '/android'
+			}
+			{
+				id: 'university',
+				title: 'University',
+				link: '/docs/university/videos'
+			}
+			{
+				id: 'download',
+				title: 'Download',
+				link: '/download'
+			}
+		]
+
+		soomlaModules: {
+			'unity': [
+				{
+					id: 'store',
+					title: 'Store'
+				}
+				{
+					id: 'profile',
+					title: 'Profile'
+				}
+				{
+					id: 'levelup',
+					title: 'LevelUp'
+				}
+				{
+					id: 'grow',
+					title: 'GROW'
+				}
+			],
+			'cocos2dx': [
+				{
+					id: 'store',
+					title: 'Store'
+				}
+				{
+					id: 'profile',
+					title: 'Profile'
+				}
+				{
+					id: 'levelup',
+					title: 'LevelUp'
+				}
+				{
+					id: 'grow',
+					title: 'GROW'
+				}
+			],
+			'ios': [
+				{
+					id: 'store',
+					title: 'Store'
+				}
+			],
+			'android': [
+				{
+					id: 'store',
+					title: 'Store'
+				}
+			]
+		}
+
+
+
 	# -----------------------------
 	# Helper Functions
 
@@ -126,17 +212,47 @@ docpadConfig = {
 		university: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','university')},[position:1])
 
-		platforms_ios: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'ios')},[position:1])
+		ios_store: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('ios','store')},[position:1])
 
-		platforms_android: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'android')},[position:1])
+		ios_profile: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('ios','profile')},[position:1])
 
-		platforms_cocos2dx: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'cocos2dx')},[position:1])
+		ios_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('ios','levelup')},[position:1])
 
-		platforms_unity: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','platforms', 'unity')},[position:1])
+		android_store: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('android','store')},[position:1])
+
+		android_profile: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('android','profile')},[position:1])
+
+		android_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('android','levelup')},[position:1])
+
+		cocos2dx_store: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','store')},[position:1])
+
+		cocos2dx_profile: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','profile')},[position:1])
+
+		cocos2dx_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','levelup')},[position:1])
+
+		cocos2dx_grow: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('cocos2dx','grow')},[position:1])
+
+		unity_store: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','store')},[position:1])
+
+		unity_profile: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','profile')},[position:1])
+
+		unity_levelup: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','levelup')},[position:1])
+
+		unity_grow: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('unity','grow')},[position:1])
 
 		soomla_levelup: ->
 			@getCollection('documents').findAllLive({relativeOutDirPath: path.join('docs','soomla', 'levelup')},[position:1])

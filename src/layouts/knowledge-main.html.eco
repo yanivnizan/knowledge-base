@@ -3,22 +3,41 @@ layout: 'knowledge-base'
 title: 'Soomla Knowledge Base'
 ---
 
-    <div class="jumbotron" id="know-soomla">
+<div class="jumbotron" id="know-soomla">
 
-        <div id="jumbo-main-text">
-            KNOW SOOMLA
-        </div>
-        <div id="jumbo-small-text">
-            Get more intimate with SOOMLA and related services
-        </div>
+    <div id="jumbo-main-text">
+        KNOW SOOMLA
     </div>
-
-    <div class="nav-options kb-main-menu">
-      <div class="container">
-        <%- @partial('grid-option', {image:"img/Level1-Soomla.png",link:"/soomla",title: "SOOMLA",text: "Learn about the several game economy components that SOOMLA offers that can easily be integrated into your games.", selectorid:"test"}) %>
-        <%- @partial('grid-option', {image:"img/Level1-Platforms.png",link:"/platforms",title: "PLATFORMS",text: "SOOMLA's open-source in-game economy is offered in various native platforms and game engines."}) %>
-        <%- @partial('grid-option', {image:"img/Level1-Downloads.png",link:"//soom.la/getting-started/",title: "DOWNLOADS",text: "Download links to the latest (and previous) store versions of each of the platforms SOOMLA supports."}) %>
-        <%- @partial('grid-option', {image:"img/Level1-University-green.png",link:"/docs/university/videos",title: "UNIVERSITY",text: "Watch our new video tutorials to get started with SOOMLA. More videos coming soon!", new:"true"}) %>
-      </div>
-
+    <div id="jumbo-small-text">
+        Choose your platform to get started with SOOMLA and related services
     </div>
+</div>
+
+<div id="platform-options">
+  <div class="container">
+    <%- @partial('platform-selection', {image:"img/Level2-Unity.png", link:"/unity", title: "Unity3D"}) %>
+    <%- @partial('platform-selection', {image:"img/Level2-Cocos2dx.png", link:"/cocos2dx", title: "Cocos2d-x"}) %>
+    <%- @partial('platform-selection', {image:"img/Level2-iOS.png", link:"/ios", title: "iOS"}) %>
+    <%- @partial('platform-selection', {image:"img/Level2-Android.png", link:"/android", title: "Android"}) %>
+  </div>
+</div>
+
+<div class="nav-options nav-options-bottom">
+
+  <div class="container">
+    <div class="col-lg-4 col-md-4 col-md-offset-2 menu-option">
+      <a href="//soom.la/getting-started/" class="link-container">
+        <div class="option-image" style="background-image: url('img/Level1-Downloads.png')"></div>
+        <div class="option-head-text">DOWNLOADS</div>
+        <div class="option-text">All of SOOMLA's SDKs bundled and packaged for getting started. Come and get'em!</div>
+      </a>
+    </div>
+    <div class="col-lg-4 col-md-4 menu-option">
+      <a href="/docs/university/videos" class="link-container">
+        <div class="option-image" style="background-image: url('img/Level1-University-green.png')"></div>
+        <div class="option-head-text">UNIVERSITY</div>
+        <div class="option-text">Watch our new video tutorials to get started with SOOMLA. More videos coming soon!</div>
+      </a>
+    </div>
+  </div>
+</div>

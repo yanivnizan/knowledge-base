@@ -1,6 +1,7 @@
 ---
 layout: 'knowledge-base'
 title: 'Soomla University'
+theme: 'university'
 ---
 
 
@@ -10,8 +11,8 @@ title: 'Soomla University'
 <!-- VIDEO LIST TITLE -->
 <div id="know-soomla">
   <div id="jumbo-small-text">
-      <div id="university-hierarchy-nav"><%- @partial('nav-menu-l1', {current:'university'}) %></div>
-      Learn how to get started with SOOMLA, integrate SOOMLA into your projects, and more!
+    <div id="university-hierarchy-nav"><%- @partial('nav-menu-l1', {current:'university'}) %></div>
+    Learn how to get started with SOOMLA, integrate SOOMLA into your projects, and more!
   </div>
 </div>
 
@@ -65,10 +66,10 @@ title: 'Soomla University'
 
   YT_ready(function() {
     $(".video-iframe").each(function() {
-      var frameID =  this.id;
+      var frameID = this.id;
       players[frameID] = new YT.Player(frameID, {
         events: {
-          "onReady": createYTEvent(frameID),
+          "onReady"      : createYTEvent(frameID),
           "onStateChange": onPlayerStateChange(frameID)
         }
       });
@@ -77,9 +78,9 @@ title: 'Soomla University'
 
   // Returns a function to enable multiple events
   function createYTEvent(frameID) {
-    return function (event) {
+    return function(event) {
       var player = players[frameID];
-      var the_div = $('#'+frameID).parent();
+      var the_div = $('#' + frameID).parent();
       the_div.children('.button-container').click(function() {
         $(this).hide();
         player.playVideo();
@@ -92,7 +93,7 @@ title: 'Soomla University'
     return function(event) {
 
       // if video ended(0) or paused(2) show play button
-      if(event.data === 0 || event.data === 2) {
+      if (event.data === 0 || event.data === 2) {
 
         // get the id # of the current iframe, show its "play" icon; should have same id #
         $("#playButton" + event.target.a.id.slice(-1)).show();

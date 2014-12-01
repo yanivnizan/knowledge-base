@@ -1,0 +1,8 @@
+---
+title: 'Cocos2dx'
+layout: 'l2-main'
+theme: 'platforms'
+collection: 'android_profile'
+platform: 'android'
+module: 'profile'
+---

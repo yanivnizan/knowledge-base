@@ -1,0 +1,6 @@
+<div class="col-lg-3 col-md-3 menu-option">
+  <a href="<%= @link %>" class="link-container">
+    <div class="option-image" style="background-image: url('<%= @image %>')"></div>
+    <div class="option-head-text"><%= @title %></div>
+  </a>
+</div>

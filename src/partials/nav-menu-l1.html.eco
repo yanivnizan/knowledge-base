@@ -1,28 +1,15 @@
 <div class="dropdown dropdown-container">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <img class="dropdown-menu-icon" src="/img/<%= @current %>-TopMenu.png"/>
-    </a>
-    <ul id="nav-list" class="dropdown-menu <%= @current %>" role="menu" >
-        <% if @current == "soomla": %>
-          <li><a href="/soomla" class="link-current">Soomla</a></li>
-        <% else: %>
-          <li><a href="/soomla">Soomla</a></li>
-        <% end %>
-        <% if @current == "platforms": %>
-          <li><a href="/platforms" class="link-current">Platforms</a></li>
-        <% else: %>
-          <li><a href="/platforms">Platforms</a></li>
-        <% end %>
-        <% if @current == "downloads": %>
-            <li><a href="//soom.la/getting-started" class="link-current">Downloads</a></li>
-        <% else: %>
-            <li><a href="//soom.la/getting-started">Downloads</a></li>
-        <% end %>
-        <% if @current == "university": %>
-            <li><a href="/docs/university/videos" class="link-current">University</a></li>
-        <% else: %>
-            <li><a href="/docs/university/videos">University</a></li>
-        <% end %>
-    </ul>
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <img class="dropdown-menu-icon" src="/img/level1-topmenu/level1-<%= @current %>.png"/>
+  </a>
+  <ul id="nav-list" class="dropdown-menu <%= @document.theme %>" role="menu">
+    <% for item in @topLevelNavItems: %>
+    <% if @current == item.id: %>
+    <li><a href="<%= item.link %>" class="link-current"><%= item.title %></a></li>
+    <% else: %>
+    <li><a href="<%= item.link %>"><%= item.title %></a></li>
+    <% end %>
+    <% end %>
+  </ul>
 </div>
 <img class="breadcrumb-icon" src="/img/Arrow.png"/>

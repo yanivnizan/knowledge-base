@@ -1,22 +1,25 @@
 <div class="dropdown dropdown-container">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      <img class="dropdown-menu-icon" src="/img/level2-topmenu/<%= @collection %>.png"/>
+      <img class="dropdown-menu-icon" src="/img/level2-topmenu/level2-<%= @module %>.png"/>
     </a>
-    <ul id="nav-list-l2" class="dropdown-menu <%= @current %>" role="menu" >
-        <% for doc in @getCollection(@current).toJSON(): %>
-            <% if doc.placeholder: %>
+    <ul id="nav-list-l2" class="dropdown-menu <%= @theme %>" role="menu">
+      <% if @soomlaModules[@platform]: %>
+      <% for item in @soomlaModules[@platform]: %>
 
+        <% if item.placeholder: %>
+        <% else: %>
+
+          <li class="icon-option">
+            <% if @module == item.id: %>
+            <a class="icon-link link-current" href="/<%= @platform %>/<%= item.id %>"><%= item.title %></a>
             <% else: %>
-
-              <li class="icon-option">
-                <% if @collection == doc.collection: %>
-                    <a class="icon-link link-current" href="/docs/<%= @current %>/<%= doc.title.toLowerCase() %>"><%= doc.title %></a>
-                <% else: %>
-                    <a class="icon-link" href="/docs/<%= @current %>/<%= doc.title.toLowerCase() %>"><%= doc.title %></a>
-                <% end %>
-              </li>
+            <a class="icon-link" href="/<%= @platform %>/<%= item.id %>"><%= item.title %></a>
             <% end %>
+          </li>
+
         <% end %>
+      <% end %>
+      <% end %>
     </ul>
 </div>
 <img class="breadcrumb-icon" src="/img/Arrow.png"/>
