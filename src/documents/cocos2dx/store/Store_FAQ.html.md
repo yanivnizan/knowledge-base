@@ -40,7 +40,7 @@ To get the updated market prices in your application use the `onMarketItemsRefre
 
 **How can I test the products that I want to sell in Google Play?**
 
-In testing mode, you should use [Google's test product IDs](http://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static). Please notice that you should use "android.test.purchased" for all the products you want to successfully test, and that you can use this same product ID for more than one product. Once you are done with testing mode you can define your actual product IDs, as explained in our [Google Play IAB](/android/store/Store_GooglePlayIAB) tutorial.
+In testing mode, you should use [Google's test product IDs](http://developer.android.com/google/play/billing/billing_testing.html#billing-testing-static). Please notice that you should use "android.test.purchased" for all the products you want to successfully test, and that you can use this same *test* product ID for more than one product. Once you are done with testing mode you can define your actual product IDs, as explained in our [Google Play IAB](/android/store/Store_GooglePlayIAB) tutorial.
 
 ---
 
@@ -92,6 +92,18 @@ Use [`CCSoomlaStore`](https://github.com/soomla/cocos2dx-store/blob/master/Sooml
 
 ---
 
+**Are user purchases synced across various devices?**
+
+Purchases you make with coins \ other virtual items, are not synced across devices, however, we are planning to add this functionality in the future. Regarding restoring transactions that were bought with real money in Google Play \ iTunesConnect, are associated per user. Thus they should be available on other devices with the same account and app.
+
+From Google's IAB docs:
+
+> Managed in-app products are items that have their ownership information tracked and managed by Google Play. When a user purchases a managed in-app item, Google Play stores the purchase information for each item on a per-user basis. This enables you to later query Google Play at any time to restore the state of the items a specific user has purchased. This information is persistent on the Google Play servers even if the user uninstalls the application or if they change devices."
+
+Also, see [Apple's docs](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Products.html1) regarding product types and syncing them across devices.
+
+---
+
 ## Common Errors
 
 **I updated the names of some of the items in my implementation of `CCStoreAssets`. Strangely, when I try to buy the items with the new names, I get a `VirtualItemNotFoundException`, but when I try to purchase the items with their old names, everything works fine. What's going on?**
@@ -114,7 +126,21 @@ The other case where you will get such an error, is when you haven't waited long
 
 **When I try to test purchase my in-app product IDs (real product IDs, not Google's static response IDs), I get the following Google Play error: "This version of the application is not configured for billing through Google Play".**
 
-Follow [this checklist](http://answers.soom.la/t/solved-virtualitemnotfoundexception-for-existing-item-but-strangely-no-error-for-non-existent-item/624/5) and/or read Google's [Testing In-app Billing](http://developer.android.com/google/play/billing/billing_testing.html) document.
+Follow the checklist below and/or read Google's [Testing In-app Billing](http://developer.android.com/google/play/billing/billing_testing.html) document.
+
+- Make sure your APK is built in release mode (exported / signed with release certificate).
+
+- Wait for a few hours (anywhere between 5 to 24 hours) after uploading signed APK with correct version code.
+
+- Publish uploaded / signed APK to either alpha / beta / production channel (NOT draft).
+
+- This APK is what needs to be installed on your device; not run directly through Eclipse on your device.
+
+- You cannot install this APK with your Google account tied to your Google Play Developer console account, being used for developing the app / game, as a developer is not allowed to buy anything from their own account. Use a separate test Google account.
+
+- Make sure this test Google account is added to your Google Play Developer Console (within the Settings screen, "License Testing" section).
+
+- The test Google account needs to be your primary Google account on the test device prior to installing the APK on the device (safest way to do this is to remove your developer Google account from your phone, and add it back again after your testing is done; that way you only have one Google account tied to your test device).
 
 <br>
 
