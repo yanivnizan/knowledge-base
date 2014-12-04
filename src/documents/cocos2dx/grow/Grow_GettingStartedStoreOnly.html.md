@@ -147,9 +147,8 @@ In your XCode project, perform the following steps:
 
 5. Add the AFNetworking dependency:
 
-  - Drag the `AFNetworking` (extensions/cocos2dx-highway/build/ios/AFNetworking) files to your project.
+  - Add the static library (from `extensions/cocos2dx-highway/build/ios/libAFNetworking.a`) to **Build Phases->Link Binary With Libraries**.  Achieve this by clicking the + icon, and then "Add Other", and browse for the file.
   - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios` to **Build Settings->Library Search Paths**
-  - Turn on ARC for these files, if it's turned on for your project (add the `-fobjc-arc` compiler flag to all `AFNetworking` related headers.
 
 
 6. Make sure you have these 7 Frameworks linked to your XCode project:
