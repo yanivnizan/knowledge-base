@@ -24,23 +24,11 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
 
   ![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
-2. Clone [soomla-cocos2dx-core](https://github.com/soomla/soomla-cocos2dx-core), [cocos2dx-store](](https://github.com/soomla/cocos2dx-store)) into the `extensions` folder located at the root of your Cocos2d-x framework.
+2. Download [soomla-cocos2dx-core](http://library.soom.la/fetch/cocos2dx-core/latest?cf=knowledge%20base), [cocos2dx-store](http://library.soom.la/fetch/cocos2dx-store/latest?cf=knowledge%20base) and [cocos2dx-store](http://library.soom.la/fetch/cocos2dx-highway/latest?cf=knowledge%20base) into your Cocos2d-x root framework and unzip them.  You should have Core, Store and Highway placed in the `extensions` and the Jansson dependency (a JSON parsing library) placed in `external`.
 
-  ```
-  $ git clone git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
+  ![](/img/tutorial_img/cocos_grow/folder_structure.png "Folder Structure")
 
-  $ git clone git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
-
-  $ git clone git@github.com:soomla/cocos2dx-highway.git extensions/cocos2dx-highway
-  ```
-
-3. cocos2dx-store uses a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing. Clone it into the `external` directory at the root of your Cocos2d-x framework.
-
-  ```
-  $ git clone git@github.com:vedi/jansson.git external/jansson
-  ```
-
-4. Create your own implementation of `CCStoreAssets` that will represent the assets in your specific game. For a brief example, refer to the example below. For a complete example refer to [cocos2dx-store-example](https://github.com/soomla/cocos2dx-store-example/blob/master/Classes/MuffinRushAssets.cpp).
+4. Create your own implementation of `CCStoreAssets` that will represent the assets in your specific game. For a brief example, refer to the example below. For more details refer to the cocos2dx-store [Getting Started](/cocos2dx/store/Store_GettingStarted).
 
 5. Implement your `CCStoreEventHandler` in order to be notified about in-app purchase related events. Refer to the [Event Handling](/cocos2dx/store/Store_Events) section for more information.
 
@@ -88,7 +76,7 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
   soomla::CCStoreService::initShared(assets, storeParams);
   ```
 
-11. Once your app is running, you can go back to the [GROW dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
+11. According to your target platform (iOS or Android) go over the platform specific instructions below.  Once your app is running, you can go back to the [GROW dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
 
   ![alt text](/img/tutorial_img/unity_grow/verifyIntegration.png "Verify Integration")
 
@@ -114,6 +102,15 @@ In your XCode project, perform the following steps:
     - Add its targets to your **Build Phases->Target Dependencies**
     - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
+  See Xcode screenshots for reference:
+
+  ![alt text](/img/tutorial_img/cocos_grow/ios_project_structure.png "Project Structure")
+
+  ![alt text](/img/tutorial_img/cocos_grow/ios_target_dependencies.png "Target Dependencies")
+
+  ![alt text](/img/tutorial_img/cocos_grow/ios_link_with_binaries.png "Link With Binaries")
+
+
 3. Add the following directories to **Build Settings->Header Search Paths** (with the `recursive` option):
 
   NOTE: This article assumes you have a `cocos2d` folder under your project folder which either contains the Cocos2d-x framework, or links to to its root folder.
@@ -125,6 +122,8 @@ In your XCode project, perform the following steps:
   - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
   - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
 
+  ![alt text](/img/tutorial_img/cocos_grow/ios_header_search_paths.png "Link With Binaries")
+
 4. To register services on the native application (`AppController`):
 
   a. Import the following headers:
@@ -134,12 +133,9 @@ In your XCode project, perform the following steps:
     #import "StoreService.h"
     ```
 
-  b. Register the native `Cocos2dXSoomlaHighway`, `StoreService`, `ProfileService`, and `LevelUpService` by adding:
+  b. Register the native `Cocos2dXSoomlaHighway` and `StoreService`` by adding:
 
     ```cpp
-    [[ServiceManager sharedServiceManager]
-      registerService:[Cocos2dXSoomlaHighway sharedCocos2dXSoomlaHighway]];
-
     [[ServiceManager sharedServiceManager]
       registerService:[Cocos2dXSoomlaHighway sharedCocos2dXSoomlaHighway]];
 
@@ -149,7 +145,12 @@ In your XCode project, perform the following steps:
 
     at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
-5. Drag the `AFNetworking` (extensions/cocos2dx-highway/build/ios/AFNetworking) files to your project. Turn on ARC for these files, if it's turned on for your project.
+5. Add the AFNetworking dependency:
+
+  - Drag the `AFNetworking` (extensions/cocos2dx-highway/build/ios/AFNetworking) files to your project.
+  - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios` to **Build Settings->Library Search Paths**
+  - Turn on ARC for these files, if it's turned on for your project (add the `-fobjc-arc` compiler flag to all `AFNetworking` related headers.
+
 
 6. Make sure you have these 7 Frameworks linked to your XCode project:
 
@@ -161,11 +162,13 @@ In your XCode project, perform the following steps:
   - SystemConfguration
   - AdSupport
 
+  ![alt text](/img/tutorial_img/cocos_grow/ios_frameworks.png "Link With Binaries")
+
 That's it! Now all you have to do is build your XCode project and run your game.
 
 ###**Instructions for Android**
 
-1. Import cocos2dx-highway, cocos2dx-store, cocos2dx-profile, and cocos2dx-levelup module into your project's Android.mk by adding the following:
+1. Import cocos2dx-highway and cocos2dx-store module into your project's Android.mk by adding the following:
 
     ```
     LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_highway_static
@@ -317,8 +320,6 @@ commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret")
 
 __Dictionary *storeParams = __Dictionary::create();
 storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
-
-__Dictionary *profileParams = __Dictionary::create();
 
 soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
 
