@@ -127,6 +127,10 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios/headers`
 
+4. Add the AFNetworking dependency to your project:
+  - Add the `libAFNetworking.a` file (from `extensions/cocos2dx-highway/build/ios/`) to **Build Phases->Link Binary With Libraries** (You'll need to hit "Open Other")
+  - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios/` to **Build Settings->Library Search Paths** (non-recursive)
+
 4. To register services on the native application (`AppController`):
 
   a. Import the following headers:
@@ -141,9 +145,6 @@ In your XCode project, perform the following steps:
   b. Register the native `Cocos2dXSoomlaHighway`, `StoreService`, `ProfileService`, and `LevelUpService` by adding:
 
     ```cpp
-    [[ServiceManager sharedServiceManager]
-      registerService:[Cocos2dXSoomlaHighway sharedCocos2dXSoomlaHighway]];
-
     [[ServiceManager sharedServiceManager]
       registerService:[Cocos2dXSoomlaHighway sharedCocos2dXSoomlaHighway]];
 
