@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Getting Started (Store only)"
 text: "Using cocos2dx-store already? Drop in one more package to seamlessly connect your game to GROW open analytics."
-position: 1
+position: 2
 theme: 'platforms'
 collection: 'cocos2dx_grow'
 module: 'grow'
@@ -102,14 +102,7 @@ In your XCode project, perform the following steps:
     - Add its targets to your **Build Phases->Target Dependencies**
     - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
-  See Xcode screenshots for reference:
-
-  ![alt text](/img/tutorial_img/cocos_grow/ios_project_structure.png "Project Structure")
-
-  ![alt text](/img/tutorial_img/cocos_grow/ios_target_dependencies.png "Target Dependencies")
-
-  ![alt text](/img/tutorial_img/cocos_grow/ios_link_with_binaries.png "Link With Binaries")
-
+  ![alt text](/img/tutorial_img/cocos_grow/iosStep2SO.png "iOS Integration")
 
 3. Add the following directories to **Build Settings->Header Search Paths** (with the `recursive` option):
 
@@ -122,7 +115,7 @@ In your XCode project, perform the following steps:
   - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
   - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
 
-  ![alt text](/img/tutorial_img/cocos_grow/ios_header_search_paths.png "Link With Binaries")
+  ![alt text](/img/tutorial_img/cocos_grow/headersSO.png "Header search paths")
 
 4. To register services on the native application (`AppController`):
 
@@ -148,8 +141,8 @@ In your XCode project, perform the following steps:
 5. Add the AFNetworking dependency:
 
   - Add the static library (from `extensions/cocos2dx-highway/build/ios/libAFNetworking.a`) to **Build Phases->Link Binary With Libraries**.  Achieve this by clicking the + icon, and then "Add Other", and browse for the file.
-  - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios` to **Build Settings->Library Search Paths**
 
+  - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios` to **Build Settings->Library Search Paths**
 
 6. Make sure you have these 7 Frameworks linked to your XCode project:
 
@@ -206,7 +199,6 @@ That's it! Now all you have to do is build your XCode project and run your game.
     - AndroidStore.jar
 
     - Cocos2dxAndroidStore.jar
-
 
 3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
 
