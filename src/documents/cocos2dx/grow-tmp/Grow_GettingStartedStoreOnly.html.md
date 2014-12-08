@@ -114,6 +114,8 @@ In your XCode project, perform the following steps:
     - Add its targets to your **Build Phases->Target Dependencies**
     - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
+  ![alt text](/img/tutorial_img/cocos2dx-grow/iosStep2SO.png "iOS Integration")
+
 3. Add the following directories to **Build Settings->Header Search Paths** (with the `recursive` option):
 
   NOTE: This article assumes you have a `cocos2d` folder under your project folder which either contains the Cocos2d-x framework, or links to to its root folder.
@@ -124,6 +126,8 @@ In your XCode project, perform the following steps:
   - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
   - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
   - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
+
+  ![alt text](/img/tutorial_img/cocos2dx-grow/headersSO.png "Header search paths")
 
 4. To register services on the native application (`AppController`):
 
