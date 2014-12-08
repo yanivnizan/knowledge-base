@@ -326,3 +326,31 @@ public void onUnexpectedErrorInStore(string message) {
     // ... your game specific implementation here ...
 }
 ```
+
+## Android Specific Events
+
+###OnIabServiceStarted
+
+This event will be thrown when the in-app billing service is started.
+
+``` cs
+StoreEvents.OnIabServiceStarted += onIabServiceStarted;
+
+public void onIabServiceStarted() {
+
+    // ... your game specific implementation here ...
+}
+```
+
+###OnIabServiceStopped
+
+This event will be thrown when the in-app billing service is stopped.
+
+``` cs
+StoreEvents.OnIabServiceStopped += onIabServiceStopped;
+
+public void onIabServiceStopped() {
+
+    // ... your game specific implementation here ...
+}
+```
