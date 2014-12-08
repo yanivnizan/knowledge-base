@@ -16,13 +16,19 @@ platform: 'unity'
 
 SOOMLA allows you to subscribe to store events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur. SOOMLA's unity3d-store's event handling mechanism is based on the event-handling methods of android-store and ios-store. Throughout android-store and ios-store events are fired and in unity3d-store they are observed and handled.
 
+###Tips & Reminders
+
+- As mentioned in [Getting Started](/unity/store/Store_GettingStarted), make sure you add the event prefabs (StoreEvents and CoreEvents) to your earliest loading scene.
+
+- It is recommended that you register all events before initializing Store.
+
 ##How it works
 
 Events are triggered when SOOMLA wants to notify you on different things that happened involving Store operations.
 
 For example, When a user buys a currency pack, his currency balance is updated. As a result, a `CurrencyBalanceChangedEvent` is fired.
 
-###Observing & Handling Events
+##Observing & Handling Events
 
 The `StoreEvents` class is where all events go through. To handle various events, just add your game-specific behavior to the delegates in the `StoreEvents` class.
 
@@ -38,7 +44,7 @@ public void onMarketPurchaseStarted(PurchasableVirtualItem pvi) {
 
 <div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
-##Events
+##Store Events
 
 This is a list of all events in SOOMLA Store and the way to listen to them:
 
@@ -111,7 +117,7 @@ public void onMarketPurchaseStarted(PurchasableVirtualItem pvi) {
 
 ###OnMarketPurchase
 
-This event will be thrown when market purchase operation has completed successfully.
+This event will be thrown when a market purchase operation has completed successfully.
 
 ``` cs
 StoreEvents.OnMarketPurchase += onMarketPurchase;
@@ -129,13 +135,54 @@ public void onMarketPurchase(PurchasableVirtualItem pvi, string payload, Diction
 
 ###OnMarketPurchaseCancelled
 
-This event will be thrown when market purchase operation has cancelled by the user.
+This event will be thrown when a market purchase operation has cancelled by the user.
 
 ``` cs
 StoreEvents.OnMarketPurchaseCancelled += onMarketPurchaseCancelled;
 
 public void onMarketPurchaseCancelled(PurchasableVirtualItem pvi) {
-    // pvi is the PurchasableVirtualItem that its purchase operation has just cancelled
+    // pvi is the PurchasableVirtualItem whose purchase operation has just cancelled
+
+    // ... your game specific implementation here ...
+}
+```
+
+###OnMarketRefund
+
+This event will be thrown when a market refund operation has completed successfully.
+
+``` cs
+StoreEvents.OnMarketRefund += onMarketRefund;
+
+public void onMarketRefund(PurchasableVirtualItem pvi) {
+    // pvi is the PurchasableVirtualItem to refund
+
+    // ... your game specific implementation here ...
+}
+```
+
+###OnMarketItemsRefreshStarted
+
+This event will be thrown when a refresh market items operation has started.
+
+``` cs
+StoreEvents.OnMarketItemsRefreshStarted += onMarketItemsRefreshStarted;
+
+public void onMarketItemsRefreshStarted() {
+
+    // ... your game specific implementation here ...
+}
+```
+
+###OnMarketItemsRefreshFinished
+
+This event will be thrown when a refresh market items operation has finished.
+
+``` cs
+StoreEvents.OnMarketItemsRefreshFinished += onMarketItemsRefreshFinished;
+
+public void onMarketItemsRefreshFinished(List<MarketItem> items) {
+    // items is the list of Market items that was fetched from the Market
 
     // ... your game specific implementation here ...
 }
@@ -149,6 +196,7 @@ This event will be thrown when restore transactions operation has started.
 StoreEvents.OnRestoreTransactionsStarted += onRestoreTransactionsStarted;
 
 public void onRestoreTransactionsStarted() {
+
     // ... your game specific implementation here ...
 }
 ```
@@ -247,7 +295,6 @@ This event will be thrown when the billing service is initialized and ready.
 StoreEvents.OnBillingSupported += onBillingSupported;
 
 public void onBillingSupported() {
-    // your game specific implementation here
 
     // ... your game specific implementation here ...
 }
@@ -261,7 +308,48 @@ This event will be thrown when the billing service fails to initialize.
 StoreEvents.OnBillingNotSupported += onBillingNotSupported;
 
 public void onBillingNotSupported() {
-    // your game specific implementation here
+
+    // ... your game specific implementation here ...
+}
+```
+
+###OnUnexpectedErrorInStore
+
+This event will be thrown when the billing service fails to initialize.
+
+``` cs
+StoreEvents.OnUnexpectedErrorInStore += onUnexpectedErrorInStore;
+
+public void onUnexpectedErrorInStore(string message) {
+    // message is the description of the error
+
+    // ... your game specific implementation here ...
+}
+```
+
+## Android Specific Events
+
+###OnIabServiceStarted
+
+This event will be thrown when the in-app billing service is started.
+
+``` cs
+StoreEvents.OnIabServiceStarted += onIabServiceStarted;
+
+public void onIabServiceStarted() {
+
+    // ... your game specific implementation here ...
+}
+```
+
+###OnIabServiceStopped
+
+This event will be thrown when the in-app billing service is stopped.
+
+``` cs
+StoreEvents.OnIabServiceStopped += onIabServiceStopped;
+
+public void onIabServiceStopped() {
 
     // ... your game specific implementation here ...
 }
