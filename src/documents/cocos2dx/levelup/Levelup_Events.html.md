@@ -10,23 +10,21 @@ module: 'levelup'
 platform: 'cocos2dx'
 ---
 
-#Event Handling
+# Event Handling
 
-##About
+## About
 
 LevelUp allows you to subscribe to events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur.
 
 <div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
-##How it Works
+## How it Works
 
 Events are triggered when SOOMLA wants to notify you about different things that happen involving LevelUp operations.
 
 For example, when a user completes a World, an `onWorldCompleted` event is fired as a result.
 
-
-##Observing & Handling Events
-
+## Observing & Handling Events
 
 The `CCLevelUpEventDispatcher` class is where all events go through. See [CCLevelUpEventDispatcher](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCLevelUpEventDispatcher.cpp).
 
@@ -71,8 +69,6 @@ class CCMyEventHandler: public soomla::CCLevelUpEventHandler {
 
 ``` cpp
 #include "CCMyEventHandler.h"
-...
-
 ...
 
 // This event will be thrown when the Soomla LevelUp module is initialized and ready.

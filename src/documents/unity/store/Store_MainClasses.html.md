@@ -16,7 +16,7 @@ Here you can find descriptions of some of the main classes and interfaces of uni
 
 To see more usage examples of the functions of these classes see [Economy Model](/unity/store/Store_EconomyModel).
 
-##[SoomlaStore](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs)
+## SoomlaStore [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs)
 
 SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon Appstore, App Store).
 
@@ -43,7 +43,7 @@ public class ExampleWindow : MonoBehaviour {
 
 This function queries the Market’s inventory, and creates a list of all metadata stored in the Market (the items that have been purchased). The metadata includes the item's name, description, price, product ID, etc. Upon failure, an error message is printed.  
 
-##[StoreInfo](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/data/StoreInfo.cs)
+## StoreInfo [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/data/StoreInfo.cs)
 
 `StoreInfo` is the mother of all metadata information about your specific game.
 
@@ -68,7 +68,7 @@ UpgradeVG firstUpgrade = StoreInfo.GetFirstUpgradeForVirtualGood("strength");
 `StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
 
 
-##[StoreInventory](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/StoreInventory.cs)
+## StoreInventory [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/StoreInventory.cs)
 
 `StoreInventory` is a utility class that provides you with functions that perform store-related operations. With `StoreInventory` you can give or take items from your users. You can buy items or upgrade them. You can also check their equipping status and change it.
 

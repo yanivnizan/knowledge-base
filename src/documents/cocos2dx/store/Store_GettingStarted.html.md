@@ -302,7 +302,7 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 **That's it! Now all you have to do is run the *build_native.sh* script and you can begin using cocos2dx-store in your game.**
 
 
-##**Example**
+## Example
 
 **Create an example implementation of `CCStoreAssets`:**
 

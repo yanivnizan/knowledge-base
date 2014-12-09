@@ -10,23 +10,22 @@ module: 'profile'
 platform: 'cocos2dx'
 ---
 
-#Event Handling
+# Event Handling
 
-##About
+## About
 
 Profile allows you to subscribe to events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur.
 
 <div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
-
-##How it Works
+## How it Works
 
 Events are triggered when SOOMLA wants to notify you about different things that happen involving Profile operations.
 
 For example, when a user performs a social action such as uploading a status, an `onSocialActionStartedEvent` is fired as a result.
 
 
-##Observing & Handling Events
+## Observing & Handling Events
 
 The `CCProfileEventDispatcher` class is where all events go through. See [CCProfileEventDispatcher](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCProfileEventDispatcher.cpp).
 
@@ -36,9 +35,9 @@ To handle various events, create your own event handler (see example below) that
 soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myEventHandler);
 ```
 
-##Profile Events
+## Profile Events
 
-###`CCMyEventHandler.h`
+### `CCMyEventHandler.h`
 
 ``` cpp
 #include "CCProfileEventHandler.h"
@@ -155,7 +154,7 @@ class CCMyEventHandler: public soomla::CCProfileEventHandler {
 };
 ```
 
-###`CCMyEventHandler.cpp`
+### `CCMyEventHandler.cpp`
 
 ``` cpp
 #include "CCMyEventHandler.h"

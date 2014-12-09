@@ -11,23 +11,23 @@ platform: 'cocos2dx'
 ---
 
 
-#Event Handling
+# Event Handling
 
-##About
+## About
 
 cocos2dx-store allows you to subscribe to events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur.
 
 <div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
 
-##How it Works
+## How it Works
 
 Events are triggered when SOOMLA wants to notify you about different things that happen involving Store operations.
 
 For example, when a user purchases a Market item, an `onMarketPurchaseStarted` is fired as a result.
 
 
-##Observing & Handling Events
+## Observing & Handling Events
 
 The `CCStoreEventDispatcher` class is where all events go through. To handle various events, create your own event handler, a class that implements `CCStoreEventHandler`, and add it to the `CCStoreEventDispatcher` class:
 
