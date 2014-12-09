@@ -57,9 +57,12 @@
         .square(@edge);
         margin-bottom: 15px;
         background-repeat: no-repeat;
+        transform: scale(1,1);
+        transition: transform 150ms ease-in-out;
 
         &:hover {
           background-position-y: -1 * @edge;
+          transform: scale(1.2,1.2);
         }
         &:active {
           background-position-y: -2 * @edge;
@@ -108,6 +111,8 @@
         .square(@edge);
         margin-bottom: 15px;
         background-repeat: no-repeat;
+        transform: scale(1,1);
+        transition: transform 150ms ease-in-out;
       }
 
       .option-head-text {
@@ -123,11 +128,13 @@
 
       &:hover .option-image {
         background-position-y: -1 * @edge;
+        transform: scale(1.2,1.2);
       }
 
       &:active .option-image {
         background-position-y: -2 * @edge;
       }
+
     }
 
     .option-head-text {
@@ -146,6 +153,7 @@
     }
   }
 }
+
 
 .nav-options.nav-options-bottom {
   text-align: center;
