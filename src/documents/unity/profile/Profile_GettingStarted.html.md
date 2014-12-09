@@ -107,30 +107,13 @@ Twitter is supported out-of-the-box, authentication is done either through the s
 
 1. **Facebook Application** - You must create a Facebook application and use its details in your Profile-based application (with Facebook).
 
-2. **Facebook ID and Display name** - The Facebook application's ID and Name must be used in your application, this information must be added to the application's `plist` file, under `FacebookAppID` (App ID) and `FacebookDisplayName` (Application name).
-
-3. **URL Schemes and openURL** - To support web-based authorization and dialogs the application needs to handle URL schemes (see [Facebook Login for iOS](https://developers.facebook.com/docs/facebook-login/ios/v2.1) for more information):
-
-  a. Under the project's info add an entry to `URL Types` and under `URL Schemes` add the string `fbxxxxxxx` the x's should be replaced with your Facebook App ID.
-
-	b. See [Browser-based Authentication](/cocos2dx/profile/Profile_GettingStarted#browser-based-authentication)
-
-4. **Facebook Permissions** - Profile will request `publish_actions` from the user of the application, to test the application please make sure you test with either Admin, Developer or Tester roles.
+2. **Facebook Permissions** - Profile will request `publish_actions` from the user of the application, to test the application please make sure you test with either Admin, Developer or Tester roles.
 
 ####**Android**
 
 1. **Facebook Application** - You must create a Facebook application and use its details in your Profile-based application (with Facebook).
 
-2. **Facebook ID** - The Facebook application's ID must be used in your application, this information should be added to the application's `strings.xml` file, under `fb_app_id` (App ID). In the `AndroidManifest.xml` file add the following:
-
-	``` xml
-  <application ...
-	  <activity android:name="com.facebook.LoginActivity" />
-	  <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/fb_app_id" />
-  </application>
-	```
-
-3. **Facebook Permissions** - Profile will request `publish_actions` from the user of the application, to test the application please make sure you test with either Admin, Developer or Tester roles
+2. **Facebook Permissions** - Profile will request `publish_actions` from the user of the application, to test the application please make sure you test with either Admin, Developer or Tester roles
 
 ###Twitter Caveats
 

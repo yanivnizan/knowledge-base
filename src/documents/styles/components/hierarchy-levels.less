@@ -57,12 +57,11 @@
         .square(@edge);
         margin-bottom: 15px;
         background-repeat: no-repeat;
-        transform: scale(1,1);
-        transition: transform 150ms ease-in-out;
+        transition: transform 100ms ease-in-out;
 
         &:hover {
           background-position-y: -1 * @edge;
-          transform: scale(1.2,1.2);
+          .scale(1.1,1.1);
         }
         &:active {
           background-position-y: -2 * @edge;
@@ -111,8 +110,7 @@
         .square(@edge);
         margin-bottom: 15px;
         background-repeat: no-repeat;
-        transform: scale(1,1);
-        transition: transform 150ms ease-in-out;
+        transition: transform 100ms ease-in-out;
       }
 
       .option-head-text {
@@ -128,7 +126,7 @@
 
       &:hover .option-image {
         background-position-y: -1 * @edge;
-        transform: scale(1.2,1.2);
+        .scale(1.1,1.1);
       }
 
       &:active .option-image {
@@ -237,23 +235,23 @@
     // On hover, highlight the image with the theme
     // Themes are soomla, university, downloads, platforms
     //
-    .link-container:hover {
-
-      .option-image {
-
-        &.soomla {
-          background-position-y: -1 * @edge;
-        }
-        &.university {
-          background-position-y: -2 * @edge;
-        }
-        &.downloads {
-          background-position-y: -3 * @edge;
-        }
-        &.platforms {
-          background-position-y: -4 * @edge;
-        }
-      }
-    }
+    // .link-container:hover {
+    //
+    //   .option-image {
+    //
+    //     &.soomla {
+    //       background-position-y: -1 * @edge;
+    //     }
+    //     &.university {
+    //       background-position-y: -2 * @edge;
+    //     }
+    //     &.downloads {
+    //       background-position-y: -3 * @edge;
+    //     }
+    //     &.platforms {
+    //       background-position-y: -4 * @edge;
+    //     }
+    //   }
+    // }
   }
 }
