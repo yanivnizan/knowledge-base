@@ -164,9 +164,7 @@ In your XCode project, perform the following steps:
 
     at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
-6. Drag the `AFNetworking` (extensions/cocos2dx-highway/build/ios/AFNetworking) files to your project. Turn on ARC for these files, if it's turned on for your project.
-
-7. Make sure you have these 7 Frameworks linked to your XCode project:
+6. Make sure you have these 7 Frameworks linked to your XCode project:
 
   - Security
   - libsqlite3.0.dylib
@@ -176,7 +174,7 @@ In your XCode project, perform the following steps:
   - SystemConfguration
   - AdSupport
 
-8. Connect the Profile module to a social network provider:
+7. Connect the Profile module to a social network provider:
 
   - [Facebook](/cocos2dx/profile/Profile_GettingStarted#facebook-for-ios)
 
