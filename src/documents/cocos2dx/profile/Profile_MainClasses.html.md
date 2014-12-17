@@ -17,7 +17,7 @@ In this document you'll find descriptions of most of the main classes and interf
 ![alt text](/img/tutorial_img/soomla_diagrams/Profile.png "Profile Diagram")
 
 <br>
-Social actions allow you to entice social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or  about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
+Social actions allow you to entice social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or post a status about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
 
 <div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many methods of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
@@ -71,7 +71,7 @@ Most of the social actions provided in Profile depend on the user being logged i
 
 `logout` simply logs the user out of the specified provider. Don't forget to disable the social action buttons in your UI once your user is logged out.
 
-``` cs
+``` cpp
 // If the user clicks on the login button you provide, call the login method:
 soomla::CCSoomlaProfile::getInstance()->login(
 	soomla::FACEBOOK,                     // Provider
@@ -274,9 +274,9 @@ soomla::CCSoomlaProfile::getInstance()->getContacts(
 <br>
 ###`openAppRatingPage`
 
-`OpenAppRatingPage` conveniently opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store) so that it's simple to rate the app. You can offer your users to rate your app after they've completed a level successfully or have progressed significantly in your game.
+`openAppRatingPage` conveniently opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store) so that it's simple to rate the app. You can offer your users to rate your app after they've completed a level successfully or have progressed significantly in your game.
 
-``` cs
+``` cpp
 soomla::CCSoomlaProfile::openAppRatingPage(&profileError);
 ```
 
@@ -317,14 +317,13 @@ CCReward *goldMedal = CCBadgeReward::create(
 <br>
 ###**SequenceReward**
 
-A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
+A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, purple belt, brown belt, and lastly, black belt.
 
 ``` cpp
 cocos2d::__Array *belts = cocos2d::__Array::create();
 // Assume that the below belts are BadgeRewards that have been defined.
 belts->addObject(blueBelt);
-belts->addObject(yellowBelt);
-belts->addObject(greenBelt);
+belts->addObject(purpleBelt);
 belts->addObject(brownBelt);
 belts->addObject(blackBelt);
 

@@ -146,7 +146,7 @@ This function updates the user's status, which is simply a message, on the suppl
 VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_ID");
 
 // A single-use virtual item, sword, that can be purchased for 200 virtual coins.
-VirtualItem sword = new SingleUseVG("Sword", "", "sword_ID", new PurchaseWithVirtualItem(coin.ID, 200));
+VirtualGood sword = new SingleUseVG("Sword", "", "sword_ID", new PurchaseWithVirtualItem(coin.ID, 200));
 
 // A reward of 1 FREE sword (no need to purchase it for 200 coins!)
 Reward swordReward = new VirtualItemReward("swordReward_ID", "Sword Reward", sword.ID, 1);
@@ -173,7 +173,7 @@ For example, once your user reaches a high score, you could display a popup that
 ``` cs
 // Equippable virtual good - a soombot character with super powers
 // that can be purchased for 2.99.
-VirtualItem soombot = new EquippableVG(
+VirtualGood soombot = new EquippableVG(
 	EquippableVG.EquippingModel.GLOBAL,
 	"Soombot character",
 	"Soombot has super powers!",
@@ -198,7 +198,7 @@ SoomlaProfile.UpdateStory(
 	"http://about.soom.la/soombots",            // Link to post
 	"http://about.soom.la/.../spockbot.png",    // Image URL
 	"",                                         // Payload
-	soombotReward,                              // Reward for posting a story
+	soombotReward                               // Reward for posting a story
 );
 ```
 
@@ -216,12 +216,12 @@ For example, when your user finishes a level in your game, you can offer him/her
 ``` cs
 // A random reward that is selected from the given list - in this case it'll be one of the rewards defined above.
 Reward mysteryReward = new RandomReward(
-	"mysterReward_ID",
+	"mysteryReward_ID",
 	"Mystery Reward",
 	new List<Reward>{hundredCoinReward, swordReward, soombotReward}
 );
 
-// Once the user uploads the image, give him/her a mysterReward.
+// Once the user uploads the image, give him/her a mysteryReward.
 SoomlaProfile.UploadImage(
 	Provider.FACEBOOK,                    // Provider
 	(a texture),                          // The image as a texture
@@ -310,7 +310,7 @@ Reward goldMedal = new BadgeReward(
 <br>
 ###**SequenceReward**
 
-A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
+A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, purple belt, brown belt, and lastly, black belt.
 
 ``` cs
 Reward blueBelt = new BadgeReward(
@@ -324,8 +324,7 @@ Reward beltReward = new SequenceReward(
 	"Belt Reward",                        // Name
 	new List<Reward>() {                  // Rewards in sequence
 		blueBelt,
-		yellowBelt,  
-		greenBelt,  
+		purpleBelt,  
 		brownBelt,  
 		blackBelt }
 );

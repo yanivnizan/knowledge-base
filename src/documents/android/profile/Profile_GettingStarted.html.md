@@ -12,8 +12,6 @@ platform: 'android'
 
 #Getting Started
 
-<div class="info-box">Profile depends on SOOMLA's Core module. This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already have Core & Store, please follow these directions only for the Profile module.</div>
-
 ##Getting Started
 
 1. Download [android-profile](http://library.soom.la/fetch/android-profile/1.0.1?cf=github).
@@ -47,7 +45,7 @@ platform: 'android'
 	SoomlaProfile.getInstance().initialize();
 	```
 
-  NOTE that some social providers need special parameters in initialization - you can supply them like so:
+  **NOTE** that some social providers need special parameters in initialization - supply them like so:
 
 	``` java
 	HashMap<IProvider.Provider, HashMap<String, String>> providerParams = new
@@ -64,15 +62,16 @@ platform: 'android'
 
 	c. **Twitter** - Please provide **Consumer Key** and **Consumer Secret** from the "Keys and Access Tokens" section in [Twitter Apps](https://apps.twitter.com/), like so:
 
-		``` java
-		HashMap<String, String> twitterParams = new HashMap<String, String>();
-		twitterParams.put("consumerKey", "[YOUR CONSUMER KEY]");
-		twitterParams.put("consumerSecret", "[YOUR CONSUMER SECRET]");
+	``` java
+	HashMap<String, String> twitterParams = new HashMap<String, String>();
+	twitterParams.put("consumerKey", "[YOUR CONSUMER KEY]");
+	twitterParams.put("consumerSecret", "[YOUR CONSUMER SECRET]");
+	providerParams.put(IProvider.Provider.TWITTER, twitterParams);
 
-		providerParams.put(IProvider.Provider.TWITTER, twitterParams);
-		```
+	SoomlaProfile.getInstance().initialize(providerParams);
+	```
 
-6. If integrating a virtual economy with the store module, please see [android-store](https://github.com/soomla/android-store) for store setup.
+6. If integrating a virtual economy with the store module, please see [android-store](android/store/Store_GettingStarted) for store setup.
 
 <div class="info-box">The following steps should be done according to the target social network.</div>
 
@@ -81,132 +80,142 @@ platform: 'android'
 Facebook is supported out-of-the-box, you just have to follow the next steps to make it work:
 
 1. From the downloaded zip, Add the following jars to your project.
-  1. `AndroidProfileFacebook.jar`
-  1. `simple.facebook-2.1.jar`
 
-1. Import the Facebook SDK for Android into your project and setup all the relevant information (Application ID, etc).
+	- `AndroidProfileFacebook.jar`
+	- `simple.facebook-2.1.jar`
 
-    1. For more information regarding this refer to [Facebook SDK for Android](https://developers.facebook.com/docs/android)
+2. Import the Facebook SDK for Android into your project and setup all the relevant information (Application ID, etc).
 
-    1. SOOMLA uses [Android Studio](https://developer.android.com/sdk/installing/studio.html), in this case you can extract the Facebook SDK into your project folder and then it's simply a case of importing the `iml` file in the Facebook SDK folder into your project
-1. Make the following changes in `AndroidManifest.xml`:
+    - For more information regarding this refer to [Facebook SDK for Android](https://developers.facebook.com/docs/android)
 
-      ```xml
-      ...
+    - SOOMLA uses [Android Studio](https://developer.android.com/sdk/installing/studio.html), in this case you can extract the Facebook SDK into your project folder and then it's simply a case of importing the `iml` file in the Facebook SDK folder into your project
+3. Make the following changes in `AndroidManifest.xml`:
 
-      <application ...
-          <activity android:name="com.soomla.profile.social.facebook.SoomlaFacebook$SoomlaFBActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-        </activity>
-      </application>
-      ```
+	```xml
+	...
+	<application ...
+	    <activity android:name="com.soomla.profile.social.facebook.SoomlaFacebook$SoomlaFBActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+	  </activity>
+	</application>
+	```
 
 ### Twitter
 
-Twitter is also supported out-of-the-box, authentication is done via web view. Follow the next steps to make it work:
+Twitter is supported out-of-the-box, authentication is done via web view. Follow the next steps to make it work:
 
 > **android-profile** uses the [Twitter4J](https://github.com/yusuke/twitter4j) library (v 4.0.2) to support Twitter integration
 
 1. From the downloaded zip, Add the following jars to your project.
-  1. `AndroidProfileTwitter.jar`
-  1. `twitter4j-core-4.0.2.jar`
-  1. `twitter4j-asyc-4.0.2.jar`
 
-1. Create your Twitter app at https://apps.twitter.com/
+	- `AndroidProfileTwitter.jar`
 
-1. Make the following changes in `AndroidManifest.xml`:
+	- `twitter4j-core-4.0.2.jar`
 
-      ```xml
-      ...
+	- `twitter4j-asyc-4.0.2.jar`
 
-      <application ...
-          <activity android:name="com.soomla.profile.social.twitter.SoomlaTwitter$SoomlaTwitterActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-        </activity>
-      </application>
-      ```
+2. Create your Twitter app at https://apps.twitter.com/
+
+3. Make the following changes in `AndroidManifest.xml`:
+
+	```xml
+	...
+	<application ...
+	    <activity android:name="com.soomla.profile.social.twitter.SoomlaTwitter$SoomlaTwitterActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+	  </activity>
+	</application>
+	```
 
 ### Google Plus
 
 1. From the downloaded zip, Add the `AndroidProfileGoogle.jar` jar to your project.
 
-1. Follow [Step 1: Enable the Google+ API](https://developers.google.com/+/mobile/android/getting-started#step_1_enable_the_google_api) and create a google+ app for Android.
+2. Follow [Step 1: Enable the Google+ API](https://developers.google.com/+/mobile/android/getting-started#step_1_enable_the_google_api) and create a google+ app for Android.
 
     > **Note:** Set the PACKAGE NAME of your google+ app to the value the package defined in your `AndroidManifest.xml`.
 
-1. Import `google-play-services_lib` project as module dependency to your project.
+3. Import `google-play-services_lib` project as module dependency to your project.
 
     > **Note:** You can either download/copy the existing `google-play-services_lib` project located under [google social provider libs](https://github.com/soomla/android-profile/tree/master/social-providers/android-profile-google/libs) folder or [create one yourself](https://developers.google.com/+/mobile/android/getting-started#step_2_configure_your_eclipse_project).
 
-1. Add `SoomlaGooglePlusActivity` to `AndroidManifest.xml` as following:
+4. Add `SoomlaGooglePlusActivity` to `AndroidManifest.xml` as following:
 
-      ```xml
-      ...
+	```xml
+	...
+	<application ...
+	    <activity android:name="com.soomla.profile.social.google.SoomlaGooglePlus$SoomlaGooglePlusActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+	  </activity>
+	</application>
+	```
 
-      <application ...
-          <activity android:name="com.soomla.profile.social.google.SoomlaGooglePlus$SoomlaGooglePlusActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
-        </activity>
-      </application>
-      ```
+5. Add the following permissions in `AndroidManifest.xml`:
 
-1. Add the following permissions in `AndroidManifest.xml`:
-    ```xml
-      <uses-permission android:name="android.permission.INTERNET" />
-      <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-      <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    ```
+	```xml
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+	```
 
+## Facebook Caveats
 
+1. **Facebook Application** - You must create a Facebook application and use its details in your Profile-based application (with Facebook)
 
+2. **Facebook ID** - The Facebook application's ID must be used in your application, this information should be added to the application's `strings.xml` file, under `fb_app_id` (App ID). In the `AndroidManifest.xml` file add the following:
 
+	```xml
+	<application ...
+	    <activity android:name="com.facebook.LoginActivity" />
+	    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/fb_app_id" />
+	</application>
+	```
 
+3. **Facebook Permissions** - Profile will request `publish_actions` from the user of the application, to test the application please make sure you test with either Admin, Developer or Tester roles
 
+## Twitter Caveats
 
+1. **Login method returns 401 error** - this could be the result of a few issues:
 
+	- Have you supplied the correct consumer key and secret SoomlaProfile initialization?
 
+	- Have you supplied a `Callback URL` in your Twitter application settings?
 
+## Google Plus Caveats
 
-##Caveats
+1. Did you set the PACKAGE NAME of your google+ app is the same as the package name in `AndroidManifest.xml`?
 
-###Facebook Caveats
+2. Did you set the CERTIFICATE FINGERPRINT (SHA1) of your google+ app is the same as your debug.keystore or release keystore SHA1?
 
+3. Did you add google-play-services_lib as a dependency to your project?
 
-###Twitter Caveats
+## Example
 
+Below is a brief example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To see a full example, check out the [Muffin Rush Example](https://github.com/soomla/android-profile/tree/master/SoomlaAndroidExample/src/com/soomla/example).
 
-###Google Plus Caveats
-
-
-
-
-
-
-##Example
-
-Below is a brief example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To see a full example, check out the [Muffin Rush Example](https://github.com/soomla/unity3d-profile/tree/master/Soomla/Assets/Examples/MuffinRush) that comes with unity3d-profile when you download it.
-
-To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/unity/profile/Profile_MainClasses).
+To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/android/profile/Profile_MainClasses).
 
 <br>
 Initialize `SoomlaProfile`.
 
-``` cs
-SoomlaProfile.Initialize();
+``` java
+SoomlaProfile.getInstance().initialize();
 ```
 
 <br>
 Log the user into Facebook.
 
-``` cs
-SoomlaProfile.Login(
-	Provider.FACEBOOK,                        // Social Provider
-	new BadgeReward("loggedIn", "Logged In!") // Reward
+``` java
+SoomlaProfile.getInstance().login(
+	this,                                     // Activity
+	IProvider.Provider.TWITTER                // Social Provider
+	someReward                                // Reward
 );
 ```
 
 <br>
 Share a story on the user's Facebook wall.
 
-``` cs
-SoomlaProfile.UpdateStory(
+``` java
+SoomlaProfile.getInstance().updateStory(
+	IProvider.Provider.FACEBOOK                // Social Provider
 	"Check out this great story by SOOMLA!",   // Message
 	"SOOMLA is 2 years young!",                // Name
 	"SOOMLA is GROWing",                       // Caption

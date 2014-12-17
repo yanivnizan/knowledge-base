@@ -44,9 +44,7 @@ ProfileEvents.OnLoginFinished += onLoginFinished;
 
 // Handle this event with your game-specific behavior:
 public static void onLoginFinished(UserProfile userProfileJson, string payload){
-	Soomla.SoomlaUtils.LogDebug("Login finished: " + UserProfile.toJSONObject().print());
-	SoomlaProfile.GetContacts(Provider.FACEBOOK);
-	string bday = SoomlaProfile.GetStoredUserProfile(Provider.FACEBOOK).Birthday;
+	// ... your game specific implementation here ...
 }
 ```
 
@@ -239,7 +237,7 @@ public void onSocialActionFailed(Provider provider, SocialActionType action, str
 This event will be thrown when fetching the contacts from the social provider has started.
 
 ``` cs
-public void onGetContactsStarted(Provider provider, string payload {
+public void onGetContactsStarted(Provider provider, string payload) {
 	// provider is the social provider
 	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon starting
 

@@ -10,307 +10,437 @@ module: 'profile'
 platform: 'ios'
 ---
 
-#Event Handling
+# Event Handling
 
-##About
+## About
 
 Profile allows you to subscribe to events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur.
 
 <div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
 
-##How it Works
+## How it Works
 
 Events are triggered when SOOMLA wants to notify you about different things that happen involving Profile operations.
 
-For example, when a user performs a social action such as uploading a status, an `OnSocialActionStartedEvent` is fired as a result.
+For example, when a user performs a social action such as uploading a status, an event is fired as a result.
 
 
-##Observing & Handling Events
+## Observing & Handling Events
 
-The `CCProfileEventDispatcher` class is where all events go through. See [CCProfileEventDispatcher](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCProfileEventDispatcher.cpp).
+In order to observe store events you need to import `ProfileEventHandling.h` and then you can add a notification to `NSNotificationCenter`:
 
-To handle various events, create your own event handler (see example below) that implements `CCProfileEventHandler`, and add it to the `CCProfileEventDispatcher` class:
-
-``` cpp
-soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myEventHandler);
+``` objectivec
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yourCustomSelector:)
+name:EVENT_UP_LOGIN_STARTED object:nil];
 ```
 
-##Profile Events
+OR, you can observe all events with the same selector by calling:
 
-###`CCMyEventHandler.h`
+``` objectivec
+[UserProfileEventHandling observeAllEventsWithObserver:self
+  withSelector:@selector(yourCustomSelector:)];
+```
 
-``` cpp
-#include "CCProfileEventHandler.h"
+## Profile Events
 
-namespace soomla {
+### EVENT_UP_PROFILE_INITIALIZED  
 
-  class CCMyEventHandler: public CCProfileEventHandler {
+This event will be posted when Soomla Profile has been initialized.
 
-    public:
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileInitialized:)
+:EVENT_UP_PROFILE_INITIALIZED object:nil];
 
-    // This event will be thrown when Soomla Profile has been initialized.
-    virtual void onProfileInitialized() = 0;
-
-    // This event will be thrown when the page for rating your app is opened.
-    virtual void onUserRatingEvent() = 0;
-
-    // This event will be thrown when the user profile has been updated,
-    // after login.
-    virtual void onUserProfileUpdatedEvent(
-      CCUserProfile *userProfile) = 0;
-
-    // This event will be thrown when logging in to the social provider has started.
-    virtual void onLoginStarted(
-      CCProvider provider,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when logging in to the social provider has finished
-    // successfully.
-    virtual void onLoginFinished(
-      CCUserProfile *userProfile,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when logging in to the social provider has been cancelled.
-    virtual void onLoginCancelledEvent(
-      CCProvider provider,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when logging in to the social provider has failed.
-    virtual void onLoginFailed(
-      CCProvider provider,
-      cocos2d::__String *errorDescription,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when logging out of the social provider has started.
-    virtual void onLogoutStarted(CCProvider provider) = 0;
-
-    // This event will be thrown when logging out of the social provider has finished
-    // successfully.
-    virtual void onLogoutFinished(CCProvider provider) = 0;
-
-    // This event will be thrown when logging out of the social provider has failed.
-    virtual void onLogoutFailed(
-      CCProvider provider,
-      cocos2d::__String *errorDescription) = 0;
-
-    // This event will be thrown when a social action (like, post status, etc..)
-    // has started.
-    virtual void onSocialActionStartedEvent(
-      CCProvider provider,
-      CCSocialActionType socialActionType,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when a social action has finished successfully.
-    virtual void onSocialActionFinishedEvent(
-      CCProvider provider,
-      CCSocialActionType socialActionType,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when a social action has failed.
-    virtual void onSocialActionFailedEvent(
-      CCProvider provider,
-      CCSocialActionType socialActionType,
-      cocos2d::__String *errorDescription,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when fetching the contacts from the social provider
-    // has started.
-    virtual void onGetContactsStarted(
-      CCProvider provider,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when fetching the contacts from the social provider
-    // has finished successfully.
-    virtual void onGetContactsFinished(
-      CCProvider provider,
-      cocos2d::__Array *contactsDict,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when fetching the contacts from the social provider
-    // has failed.
-    virtual void onGetContactsFailed(
-      CCProvider provider,
-      cocos2d::__String *errorDescription,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when fetching the feed from the social provider
-    // has started.
-    virtual void onGetFeedStarted(
-      CCProvider provider,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when fetching the feed from the social provider
-    // has finished successfully.
-    virtual void onGetFeedFinished(
-      CCProvider provider,
-      cocos2d::__Array *feedList,
-      cocos2d::__String *payload) = 0;
-
-    // This event will be thrown when fetching the feed from the social provider
-    // has failed.
-    virtual void onGetFeedFailed(
-      CCProvider provider,
-      cocos2d::__String *errorDescription,
-      cocos2d::__String *payload) = 0;
-
-  };
-
+// your handler:
+- (void)profileInitialized:(NSNotification*)notification {
+  // ... your game specific implementation here ...
 }
 ```
 
-###`CCMyEventHandler.cpp`
+### EVENT_UP_USER_RATING
 
-``` cpp
-#include "CCExampleProfileEventHandler.h"
+This event will be thrown when the page for rating your app is opened.
 
-virtual void onProfileInitialized() = 0 {
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRating:)
+name:EVENT_UP_USER_RATING object:nil];
+
+// your handler:
+- (void)userRating:(NSNotification*)notification {
   // ... your game specific implementation here ...
 }
+```
 
-virtual void onUserRatingEvent() = 0 {
-  // ... your game specific implementation here ...
-}
+### EVENT_UP_USER_PROFILE_UPDATED
 
-virtual void onLoginFailed(CCProvider provider, cocos2d::__String *errorDescription,
-                          cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // payload is the identification string sent from the caller of the action
+This event will be thrown when the user profile has been updated, after login.
 
-  // ... your game specific implementation here ...
-}
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userProfileUpdated:)
+name:EVENT_UP_USER_PROFILE_UPDATED object:nil];
 
-virtual void onLoginFinished(CCUserProfile *userProfile, cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the login
-  //  operation and want to receive back upon failure
-
-  // ... your game specific implementation here ...
-}
-
-virtual void onLoginStarted(CCProvider provider, cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the login
-  //  operation and want to receive back upon starting
+// your handler:
+- (void)userProfileUpdated:(NSNotification*)notification {
+  // notification contains:
+  // DICT_ELEMENT_USER_PROFILE = the user's profile from the logged in provider
 
   // ... your game specific implementation here ...
 }
+```
 
-virtual void onLogoutFailed(CCProvider provider, cocos2d::__String *errorDescription) = 0 {
-  // provider is the social provider
+### EVENT_UP_LOGIN_STARTED
 
-  // ... your game specific implementation here ...
-}
+This event will be thrown when logging in to the social provider has started.
 
-virtual void onLogoutFinished(CCProvider provider) = 0 {
-  // provider is the social provider
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStarted:)
+name:EVENT_UP_LOGIN_STARTED object:nil];
 
-  // ... your game specific implementation here ...
-}
-
-virtual void onLogoutStarted(CCProvider provider) = 0 {
-  // provider is the social provider
-
-  // ... your game specific implementation here ...
-}
-
-virtual void onGetContactsFailed(CCProvider provider, cocos2d::__String *errorDescription,
-                                cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the get
-  //  contacts operation and want to receive back upon failure
+// your handler:
+- (void)loginStarted:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER = the provider where the login has started
+  // DICT_ELEMENT_PAYLOAD  = an identification String that you can give when you initiate the
+  //                         login operation and want to receive back upon starting
 
   // ... your game specific implementation here ...
 }
+```
 
-virtual void onGetContactsFinished(CCProvider provider, cocos2d::__Array *contactsDict,
-                                  cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // contactsDict is an Array of contacts represented by CCUserProfile
-  // payload is an identification string that you can give when you initiate the get
-  //  contacts operation and want to receive back upon its completion
+### EVENT_UP_LOGIN_FINISHED
 
-  // ... your game specific implementation here ...
-}
+This event will be thrown when logging in to the social provider has finished successfully.
 
-virtual void onGetContactsStarted(CCProvider provider, cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the get
-  //  contacts operation and want to receive back upon starting
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFinished:)
+name:EVENT_UP_LOGIN_FINISHED object:nil];
 
-  // ... your game specific implementation here ...
-}
-
-virtual void onGetFeedFailed(CCProvider provider, cocos2d::__String *errorDescription,
-                            cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the get feed
-  //  operation and want to receive back upon failure
+// your handler:
+- (void)loginFinished:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_USER_PROFILE = the user's profile from the logged in provider
+  // DICT_ELEMENT_PAYLOAD      = an identification string that you can give when you initiate the
+  //                             login operation and want to receive back upon its completion
 
   // ... your game specific implementation here ...
 }
+```
 
-virtual void onGetFeedFinished(CCProvider provider, cocos2d::__Array *feedList,
-                              cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // feedList is an Array of feed entries
-  // payload is the identification String sent from the caller of the action
+### EVENT_UP_LOGIN_CANCELLED
 
-  // ... your game specific implementation here ...
-}
+This event will be thrown when logging in to the social provider has been cancelled.
 
-virtual void onGetFeedStarted(CCProvider provider, cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // payload is the identification String sent from the caller of the action
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginCancelled:)
+name:EVENT_UP_LOGIN_CANCELLED object:nil];
 
-  // ... your game specific implementation here ...
-}
-
-virtual void onSocialActionFailedEvent(CCProvider provider,
-                                      CCSocialActionType socialActionType,
-                                      cocos2d::__String *errorDescription,
-                                      cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // socialActionType is the social action that failed (like, upload status, etc..)
-  // payload is the identification String sent from the caller of the action
+// your handler:
+- (void)loginCancelled:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER = the provider which the user has cancelled login to
+  // DICT_ELEMENT_PAYLOAD  = an identification string that you can give when you initiate the
+  //            login operation and want to receive back upon cancellation
 
   // ... your game specific implementation here ...
 }
+```
 
-virtual void onSocialActionFinishedEvent(CCProvider provider,
-                                        CCSocialActionType socialActionType,
-                                        cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // socialActionType is the social action that finished (like, upload status, etc..)
-  // payload is an identification string that you can give when you initiate the social
-  //  action operation and want to receive back upon failure
+### EVENT_UP_LOGIN_FAILED
 
-  // ... your game specific implementation here ...
-}
+This event will be thrown when logging in to the social provider has failed.
 
-virtual void onSocialActionStartedEvent(CCProvider provider,
-                                        CCSocialActionType socialActionType,
-                                        cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // socialActionType is the social action that started (like, upload status, etc..)
-  // payload is an identification string that you can give when you initiate the social
-  //  action operation and want to receive back upon starting
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed:)
+name:EVENT_UP_LOGIN_FAILED object:nil];
 
-  // ... your game specific implementation here ...
-}
-
-virtual void onLoginCancelledEvent(CCProvider provider, cocos2d::__String *payload) = 0 {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the login
-  //  operation and want to receive back upon cancellation
+// your handler:
+- (void)loginFailed:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER = the provider on which the login has failed
+  // DICT_ELEMENT_MESSAGE  = description of the reason for failure
+  // DICT_ELEMENT_PAYLOAD  = an identification string that you can give when you initiate
+  //                         the login operation and want to receive back upon failure
 
   // ... your game specific implementation here ...
 }
+```
 
-virtual void onUserProfileUpdatedEvent(CCUserProfile *userProfile) = 0 {
-  // userProfile is the user's profile which was updated
+### EVENT_UP_LOGOUT_STARTED
+
+This event will be thrown when logging out of the social provider has started.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutStarted:)
+name:EVENT_UP_LOGOUT_STARTED object:nil];
+
+// your handler:
+- (void)logoutStarted:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER = the provider on which the login has started
 
   // ... your game specific implementation here ...
 }
+```
 
+### EVENT_UP_LOGOUT_FINISHED
+
+This event will be thrown when logging out of the social provider has finished successfully.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutFinished:)
+name:EVENT_UP_LOGOUT_FINISHED object:nil];
+
+// your handler:
+- (void)logoutFinished:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER = the provider on which the logout has finished
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_LOGOUT_FAILED
+
+This event will be thrown when logging out of the social provider has failed.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutFailed:)
+name:EVENT_UP_LOGOUT_FAILED object:nil];
+
+// your handler:
+- (void)logoutFailed:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER = the provider on which the logout has failed
+  // DICT_ELEMENT_MESSAGE  = description of the reason for failure
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_SOCIAL_ACTION_STARTED
+
+This event will be thrown when a social action (like, post status, etc..) has started.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socialActionStarted:)
+name:EVENT_UP_SOCIAL_ACTION_STARTED object:nil];
+
+// your handler:
+- (void)socialActionStarted:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the social action has started
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action (like, post status, etc..) that started
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you initiate the
+  //                                   social action operation and want to receive back upon starting
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_SOCIAL_ACTION_FINISHED
+
+This event will be thrown when a social action has finished successfully.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socialActionFinished:)
+name:EVENT_UP_SOCIAL_ACTION_FINISHED object:nil];
+
+// your handler:
+- (void)socialActionFinished:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the social action has finished
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action (like, post status, etc..) that finished
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
+  //         initiate the social action operation and want to receive back upon completion
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_SOCIAL_ACTION_CANCELLED
+
+This event will be thrown when a social action has been cancelled.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socialActionCancelled:)
+name:EVENT_UP_SOCIAL_ACTION_CANCELLED object:nil];
+
+// your handler:
+- (void)socialActionCancelled:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which a social action was cancelled
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action (like, post status, etc..) that has been cancelled
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you initiate the
+  //                                 social action operation and want to receive back upon cancellation
+
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_SOCIAL_ACTION_FAILED
+
+This event will be thrown when a social action has failed.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(socialActionFailed:)
+name:EVENT_UP_SOCIAL_ACTION_FAILED object:nil];
+
+// your handler:
+- (void)socialActionFailed:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the social action has failed
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action (like, post status, etc..) that failed
+  // DICT_ELEMENT_MESSAGE            = description of the reason for failure
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
+  //            initiate the social action operation and want to receive back upon failure
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_GET_CONTACTS_STARTED
+
+This event will be thrown when fetching the contacts from the social provider has started.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getContactsStarted:)
+name:EVENT_UP_GET_CONTACTS_STARTED object:nil];
+
+// your handler:
+- (void)getContactsStarted:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the get contacts process started
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
+  //            initiate the get contacts operation and want to receive back upon starting
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_GET_CONTACTS_FINISHED
+
+This event will be thrown when fetching the contacts from the social provider has finished successfully.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getContactsFinished:)
+name:EVENT_UP_GET_CONTACTS_FINISHED object:nil];
+
+// your handler:
+- (void)getContactsFinished:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the get contacts process finished
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
+  // DICT_ELEMENT_CONTACTS           = an Array of contacts represented by UserProfile
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
+  //      initiate the get contacts operation and want to receive back upon its completion
+
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_GET_CONTACTS_FAILED
+
+This event will be thrown when fetching the contacts from the social provider has failed.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getContactsFailed:)
+name:EVENT_UP_GET_CONTACTS_FAILED object:nil];
+
+// your handler:
+- (void)getContactsFailed:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the get contacts process has failed
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
+  // DICT_ELEMENT_MESSAGE            = description of the reason for failure
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
+  //             initiate the get contacts operation and want to receive back upon failure
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_GET_FEED_STARTED
+
+This event will be thrown when fetching the feed from the social provider has started.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeedStarted:)
+name:EVENT_UP_GET_FEED_STARTED object:nil];
+
+// your handler:
+- (void)getFeedStarted:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the get feed process started
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
+  //                initiate the get feed operation and want to receive back upon starting
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_GET_FEED_FINISHED
+
+This event will be thrown when fetching the feed from the social provider has finished successfully.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeedFinished:)
+name:EVENT_UP_GET_FEED_FINISHED object:nil];
+
+// your handler:
+- (void)getFeedFinished:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the get feed process finished
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
+  // DICT_ELEMENT_FEEDS              = an Array of feed entries represented by strings
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
+  //               initiate the get feed operation and want to receive back upon completion
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UP_GET_FEED_FAILED
+
+This event will be thrown when fetching the feed from the social provider has failed.
+
+``` objectivec
+// observe the event:
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeedFailed:)
+name:EVENT_UP_GET_FEED_FAILED object:nil];
+
+// your handler:
+- (void)getFeedFailed:(NSNotification*)notification {
+  // notification contains the following:
+  // DICT_ELEMENT_PROVIDER           = the provider on which the get feed process has
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
+  // DICT_ELEMENT_MESSAGE            = description of the reason for failure
+  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
+  //                 initiate the get feed operation and want to receive back upon failure
+
+  // ... your game specific implementation here ...
+}
 ```

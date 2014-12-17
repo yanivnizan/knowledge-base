@@ -10,303 +10,368 @@ module: 'profile'
 platform: 'android'
 ---
 
-#Event Handling
+# Event Handling
 
-##About
+## About
 
 Profile allows you to subscribe to events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur.
 
 <div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
-###Tips & Reminders
-
-- As mentioned in [Getting Started](/unity/profile/Profile_GettingStarted), make sure you add the event prefabs (ProfileEvents and CoreEvents) to your earliest loading scene.
-
-- It is recommended that you register all events before initializing Profile.
-
-
-##How it Works
+## How it Works
 
 Events are triggered when SOOMLA wants to notify you about different things that happen involving Profile operations.
 
-For example, when a user posts a status, an `OnSocialActionStartedEvent` is fired as a result.
+For example, when a user posts a status, a `SocialActionStartedEvent` is fired as a result.
 
+## Observing & Handling Events
 
-##Observing & Handling Events
+For event handling, SOOMLA uses Square's great open-source project [Otto](http://square.github.io/otto/). In ordere to be notified of profile related events, you can register for specific events and create your game-specific behavior to handle them.
 
-The `ProfileEvents` class is where all events go through. To handle various events, just add your game-specific behavior to the delegates in the `ProfileEvents` class.
+In order to register for & handle events:
 
-**For example:** To "listen" for an `onLoginFinished` event:
+1. In the class that should receive the event, create your event handler function with the annotation '@Subscribe'. Example:
 
-``` cs
-// Sign up for the event
-ProfileEvents.OnLoginFinished += onLoginFinished;
+    ``` java
+    @Subscribe
+    public void onLoginFinishedEvent(LoginFinishedEvent loginFinishedEvent) {
+        // ... your game specific implementation here ...
+    }
+    ```
 
-// Handle this event with your game-specific behavior:
-public static void onLoginFinished(UserProfile userProfileJson, string payload){
-	Soomla.SoomlaUtils.LogDebug("Login finished: " + UserProfile.toJSONObject().print());
-	SoomlaProfile.GetContacts(Provider.FACEBOOK);
-	string bday = SoomlaProfile.GetStoredUserProfile(Provider.FACEBOOK).Birthday;
-}
-```
+2. You'll also have to register your event handler class in the event bus (and unregister when needed):
+
+   ``` java
+   BusProvider.getInstance().register(this);
+   ```
+
+   ``` java
+   BusProvider.getInstance().unregister(this);
+   ```
+
+<div class="info-box">If your class is an Activity, register in 'onResume' and unregister in 'onPause'.</div>
+
+See a full [event handler example](https://github.com/soomla/android-profile/blob/master/SoomlaAndroidExample/src/com/soomla/example/ExampleEventHandler.java).
 
 ##Profile Events
 
-###OnSoomlaProfileInitialized
+###ProfileInitializedEvent
 
 This event will be thrown when Soomla Profile has been initialized.
 
-``` cs
-public void onSoomlaProfileInitialized() {
+``` java
+@Subscribe
+public void onProfileInitialized(ProfileInitializedEvent profileInitializedEvent) {
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnUserRatingEvent
+###UserRatingEvent
 
 This event will be thrown when the page for rating your app is opened.
 
-``` cs
-public void onUserRatingEvent() {
+``` java
+@Subscribe
+public void onUserRatingEvent(UserRatingEvent UserRating) {
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnUserProfileUpdated
+###UserProfileUpdatedEvent
 
 This event will be thrown when the user profile has been updated, after login.
 
-``` cs
-public void onUserProfileUpdated(UserProfile userProfileJson) {
-	// userProfileJson is the user's profile from the logged in provider
+``` java
+@Subscribe
+public void onUserProfileUpdated(UserProfileUpdatedEvent userProfileUpdatedEvent) {
+	// A UserProfileUpdatedEvent contains the following:
+	// userProfile = the user's profile from the logged in provider
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnLoginStarted
+###LoginStartedEvent
 
 This event will be thrown when logging in to the social provider has started.
 
-``` cs
-public void onLoginStarted(Provider provider, string payload) {
-	// provider is the social provider
-	// payload is an identification string that you can give when you initiate the login operation and want to receive back upon starting
+``` java
+@Subscribe
+public void onLoginStarted(LoginStartedEvent loginStartedEvent) {
+	// A LoginStartedEvent contains the following:
+	// provider = the provider where the login has started
+	// payload  = an identification String that you can give when you initiate the login
+	//            operation and want to receive back upon starting
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnLoginFinished
+###LoginFinishedEvent
 
 This event will be thrown when logging in to the social provider has finished **successfully**.
 
-``` cs
-public void onLoginFinished(UserProfile userProfileJson, string payload) {
-	// userProfileJson is the user's profile from the logged in provider
-	// payload is an identification string that you can give when you initiate the login operation and want to receive back upon its completion
+``` java
+@Subscribe
+public void onLoginFinished(LoginFinishedEvent loginFinishedEvent) {
+	// A LoginFinishedEvent contains the following:
+	// userProfile = the user's profile from the logged in provider
+	// payload     = an identification string that you can give when you initiate the
+	//               login operation and want to receive back upon its completion
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnLoginCancelled
+###LoginCancelledEvent
 
 This event will be thrown when logging in to the social provider has been cancelled.
 
-``` cs
-public void onLoginCancelled(Provider provider, string payload) {
-	// provider is the social provider
-	// payload is an identification string that you can give when you initiate the login operation and want to receive back upon cancellation
+``` java
+@Subscribe
+public void onLoginCancelled(LoginCancelledEvent loginCancelledEvent) {
+	// A LoginCancelledEvent contains the following:
+	// provider = the provider which the user has cancelled login to
+	// payload  = an identification string that you can give when you initiate the
+	//            login operation and want to receive back upon cancellation
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnLoginFailed
+###LoginFailedEvent
 
 This event will be thrown when logging in to the social provider has failed.
 
-``` cs
-public void onLoginFailed(Provider provider, string message, string payload) {
-	// provider is the social provider
-	// message is the failure message
-	// payload is an identification string that you can give when you initiate the login operation and want to receive back upon failure
+``` java
+@Subscribe
+public void onLoginFailed(LoginFailedEvent loginFailedEvent) {
+	// A LoginFailedEvent contains the following:
+	// provider         = the provider on which the login has failed
+	// errorDescription = description of the reason for failure
+	// payload          = an identification string that you can give when you initiate
+	//                    the login operation and want to receive back upon failure
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnLogoutStarted
+###LogoutStartedEvent
 
 This event will be thrown when logging out of the social provider has started.
 
-``` cs
-public void onLogoutStarted(Provider provider) {
-	// provider is the social provider
+``` java
+@Subscribe
+public void onLogoutStarted(LogoutStartedEvent logoutStartedEvent) {
+	// A LogoutStartedEvent contains the following:
+	// provider = the provider on which the login has started
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnLogoutFinished
+###LogoutFinishedEvent
 
 This event will be thrown when logging out of the social provider has finished **successfully**.
 
-``` cs
-public void onLogoutFinished(Provider provider) {
-	// provider is the social provider
+``` java
+@Subscribe
+public void onLogoutFinished(LogoutFinishedEvent logoutFinishedEvent) {
+	// A LogoutFinishedEvent contains the following:
+	// provider = the provider on which the logout has finished
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnLogoutFailed
+###LogoutFailedEvent
 
 This event will be thrown when logging out of the social provider has failed.
 
-``` cs
-public void onLogoutFailed(Provider provider, string payload) {
-	// provider is the social provider
-	// payload is an identification string that you can give when you initiate the logout operation and want to receive back upon failure
+``` java
+@Subscribe
+public void onLogoutFailed(LogoutFailedEvent logoutFailedEvent) {
+	// A LogoutFailedEvent contains the following:
+	// provider         = the provider on which the logout has failed
+	// errorDescription = description of the reason for failure
 
 	// ... your game specific implementation here ...
 }
 ```
 
 
-###OnSocialActionStarted
+###SocialActionStartedEvent
 
 This event will be thrown when a social action has started.
 
-``` cs
-public void onSocialActionStarted(Provider provider, SocialActionType action, string payload) {
-	// provider is the social provider
-	// action is the social action (like, post status, etc..) that started
-	// payload is an identification string that you can give when you initiate the social action operation and want to receive back upon starting
+``` java
+@Subscribe
+public void onSocialActionStarted(SocialActionStartedEvent socialActionStartedEvent) {
+	// A SocialActionStartedEvent contains the following:
+	// provider         = the provider on which the social action has started
+	// socialActionType = the social action (like, post status, etc..) that started
+	// payload          = an identification string that you can give when you initiate
+	//                    the social action operation and want to receive back upon starting
 
 	// ... your game specific implementation here ...
 }
 ```
 
 
-###OnSocialActionFinished
+###SocialActionFinishedEvent
 
 This event will be thrown when a social action has finished **successfully**.
 
-``` cs
-public void onSocialActionFinished(Provider provider, SocialActionType action, string payload) {
-	// provider is the social provider
-	// action is the social action (like, post status, etc..) that finished
-	// payload is an identification string that you can give when you initiate the social action operation and want to receive back upon its completion
+``` java
+@Subscribe
+public void onSocialActionFinished(SocialActionFinishedEvent socialActionFinishedEvent) {
+	// A SocialActionFinishedEvent contains the following:
+	// provider         = the provider on which the social action has finished
+	// socialActionType = the social action (like, post status, etc..) that finished
+	// payload          = an identification string that you can give when you initiate
+	//                    the social action operation and want to receive back upon completion
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnSocialActionCancelled
+###SocialActionCancelledEvent
 
 This event will be thrown when a social action has been cancelled.
 
-``` cs
-public void onSocialActionCancelled(Provider provider, SocialActionType action, string payload) {
-	// provider is the social provider
-	// action is the social action (like, post status, etc..) that has been cancelled
-	// payload is an identification string that you can give when you initiate the social action operation and want to receive back upon cancellation
+``` java
+@Subscribe
+public void onSocialActionCancelled(SocialActionCancelledEvent socialActionCancelledEvent) {
+	// A SocialActionCancelledEvent contains the following:
+	// provider         = the provider on which a social action was cancelled
+	// socialActionType = the social action (like, post status, etc..) that has been cancelled
+	// payload          = an identification string that you can give when you initiate the
+	//                    social action operation and want to receive back upon cancellation
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnSocialActionFailed
+###SocialActionFailedEvent
 
 This event will be thrown when a social action has failed.
 
-``` cs
-public void onSocialActionFailed(Provider provider, SocialActionType action, string message, string payload) {
-	// provider is the social provider
-	// action is the social action (like, post status, etc..) that failed
-	// message is the failure message
-	// payload is an identification string that you can give when you initiate the social action operation and want to receive back upon failure
+``` java
+@Subscribe
+public void onSocialActionFailed(SocialActionFailedEvent socialActionFailedEvent) {
+	// A SocialActionFailedEvent contains the following:
+	// provider         = the provider on which the social action has failed
+	// socialActionType = the social action (like, post status, etc..) that failed
+	// errorDescription = description of the reason for failure
+	// payload          = an identification string that you can give when you initiate
+	//                    the social action operation and want to receive back upon failure
 
 	// ... your game specific implementation here ...
 }
 ```
 
 
-###OnGetContactsStarted
+###GetContactsStartedEvent
 
 This event will be thrown when fetching the contacts from the social provider has started.
 
-``` cs
-public void onGetContactsStarted(Provider provider, string payload {
-	// provider is the social provider
-	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon starting
+``` java
+@Subscribe
+public void onGetContactsStarted(GetContactsStartedEvent getContactsStartedEvent) {
+	// A GetContactsStartedEvent contains the following:
+	// provider         = the provider on which the get contacts process started
+	// socialActionType = the social action preformed
+	// payload          = an identification string that you can give when you initiate
+	//                    the get contacts operation and want to receive back upon starting
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnGetContactsFinished
+###GetContactsFinishedEvent
 
 This event will be thrown when fetching the contacts from the social provider has finished **successfully**.
 
-``` cs
-public void onGetContactsFinished(Provider provider, List<UserProfile> userProfiles, string payload) {
-	// provider is the social provider
-	// userProfiles is a List of user profiles that have been fetched in the get contacts operation
-	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon its completion
+``` java
+@Subscribe
+public void onGetContactsFinished(GetContactsFinishedEvent getContactsFinishedEvent) {
+	// A GetContactsFinishedEvent contains the following:
+	// provider         = the provider on which the get contacts process finished
+	// socialActionType = the social action preformed
+	// contacts         = an Array of contacts represented by UserProfile
+	// payload          = an identification string that you can give when you initiate the
+	//                    get contacts operation and want to receive back upon its completion
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnGetContactsFailed
+###GetContactsFailedEvent
 
 This event will be thrown when fetching the contacts from the social provider has failed.
 
-``` cs
-public void onGetContactsFailed(Provider provider, string payload) {
-	// provider is the social provider
-	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon failure
+``` java
+@Subscribe
+public void onGetContactsFailed(GetContactsFailedEvent getContactsFailedEvent) {
+	// A GetContactsFailedEvent contains the following:
+	// provider         = the provider on which the get contacts process has failed
+	// socialActionType = the social action preformed
+	// errorDescription = description of the reason for failure
+	// payload          = an identification string that you can give when you initiate
+	//                    the get contacts operation and want to receive back upon failure
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnGetFeedStarted
+###GetFeedStartedEvent
 
 This event will be thrown when fetching the feed from the social provider has started.
 
-``` cs
-public void onGetFeedStarted(Provider provider) {
-	// provider is the social provider
+``` java
+@Subscribe
+public void onGetFeedStarted(GetFeedStartedEvent getFeedStartedEvent) {
+	// A GetFeedStartedEvent contains the following:
+	// provider    = the provider on which the get feed process started
+	// getFeedType = the social action preformed
+	// payload     = an identification string that you can give when you initiate
+	//               the get feed operation and want to receive back upon starting
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnGetFeedFinished
+###GetFeedFinishedEvent
 
 This event will be thrown when fetching the feed from the social provider has finished **successfully**.
 
-``` cs
-public void onGetFeedFinished(Provider provider, List<string> feed) {
-	// provider is the social provider
-	// feed is the user's feed that has been fetched in the get feed operation
+``` java
+@Subscribe
+public void onGetFeedFinished(GetFeedFinishedEvent getFeedFinishedEvent) {
+	// A GetFeedFinishedEvent contains the following:
+	// provider    = the provider on which the get feed process finished
+	// getFeedType = the social action preformed
+	// feedPosts   = an Array of feed entries represented by strings
+	// payload     = an identification string that you can give when you initiate
+	//               the get feed operation and want to receive back upon completion
 
 	// ... your game specific implementation here ...
 }
 ```
 
-###OnGetFeedFailed
+###GetFeedFailedEvent
 
 This event will be thrown when fetching the feed from the social provider has failed.
 
-``` cs
-public void onGetFeedFailed(Provider provider, string payload) {
-	// provider is the social provider
-	// payload is an identification string that you can give when you initiate the get feed operation and want to receive back upon failure
+``` java
+@Subscribe
+public void onGetFeedFailed(GetFeedFailedEvent getFeedFailedEvent) {
+	// A GetFeedFailedEvent contains the following:
+	// provider         = the provider on which the get feed process has
+	// getFeedType      = the social action preformed
+	// errorDescription = description of the reason for failure
+	// payload          = an identification string that you can give when you initiate
+	//                    the get feed operation and want to receive back upon failure
 
 	// ... your game specific implementation here ...
 }

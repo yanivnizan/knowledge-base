@@ -10,7 +10,7 @@ module: 'store'
 platform: 'android'
 ---
 
-#Main Classes*
+#Main Classes
 
 Here you can find descriptions of some of the main classes and interfaces of android-store. These classes contain functionality for store-related operations such as purchasing, billing, inventory querying and storage.
 
