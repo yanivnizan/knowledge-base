@@ -21,17 +21,17 @@ Social actions allow you to entice social engagement by offering your users rewa
 
 <div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many methods of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
-##UserProfileUtils
+## UserProfileUtils [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/UserProfileUtils.h)
 
 This class lists the different social networks that exist today. Currently, SOOMLA supports Facebook, Twitter, and Google+.
 
-##SocialActionUtils
+## SocialActionUtils [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/SocialActionUtils.h)
 
 `SocialActionUtils` represents various social actions that can be performed in social networks, such as posting a status or story, or uploading an image.
 
 This class simply holds a string enumeration of the different social actions.
 
-##UserProfile
+## UserProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/domain/UserProfile.h)
 
 This class represents a profile of a user from a social network (provider).
 
@@ -51,7 +51,7 @@ This class represents a profile of a user from a social network (provider).
 - `language`
 - `birthday`
 
-##SoomlaProfile
+## SoomlaProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/SoomlaProfile.h)
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations for users. The Profile module will work with the social and authentication plugins of the integrated social provider (FB, G+, Twitter, etc..).
 
@@ -71,7 +71,7 @@ Most of the social actions provided in Profile depend on the user being logged i
 
 `logout` simply logs the user out of the specified provider. Don't forget to disable the social action buttons in your UI once your user is logged out.
 
-``` objective-c
+``` objectivec
 // If the user clicks on the login button you provide, call the login method:
 [[SoomlaProfile getInstance]
 	loginWithProvider:FACEBOOK
@@ -88,7 +88,7 @@ Most of the social actions provided in Profile depend on the user being logged i
 
 As its name implies, this method checks if the user is logged in and returns a boolean value.
 
-``` objective-c
+``` objectivec
 if ([[SoomlaProfile getInstance] isLoggedInWithProvider:FACEBOOK]) {
     // Here you can (and should) set the screen to match the logged-in state.
     // For example display the logout button, like button, share button, etc.
@@ -102,7 +102,7 @@ if ([[SoomlaProfile getInstance] isLoggedInWithProvider:FACEBOOK]) {
 
 This function opens up the provider page to "like" (a web page in a browser), and grants the user the supplied reward. For example, give the user 100 coins for liking your page.
 
-``` objective-c
+``` objectivec
 // If the user clicks the "Like" button provided in your game, call the
 // like method and reward him/her with 100 coins.
 [[SoomlaProfile getInstance] like:FACEBOOK
@@ -118,7 +118,7 @@ This function opens up the provider page to "like" (a web page in a browser), an
 
 This function updates the user's status, which is simply a message, on the supplied social provider. Upon a successful update, the user will receive the supplied reward. For example, reward users that post a specific status with a `CCSingleUseVG`, such as a sword.
 
-``` objective-c
+``` objectivec
 [[SoomlaProfile getInstance] updateStatusWithProvider:FACEBOOK
 	andStatus:@"I love SOOMLA! http://www.soom.la"
 	andReward:appDelegate.updateStatusReward
@@ -135,7 +135,7 @@ For example, once your user reaches a high score, you could display a popup that
 
 **NOTE:** This functionality is supported in Facebook only.
 
-``` objective-c
+``` objectivec
 [[SoomlaProfile getInstance] updateStoryWithProvider:TARGET_PROVIDER
 	andMessage:@"This is the story"
 	andName:@"The story of SOOMBOT (Profile Test App)"
@@ -158,7 +158,7 @@ For example, when your user finishes a level in your game, you can offer him/her
 
 **NOTE:** This functionality is supported in Facebook only.
 
-``` objective-c
+``` objectivec
 [[SoomlaProfile getInstance] uploadImageWithProvider:FACEBOOK
 	andMessage:@"I love SOOMLA! http://www.soom.la"
 	andFilePath:filePath
@@ -177,7 +177,7 @@ This function retrieves the user's page for the given social provider from the *
 
 For example, you could use `GetStoredUserProfile` to get the user's `FirstName`, and welcome him to the game.
 
-``` objective-c
+``` objectivec
 [[SoomlaProfile getInstance] getStoredUserProfileWithProvider:FACEBOOK];
 ```
 
@@ -192,7 +192,7 @@ This function retrieves a list of the user's contacts from the supplied provider
 
 You could use `GetContacts` to show your users a personalized screen where they can see which of their friends are also playing your game, or you could offer the contacts that don't play your game to download your game and receive some free coins.
 
-``` objective-c
+``` objectivec
 [[SoomlaProfile getInstance] getContactsWithProvider:FACEBOOK
 	andReward:nil
 ];
@@ -203,7 +203,7 @@ You could use `GetContacts` to show your users a personalized screen where they 
 
 `openAppRatingPage` conveniently opens your application's page in the App Store so that it's simple to rate the app. You can offer your users to rate your app after they've completed a level successfully or have progressed significantly in your game.
 
-``` objective-c
+``` objectivec
 [[SoomlaProfile getInstance] openAppRatingPage];
 ```
 
@@ -220,7 +220,7 @@ A `Reward` is an entity which can be earned by the user for meeting certain crit
 
 A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) for liking your page.
 
-``` objective-c
+``` objectivec
 VirtualItemReward* coinReward;
 ...
 
@@ -236,7 +236,7 @@ self.coinReward = [[VirtualItemReward alloc] initWithRewardId:@"coin_reward"
 
 A specific type of `Reward` that represents a badge with an icon. **For example:** Give the user a badge reward for posting a status on his/her wall.
 
-``` objective-c
+``` objectivec
 BadgeReward* badgeReward;
 ...
 
@@ -251,7 +251,7 @@ self.badgeReward = [[BadgeReward alloc] initWithRewardId:@"badge_reward"
 
 A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
 
-``` objective-c
+``` objectivec
 SequenceReward* beltReward;
 
 // Assume that these are Badge Rewards that have been created.
@@ -269,7 +269,7 @@ self.badgeReward = [[BadgeReward alloc] initWithRewardId:@"belt_reward"
 
 A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** Give users a mystery box `Reward` for uploading an image, that grants him/her a random `Reward`.
 
-``` objective-c
+``` objectivec
 RandomReward* mysteryReward;
 
 // Assume that these are Virtual Item Rewards that have been created.
