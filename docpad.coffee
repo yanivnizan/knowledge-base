@@ -147,8 +147,6 @@ docpadConfig = {
 			]
 		}
 
-
-
 	# -----------------------------
 	# Helper Functions
 
