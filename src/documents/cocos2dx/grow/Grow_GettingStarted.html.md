@@ -112,6 +112,8 @@ In your XCode project, perform the following steps:
     - Add its targets to your **Build Phases->Target Dependencies**
     - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
+  ![alt text](/img/tutorial_img/cocos_grow/iosStep2.png "iOS Integration")
+
 3. Add the following directories to **Build Settings->Header Search Paths** (with the `recursive` option):
 
   NOTE: This article assumes you have a `cocos2d` folder under your project folder which either contains the Cocos2d-x framework, or links to to its root folder.
@@ -127,7 +129,13 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios/headers`
 
-4. To register services on the native application (`AppController`):
+  ![alt text](/img/tutorial_img/cocos_grow/headerSP.png "Header search paths")
+
+4. Add the AFNetworking dependency to your project:
+  - Add the `libAFNetworking.a` file (from `extensions/cocos2dx-highway/build/ios/`) to **Build Phases->Link Binary With Libraries** (You'll need to hit "Open Other")
+  - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios/` to **Build Settings->Library Search Paths** (non-recursive)
+
+5. To register services on the native application (`AppController`):
 
   a. Import the following headers:
     ```cpp
@@ -145,9 +153,6 @@ In your XCode project, perform the following steps:
       registerService:[Cocos2dXSoomlaHighway sharedCocos2dXSoomlaHighway]];
 
     [[ServiceManager sharedServiceManager]
-      registerService:[Cocos2dXSoomlaHighway sharedCocos2dXSoomlaHighway]];
-
-    [[ServiceManager sharedServiceManager]
       registerService:[StoreService sharedStoreService]];
 
     [[ServiceManager sharedServiceManager]
@@ -158,8 +163,6 @@ In your XCode project, perform the following steps:
     ```
 
     at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
-
-5. Drag the `AFNetworking` (extensions/cocos2dx-highway/build/ios/AFNetworking) files to your project. Turn on ARC for these files, if it's turned on for your project.
 
 6. Make sure you have these 7 Frameworks linked to your XCode project:
 

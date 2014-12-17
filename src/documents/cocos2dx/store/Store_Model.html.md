@@ -32,7 +32,7 @@ As stated above, almost all Virtual Items are purchasable, or as we call them, `
 
 <div class="info-box">In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.</div>
 
-### [PurchaseWithMarket](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/PurchaseTypes/CCPurchaseWithMarket.h)
+### PurchaseWithMarket [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/PurchaseTypes/CCPurchaseWithMarket.h)
 
 This kind of `PurchaseType` should be attached to items that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market.
 
@@ -69,7 +69,7 @@ For more info on how to declare your items in the Market, see one of our tutoria
 
 - For iOS: [App Store IAB](/ios/store/Store_AppStoreIAB)
 
-###[PurchaseWithVirtualItem](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/PurchaseTypes/CCPurchaseWithVirtualItem.h)
+### PurchaseWithVirtualItem [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/PurchaseTypes/CCPurchaseWithVirtualItem.h)
 
 Any item with purchase type `PurchaseWithVirtualItem` can be purchased with any `VirtualItem`, like a sort of trade. When creating an instance of `PurchaseWithVirtualItem`, you need to provide the ID of the virtual item that you want to be paid with and the amount of that virtual item.
 
@@ -88,7 +88,7 @@ CCVirtualGood *chocolateCakeGood = CCSingleUseVG::create(
 
 ## Virtual Currencies
 
-### [VirtualCurrency](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualCurrencies/CCVirtualCurrency.h)
+### VirtualCurrency [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualCurrencies/CCVirtualCurrency.h)
 
 Every game that has an economy has at least one `VirtualCurrency`. `VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` (explained later in this document). If for some reason you *do* want to sell a single currency you can do so by providing a `VirtualCurrencyPack` with an amount of 1.
 
@@ -144,7 +144,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->getItemBalance("currency_muffin", &soomlaError);
 ```
 
-### [VirtualCurrencyPack](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualCurrencies/CCVirtualCurrencyPack.h)
+### VirtualCurrencyPack [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualCurrencies/CCVirtualCurrencyPack.h)
 
 As mentioned above, in game stores you never buy just a "Gold Coin" or a "Muffin", you always buy a pack of the game's `VirtualCurrency`. This class represents exactly that: a pack of `VirtualCurrency`. Use this class to define various currency packs in your game.
 
@@ -227,7 +227,7 @@ Every virtual good belongs to one of the following groups:
 
 Below are detailed descriptions of each category.
 
-### [SingleUseVG](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCSingleUseVG.h)
+### SingleUseVG [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCSingleUseVG.h)
 
 The most basic and common kind of a `VirtualGood` is a `SingleUseVG`. `SingleUseVG`s can be purchase by your users multiple times. No limits!
 
@@ -292,7 +292,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->getItemBalance("fruit_cake", &soomlaError);
 ```
 
-###[SingleUsePackVG](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCSingleUsePackVG.h)
+### SingleUsePackVG [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCSingleUsePackVG.h)
 
 Sometimes, you'll want to to sell packs of `SingleUseVG`s. To support these cases, we've created `SingleUsePackVG`.
 
@@ -359,7 +359,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->getItemBalance("fruit_cake_5pack", &soomlaError);
 ```
 
-###[LifetimeVG](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCLifetimeVG.h)
+### LifetimeVG [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCLifetimeVG.h)
 
 A `LifetimeVG` is a `VirtualGood` that can be bought once and is kept forever.
 
@@ -455,7 +455,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->getItemBalance("marriage", &soomlaError);
 ```
 
-###[EquippableVG](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCEquippableVG.h)
+### EquippableVG [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCEquippableVG.h)
 
 An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact that an `EquippableVG` can be purchased once, it can also be equipped by your users. Equipping means that the user decides to currently use a specific `EquippableVG`.
 
@@ -568,7 +568,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->isVirtualGoodEquipped("kramer", &soomlaError);
 ```
 
-###[UpgradeVG](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCUpgradeVG.h)
+### UpgradeVG [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCUpgradeVG.h)
 
 An `UpgradeVG` is a `VirtualGood` in a series of `UpgradeVG`s that define an upgrade sequence for a given `VirtualGood`. The associated `VirtualGood` can be of any type (`SingleUseVG`, `EquippableVG`, etc..).
 
@@ -712,7 +712,7 @@ CCSoomlaError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->getGoodUpgradeLevel(MUFFIN_CAKE_GOOD_ITEM_ID, &soomlaError);
 ```
 
-##[VirtualCategory](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/CCVirtualCategory.h)
+## VirtualCategory [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/CCVirtualCategory.h)
 
 A `VirtualCategory` is used to categorize `VirtualGood`s. Categories are helpful for organizational purposes, but especially come in handy when you have Equippable Virtual Goods.
 

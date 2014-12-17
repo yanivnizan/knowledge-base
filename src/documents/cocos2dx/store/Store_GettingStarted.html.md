@@ -12,9 +12,7 @@ platform: 'cocos2dx'
 
 #Getting Started
 
-##Integrate cocos2dx-store
-
-###With pre-built libraries
+##Getting Started
 
 *If you want to develop with sources, refer to the "Working with Sources" section below.*
 
@@ -76,7 +74,7 @@ platform: 'cocos2dx'
 
 <br>
 
-####**Instructions for iOS**
+###**Instructions for iOS**
 
 In your XCode project, perform the following steps:
 
@@ -92,41 +90,47 @@ In your XCode project, perform the following steps:
 
     b. Add its targets to your **Build Phases->Target Dependencies**.
 
-    c. Add its *.a files to **Build Phases->Link Binary With Libraries**.
+    c. Add its `.a` files to **Build Phases->Link Binary With Libraries**.
 
-    ![alt text](/img/tutorial_img/cocos2dx_getting_started/iOS_steps1to4.png "iOS Integration")
+ ![alt text](/img/tutorial_img/cocos2dx_getting_started/iOS_steps1to4.png "iOS Integration")
 
-3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
- - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers/**`
+3. Add the following directories to **Build Settings->Header Search Paths** (with the `recursive` option):
 
-4. Add `-ObjC` to your project **Build Settings** > **Other Linker Flags**.
+	- `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
+
+	- `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
+
+	- `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
+
+	- `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
+
+ ![alt text](/img/tutorial_img/cocos2dx_getting_started/headerSP.png "Header search paths")
+
+4. Add `-ObjC` to your project **Build Settings->Other Linker Flags**.
+
+	![alt text](/img/tutorial_img/cocos2dx_getting_started/objc.png "Pther Linker Flags")
 
 5. To register services on the native application (AppController):
 
-  a. import the following headers:
+  a. Import the following headers:
 
     ``` cpp
     #import "ServiceManager.h"
     #import "StoreService.h"
     ```
 
-  b. Register the native `StoreService` by adding:
+  b. Register the native `StoreService` at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController` by adding:
 
     ```cpp
     [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
     ```
-
-    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
 6. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
 **That's it! Now all you have to do is build your XCode project and run your game with cocos2dx-store.**
 
 <br>
-####**Instructions for Android**
+###**Instructions for Android**
 
 1. Import cocos2dx-store module into your project's Android.mk by adding the following:
 
@@ -195,7 +199,7 @@ In your XCode project, perform the following steps:
     ```
 
 
-###**Working with sources**
+##**Working with sources**
 
 To integrate cocos2dx-store into your game, follow these steps.
 
@@ -207,13 +211,11 @@ To integrate cocos2dx-store into your game, follow these steps.
     $ git clone --recursive git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
     ```
 
-	**OR:** If you have already cloned the repositories, to obtain the submodules, use command:
+	**OR:** If you have already cloned the repositories, to obtain the submodules, run this command in each repository:
 
     ```
     $ git submodule update --init --recursive
     ```
-
-	**NOTE:** You should run this command in each repository.
 
 2. **For iOS:** Use sourced versions of Linked projects (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.xcodeproj`, `extensions/cocos2dx-store/development/Cocos2dxStoreFromSources.xcodeproj`)
 
@@ -236,9 +238,9 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 	<uses-permission android:name="com.android.vending.BILLING"/>
 
 	<application ...
-	    <activity android:name="com.soomla.store.billing.google.GooglePlayIabService$IabActivity"
-	              android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
-	    <meta-data android:name="billing.service" android:value="google.GooglePlayIabService" />
+	 <activity android:name="com.soomla.store.billing.google.GooglePlayIabService$IabActivity"
+	            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+	 <meta-data android:name="billing.service" android:value="google.GooglePlayIabService"/>
 	</application>
 	```
 
@@ -264,7 +266,6 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 
     <div class="info-box">Don't forget to close the Iab Service when your store is closed.</div>
 
-
 ###Amazon
 
 1. Add `in-app-purchasing-1.0.3.jar` and `AndroidStoreAmazon.jar` from `extensions/cocos2dx-store/build/android/billing-services/amazon` to your classpath:
@@ -272,12 +273,11 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 2. Update your manifest:
 
 	``` xml
-	...
 	<receiver android:name = "com.amazon.inapp.purchasing.ResponseReceiver" >
-	<intent-filter>
+		<intent-filter>
 	    <action android:name = "com.amazon.inapp.purchasing.NOTIFY"
 	            android:permission = "com.amazon.inapp.purchasing.Permission.NOTIFY" />
-	</intent-filter>
+		</intent-filter>
 	</receiver>
 	<meta-data android:name="billing.service" android:value="amazon.AmazonIabService" />
 	```
@@ -302,7 +302,7 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 **That's it! Now all you have to do is run the *build_native.sh* script and you can begin using cocos2dx-store in your game.**
 
 
-##**Example**
+## Example
 
 **Create an example implementation of `CCStoreAssets`:**
 
@@ -325,8 +325,8 @@ CCVirtualCurrencyPack *TEN_COIN_PACK = CCVirtualCurrencyPack::create(
 	String::create("10 Coins"),                                 // name
 	String::create("A pack of 10 coins"),                       // description
 	String::create(TEN_COIN_PACK_ITEM_ID),                      // item ID
-	Integer::create(10),                                        // number of currency units in this pack
-	String::create(COIN_CURRENCY_ITEM_ID),                      // ID of the currency associated with this pack
+	Integer::create(10),                                        // number of currency units
+	String::create(COIN_CURRENCY_ITEM_ID),                      // associated currency
 	CCPurchaseWithMarket::create(String::create(                // purchase type
 	    TEN_COIN_PACK_PRODUCT_ID),                              // ID as defined in the Market
 	    Double::create(0.99))                                   // amount
@@ -335,23 +335,23 @@ CCVirtualCurrencyPack *TEN_COIN_PACK = CCVirtualCurrencyPack::create(
 /** Virtual Goods **/
 
 CCVirtualGood *shieldGood = CCSingleUseVG::create(
-    CCString::create("Shield"),                                 // name
-    CCString::create("Defend yourself!"),                       // description
-    CCString::create("shield_good"),                            // item ID
-    CCPurchaseWithVirtualItem::create(CCString::create(         // purchase type
-        COIN_CURRENCY_ITEM_ID),                                 // currency
-        CCInteger::create(50))                                  // price
+    CCString::create("Shield"),                               // name
+    CCString::create("Defend yourself!"),                     // description
+    CCString::create("shield_good"),                          // item ID
+    CCPurchaseWithVirtualItem::create(CCString::create(       // purchase type
+        COIN_CURRENCY_ITEM_ID),                               // currency
+        CCInteger::create(50))                                // price
 );
 
 CCVirtualGood *tenShieldGoods = CCSingleUsePackVG::create(
-    CCString::create("shield_good"),                            // ID of the Single Use item associated with this Pack
-    CCInteger::create(10),                                      // number of items in the Pack
-    CCString::create("10 Shields"),                             // name
-    CCString::create("Defend yourself!"),                       // description
-    CCString::create("shield_good_10"),                         // item ID
-    CCPurchaseWithVirtualItem::create(CCString::create(         // purchase type
-        COIN_CURRENCY_ITEM_ID),                                 // currency
-        CCInteger::create(300)));                               // price
+    CCString::create("shield_good"),                          // associated item ID
+    CCInteger::create(10),                                    // number of items
+    CCString::create("10 Shields"),                           // name
+    CCString::create("Defend yourself!"),                     // description
+    CCString::create("shield_good_10"),                       // item ID
+    CCPurchaseWithVirtualItem::create(CCString::create(       // purchase type
+        COIN_CURRENCY_ITEM_ID),                               // currency
+        CCInteger::create(300)));                             // price
 ```
 
 **Initialize SOOMLA SDK**
