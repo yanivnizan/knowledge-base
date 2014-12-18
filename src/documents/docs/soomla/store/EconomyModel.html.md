@@ -2,7 +2,7 @@
 layout: "content"
 image: "Modeling"
 title: "Economy Model"
-text: "Every game economy can be based on SOOMLA's economy model, with entities such as virtual currencies, currency packs, and virtual items of all sorts."
+text: "Every game economy can be based on SOOMLA's economy model. Learn the building blocks of creating a virtual economy with currencies and virtual goods."
 position: 3
 theme: 'soomla'
 collection: 'soomla_store'
@@ -20,11 +20,11 @@ SOOMLA provides game developers with an economy model that every game economy ca
 
 Almost every entity in your virtual economy will be a Virtual Item. There are many types of Virtual Items and you can select the ones that fit your needs. Each one of the various types extends the class `VirtualItem` and adds its own behavior.
 
-Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeVirtualItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
+Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
 
-Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeVirtualItem` when you want to take something from your user, for example in the case of a refund.
+Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeItem` when you want to take something from your user, for example in the case of a refund.
 
-Every virtual item has an `itemId`, a unique string that we use to identify the different items.
+Every virtual item has an ID, a unique string that we use to identify the different items.
 
 ##Purchase Types
 
@@ -208,7 +208,7 @@ As mentioned in the beginning of this document, every virtual item has a purchas
 
 In the case of a `LifetimeVG`, when created with a purchase type of `PurchaseWithMarket`, it represents a non-consumable item in the market, i.e., it cannot be consumed and is owned by the user forever.
 
-On the other hand, when created with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` as long as the local storage of the game has **not** been deleted (the version has been updated, or the game was deleted and re-downloaded... Read more about [SOOMLA Storage]()), .
+On the other hand, when created with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` as long as the local storage of the game has **not** been deleted (i.e. the version has been updated, or the game was deleted and re-downloaded... Read more about [SOOMLA Storage]()), .
 
 Confused? See the example below for clarification.
 

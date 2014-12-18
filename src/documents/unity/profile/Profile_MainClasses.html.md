@@ -10,7 +10,7 @@ module: 'profile'
 platform: 'unity'
 ---
 
-#Main Classes & Operations
+# Main Classes & Operations
 
 In this document you'll find descriptions of most of the main classes and interfaces of unity3d-profile. Some of these classes represent the different social elements used in the Profile module, while others contain functionality to perform social-related operations.
 
@@ -21,19 +21,19 @@ Social actions allow you to entice social engagement by offering your users rewa
 
 <div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many functions of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
-##Provider
+## Provider [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-profile/blob/master/Soomla/Assets/Plugins/Soomla/Profile/Domain/Provider.cs)
 
 This class represents the different social networks that exist today. Currently, SOOMLA supports Facebook, Twitter, and Google+.
 
 The `Provider` class simply holds a string enumeration of the various providers that are currently available, as well as those that will be available in the future.
 
-##SocialActionType
+## SocialActionType [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-profile/blob/master/Soomla/Assets/Plugins/Soomla/Profile/Domain/SocialActionType.cs)
 
 This class represents various social actions that can be performed in social networks, such as posting a status or story, or uploading an image.
 
 The `SocialActionType` class simply holds a string enumeration of the different social actions.
 
-##UserProfile
+## UserProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-profile/blob/master/Soomla/Assets/Plugins/Soomla/Profile/Domain/UserProfile.cs)
 
 This class holds information about a user for a specific `Provider`.
 
@@ -52,7 +52,7 @@ This class holds information about a user for a specific `Provider`.
 - `Language`
 - `Birthday`
 
-##SoomlaProfile
+## SoomlaProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-profile/blob/master/Soomla/Assets/Plugins/Soomla/Profile/SoomlaProfile.cs)
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations for users. The Profile module will work with the social and authentication plugins, as you supply in the SOOMLA settings, described in step 3b of the [Getting Started](/docs/platforms/unity/Profile_GettingStarted#getting-started) tutorial.
 
@@ -146,7 +146,7 @@ This function updates the user's status, which is simply a message, on the suppl
 VirtualCurrency coin = new VirtualCurrency("Coin", "", "coin_ID");
 
 // A single-use virtual item, sword, that can be purchased for 200 virtual coins.
-VirtualItem sword = new SingleUseVG("Sword", "", "sword_ID", new PurchaseWithVirtualItem(coin.ID, 200));
+VirtualGood sword = new SingleUseVG("Sword", "", "sword_ID", new PurchaseWithVirtualItem(coin.ID, 200));
 
 // A reward of 1 FREE sword (no need to purchase it for 200 coins!)
 Reward swordReward = new VirtualItemReward("swordReward_ID", "Sword Reward", sword.ID, 1);
@@ -173,7 +173,7 @@ For example, once your user reaches a high score, you could display a popup that
 ``` cs
 // Equippable virtual good - a soombot character with super powers
 // that can be purchased for 2.99.
-VirtualItem soombot = new EquippableVG(
+VirtualGood soombot = new EquippableVG(
 	EquippableVG.EquippingModel.GLOBAL,
 	"Soombot character",
 	"Soombot has super powers!",
@@ -198,7 +198,7 @@ SoomlaProfile.UpdateStory(
 	"http://about.soom.la/soombots",            // Link to post
 	"http://about.soom.la/.../spockbot.png",    // Image URL
 	"",                                         // Payload
-	soombotReward,                              // Reward for posting a story
+	soombotReward                               // Reward for posting a story
 );
 ```
 
@@ -216,12 +216,12 @@ For example, when your user finishes a level in your game, you can offer him/her
 ``` cs
 // A random reward that is selected from the given list - in this case it'll be one of the rewards defined above.
 Reward mysteryReward = new RandomReward(
-	"mysterReward_ID",
+	"mysteryReward_ID",
 	"Mystery Reward",
 	new List<Reward>{hundredCoinReward, swordReward, soombotReward}
 );
 
-// Once the user uploads the image, give him/her a mysterReward.
+// Once the user uploads the image, give him/her a mysteryReward.
 SoomlaProfile.UploadImage(
 	Provider.FACEBOOK,                    // Provider
 	(a texture),                          // The image as a texture
@@ -272,7 +272,7 @@ SoomlaProfile.OpenAppRatingPage();
 ```
 
 <br>
-##Auxiliary Model: Reward
+##Auxiliary Model: Reward [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/rewards/Reward.cs)
 
 A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress.
 
@@ -280,7 +280,7 @@ A `Reward` is an entity which can be earned by the user for meeting certain crit
 
 `Reward` is an abstract class. Below are several types of rewards that implement `Reward`.
 
-###**VirtualItemReward**
+### VirtualItemReward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/rewards/VirtualItemReward.cs)
 
 A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) for liking your page.
 
@@ -296,7 +296,7 @@ Reward coinReward = new VirtualItemReward(
 ```
 
 <br>
-###**BadgeReward**
+### BadgeReward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/rewards/BadgeReward.cs)
 
 A specific type of `Reward` that represents a badge with an icon. **For example:** Give the user a badge reward for posting a status on his/her wall.
 
@@ -308,9 +308,9 @@ Reward goldMedal = new BadgeReward(
 ```
 
 <br>
-###**SequenceReward**
+### SequenceReward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/rewards/SequenceReward.cs)
 
-A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
+A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, purple belt, brown belt, and lastly, black belt.
 
 ``` cs
 Reward blueBelt = new BadgeReward(
@@ -324,15 +324,14 @@ Reward beltReward = new SequenceReward(
 	"Belt Reward",                        // Name
 	new List<Reward>() {                  // Rewards in sequence
 		blueBelt,
-		yellowBelt,  
-		greenBelt,  
+		purpleBelt,  
 		brownBelt,  
 		blackBelt }
 );
 ```
 
 <br>
-###**RandomReward**
+### RandomReward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/rewards/RandomReward.cs)
 
 A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** Give users a mystery box `Reward` for uploading an image, that grants him/her a random `Reward`.
 

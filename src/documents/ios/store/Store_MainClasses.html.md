@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "Main Classes"
-text: "The main classes of ios-store contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store."
+text: "The main classes of ios-store contain functionality for store-related operations such as purchasing, billing, inventory querying and storage."
 position: 4
 theme: 'platforms'
 collection: 'ios_store'
@@ -12,9 +12,9 @@ platform: 'ios'
 
 #Main Classes
 
-Here you can find descriptions of some of the main classes and interfaces of iOS-store. These classes contain functionality to perform store-related operations, provide you with different storages, and hold the basic assets needed to operate the store.
+Here you can find descriptions of some of the main classes and interfaces of iOS-store. These classes contain functionality for store-related operations such as purchasing, billing, inventory querying and storage.
 
-##[SoomlaStore](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/SoomlaStore.h)
+## SoomlaStore [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/SoomlaStore.h)
 
 SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the App Store. It provides you with functionality such as starting/stopping the in-app billing service in the background, querying the inventory for information, or starting a purchase process in the App Store.
 
@@ -34,7 +34,7 @@ id<IStoreAssets> storeAssets = [[MuffinRushAssets alloc] init];
 
 This function queries the App Store’s inventory, and creates a list of all metadata stored in the App Store (the items that have been purchased). The metadata includes the item's name, description, price, product ID, etc… Then a `MarketItemsRefreshed` event is posted with the list just created. Upon failure, displays an error message.
 
-##[StoreInfo](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/data/StoreInfo.h)
+## StoreInfo [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/data/StoreInfo.h)
 
 `StoreInfo` is the mother of all metadata information about your specific game.
 
@@ -58,7 +58,7 @@ int greenHatsBalance = [[[StorageManager getInstance] virtualGoodStorage] balanc
 
 `StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
 
-##[StoreInventory](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreInventory.h)
+## StoreInventory [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreInventory.h)
 
 `StoreInventory` is a utility class that provides you with functions that perform store-related operations. With `StoreInventory` you can give or take items from your users. You can buy items or upgrade them. You can also check their equipping status and change it.
 
@@ -93,7 +93,7 @@ Takes from your user the given amount of the virtual item with the given item id
 
 Equips the given virtual good with the given good item id. Equipping means that your user decides to currently use a specific virtual good. According to additional factors, your user may or may not use other equippable goods at the same time. To understand more about equipping see `EquippableVG` in our [Economy Model](/docs/platforms/ios/EconomyModel#virtual-goods) guide.
 
-##[StorageManager](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/data/StorageManager.h)
+## StorageManager [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/data/StorageManager.h)
 
 <div class="warning-box">SOOMLA discourages the use of StorageManager's functions, and suggests you use StoreInventory's functions instead to perform the same actions.</div>
 
@@ -101,7 +101,7 @@ Equips the given virtual good with the given good item id. Equipping means that 
 
 You can use the `StorageManager`’s functions to access the different storage bases, and then use the different storages’ available functions to perform actions such as set/get an item’s balance, add/remove an item from the storage, etc…
 
-##[StoreConfig](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreConfig.h)
+## StoreConfig [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/StoreConfig.h)
 
 The configurations of your store will be kept in `StoreConfig`.
 

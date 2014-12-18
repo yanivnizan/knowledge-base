@@ -1,8 +1,8 @@
 ---
 layout: "content"
 image: "Modeling"
-title: "Economy Model & Operations"
-text: "Every game economy can be based on SOOMLA's economy model. The game economy entities that SOOMLA provides are virtual currencies, currency packs, and virtual items of all sorts."
+title: "Economy Model & API"
+text: "Every game economy can be based on SOOMLA's economy model. Learn the building blocks of creating a virtual economy with currencies and virtual goods."
 position: 2
 theme: 'platforms'
 collection: 'unity_store'
@@ -10,7 +10,7 @@ module: 'store'
 platform: 'unity'
 ---
 
-# Economy Model & Operations
+# Economy Model & API
 
 SOOMLA's unity3d-store provides a complete data model implementation for virtual economies. Every game economy has currencies, packs of currencies that can be sold, and items that can be sold either for money or in exchange for other items. And these are just the very basics, of course. This tutorial contains descriptions of each entity in the economy model, along with examples.
 
@@ -20,11 +20,11 @@ SOOMLA's unity3d-store provides a complete data model implementation for virtual
 
 Almost every entity in your virtual economy will be a Virtual Item. There are many types of Virtual Items and you can select the ones that fit your needs. Each one of the various types extends the class `VirtualItem` and adds its own behavior.
 
-Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeVirtualItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
+Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
 
-Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeVirtualItem` when you want to take something from your user, for example in the case of a refund.
+Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeItem` when you want to take something from your user, for example in the case of a refund.
 
-Every virtual item has an `itemId`, a unique string that we use to identify the different items.
+Every virtual item has an ID, a unique string that we use to identify the different items.
 
 ## PurchaseTypes
 
@@ -32,7 +32,7 @@ As stated above, almost all Virtual Items are purchasable, or as we call them, `
 
 <div class="info-box">In the examples below the declarations of purchase types are shown as a part of `PurchasableVirtualItem` declarations, because this is the most common use of purchase types.</div>
 
-###[PurchaseWithMarket](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/purchaseTypes/PurchaseWithMarket.cs)
+### PurchaseWithMarket [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/purchaseTypes/PurchaseWithMarket.cs)
 
 This kind of `PurchaseType` should be attached to items that you want to make available for purchase in the Market (App Store, Google Play Store, etc..) for real money. When you create an instance of `PurchaseWithMarket`, you need to define the associated `VirtualItem` in the Market.
 
@@ -55,7 +55,7 @@ public static LifetimeVG NO_AD = new LifetimeVG(
 
 There is another way to define this purchase type:
 
-```  cs
+``` cs
 public const string THOUSANDMUFF_PACK_PRODUCT_ID = "1000_pack";
 
 public static VirtualCurrencyPack THOUSANDMUFF_PACK = new VirtualCurrencyPack(
@@ -72,14 +72,14 @@ For more info on how to declare your items in the Market, see one of our tutoria
 
 - For iOS: [App Store IAB](/ios/store/Store_AppStoreIAB)
 
-###[PurchaseWithVirtualItem](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/purchaseTypes/PurchaseWithVirtualItem.cs)
+### PurchaseWithVirtualItem [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/purchaseTypes/PurchaseWithVirtualItem.cs)
 
 Any item with purchase type `PurchaseWithVirtualItem` can be purchased with any `VirtualItem`, like a sort of trade. When creating an instance of `PurchaseWithVirtualItem`, you need to provide the ID of the virtual item that you want to be paid with and the amount of that virtual item.
 
 ####**For Example**
 Suppose that in your game, you offer a PAVLOVA_GOOD that can be bought by paying 175 “Muffins”. The item being purchased is a PAVLOVA_GOOD, the item (virtual currency) to pay with is “Muffin”, and the amount is 175.
 
-```  cs
+``` cs
 public const string MUFFIN_CURRENCY_ITEM_ID = "currency_muffin";
 
 public static VirtualGood PAVLOVA_GOOD = new SingleUseVG(
@@ -91,7 +91,7 @@ public static VirtualGood PAVLOVA_GOOD = new SingleUseVG(
 
 ##Virtual Currencies
 
-###[VirtualCurrency](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualCurrencies/VirtualCurrency.cs)
+### VirtualCurrency [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualCurrencies/VirtualCurrency.cs)
 
 Every game that has an economy has at least one `VirtualCurrency`. `VirtualCurrency` is NOT a `PurchasableVirtualItem`. This is because in game stores, you never buy just a single "Gold Coin" or a "Muffin", but rather you buy a pack of them. Your users will be able to buy packs of your game’s `VirtualCurrency` by using `VirtualCurrencyPack` (explained later in this document). If for some reason you *do* want to sell a single currency you can do so by providing a `VirtualCurrencyPack` with an amount of 1.
 
@@ -143,7 +143,7 @@ Get the balance of a specific `VirtualCurrency`.
 StoreInventory.GetItemBalance("currency_muffin");
 ```
 
-###[VirtualCurrencyPack](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualCurrencies/VirtualCurrencyPack.cs)
+### VirtualCurrencyPack [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualCurrencies/VirtualCurrencyPack.cs)
 
 As mentioned above, in game stores you never buy just a "Gold Coin" or a "Muffin", you always buy a pack of the game's `VirtualCurrency`. This class represents exactly that: a pack of `VirtualCurrency`. Use this class to define various currency packs in your game.
 
@@ -195,7 +195,7 @@ StoreInventory.TakeItem("muffins_50", 1);
 StoreInventory.GetItemBalance("currency_muffin");
 ```
 
-##Virtual Goods
+## Virtual Goods
 
 Every virtual good is a `PurchasableVirtualItem`. You can buy it with other `VirtualItem`s, or in the market with money. Virtual goods are the heart of every virtual economy. These are the game objects you’re going to want to sell in your game's store.
 
@@ -215,7 +215,7 @@ Every virtual good belongs to one of the following groups:
 
 Below are detailed descriptions of each category.
 
-###[SingleUseVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/SingleUseVG.cs)
+### SingleUseVG [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/SingleUseVG.cs)
 
 ####**How to define**
 
@@ -270,7 +270,7 @@ Get the balance of a specific `SingleUseVG`.
 StoreInventory.GetItemBalance("fruit_cake");
 ```
 
-###[SingleUsePackVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/SingleUsePackVG.cs)
+### SingleUsePackVG [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/SingleUsePackVG.cs)
 
 Sometimes, you'll want to to sell packs of `SingleUseVG`s. To support these cases, we've created `SingleUsePackVG`.
 
@@ -331,7 +331,7 @@ Query the balance of the virtual good with item ID "cream_cup":
 StoreInventory.getVirtualItemBalance("fruit_cake");
 ```
 
-###[LifetimeVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/LifetimeVG.cs)
+### LifetimeVG [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/LifetimeVG.cs)
 
 A `LifetimeVG` is a `VirtualGood` that can be bought once and is kept forever.
 
@@ -343,7 +343,7 @@ A `LifetimeVG` is a `VirtualGood` that can be bought once and is kept forever.
 
 If you declare a `LifetimeVG` with a purchase type of `PurchaseWithMarket`, it represents a non-consumable item in the market, i.e., it cannot be consumed and is owned by the user forever. (The Market saves this information forever)
 
-However, notice that if you declare a `LifetimeVG` with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` **as long as the local storage of the game has NOT been deleted** (the version has been updated, or the game was deleted and re-downloaded, etc..).
+However, notice that if you declare a `LifetimeVG` with a purchase type of `PurchaseWithVirtualItem`, the user will own the `LifetimeVG` **as long as the local storage of the game has NOT been deleted** (i.e. the version has been updated, or the game was deleted and re-downloaded, etc..).
 
 ####**For Example**
 
@@ -423,7 +423,7 @@ if (balance > 0) {
 }
 ```
 
-###[EquippableVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/EquippableVG.cs)
+### EquippableVG [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/EquippableVG.cs)
 
 An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact that an `EquippableVG` can be purchased once, it can also be equipped by your users. Equipping means that the user decides to currently use a specific `EquippableVG`.
 
@@ -529,7 +529,7 @@ Check if Kramer is currently equipped:
 StoreInventory.IsVirtualGoodEquipped("kramer");
 ```
 
-###[UpgradeVG](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/UpgradeVG.cs)
+### UpgradeVG [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/virtualGoods/UpgradeVG.cs)
 
 An `UpgradeVG` is a `VirtualGood` in a series of `UpgradeVG`s that define an upgrade sequence for a given `VirtualGood`. The associated `VirtualGood` can be of any type (`SingleUseVG`, `EquippableVG`, etc..).
 
@@ -655,7 +655,7 @@ To find out the upgrade level of a virtual good use `GetGoodUpgradeLevel`. If ou
 StoreInventory.GetGoodUpgradeLevel("strength");
 ```
 
-##[VirtualCategory](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/VirtualCategory.cs)
+## VirtualCategory [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/VirtualCategory.cs)
 
 A `VirtualCategory` is used to categorize `VirtualGood`s. Categories are helpful for organizational purposes, but especially come in handy when you have Equippable Virtual Goods.
 

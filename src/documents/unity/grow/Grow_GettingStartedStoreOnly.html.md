@@ -16,9 +16,9 @@ platform: 'unity'
 
 ##Setup GROW
 
-Go to the [Grow dashboard](http://dashboard.soom.la). Upon signing up, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
+Go to the [GROW dashboard](http://dashboard.soom.la). Upon signing up, you will be directed to the main page of the dashboard. On the left side panel, you can click on "Demo Game" in order to know what to expect to see once you start using Grow.
 
-1. Click on "Demo Game" > "Add New App" and fill in the required fields.
+1. Click on the right pointing arrow next to "Demo Game" > "Add New App" and fill in the required fields.
 
 	![alt text](/img/tutorial_img/unity_grow/addNewApp.png "Add new app")
 
@@ -30,7 +30,7 @@ Go to the [Grow dashboard](http://dashboard.soom.la). Upon signing up, you will 
 
 	- [unity3d-highway](http://library.soom.la/fetch/unity3d-highway/latest)
 
-3. Drag the `CoreEvents` & `StoreEvents` Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see them listed in the "Hierarchy" panel.
+3. Open your earliest loading scene.  Drag the `CoreEvents` & `StoreEvents` Prefabs from `Assets/Soomla/Prefabs` into the scene. You should see them listed in the "Hierarchy" panel.
 
 	![alt text](/img/tutorial_img/unity_grow/prefabsStoreOnly.png "Prefabs")
 
@@ -63,7 +63,7 @@ Go to the [Grow dashboard](http://dashboard.soom.la). Upon signing up, you will 
 	SoomlaHighway.Initialize();
 	```
 
-6. Build your app to a target platform (either iOS or Android) and run it once on a device.  Once your app is running, you can go back to the SOOMLA [dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the active users and game events should appear.
+6. Build your app to a target platform (either iOS or Android) and run it once on a device.  Once your app is running, you can go back to the [GROW dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the active users and game events should appear.
 
 	![alt text](/img/tutorial_img/unity_grow/verifyIntegration.png "Verify Integration")
 
@@ -71,7 +71,7 @@ Go to the [Grow dashboard](http://dashboard.soom.la). Upon signing up, you will 
 
 <div class="info-box">If you already had unity3d-store installed, and you already had an economy implemented (by implementing `IStoreAssets`) then you've successfully completed the Grow integration and you can skip the rest of this document.</div>
 
-If this is your first time using the store module, we suggest you read about the different modules and their entities in SOOMLA's Knowledge Base: [Store](/docs/platforms/unity/EconomyModel), [Profile](/docs/platforms/unity/Levelup_Model), and [LevelUp](/docs/platforms/unity/Profile_MainClasses).
+If this is your first time using the store module, we suggest you read about the different modules and their entities in SOOMLA's Knowledge Base: [Store](/unity/store/Store_Model), [Profile](/unity/profile/Profile_MainClasses), and [LevelUp](/unity/levelup/Levelup_Model).
 Below is a short example of how to implement an economy with SOOMLA's store module, which is the basic building block for using the GROW analytics dashboard.  This example isn't complete, but should give you a general idea of what you need to do.
 
 ###IStoreAssets

@@ -109,11 +109,15 @@ In your XCode project, perform the following steps:
 
     c. Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
+  ![alt text](/img/tutorial_img/cocos2dx-profile/iosStep2.png "iOS Integration")
+
 3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers`
+
+ ![alt text](/img/tutorial_img/cocos2dx-profile/headerSP.png "Header search paths")
 
 4. To register services on the native application (`AppController`):
 
@@ -265,10 +269,9 @@ That's it! Now all you have to do is build your XCode project and run your game 
     </application>
     ```
 
-<div class="info-box">The following steps should be done according to the target social network.</div>
+<div class="info-box">The following steps should be done according to the target social network.
 
-<br>
-<div class="info-box">NOTE: All jars for social providers are located at the following path: `extensions/cocos2dx-profile/build/android`</div>
+<br>NOTE: All jars for social providers are located at the following path: `extensions/cocos2dx-profile/build/android`</div>
 
 ###Facebook for Android
 

@@ -2,7 +2,7 @@
 layout: "content"
 image: "Events"
 title: "Events"
-text: "Event handling in android-store follows the publish-subscribe pattern. Throughout the SOOMLA SDK events are fired and need to be handled with your game-specific behavior."
+text: "Learn how to observe and handle economy events triggered by android-store to customize your game-specific behavior."
 position: 6
 theme: 'platforms'
 collection: 'android_store'

@@ -10,27 +10,27 @@ module: 'levelup'
 platform: 'unity'
 ---
 
-#Model & Operations
+# Model & Operations
 
-##LevelUp
+## LevelUp
 
 `LevelUp` models out worlds, levels, scores, missions, and more, all in one framework that allows game developers to build their game structure and progressions behavior easily and effectively. The sense of progress that users feel in a game is what creates retention and long-term use, which usually lead to monetization.
 
 In this document, you will find definitions of each of the entities of LevelUp, the connections between them, and code examples that demonstrate how to use them.
 
-###**LevelUp Hierarchy**
+### LevelUp Hierarchy
 
 The SOOMLA team has examined dozens of games and has observed that most game progress and accomplishment can be packed into worlds. Worlds can contain both levels and worlds internally, and may have missions that can be completed in order to receive rewards.
 
 ![alt text](/img/tutorial_img/soomla_diagrams/LevelUp.png "Soomla LevelUp Model")
 
-###**Prerequisites**
+### Prerequisites
 
 This document assumes that you have a good understanding of SOOMLA's Store module. If not, please take time to read about the [Economy Model](/unity/store/Store_Model), and then come back to this document.
 
 The `Schedule` and `Reward` entities are widely used in the examples of this document. You can read about them [here](#auxiliary-models).
 
-##SoomlaLevelUp
+## SoomlaLevelUp [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/SoomlaLevelUp.cs)
 
 This class is the top level container for the unity3d-levelup model and definitions. It stores the configurations of the game's world-hierarchy and provides lookup functions for `LevelUp` model elements.
 
@@ -69,7 +69,7 @@ int completedLevels = SoomlaLevelUp.GetCompletedWorldCount();
 ```
 
 <br>
-##**World**
+## World [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/World.cs)
 
 A game can have multiple `World`s or a single one, and `World`s can also contain other `World`s in them. In some games, these are referred to as level packs. Often, a `World` contains a set of `Level`s, or multiple sets. A `World` can also have a potential `Gate` that defines the criteria to enter it. Games that don’t have the concept of `World`s can be modeled as single `World` games.
 
@@ -225,7 +225,7 @@ foreach(KeyValuePair<string, double> entry in latestScores)
 ```
 
 <br>
-##**Level**
+## Level [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/Level.cs)
 
 One of the most common ways to create a sense of progress and accomplishment in games is to have levels. Every `Level` has a state, that is always one of: `Idle`, `Running`, `Paused`, `Ended`, or `Completed`. To use levels correctly, you need to use the provided `Start`, `Pause`, and `End` functions, in order for the level to keep an updated record of what its state is.
 
@@ -293,7 +293,7 @@ long playDuration = level1.GetPlayDurationMillis();
 ```
 
 <br>
-##**Score**
+## Score [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/scoring/Score.cs)
 
 Represents a score in the game. A simple game usually has one generic numeric score which grows as the user progresses in the game. A game can also have multiple scores for different aspects such as time, speed, points, etc.
 
@@ -361,7 +361,7 @@ int n = numberScore.GetTempScore(); // n = 0
 ```
 
 <br>
-###**RangeScore**
+### RangeScore [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/scoring/RangeScore.cs)
 
 A specific type of `Score` that has an associated range. The `Score`'s  value can be only inside that range of values. **For example:** A puzzle or quiz can measure the user's success on a scale of 1 - 10, or a shooting `Score` can be on a scale of 10 to 100 according to the user's performance in the game.
 
@@ -383,7 +383,7 @@ Score shootingScore = new RangeScore(
 ```
 
 <br>
-###**VirtualItemScore**
+### VirtualItemScore [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/scoring/VirtualItemScore.cs)
 
 A specific type of `Score` that has an associated virtual item, whose balance is affected by the score.
 
@@ -411,7 +411,7 @@ Score coinScore = new VirtualItemScore(
 ```
 
 <br>
-##**Gate**
+## Gate [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/Gate.cs)
 
 A `Gate` is an object that defines certain criteria for progressing between the game's `World`s or `Level`s. The `Gate` is a criteria or list of rules which which must be met in order to enter the `World` or `Level`. The rules are based on components of the previous `World` or `Level`: scores achieved, missions completed, etc. The `Gate` is opened once the logical conditions are met. In some games, `Gate`s can be opened with a payment or social task, such as sharing the game on Facebook.
 
@@ -423,7 +423,7 @@ A `Gate` is an object that defines certain criteria for progressing between the 
 All `Gate`s share the same definition, as explained above, but each `Gate` opens in a different way. Some `Gate`s need to be opened manually by the developer, and others will open automatically when a specific event is thrown. You'll find below an explanation of each type of `Gate` including how it opens.
 
 <br>
-###**BalanceGate**
+### BalanceGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/store/BalanceGate.cs)
 
 A specific type of `Gate` that has an associated virtual item and a desired balance. The`Gate` **automatically** opens once the item's balance has reached the desired balance.
 
@@ -463,7 +463,7 @@ isOpen = bGate.IsOpen(); // True because the balance has reached the desired bal
 ```
 
 <br>
-###**PurchasableGate**
+### PurchasableGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/store/PurchasableGate.cs)
 
 A specific type of `Gate` that has an associated Virtual item. This `Gate` is useful when you want to allow unlocking of certain `Level`s or `World`s only if they are purchased.
 
@@ -501,7 +501,7 @@ isOpen = pGate.IsOpen();  // True because the shield item has been purchased.
 ```
 
 <br>
-###**RecordGate**
+### RecordGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/RecordGate.cs)
 
 A RecordGate has an associated score and a desired record. The `Gate` opens **automatically** once the player achieves the desired record.
 
@@ -543,7 +543,7 @@ isOpen = rGate.IsOpen(); // True because numberScore has reached the record of 5
 ```
 
 <br>
-###**ScheduleGate**
+### ScheduleGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/ScheduleGate.cs)
 
 A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens **automatically** according to the defined schedule.
 
@@ -581,7 +581,7 @@ isOpen = sGate.IsOpen();  // False because we are NOT within the defined time fr
 ```
 
 <br>
-###**WorldCompletionGate**
+### WorldCompletionGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/WorldCompletionGate.cs)
 
 A `WorldCompletionGate` has an associated `World` that. Once the `World` is completed, the `Gate` **automatically** opens.
 
@@ -617,14 +617,14 @@ isOpen = wGate.IsOpen(); // True because worldA has been completed.
 ```
 
 <br>
-###**GatesList**
+### GatesList [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/GatesList.cs)
 
 A list of one or more `Gate`s that together define a composite criteria for progressing between the game's `World`s or `Level`s.
 
 There are two kinds of `GatesList`s:
 
 <br>
-####**GatesListAND**
+#### **GatesListAND** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/GatesListAND.cs)
 
 A specific type of `GatesList` that can be opened only if ALL `Gate`s in its list are open.
 
@@ -674,7 +674,7 @@ isOpen = wGateANDrGate.IsOpen(); // TRUE! because both gates have been opened
 ```
 
 <br>
-####**GatesListOR**
+#### **GatesListOR** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/GatesListOR.cs)
 A specific type of `GatesList` that can be opened if AT LEAST ONE `Gate` in its list is open.
 
 `GatesListOR` gives the user more than one option to unlock some Level or World, by opening at least one of the specified gates.
@@ -718,7 +718,7 @@ isOpen = wGateORrGate.IsOpen(); // TRUE! We only need one of the gates to be ope
 ```
 
 <br>
-###**SocialActionGate**
+### SocialActionGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/profile/SocialActionGate.cs)
 
 `SocialActionGate`s require the user to perform a specific social action in order to open the `Gate`s. Currently, the social provider that's available is Facebook, so the `Gate`s are FB-oriented. In the future, more social providers will be added.
 
@@ -729,7 +729,7 @@ isOpen = wGateORrGate.IsOpen(); // TRUE! We only need one of the gates to be ope
 Also, please note that `SocialActionGate`s are dependent on SOOMLA's [unity3d-profile](https://github.com/soomla/unity3d-profile).</div>
 
 <br>
-###**SocialLikeGate**
+### SocialLikeGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/profile/SocialLikeGate.cs)
 
 A specific type of `Gate` that has an associated page name.
 
@@ -747,7 +747,7 @@ SocialActionGate likeGate = new SocialLikeGate(
 ```
 
 <br>
-###**SocialStatusGate**
+### SocialStatusGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/profile/SocialStatusGate.cs)
 
 A specific type of `Gate` that has an associated status.
 
@@ -765,7 +765,7 @@ SocialActionGate statusGate = new SocialStatusGate(
 ```
 
 <br>
-###**SocialStoryGate**
+### SocialStoryGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/profile/SocialStoryGate.cs)
 
 A specific type of `Gate` that has an associated story.
 
@@ -787,7 +787,7 @@ SocialActionGate storyGate = new SocialStoryGate(
 ```
 
 <br>
-###**SocialUploadGate**
+### SocialUploadGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/gates/profile/SocialUploadGate.cs)
 
 A specific type of `Gate` that has an associated image.
 
@@ -807,7 +807,7 @@ SocialActionGate uploadGate = new SocialUploadGate(
 ```
 
 <br>
-##**Mission**
+## Mission [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/Mission.cs)
 
 A `Mission` is a task your users need to complete in your game. `Mission`s are the glue between `Gate`s and `Reward`s; Specific `Reward`s can be given to users that complete `Mission`s, and every `Mission` has a `Gate` that must be opened in order to complete it. You can create `Mission`s and use them as single, independent entities OR create a `Challenge` to handle several `Mission`s and monitor their completion. Some `Mission`s may be completed multiple times.
 
@@ -852,7 +852,7 @@ if (someMission.IsCompleted()) {
 ```
 
 <br>
-###**BalanceMission**
+### BalanceMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/store/BalanceMission.cs)
 
 A specific type of `Mission` that has an associated virtual item and a desired balance. The `Mission` is **automatically** complete once the item's balance reaches the desired balance.
 
@@ -895,7 +895,7 @@ isCompleted = bMission.IsCompleted(); // True because the balance has reached
 ```
 
 <br>
-###**RecordMission**
+### RecordMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/RecordMission.cs)
 
 A specific type of `Mission` that has an associated score and a desired record. The `Mission` is **automatically** complete once the player achieves the desired record for the given score.
 
@@ -939,7 +939,7 @@ isCompleted = rMission.IsCompleted();  // TRUE!
 ```
 
 <br>
-###**PurchasingMission**
+### PurchasingMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/store/PurchasingMission.cs)
 
 A specific type of `Mission` that has an associated market item.
 
@@ -976,7 +976,7 @@ isCompleted = pMission.IsCompleted();  // True because the item has been purchas
 ```
 
 <br>
-###**WorldCompletionMission**
+### WorldCompletionMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/WorldCompletionMission.cs)
 
 A specific type of `Mission` that has an associated `World`. The `Mission` is **automatically** complete once the `World` has been completed.
 
@@ -1016,7 +1016,7 @@ isMissionComplete = wMission.IsCompleted(); // True because worldA has been comp
 <div class="info-box">The following `Mission`s require the user to perform a specific social action in order to receive a `Reward`. Currently, the social provider that's available is Facebook, so the `Mission`s are FB-oriented. In the future, more social providers will be added. Please note that `SocialActionGate`s are dependent on SOOMLA's [unity3d-profile](https://github.com/soomla/unity3d-profile).</div>
 
 <br>
-###**SocialLikeMission**
+### SocialLikeMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/profile/SocialLikeMission.cs)
 
 A specific type of `Mission` that has an associated page name.
 
@@ -1036,7 +1036,7 @@ Mission likeMission = new SocialLikeMission(
 ```
 
 <br>
-###**SocialStatusMission**
+### SocialStatusMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/profile/SocialStatusMission.cs)
 
 A specific type of `Mission` that has an associated status.
 
@@ -1056,7 +1056,7 @@ Mission statusMission = new SocialStatusMission(
 ```
 
 <br>
-###**SocialStoryMission**
+### SocialStoryMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/profile/SocialStoryMission.cs)
 A specific type of `Mission` that has an associated story that includes a message, story name, caption, link, and image.
 
 <div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant story has been posted, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `Complete()`), the `UpdateStory()` function is called.</div>
@@ -1079,7 +1079,7 @@ Mission storyMission = new SocialStoryMission(
 ```
 
 <br>
-###**SocialUploadMission**
+### SocialUploadMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/profile/SocialUploadMission.cs)
 A specific type of `Mission` that has an associated filename and message.
 
 <div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant image has been uploaded, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `Complete()`), the `UploadImage()` function is called.</div>
@@ -1100,7 +1100,7 @@ Mission uploadMission = new SocialUploadMission(
 ```
 
 <br>
-##**Challenge**
+## Challenge [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-levelup/blob/master/Soomla/Assets/Plugins/Soomla/Levelup/challenges/Challenge.cs)
 
 Missions can be aggregated into challenges which can contain a single mission or multiple ones. The user is required to complete all these missions in order to earn the reward associated with the challenge.
 
@@ -1139,7 +1139,7 @@ isCompleted = challenge.IsCompleted(); // TRUE! Both missions have been complete
 
 ##Auxiliary Models
 
-###**Schedule**
+### Schedule [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/Schedule.cs)
 
 A `Schedule` defines any time restrictions that an entity may have.
 
@@ -1158,7 +1158,7 @@ A `Schedule` defines any time restrictions that an entity may have.
   **For example:** A `Mission` that can be attempted 10 times throughout gameplay.
 
 <br>
-###**Reward**
+### Reward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/rewards/Reward.cs)
 
 <div class="info-box">Note that `Reward` is a part of soomla-unity3d-core, and *not* part of the LevelUp module. However, because `Reward`s are used very often throughout Levelup, it's important that you are familiar with the different `Reward` types.</div>
 
@@ -1188,7 +1188,7 @@ reward.Take();
 ```
 
 <br>
-####**VirtualItemReward**
+#### **VirtualItemReward** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/rewards/VirtualItemReward.cs)
 
 A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) when they complete a `Mission`.
 
@@ -1206,7 +1206,7 @@ Reward coinReward = new VirtualItemReward(
 ```
 
 <br>
-####**BadgeReward**
+#### **BadgeReward** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/rewards/BadgeReward.cs)
 
 A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score,  the user can earn a "Highest Score" badge reward.
 
@@ -1220,7 +1220,7 @@ Reward goldMedal = new BadgeReward(
 ```
 
 <br>
-####**SequenceReward**
+#### **SequenceReward** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/rewards/SequenceReward.cs)
 
  A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
 
@@ -1246,7 +1246,7 @@ Reward beltReward = new SequenceReward(
 ```
 
 <br>
-####**RandomReward**
+#### **RandomReward** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-unity3d-core/blob/master/Soomla/Assets/Plugins/Soomla/Core/rewards/RandomReward.cs)
 
 A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** A user can earn a mystery box `Reward` that grants him/her a random `Reward`.
 

@@ -10,28 +10,28 @@ module: 'profile'
 platform: 'cocos2dx'
 ---
 
-#Main Classes & Operations
+# Main Classes & Operations
 
 In this document you'll find descriptions of most of the main classes and interfaces of cocos2dx-profile. Some of these classes represent the different social elements used in the Profile module, while others contain functionality to perform social-related operations.
 
 ![alt text](/img/tutorial_img/soomla_diagrams/Profile.png "Profile Diagram")
 
 <br>
-Social actions allow you to entice social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or  about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
+Social actions allow you to entice social engagement by offering your users rewards in exchange for social interactions. For example, you can ask your users to like your page or post a status about your game, and give them various rewards, such as a badge of recognition or free virtual items that you normally sell for money/virtual currency. In this win-win situation your users will be pleased, and the network effect will increase the popularity of your game.
 
 <div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many methods of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
-##CCUserProfileUtils
+## CCUserProfileUtils [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCUserProfileUtils.h)
 
 This class lists the different social networks that exist today. Currently, SOOMLA supports Facebook, Twitter, and Google+.
 
-##CCSocialActionUtils
+## CCSocialActionUtils [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCSocialActionUtils.h)
 
 `CCSocialActionUtils` represents various social actions that can be performed in social networks, such as posting a status or story, or uploading an image.
 
 This class simply holds a string enumeration of the different social actions.
 
-##CCUserProfile
+## CCUserProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/domain/CCUserProfile.h)
 
 This class represents a profile of a user from a social network (provider).
 
@@ -51,7 +51,7 @@ This class represents a profile of a user from a social network (provider).
 - `Language`
 - `Birthday`
 
-##CCSoomlaProfile
+## CCSoomlaProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCSoomlaProfile.h)
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations for users. The Profile module will work with the social and authentication plugins of the integrated social provider (FB, G+, Twitter, etc..).
 
@@ -63,7 +63,7 @@ The diagram below depicts the flow that takes place when a `CCSoomlaProfile` fun
 ![alt text](/img/tutorial_img/profile/functionFlow.png "Method Flow")
 
 <br>
-###`login / logout`
+### `login / logout`
 
 The `login` function will log the user into the specified provider, and will give the user a reward if one was provided.
 
@@ -71,7 +71,7 @@ Most of the social actions provided in Profile depend on the user being logged i
 
 `logout` simply logs the user out of the specified provider. Don't forget to disable the social action buttons in your UI once your user is logged out.
 
-``` cs
+``` cpp
 // If the user clicks on the login button you provide, call the login method:
 soomla::CCSoomlaProfile::getInstance()->login(
 	soomla::FACEBOOK,                     // Provider
@@ -86,7 +86,7 @@ soomla::CCSoomlaProfile::getInstance()->logout(
 ```
 
 <br>
-###`isLoggedIn`
+### `isLoggedIn`
 
 As its name implies, this method checks if the user is logged in and returns a boolean value.
 
@@ -105,7 +105,7 @@ if (isLoggedIn) {
 <div class="info-box">If the user is not logged in, please notice that `isLoggedIn` will not log the user in, you'll need to call the `login` method yourself. </div>
 
 <br>
-###`like`
+### `like`
 
 This function opens up the provider page to "like" (a web page in a browser), and grants the user the supplied reward. For example, give the user 100 coins for liking your page.
 
@@ -133,7 +133,7 @@ soomla::CCSoomlaProfile::getInstance()->like(
 <div class="info-box">Note that the user is given the reward just for clicking `Like` from the application. The `Like` function opens the page to like, but does not track if the user *actually* liked the page or not.</div>
 
 <br>
-###`updateStatus`
+### `updateStatus`
 
 This function updates the user's status, which is simply a message, on the supplied social provider. Upon a successful update, the user will receive the supplied reward. For example, reward users that post a specific status with a `CCSingleUseVG`, such as a sword.
 
@@ -159,7 +159,7 @@ soomla::CCSoomlaProfile::getInstance()->updateStatus(
 ![alt text](/img/tutorial_img/profile/socialStatus.png "Update Status")
 
 <br>
-###`updateStory`
+### `updateStory`
 This function posts a story (which is a detailed status) on the user's wall in the supplied social provider. Upon a successful update, the user will receive the supplied reward.
 
 For example, once your user reaches a high score, you could display a popup that allows them to share their high score on Facebook with a click of a button. Once he/she shares the story, you can give them a reward such as a free character.
@@ -193,7 +193,7 @@ soomla::CCSoomlaProfile::getInstance()->updateStory(
 ![alt text](/img/tutorial_img/profile/socialStory.png "Post Story")
 
 <br>
-###`uploadImage`
+### `uploadImage`
 
 This function uploads an image on the user's wall in the supplied social provider. Upon a successful upload, the user will receive the supplied reward.
 
@@ -236,7 +236,7 @@ soomla::CCSoomlaProfile::getInstance()->uploadImage(
 <div class="info-box">The image to upload should be on the device already; the path supplied needs to be a full path to the image on the device.</div>
 
 <br>
-###`getStoredUserProfile`
+### `getStoredUserProfile`
 
 This function retrieves the user's page for the given social provider from the **local device storage** (`GetStoredUserProfile` does not call any social provider function, it retrieves and returns its information from the storage, contrary to what is depicted in the diagram at the beginning of this section). This function allows you to get user information even if the user is offline.
 
@@ -255,7 +255,7 @@ userProf->getFirstName();
 <div class="info-box">This functionality is only available if the user has already logged into the provider.</div>
 
 <br>
-###`getContacts`
+### `getContacts`
 
 This function retrieves a list of the user's contacts from the supplied provider.
 
@@ -272,15 +272,15 @@ soomla::CCSoomlaProfile::getInstance()->getContacts(
 ```
 
 <br>
-###`openAppRatingPage`
+### `openAppRatingPage`
 
-`OpenAppRatingPage` conveniently opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store) so that it's simple to rate the app. You can offer your users to rate your app after they've completed a level successfully or have progressed significantly in your game.
+`openAppRatingPage` conveniently opens your application's page on the platform store (for example on an iOS device it'll open your app's page in the App Store) so that it's simple to rate the app. You can offer your users to rate your app after they've completed a level successfully or have progressed significantly in your game.
 
-``` cs
+``` cpp
 soomla::CCSoomlaProfile::openAppRatingPage(&profileError);
 ```
 
-##Auxiliary Model: Reward
+## Auxiliary Model: CCReward [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCReward.h)
 
 A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress.
 
@@ -289,7 +289,7 @@ A `Reward` is an entity which can be earned by the user for meeting certain crit
 `Reward` itself cannot be instantiated, but there are many types of rewards, all explained below.
 
 <br>
-###**VirtualItemReward**
+### VirtualItemReward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/rewards/CCVirtualItemReward.h)
 
 A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users 100 coins (virtual currency) for liking your page.
 
@@ -303,7 +303,7 @@ CCReward *coinReward = CCVirtualItemReward::create(
 ```
 
 <br>
-###**BadgeReward**
+### BadgeReward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCBadgeReward.h)
 
 A specific type of `Reward` that represents a badge with an icon. **For example:** Give the user a badge reward for posting a status on his/her wall.
 
@@ -315,16 +315,15 @@ CCReward *goldMedal = CCBadgeReward::create(
 ```
 
 <br>
-###**SequenceReward**
+### SequenceReward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCSequenceReward.h)
 
-A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
+A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, purple belt, brown belt, and lastly, black belt.
 
 ``` cpp
 cocos2d::__Array *belts = cocos2d::__Array::create();
 // Assume that the below belts are BadgeRewards that have been defined.
 belts->addObject(blueBelt);
-belts->addObject(yellowBelt);
-belts->addObject(greenBelt);
+belts->addObject(purpleBelt);
 belts->addObject(brownBelt);
 belts->addObject(blackBelt);
 
@@ -336,7 +335,7 @@ CCReward *beltReward = CCSequenceReward::create(
 ```
 
 <br>
-###**RandomReward**
+### RandomReward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCRandomReward.h)
 
 A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** Give users a mystery box `Reward` for uploading an image, that grants him/her a random `Reward`.
 

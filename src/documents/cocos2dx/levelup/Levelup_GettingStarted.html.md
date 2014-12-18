@@ -14,7 +14,7 @@ platform: 'cocos2dx'
 
 ##Getting Started
 
-<div class="info-box">LevelUp depends on SOOMLA's other modules: Core, Store, and Profile. This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already have some or all of the other modules, please follow these directions only for the modules you are missing and of course, for the LevelUp module.</div>
+<div class="info-box">LevelUp depends on SOOMLA's other modules: [Core & Store](/cocos2dx/store), and [Profile](/cocos2dx/profile). This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already have some or all of the other modules, please follow these directions only for the modules you are missing and, of course, for the LevelUp module.</div>
 
 <br>
 
@@ -101,24 +101,30 @@ In your XCode project, perform the following steps:
 
 	- `Cocos2dXLevelUp.xcodeproj` (**extensions/cocos2dx-levelup/**)
 
-    Perform the following:
+  Perform the following:
 
-    - Drag the project into your project
-    - Add its targets to your **Build Phases->Target Dependencies**
-    - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
+  - Drag the project into your project
+
+  - Add its targets to your **Build Phases->Target Dependencies**
+
+  - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
+
+  ![alt text](/img/tutorial_img/cocos2dx-levelup/iosStep2.png "iOS Integration")
 
 3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
 
   NOTE: This article assumes you have a `cocos2d` folder under your project folder which either contains the Cocos2d-x framework, or links to to its root folder.
 
- - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers/**`
+ - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
+ - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers`
+
+ ![alt text](/img/tutorial_img/cocos2dx-levelup/headerSP.png "Header search paths")
 
 4. To register services on the native application (`AppController`):
 
@@ -145,7 +151,15 @@ In your XCode project, perform the following steps:
 
 5. Make sure you have these 3 Frameworks linked to your XCode project: **Security**, **libsqlite3.0.dylib**, and **StoreKit**.
 
-6. See the last step of [cocos2dx-profile instructions for iOS](https://github.com/soomla/cocos2dx-profile#instructions-for-ios) in order to connect the Profile module to a social network provider (in this case Facebook).
+6. Follow our [tutorial](/cocos2dx/store/Store_GettingStarted#apple-app-store) on how to connect the Store module to the App Store billing service.
+
+7. See the following links in order to connect the Profile module to a social network provider:
+
+  - [Facebook for iOS](/cocos2dx/profile/Profile_GettingStarted#facebook-for-ios)
+
+  - [Google+ for iOS](/cocos2dx/profile/Profile_GettingStarted#google-for-ios)
+
+  - [Twitter for iOS](/cocos2dx/profile/Profile_GettingStarted#twitter-for-ios)
 
 That's it! Now all you have to do is build your XCode project and run your game with cocos2dx-levelup.
 
@@ -244,21 +258,21 @@ That's it! Now all you have to do is build your XCode project and run your game 
     </application>
     ```
 
-6. See the last step in [cocos2dx-store instructions for Android](https://github.com/soomla/cocos2dx-store#instructions-for-android) in order to connect the Store module to the desired billing service.
+6. See the following links in order to connect the Store module to a billing service:
 
-7. See the last step in [cocos2dx-profile instructions for Android](https://github.com/soomla/cocos2dx-profile#instructions-for-android) in order to connect the Profile module to a social network provider (in this case Facebook).
+  - [Google Play](/cocos2dx/store/Store_GettingStarted#google-play)
+
+  - [Amazon App Store](/cocos2dx/store/Store_GettingStarted#amazon)
+
+7. See the following links in order to connect the Profile module to a social network provider:
+
+  - [Facebook for Android](/cocos2dx/profile/Profile_GettingStarted#facebook-for-android)
+
+  - [Google+ for Android](/cocos2dx/profile/Profile_GettingStarted#google-for-android)
+
+  - [Twitter for Android](/cocos2dx/profile/Profile_GettingStarted#twitter-for-android)
 
 That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelup sources will be built with cocos2d-x.
-
-###SOOMLA's cocos2dx-store Integration
-
-Please follow the steps in [cocos2dx-store](https://github.com/soomla/cocos2dx-store) for the _Store_ part of the setup.
-Then, you can use the **store-related _LevelUp_ classes**, such as _CCVirtualItemScore_ or _CCVirtualItemReward_ or _CCBalanceGate_.
-
-###SOOMLA's cocos2dx-profile Integration
-
-Please follow the steps in [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile) for the _Profile_ part of the setup.
-Then, you can use the **profile-related _LevelUp_ classes**, such as _CCSocialLikeMission_.
 
 ##Working with sources
 

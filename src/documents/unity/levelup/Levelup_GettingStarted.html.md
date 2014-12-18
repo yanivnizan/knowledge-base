@@ -32,11 +32,11 @@ platform: 'unity'
 
   <div class="info-box">If you are completely new to SOOMLA you can use the [All-in-One](https://github.com/soomla/unity3d-levelup/raw/master/soomla-unity3d-all-in-one.unitypackage) unitypackage which contains all the above packages in one package. Importing it is equivalent to preforming the above steps.</div>
 
-3. Drag the "CoreEvents", "StoreEvents", "ProfileEvents" and "LevelUpEvents" Prefabs from `../Assets/Soomla/Prefabs` into your scene. You should see it listed in the "Hierarchy" panel. [This step MUST be done for unity3d-levelup to work properly]
+3. Drag the "CoreEvents", "StoreEvents", "ProfileEvents" and "LevelUpEvents" Prefabs from `Assets/Soomla/Prefabs` into your scene. You should see it listed in the "Hierarchy" panel. [This step MUST be done for unity3d-levelup to work properly]
 
   ![alt text](/img/tutorial_img/unity_levelup/prefabs.png "Hierarchy")
 
-4. In the menu bar go to "Window -> Soomla -> Edit Settings" and change the value for "Soomla Secret" (also setup Public Key if you're building for Google Play):
+4. In the menu bar go to **Window > Soomla > Edit Settings** and change the value for "Soomla Secret" (also setup Public Key if you're building for Google Play):
 
     - _Soomla Secret_ - is an encryption secret you provide that will be used to secure your data. (If you used versions before v1.5.2 this secret MUST be the same as Custom Secret)  
     **Choose this secret wisely, you can't change it after you launch your game!**
@@ -49,7 +49,7 @@ platform: 'unity'
     SoomlaLevelUp.Initialize (initialWorld);
     ```
 
-  <div class="warning-box">Initialize _LevelUp_ ONLY ONCE when your application loads, in the "Start()" function of a 'MonoBehaviour' and **NOT** in the "Awake()" function. SOOMLA has its own 'MonoBehaviour' and it needs to be "Awakened" before you initialize.</div>
+  <div class="warning-box">Initialize _LevelUp_ ONLY ONCE when your application loads, in the `Start()` function of a `MonoBehaviour` and **NOT** in the `Awake()` function. SOOMLA has its own `MonoBehaviour` and it needs to be "Awakened" before you initialize.</div>
 
 6. You'll need to create event handler functions in order to be notified about (and handle) _LevelUp_ related events. Refer to the [Event Handling](/unity/levelup/LevelUp_Events) section for more information.
 

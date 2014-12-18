@@ -130,16 +130,22 @@ docpadConfig = {
 					id: 'store',
 					title: 'Store'
 				}
+				{
+					id: 'profile',
+					title: 'Profile'
+				}
 			],
 			'android': [
 				{
 					id: 'store',
 					title: 'Store'
 				}
+				{
+					id: 'profile',
+					title: 'Profile'
+				}
 			]
 		}
-
-
 
 	# -----------------------------
 	# Helper Functions
