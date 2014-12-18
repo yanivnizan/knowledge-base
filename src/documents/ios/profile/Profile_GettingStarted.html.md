@@ -30,7 +30,7 @@ platform: 'ios'
     [Soomla initializeWithSecret:@"[YOUR CUSTOM GAME SECRET HERE]"];
     ```
 
-5. If integrating a virtual economy with the store module, please see [ios-store](https://github.com/soomla/ios-store) for store setup.
+5. If integrating a virtual economy with the store module, please see [ios-store](/ios/store/Store_GettingStarted) for store setup.
 
 6. Initalize Soomla Profile:
 
