@@ -280,7 +280,7 @@ This event will be thrown when fetching the contacts from the social provider ha
 public void onGetContactsStarted(GetContactsStartedEvent getContactsStartedEvent) {
 	// A GetContactsStartedEvent contains the following:
 	// provider         = the provider on which the get contacts process started
-	// socialActionType = the social action preformed
+	// socialActionType = the social action performed
 	// payload          = an identification string that you can give when you initiate
 	//                    the get contacts operation and want to receive back upon starting
 
@@ -297,7 +297,7 @@ This event will be thrown when fetching the contacts from the social provider ha
 public void onGetContactsFinished(GetContactsFinishedEvent getContactsFinishedEvent) {
 	// A GetContactsFinishedEvent contains the following:
 	// provider         = the provider on which the get contacts process finished
-	// socialActionType = the social action preformed
+	// socialActionType = the social action performed
 	// contacts         = an Array of contacts represented by UserProfile
 	// payload          = an identification string that you can give when you initiate the
 	//                    get contacts operation and want to receive back upon its completion
@@ -315,7 +315,7 @@ This event will be thrown when fetching the contacts from the social provider ha
 public void onGetContactsFailed(GetContactsFailedEvent getContactsFailedEvent) {
 	// A GetContactsFailedEvent contains the following:
 	// provider         = the provider on which the get contacts process has failed
-	// socialActionType = the social action preformed
+	// socialActionType = the social action performed
 	// errorDescription = description of the reason for failure
 	// payload          = an identification string that you can give when you initiate
 	//                    the get contacts operation and want to receive back upon failure
@@ -333,7 +333,7 @@ This event will be thrown when fetching the feed from the social provider has st
 public void onGetFeedStarted(GetFeedStartedEvent getFeedStartedEvent) {
 	// A GetFeedStartedEvent contains the following:
 	// provider    = the provider on which the get feed process started
-	// getFeedType = the social action preformed
+	// getFeedType = the social action performed
 	// payload     = an identification string that you can give when you initiate
 	//               the get feed operation and want to receive back upon starting
 
@@ -350,7 +350,7 @@ This event will be thrown when fetching the feed from the social provider has fi
 public void onGetFeedFinished(GetFeedFinishedEvent getFeedFinishedEvent) {
 	// A GetFeedFinishedEvent contains the following:
 	// provider    = the provider on which the get feed process finished
-	// getFeedType = the social action preformed
+	// getFeedType = the social action performed
 	// feedPosts   = an Array of feed entries represented by strings
 	// payload     = an identification string that you can give when you initiate
 	//               the get feed operation and want to receive back upon completion
@@ -368,7 +368,7 @@ This event will be thrown when fetching the feed from the social provider has fa
 public void onGetFeedFailed(GetFeedFailedEvent getFeedFailedEvent) {
 	// A GetFeedFailedEvent contains the following:
 	// provider         = the provider on which the get feed process has
-	// getFeedType      = the social action preformed
+	// getFeedType      = the social action performed
 	// errorDescription = description of the reason for failure
 	// payload          = an identification string that you can give when you initiate
 	//                    the get feed operation and want to receive back upon failure

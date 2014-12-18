@@ -85,8 +85,8 @@ name:EVENT_UP_USER_PROFILE_UPDATED object:nil];
 
 // your handler:
 - (void)userProfileUpdated:(NSNotification*)notification {
-  // notification contains:
-  // DICT_ELEMENT_USER_PROFILE = the user's profile from the logged in provider
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_USER_PROFILE = The user's profile (UserProfile*) from the logged in provider
 
   // ... your game specific implementation here ...
 }
@@ -103,10 +103,10 @@ name:EVENT_UP_LOGIN_STARTED object:nil];
 
 // your handler:
 - (void)loginStarted:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER = the provider where the login has started
-  // DICT_ELEMENT_PAYLOAD  = an identification String that you can give when you initiate the
-  //                         login operation and want to receive back upon starting
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER = The provider (NSNumber*) where the login has started
+  // DICT_ELEMENT_PAYLOAD  = An identification string (NSString*) that you can give when you
+  //                     initiate the login operation and want to receive back upon starting
 
   // ... your game specific implementation here ...
 }
@@ -123,10 +123,10 @@ name:EVENT_UP_LOGIN_FINISHED object:nil];
 
 // your handler:
 - (void)loginFinished:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_USER_PROFILE = the user's profile from the logged in provider
-  // DICT_ELEMENT_PAYLOAD      = an identification string that you can give when you initiate
-  //                         the login operation and want to receive back upon its completion
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_USER_PROFILE = The user's profile (UserProfile*) from the logged in provider
+  // DICT_ELEMENT_PAYLOAD      = An identification string (NSString*) that you can give when
+  //           you initiate the login operation and want to receive back upon its completion
 
   // ... your game specific implementation here ...
 }
@@ -143,10 +143,10 @@ name:EVENT_UP_LOGIN_CANCELLED object:nil];
 
 // your handler:
 - (void)loginCancelled:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER = the provider which the user has cancelled login to
-  // DICT_ELEMENT_PAYLOAD  = an identification string that you can give when you initiate the
-  //            login operation and want to receive back upon cancellation
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER = The provider (NSNumber*) which the user has cancelled login to
+  // DICT_ELEMENT_PAYLOAD  = An identification string (NSString*) that you can give when you
+  //                 initiate the login operation and want to receive back upon cancellation
 
   // ... your game specific implementation here ...
 }
@@ -163,11 +163,11 @@ name:EVENT_UP_LOGIN_FAILED object:nil];
 
 // your handler:
 - (void)loginFailed:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER = the provider on which the login has failed
-  // DICT_ELEMENT_MESSAGE  = description of the reason for failure
-  // DICT_ELEMENT_PAYLOAD  = an identification string that you can give when you initiate
-  //                         the login operation and want to receive back upon failure
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER = The provider (NSNumber*) on which the login has failed
+  // DICT_ELEMENT_MESSAGE  = Description (NSString*) of the reason for failure
+  // DICT_ELEMENT_PAYLOAD  = An identification string (NSString*) that you can give when
+  //              you initiate the login operation and want to receive back upon failure
 
   // ... your game specific implementation here ...
 }
@@ -184,8 +184,8 @@ name:EVENT_UP_LOGOUT_STARTED object:nil];
 
 // your handler:
 - (void)logoutStarted:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER = the provider on which the login has started
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER = The provider (NSNumber*) on which the login has started
 
   // ... your game specific implementation here ...
 }
@@ -202,8 +202,8 @@ name:EVENT_UP_LOGOUT_FINISHED object:nil];
 
 // your handler:
 - (void)logoutFinished:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER = the provider on which the logout has finished
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER = The provider (NSNumber*) on which the logout has finished
 
   // ... your game specific implementation here ...
 }
@@ -220,9 +220,9 @@ name:EVENT_UP_LOGOUT_FAILED object:nil];
 
 // your handler:
 - (void)logoutFailed:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER = the provider on which the logout has failed
-  // DICT_ELEMENT_MESSAGE  = description of the reason for failure
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER = The provider (NSNumber*) on which the logout has failed
+  // DICT_ELEMENT_MESSAGE  = Description (NSString*) of the reason for failure
 
   // ... your game specific implementation here ...
 }
@@ -239,11 +239,12 @@ name:EVENT_UP_SOCIAL_ACTION_STARTED object:nil];
 
 // your handler:
 - (void)socialActionStarted:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the social action has started
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action (like, post status, etc.) that started
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //           initiate the social action operation and want to receive back upon starting
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the social action
+  //                                   has started
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) that started
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  //     when you initiate the social action operation and want to receive back upon starting
 
   // ... your game specific implementation here ...
 }
@@ -260,11 +261,12 @@ name:EVENT_UP_SOCIAL_ACTION_FINISHED object:nil];
 
 // your handler:
 - (void)socialActionFinished:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the social action has finished
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action (like, post status, etc.) that finished
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //         initiate the social action operation and want to receive back upon completion
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the social action
+  //                                   has finished
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) that finished
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  //   when you initiate the social action operation and want to receive back upon completion
 
   // ... your game specific implementation here ...
 }
@@ -281,12 +283,12 @@ name:EVENT_UP_SOCIAL_ACTION_CANCELLED object:nil];
 
 // your handler:
 - (void)socialActionCancelled:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which a social action was cancelled
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action (like, post status, etc.) that has
-  //                                   been cancelled
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //       initiate the social action operation and want to receive back upon cancellation
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which a social action was
+  //                                   cancelled
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) that was cancelled
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  // when you initiate the social action operation and want to receive back upon cancellation
 
 
   // ... your game specific implementation here ...
@@ -304,12 +306,13 @@ name:EVENT_UP_SOCIAL_ACTION_FAILED object:nil];
 
 // your handler:
 - (void)socialActionFailed:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the social action has failed
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action (like, post status, etc.) that failed
-  // DICT_ELEMENT_MESSAGE            = description of the reason for failure
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //            initiate the social action operation and want to receive back upon failure
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the social action
+  //                                   has failed
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) that failed
+  // DICT_ELEMENT_MESSAGE            = Description (NSString*) of the reason for failure
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  //      when you initiate the social action operation and want to receive back upon failure
 
   // ... your game specific implementation here ...
 }
@@ -326,11 +329,12 @@ name:EVENT_UP_GET_CONTACTS_STARTED object:nil];
 
 // your handler:
 - (void)getContactsStarted:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the get contacts process started
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //            initiate the get contacts operation and want to receive back upon starting
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the get contacts
+  //                                   process started
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  //      when you initiate the get contacts operation and want to receive back upon starting
 
   // ... your game specific implementation here ...
 }
@@ -347,12 +351,13 @@ name:EVENT_UP_GET_CONTACTS_FINISHED object:nil];
 
 // your handler:
 - (void)getContactsFinished:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the get contacts process finished
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
-  // DICT_ELEMENT_CONTACTS           = an Array of contacts represented by UserProfile
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //      initiate the get contacts operation and want to receive back upon its completion
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the get contacts process
+  //                                   finished
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
+  // DICT_ELEMENT_CONTACTS           = An Array (NSArray*) of contacts (UserProfile*)
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  // when you initiate the get contacts operation and want to receive back upon its completion
 
 
   // ... your game specific implementation here ...
@@ -370,12 +375,13 @@ name:EVENT_UP_GET_CONTACTS_FAILED object:nil];
 
 // your handler:
 - (void)getContactsFailed:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the get contacts process has failed
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
-  // DICT_ELEMENT_MESSAGE            = description of the reason for failure
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //             initiate the get contacts operation and want to receive back upon failure
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the get contacts
+  //                                   process has failed
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
+  // DICT_ELEMENT_MESSAGE            = Description (NSString*) of the reason for failure
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  //       when you initiate the get contacts operation and want to receive back upon failure
 
   // ... your game specific implementation here ...
 }
@@ -392,11 +398,12 @@ name:EVENT_UP_GET_FEED_STARTED object:nil];
 
 // your handler:
 - (void)getFeedStarted:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the get feed process started
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //                initiate the get feed operation and want to receive back upon starting
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the get feed process
+  //                                   started
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  //          when you initiate the get feed operation and want to receive back upon starting
 
   // ... your game specific implementation here ...
 }
@@ -413,12 +420,13 @@ name:EVENT_UP_GET_FEED_FINISHED object:nil];
 
 // your handler:
 - (void)getFeedFinished:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the get feed process finished
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
-  // DICT_ELEMENT_FEEDS              = an Array of feed entries represented by strings
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //               initiate the get feed operation and want to receive back upon completion
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the get feed process
+  //                                   finished
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
+  // DICT_ELEMENT_FEEDS              = An Array (NSArray*) of feed entries (NSString*)
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  //        when you initiate the get feed operation and want to receive back upon completion
 
   // ... your game specific implementation here ...
 }
@@ -435,12 +443,13 @@ name:EVENT_UP_GET_FEED_FAILED object:nil];
 
 // your handler:
 - (void)getFeedFailed:(NSNotification*)notification {
-  // notification contains the following:
-  // DICT_ELEMENT_PROVIDER           = the provider on which the get feed process has
-  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = the social action preformed
-  // DICT_ELEMENT_MESSAGE            = description of the reason for failure
-  // DICT_ELEMENT_PAYLOAD            = an identification string that you can give when you
-  //                 initiate the get feed operation and want to receive back upon failure
+  // notification's userInfo contains the following keys:
+  // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the get feed process
+  //                                   has failed
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
+  // DICT_ELEMENT_MESSAGE            = Description (NSString*) of the reason for failure
+  // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give  
+  //           when you initiate the get feed operation and want to receive back upon failure
 
   // ... your game specific implementation here ...
 }
