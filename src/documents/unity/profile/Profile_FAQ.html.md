@@ -36,7 +36,7 @@ Notice that `GetContacts` with Twitter or Google+ supplies ALL of the user's con
 
 **Is it necessary that I enter the Facebook App name and ID in the Facebook Edit Settings?**
 
-Yes this is necessary, step 1 of our [Getting Started](/unity/profile/Profile_GettingStarted) guide sends you to Facebook's getting started guide to do exactly that.
+Yes this is necessary, step 1 of the Facebook section of our [Getting Started](/unity/profile/Profile_GettingStarted#facebook) guide sends you to Facebook's getting started guide to do exactly that.
 
 ---
 

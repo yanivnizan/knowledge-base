@@ -26,7 +26,7 @@ platform: 'ios'
 
 4. Initialize **Soomla** with a secret of your choise, used to encrypt your user data. (For those who came from older versions, this should be the same as the old "custom secret"):
 
-    ```objective-c
+    ``` objectivec
     [Soomla initializeWithSecret:@"[YOUR CUSTOM GAME SECRET HERE]"];
     ```
 
@@ -34,13 +34,13 @@ platform: 'ios'
 
 6. Initalize Soomla Profile:
 
-  ``` objective-c
+  ``` objectivec
   [[SoomlaProfile getInstance] initialize];
   ```
 
   Note that some providers will need initialization parameters (see their sections below), in that case you'll need to supply their parameters here, each with its dictionary:
 
-  ```objective-c
+  ``` objectivec
   NSDictionary* providerParams = @{ @([provider]) : @{...}
                                     ... };
     [[SoomlaProfile getInstance] initialize:providerParams];
@@ -49,19 +49,21 @@ platform: 'ios'
   1. **Facebook** - No parameters
 
   2. **Google+** - Please provide **CLIENT ID** from the "API&Auth" -> "Credentials" -> "Client ID for iOS applicatio" section in [Google Developer Console Projects](https://console.developers.google.com/project/), like so:
-    ```objective-c
+
+    ```objectivec
     @(GOOGLE) : @{ @"clientId": @"[CLIENT ID]" }
     ```
 
   3. **Twitter** - Please provide **Consumer Key** and **Consumer Secret** from the "Keys and Access Tokens" section in [Twitter Apps](https://apps.twitter.com/), like so:
-    ```objective-c
+
+    ```objectivec
     @(TWITTER) : @{ @"consumerKey": @"[YOUR CONSUMER KEY]",
                  @"consumerSecret": @"[YOUR CONSUMER SECRET]" }
     ```
 
   (OPTIONAL) You can supply the `forceWeb` key in the parameters (with a `BOOL`) value if you would like to force browser-based authorization, like so:
 
-  ```objective-c
+  ```objectivec
   @(TWITTER): @{ ..., @"forceWeb": @(YES) },
   ```
 
