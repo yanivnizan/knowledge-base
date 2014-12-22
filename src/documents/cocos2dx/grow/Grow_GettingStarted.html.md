@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Getting Started"
 text: "Get started with GROW open analytics for Cocos2d-x. Includes all of SOOMLA's modules: Core, Store, Profile, LevelUp, and Highway. Learn how to easily integrate all that SOOMLA offers into your game."
-position: 1
+position: 2
 theme: 'platforms'
 collection: 'cocos2dx_grow'
 module: 'grow'
