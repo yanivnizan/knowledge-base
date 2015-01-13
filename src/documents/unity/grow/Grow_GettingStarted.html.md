@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Getting Started"
 text: "Get started with GROW open analytics for Unity. Includes all of SOOMLA's modules: Core, Store, Profile, LevelUp, and Highway. Learn how to easily integrate all that SOOMLA offers into your game."
-position: 1
+position: 2
 theme: 'platforms'
 collection: 'unity_grow'
 module: 'grow'
@@ -14,9 +14,9 @@ platform: 'unity'
 
 ##Overview
 
-Soomla GROW is our flagship community driven analytics dashboard.  Developers using GROW can gain valuable insights about their games' performance and compare the data to benchmarks of other games in the GROW community.
+Soomla GROW is our flagship community-driven analytics dashboard. Developers using GROW can gain valuable insights about their games' performance and compare the data to benchmarks of other games in the GROW community. Read [more](/unity/grow/Grow_About).
 
-**Note:** GROW analytics use all of Soomla's modules: Store, Profile and LevelUp. This document describes how to incorporate all of these modules as part of the setup.  You may choose to use only specific modules, however, to benefit from the full power of GROW analytics we recommend that you integrate Store, Profile and LevelUp.
+**Note:** GROW analytics uses all of Soomla's modules: Store, Profile and LevelUp. This document describes how to incorporate all of these modules as part of the setup.  You may choose to use only specific modules, however, to benefit from the full power of GROW analytics we recommend that you integrate Store, Profile and LevelUp.
 
 ##Setup GROW
 
