@@ -24,9 +24,9 @@ To get started with GROW, please follow our [Getting Started tutorial](/cocos2dx
 
 - With GROW, you can see how you're app is doing in a number of different aspects, including average revenue, average session duration, what percentage of your users are social in your game, and more. These are all explained in detail in the section below.
 
-- GROW is different than other analytics services because it allows data sharing. In the dashboard, you'll be able to see statistics about other developers' apps as well as your own. This feature makes it possible for you to **compare your game to other indie games** and see how you measure.
+- GROW is different than other analytics services because it allows data sharing. In the dashboard, you'll be able to see aggregative analytics about other developers' apps as well as your own. This feature makes it possible for you to **compare your game to other indie games** and see how you measure.
 
-## GROW Dashboard Breakdown
+## GROW Dashboard
 
 The [GROW dashboard](http://dashboard.soom.la) consists of several screens where you can see different information.
 
@@ -42,6 +42,7 @@ The [GROW dashboard](http://dashboard.soom.la) consists of several screens where
 
 <div class="info-box">In the following screens of the dashboard, each statistic represents some type of information about your game. Under each of these there's another statistic in blue, which represents the information about all the other games using GROW. Also notice the color coding: green means that your statistic is better than or equal to the others' statistic, yellow means that you're a bit behind, and red means you're far behind.</div>
 
+
 ### **Overview**
 
 In this part of the dashboard, you can filter by Date, Country, and Device. At the time of writing this article, the Benchmark filter is not yet available, but once it comes out, you'll be able to compare how your users behave in other games.
@@ -52,17 +53,18 @@ In this part of the dashboard, you can filter by Date, Country, and Device. At t
 
 ![alt text](/img/tutorial_img/unity_grow/overviewNumbers.png "Numbers")
 
+
 - **ARPU** - Average Revenue Per User
 
-For example, if you have 100 users, and only 1 of them paid $1.00, your ARPU will be
+  For example, if you have 100 users, and only 1 of them paid $1.00, your ARPU will be
 
-$1.00 / 100 users = **$0.01**.
+  $1.00 / 100 users = **$0.01**.
 
 - **ARPPU** - Average Revenue Per **Paying** User
 
-Following the example above, you have 1 paying user that paid $1.00, so your ARPPU will be
+  Following the example above, you have 1 paying user that paid $1.00, so your ARPPU will be
 
-$1.00 / 1 user = **$1.00**
+  $1.00 / 1 user = **$1.00**
 
 - **TIMES PLAYED** - The average number of times your game has been played.
 
@@ -103,7 +105,7 @@ This graph presents the number of users who performed the conversion action (pur
 
 ### **Countries & Devices**
 
-In this part of the dashboard, you can filter by Date and Conversion action, which can be Social, Rating, or Purchase.
+In this part of the dashboard, you can filter by Date and Conversion action (purchase, rate, 'like').
 
 <br>
 
@@ -111,7 +113,7 @@ In this part of the dashboard, you can filter by Date and Conversion action, whi
 
 ![alt text](/img/tutorial_img/unity_grow/countries.png "Countries")
 
-Hover over any country on the map and see what percentage of your users in that country performed the action you defined in the filter. For example, in the image above, you can see that 4.1% of your **US users** that played **yesterday** performed a **social** action in your game (like, post status, etc.). You can see how you compare to other games that use GROW - with the same filters, the other games together have 6.0% for this statistic, which means you're not doing very well in comparison, but not horribly either.  
+Hover over any country on the map and see what percentage of your users in that country performed the action you defined in the filter. For example, in the image above, you can see that 4.1% of your **United States users** that played **yesterday** performed a **social** action in your game (e.g. Facebook connect, like, share status, etc.). You can see how you compare to other games that use GROW - the other games together have 6.0% for this metric, which means you're a bit behind.  This is a thoughtful insight that can lead you to re-evaluate social engagement in your game.
 
 <br>
 
@@ -119,4 +121,4 @@ Hover over any country on the map and see what percentage of your users in that 
 
 ![alt text](/img/tutorial_img/unity_grow/devices.png "Devices")
 
-See the percentage of your users who performed the action you defined in the filter per device. For example, 4.5% of your iPhone users rated your game. 6.2% of the other games' iPhone users rated their games.
+See the percentage of your users who performed the action you defined in the filter per device. For example, 4.5% of your iPhone users rated your game. 6.2% of the other games' iPhone users rated their games, so your game is a bit behind the benchmark.
