@@ -79,7 +79,7 @@ A game can have multiple `World`s or a single one, and `World`s can also contain
 
 - `InnerWorldsMap` - The `World`s contained in this `World`.
 
-- `Scores` - A list of `Score`s that this `World` contains . In the class `World`, you can add, retrieve, set, increase, decrease, and reset `Score`s, whether there are multiple `Score`s, or a single one.
+- `Scores` - A list of `Score`s that this `World` contains . In the class `World`, you can add, retrieve, set, increase and decrease `Score`s, whether there are multiple `Score`s, or a single one.
 
 - `Missions` - A list of `Mission`s that this `World` contains. In the class `World` you can add more `Mission`s.
 
@@ -166,8 +166,8 @@ jungleWorld.DecSingleScore(50); // increase score by 50
 
 Score score = jungleWorld.GetSingleScore(); // get score: value is 350
 
-double total = jungleWorld.SumInnerWorldsRecords(); // get the total score of all inner world (levels) scores
-
+double total = jungleWorld.SumInnerWorldsRecords(); // get the total score of all  
+                                                    // inner world (levels) scores
 
 /** For worlds with multiple scores: **/
 
@@ -176,8 +176,6 @@ jungleWorld.SetScoreValue(someScore.ID, 500); // set someScore to 500
 jungleWorld.IncScore(someScore.ID, 200); // increase score by 200
 
 jungleWorld.DecScore(someScore.ID, 100); // decrease score by 100
-
-jungleWorld.ResetScores(true); // reset score values & save
 ```
 
 <br>
@@ -355,9 +353,8 @@ numberScore.Inc(200); // numberScore = 250
 
 numberScore.Dec(100); // numberScore = 150
 
-numberScore.Reset(true); // numberScore = 0
-
-int n = numberScore.GetTempScore(); // n = 0
+// When the level ends, the record score will be saved and
+// numberScore will be reset to its initial value.
 ```
 
 <br>
@@ -535,7 +532,7 @@ isOpen = rGate.IsOpen(); // False, because numberScore hasn't reached a record o
 
 numberScore.Inc(5000.0); // Now, the value of numberScore is 5000
 
-numberScore.Reset(true); // Saves the score and its new record in the storage
+// Once the level ends, the score's record is saved
 
 reachedRecord = numberScore.HasRecordReached(5000); // True!
 
@@ -668,7 +665,7 @@ isOpen = wGateANDrGate.IsOpen(); // False because we need both of the gates to b
 
 numberScore.Inc(5000.0); // Now numberScore = 5000
 
-numberScore.Reset(true); // Save the score and its record in the storage
+// Once the level ends, the score's record is saved
 
 isOpen = wGateANDrGate.IsOpen(); // TRUE! because both gates have been opened
 ```
@@ -930,7 +927,7 @@ isCompleted = rMission.IsCompleted();  // False, because numberScore hasn't reac
 
 coinScore.Inc(2000.0); // Now, the value of numberScore is 2000
 
-coinScore.Reset(true); // Saves the score and its new record in the storage
+// Once the level ends, the score's record is saved
 
 reachedRecord = coinScore.HasRecordReached(2000.0); // True because numberScore has
                                                     // reached the record of 2000
@@ -1132,7 +1129,8 @@ worldA.SetCompleted(true); // Complete wMission
 isCompleted = challenge.IsCompleted(); // False because only 1 of 2 missions is complete
 
 numberScore.Inc(2000.0); // Now numberScore = 2000
-numberScore.Reset(true); // Save the new record in storage
+
+// Once the level ends, the score's record is saved
 
 isCompleted = challenge.IsCompleted(); // TRUE! Both missions have been completed
 ```

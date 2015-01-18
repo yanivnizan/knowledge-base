@@ -80,7 +80,7 @@ A game can have multiple `World`s or a single one, and `World`s can also contain
 
 - `mInnerWorldsMap` - The `World`s contained in this `World`.
 
-- `mScores` - A list of `Score`s that this `World` contains . In the class `World`, you can add, retrieve, set, increase, decrease, and reset `Score`s, whether there are multiple `Score`s, or a single one.
+- `mScores` - A list of `Score`s that this `World` contains . In the class `World`, you can add, retrieve, set, increase and decrease `Score`s, whether there are multiple `Score`s, or a single one.
 
 - `mMissions` - A list of `Mission`s that this `World` contains. In the class `World` you can add more `Mission`s.
 
@@ -90,11 +90,11 @@ A game can have multiple `World`s or a single one, and `World`s can also contain
 For your convenience, there are multiple ways to define a `World`.
 
 ``` cpp
-/// Simple constructor that receives only an ID.
+// Simple constructor that receives only an ID.
 CCWorld *worldA = CCWorld::create(CCString::create(WORLD_A_ID));
 
-/// Instantiation of gates, scores, and missions will
-/// be demonstrated in the relevant sections below.
+// Instantiation of gates, scores, and missions will
+// be demonstrated in the relevant sections below.
 CCWorld *worldB = CCWorld::create(
 	CCString::create("world_B_ID"),
 	gate,
@@ -114,10 +114,10 @@ CCWorld *worldB = CCWorld::create(
 // of creating many levels one by one, you can create them all at
 // once, and save time.
 worldA->batchAddLevelsWithTemplates(
-	10,								// Number of levels in this world
-	gate,							// Gate for each of the levels
-	scores,						// Scores for each of the levels
-	missions 					// Missions for each of the levels
+	10,               // Number of levels in this world
+	gate,             // Gate for each of the levels
+	scores,           // Scores for each of the levels
+	missions          // Missions for each of the levels
 );
 
 // Add an inner world
@@ -173,8 +173,6 @@ worldA->setScoreValue("some_score_ID", 500); // set SomeScore to 200
 worldA->incScore("someScore", 200); // increase score by 200
 
 worldA->decScore("someScore", 100); // decrease score by 50
-
-worldA->resetScores(true); // reset score values
 ```
 
 <br>
@@ -295,7 +293,7 @@ There are multiple ways to define a `Score`.
 CCScore *score1 = CCScore::create(CCString::create("score1ID"));
 
 CCScore *score2 = CCScore::create(
-	CCString::create("score2ID"),        		 // ID  
+	CCString::create("score2ID"),            // ID  
 	CCString::create("Number Score"),        // Name
 	CCBool::create(true)                     // Higher is better
 );
@@ -333,9 +331,8 @@ numScore->inc(200); // numScore = 250
 
 numScore->dec(100); // numScore = 150
 
-numScore->reset(true); // numScore = 0
-
-int n = numScore->getTempScore(); // n = 0
+// When the level ends, the record score will be saved and
+// numScore will be reset to its initial value.
 ```
 
 <br>
@@ -525,7 +522,7 @@ isOpen = rGate->isOpen(); // False, because numberScore hasn't reached a record 
 
 numberScore->inc(5000.0); // Now, the value of numberScore is 5000
 
-numberScore->reset(true); // Saves the score and its new record in the storage
+// Once the level ends, the score's record is saved
 
 reachedRecord = numberScore->hasRecordReached(5000); // True!
 
@@ -546,7 +543,7 @@ A specific type of `Gate` that has a schedule that defines when the `Gate` can b
 // This Gate is open if we are within the time frame defined
 // in the schedule. In this case the gate is always open.
 CCGate *sGate = CCScheduleGate::create(
-	CCString::create("scheduleGate"),      			// ID
+	CCString::create("scheduleGate"),           // ID
 	CCSchedule::createAnyTimeUnLimited()        // Schedule
 );
 ```
@@ -574,7 +571,7 @@ CCWorld *worldA = CCWorld::create(__String::create("worldA"));
 
 CCGate *wGate = CCWorldCompletionGate::create(
 	CCString::create("wGate"),          // ID
-	CCString::create("worldA")       		// Associated world ID
+	CCString::create("worldA")          // Associated world ID
 );
 ```
 
@@ -649,7 +646,7 @@ isOpen = wGateANDrGate->isOpen(); // False because we need both of the gates to 
 
 numberScore->inc(5000.0); // Now numberScore = 5000
 
-numberScore->reset(true); // Save the score and its record in the storage
+// Once the level ends, the score's record is saved
 
 isOpen = wGateANDrGate->isOpen(); // TRUE! because both gates have been opened
 ```
@@ -839,8 +836,8 @@ A specific type of `Mission` that has an associated virtual item and a desired b
 **HOW TO DEFINE**
 
 ``` cpp
-///To complete this mission the user needs to collect 250 coins.
-///Once the mission is complete he/she will receive the reward.
+// To complete this mission the user needs to collect 250 coins.
+// Once the mission is complete he/she will receive the reward.
 CCMission *bMission = CCBalanceMission::create(
 	CCString::create("coinMission"),       // ID
 	CCString::create("Coin Mission"),      // Name
@@ -882,7 +879,7 @@ A specific type of `Mission` that has an associated score and a desired record. 
 **HOW TO DEFINE**
 
 ``` cpp
-///To complete this mission, the user needs his "coinScore" to reach a record of 5000.
+// To complete this mission, the user needs his "coinScore" to reach a record of 5000.
 CCMission *rMission = CCRecordMission::create(
 	CCString::create("rMission"),          // ID
 	CCString::create("Coin Record Score"), // Name
@@ -907,7 +904,7 @@ isCompleted = rMission->isCompleted();
 
 numberScore->inc(2000.0); // Now, the value of numberScore is 2000
 
-score->reset(true); // Saves the score and its new record in the storage
+// Once the level ends, the score's record is saved
 
 reachedRecord = numberScore->hasRecordReached(2000.0);
 // True because numberScore has reached the record of 2000
@@ -935,7 +932,7 @@ CCVirtualGood *itemToBuy = CCSingleUseVG::create(
 		CCDouble::create(1.99))
 );
 
-///To complete this mission, the user needs to buy the item.
+// To complete this mission, the user needs to buy the item.
 CCMission *pMission = CCPurchasingMission::create(
 	CCString::create("pMission"),          // ID
 	CCString::create("Purchase Mission"),  // Name
@@ -1095,7 +1092,7 @@ cocos2d::__Array *missions = cocos2d::__Array::create();
 missions->addObject(wMission);
 missions->addObject(rMission);
 
-///To complete this challenge, the user must complete both missions.
+// To complete this challenge, the user must complete both missions.
 CCChallenge *challenge = CCChallenge::create(
 	__String::create("challenge"),             // ID
 	__String::create("2 Mission Challenge"),   // Name
@@ -1117,7 +1114,8 @@ worldA->setCompleted(true); // Complete wMission
 isCompleted = challenge->isCompleted(); // False because only 1 of 2 missions is complete
 
 numberScore->inc(2000.0); // Now numberScore = 2000
-numberScore->reset(true); // Save the new record in storage
+
+// Once the level ends, the score's record is saved
 
 isCompleted = challenge->isCompleted(); // TRUE! Both missions have been completed
 ```
