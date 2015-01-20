@@ -31,7 +31,7 @@ This document assumes that you have a good understanding of SOOMLA's Store modul
 The `Schedule` and `Reward` entities are widely used in the examples of this document. You can read about them [here](#auxiliary-models).
 
 
-## SoomlaLevelUp [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCSoomlaLevelUp.h)
+##SoomlaLevelUp <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCSoomlaLevelUp.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This class is the top level container for the cocos2dx-levelup model and definitions. It stores the configurations of the game's world-hierarchy and provides lookup methods for *LevelUp* model elements.
 
@@ -70,7 +70,7 @@ int completedLevels = CCSoomlaLevelUp::getInstance()->getCompletedWorldCount();
 ```
 
 <br>
-## World [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCWorld.h)
+## World <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCWorld.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 A game can have multiple `World`s or a single one, and `World`s can also contain other `World`s in them. In some games, these are referred to as level packs. Often, a `World` contains a set of `Level`s, or multiple sets. A `World` can also have a potential `Gate` that defines the criteria to enter it. Games that don’t have the concept of `World`s can be modeled as single `World` games.
 
@@ -204,7 +204,7 @@ CCDICT_FOREACH(latestScores, el) {
 ```
 
 <br>
-## Level [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCLevel.h)
+## Level <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCLevel.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 One of the most common ways to create a sense of progress and accomplishment in games is to have levels. Every `Level` has a state, that is always one of: `Idle`, `Running`, `Paused`, `Ended`, or `Completed`. To use levels correctly, you need to use the provided `Start`, `Pause`, and `End` functions, in order for the level to keep an updated record of what its state is.
 
@@ -272,7 +272,7 @@ long playDuration = level1->getPlayDurationMillis();
 ```
 
 <br>
-## Score [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/scoring/CCScore.h)
+## Score <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/scoring/CCScore.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 Represents a score in the game. A simple game usually has one generic numeric score which grows as the user progresses in the game. A game can also have multiple scores for different aspects such as time, speed, points, etc.
 
@@ -336,7 +336,7 @@ numScore->dec(100); // numScore = 150
 ```
 
 <br>
-### RangeScore [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/scoring/CCRangeScore.h)
+### RangeScore <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/scoring/CCRangeScore.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Score` that has an associated range. The `Score`'s  value can be only inside that range of values. **For example:** A puzzle or quiz can measure the user's success on a scale of 1 - 10, or a shooting `Score` can be on a scale of 10 to 100 according to the user's performance in the game.
 
@@ -358,7 +358,7 @@ CCScore *shootingScore = CCRangeScore::create(
 ```
 
 <br>
-### VirtualItemScore [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/scoring/CCVirtualItemScore.h)
+### VirtualItemScore <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/scoring/CCVirtualItemScore.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Score` that has an associated virtual item, whose balance is affected by the score.
 
@@ -386,7 +386,7 @@ CCScore *coinScore = CCVirtualItemScore::create(
 ```
 
 <br>
-## Gate [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCGate.h)
+## Gate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCGate.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 A `Gate` is an object that defines certain criteria for progressing between the game's `World`s or `Level`s. The `Gate` is a criteria or list of rules which which must be met in order to enter the `World` or `Level`. The rules are based on components of the previous `World` or `Level`: scores achieved, missions completed, etc. The `Gate` is opened once the logical conditions are met. In some games, `Gate`s can be opened with a payment or social task, such as sharing the game on Facebook.
 
@@ -398,7 +398,7 @@ A `Gate` is an object that defines certain criteria for progressing between the 
 All `Gate`s share the same definition, as explained above, but each `Gate` opens in a different way. Some `Gate`s need to be opened manually by the developer, and others will open automatically when a specific event is thrown. You'll find below an explanation of each type of `Gate` including how it opens.
 
 <br>
-### BalanceGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/store/CCBalanceGate.h)
+### BalanceGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/store/CCBalanceGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Gate` that has an associated virtual item and a desired balance. The`Gate` opens **automatically** once the item's balance has reached the desired balance.
 
@@ -451,7 +451,7 @@ isOpen = bGate->isOpen();
 ```
 
 <br>
-### PurchasableGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/store/CCPurchasableGate.h)
+### PurchasableGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/store/CCPurchasableGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Gate` that has an associated Virtual item. This `Gate` is useful when you want to allow unlocking of certain `Level`s or `World`s only if they are purchased.
 
@@ -493,7 +493,7 @@ isOpen = gate->isOpen(); // True because the shield has been purchased.
 ```
 
 <br>
-### RecordGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCRecordGate.h)
+### RecordGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCRecordGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A RecordGate has an associated score and a desired record. The `Gate` opens **automatically** once the player achieves the desired record.
 
@@ -530,7 +530,7 @@ isOpen = rGate->isOpen(); // True because numberScore has reached the record of 
 ```
 
 <br>
-### ScheduleGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCScheduleGate.h)
+### ScheduleGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCScheduleGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Gate` that has a schedule that defines when the `Gate` can be opened. The `Gate` opens **automatically** according to the defined schedule.
 
@@ -557,7 +557,7 @@ bool isOpen = sGate->isOpen();  // TRUE!
 ```
 
 <br>
-### WorldCompletionGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCWorldCompletionGate.h)
+### WorldCompletionGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCWorldCompletionGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A `WorldCompletionGate` has an associated `World` that. Once the `World` is completed, the `Gate` **automatically** opens.
 
@@ -592,14 +592,14 @@ isOpen = wGate->isOpen(); // True because worldA has been completed.
 ```
 
 <br>
-### GatesList [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCGatesList.h)
+### GatesList <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCGatesList.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A list of one or more `Gate`s that together define a composite criteria for progressing between the game's `World`s or `Level`s.
 
 There are two kinds of `GatesList`s:
 
 <br>
-#### **GatesListAND** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCGatesListAND.h)
+#### **GatesListAND** <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCGatesListAND." target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `GatesList` that can be opened only if ALL `Gate`s in its list are open.
 
@@ -652,7 +652,8 @@ isOpen = wGateANDrGate->isOpen(); // TRUE! because both gates have been opened
 ```
 
 <br>
-#### **GatesListOR** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCGatesListOr.h)
+#### **GatesListOR** <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/CCGatesListOr.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
+
 A specific type of `GatesList` that can be opened if AT LEAST ONE `Gate`s in its list is open.
 
 <br>
@@ -697,7 +698,7 @@ isOpen = wGateORrGate->isOpen(); // TRUE! We only need one of the gates to be op
 ```
 
 <br>
-### SocialActionGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialActionGate.h)
+### SocialActionGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialActionGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 `SocialActionGate`s require the user to perform a specific social action in order to open the `Gate`s. Currently, the social provider that's available is Facebook, so the `Gate`s are FB-oriented. In the future, more social providers will be added.
 
@@ -708,7 +709,7 @@ isOpen = wGateORrGate->isOpen(); // TRUE! We only need one of the gates to be op
 Also, please note that `SocialActionGate`s are dependent on SOOMLA's [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile).</div>
 
 <br>
-### SocialLikeGate [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialLikeGate.h)
+### SocialLikeGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialLikeGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Gate` that has an associated page name.
 
@@ -726,7 +727,7 @@ CCGate *likeGate = CCSocialLikeGate::create(
 ```
 
 <br>
-### SocialStatusGate [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialStatusGate.h)
+### SocialStatusGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialStatusGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Gate` that has an associated status.
 
@@ -744,7 +745,7 @@ CCGate *statusGate = CCSocialStatusGate::create(
 ```
 
 <br>
-### SocialStoryGate [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialStoryGate.h)
+### SocialStoryGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialStoryGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Gate` that has an associated story.
 
@@ -766,7 +767,7 @@ CCGate *storyGate = CCSocialStoryGate::create(
 ```
 
 <br>
-### SocialUploadGate [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialUploadGate.h)
+### SocialUploadGate <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/gates/profile/CCSocialUploadGate.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Gate` that has an associated image.
 
@@ -785,7 +786,7 @@ CCGate *uploadGate = CCSocialUploadGate::create(
 ```
 
 <br>
-## Mission [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/CCMission.h)
+## Mission <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/CCMission.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 A `Mission` is a task your users need to complete in your game. `Mission`s are the glue between `Gate`s and `Reward`s; Specific `Reward`s can be given to users that complete `Mission`s, and every `Mission` has a `Gate` that must be opened in order to complete it. You can create `Mission`s and use them as single, independent entities OR create a `Challenge` to handle several `Mission`s and monitor their completion. Some `Mission`s may be completed multiple times.
 
@@ -828,7 +829,7 @@ if (someMission->isCompleted()) {
 ```
 
 <br>
-### BalanceMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/store/CCBalanceMission.h)
+### BalanceMission <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/store/CCBalanceMission.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Mission` that has an associated virtual item and a desired balance. The `Mission` is **automatically** complete once the item's balance reaches the desired balance.
 
@@ -871,7 +872,7 @@ isCompleted = bMission->isCompleted();
 ```
 
 <br>
-### RecordMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/CCRecordMission.h)
+### RecordMission <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/CCRecordMission.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Mission` that has an associated score and a desired record. The `Mission` is **automatically** complete once the player achieves the desired record for the given score.
 
@@ -913,7 +914,7 @@ isCompleted = rMission->isCompleted();  // TRUE!
 ```
 
 <br>
-### PurchasingMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/store/CCPurchasingMission.h)
+### PurchasingMission <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/store/CCPurchasingMission.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Mission` that has an associated market item.
 
@@ -955,7 +956,7 @@ isCompleted = pMission->isCompleted();  // True because the item has been purcha
 ```
 
 <br>
-### WorldCompletionMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/CCWorldCompletionMission.h)
+### WorldCompletionMission <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/CCWorldCompletionMission.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Mission` that has an associated `World`. The `Mission` is **automatically** complete once the `World` has been completed.
 
@@ -991,7 +992,7 @@ isMissionComplete = wMission->isCompleted(); // True because worldA has been com
 <div class="info-box">The following `Mission`s require the user to perform a specific social action in order to receive a `Reward`. Currently, the social provider that's available is Facebook, so the `Mission`s are FB-oriented. In the future, more social providers will be added. Please note that `SocialActionGate`s are dependent on SOOMLA's [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile).</div>
 
 <br>
-### SocialLikeMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/profile/CCSocialLikeMission.h)
+### SocialLikeMission <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/profile/CCSocialLikeMission.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Mission` that has an associated page name.
 
@@ -1032,11 +1033,11 @@ CCMission *statusMission = CCSocialStatusMission::create(
 
 <br>
 
-### SocialStoryMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/profile/CCSocialStoryMission.h)
+### SocialStoryMission <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/profile/CCSocialStoryMission.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
+
 A specific type of `Mission` that has an associated story that includes a message, story name, caption, link, and image.
 
 <div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant story has been posted, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `complete()`), the `updateStory()` function is called.</div>
-
 
 <br>
 **HOW TO DEFINE**
@@ -1057,7 +1058,8 @@ CCMission *storyMission = CCSocialStoryMission::create(
 
 <br>
 
-### SocialUploadMission [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/profile/CCSocialUploadMission.h)
+### SocialUploadMission <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/profile/CCSocialUploadMission.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
+
 A specific type of `Mission` that has an associated filename and message.
 
 <div class="info-box">**IMPORTANT:** This `Mission` is not completed automatically when the relevant image has been uploaded, but rather the developer has to *manually* complete it. Once the `Mission` is complete (by calling `complete()`), the `uploadImage()` function is called.</div>
@@ -1077,7 +1079,7 @@ CCMission *uploadMission = CCSocialUploadMission::create(
 ```
 
 <br>
-## Challenge [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/CCChallenge.h)
+## Challenge <a href="https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/challenges/CCChallenge.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 Missions can be aggregated into challenges which can contain a single mission or multiple ones. The user is required to complete all these missions in order to earn the reward associated with the challenge.
 
@@ -1122,7 +1124,7 @@ isCompleted = challenge->isCompleted(); // TRUE! Both missions have been complet
 
 ##Auxiliary Models
 
-### Schedule [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/CCSchedule.h)
+### Schedule <a href="https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/CCSchedule.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A `CCSchedule` defines any time restrictions that an entity may have.
 
@@ -1140,7 +1142,7 @@ A `CCSchedule` defines any time restrictions that an entity may have.
 
 	**For example:** A `Mission` that can be attempted 10 times throughout gameplay.
 
-### Reward [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCReward.h)
+### Reward <a href="https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCReward.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 <div class="info-box">Note that `Reward` is a part of soomla-cocos2dx-core, and not part of the LevelUp module. However, because `Reward`s are used very often throughout Levelup, it's important that you are familiar with the different `Reward` types.</div>
 
@@ -1171,7 +1173,7 @@ reward->take();
 ```
 
 <br>
-#### **VirtualItemReward** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/rewards/CCVirtualItemReward.h)
+#### **VirtualItemReward** <a href="https://github.com/soomla/cocos2dx-store/blob/master/Soomla/rewards/CCVirtualItemReward.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Reward` that you can use to give your users some amount of a virtual item. **For example:** Give users a reward of 100 coins (virtual currency).
 
@@ -1187,7 +1189,7 @@ CCReward *coinReward = CCVirtualItemReward::create(
 ```
 
 <br>
-#### **BadgeReward** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCBadgeReward.h)
+#### **BadgeReward** <a href="https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCBadgeReward.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Reward` that represents a badge with an icon. **For example:** when the user achieves a top score, the user can earn a "Highest Score" badge reward.
 
@@ -1201,7 +1203,7 @@ CCReward *goldMedal = CCBadgeReward::create(
 ```
 
 <br>
-#### **SequenceReward** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCSequenceReward.h)
+#### **SequenceReward** <a href="https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCSequenceReward.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, yellow belt, green belt, brown belt, and lastly, black belt.
 
@@ -1224,7 +1226,7 @@ CCReward *beltReward = CCSequenceReward::create(
 ```
 
 <br>
-#### **RandomReward** [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCRandomReward.h)
+#### **RandomReward** <a href="https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCRandomReward.h" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** A user can earn a mystery box `Reward` that grants him/her a random `Reward`.
 

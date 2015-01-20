@@ -14,7 +14,7 @@ platform: 'cocos2dx'
 
 Here you can find descriptions of some of the main classes and interfaces of cocos2dx-store. These classes contain functionality for store-related operations, provide you with various storages, and hold the basic assets needed to operate the store.
 
-## CCSoomlaStore [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/CCSoomlaStore.h)
+##CCSoomlaStore <a href="https://github.com/soomla/cocos2dx-store/blob/master/Soomla/CCSoomlaStore.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 `SoomlaStore` holds the basic assets needed to operate the store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, App Store, etc…).
 
@@ -24,7 +24,7 @@ Here you can find descriptions of some of the main classes and interfaces of coc
 
 This function queries the Market’s inventory, and creates a list of all metadata stored in the Market (the items that have been purchased). The metadata includes the item’s name, description, price, product ID, etc.
 
-## CCStoreInfo [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/data/CCStoreInfo.h)
+## CCStoreInfo <a href="https://github.com/soomla/cocos2dx-store/blob/master/Soomla/data/CCStoreInfo.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 StoreInfo is the mother of all metadata information about your specific game.
 
@@ -47,7 +47,7 @@ CCUpgradeVG *firstUpgrade = soomla::CCStoreInfo::sharedStoreInfo()->getFirstUpgr
 
 `StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game’s metadata. When your game loads for the first time, the virtual economy’s metadata is saved, and from that moment on it’ll be loaded from the database.
 
-## CCStoreInventory [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-store/blob/master/Soomla/CCStoreInventory.h)
+## CCStoreInventory <a href="https://github.com/soomla/cocos2dx-store/blob/master/Soomla/CCStoreInventory.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 `StoreInventory` is a utility class that provides you with functions that perform store-related operations. With `StoreInventory` you can give or take items from your users. You can buy items or upgrade them. You can also check their equipping status and change it.
 
