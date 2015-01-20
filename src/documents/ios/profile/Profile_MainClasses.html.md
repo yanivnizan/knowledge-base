@@ -264,6 +264,7 @@ self.badgeReward = [[BadgeReward alloc] initWithRewardId:@"belt_reward"
 ];
 ```
 
+
 <br>
 ###**RandomReward**
 
