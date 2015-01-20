@@ -21,17 +21,17 @@ Social actions allow you to entice social engagement by offering your users rewa
 
 <div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many methods of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
-## CCUserProfileUtils [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCUserProfileUtils.h)
+##CCUserProfileUtils <a href="https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCUserProfileUtils.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This class lists the different social networks that exist today. Currently, SOOMLA supports Facebook, Twitter, and Google+.
 
-## CCSocialActionUtils [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCSocialActionUtils.h)
+## CCSocialActionUtils <a href="https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCSocialActionUtils.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 `CCSocialActionUtils` represents various social actions that can be performed in social networks, such as posting a status or story, or uploading an image.
 
 This class simply holds a string enumeration of the different social actions.
 
-## CCUserProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/domain/CCUserProfile.h)
+## CCUserProfile <a href="https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/domain/CCUserProfile.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This class represents a profile of a user from a social network (provider).
 
@@ -51,7 +51,7 @@ This class represents a profile of a user from a social network (provider).
 - `Language`
 - `Birthday`
 
-## CCSoomlaProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCSoomlaProfile.h)
+## CCSoomlaProfile <a href="https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCSoomlaProfile.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations for users. The Profile module will work with the social and authentication plugins of the integrated social provider (FB, G+, Twitter, etc..).
 
