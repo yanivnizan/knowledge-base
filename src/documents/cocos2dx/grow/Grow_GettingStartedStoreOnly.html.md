@@ -52,11 +52,16 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
 
 9. Initialize `CCHighwayService` with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la).
 
+  ``` cpp
+  soomla::CCSoomlaHighway::initShared(
+      __String::create("yourGameKey"),
+      __String::create("yourEnvKey"));
+  ```
+
   ![alt text](/img/tutorial_img/cocos_grow/dashboardKeys.png "Keys")
 
-  ``` cpp
-  soomla::CCSoomlaHighway::initShared(__String::create("yourGameKey"), __String::create("yourEnvKey"));
-  ```
+  <div class="info-box">Note: SOOMLA modules should be initialized in this order: core, highway, store
+  <br>Or in other words - `CCServiceManager`, `CCHighwayService` `CCStoreService`</div>
 
 10. Initialize `CCServiceManager`, `CCStoreService`, `CCStoreAssets` (the the class you just created), a `customSecret` and other params.
 
@@ -67,12 +72,12 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
   ``` cpp
   __Dictionary *commonParams = __Dictionary::create();
   commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-
-  __Dictionary *storeParams = __Dictionary::create();
-  storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
-
   soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
 
+  // `assets` should implement the `IStoreAssets` interface
+  // and should include your entire virtual economy
+  __Dictionary *storeParams = __Dictionary::create();
+  storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
   soomla::CCStoreService::initShared(assets, storeParams);
   ```
 
@@ -98,9 +103,9 @@ In your XCode project, perform the following steps:
 
   perform the following:
 
-    - Drag the project into your project
-    - Add its targets to your **Build Phases->Target Dependencies**
-    - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
+  - Drag the project into your project
+  - Add its targets to your **Build Phases->Target Dependencies**
+  - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
   ![alt text](/img/tutorial_img/cocos_grow/iosStep2SO.png "iOS Integration")
 
@@ -117,7 +122,16 @@ In your XCode project, perform the following steps:
 
   ![alt text](/img/tutorial_img/cocos_grow/headersSO.png "Header search paths")
 
-4. To register services on the native application (`AppController`):
+4. Add the AFNetworking dependency:
+
+  - Add the static library (from `extensions/cocos2dx-highway/build/ios/libAFNetworking.a`) to **Build Phases->Link Binary With Libraries**.  Achieve this by clicking the + icon, and then "Add Other", and browse for the file.
+  - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios/` to **Build Settings->Library Search Paths** (non-recursive)
+
+5. Add the `-ObjC` to the **Build Setting->Other Linker Flags**
+
+  ![alt text](/img/tutorial_img/ios_getting_started/linkerFlags.png "Linker Flags")
+
+6. To register services on the native application (`AppController`):
 
   a. Import the following headers:
     ```cpp
@@ -138,13 +152,7 @@ In your XCode project, perform the following steps:
 
     at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
-5. Add the AFNetworking dependency:
-
-  - Add the static library (from `extensions/cocos2dx-highway/build/ios/libAFNetworking.a`) to **Build Phases->Link Binary With Libraries**.  Achieve this by clicking the + icon, and then "Add Other", and browse for the file.
-
-  - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios` to **Build Settings->Library Search Paths**
-
-6. Make sure you have these 7 Frameworks linked to your XCode project:
+7. Make sure you have these 7 Frameworks linked to your XCode project:
 
   - Security
   - libsqlite3.0.dylib
