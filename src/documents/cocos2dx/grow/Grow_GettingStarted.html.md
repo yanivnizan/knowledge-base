@@ -40,46 +40,50 @@ Go to the [GROW dashboard](http://dashboard.soom.la) and sign up \ login. Upon l
   #include "Cocos2dxHighway.h"
   ```
 
-6. Initialize `CCHighwayService`: with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la):
-
-    **Copy the "Game Key" and "Environment Key"** given to you from the [dashboard](http://dashboard.soom.la) and initialize `CCSoomlaHighway` with them. At this point, you're probably testing your integration and you want to use the **Sandbox** environment key.
-
-	Explanation: The "game" and "env" keys allow for your game to distinguish multiple environments for the same game. The dashboard pre-generates two fixed environments for your game: **Production** and **Sandbox**. When you decide to publish your game, make sure to switch the env key to **Production**.  You can always generate more environments.  For example - you can choose to have a playground environment for your game's beta testers which will be isolated from your production environment and will thus prevent analytics data from being mixed between the two.  Another best practice is to have a separate environment for each version of your game.
-
-  ```cpp
-  CCSoomlaHighway::initShared(__String::create("yourGameKey"), __String::create("yourEnvKey"));
-  ```
-
-  ![alt text](/img/tutorial_img/cocos_grow/dashboardKeys.png "Keys")
-
-7. Initialize the rest of the SOOMLA modules: `CCServiceManager`, `CCStoreService`, `CCProfileService`, and `CCLevelUpService`. **Custom Secret** is an encryption secret you provide that will be used to secure your data.
-
-  <div class="warning-box">Choose this secret wisely, you can't change it after you launch your game!
-  <br>Initialize `CCLevelUpService` ONLY ONCE when your application loads.</div>
+6. Initialize `CCServiceManager` with a custom secret of your choice:
 
   ```cpp
   __Dictionary *commonParams = __Dictionary::create();
   commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-
-  __Dictionary *storeParams = __Dictionary::create();
-  storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
-
-  __Dictionary *profileParams = __Dictionary::create();
-
   soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-
-  soomla::CCStoreService::initShared(assets, storeParams);
-
-  soomla::CCProfileService::initShared(profileParams);
-
-  soomla::CCLevelUpService::initShared();
-
-  // initialWorld should contain all worlds and levels of the game
-  // rewards should contain a list of all rewards of the game
-  soomla::CCLevelUp::getInstance()->initialize(initialWorld, rewards);
   ```
 
-8. Make sure to include the relevant headers where needed:
+  <div class="warning-box">Choose this secret wisely, you can't change it after you launch your game!
+  <br>Initialize `CCLevelUpService` ONLY ONCE when your application loads.</div>
+
+7. Initialize `CCHighwayService` with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la):
+
+  **Copy the "Game Key" and "Environment Key"** given to you from the [dashboard](http://dashboard.soom.la) and initialize `CCSoomlaHighway` with them. At this point, you're probably testing your integration and you want to use the **Sandbox** environment key.
+
+  Explanation: The "game" and "env" keys allow for your game to distinguish multiple environments for the same game. The dashboard pre-generates two fixed environments for your game: **Production** and **Sandbox**. When you decide to publish your game, make sure to switch the env key to **Production**.  You can always generate more environments.  For example - you can choose to have a playground environment for your game's beta testers which will be isolated from your production environment and will thus prevent analytics data from being mixed between the two.  Another best practice is to have a separate environment for each version of your game.
+
+  ```cpp
+  CCSoomlaHighway::initShared(
+        __String::create("yourGameKey"),
+        __String::create("yourEnvKey"));
+  ```
+
+  ![alt text](/img/tutorial_img/cocos_grow/dashboardKeys.png "Keys")
+
+8. Initialize the rest of the SOOMLA modules: `CCStoreService`, `CCProfileService`, and `CCLevelUpService`. **Custom Secret** is an encryption secret you provide that will be used to secure your data.
+
+    ```cpp
+    // `assets` should implement the `IStoreAssets` interface
+    // and should include your entire virtual economy
+    __Dictionary *storeParams = __Dictionary::create();
+    storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
+    soomla::CCStoreService::initShared(assets, storeParams);
+
+    __Dictionary *profileParams = __Dictionary::create();
+    soomla::CCProfileService::initShared(profileParams);
+
+    // `initialWorld` should contain all worlds and levels of the game
+    // rewards should contain a list of all rewards of the game
+    soomla::CCLevelUpService::initShared();
+    soomla::CCLevelUp::getInstance()->initialize(initialWorld, rewards);
+    ```
+
+9. Make sure to include the relevant headers where needed:
 
     ```cpp
     #include "Cocos2dxStore.h"
@@ -108,9 +112,9 @@ In your XCode project, perform the following steps:
 
   perform the following:
 
-    - Drag the project into your project
-    - Add its targets to your **Build Phases->Target Dependencies**
-    - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
+  - Drag the project into your project
+  - Add its targets to your **Build Phases->Target Dependencies**
+  - Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
   ![alt text](/img/tutorial_img/cocos_grow/iosStep2.png "iOS Integration")
 
@@ -132,10 +136,14 @@ In your XCode project, perform the following steps:
   ![alt text](/img/tutorial_img/cocos_grow/headerSP.png "Header search paths")
 
 4. Add the AFNetworking dependency to your project:
-  - Add the `libAFNetworking.a` file (from `extensions/cocos2dx-highway/build/ios/`) to **Build Phases->Link Binary With Libraries** (You'll need to hit "Open Other")
+  - Add the static library (from `extensions/cocos2dx-highway/build/ios/libAFNetworking.a`) to **Build Phases->Link Binary With Libraries**.  Achieve this by clicking the + icon, and then "Add Other", and browse for the file.
   - Add `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios/` to **Build Settings->Library Search Paths** (non-recursive)
 
-5. To register services on the native application (`AppController`):
+5. Add the `-ObjC` to the **Build Setting->Other Linker Flags**
+
+  ![alt text](/img/tutorial_img/ios_getting_started/linkerFlags.png "Linker Flags")
+
+6. To register services on the native application (`AppController`):
 
   a. Import the following headers:
     ```cpp
@@ -164,7 +172,7 @@ In your XCode project, perform the following steps:
 
     at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
-6. Make sure you have these 7 Frameworks linked to your XCode project:
+7. Make sure you have these 7 Frameworks linked to your XCode project:
 
   - Security
   - libsqlite3.0.dylib
@@ -174,7 +182,7 @@ In your XCode project, perform the following steps:
   - SystemConfguration
   - AdSupport
 
-7. Connect the Profile module to a social network provider:
+8. Connect the Profile module to a social network provider:
 
   - [Facebook](/cocos2dx/profile/Profile_GettingStarted#facebook-for-ios)
 
