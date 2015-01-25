@@ -2,7 +2,7 @@
 layout: "content"
 image: "Wrench"
 title: "Debugging"
-text: "Debugging methods and tips for iOS-store and iOS=profile."
+text: "Debugging methods and tips for iOS-store."
 position: 6
 theme: 'platforms'
 collection: 'ios_store'

@@ -2,7 +2,7 @@
 layout: "content"
 image: "Wrench"
 title: "Debugging"
-text: "Debugging methods and tips for cocos2dx-store and cocos2dx-profile."
+text: "Debugging methods and tips for cocos2dx-store."
 position: 5
 theme: 'platforms'
 collection: 'cocos2dx_store'
