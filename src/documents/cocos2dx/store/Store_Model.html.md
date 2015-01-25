@@ -3,7 +3,7 @@ layout: "content"
 image: "Modeling"
 title: "Economy Model & API"
 text: "Every game economy can be based on SOOMLA's economy model. Learn the building blocks of creating a virtual economy with currencies and virtual goods."
-position: 2
+position: 3
 theme: 'platforms'
 collection: 'cocos2dx_store'
 module: 'store'

@@ -3,7 +3,7 @@ layout: "content"
 image: "Events"
 title: "Events"
 text: "Learn how to observe and handle economy events triggered by android-store to customize your game-specific behavior."
-position: 6
+position: 5
 theme: 'platforms'
 collection: 'android_store'
 module: 'store'

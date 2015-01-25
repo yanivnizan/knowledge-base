@@ -89,58 +89,7 @@ In many games the user has to navigate into the in-game store, or start a game s
 
 ##Example
 
-``` cs
-//Create your implementation of IStoreAssets
-public class ExampleAssets : IStoreAssets{
-    ...
-
-    /** Virtual Currencies **/
-    public static VirtualCurrency COIN_CURRENCY = new VirtualCurrency(
-        ...
-        "currency_coin"                     // item id
-  );
-
-    /** Virtual Currency Packs **/
-    public static VirtualCurrencyPack TEN_COIN_PACK = new VirtualCurrencyPack(
-        ...
-        10,                                 // number of currencies in the pack
-        "currency_coin",                    // the currency associated with this pack
-        new PurchaseWithMarket(             // purchase type
-            TEN_COIN_PACK_PRODUCT_ID,       // product ID
-            0.99)                           // initial price
-    );
-
-    /** Virtual Goods **/
-
-    // Shield that can be purchased for 150 coins.
-    public static VirtualGood SHIELD_GOOD = new SingleUseVG(
-        ...
-        new PurchaseWithVirtualItem(        // purchase type
-            "currency_coin",                // virtual item to pay with
-            150)                            // payment amount
-    );
-
-    // Pack of 5 shields that can be purchased for $2.99.
-    public static VirtualGood 5_SHIELD_GOOD = new SingleUsePackVG(
-        ...
-        new PurchaseWithMarket(             // purchase type
-            SHIELD_PACK_PRODUCT_ID,         // product ID
-            2.99)                           // initial price
-    );
-
-    ...
-}
-
-// Initialize SoomlaStore
-public class ExampleWindow : MonoBehaviour {
-    ...
-    void Start () {
-    ...
-    SoomlaStore.Initialize(new ExampleAssets());
-    ...
-  }
-}
-```
+Create your own implementation of `IStoreAssets`, and initialize `SoomlaStore`. See the article about [IStoreAssets](/unity/store/Store_IStoreAssets), which includes a code example and explanations. 
 
 ##In-app Billing
 

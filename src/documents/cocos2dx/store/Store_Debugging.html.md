@@ -3,7 +3,7 @@ layout: "content"
 image: "Wrench"
 title: "Debugging"
 text: "Debugging methods and tips for cocos2dx-store."
-position: 5
+position: 6
 theme: 'platforms'
 collection: 'cocos2dx_store'
 module: 'store'

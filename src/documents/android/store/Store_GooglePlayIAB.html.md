@@ -3,7 +3,7 @@ layout: "content"
 image: "InAppPurchase"
 title: "Google Play In-app Billing"
 text: "Google Play in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
-position: 2
+position: 8
 theme: 'platforms'
 collection: 'android_store'
 module: 'store'

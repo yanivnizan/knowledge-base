@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Main Classes"
 text: "The main classes of cocos2dx-store contain functionality for store-related operations such as purchasing, billing, inventory querying and storage."
-position: 3
+position: 4
 theme: 'platforms'
 collection: 'cocos2dx_store'
 module: 'store'

@@ -23,7 +23,7 @@ platform: 'cocos2dx'
 	```
 	$ git clone git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
 
-  $ git clone git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
+	$ git clone git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
 	```
 
 2. cocos2dx-store uses a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing. Clone it into the `external` directory at the root of your Cocos2d-x framework.
@@ -39,10 +39,12 @@ platform: 'cocos2dx'
 5. Initialize `CCServiceManager`, `CCStoreService`, `CCStoreAssets` (the the class you just created), a `customSecret` and other params:
 
 	``` cpp
+	YourImplementationAssets *assets = YourImplementationAssets::create();
+
 	__Dictionary *commonParams = __Dictionary::create();
 	commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
 
-  __Dictionary *storeParams = __Dictionary::create();
+	__Dictionary *storeParams = __Dictionary::create();
 
 	soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
 
@@ -304,62 +306,14 @@ SOOMLA's cocos2dx-store knows how to contact Google Play, Amazon Appstore, or Ap
 
 ## Example
 
-**Create an example implementation of `CCStoreAssets`:**
+Create your own implementation of `CCStoreAssets`; See the article about `CCStoreAssets`, which includes a code example and explanations.
 
-Let's call it `ExampleAssets`.
-
-``` cpp
-#define COIN_CURRENCY_ITEM_ID "coin_currency"
-#define TEN_COIN_PACK_ITEM_ID "ten_coin_pack"
-#define TEN_COIN_PACK_PRODUCT_ID "10_coins_pack"
-
-/** Virtual Currencies **/
-CCVirtualCurrency *COIN_CURRENCY = CCVirtualCurrency::create(
-	String::create("COIN_CURRECY"),                             // name
-	String::create(""),                                         // description
-	String::create(COIN_CURRENCY_ITEM_ID)                       // item ID
-);
-
-/** Virtual Currency Packs **/
-CCVirtualCurrencyPack *TEN_COIN_PACK = CCVirtualCurrencyPack::create(
-	String::create("10 Coins"),                                 // name
-	String::create("A pack of 10 coins"),                       // description
-	String::create(TEN_COIN_PACK_ITEM_ID),                      // item ID
-	Integer::create(10),                                        // number of currency units
-	String::create(COIN_CURRENCY_ITEM_ID),                      // associated currency
-	CCPurchaseWithMarket::create(String::create(                // purchase type
-	    TEN_COIN_PACK_PRODUCT_ID),                              // ID as defined in the Market
-	    Double::create(0.99))                                   // amount
-);
-
-/** Virtual Goods **/
-
-CCVirtualGood *shieldGood = CCSingleUseVG::create(
-    CCString::create("Shield"),                               // name
-    CCString::create("Defend yourself!"),                     // description
-    CCString::create("shield_good"),                          // item ID
-    CCPurchaseWithVirtualItem::create(CCString::create(       // purchase type
-        COIN_CURRENCY_ITEM_ID),                               // currency
-        CCInteger::create(50))                                // price
-);
-
-CCVirtualGood *tenShieldGoods = CCSingleUsePackVG::create(
-    CCString::create("shield_good"),                          // associated item ID
-    CCInteger::create(10),                                    // number of items
-    CCString::create("10 Shields"),                           // name
-    CCString::create("Defend yourself!"),                     // description
-    CCString::create("shield_good_10"),                       // item ID
-    CCPurchaseWithVirtualItem::create(CCString::create(       // purchase type
-        COIN_CURRENCY_ITEM_ID),                               // currency
-        CCInteger::create(300)));                             // price
-```
-
-**Initialize SOOMLA SDK**
-
-In `AppDelegate.cpp`:
+Then, initialize `CCStoreService` with your implementation of `CCStoreAssets`:
 
 ``` cpp
-#include "ExampleAssets.h"
+//In `AppDelegate.cpp`:
+
+#include "YourImplementationAssets.h"
 
 bool AppDelegate::applicationDidFinishLaunching() {
     __Dictionary *commonParams = __Dictionary::create();
@@ -367,7 +321,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
 
-    ExampleAssets *assets = ExampleAssets::create();
+		YourImplementationAssets *assets = YourImplementationAssets::create();
 
     __Dictionary *storeParams = __Dictionary::create();
     storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
@@ -377,4 +331,4 @@ bool AppDelegate::applicationDidFinishLaunching() {
 }
 ```
 
-And that's it! cocos2dx-store knows how to contact Google Play or the App Store for you and will redirect your users to the purchasing system to complete the transaction. Don't forget to subscribe to store events in order to get notified of successful or failed purchases (see [Event Handling](https://github.com/soomla/cocos2dx-store#event-handling)).
+And that's it! cocos2dx-store knows how to contact Google Play or the App Store for you and will redirect your users to the purchasing system to complete the transaction. Don't forget to subscribe to store events in order to get notified of successful or failed purchases - See [Event Handling](/cocos2dx/store/Store_Events).

@@ -3,7 +3,7 @@ layout: "content"
 image: "Events"
 title: "Events"
 text: "Learn how to observe and handle economy events triggered by unity3d-store to customize your game-specific behavior."
-position: 4
+position: 5
 theme: 'platforms'
 collection: 'unity_store'
 module: 'store'

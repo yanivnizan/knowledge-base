@@ -62,75 +62,17 @@ In order to define the way your various virtual items (Coins, swords, hats...) a
 
 ##Example
 
+Create your own implementation of `IStoreAssets`; See the article about [IStoreAssets](/ios/store/Store_IStoreAssets), which includes a code example and explanations.
+
+Then, initialize `SoomlaStore` with your implementation of `IStoreAssets`:
+
 ``` objectivec
-//Create your own implementation of IStoreAssets
-@interface ExampleStoreAssets : NSObject <IStoreAssets>{
-}
-@end
-
-@implementation ExampleStoreAssets
-    ...
-
-    NSString* const COIN_CURRENCY_ITEM_ID = @"currency_coin";
-    NSString* const _10_COINS_PACK_ITEM_ID = @"coins_10";
-    NSString* const _10_MUFFINS_PRODUCT_ID = @"coins_10";
-    NSString* const SHIELD_GOOD_ITEM_ID = @"shield";
-    NSString* const _5_SHIELDS_GOOD_ITEM_ID = @"shields_5";
-
-    /** Virtual Currencies **/
-    COIN_CURRENCY = [[VirtualCurrency alloc]
-        initWithName:@"Coin"
-        andDescription:@"Coin currency"
-        andItemId:COIN_CURRENCY_ITEM_ID];
-
-    /** Virtual Currency Packs **/
-    // This good needs to be made available in the App Store.
-    _10_COINS_PACK = [[VirtualCurrencyPack alloc]
-        initWithName:@"10 Coins"
-        andDescription:@"Pack of 10 coins"
-        andItemId:_10_COINS_PACK_ITEM_ID
-        andCurrencyAmount:10
-        andCurrency:COIN_CURRENCY_ITEM_ID
-        andPurchaseType:[[PurchaseWithMarket alloc]
-            initWithMarketItem:[[MarketItem alloc]
-                initWithProductId:_10_COINS_PRODUCT_ID
-                andConsumable:kConsumable
-                andPrice:0.99]]];
-
-    /** Virtual Goods **/
-
-    // Shield that can be purchased for 150 coins.
-    SHIELD_GOOD = [[SingleUseVG alloc]
-        initWithName:@"Shield"
-        andDescription:@"A shield to defend you from monsters."
-        andItemId:SHIELD_GOOD_ITEM_ID
-        andPurchaseType:[[PurchaseWithVirtualItem alloc]
-            initWithVirtualItem:COIN_CURRENCY_ITEM_ID
-            andAmount:150]];
-
-    // Pack of 5 shields that can be purchased for 500 coins.
-    5_SHIELD_GOOD = [[SingleUsePackVG alloc]
-        initWithName:@"5 Shields"
-        andDescription:@"A pack of 5 shields"
-        andItemId:_5_SHIELDS_GOOD_ITEM_ID
-        andPurchaseType:[[PurchaseWithVirtualItem alloc]
-            initWithVirtualItem:COINS_CURRENCY_ITEM_ID
-            andAmount:500]
-        andSingleUseGood:SHIELD_GOOD_ITEM_ID
-        andAmount:5];
-
-    ...
-
-@end
-
-
-// Initialization
 @implementation AppDelegate
     ...
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     {
         ...
-        id<IStoreAssets> storeAssets = [[MuffinRushAssets alloc] init];
+        id<IStoreAssets> storeAssets = [[YourImplementationAssets alloc] init];
         [Soomla initializeWithSecret:@"ChangeMe!!"];
         [[SoomlaStore getInstance] initializeWithStoreAssets:storeAssets];
         ...
@@ -141,6 +83,6 @@ In order to define the way your various virtual items (Coins, swords, hats...) a
 
 When your users buy products, iOS-store knows how to contact the App Store for you and redirect the users to their purchasing system to complete the transaction.
 
-Don't forget to subscribe to events of successful or failed purchases (see [Event Handling](/ios/store/Store_Events)).
+Don't forget to subscribe to events of successful or failed purchases - See [Event Handling](/ios/store/Store_Events).
 
 <div class="info-box">To read about iTunes Connect in-app-purchase setup and integration with SOOMLA see our [iOS IAB tutorial](/ios/store/Store_AppStoreIAB).</div>

@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Main Classes"
 text: "The main classes of android-store contain functionality for store-related operations such as purchasing, billing, inventory querying and storage."
-position: 5
+position: 4
 theme: 'platforms'
 collection: 'android_store'
 module: 'store'

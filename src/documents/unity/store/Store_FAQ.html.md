@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "FAQ"
 text: "Frequently asked questions about unity3d-store"
-position: 7
+position: 9
 theme: 'platforms'
 collection: 'unity_store'
 module: 'store'
