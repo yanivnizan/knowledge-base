@@ -10,67 +10,339 @@ module: 'store'
 platform: 'android'
 ---
 
-#Event Handling
+# Event Handling
 
-##About
+## About
 
-SOOMLA's android-store supplies a package of Events, which contains many classes that represent  store-related events. Some of these are `MarketPurchaseEvent`, `MarketRefundEvent`, `CurrencyBalanceChangeEvent`, and many more. You can see the full list of events [here](https://github.com/soomla/android-store/tree/master/SoomlaAndroidStore/src/com/soomla/store/events).
+SOOMLA's android-store allows you to subscribe to events, be notified when they occur, and implement your own application-specific behavior to handle them once they occur.
 
-In addition, android-store provides a singleton class called `BusProvider`, which exposes functions `post`, `register`, and `unregister`. Internally, `BusProvider` uses Square’s open-source project [Otto](http://square.github.io/otto/). Use the singleton instance of `BusProvider` to obtain the bus. Use the functions provided to publish-subscribe and handle the various events:
+<div class="info-box">Your game-specific behavior is an addition to the default behavior implemented by SOOMLA. You don't replace SOOMLA's behavior.</div>
 
-- `post` - Use to publish a new event, which essentially informs subscribers that an action has occurred.
+## How it Works
 
-- `register` - In order to receive events, a class needs to register with the `BusProvider`.
+Events are triggered when SOOMLA wants to notify you about different things that happen involving Store operations.
 
-- `unregister` - In order to stop receiving events, a class needs to unregister with the `BusProvider`.
+For example, when a user purchases an item using virtual currency, his/her currency balance changes, causing a `CurrencyBalanceChangedEvent` to be fired.
 
-##How it works
+## Observing & Handling Events
 
-###Triggering Events
+For event handling, SOOMLA uses Square's great open-source project [Otto](http://square.github.io/otto/). In ordere to be notified of profile related events, you can register for specific events and create your game-specific behavior to handle them.
 
-Throughout android-store events are fired, which means they are posted to the singleton instance of the bus.
+**In order to register for & handle events:**
 
-The example below is taken from android-store’s class `VirtualCurrencyStorage`. Here we can see a function that fires a `CurrencyBalanceChangedEvent`.
+1. In the class that should receive the event, create your event handler function with the annotation '@Subscribe'.
 
-``` java
-protected void postBalanceChangeEvent(VirtualItem item, int balance, int amountAdded) {
-    BusProvider.getInstance().post(new CurrencyBalanceChangedEvent((VirtualCurrency)item, balance, amountAdded));
-}
-```
+  For example:
 
-**What will happen next:** the subscriber function that catches this kind of event will be notified, and will handle the change in currency balance.
+  ``` java
+  @Subscribe
+  public void onCurrencyBalanceChangedEvent(CurrencyBalanceChangedEvent currencyBalanceChangedEvent) {
+    // ... your game specific implementation here ...
+  }
+  ```
 
-> **NOTE:** Any class can have functions that `post` to the bus.
+2. You'll also have to register your **event handler class** in the event bus:
 
-###Subscribing to & Handling Events
+  ``` java
+  BusProvider.getInstance().register(this);
+  ```
 
-You need to create an event-handler class with functions that listen for and handle such events. Annotate these functions with `@subscribe`.
+  and unregister when needed:
 
-You can see a full example of such an event handler class [here](https://github.com/soomla/android-store/blob/master/SoomlaAndroidExample/src/com/soomla/example/ExampleEventHandler.java).
+  ``` java
+  BusProvider.getInstance().unregister(this);
+  ```
+
+  <div class="info-box">If your class is an Activity, register in 'onResume' and unregister in 'onPause'.</div>
+
+## Store Events
+
+Below is a list of all the events in SOOMLA Store and an example of how to observe & handle them. See a full [event handler example](https://github.com/soomla/android-profile/blob/master/SoomlaAndroidExample/src/com/soomla/example/ExampleEventHandler.java).
+
+### SoomlaStoreInitializedEvent
+
+This event is triggered when the Soomla Store module is initialized and ready.
 
 ``` java
 @Subscribe
-public void onCurrencyBalanceChanged(CurrencyBalanceChangedEvent event) {
-    // handle accordingly...
+public void onSoomlaStoreInitialized(SoomlaStoreInitializedEvent soomlaStoreInitializedEvent) {
+  // ... your game specific implementation here ...
 }
 ```
 
-> **NOTE:** Any class can have `@subscribe` functions that handle events.
+<div class="warning-box">NOTE: Make sure to initialize the event handler for `SoomlaStoreInitializedEvent` before initializing SoomlaStore.</div>
 
-<br>
-In order to receive events, any class that contains functions that receive events (`@subscribe` functions) needs to register with the bus:
+### CurrencyBalanceChangedEvent
 
-``` java
-BusProvider.getInstance().register(this);
-```
-
-<div class="info-box">If your class is an Activity register in `onResume`.</div>
-
-<br>
-In order to stop receiving events, you’ll need to unregister with the bus:
+This event is triggered when the balance of a specific currency has changed.
 
 ``` java
-BusProvider.getInstance().unregister(this);
+@Subscribe
+public void onCurrencyBalanceChanged(CurrencyBalanceChangedEvent currencyBalanceChangedEvent) {
+  // currencyBalanceChangedEvent contains:
+  //   itemId - the currency whose balance has changed
+  //   balance - the currency's balance after the change
+  //   amountAdded - the change in balance that caused the event to be triggered
+
+  // ... your game specific implementation here ...
+}
 ```
 
-<div class="info-box">If your class is an Activity unregister in `onPause`.</div>
+### GoodBalanceChangedEvent
+
+This event is triggered when the balance of a specific virtual good has changed.
+
+``` java
+@Subscribe
+public void onGoodBalanceChanged(GoodBalanceChangedEvent goodBalanceChangedEvent) {
+  // goodBalanceChangedEvent contains:
+  //   itemId - the good whose balance has changed
+  //   balance - the good's balance after the change
+  //   amountAdded - the change in balance that caused the event to be triggered
+
+  // ... your game specific implementation here ...
+}
+```
+
+### MarketPurchaseStartedEvent
+
+This event is triggered when a market purchase operation has started.
+
+``` java
+@Subscribe
+public void onMarketPurchaseStarted(MarketPurchaseStartedEvent marketPurchaseStartedEvent) {
+  // marketPurchaseStartedEvent contains:
+  //   purchasableVirtualItem - the item whose purchase process has started
+
+  // ... your game specific implementation here ...
+}
+```
+
+### MarketPurchaseEvent
+
+This event is triggered when a market purchase operation has completed successfully.
+
+``` java
+@Subscribe
+public void onMarketPurchase(MarketPurchaseEvent marketPurchaseEvent) {
+  // marketPurchaseEvent contains:
+  //   purchasableVirtualItem - the item that was purchased
+  //   payload - text that you can provide when you initiate the purchase operation
+  //             and receive back upon completion
+  //   token - associated with in-app billing purchase
+  //   orderId - order ID of the item
+
+  // ... your game specific implementation here ...
+}
+```
+
+### MarketPurchaseCancelledEvent
+
+This event is triggered when a market purchase operation has been cancelled by the user.
+
+``` java
+@Subscribe
+public void onMarketPurchaseCancelled(MarketPurchaseCancelledEvent marketPurchaseCancelledEvent) {
+  // marketPurchaseCancelledEvent contains:
+  //   purchasableVirtualItem - the item whose purchase was cancelled
+
+  // ... your game specific implementation here ...
+}
+```
+
+### MarketRefundEvent
+
+This event is triggered when a market refund operation has been completed successfully.
+
+``` java
+@Subscribe
+public void onMarketRefund(MarketRefundEvent marketRefundEvent) {
+  // marketRefundEvent contains:
+  //   purchasableVirtualItem - the item whose purchase was refunded
+  //   payload - text that you can provide when you initiate the refund operation
+  //             and receive back upon completion
+
+  // ... your game specific implementation here ...
+}
+```
+
+### MarketItemsRefreshStartedEvent
+
+This event is triggered when a refresh market items operation has started.
+
+``` java
+@Subscribe
+public void onMarketItemsRefreshStarted(MarketItemsRefreshStartedEvent marketItemsRefreshStartedEvent) {
+  // ... your game specific implementation here ...
+}
+```
+
+### MarketItemsRefreshFinishedEvent
+
+This event is triggered when a refresh market items operation has finished.
+
+``` java
+@Subscribe
+public void onMarketItemsRefreshFinished(MarketItemsRefreshFinishedEvent marketItemsRefreshFinishedEvent) {
+  // marketItemsRefreshFinishedEvent contains:
+  //   List<MarketItem> marketItems - a list of MarketItems that was fetched from the market (Google Play, Amazon, etc...)
+
+  // ... your game specific implementation here ...
+}
+```
+
+### RestoreTransactionsStartedEvent
+
+This event is triggered when the Soomla Store module is initialized and ready.
+
+``` java
+@Subscribe
+public void onRestoreTransactionsStarted(RestoreTransactionsStartedEvent restoreTransactionsStartedEvent) {
+  // ... your game specific implementation here ...
+}
+```
+
+### RestoreTransactionsFinishedEvent
+
+This event is triggered when a restore transactions operation has completed successfully.
+
+``` java
+@Subscribe
+public void onRestoreTransactionsFinished(RestoreTransactionsFinishedEvent restoreTransactionsFinishedEvent) {
+  // restoreTransactionsFinishedEvent contains:
+  //   success - true if the RestoreTransactions operation finished successfully
+
+  // ... your game specific implementation here ...
+}
+```
+
+### ItemPurchaseStartedEvent
+
+This event is triggered when an item purchase operation has started.
+
+``` java
+@Subscribe
+public void onItemPurchaseStarted(ItemPurchaseStartedEvent itemPurchaseStartedEvent) {
+  // itemPurchaseStartedEvent contains:
+  //   itemId - ID of the item whose purchase process has started
+
+  // ... your game specific implementation here ...
+}
+```
+
+### ItemPurchasedEvent
+
+This event is triggered when an item purchase operation has completed successfully.
+
+``` java
+@Subscribe
+public void onItemPurchased(ItemPurchasedEvent itemPurchasedEvent) {
+  // itemPurchasedEvent contains:
+  //   itemId - ID of the item that was purchased
+  //   payload - text that you can provide when you initiate the purchase operation
+  //             and receive back upon completion
+
+  // ... your game specific implementation here ...
+}
+```
+
+### GoodEquippedEvent
+
+This event is triggered when a virtual good equipping operation has been completed successfully.
+
+``` java
+@Subscribe
+public void onGoodEquipped(GoodEquippedEvent goodEquippedEvent) {
+  // goodEquippedEvent contains:
+  //   itemId - ID of the good that was equipped
+
+  // ... your game specific implementation here ...
+}
+```
+
+### GoodUnEquippedEvent
+
+This event is triggered when a virtual good un-equipping operation has been completed successfully.
+
+``` java
+@Subscribe
+public void onGoodUnEquipped(GoodUnEquippedEvent goodUnEquippedEvent) {
+  // goodUnEquippedEvent contains:
+  //   itemId - ID of the good that was unequipped
+
+  // ... your game specific implementation here ...
+}
+```
+
+### GoodUpgradeEvent
+
+This event is triggered when a virtual good upgrading operation has been completed successfully.
+
+``` java
+@Subscribe
+public void onGoodUpgrade(GoodUpgradeEvent goodUpgradeEvent) {
+  // goodUpgradeEvent contains:
+  //   itemId - ID of the good that was upgraded
+  //   upgradeVGItemId - details about the upgrade
+
+  // ... your game specific implementation here ...
+}
+```
+
+### BillingSupportedEvent
+
+This event is triggered when the billing service is initialized and ready.
+
+``` java
+@Subscribe
+public void onBillingSupported(BillingSupportedEvent billingSupportedEvent) {
+  // ... your game specific implementation here ...
+}
+```
+
+### BillingNotSupportedEvent
+
+This event is triggered when the billing service fails to initialize.
+
+``` java
+@Subscribe
+public void onBillingNotSupported(BillingNotSupportedEvent billingNotSupportedEvent) {
+  // ... your game specific implementation here ...
+}
+```
+
+### UnexpectedStoreErrorEvent
+
+This event is triggered an unexpected error occurs in the Store.
+
+``` java
+@Subscribe
+public void onUnexpectedStoreError(UnexpectedStoreErrorEvent unexpectedStoreErrorEvent) {
+  // unexpectedStoreErrorEvent contains:
+  //   message - description of the error
+
+  // ... your game specific implementation here ...
+}
+```
+
+### IabServiceStartedEvent
+
+This event is triggered when the in-app billing service is started.
+
+``` java
+@Subscribe
+public void onIabServiceStarted(IabServiceStartedEvent iabServiceStartedEvent) {
+  // ... your game specific implementation here ...
+}
+```
+
+### IabServiceStoppedEvent
+
+This event is triggered when the in-app billing service is stopped.
+
+``` java
+@Subscribe
+public void onIabServiceStopped(IabServiceStoppedEvent iabServiceStoppedEvent) {
+  // ... your game specific implementation here ...
+}
+```

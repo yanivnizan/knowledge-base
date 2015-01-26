@@ -52,9 +52,11 @@ public static void onLoginFinished(UserProfile userProfileJson, string payload){
 
 ###OnSoomlaProfileInitialized
 
-This event will be thrown when Soomla Profile has been initialized.
+This event is triggered when Soomla Profile has been initialized.
 
 ``` cs
+ProfileEvents.OnSoomlaProfileInitialized += onSoomlaProfileInitialized;
+
 public void onSoomlaProfileInitialized() {
 	// ... your game specific implementation here ...
 }
@@ -62,9 +64,11 @@ public void onSoomlaProfileInitialized() {
 
 ###OnUserRatingEvent
 
-This event will be thrown when the page for rating your app is opened.
+This event is triggered when the page for rating your app is opened.
 
 ``` cs
+ProfileEvents.OnUserRatingEvent += onUserRatingEvent;
+
 public void onUserRatingEvent() {
 	// ... your game specific implementation here ...
 }
@@ -72,9 +76,11 @@ public void onUserRatingEvent() {
 
 ###OnUserProfileUpdated
 
-This event will be thrown when the user profile has been updated, after login.
+This event is triggered when the user profile has been updated, after login.
 
 ``` cs
+ProfileEvents.OnUserProfileUpdated += onUserProfileUpdated;
+
 public void onUserProfileUpdated(UserProfile userProfileJson) {
 	// userProfileJson is the user's profile from the logged in provider
 
@@ -84,9 +90,11 @@ public void onUserProfileUpdated(UserProfile userProfileJson) {
 
 ###OnLoginStarted
 
-This event will be thrown when logging in to the social provider has started.
+This event is triggered when logging into the social provider has started.
 
 ``` cs
+ProfileEvents.OnLoginStarted += onLoginStarted;
+
 public void onLoginStarted(Provider provider, string payload) {
 	// provider is the social provider
 	// payload is an identification string that you can give when you initiate the login operation and want to receive back upon starting
@@ -97,9 +105,11 @@ public void onLoginStarted(Provider provider, string payload) {
 
 ###OnLoginFinished
 
-This event will be thrown when logging in to the social provider has finished **successfully**.
+This event is triggered when logging into the social provider has finished **successfully**.
 
 ``` cs
+ProfileEvents.OnLoginFinished += onLoginFinished;
+
 public void onLoginFinished(UserProfile userProfileJson, string payload) {
 	// userProfileJson is the user's profile from the logged in provider
 	// payload is an identification string that you can give when you initiate the login operation and want to receive back upon its completion
@@ -110,9 +120,11 @@ public void onLoginFinished(UserProfile userProfileJson, string payload) {
 
 ###OnLoginCancelled
 
-This event will be thrown when logging in to the social provider has been cancelled.
+This event is triggered when logging into the social provider has been cancelled.
 
 ``` cs
+ProfileEvents.OnLoginCancelled += onLoginCancelled;
+
 public void onLoginCancelled(Provider provider, string payload) {
 	// provider is the social provider
 	// payload is an identification string that you can give when you initiate the login operation and want to receive back upon cancellation
@@ -123,9 +135,11 @@ public void onLoginCancelled(Provider provider, string payload) {
 
 ###OnLoginFailed
 
-This event will be thrown when logging in to the social provider has failed.
+This event is triggered when logging into the social provider has failed.
 
 ``` cs
+ProfileEvents.OnLoginFailed += onLoginFailed;
+
 public void onLoginFailed(Provider provider, string message, string payload) {
 	// provider is the social provider
 	// message is the failure message
@@ -137,9 +151,11 @@ public void onLoginFailed(Provider provider, string message, string payload) {
 
 ###OnLogoutStarted
 
-This event will be thrown when logging out of the social provider has started.
+This event is triggered when logging out of the social provider has started.
 
 ``` cs
+ProfileEvents.OnLogoutStarted += onLogoutStarted;
+
 public void onLogoutStarted(Provider provider) {
 	// provider is the social provider
 
@@ -149,9 +165,11 @@ public void onLogoutStarted(Provider provider) {
 
 ###OnLogoutFinished
 
-This event will be thrown when logging out of the social provider has finished **successfully**.
+This event is triggered when logging out of the social provider has finished **successfully**.
 
 ``` cs
+ProfileEvents.OnLogoutFinished += onLogoutFinished;
+
 public void onLogoutFinished(Provider provider) {
 	// provider is the social provider
 
@@ -161,9 +179,11 @@ public void onLogoutFinished(Provider provider) {
 
 ###OnLogoutFailed
 
-This event will be thrown when logging out of the social provider has failed.
+This event is triggered when logging out of the social provider has failed.
 
 ``` cs
+ProfileEvents.OnLogoutFailed += onLogoutFailed;
+
 public void onLogoutFailed(Provider provider, string payload) {
 	// provider is the social provider
 	// payload is an identification string that you can give when you initiate the logout operation and want to receive back upon failure
@@ -175,9 +195,11 @@ public void onLogoutFailed(Provider provider, string payload) {
 
 ###OnSocialActionStarted
 
-This event will be thrown when a social action has started.
+This event is triggered when a social action has started.
 
 ``` cs
+ProfileEvents.OnSocialActionStarted += onSocialActionStarted;
+
 public void onSocialActionStarted(Provider provider, SocialActionType action, string payload) {
 	// provider is the social provider
 	// action is the social action (like, post status, etc..) that started
@@ -190,9 +212,11 @@ public void onSocialActionStarted(Provider provider, SocialActionType action, st
 
 ###OnSocialActionFinished
 
-This event will be thrown when a social action has finished **successfully**.
+This event is triggered when a social action has finished **successfully**.
 
 ``` cs
+ProfileEvents.OnSocialActionFinished += onSocialActionFinished;
+
 public void onSocialActionFinished(Provider provider, SocialActionType action, string payload) {
 	// provider is the social provider
 	// action is the social action (like, post status, etc..) that finished
@@ -204,9 +228,11 @@ public void onSocialActionFinished(Provider provider, SocialActionType action, s
 
 ###OnSocialActionCancelled
 
-This event will be thrown when a social action has been cancelled.
+This event is triggered when a social action has been cancelled.
 
 ``` cs
+ProfileEvents.OnSocialActionCancelled += onSocialActionCancelled;
+
 public void onSocialActionCancelled(Provider provider, SocialActionType action, string payload) {
 	// provider is the social provider
 	// action is the social action (like, post status, etc..) that has been cancelled
@@ -218,9 +244,11 @@ public void onSocialActionCancelled(Provider provider, SocialActionType action, 
 
 ###OnSocialActionFailed
 
-This event will be thrown when a social action has failed.
+This event is triggered when a social action has failed.
 
 ``` cs
+ProfileEvents.OnSocialActionFailed += onSocialActionFailed;
+
 public void onSocialActionFailed(Provider provider, SocialActionType action, string message, string payload) {
 	// provider is the social provider
 	// action is the social action (like, post status, etc..) that failed
@@ -231,12 +259,13 @@ public void onSocialActionFailed(Provider provider, SocialActionType action, str
 }
 ```
 
-
 ###OnGetContactsStarted
 
-This event will be thrown when fetching the contacts from the social provider has started.
+This event is triggered when fetching the contacts from the social provider has started.
 
 ``` cs
+ProfileEvents.OnGetContactsStarted += onGetContactsStarted;
+
 public void onGetContactsStarted(Provider provider, string payload) {
 	// provider is the social provider
 	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon starting
@@ -247,9 +276,11 @@ public void onGetContactsStarted(Provider provider, string payload) {
 
 ###OnGetContactsFinished
 
-This event will be thrown when fetching the contacts from the social provider has finished **successfully**.
+This event is triggered when fetching the contacts from the social provider has finished **successfully**.
 
 ``` cs
+ProfileEvents.OnGetContactsFinished += onGetContactsFinished;
+
 public void onGetContactsFinished(Provider provider, List<UserProfile> userProfiles, string payload) {
 	// provider is the social provider
 	// userProfiles is a List of user profiles that have been fetched in the get contacts operation
@@ -261,9 +292,11 @@ public void onGetContactsFinished(Provider provider, List<UserProfile> userProfi
 
 ###OnGetContactsFailed
 
-This event will be thrown when fetching the contacts from the social provider has failed.
+This event is triggered when fetching the contacts from the social provider has failed.
 
 ``` cs
+ProfileEvents.OnGetContactsFailed += onGetContactsFailed;
+
 public void onGetContactsFailed(Provider provider, string payload) {
 	// provider is the social provider
 	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon failure
@@ -274,9 +307,11 @@ public void onGetContactsFailed(Provider provider, string payload) {
 
 ###OnGetFeedStarted
 
-This event will be thrown when fetching the feed from the social provider has started.
+This event is triggered when fetching the feed from the social provider has started.
 
 ``` cs
+ProfileEvents.OnGetFeedStarted += onGetFeedStarted;
+
 public void onGetFeedStarted(Provider provider) {
 	// provider is the social provider
 
@@ -286,9 +321,11 @@ public void onGetFeedStarted(Provider provider) {
 
 ###OnGetFeedFinished
 
-This event will be thrown when fetching the feed from the social provider has finished **successfully**.
+This event is triggered when fetching the feed from the social provider has finished **successfully**.
 
 ``` cs
+ProfileEvents.OnGetFeedFinished += onGetFeedFinished;
+
 public void onGetFeedFinished(Provider provider, List<string> feed) {
 	// provider is the social provider
 	// feed is the user's feed that has been fetched in the get feed operation
@@ -299,9 +336,11 @@ public void onGetFeedFinished(Provider provider, List<string> feed) {
 
 ###OnGetFeedFailed
 
-This event will be thrown when fetching the feed from the social provider has failed.
+This event is triggered when fetching the feed from the social provider has failed.
 
 ``` cs
+ProfileEvents.OnGetFeedFailed += onGetFeedFailed;
+
 public void onGetFeedFailed(Provider provider, string payload) {
 	// provider is the social provider
 	// payload is an identification string that you can give when you initiate the get feed operation and want to receive back upon failure

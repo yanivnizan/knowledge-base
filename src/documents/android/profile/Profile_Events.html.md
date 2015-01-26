@@ -28,7 +28,7 @@ For example, when a user posts a status, a `SocialActionStartedEvent` is fired a
 
 For event handling, SOOMLA uses Square's great open-source project [Otto](http://square.github.io/otto/). In ordere to be notified of profile related events, you can register for specific events and create your game-specific behavior to handle them.
 
-In order to register for & handle events:
+**In order to register for & handle events:**
 
 1. In the class that should receive the event, create your event handler function with the annotation '@Subscribe'. Example:
 
@@ -53,11 +53,11 @@ In order to register for & handle events:
 
 See a full [event handler example](https://github.com/soomla/android-profile/blob/master/SoomlaAndroidExample/src/com/soomla/example/ExampleEventHandler.java).
 
-##Profile Events
+## Profile Events
 
-###ProfileInitializedEvent
+### ProfileInitializedEvent
 
-This event will be thrown when Soomla Profile has been initialized.
+This event is triggered when Soomla Profile has been initialized.
 
 ``` java
 @Subscribe
@@ -66,9 +66,9 @@ public void onProfileInitialized(ProfileInitializedEvent profileInitializedEvent
 }
 ```
 
-###UserRatingEvent
+### UserRatingEvent
 
-This event will be thrown when the page for rating your app is opened.
+This event is triggered when the page for rating your app is opened.
 
 ``` java
 @Subscribe
@@ -77,9 +77,9 @@ public void onUserRatingEvent(UserRatingEvent UserRating) {
 }
 ```
 
-###UserProfileUpdatedEvent
+### UserProfileUpdatedEvent
 
-This event will be thrown when the user profile has been updated, after login.
+This event is triggered when the user profile has been updated, after login.
 
 ``` java
 @Subscribe
@@ -91,9 +91,9 @@ public void onUserProfileUpdated(UserProfileUpdatedEvent userProfileUpdatedEvent
 }
 ```
 
-###LoginStartedEvent
+### LoginStartedEvent
 
-This event will be thrown when logging in to the social provider has started.
+This event is triggered when logging into the social provider has started.
 
 ``` java
 @Subscribe
@@ -107,9 +107,9 @@ public void onLoginStarted(LoginStartedEvent loginStartedEvent) {
 }
 ```
 
-###LoginFinishedEvent
+### LoginFinishedEvent
 
-This event will be thrown when logging in to the social provider has finished **successfully**.
+This event is triggered when logging into the social provider has finished **successfully**.
 
 ``` java
 @Subscribe
@@ -123,9 +123,9 @@ public void onLoginFinished(LoginFinishedEvent loginFinishedEvent) {
 }
 ```
 
-###LoginCancelledEvent
+### LoginCancelledEvent
 
-This event will be thrown when logging in to the social provider has been cancelled.
+This event is triggered when logging into the social provider has been cancelled.
 
 ``` java
 @Subscribe
@@ -139,9 +139,9 @@ public void onLoginCancelled(LoginCancelledEvent loginCancelledEvent) {
 }
 ```
 
-###LoginFailedEvent
+### LoginFailedEvent
 
-This event will be thrown when logging in to the social provider has failed.
+This event is triggered when logging into the social provider has failed.
 
 ``` java
 @Subscribe
@@ -156,9 +156,9 @@ public void onLoginFailed(LoginFailedEvent loginFailedEvent) {
 }
 ```
 
-###LogoutStartedEvent
+### LogoutStartedEvent
 
-This event will be thrown when logging out of the social provider has started.
+This event is triggered when logging out of the social provider has started.
 
 ``` java
 @Subscribe
@@ -170,9 +170,9 @@ public void onLogoutStarted(LogoutStartedEvent logoutStartedEvent) {
 }
 ```
 
-###LogoutFinishedEvent
+### LogoutFinishedEvent
 
-This event will be thrown when logging out of the social provider has finished **successfully**.
+This event is triggered when logging out of the social provider has finished **successfully**.
 
 ``` java
 @Subscribe
@@ -184,9 +184,9 @@ public void onLogoutFinished(LogoutFinishedEvent logoutFinishedEvent) {
 }
 ```
 
-###LogoutFailedEvent
+### LogoutFailedEvent
 
-This event will be thrown when logging out of the social provider has failed.
+This event is triggered when logging out of the social provider has failed.
 
 ``` java
 @Subscribe
@@ -200,9 +200,9 @@ public void onLogoutFailed(LogoutFailedEvent logoutFailedEvent) {
 ```
 
 
-###SocialActionStartedEvent
+### SocialActionStartedEvent
 
-This event will be thrown when a social action has started.
+This event is triggered when a social action has started.
 
 ``` java
 @Subscribe
@@ -218,9 +218,9 @@ public void onSocialActionStarted(SocialActionStartedEvent socialActionStartedEv
 ```
 
 
-###SocialActionFinishedEvent
+### SocialActionFinishedEvent
 
-This event will be thrown when a social action has finished **successfully**.
+This event is triggered when a social action has finished **successfully**.
 
 ``` java
 @Subscribe
@@ -235,9 +235,9 @@ public void onSocialActionFinished(SocialActionFinishedEvent socialActionFinishe
 }
 ```
 
-###SocialActionCancelledEvent
+### SocialActionCancelledEvent
 
-This event will be thrown when a social action has been cancelled.
+This event is triggered when a social action has been cancelled.
 
 ``` java
 @Subscribe
@@ -252,9 +252,9 @@ public void onSocialActionCancelled(SocialActionCancelledEvent socialActionCance
 }
 ```
 
-###SocialActionFailedEvent
+### SocialActionFailedEvent
 
-This event will be thrown when a social action has failed.
+This event is triggered when a social action has failed.
 
 ``` java
 @Subscribe
@@ -271,9 +271,9 @@ public void onSocialActionFailed(SocialActionFailedEvent socialActionFailedEvent
 ```
 
 
-###GetContactsStartedEvent
+### GetContactsStartedEvent
 
-This event will be thrown when fetching the contacts from the social provider has started.
+This event is triggered when fetching the contacts from the social provider has started.
 
 ``` java
 @Subscribe
@@ -288,9 +288,9 @@ public void onGetContactsStarted(GetContactsStartedEvent getContactsStartedEvent
 }
 ```
 
-###GetContactsFinishedEvent
+### GetContactsFinishedEvent
 
-This event will be thrown when fetching the contacts from the social provider has finished **successfully**.
+This event is triggered when fetching the contacts from the social provider has finished **successfully**.
 
 ``` java
 @Subscribe
@@ -306,9 +306,9 @@ public void onGetContactsFinished(GetContactsFinishedEvent getContactsFinishedEv
 }
 ```
 
-###GetContactsFailedEvent
+### GetContactsFailedEvent
 
-This event will be thrown when fetching the contacts from the social provider has failed.
+This event is triggered when fetching the contacts from the social provider has failed.
 
 ``` java
 @Subscribe
@@ -324,9 +324,9 @@ public void onGetContactsFailed(GetContactsFailedEvent getContactsFailedEvent) {
 }
 ```
 
-###GetFeedStartedEvent
+### GetFeedStartedEvent
 
-This event will be thrown when fetching the feed from the social provider has started.
+This event is triggered when fetching the feed from the social provider has started.
 
 ``` java
 @Subscribe
@@ -341,9 +341,9 @@ public void onGetFeedStarted(GetFeedStartedEvent getFeedStartedEvent) {
 }
 ```
 
-###GetFeedFinishedEvent
+### GetFeedFinishedEvent
 
-This event will be thrown when fetching the feed from the social provider has finished **successfully**.
+This event is triggered when fetching the feed from the social provider has finished **successfully**.
 
 ``` java
 @Subscribe
@@ -359,9 +359,9 @@ public void onGetFeedFinished(GetFeedFinishedEvent getFeedFinishedEvent) {
 }
 ```
 
-###GetFeedFailedEvent
+### GetFeedFailedEvent
 
-This event will be thrown when fetching the feed from the social provider has failed.
+This event is triggered when fetching the feed from the social provider has failed.
 
 ``` java
 @Subscribe

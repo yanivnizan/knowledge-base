@@ -52,9 +52,11 @@ This is a list of all events of SOOMLA LevelUp and an example of how to listen t
 
 ###OnLevelUpInitialized
 
-This event will be thrown when the Soomla LevelUp module is initialized and ready.
+This event is triggered when the Soomla LevelUp module is initialized and ready.
 
 ``` cs
+LevelUpEvents.OnLevelUpInitialized += onLevelUpInitialized;
+
 public void onLevelUpInitialized() {
   // ... your game specific implementation here ...
 }
@@ -62,9 +64,11 @@ public void onLevelUpInitialized() {
 
 ###OnWorldCompleted
 
-This event will be thrown when a `World` has been completed.
+This event is triggered when a `World` has been completed.
 
 ``` cs
+LevelUpEvents.OnWorldCompleted += onWorldCompleted;
+
 public void onWorldCompleted(World world) {
   // world is the world that was completed
 
@@ -74,9 +78,11 @@ public void onWorldCompleted(World world) {
 
 ###OnWorldAssignedReward
 
-This event will be thrown when a `Reward` is assigned to a `World`.
+This event is triggered when a `Reward` is assigned to a `World`.
 
 ``` cs
+LevelUpEvents.OnWorldAssignedReward += onWorldAssignedReward;
+
 public void onWorldAssignedReward(World world) {
   // world is the world who had a reward assigned to it
 
@@ -86,9 +92,11 @@ public void onWorldAssignedReward(World world) {
 
 ###OnLevelStarted
 
-This event will be thrown when a `Level` has started.
+This event is triggered when a `Level` has started.
 
 ``` cs
+LevelUpEvents.OnLevelStarted += onLevelStarted;
+
 public void onLevelStarted(Level level) {
   // level is the level that has started
 
@@ -98,9 +106,11 @@ public void onLevelStarted(Level level) {
 
 ###OnLevelEnded
 
-This event will be thrown when a `Level` has been completed.
+This event is triggered when a `Level` has been completed.
 
 ``` cs
+LevelUpEvents.OnLevelEnded += onLevelEnded;
+
 public void onLevelEnded(Level level) {
   // level is the level that has ended
 
@@ -110,9 +120,11 @@ public void onLevelEnded(Level level) {
 
 ###OnScoreRecordReached
 
-This event will be thrown when a `Score`'s record has been reached.
+This event is triggered when a `Score`'s record has been reached.
 
 ``` cs
+LevelUpEvents.OnScoreRecordReached += onScoreRecordReached;
+
 public void onScoreRecordReached(Score score) {
   // score is the score whose record has been reached
 
@@ -122,9 +134,11 @@ public void onScoreRecordReached(Score score) {
 
 ###OnScoreRecordChanged
 
-This event will be thrown when a `Score`'s record has changed.
+This event is triggered when a `Score`'s record has changed.
 
 ``` cs
+LevelUpEvents.OnScoreRecordChanged += onScoreRecordChanged;
+
 public void onScoreRecordChanged(Score score) {
   // score is the score whose record has changed
 
@@ -134,9 +148,11 @@ public void onScoreRecordChanged(Score score) {
 
 ###OnGateOpened
 
-This event will be thrown when a `Gate` has opened.
+This event is triggered when a `Gate` has opened.
 
 ``` cs
+LevelUpEvents.OnGateOpened += onGateOpened;
+
 public void onGateOpened(Gate gate) {
   // gate is the gate that was opened
 
@@ -146,9 +162,11 @@ public void onGateOpened(Gate gate) {
 
 ###OnMissionCompleted
 
-This event will be thrown when a `Mission` has been completed.
+This event is triggered when a `Mission` has been completed.
 
 ``` cs
+LevelUpEvents.OnMissionCompleted += onMissionCompleted;
+
 public void onMissionCompleted(Mission mission) {
   // mission is the mission that was completed
 
@@ -158,9 +176,11 @@ public void onMissionCompleted(Mission mission) {
 
 ###OnMissionCompletionRevoked
 
-This event will be thrown when a `Mission` has been revoked.
+This event is triggered when a `Mission` has been revoked.
 
 ``` cs
+LevelUpEvents.OnMissionCompletionRevoked += onMissionCompletionRevoked;
+
 public void onMissionCompletionRevoked((Mission mission) {
   // mission is the mission that was revoked
 

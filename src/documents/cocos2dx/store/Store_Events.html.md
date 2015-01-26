@@ -45,25 +45,25 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
   public:
 
     /**
-     Handles an `onSoomlaStoreInitialized` event, which is fired when
-     SOOMLA Store is initialized.
+     Handles an `onSoomlaStoreInitialized` event, which is triggered when
+     SoomlaStore is initialized.
      */
     virtual void onSoomlaStoreInitialized();
 
     /**
-     Handles an `onBillingSupported` event, which is fired when SOOMLA
+     Handles an `onBillingSupported` event, which is triggered when SOOMLA
      knows that billing IS supported on the device.
      */
     virtual void onBillingSupported();
 
     /**
-     Handles an `onBillingNotSupported` event, which is fired when SOOMLA
+     Handles an `onBillingNotSupported` event, which is triggered when SOOMLA
      knows that billing is NOT supported on the device.
      */
     virtual void onBillingNotSupported();
 
     /**
-     Handles an `onCurrencyBalanceChanged` event, which is fired when the
+     Handles an `onCurrencyBalanceChanged` event, which is triggered when the
      balance of a specific virtual currency has changed.
      @param virtualCurrency The currency whose balance has changed.
      @param balance The balance of the currency.
@@ -75,7 +75,7 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       int amountAdded);
 
     /**
-     Handles an `onGoodBalanceChanged` event, which is fired when the
+     Handles an `onGoodBalanceChanged` event, which is triggered when the
      balance of a specific virtual good has changed.
      @param virtualGood The good whose balance has changed.
      @param balance The balance of the good.
@@ -87,7 +87,7 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       int amountAdded);
 
     /**
-     Handles an `onGoodEquipped` event, which is fired when a specific
+     Handles an `onGoodEquipped` event, which is triggered when a specific
      equippable virtual good has been equipped.
      @param equippableVG The good that is being equipped.
      */
@@ -95,14 +95,14 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       soomla::CCEquippableVG *equippableVG);
 
     /**
-     Handles an `onGoodUnEquipped` event, which is fired when a specific
+     Handles an `onGoodUnEquipped` event, which is triggered when a specific
      equippable virtual good has been unequipped.
      @param equippableVG The good that is being unequipped.
      */
     virtual void onGoodUnEquipped(soomla::CCEquippableVG *equippableVG);
 
     /**
-     Handles an `onGoodUpgrade` event, which is fired when a specific
+     Handles an `onGoodUpgrade` event, which is triggered when a specific
      virtual good has been upgraded.
      @param virtualGood The virtual good that is being upgraded.
      @param upgradeVG The upgrade.
@@ -112,7 +112,7 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       soomla::CCUpgradeVG *upgradeVG);
 
     /**
-     Handles an `onItemPurchased` event, which is fired when when a specific
+     Handles an `onItemPurchased` event, which is triggered when when a specific
      virtual good has been purchased.
      @param purchasableVirtualItem The item being purchased.
      */
@@ -121,7 +121,7 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       cocos2d::__String *payload);
 
     /**
-     Handles an `onItemPurchaseStarted` event, which is fired when a
+     Handles an `onItemPurchaseStarted` event, which is triggered when a
      purchase process has started.
      @param purchasableVirtualItem The item whose purchase has started.
      */
@@ -129,7 +129,7 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
 
     /**
-     Handles an `onMarketPurchaseStarted` event, which is fired when a
+     Handles an `onMarketPurchaseStarted` event, which is triggered when a
      purchase process has started, where the item is being purchased from
      the store (App Store, Google Play, etc..).
      @param purchasableVirtualItem The market item whose purchase has
@@ -139,7 +139,7 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
 
     /**
-     Handles an `onMarketPurchase` event, which is fired when a market item
+     Handles an `onMarketPurchase` event, which is triggered when a market item
      from the store (App Store, Google Play, etc..) has been purchased.
      @param purchasableVirtualItem The market item being purchased.
      @param receiptUrl Receipt URL from the store.
@@ -150,7 +150,7 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       cocos2d::__String *payload);
 
     /**
-     Handles an `onMarketPurchaseVerification` event, which is fired when a
+     Handles an `onMarketPurchaseVerification` event, which is triggered when a
      market purchase verification process has started.
      @param purchasableVirtualItem The market item whose purchase is being
             verified.
@@ -159,7 +159,7 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
 
     /**
-     Handles an `onMarketPurchaseCancelled` event, which is fired when a
+     Handles an `onMarketPurchaseCancelled` event, which is triggered when a
      market (App Store, Google Play, etc..) purchase has been cancelled.
      @param purchasableVirtualItem the item whose purchase is being
             cancelled.
@@ -168,13 +168,13 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
       soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
 
     /**
-     Handles an `onRestoreTransactionsStarted` event, which is fired when a
+     Handles an `onRestoreTransactionsStarted` event, which is triggered when a
      restore transactions process has started.
      */
     virtual void onRestoreTransactionsStarted();
 
     /**
-     Handles an `onRestoreTransactionsFinished` event, which is fired when a
+     Handles an `onRestoreTransactionsFinished` event, which is triggered when a
      restore transactions process has finished.
      @param success Indicates if the restore transactions process finished
             successfully.
@@ -182,19 +182,19 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
     virtual void onRestoreTransactionsFinished(bool success);
 
     /**
-     Handles an `onMarketItemsRefreshStarted` event, which is fired when a market
+     Handles an `onMarketItemsRefreshStarted` event, which is triggered when a market
      item refreshed process has started.
      */
     virtual void onMarketItemsRefreshStarted();
 
     /**
-     Handles an `onMarketItemsRefreshed` event, which is fired when a market
+     Handles an `onMarketItemsRefreshed` event, which is triggered when a market
      item refreshed process has completed.
      */
     virtual void onMarketItemsRefreshed(cocos2d::__Array *virtualItems);
 
     /**
-     Handles an `onUnexpectedErrorInStore` event, which is fired when an
+     Handles an `onUnexpectedErrorInStore` event, which is triggered when an
      unexpected error occurs in the store.
      */
     virtual void onUnexpectedErrorInStore(cocos2d::__String *errorMessage);
@@ -206,20 +206,20 @@ class ExampleEventHandler : public soomla::CCStoreEventHandler {
 
 ``` cpp
 /**
- Handles an `onMarketRefund` event, which is fired when a market item is
+ Handles an `onMarketRefund` event, which is triggered when a market item is
  being refunded.
  @param purchasableVirtualItem The item that is being refunded in the market.
  */
 virtual void onMarketRefund(CCPurchasableVirtualItem *purchasableVirtualItem);
 
 /**
- Handles an `onIabServiceStarted` event, which is fired when in-app
+ Handles an `onIabServiceStarted` event, which is triggered when in-app
  billing service is started.
  */
 virtual void onIabServiceStarted();
 
 /**
- Handles an `onIabServiceStopped` event, which is fired when in-app
+ Handles an `onIabServiceStopped` event, which is triggered when in-app
  billing service is stopped.
  */
 virtual void onIabServiceStopped();

@@ -46,7 +46,7 @@ OR, you can observe all events with the same selector by calling:
 
 ### PROFILE INITIALIZED  
 
-The event `EVENT_UP_PROFILE_INITIALIZED` will be fired when Soomla Profile has been initialized.
+The event `EVENT_UP_PROFILE_INITIALIZED` will be triggered when Soomla Profile has been initialized.
 
 ``` objectivec
 // observe the event:
@@ -61,7 +61,7 @@ The event `EVENT_UP_PROFILE_INITIALIZED` will be fired when Soomla Profile has b
 
 ### USER RATING
 
-The event `EVENT_UP_USER_RATING` will be fired when the page for rating your app is opened.
+The event `EVENT_UP_USER_RATING` will be triggered when the page for rating your app is opened.
 
 ``` objectivec
 // observe the event:
@@ -76,7 +76,7 @@ name:EVENT_UP_USER_RATING object:nil];
 
 ### USER PROFILE UPDATED
 
-The event `EVENT_UP_USER_PROFILE_UPDATED` will be fired when the user profile has been updated, after login.
+The event `EVENT_UP_USER_PROFILE_UPDATED` will be triggered when the user profile has been updated, after login.
 
 ``` objectivec
 // observe the event:
@@ -94,7 +94,7 @@ name:EVENT_UP_USER_PROFILE_UPDATED object:nil];
 
 ### LOGIN STARTED
 
-The event `EVENT_UP_LOGIN_STARTED` will be fired when logging in to the social provider has started.
+The event `EVENT_UP_LOGIN_STARTED` will be triggered when logging into the social provider has started.
 
 ``` objectivec
 // observe the event:
@@ -114,7 +114,7 @@ name:EVENT_UP_LOGIN_STARTED object:nil];
 
 ### LOGIN FINISHED
 
-The event `EVENT_UP_LOGIN_FINISHED` will be fired when logging in to the social provider has finished successfully.
+The event `EVENT_UP_LOGIN_FINISHED` will be triggered when logging into the social provider has finished successfully.
 
 ``` objectivec
 // observe the event:
@@ -134,7 +134,7 @@ name:EVENT_UP_LOGIN_FINISHED object:nil];
 
 ### LOGIN CANCELLED
 
-The event `EVENT_UP_LOGIN_CANCELLED` will be fired when logging in to the social provider has been cancelled.
+The event `EVENT_UP_LOGIN_CANCELLED` will be triggered when logging into the social provider has been cancelled.
 
 ``` objectivec
 // observe the event:
@@ -154,7 +154,7 @@ name:EVENT_UP_LOGIN_CANCELLED object:nil];
 
 ### LOGIN FAILED
 
-The event `EVENT_UP_LOGIN_FAILED` will be fired when logging in to the social provider has failed.
+The event `EVENT_UP_LOGIN_FAILED` will be triggered when logging into the social provider has failed.
 
 ``` objectivec
 // observe the event:
@@ -175,7 +175,7 @@ name:EVENT_UP_LOGIN_FAILED object:nil];
 
 ### LOGOUT STARTED
 
-The event `EVENT_UP_LOGOUT_STARTED` will be fired when logging out of the social provider has started.
+The event `EVENT_UP_LOGOUT_STARTED` will be triggered when logging out of the social provider has started.
 
 ``` objectivec
 // observe the event:
@@ -193,7 +193,7 @@ name:EVENT_UP_LOGOUT_STARTED object:nil];
 
 ### LOGOUT FINISHED
 
-The event `EVENT_UP_LOGOUT_FINISHED` will be fired when logging out of the social provider has finished successfully.
+The event `EVENT_UP_LOGOUT_FINISHED` will be triggered when logging out of the social provider has finished successfully.
 
 ``` objectivec
 // observe the event:
@@ -211,7 +211,7 @@ name:EVENT_UP_LOGOUT_FINISHED object:nil];
 
 ### LOGOUT FAILED
 
-The event `EVENT_UP_LOGOUT_FAILED` will be fired when logging out of the social provider has failed.
+The event `EVENT_UP_LOGOUT_FAILED` will be triggered when logging out of the social provider has failed.
 
 ``` objectivec
 // observe the event:
@@ -230,7 +230,7 @@ name:EVENT_UP_LOGOUT_FAILED object:nil];
 
 ### SOCIAL ACTION STARTED
 
-The event `EVENT_UP_SOCIAL_ACTION_STARTED` will be fired when a social action (like, post status, etc..) has started.
+The event `EVENT_UP_SOCIAL_ACTION_STARTED` will be triggered when a social action (like, post status, etc..) has started.
 
 ``` objectivec
 // observe the event:
@@ -252,7 +252,7 @@ name:EVENT_UP_SOCIAL_ACTION_STARTED object:nil];
 
 ### SOCIAL ACTION FINISHED
 
-The event `EVENT_UP_SOCIAL_ACTION_FINISHED` will be fired when a social action has finished successfully.
+The event `EVENT_UP_SOCIAL_ACTION_FINISHED` will be triggered when a social action has finished successfully.
 
 ``` objectivec
 // observe the event:
@@ -274,7 +274,7 @@ name:EVENT_UP_SOCIAL_ACTION_FINISHED object:nil];
 
 ### SOCIAL ACTION CANCELLED
 
-The event `EVENT_UP_SOCIAL_ACTION_CANCELLED` will be fired when a social action has been cancelled.
+The event `EVENT_UP_SOCIAL_ACTION_CANCELLED` will be triggered when a social action has been cancelled.
 
 ``` objectivec
 // observe the event:
@@ -297,7 +297,7 @@ name:EVENT_UP_SOCIAL_ACTION_CANCELLED object:nil];
 
 ### SOCIAL ACTION FAILED
 
-The event `EVENT_UP_SOCIAL_ACTION_FAILED` will be fired when a social action has failed.
+The event `EVENT_UP_SOCIAL_ACTION_FAILED` will be triggered when a social action has failed.
 
 ``` objectivec
 // observe the event:
@@ -320,7 +320,7 @@ name:EVENT_UP_SOCIAL_ACTION_FAILED object:nil];
 
 ### GET CONTACTS STARTED
 
-The event `EVENT_UP_GET_CONTACTS_STARTED` will be fired when fetching the contacts from the social provider has started.
+The event `EVENT_UP_GET_CONTACTS_STARTED` will be triggered when fetching the contacts from the social provider has started.
 
 ``` objectivec
 // observe the event:
@@ -342,7 +342,7 @@ name:EVENT_UP_GET_CONTACTS_STARTED object:nil];
 
 ### GET CONTACTS FINISHED
 
-The event `EVENT_UP_GET_CONTACTS_FINISHED` will be fired when fetching the contacts from the social provider has finished successfully.
+The event `EVENT_UP_GET_CONTACTS_FINISHED` will be triggered when fetching the contacts from the social provider has finished successfully.
 
 ``` objectivec
 // observe the event:
@@ -366,7 +366,7 @@ name:EVENT_UP_GET_CONTACTS_FINISHED object:nil];
 
 ### GET CONTACTS FAILED
 
-The event `EVENT_UP_GET_CONTACTS_FAILED` will be fired when fetching the contacts from the social provider has failed.
+The event `EVENT_UP_GET_CONTACTS_FAILED` will be triggered when fetching the contacts from the social provider has failed.
 
 ``` objectivec
 // observe the event:
@@ -389,7 +389,7 @@ name:EVENT_UP_GET_CONTACTS_FAILED object:nil];
 
 ### GET FEED STARTED
 
-The event `EVENT_UP_GET_FEED_STARTED` will be fired when fetching the feed from the social provider has started.
+The event `EVENT_UP_GET_FEED_STARTED` will be triggered when fetching the feed from the social provider has started.
 
 ``` objectivec
 // observe the event:
@@ -411,7 +411,7 @@ name:EVENT_UP_GET_FEED_STARTED object:nil];
 
 ### GET FEED FINISHED
 
-The event `EVENT_UP_GET_FEED_FINISHED` will be fired when fetching the feed from the social provider has finished successfully.
+The event `EVENT_UP_GET_FEED_FINISHED` will be triggered when fetching the feed from the social provider has finished successfully.
 
 ``` objectivec
 // observe the event:
@@ -434,7 +434,7 @@ name:EVENT_UP_GET_FEED_FINISHED object:nil];
 
 ### GET FEED FAILED
 
-The event `EVENT_UP_GET_FEED_FAILED` will be fired when fetching the feed from the social provider has failed.
+The event `EVENT_UP_GET_FEED_FAILED` will be triggered when fetching the feed from the social provider has failed.
 
 ``` objectivec
 // observe the event:
