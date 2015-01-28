@@ -41,27 +41,37 @@ soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(CCExampleEventH
 ``` cpp
 class CCMyEventHandler: public soomla::CCLevelUpEventHandler {
 
-		public:
+	public:
 
-        virtual void onLevelUpInitialized();
+		// This event is triggered when the Soomla LevelUp module is initialized and ready.
+		virtual void onLevelUpInitialized();
 
-        virtual void onGateOpened(CCGate* gate);
+		// This event is triggered when a World has been completed.
+		virtual void onWorldCompleted(CCWorld *world);
 
-        virtual void onMissionCompleted(CCMission* completedMission);
+		// This event is triggered when a Reward is assigned to a World.
+		virtual void onWorldRewardAssigned(CCWorld *world);
 
-        virtual void onMissionCompletionRevoked(CCMission* mission);
+		// This event is triggered when a Level has started.
+		virtual void onLevelStarted(CCLevel *level);
 
-        virtual void onScoreRecordReached(CCScore *score);
+		// This event is triggered when a Level has been completed.
+		virtual void onLevelEnded(CCLevel *level);
 
-        virtual void onScoreRecordChanged(CCScore *score);
+		// This event is triggered when a Score's record has been reached.
+		virtual void onScoreRecordReached(CCScore *score);
 
-        virtual void onWorldCompleted(CCWorld *world);
+		// This event is triggered when a Score's record has changed.
+		virtual void onScoreRecordChanged(CCScore *score);
 
-        virtual void onWorldRewardAssigned(CCWorld *world);
+		// This event is triggered when a Gate has opened.
+		virtual void onGateOpened(CCGate* gate);
 
-        virtual void onLevelStarted(CCLevel *level);
+		// This event is triggered when a Mission has been completed.
+		virtual void onMissionCompleted(CCMission* completedMission);
 
-        virtual void onLevelEnded(CCLevel *level);
+		// This event is triggered when a Mission has been revoked.
+		virtual void onMissionCompletionRevoked(CCMission* mission);
 };
 ```
 
@@ -71,68 +81,58 @@ class CCMyEventHandler: public soomla::CCLevelUpEventHandler {
 #include "CCMyEventHandler.h"
 ...
 
-// This event will be thrown when the Soomla LevelUp module is initialized and ready.
 void soomla::CCSimpleLevelUpEventHandler::onLevelUpInitialized() {
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a World has been completed.
 void soomla::CCSimpleLevelUpEventHandler::onWorldCompleted(soomla::CCWorld *world) {
 	// world is the world that was completed
 
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a Reward is assigned to a World.
 void soomla::CCSimpleLevelUpEventHandler::onWorldRewardAssigned(soomla::CCWorld *world) {
 	// world is the world who had a reward assigned to it
 
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a Level has started.
 void soomla::CCSimpleLevelUpEventHandler::onLevelStarted(soomla::CCLevel *level) {
 	// level is the level that has started
 
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a Level has been completed.
 void soomla::CCSimpleLevelUpEventHandler::onLevelEnded(soomla::CCLevel *level) {
 	// level is the level that has ended
 
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a Score's record has been reached.
 void soomla::CCSimpleLevelUpEventHandler::onScoreRecordReached(soomla::CCScore *score) {
 	// score is the score whose record has been reached
 
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a Score's record has changed.
 void soomla::CCSimpleLevelUpEventHandler::onScoreRecordChanged(CCScore *score) {
 	// score is the score whose record has changed
 
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a Gate has opened.
 void soomla::CCSimpleLevelUpEventHandler::onGateOpened(soomla::CCGate *gate) {
 	// gate is the gate that was opened
 
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a Mission has been completed.
 void soomla::CCSimpleLevelUpEventHandler::onMissionCompleted(soomla::CCMission *completedMission) {
 	// mission is the mission that was completed
 
 	// ... your game specific implementation here ...
 }
 
-// This event will be thrown when a Mission has been revoked.
 void soomla::CCSimpleLevelUpEventHandler::onMissionCompletionRevoked(soomla::CCMission *mission) {
 	// mission is the mission that was revoked
 

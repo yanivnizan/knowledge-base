@@ -157,55 +157,18 @@ Once you complete the following steps, see the [Amazon IAB](/android/store/Store
 
 ##Example
 
+Create your own implementation of `IStoreAssets`; See the article about [IStoreAssets](/android/store/Store_IStoreAssets), which includes a code example and explanations.
+
+Then initialize `SoomlaStore` with your implementation of `IStoreAssets`:
+
 ``` java
-//Create your implementation of IStoreAssets
-public class ExampleStoreAssets extends IStoreAssets {
-    ...
-
-    /** Virtual Currencies **/
-    public static final VirtualCurrency COIN_CURRENCY = new VirtualCurrency(
-            ...
-            "currency_coin"                 // item id
-    );
-
-
-    /** Virtual Currency Packs **/
-    public static final VirtualCurrencyPack TEN_COIN_PACK = new VirtualCurrencyPack(
-        ...
-        10,                                 // number of currencies in the pack
-        "currency_coin",                    // the currency associated with this pack
-        new PurchaseWithMarket(             // purchase type
-            TEN_COIN_PACK_PRODUCT_ID,       // product ID
-            0.99)                           // initial price
-    );
-
-    /** Virtual Goods **/
-
-    // Shield that can be purchased for 150 coins.
-    public static final VirtualGood SHIELD_GOOD = new SingleUseVG(
-        ...
-        new PurchaseWithVirtualItem("currency_coin", 150)     // purchase type
-    );
-
-    // Pack of 5 shields that can be purchased for $2.99.
-    public static final VirtualGood 5_SHIELD_GOOD = new SingleUsePackVG(
-        ...
-        new PurchaseWithMarket(             // purchase type
-            SHIELD_PACK_PRODUCT_ID,         // product ID
-            2.99)                           // initial price
-    );
-
-    ...
-}
-
-// Initialization
 public class StoreExampleActivity extends Activity {
     ...
 
     protected void onCreate(Bundle savedInstanceState) {
         ...
 
-        IStoreAssets storeAssets = new ExampleStoreAssets();
+        IStoreAssets storeAssets = new YourImplementationAssets();
 
         // This value is a secret of your choice.
         // You can't change it after you publish your game.

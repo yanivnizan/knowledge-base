@@ -71,7 +71,7 @@ platform: 'android'
 	SoomlaProfile.getInstance().initialize(providerParams);
 	```
 
-6. If integrating a virtual economy with the store module, please see [android-store](android/store/Store_GettingStarted) for store setup.
+6. If integrating a virtual economy with the store module, please see [android-store](/android/store/Store_GettingStarted) for store setup.
 
 <div class="info-box">The following steps should be done according to the target social network.</div>
 

@@ -3,7 +3,7 @@ layout: "content"
 image: "Tutorial"
 title: "Main Classes"
 text: "The main classes of android-store contain functionality for store-related operations such as purchasing, billing, inventory querying and storage."
-position: 5
+position: 4
 theme: 'platforms'
 collection: 'android_store'
 module: 'store'
@@ -14,7 +14,7 @@ platform: 'android'
 
 Here you can find descriptions of some of the main classes and interfaces of android-store. These classes contain functionality for store-related operations such as purchasing, billing, inventory querying and storage.
 
-## SoomlaStore [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/SoomlaStore.java)
+##SoomlaStore <a href="https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/SoomlaStore.java" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the Market. It provides you with functionality such as querying the inventory for information, and starting a purchase process with the market (Google Play, Amazon Appstore, etc…).
 
@@ -35,7 +35,7 @@ SoomlaStore.getInstance().initialize(storeAssets, "MIIBIjANBgkqhkiG9w...");
 
 This function queries the Market’s inventory, and creates a list of all metadata stored in the Market (the items that have been purchased). The metadata includes the item's name, description, price, product ID, etc… Then a `MarketItemsRefreshed` event is posted with the list just created. Upon failure, an error message is printed.
 
-## StoreInfo] [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StoreInfo.java)
+## StoreInfo <a href="https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StoreInfo.java" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 `StoreInfo` is the mother of all metadata information about your specific game.
 
@@ -60,7 +60,7 @@ int greenHatsBalance = StorageManager.getVirtualGoodsStorage().getBalance(greenH
 `StoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`, a class that represents your game's metadata. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
 
 
-## StoreInventory [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/StoreInventory.java)
+## StoreInventory <a href="https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/StoreInventory.java" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 `StoreInventory` is a utility class that provides you with functions that perform store-related operations. With `StoreInventory` you can give or take items from your users. You can buy items or upgrade them. You can also check their equipping status and change it.
 
@@ -100,7 +100,7 @@ Takes from your user the given amount of the virtual item with the given item ID
 StoreInventory.takeVirtualItem("green_hat", 1);
 ```
 
-## StorageManager [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StorageManager.java)
+## StorageManager <a href="https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/data/StorageManager.java" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 <div class="warning-box">SOOMLA discourages the use of StorageManager's functions, and suggests you use StoreInventory's functions instead to perform the same actions.</div>
 
@@ -114,8 +114,7 @@ You can use the `StorageManager`’s functions to access the different storage b
 StorageManager.getVirtualItemStorage().add(some_VI_ID, 1);
 ```
 
-
-## StoreConfig [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/StoreConfig.java)
+## StoreConfig <a href="https://github.com/soomla/android-store/blob/master/SoomlaAndroidStore/src/com/soomla/store/StoreConfig.java" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 The configurations of your store will be kept in `StoreConfig`.
 

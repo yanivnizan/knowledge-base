@@ -3,7 +3,7 @@ layout: "content"
 image: "InAppPurchase"
 title: "Amazon In-app Billing"
 text: "Amazon in-app-purchase setup and integration with SOOMLA - define your game's in-app products."
-position: 3
+position: 9
 theme: 'platforms'
 collection: 'android_store'
 module: 'store'

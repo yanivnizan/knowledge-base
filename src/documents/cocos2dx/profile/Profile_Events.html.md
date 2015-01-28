@@ -32,6 +32,8 @@ The `CCProfileEventDispatcher` class is where all events go through. See [CCProf
 To handle various events, create your own event handler (see example below) that implements `CCProfileEventHandler`, and add it to the `CCProfileEventDispatcher` class:
 
 ``` cpp
+CCMyEventHandler *myEventHandler = new CCMyEventHandler();
+
 soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myEventHandler);
 ```
 
@@ -46,105 +48,105 @@ class CCMyEventHandler: public soomla::CCProfileEventHandler {
 
   public:
 
-    // This event will be thrown when Soomla Profile has been initialized.
+    // This event is triggered when Soomla Profile has been initialized.
     virtual void onProfileInitialized();
 
-    // This event will be thrown when the page for rating your app is opened.
+    // This event is triggered when the page for rating your app is opened.
     virtual void onUserRatingEvent();
 
-    // This event will be thrown when the user profile has been updated,
+    // This event is triggered when the user profile has been updated,
     // after login.
     virtual void onUserProfileUpdatedEvent(
       CCUserProfile *userProfile);
 
-    // This event will be thrown when logging in to the social provider has started.
+    // This event is triggered when logging into the social provider has started.
     virtual void onLoginStarted(
       CCProvider provider,
       cocos2d::__String *payload);
 
-    // This event will be thrown when logging in to the social provider has finished
+    // This event is triggered when logging into the social provider has finished
     // successfully.
     virtual void onLoginFinished(
       CCUserProfile *userProfile,
       cocos2d::__String *payload);
 
-    // This event will be thrown when logging in to the social provider has been cancelled.
+    // This event is triggered when logging into the social provider has been cancelled.
     virtual void onLoginCancelledEvent(
       CCProvider provider,
       cocos2d::__String *payload);
 
-    // This event will be thrown when logging in to the social provider has failed.
+    // This event is triggered when logging into the social provider has failed.
     virtual void onLoginFailed(
       CCProvider provider,
       cocos2d::__String *errorDescription,
       cocos2d::__String *payload);
 
-    // This event will be thrown when logging out of the social provider has started.
+    // This event is triggered when logging out of the social provider has started.
     virtual void onLogoutStarted(CCProvider provider);
 
-    // This event will be thrown when logging out of the social provider has finished
+    // This event is triggered when logging out of the social provider has finished
     // successfully.
     virtual void onLogoutFinished(CCProvider provider);
 
-    // This event will be thrown when logging out of the social provider has failed.
+    // This event is triggered when logging out of the social provider has failed.
     virtual void onLogoutFailed(
       CCProvider provider,
       cocos2d::__String *errorDescription);
 
-    // This event will be thrown when a social action (like, post status, etc..)
+    // This event is triggered when a social action (like, post status, etc..)
     // has started.
     virtual void onSocialActionStartedEvent(
       CCProvider provider,
       CCSocialActionType socialActionType,
       cocos2d::__String *payload);
 
-    // This event will be thrown when a social action has finished successfully.
+    // This event is triggered when a social action has finished successfully.
     virtual void onSocialActionFinishedEvent(
       CCProvider provider,
       CCSocialActionType socialActionType,
       cocos2d::__String *payload);
 
-    // This event will be thrown when a social action has failed.
+    // This event is triggered when a social action has failed.
     virtual void onSocialActionFailedEvent(
       CCProvider provider,
       CCSocialActionType socialActionType,
       cocos2d::__String *errorDescription,
       cocos2d::__String *payload);
 
-    // This event will be thrown when fetching the contacts from the social provider
+    // This event is triggered when fetching the contacts from the social provider
     // has started.
     virtual void onGetContactsStarted(
       CCProvider provider,
       cocos2d::__String *payload);
 
-    // This event will be thrown when fetching the contacts from the social provider
+    // This event is triggered when fetching the contacts from the social provider
     // has finished successfully.
     virtual void onGetContactsFinished(
       CCProvider provider,
       cocos2d::__Array *contactsDict,
       cocos2d::__String *payload);
 
-    // This event will be thrown when fetching the contacts from the social provider
+    // This event is triggered when fetching the contacts from the social provider
     // has failed.
     virtual void onGetContactsFailed(
       CCProvider provider,
       cocos2d::__String *errorDescription,
       cocos2d::__String *payload);
 
-    // This event will be thrown when fetching the feed from the social provider
+    // This event is triggered when fetching the feed from the social provider
     // has started.
     virtual void onGetFeedStarted(
       CCProvider provider,
       cocos2d::__String *payload);
 
-    // This event will be thrown when fetching the feed from the social provider
+    // This event is triggered when fetching the feed from the social provider
     // has finished successfully.
     virtual void onGetFeedFinished(
       CCProvider provider,
       cocos2d::__Array *feedList,
       cocos2d::__String *payload);
 
-    // This event will be thrown when fetching the feed from the social provider
+    // This event is triggered when fetching the feed from the social provider
     // has failed.
     virtual void onGetFeedFailed(
       CCProvider provider,

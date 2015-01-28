@@ -21,17 +21,17 @@ Social actions allow you to entice social engagement by offering your users rewa
 
 <div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many functions of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
-## IProvider [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-profile/blob/master/SoomlaAndroidProfile/src/com/soomla/profile/domain/IProvider.java)
+##IProvider <a href="https://github.com/soomla/android-profile/blob/master/SoomlaAndroidProfile/src/com/soomla/profile/domain/IProvider.java" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This class represents the different social networks that exist today. Currently, SOOMLA supports Facebook, Twitter, and Google+.
 
 The `IProvider` class simply holds a string enumeration of the various providers that are currently available, as well as those that will be available in the future.
 
-## SocialActionType [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-profile/blob/master/SoomlaAndroidProfile/src/com/soomla/profile/social/ISocialProvider.java#L131)
+## SocialActionType <a href="https://github.com/soomla/android-profile/blob/master/SoomlaAndroidProfile/src/com/soomla/profile/social/ISocialProvider.java#L131" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 A part of the `ISocialProvider` class, this enum represents various social actions that can be performed in social networks, such as posting a status or story, uploading an image, etc.
 
-## UserProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-profile/blob/master/SoomlaAndroidProfile/src/com/soomla/profile/domain/UserProfile.java)
+## UserProfile <a href="https://github.com/soomla/android-profile/blob/master/SoomlaAndroidProfile/src/com/soomla/profile/domain/UserProfile.java" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This class holds information about a user for a specific `IProvider`.
 
@@ -44,7 +44,7 @@ This class holds information about a user for a specific `IProvider`.
 - `FirstName`
 - `LastName`
 
-## SoomlaProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/android-profile/blob/master/SoomlaAndroidProfile/src/com/soomla/profile/SoomlaProfile.java)
+## SoomlaProfile <a href="https://github.com/soomla/android-profile/blob/master/SoomlaAndroidProfile/src/com/soomla/profile/SoomlaProfile.java" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations for users.
 
@@ -52,7 +52,7 @@ This is the main class that controls the entire SOOMLA Profile module. Use this 
 
 The diagram below depicts the flow that takes place when a `SoomlaProfile` function is called. In the diagram, the example function shown is `login`, but this principle holds for all functions.
 
-![alt text](/img/tutorial_img/unity-profile/functionFlow.png "Function Flow")
+![alt text](/img/tutorial_img/profile/functionFlowAndroid.png "Function Flow")
 
 <br>
 ### `initialize`

@@ -21,17 +21,17 @@ Social actions allow you to entice social engagement by offering your users rewa
 
 <div class="info-box">`Reward`s are a part of SOOMLA's core module and are used in many methods of Profile. Read about the different types of `Reward`s [below](#auxiliary-model-reward).</div>
 
-## UserProfileUtils [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/UserProfileUtils.h)
+##UserProfileUtils <a href="https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/UserProfileUtils.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This class lists the different social networks that exist today. Currently, SOOMLA supports Facebook, Twitter, and Google+.
 
-## SocialActionUtils [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/SocialActionUtils.h)
+## SocialActionUtils <a href="https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/SocialActionUtils.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 `SocialActionUtils` represents various social actions that can be performed in social networks, such as posting a status or story, or uploading an image.
 
 This class simply holds a string enumeration of the different social actions.
 
-## UserProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/domain/UserProfile.h)
+## UserProfile <a href="https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/domain/UserProfile.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This class represents a profile of a user from a social network (provider).
 
@@ -51,7 +51,7 @@ This class represents a profile of a user from a social network (provider).
 - `language`
 - `birthday`
 
-## SoomlaProfile [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/SoomlaProfile.h)
+## SoomlaProfile <a href="https://github.com/soomla/ios-profile/blob/master/SoomlaiOSProfile/SoomlaProfile.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 This is the main class that controls the entire SOOMLA Profile module. Use this class to perform various social and authentication operations for users. The Profile module will work with the social and authentication plugins of the integrated social provider (FB, G+, Twitter, etc..).
 
@@ -60,7 +60,7 @@ This is the main class that controls the entire SOOMLA Profile module. Use this 
 <br>
 The diagram below depicts the flow that takes place when a `CCSoomlaProfile` function is called. In the diagram, the example function shown is `login`, but this principle holds for all functions.
 
-![alt text](/img/tutorial_img/profile/functionFlow.png "Method Flow")
+![alt text](/img/tutorial_img/profile/functionFlowiOS.png "Method Flow")
 
 <br>
 ###`login / logout`
@@ -263,6 +263,7 @@ self.badgeReward = [[BadgeReward alloc] initWithRewardId:@"belt_reward"
 	andRewards: beltRewards
 ];
 ```
+
 
 <br>
 ###**RandomReward**

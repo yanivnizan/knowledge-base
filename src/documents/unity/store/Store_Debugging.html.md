@@ -2,8 +2,8 @@
 layout: "content"
 image: "Wrench"
 title: "Debugging"
-text: "Debugging methods and tips for unity3d-store and unity3d-profile."
-position: 5
+text: "Debugging methods and tips for unity3d-store."
+position: 6
 theme: 'platforms'
 collection: 'unity_store'
 module: 'store'
