@@ -26,7 +26,7 @@ SOOMLA allows you to subscribe to store events, be notified when they occur, and
 
 Events are triggered when SOOMLA wants to notify you on different things that happened involving Store operations.
 
-For example, When a user buys a currency pack, his currency balance is updated. As a result, a `CurrencyBalanceChangedEvent` is fired.
+For example, when a user buys a currency pack, his currency balance is updated. As a result, a `CurrencyBalanceChangedEvent` is fired.
 
 ## Observing & Handling Events
 
@@ -59,15 +59,18 @@ public void onSoomlaStoreInitialized() {
     // ... your game specific implementation here ...
 }
 ```
-**NOTE:** One thing you need to notice is that if you want to listen to OnSoomlaStoreInitialized event you have to set up the listener before you initialize SoomlaStore.
-So you'll need to do:
-````
+
+**NOTE:** If you want to observe the `OnSoomlaStoreInitialized` event you have to set up the listener before you initialize `SoomlaStore`. So, put the following code:
+
+```
 StoreEvents.OnSoomlaStoreInitialized += onSoomlaStoreInitialized;
-````
+```
+
 before
-````
-Soomla.SoomlaStore.Initialize(new Soomla.Example.MuffinRushAssets());
-````
+
+```
+Soomla.SoomlaStore.Initialize(new Soomla.Example.YourIStoreAssets());
+```
 
 ### OnCurrencyBalanceChanged
 
@@ -76,10 +79,11 @@ This event is triggered when the balance of a specific currency has changed.
 ``` cs
 StoreEvents.OnCurrencyBalanceChanged += onCurrencyBalanceChanged;
 
-public void onCurrencyBalanceChanged(VirtualCurrency virtualCurrency, int balance, int amountAdded) {
-    // virtualCurrency is the currency that its balance was changed
-    // balance is the balance of the currency after the change
-    // amountAdded is the amount that was added to the currency balance
+public void onCurrencyBalanceChanged(VirtualCurrency virtualCurrency, int balance,
+                                                                      int amountAdded) {
+    // virtualCurrency - the currency whose balance was changed
+    // balance - the balance of the currency after the change
+    // amountAdded - the amount that was added to the currency balance
     //    (in case the number of currencies was removed this will be a negative value)
 
     // ... your game specific implementation here ...
@@ -94,9 +98,9 @@ This event is triggered when the balance of a specific virtual good has changed.
 StoreEvents.OnGoodBalanceChanged += onGoodBalanceChanged;
 
 public void onGoodBalanceChanged(VirtualGood good, int balance, int amountAdded) {
-    // virtualCurrency is the virtual good that its balance was changed
-    // balance is the balance of the currency after the change
-    // amountAdded is the amount that was added to the currency balance
+    // virtualCurrency - the virtual good whose balance was changed
+    // balance - the balance of the currency after the change
+    // amountAdded - the amount that was added to the currency balance
     //    (in case the number of currencies was removed this will be a negative value)
 
     // ... your game specific implementation here ...
@@ -111,7 +115,7 @@ This event is triggered when a market purchase operation has started.
 StoreEvents.OnMarketPurchaseStarted += onMarketPurchaseStarted;
 
 public void onMarketPurchaseStarted(PurchasableVirtualItem pvi) {
-    // pvi is the PurchasableVirtualItem that its purchase operation has just started
+    // pvi - the PurchasableVirtualItem whose purchase operation has just started
 
     // ... your game specific implementation here ...
 }
@@ -124,13 +128,14 @@ This event is triggered when a market purchase operation has completed successfu
 ``` cs
 StoreEvents.OnMarketPurchase += onMarketPurchase;
 
-public void onMarketPurchase(PurchasableVirtualItem pvi, string payload, Dictionary<string, string> extra) {
-    // pvi is the PurchasableVirtualItem that was just purchased
-    // payload is a text that you can give when you initiate the purchase operation and
+public void onMarketPurchase(PurchasableVirtualItem pvi, string payload,
+                                                         Dictionary<string, string> extra) {
+    // pvi - the PurchasableVirtualItem that was just purchased
+    // payload - a text that you can give when you initiate the purchase operation and
     //    you want to receive back upon completion
-    // extra will contain platform specific information about the market purchase.
-    //    Android: The "extra" dictionary will contain "orderId" and "purchaseToken".
-    //    iOS: The "extra" dictionary will contain "receipt" and "token".
+    // extra - contains platform specific information about the market purchase
+    //    Android: The "extra" dictionary will contain "orderId" and "purchaseToken"
+    //    iOS: The "extra" dictionary will contain "receipt" and "token"
 
     // ... your game specific implementation here ...
 }
@@ -144,7 +149,7 @@ This event is triggered when a market purchase operation has been cancelled by t
 StoreEvents.OnMarketPurchaseCancelled += onMarketPurchaseCancelled;
 
 public void onMarketPurchaseCancelled(PurchasableVirtualItem pvi) {
-    // pvi is the PurchasableVirtualItem whose purchase operation has just cancelled
+    // pvi - the PurchasableVirtualItem whose purchase operation was cancelled
 
     // ... your game specific implementation here ...
 }
@@ -158,7 +163,7 @@ This event is triggered when a market refund operation has been completed succes
 StoreEvents.OnMarketRefund += onMarketRefund;
 
 public void onMarketRefund(PurchasableVirtualItem pvi) {
-    // pvi is the PurchasableVirtualItem to refund
+    // pvi - the PurchasableVirtualItem to refund
 
     // ... your game specific implementation here ...
 }
@@ -172,7 +177,6 @@ This event is triggered when a refresh market items operation has started.
 StoreEvents.OnMarketItemsRefreshStarted += onMarketItemsRefreshStarted;
 
 public void onMarketItemsRefreshStarted() {
-
     // ... your game specific implementation here ...
 }
 ```
@@ -185,7 +189,7 @@ This event is triggered when a refresh market items operation has finished.
 StoreEvents.OnMarketItemsRefreshFinished += onMarketItemsRefreshFinished;
 
 public void onMarketItemsRefreshFinished(List<MarketItem> items) {
-    // items is the list of Market items that was fetched from the Market
+    // items - the list of Market items that was fetched from the Market
 
     // ... your game specific implementation here ...
 }
@@ -199,7 +203,6 @@ This event is triggered when a restore transactions operation has started.
 StoreEvents.OnRestoreTransactionsStarted += onRestoreTransactionsStarted;
 
 public void onRestoreTransactionsStarted() {
-
     // ... your game specific implementation here ...
 }
 ```
@@ -212,7 +215,7 @@ This event is triggered when a restore transactions operation has completed succ
 StoreEvents.OnRestoreTransactionsFinished += onRestoreTransactionsFinished;
 
 public void onRestoreTransactionsFinished(bool success) {
-    // success is a boolean value that says if the restore transactions operation hass succeeded or failed
+    // success - true if the restore transactions operation has succeeded
 
     // ... your game specific implementation here ...
 }
@@ -226,7 +229,7 @@ This event is triggered when an item purchase operation has started.
 StoreEvents.OnItemPurchaseStarted += onItemPurchaseStarted;
 
 public void onItemPurchaseStarted(PurchasableVirtualItem pvi) {
-    // pvi is the PurchasableVirtualItem that its purchase operation has just started
+    // pvi - the PurchasableVirtualItem whose purchase operation has just started
 
     // ... your game specific implementation here ...
 }
@@ -240,8 +243,8 @@ This event is triggered when an item purchase operation has completed successful
 StoreEvents.OnItemPurchased += onItemPurchased;
 
 public void onItemPurchased(PurchasableVirtualItem pvi, string payload) {
-    // pvi is the PurchasableVirtualItem that was just purchased
-    // payload is a text that you can give when you initiate the purchase operation
+    // pvi - the PurchasableVirtualItem that was just purchased
+    // payload - a text that you can give when you initiate the purchase operation
     //    and you want to receive back upon completion
 
     // ... your game specific implementation here ...
@@ -256,7 +259,7 @@ This event is triggered when a virtual good equipping operation has been complet
 StoreEvents.OnGoodEquipped += onGoodEquipped;
 
 public void onGoodEquipped(EquippableVG good) {
-    // good is the virtual good that was just equipped
+    // good - the virtual good that was just equipped
 
     // ... your game specific implementation here ...
 }
@@ -270,7 +273,7 @@ This event is triggered when a virtual good un-equipping operation has been comp
 StoreEvents.OnGoodUnEquipped += onGoodUnequipped;
 
 public void onGoodUnequipped(EquippableVG good) {
-    // good is the virtual good that was just unequipped
+    // good - the virtual good that was just unequipped
 
     // ... your game specific implementation here ...
 }
@@ -284,8 +287,8 @@ This event is triggered when a virtual good upgrading operation has been complet
 StoreEvents.OnGoodUpgrade += onGoodUpgrade;
 
 public void onGoodUpgrade(VirtualGood good, UpgradeVG currentUpgrade) {
-    // good is the virtual good that was just upgraded
-    // currentUpgrade is the upgrade after the operation copmleted
+    // good - the virtual good that was just upgraded
+    // currentUpgrade - the upgrade after the operation completed
 
     // ... your game specific implementation here ...
 }
@@ -299,7 +302,6 @@ This event is triggered when the billing service is initialized and ready.
 StoreEvents.OnBillingSupported += onBillingSupported;
 
 public void onBillingSupported() {
-
     // ... your game specific implementation here ...
 }
 ```
@@ -312,7 +314,6 @@ This event is triggered when the billing service fails to initialize.
 StoreEvents.OnBillingNotSupported += onBillingNotSupported;
 
 public void onBillingNotSupported() {
-
     // ... your game specific implementation here ...
 }
 ```
@@ -325,7 +326,7 @@ This event is triggered an unexpected error occurs in the Store.
 StoreEvents.OnUnexpectedErrorInStore += onUnexpectedErrorInStore;
 
 public void onUnexpectedErrorInStore(string message) {
-    // message is the description of the error
+    // message - the description of the error
 
     // ... your game specific implementation here ...
 }
@@ -341,7 +342,6 @@ This event is triggered when the in-app billing service is started.
 StoreEvents.OnIabServiceStarted += onIabServiceStarted;
 
 public void onIabServiceStarted() {
-
     // ... your game specific implementation here ...
 }
 ```
@@ -354,7 +354,6 @@ This event is triggered when the in-app billing service is stopped.
 StoreEvents.OnIabServiceStopped += onIabServiceStopped;
 
 public void onIabServiceStopped() {
-
     // ... your game specific implementation here ...
 }
 ```

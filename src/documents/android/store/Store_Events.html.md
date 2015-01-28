@@ -26,7 +26,7 @@ For example, when a user purchases an item using virtual currency, his/her curre
 
 ## Observing & Handling Events
 
-For event handling, SOOMLA uses Square's great open-source project [Otto](http://square.github.io/otto/). In ordere to be notified of profile related events, you can register for specific events and create your game-specific behavior to handle them.
+For event handling, SOOMLA uses Square's great open-source project [Otto](http://square.github.io/otto/). In order to be notified of profile related events, you can register for specific events and create your game-specific behavior to handle them.
 
 **In order to register for & handle events:**
 
@@ -36,7 +36,8 @@ For event handling, SOOMLA uses Square's great open-source project [Otto](http:/
 
   ``` java
   @Subscribe
-  public void onCurrencyBalanceChangedEvent(CurrencyBalanceChangedEvent currencyBalanceChangedEvent) {
+  public void onCurrencyBalanceChangedEvent(
+        CurrencyBalanceChangedEvent currencyBalanceChangedEvent) {
     // ... your game specific implementation here ...
   }
   ```
@@ -172,7 +173,8 @@ This event is triggered when a refresh market items operation has started.
 
 ``` java
 @Subscribe
-public void onMarketItemsRefreshStarted(MarketItemsRefreshStartedEvent marketItemsRefreshStartedEvent) {
+public void onMarketItemsRefreshStarted(
+      MarketItemsRefreshStartedEvent marketItemsRefreshStartedEvent) {
   // ... your game specific implementation here ...
 }
 ```
@@ -183,9 +185,11 @@ This event is triggered when a refresh market items operation has finished.
 
 ``` java
 @Subscribe
-public void onMarketItemsRefreshFinished(MarketItemsRefreshFinishedEvent marketItemsRefreshFinishedEvent) {
+public void onMarketItemsRefreshFinished(
+      MarketItemsRefreshFinishedEvent marketItemsRefreshFinishedEvent) {
   // marketItemsRefreshFinishedEvent contains:
-  //   List<MarketItem> marketItems - a list of MarketItems that was fetched from the market (Google Play, Amazon, etc...)
+  //   List<MarketItem> marketItems - a list of MarketItems that was fetched from the market
+  //                                  (Google Play, Amazon, etc...)
 
   // ... your game specific implementation here ...
 }
@@ -197,7 +201,8 @@ This event is triggered when the Soomla Store module is initialized and ready.
 
 ``` java
 @Subscribe
-public void onRestoreTransactionsStarted(RestoreTransactionsStartedEvent restoreTransactionsStartedEvent) {
+public void onRestoreTransactionsStarted(
+      RestoreTransactionsStartedEvent restoreTransactionsStartedEvent) {
   // ... your game specific implementation here ...
 }
 ```
@@ -208,7 +213,8 @@ This event is triggered when a restore transactions operation has completed succ
 
 ``` java
 @Subscribe
-public void onRestoreTransactionsFinished(RestoreTransactionsFinishedEvent restoreTransactionsFinishedEvent) {
+public void onRestoreTransactionsFinished(
+      RestoreTransactionsFinishedEvent restoreTransactionsFinishedEvent) {
   // restoreTransactionsFinishedEvent contains:
   //   success - true if the RestoreTransactions operation finished successfully
 
