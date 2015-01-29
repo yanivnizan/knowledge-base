@@ -52,7 +52,7 @@ A `MarketItem` is used to represent an item that you want to sell for money in t
 
 - `Price` - A default price for the item in case the fetching of information from iTunesConnect or Google Play fails.
 
-**These variable will contain information about the item as fetched from iTunesConnect or Google Play:**
+**These variables will contain information about the item as fetched from iTunesConnect or Google Play:**
 
 - `MarketPriceAndCurrency` - A String representation of the market item's price and currency, such as '$1.99'.
 

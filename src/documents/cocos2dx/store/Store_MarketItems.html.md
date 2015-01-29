@@ -16,21 +16,21 @@ This document is aimed at those of you who are using SOOMLA's cocos2dx-store, an
 
 ## RefreshInventory, RestoreTransactions and RefreshMarketItemsDetails
 
-Before we dive into `MarketItem`s, there are a few methods you need to be familiar with: `RestoreTransactions`, `RefreshMarketItemsDetails` and `RefreshInventory`, all methods of `SoomlaStore`. This section will sort out the confusion between them and explain how each of them is used.
+Before we dive into `MarketItem`s, there are a few methods you need to be familiar with: `restoreTransactions`, `refreshMarketItemsDetails` and `refreshInventory`, all methods of `SoomlaStore`. This section will sort out the confusion between them and explain how each of them is used.
 
 ###`refreshInventory` <a href="https://github.com/soomla/cocos2dx-store/blob/c04584e3a7aac43d0fe4f72c50189df47d7b63cb/build/ios/headers/SoomlaiOSStore/SoomlaStore.h#L67" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
-This method runs `RestoreTransactions` followed by `RefreshMarketItemsDetails` (see method explanations below).
+This method runs `restoreTransactions` followed by `refreshMarketItemsDetails` (see method explanations below).
 
-If you want to restore transactions AND want your market items details to be refreshed then you should simply call `RefreshInventory`.
+If you want to restore transactions AND want your market items details to be refreshed then you should simply call `refreshInventory`.
 
-**NOTE:** In Android `RefreshInventory` is called upon initialization, while in iOS it's on demand when you want it to happen.
+**NOTE:** In Android `refreshInventory` is called upon initialization, while in iOS it's on demand when you want it to happen.
 
 ### `restoreTransactions` <a href="https://github.com/soomla/cocos2dx-store/blob/c04584e3a7aac43d0fe4f72c50189df47d7b63cb/build/ios/headers/SoomlaiOSStore/SoomlaStore.h#L72" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 This method retrieves the user's past purchases of non-consumable items from iTunesConnect or Google Play. As their name implies, non-consumable items remain in the user's possession forever, which is why these are the only ones that are kept by iTunesConnect or Google Play. Thus, when restoring transactions, these are the items that will be retrieved.
 
-If you only want to restore transactions (and not as a part of `RefreshInventory`) you should call the `RestoreTransactions` method directly.
+If you only want to restore transactions (and not as a part of `refreshInventory`) you should call the `restoreTransactions` method directly.
 
 <div class="info-box">Notice that Apple requires you to include a "Restore Transactions" button in your app. Apple will reject your app without it! Read more about Apple's [Restoring Purchased Products](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Restoring.html).</div>
 
@@ -38,7 +38,7 @@ If you only want to restore transactions (and not as a part of `RefreshInventory
 
 This method retrieves information about your `MarketItem`s (explained below) from iTunesConnect or Google Play. This information includes prices, currencies, descriptions, etc.
 
-This method is called in `RefreshInventory`, which is called upon initialization.
+This method is called in `refreshInventory`, which is called upon initialization.
 
 ## CCMarketItems <a href="https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/CCMarketItem.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
@@ -52,7 +52,7 @@ A `CCMarketItem` is used to represent an item that you want to sell for money in
 
 - `mPrice` - A default price for the item in case the fetching of information from iTunesConnect or Google Play fails.
 
-**These variable will contain information about the item as fetched from iTunesConnect or Google Play:**
+**These variables will contain information about the item as fetched from iTunesConnect or Google Play:**
 
 - `mMarketPriceAndCurrency` - A String representation of the market item's price and currency, such as '$1.99'.
 
@@ -114,7 +114,7 @@ void MainScene::showStore() {
   // Retrieve market item
   soomla::CCError *error = NULL;
   soomla::CCPurchasableVirtualItem *pvi = soomla::CCStoreInfo::sharedStoreInfo()->
-                            getPurchasableItemWithProductId("some_itemID", &error);
+                            getPurchasableItemWithProductId("some_productID", &error);
   soomla::CCMarketItem *mi= dynamic_cast<soomla::CCPurchaseWithMarket*>
                             (pvi->getPurchaseType())->getMarketItem();
 
