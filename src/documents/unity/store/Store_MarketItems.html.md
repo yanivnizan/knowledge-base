@@ -2,7 +2,7 @@
 layout: "content"
 image: "Tutorial"
 title: "Market Items"
-text: ""
+text: "Understand what MarketItems are, how to use them, how to update market prices and details, and restore transactions."
 position: 8
 theme: 'platforms'
 collection: 'unity_store'
@@ -18,7 +18,7 @@ This document is aimed at those of you who are using SOOMLA's unity3d-store, and
 
 Before we dive into `MarketItem`s, there are a few methods you need to be familiar with: `RestoreTransactions`, `RefreshMarketItemsDetails` and `RefreshInventory`, all methods of `SoomlaStore`. This section will sort out the confusion between them and explain how each of them is used.
 
-### `RefreshInventory` [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs#L105)
+###`RefreshInventory` <a href="https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs#L105" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 This method runs `RestoreTransactions` followed by `RefreshMarketItemsDetails` (see method explanations below).
 
@@ -26,7 +26,7 @@ If you want to restore transactions AND want your market items details to be ref
 
 **NOTE:** In Android `RefreshInventory` is called upon initialization, while in iOS it's on demand when you want it to happen.
 
-### `RestoreTransactions` [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs#L122)
+### `RestoreTransactions` <a href="https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs#L122" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 This method retrieves the user's past purchases of non-consumable items from iTunesConnect or Google Play. As their name implies, non-consumable items remain in the user's possession forever, which is why these are the only ones that are kept by iTunesConnect or Google Play. Thus, when restoring transactions, these are the items that will be retrieved.
 
@@ -34,13 +34,13 @@ If you only want to restore transactions (and not as a part of `RefreshInventory
 
 <div class="info-box">Notice that Apple requires you to include a "Restore Transactions" button in your app. Apple will reject your app without it! Read more about Apple's [Restoring Purchased Products](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/StoreKitGuide/Chapters/Restoring.html).</div>
 
-### `RefreshMarketItemsDetails` [<img class="link-icon-small" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs#L115)
+### `RefreshMarketItemsDetails` <a href="https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/SoomlaStore.cs#L115" target="_blank"><img class="link-icon-small" src="/img/tutorial_img/linkImg.png"></a>
 
 This method retrieves information about your `MarketItem`s (explained below) from iTunesConnect or Google Play. This information includes prices, currencies, descriptions, etc.
 
 This method is called in `RefreshInventory`, which is called upon initialization.
 
-## MarketItems [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/MarketItem.cs)
+## MarketItems <a href="https://github.com/soomla/unity3d-store/blob/master/Soomla/Assets/Plugins/Soomla/Store/domain/MarketItem.cs" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 A `MarketItem` is used to represent an item that you want to sell for money in the App Store, on Google Play, or any other Store.
 
@@ -54,15 +54,15 @@ A `MarketItem` is used to represent an item that you want to sell for money in t
 
 **These variable will contain information about the item as fetched from iTunesConnect or Google Play:**
 
-- `MarketPriceAndCurrency`
+- `MarketPriceAndCurrency` - A String representation of the market item's price and currency, such as '$1.99'.
 
-- `MarketTitle`
+- `MarketTitle` - A String representation of the market item's title.
 
-- `MarketDescription`
+- `MarketDescription` - A String representation of the market item's description.
 
-- `MarketCurrencyCode`
+- `MarketCurrencyCode` - A String representation of the market item's currency code, such as 'USD'.
 
-- `MarketPriceMicros`
+- `MarketPriceMicros` - The price as an Integer, multiplied by 1M currency units (The reason it's multiplied by 1M is because this is the standard in Android. Therefore, Soomla follows this standard and multiplies iOS prices as well, in order to be aligned with Android. See `price_amount_micros` in [Table 2 of Android's documentation](http://developer.android.com/google/play/billing/billing_reference.html#getSkuDetails) on this subject).
 
 ### Usage
 
@@ -88,9 +88,9 @@ Internally, `PurchaseWithMarket` creates a `MarketItem` with the product ID and 
 
 ## MarketItem Prices
 
-You need to supply a price when you define a `MarketItem` and you also provide a price in iTunesConnect / Google Play.
+You need to supply a price when you define a `MarketItem` and you also need to provide a price in iTunesConnect / Google Play.
 
-**The reason you need both:** The Soomla price is for display purposes, such as showing the price in your UI, but only in cases of no connectivity. Otherwise, prices are retrieved from the market (Google Play, App Store), and after that happens successfully, those are the ones that should be used.
+**The reason you need both:** The Soomla price is for display purposes, such as showing the price in your UI in cases of no connectivity. Otherwise, prices are retrieved from the market (Google Play, App Store), and after that happens successfully, those are the ones that should be used.
 
 ### How Prices are Retrieved from the Market
 
@@ -120,7 +120,7 @@ Upon initialization of `SoomlaStore`, a process called `RefreshInventory` is cal
 
 ### Display Updated Prices
 
-In order to display the correct price, you can *always* display the price retrieved from the Market, unless it's null and in that case you’ll want to display the hard-coded price.
+In order to display the correct price, you can *always* display the price retrieved from the Market (`MarketPriceAndCurrency`), unless it's null - in that case you’ll want to display the hard-coded price (`Price`).
 
 **For example:**
 
@@ -142,15 +142,3 @@ public void showStore() {
   //
 }
 ```
-
-### Currencies
-
-As mentioned above, `MarketItem` has the members `MarketPriceAndCurrency` and `MarketCurrencyCode`.
-
-After the information has been retrieved from the market:
-
-- `MarketPriceAndCurrency` will hold the price with the currency symbol, such as '$1.99'.
-
-- `MarketCurrencyCode` will hold the currency code, such as 'USD'.
-
-You can use regular expressions to display your price and currency in other formats.
