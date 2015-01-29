@@ -34,9 +34,10 @@ Lets dive into each one of them:
 ##Implementing IIabService
 
 `IIabService` is the main interface for all billing services. *android-store* knows how to load your implementation of `IIabService` by looking into the meta-data tag called `billing.service` in `AndroidManifest.xml` (more about this below). `SoomlaStore` is the class inside *android-store* that's responsible for loading and calling the billing service in runtime. The methods you'll need to implement in `IIabService` are those that we found to be common in many billing services out there. Billing services that don't support some of the required methods (for example: Amazon doesn't support consumption of items) can just leave the implementation blank or throw a `RuntimeException`, depending on how you want your billing service to behave. Select a name for your billing service's class that implements `IIabService` and make sure you place it under a package that starts with `com.soomla.store.billing`. For example, if your billing service is called `GooglePlayIabService` then the full name with package can be `com.soomla.store.billing.google.GooglePlayIabService` (notice the added `google.GooglePlayIabService`). The `AndroidManifest.xml` meta-data tag for your billing service will have a value containing everything that comes after the SOOMLA billing package prefix. For the example above, the meta-data tag will be:
-```xml
+
+``` xml
  <meta-data android:name="billing.service" android:value="google.GooglePlayIabService" />
- ```
+```
 
 ###IAB Callbacks
 
