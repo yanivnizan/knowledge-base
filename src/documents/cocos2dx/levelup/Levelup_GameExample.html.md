@@ -392,7 +392,7 @@ void ExampleEventHandler::onMissionCompleted(CCMission *mission) {
 
 ###**Initialization Code**
 
-Read more in our [Getting Started](/docs/platforms/cocos2dx/Levelup_GettingStarted) tutorial.
+Read more in our [Getting Started](/cocos2dx/levelup/Levelup_GettingStarted) tutorial.
 
 **`AppDelegate.h`**
 
