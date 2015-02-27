@@ -58,13 +58,13 @@ And that's it! unity3d-profile knows how to contact the social provider (Faceboo
 
 ###Facebook
 
-1. Download and import the official [Facebook SDK](https://developers.facebook.com/docs/unity/getting-started/canvas). Make sure to use **Facebook Unity SDK v5.1** (SOOMLA's unity3d-profile support for v6.0 is in the works).
+1. Download and import the official [Facebook SDK](https://developers.facebook.com/docs/unity/getting-started/canvas).
 
-	<div class="warning-box">Do not initialize Facebook - `SoomlaProfile` will initialize it for you. (Do **not** call `FB.Init()`).</div>
+	<div class="warning-box">You don't need to initialize FB. SoomlaProfile will initialize it for you. (Do **not** call `FB.Init()`).</div>
 
 2. Create an empty folder named `Facebook` under `Assets/Plugins`.
 
-3. Move the `Facebook` folder from `Assets` to `Assets/Plugins` - SOOMLA works from the `Plugins` folder so that it'll be available to UnityScript developers. This is why you need to move `Facebook` into `Plugins` as well.
+3. Move the `Scripts` folder from `Assets/Facebook` to `Assets/Plugins/Facebook` - SOOMLA works from the `Plugins` folder so that it'll be available to UnityScript developers. This is why you need to move `Facebook` into `Plugins` as well.
 
   <div class="info-box">**NOTE:** When working with Unity version > 4.5.0 (targeting iOS) please follow these extra steps:<br>
 
