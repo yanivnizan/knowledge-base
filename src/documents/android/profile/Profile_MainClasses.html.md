@@ -116,10 +116,12 @@ Reward hundredCoinReward = new VirtualItemReward("hundredCoinReward_ID", "100 Co
 SoomlaProfile.getInstance().like(
 	this,                              // Activity
 	IProvider.Provider.FACEBOOK,       // Provider
-	"The.Soomla.Project",              // Page to like
+	"The.Soomla.Project",              // Page Id to like
 	hundredCoinReward                  // Reward
 );
 ```
+
+The Parameter pageName was renamed to pageId which implies that now you can pass the either the pageId or pageName to the function.
 
 <div class="info-box">Note that the user is given the reward just for clicking `like` from the application. The `like` function opens the page to like, but does not track if the user *actually* liked the page or not.</div>
 

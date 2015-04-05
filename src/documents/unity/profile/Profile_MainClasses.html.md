@@ -129,10 +129,17 @@ Reward hundredCoinReward = new VirtualItemReward("hundredCoinReward_ID", "100 Co
 // If the user clicks the "Like" button provided in your game, call the Like function and reward him/her with 100 coins.
 SoomlaProfile.Like(
 	Provider.FACEBOOK,                 // Provider  
-	"The.Soomla.Project",              // Page to like
+	"The.Soomla.Project",              // Page id to like
 	hundredCoinReward                  // Reward for liking
 );
 ```
+
+The Parameter pageName was renamed to pageId which implies that now you can pass the either the pageId or pageName to the function.
+
+######For iOS Applications:
+In order for the correct page to be opened in the facebook app (installed on the device) you need to pass the pageId parameter and not the pageName. Page Name will only work via Browser.
+
+Page ID can be fetched from sites like http://findmyfacebookid.com/ , or Services like https://graph.facebook.com/requested_page_name, which once queried with a valid pageName will return a JsonString that contains the pageId value under the key "id".
 
 <div class="info-box">Note that the user is given the reward just for clicking `Like` from the application. The `Like` function opens the page to like, but does not track if the user *actually* liked the page or not.</div>
 
