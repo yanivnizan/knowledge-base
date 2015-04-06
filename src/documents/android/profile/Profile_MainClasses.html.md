@@ -121,7 +121,7 @@ SoomlaProfile.getInstance().like(
 );
 ```
 
-The Parameter pageName was renamed to pageId which implies that now you can pass the either the pageId or pageName to the function.
+The 3rd parameter received by the `like` function is a pageId. This can either be a page-id or page-name.
 
 <div class="info-box">Note that the user is given the reward just for clicking `like` from the application. The `like` function opens the page to like, but does not track if the user *actually* liked the page or not.</div>
 

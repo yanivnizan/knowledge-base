@@ -111,9 +111,7 @@ This function opens up the provider page to "like" (a web page in a browser), an
 ];
 ```
 
-The Parameter pageName was renamed to pageId which implies that now you can pass the either the pageId or pageName to the function.
-
-In order for the correct page to be opened in the facebook app (installed on the device) you need to pass the pageId parameter and not the pageName. Page Name will only work via Browser.
+The 3rd parameter received by the `like` function is a pageId. This can either be a page-id or page-name. You should pass the page-id in most cases. There reason for that is that the page-name will only work correctly when the Facebook App is not installed on the device. In which case, SOOMLA tries to open the "like" page in the browser.
 
 Page ID can be fetched from sites like http://findmyfacebookid.com/ , or Services like https://graph.facebook.com/requested_page_name, which once queried with a valid pageName will return a JsonString that contains the pageId value under the key "id".
 
