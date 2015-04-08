@@ -39,7 +39,7 @@ platform: 'cocos2dx'
   #include "Cocos2dxProfile.h"
   ```
 
-5. Initialize `CCSoomla` a `customSecret` and `CCSoomlaProfile` its params. **Custom Secret** is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game!
+5. Initialize `CCSoomla` with a `customSecret` and `CCSoomlaProfile` with its params. **Custom Secret** is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game!
 
   ``` cpp
   soomla::CCSoomla::initialize("customSecret");

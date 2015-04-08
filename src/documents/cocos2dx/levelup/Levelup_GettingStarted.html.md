@@ -34,54 +34,45 @@ platform: 'cocos2dx'
     $ git clone git@github.com:soomla/cocos2dx-levelup.git extensions/cocos2dx-levelup
     ```
 
-3. We use a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing. Clone our fork into the `external` directory at the root of your framework:
+3. We use a [fork](https://github.com/soomla/jansson) of the jansson library for JSON parsing. Clone our fork into the `external` directory at the root of your framework:
 
     ```
-    $ git clone git@github.com:vedi/jansson.git external/jansson
+    $ git clone git@github.com:soomla/jansson.git external/jansson
     ```
-
-4. Implement your `CCLevelUpEventHandler` class in order to be notified about LevelUp-related events.
-
-5. Initialize `CCServiceManager`, `CCStoreService`, `CCProfileService`, and `CCLevelUpService` with the class you just created, a `customSecret` and other params:
-
-  ```cpp
-  __Dictionary *commonParams = __Dictionary::create();
-    commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-
-  __Dictionary *storeParams = __Dictionary::create();
-  storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
-
-  __Dictionary *profileParams = __Dictionary::create();
-
-    soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-
-  soomla::CCStoreService::initShared(assets, storeParams);
-
-  soomla::CCProfileService::initShared(profileParams);
-
-  soomla::CCLevelUpService::initShared();
-
-  // initialWorld - should be created here and contain all worlds and levels of the game
-  // rewards - should contain a list of all rewards that are given through LevelUp
-  soomla::CCLevelUp::getInstance()->initialize(initialWorld, rewards);
-
-  ```
-  - *Custom Secret* is an encryption secret you provide that will be used to secure your data.
-
-  <div class="warning-box">Choose this secret wisely, you can't change it after you launch your game!
-  <br>Initialize `CCLevelUpService` ONLY ONCE when your application loads.</div>
-
-6. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
+4. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
 
     ```cpp
     #include "Cocos2dxLevelUp.h"
     ```
 
-7. Add an instance of your event handler to `CCLevelUpEventDispatcher` after `CCLevelUpService` initialization:
+5. Initialize `CCSoomla`, `CCSoomlaStore`, `CCSoomlaProfile`, and `CCSoomlaLevelUp` with their appropriate params:
 
-    ```cpp
-    soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
-    ```
+  ```cpp
+  soomla::CCSoomla::initialize("customSecret");
+
+  YourImplementationAssets *assets = YourImplementationAssets::create();
+
+  __Dictionary *storeParams = __Dictionary::create();
+  soomla::CCSoomlaStore::initialize(assets, storeParams);
+
+  __Dictionary *profileParams = __Dictionary::create();
+  soomla::CCSoomlaProfile::initialize(profileParams);
+
+  // initialWorld - should be created here and contain all worlds and levels of the game
+	// rewards - should contain a list of all rewards that are given through LevelUp
+	soomla::CCSoomlaLevelUp::getInstance()->initialize(initialWorld, rewards);
+
+  ```
+  - *Custom Secret* is an encryption secret you provide that will be used to secure your data.
+
+  - *Store Params* see the [Store Getting Started](/cocos2dx/store/Store_GettingStarted) for more information about initializing Store
+
+  - *Profile Params* see the [Profile Getting Started](/cocos2dx/profile/Profile_GettingStarted) for more information about initializing Profile
+
+  <div class="warning-box">Choose this secret wisely, you can't change it after you launch your game!
+  <br>Initialize `CCSoomlaLevelUp` ONLY ONCE when your application loads.</div>
+
+6. You'll need to subscribe to levelup events to get notified about Level-Up related events. refer to the [Event Handling](/cocos2dx/levelup/Levelup_Events) section for more information.
 
 <div class="info-box">The next steps are different according to which platform you are using.</div>
 
@@ -89,7 +80,7 @@ platform: 'cocos2dx'
 
 In your XCode project, perform the following steps:
 
-1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder).
+1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder, make sure to check "create group").
 
 2. For each of the following XCode projects:
 
@@ -118,42 +109,17 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers`
 
  ![alt text](/img/tutorial_img/cocos2dx-levelup/headerSP.png "Header search paths")
 
-4. To register services on the native application (`AppController`):
+4. Make sure you have these 3 Frameworks linked to your XCode project: **Security**, **libsqlite3.0.dylib**, and **StoreKit**.
 
-  a. Import the following headers:
-    ```cpp
-    #import "ServiceManager.h"
-    #import "StoreService.h"
-    #import "ProfileService.h"
-    #import "LevelUpService.h"
-    ```
+5. Follow our [tutorial](/cocos2dx/store/Store_GettingStarted#apple-app-store) on how to connect the Store module to the App Store billing service.
 
-  b. Register the native `StoreService`, `ProfileService`, and `LevelUpService` by adding:
-    ```cpp
-    [[ServiceManager sharedServiceManager]
-      registerService:[StoreService sharedStoreService]];
-
-    [[ServiceManager sharedServiceManager]
-      registerService:[ProfileService sharedProfileService]];
-
-    [[ServiceManager sharedServiceManager]
-      registerService:[LevelUpService sharedLevelUpService]];
-    ```
-    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
-
-5. Make sure you have these 3 Frameworks linked to your XCode project: **Security**, **libsqlite3.0.dylib**, and **StoreKit**.
-
-6. Follow our [tutorial](/cocos2dx/store/Store_GettingStarted#apple-app-store) on how to connect the Store module to the App Store billing service.
-
-7. See the following links in order to connect the Profile module to a social network provider:
+6. See the following links in order to connect the Profile module to a social network provider:
 
   - [Facebook for iOS](/cocos2dx/profile/Profile_GettingStarted#facebook-for-ios)
 
@@ -212,38 +178,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 
     - Cocos2dxAndroidLevelUp.jar
 
-
-3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
-
-  ``` java
-  public Cocos2dxGLSurfaceView onCreateView() {
-    // initialize services
-    final ServiceManager serviceManager = ServiceManager.getInstance();
-    serviceManager.setActivity(this);
-    serviceManager.setGlSurfaceView(glSurfaceView);
-    serviceManager.registerService(StoreService.getInstance());
-    serviceManager.registerService(ProfileService.getInstance());
-    serviceManager.registerService(LevelUpService.getInstance());
-  }
-  ```
-
-4. Override `onPause`, `onResume`:
-
-  ``` java
-    @Override
-    protected void onPause() {
-        super.onPause();
-        ServiceManager.getInstance().onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        ServiceManager.getInstance().onResume();
-        super.onResume();
-    }
-  ```
-
-5. Update your `AndroidManifest.xml` to include permissions and the `SoomlaApp`:
+3. Update your `AndroidManifest.xml` to include permissions and the `SoomlaApp`:
 
     ``` xml
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -258,13 +193,13 @@ That's it! Now all you have to do is build your XCode project and run your game 
     </application>
     ```
 
-6. See the following links in order to connect the Store module to a billing service:
+4. See the following links in order to connect the Store module to a billing service:
 
   - [Google Play](/cocos2dx/store/Store_GettingStarted#google-play)
 
   - [Amazon App Store](/cocos2dx/store/Store_GettingStarted#amazon)
 
-7. See the following links in order to connect the Profile module to a social network provider:
+5. See the following links in order to connect the Profile module to a social network provider:
 
   - [Facebook for Android](/cocos2dx/profile/Profile_GettingStarted#facebook-for-android)
 
@@ -314,7 +249,7 @@ That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelu
 
 **NOTE:** Examples using virtual items are dependent on cocos2dx-store module, with proper `CCSoomlaStore` initialization and `CCStoreAssets` definitions. See the cocos2dx-store integration section for more details.
 
-* CCMission with CCReward (collect 5 stars to get 1 mega star)
+* `CCMission` with `CCReward` (collect 5 stars to get 1 mega star)
 
   ```cpp
   CCVirtualItemReward *virtualItemReward = CCVirtualItemReward::create(
@@ -339,16 +274,16 @@ That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelu
   CCStoreInventory::sharedStoreInventory()->giveItem(starItemId->getCString(), 5, &error);
 
   // events posted:
-  // 1. onGoodBalanceChanged (Store events)
-  // 2. onMissionCompleted (LevelUp events)
-  // 3. onRewardGivenEvent (Core events)
+  // 1. EVENT_GOOD_BALANCE_CHANGED (Store events)
+  // 2. EVENT_MISSION_COMPLETED (LevelUp events)
+  // 3. EVENT_REWARD_GIVEN (Core events)
 
   // now the mission is complete, and reward given
   balanceMission->isCompleted(); // true
   virtualItemReward->isOwned(); // true
   ```
 
-* CCRecordGate with CCRangeScore
+* `CCRecordGate` with `CCRangeScore`
 
   ```cpp
   CCLevel *lvl1 = CCLevel::create(__String::create("lvl1_recordgate_rangescore"));
@@ -377,22 +312,22 @@ That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelu
   world->addInnerWorld(lvl1);
   world->addInnerWorld(lvl2);
 
-  CCLevelUp::getInstance()->initialize(world);
+  CCSoomlaLevelUp::getInstance()->initialize(world);
 
   lvl1->start();
 
   // events posted:
-  // onLevelStarted (LevelUp events)
+  // EVENT_LEVEL_UP_INITIALIZED (LevelUp events)
 
   rangeScore->inc(100);
 
   lvl1->end(true);
 
   // events posted:
-  // onLevelEnded (LevelUp events)
-  // onWorldCompleted (lvl1) (LevelUp events)
-  // onGateOpened (LevelUp events)
-  // [onScoreRecordReached] - if record was broken (LevelUp events)
+  // EVENT_LEVEL_ENDED (LevelUp events)
+  // EVENT_MISSION_COMPLETED (lvl1) (LevelUp events)
+  // EVENT_GATE_OPENED (LevelUp events)
+  // [EVENT_SCORE_RECORD_REACHED] - if record was broken (LevelUp events)
 
   recordGate->isOpen(); // true
 
@@ -401,12 +336,12 @@ That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelu
   lvl2->end(true);
 
   // events posted:
-  // onWorldCompleted (lvl2) (LevelUp events)
+  // EVENT_WORLD_COMPLETED (lvl2) (LevelUp events)
 
   lvl2->isCompleted(); // true
   ```
 
-* CCVirtualItemScore
+* `CCVirtualItemScore`
 
   ```cpp
   CCLevel *lvl1 = CCLevel::create(__String::create("lvl1_viscore"));
@@ -417,27 +352,27 @@ That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelu
 
   world->addInnerWorld(lvl1);
 
-  CCLevelUp::getInstance()->initialize(world);
+  CCSoomlaLevelUp::getInstance()->initialize(world);
 
   lvl1->start();
   // events posted:
-  // onLevelStarted (LevelUp events)
+  // EVENT_LEVEL_UP_INITIALIZED (LevelUp events)
 
   virtualItemScore->inc(2.0);
   // events posted:
-  // onGoodBalanceChanged (Store events)
+  // EVENT_GOOD_BALANCE_CHANGED (Store events)
 
   lvl1->end(true);
   // events posted:
-  // onLevelEnded (LevelUp events)
-  // onWorldCompleted (lvl1) (LevelUp events)
-  // [onScoreRecordChanged] - if record was broken (LevelUp events)
+  // EVENT_LEVEL_ENDED (LevelUp events)
+  // EVENT_WORLD_COMPLETED (lvl1) (LevelUp events)
+  // [EVENT_SCORE_RECORD_REACHED] - if record was broken (LevelUp events)
 
   int currentBalance = CCStoreInventory::sharedStoreInventory()->getItemBalance(ITEM_ID_VI_SCORE, &error);
   // currentBalance == 2
   ```
 
-* CCChallenge (Multi-Mission)
+* `CCChallenge` (Multi-Mission)
 
   ```cpp
   __String *scoreId = __String::create("main_score");
@@ -476,22 +411,22 @@ That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelu
   score->reset(true);
 
   // events:
-  // onMissionCompleted (mission1) (LevelUp events)
-  // [onScoreRecordReached] - if record is broken
+  // EVENT_WORLD_COMPLETED (mission1) (LevelUp events)
+  // [EVENT_SCORE_RECORD_REACHED] - if record is broken
 
   score->setTempScore(120.0);
   score->reset(true);
 
   // events:
-  // onMissionCompleted (mission2) (LevelUp events)
-  // onMissionCompleted (challenge) (LevelUp events)
-  // onRewardGivenEvent (badgeReward) (Core events)
+  // EVENT_MISSION_COMPLETED (mission2) (LevelUp events)
+  // EVENT_MISSION_COMPLETED (challenge) (LevelUp events)
+  // EVENT_REWARD_GIVEN (badgeReward) (Core events)
 
   challenge->isCompleted(); // true
   badgeReward->isOwned(); // true
   ```
 
-* CCGatesList
+* `CCGatesList`
 > Note that currently a `GatesList` gate is automatically opened when sub-gates fulfill the `GatesList` requirement.
 
   ```cpp
@@ -535,7 +470,7 @@ That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelu
     gates
   );
 
-  CCLevelUp::getInstance()->initialize(world);
+  CCSoomlaLevelUp::getInstance()->initialize(world);
 
   score1->setTempScore(desiredRecord1->getValue());
   score1->reset(true);
