@@ -20,9 +20,9 @@ SOOMLA's cocos2dx-store provides a complete data model implementation for virtua
 
 Almost every entity in your virtual economy will be a Virtual Item. There are many types of Virtual Items and you can select the ones that fit your needs. Each one of the various types extends the class `VirtualItem` and adds its own behavior.
 
-Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveVirtualItem` and `takeItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
+Almost all `VirtualItems` are `PurchasableVirtualItems`. Among other features, all Virtual items have 2 functions to help you easily interact with them: `give` and `take`. Preferably, you should use the two methods provided in `StoreInventory` for these purposes, called `giveItem` and `takeItem`. Use these functions to give or take from your users a specific amount of a specific Virtual Item.
 
-Use `giveVirtualItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buy`). Use `takeItem` when you want to take something from your user, for example in the case of a refund.
+Use `giveItem` when you want to give your user something and get nothing in return. (If you want to give something and get something in return, you need to use `buyItem`). Use `takeItem` when you want to take something from your user, for example in the case of a refund.
 
 Every virtual item has an ID, a unique string that we use to identify the different items.
 
@@ -46,9 +46,9 @@ CCLifetimeVG *noAds = CCLifetimeVG::create(
     ...
     CCPurchaseWithMarket::createWithMarketItem(             // Purchase type
         CCMarketItem::create(
-            CCString::create(NO_ADDS_PRODUCT_ID),           // Product ID
-            CCInteger::create(CCMarketItem::NONCONSUMABLE), // Product type
-            CCDouble::create(1.99))                         // Initial price
+            __String::create(NO_ADDS_PRODUCT_ID),           // Product ID
+            __Integer::create(CCMarketItem::NONCONSUMABLE), // Product type
+            __Double::create(1.99))                         // Initial price
 ));
 ```
 
@@ -58,8 +58,8 @@ There is another way to define this purchase type:
 CCVirtualCurrencyPack *thousandmuffPack = CCVirtualCurrencyPack::create(
     ...
     CCPurchaseWithMarket::create(                           // Purchase type
-        CCString::create(THOUSANDMUFF_PACK_PRODUCT_ID),     // Product ID
-        CCDouble::create(8.99))                             // Initial price
+        __String::create(THOUSANDMUFF_PACK_PRODUCT_ID),     // Product ID
+        __Double::create(8.99))                             // Initial price
 );
 ```
 
@@ -81,8 +81,8 @@ Suppose that in your game, you offer a chocolate cake that can be bought by payi
 CCVirtualGood *chocolateCakeGood = CCSingleUseVG::create(
     ...
     CCPurchaseWithVirtualItem::create(
-        CCString::create("muffinCurrency_ID"),              // Target item ID
-        CCInteger::create(250))                             // Initial price
+        __String::create("muffinCurrency_ID"),              // Target item ID
+        __Integer::create(250))                             // Initial price
 );
 ```
 
@@ -97,9 +97,9 @@ Every game that has an economy has at least one `VirtualCurrency`. `VirtualCurre
 ``` cpp
 
 CCVirtualCurrency *muffinCurrency = CCVirtualCurrency::create(
-    CCString::create("Muffins"),                            // Name
-    CCString::create(""),                                   // Description
-    CCString::create("muffinCurrency_ID")                   // Item ID
+    __String::create("Muffins"),                            // Name
+    __String::create(""),                                   // Description
+    __String::create("muffinCurrency_ID")                   // Item ID
 );
 ```
 
@@ -111,14 +111,14 @@ A `VirtualCurrency` by itself is not very useful, because it cannot be sold indi
 //Use VirtualCurrency when defining VirtualCurrencyPacks:
 
 CCVirtualCurrencyPack *tenmuffPack = CCVirtualCurrencyPack::create(
-    CCString::create("10 Muffins"),                         // Name
-    CCString::create("Test refund of an item"),             // Description
-    CCString::create("muffins_10"),                         // Item ID
-    CCInteger::create(10),                                  // Number of currency units
-    CCString::create("muffinCurrency_ID"),                  // Associated currency
-    CCPurchaseWithMarket::create(CCString::create(          // Purchase type
-        CCString::create("tenMuff_prodID"),                 // Product ID
-        CCDouble::create(0.99))                             // Initial price
+    __String::create("10 Muffins"),                         // Name
+    __String::create("Test refund of an item"),             // Description
+    __String::create("muffins_10"),                         // Item ID
+    __Integer::create(10),                                  // Number of currency units
+    __String::create("muffinCurrency_ID"),                  // Associated currency
+    CCPurchaseWithMarket::create(__String::create(          // Purchase type
+        __String::create("tenMuff_prodID"),                 // Product ID
+        __Double::create(0.99))                             // Initial price
 );
 ```
 
@@ -128,7 +128,7 @@ Give a VirtualCurrency and get nothing in return.
 This is useful if you’d like to give your users some amount of currency to begin with when they first download your game.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 // If this is the first time playing, give the user an initial balance of 1000 muffins.
 CCStoreInventory::sharedStoreInventory()->giveItem("currency_coin", 1000, &soomlaError);
@@ -139,7 +139,7 @@ CCStoreInventory::sharedStoreInventory()->giveItem("currency_coin", 1000, &sooml
 Get the balance of a specific VirtualCurrency.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->getItemBalance("currency_muffin", &soomlaError);
 ```
@@ -152,14 +152,14 @@ As mentioned above, in game stores you never buy just a "Gold Coin" or a "Muffin
 
 ``` cpp
 CCVirtualCurrencyPack *fiftymuffPack = CCVirtualCurrencyPack::create(
-    CCString::create("50 Muffins"),                         // Name
-    CCString::create("Test cancellation of an item"),       // Description
-    CCString::create("muffins_50"),                         // Item id
-    CCInteger::create(50),                                  // Number of currency units
-    CCString::create("muffinCurrency_ID"),                  // Associated currency
-    CCPurchaseWithMarket::create(CCString::create(          // Purchase type
-        CCString::create("fiftyMuff_prodID"),               // Target item ID
-        CCDouble::create(1.99))                             // Initial price
+    __String::create("50 Muffins"),                         // Name
+    __String::create("Test cancellation of an item"),       // Description
+    __String::create("muffins_50"),                         // Item id
+    __Integer::create(50),                                  // Number of currency units
+    __String::create("muffinCurrency_ID"),                  // Associated currency
+    CCPurchaseWithMarket::create(__String::create(          // Purchase type
+        __String::create("fiftyMuff_prodID"),               // Target item ID
+        __Double::create(1.99))                             // Initial price
 );
 ```
 
@@ -170,7 +170,7 @@ CCVirtualCurrencyPack *fiftymuffPack = CCVirtualCurrencyPack::create(
 When your user buys a VirtualCurrencyPack of 50 muffins, his/her muffin currency balance will be increased by 50, and the payment will be deducted.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->buyItem("muffins_50", &soomlaError);
 ```
@@ -180,7 +180,7 @@ CCStoreInventory::sharedStoreInventory()->buyItem("muffins_50", &soomlaError);
 Give your users a 50-muffin pack for free. This is useful if you’d like to give your users a currency_pack to begin with when they first download your game.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->giveItem("muffins_50", 1, &soomlaError);
 ```
@@ -192,7 +192,7 @@ This function simply deducts the user’s balance. In case of a refund request, 
 Take back the 50-muffin pack that the user owns:
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->takeItem("muffins_50", 1, &soomlaError);
 ```
@@ -202,7 +202,7 @@ CCStoreInventory::sharedStoreInventory()->takeItem("muffins_50", 1, &soomlaError
 VirtualCurrencyPacks do not have a balance of their own in the database. When a user purchases a VirtualCurrencyPack, the balance of the associated VirtualCurrency is increased.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->getItemBalance("currency_muffin", &soomlaError);
 ```
@@ -241,12 +241,12 @@ The most basic and common kind of a `VirtualGood` is a `SingleUseVG`. `SingleUse
 
 ``` cpp
 CCVirtualGood *fruitCakeGood = CCSingleUseVG::create(
-    CCString::create("Fruit Cake"),                         // Name
-    CCString::create("Tasty cake"),                         // Description
-    CCString::create("fruit_cake"),                         // Item id
-    CCPurchaseWithVirtualItem::create(CCString::create(     // Purchase type
+    __String::create("Fruit Cake"),                         // Name
+    __String::create("Tasty cake"),                         // Description
+    __String::create("fruit_cake"),                         // Item id
+    CCPurchaseWithVirtualItem::create(__String::create(     // Purchase type
         "muffinCurrency_ID"),                               // Target item ID
-        CCInteger::create(225))                             // Initial price
+        __Integer::create(225))                             // Initial price
 );
 ```
 
@@ -254,20 +254,20 @@ CCVirtualGood *fruitCakeGood = CCSingleUseVG::create(
 
 **Buy:**
 
-When your user buys a SingleUseVG, for example “fruit_cake”, his/her “fruit_cake” balance will be increased by 1, and the payment will be deducted.
+When your user buys a `SingleUseVG`, for example “fruit_cake”, his/her “fruit_cake” balance will be increased by 1, and the payment will be deducted.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->buyItem("fruit_cake", &soomlaError);
 ```
 
 **Give:**
 
-Gives your user the given amount of the SingleUseVG with the given itemId(“fruit_cake” in our example) for free. This is useful if you’d like to give your users a SingleUseVG to start with when they first download your game.
+Gives your user the given amount of the `SingleUseVG` with the given itemId(“fruit_cake” in our example) for free. This is useful if you’d like to give your users a `SingleUseVG` to start with when they first download your game.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->giveItem("fruit_cake", 1, &soomlaError);
 ```
@@ -277,17 +277,17 @@ CCStoreInventory::sharedStoreInventory()->giveItem("fruit_cake", 1, &soomlaError
 This function simply deducts the user’s balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->takeItem("fruit_cake", 1, &soomlaError);
 ```
 
 ####**Get the balance**
 
-Get the balance of a specific SingleUseVG.
+Get the balance of a specific `SingleUseVG`.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->getItemBalance("fruit_cake", &soomlaError);
 ```
@@ -309,14 +309,14 @@ Suppose you offer a `SingleUsePackVG` of “5 fruit cakes”. The `SingleUseVG` 
 
 ``` cpp
 CCVirtualGood *fiveFruitcakeGoods = CCSingleUsePackVG::create(
-    CCString::create("fruit_cake"),                         // Item ID of associated good
-    CCInteger::create(10),                                  // Amount of goods in pack
-    CCString::create("10 Fruitcakes"),                      // Name
-    CCString::create("Pack of 5 fruitcakes"),               // Description
-    CCString::create("fruitcake_10"),                       // Item ID
+    __String::create("fruit_cake"),                         // Item ID of associated good
+    __Integer::create(5),                                  // Amount of goods in pack
+    __String::create("5 Fruitcakes"),                      // Name
+    __String::create("Pack of 5 fruitcakes"),               // Description
+    __String::create("fruitcake_5"),                       // Item ID
     CCPurchaseWithVirtualItem::create(                      // Purchase type
-        CCString::create("muffinCurrency_ID"),
-        CCInteger::create(1750)));
+        __String::create("muffinCurrency_ID"),
+        __Integer::create(1750)));
 ```
 
 ####**How to use**
@@ -326,37 +326,37 @@ The explanations for buying, giving, and taking are the same as those in SingleU
 **Buy:**
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->buyItem("fruit_cake_5pack", &soomlaError);
+CCStoreInventory::sharedStoreInventory()->buyItem("fruitcake_5", &soomlaError);
 ```
 
 **Give:**
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->giveItem("fruit_cake_5pack", 1, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->giveItem("fruitcake_5", 1, &soomlaError);
 ```
 
 **Take:**
 
 ```
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->takeItem("fruit_cake_5pack", 1, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->takeItem("fruitcake_5", 1, &soomlaError);
 ```
 
 ####**Get the balance**
 
-SingleUsePackVGs do not have a balance of their own in the database. When a user buys a SingleUsePackVG, the balance of the associated SingleUseVG is increased. After buying a pack of 5 fruit cakes, your user’s fruit cake balance should be increased by 5.
+SingleUsePackVGs do not have a balance of their own in the database. When a user buys a SingleUsePackVG, the balance of the associated `SingleUseVG` is increased. After buying a pack of 5 fruit cakes, your user’s fruit cake balance should be increased by 5.
 
 Query the balance of the virtual good with item ID “fruit_cake”:
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->getItemBalance("fruit_cake_5pack", &soomlaError);
+CCStoreInventory::sharedStoreInventory()->getItemBalance("fruit_cake", &soomlaError);
 ```
 
 ### LifetimeVG <a href="https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/virtualGoods/CCLifetimeVG.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
@@ -378,21 +378,21 @@ However, notice that if you declare a `LifetimeVG` with a purchase type of `Purc
 ``` cs
 // A blue car that is purchased with virtual coins.
 CCVirtualGood *BLUE_CAR =
-    CCLifetimeVG::create(CCString::create("Blue Car"),      // Name
-    CCString::create("This car is yours as long as the game's storage doesn't change!"),
-    CCString::create("blue_car"),                           // Item ID
+    CCLifetimeVG::create(__String::create("Blue Car"),      // Name
+    __String::create("This car is yours as long as the game's storage doesn't change!"),
+    __String::create("blue_car"),                           // Item ID
     CCPurchaseWithVirtualItem::create(                      // Purchase type
-        CCString::create("coinCurrency_ID"),
-        CCInteger::create(3000)));
+        __String::create("coinCurrency_ID"),
+        __Integer::create(3000)));
 
 // A red car that is purchased with money in the market.
 CCVirtualGood *RED_CAR =
-    CCLifetimeVG::create(CCString::create("Red Car"),       // Name
-    CCString::create("This car is yours FOREVER!!!"),       // Description
-    CCString::create("red_car"),                            // Item ID
+    CCLifetimeVG::create(__String::create("Red Car"),       // Name
+    __String::create("This car is yours FOREVER!!!"),       // Description
+    __String::create("red_car"),                            // Item ID
     CCPurchaseWithMarket::create(                           // Purchase type
-            CCString::create("redCar_ProdID"),
-            CCDouble::create(4.99)));
+            __String::create("redCar_ProdID"),
+            __Double::create(4.99)));
 ```
 
 Let's say a user purchases both cars. Even if the game's local storage is deleted, the user will still own the red car and will receive it upon `refreshInventory` process. However, the user will not own the blue car any longer.
@@ -405,12 +405,12 @@ Let's say a user purchases both cars. Even if the game's local storage is delete
 
 ``` cpp
 CCVirtualGood *marriageGood =
-    CCLifetimeVG::create(CCString::create("Marriage"),      // Name
-    CCString::create("This is a LIFETIME thing."),          // Description
-    CCString::create("marriage"),                           // Item ID
+    CCLifetimeVG::create(__String::create("Marriage"),      // Name
+    __String::create("This is a LIFETIME thing."),          // Description
+    __String::create("marriage"),                           // Item ID
     CCPurchaseWithVirtualItem::create(                      // Purchase type
-        CCString::create("muffinCurrency_ID"),
-        CCInteger::create(100)));
+        __String::create("muffinCurrency_ID"),
+        __Integer::create(100)));
 ```
 
 ####**How to use**
@@ -420,7 +420,7 @@ CCVirtualGood *marriageGood =
 Buying a `LifetimeVG` means that the user will now own the item for the rest of time, unless the game developer decides to explicitly take away the item from the user. Lifetime goods can be bought only once.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->buyItem("marriage", &soomlaError);
 ```
@@ -430,7 +430,7 @@ CCStoreInventory::sharedStoreInventory()->buyItem("marriage", &soomlaError);
 Give a `LifetimeVG` and get nothing in return. This is useful if you’d like to give your users a `LifetimeVG` when they first download your game.
 
 ```cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->giveItem("marriage", 1, &soomlaError);
 ```
@@ -440,7 +440,7 @@ CCStoreInventory::sharedStoreInventory()->giveItem("marriage", 1, &soomlaError);
 This function simply deducts the user’s balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
 
 ```cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->takeItem("marriage", 1, &soomlaError);
 ```
@@ -450,7 +450,7 @@ CCStoreInventory::sharedStoreInventory()->takeItem("marriage", 1, &soomlaError);
 ``` cpp
 //If the balance is greater than 0, the user owns this LifetimeVG.
 
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->getItemBalance("marriage", &soomlaError);
 ```
@@ -482,23 +482,23 @@ In this example we're defining 2 characters, George and Kramer as `CATEGORY` equ
 ``` cpp
 // Character "Kramer" can be purchased for 350 Muffins.
 CCVirtualGood *georgeGood = CCEquippableVG::create(
-    CCInteger::create(CCEquippableVG::kCategory),           // Equipping model
-    CCString::create("George"),                             // Name
-    CCString::create("The best muffin eater in the north"), // Description
-    CCString::create("george"),                             // Item ID
+    __Integer::create(CCEquippableVG::kCategory),           // Equipping model
+    __String::create("George"),                             // Name
+    __String::create("The best muffin eater in the north"), // Description
+    __String::create("george"),                             // Item ID
     CCPurchaseWithVirtualItem::create(                      // Purchase type
-        CCString::create("muffinCurrency_ID"),
-        CCInteger::create(350)));
+        __String::create("muffinCurrency_ID"),
+        __Integer::create(350)));
 
 // Character "Kramer" can be purchased for 500 Muffins.
 CCVirtualGood *kramerGood = CCEquippableVG::create(
-    CCInteger::create(CCEquippableVG::kCategory),           // Equipping model
-    CCString::create("Kramer"),                             // Name
-    CCString::create("Knows how to get muffins"),           // Description
-    CCString::create("kramer"),                             // Item ID
+    __Integer::create(CCEquippableVG::kCategory),           // Equipping model
+    __String::create("Kramer"),                             // Name
+    __String::create("Knows how to get muffins"),           // Description
+    __String::create("kramer"),                             // Item ID
     CCPurchaseWithVirtualItem::create(                      // Purchase type
-        CCString::create("muffinCurrency_ID"),
-        CCInteger::create(500)));
+        __String::create("muffinCurrency_ID"),
+        __Integer::create(500)));
 ```
 ####**How to use**
 
@@ -507,7 +507,7 @@ CCVirtualGood *kramerGood = CCEquippableVG::create(
 Buying an `EquippableVG` is exactly like buying a `LifetimeVG`. The balance of “kramer” will be checked and if it is 0, buying will be allowed.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->buyItem("kramer", &soomlaError);
 ```
@@ -518,7 +518,7 @@ Give an `EquippableVG` and get nothing in return.
 This is useful if you’d like to give your users a free character to begin with when they first download your game.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->giveItem("george", 1, &soomlaError);
 ```
@@ -528,7 +528,7 @@ CCStoreInventory::sharedStoreInventory()->giveItem("george", 1, &soomlaError);
 This function simply deducts the user’s balance. In case of a refund request, it is your responsibility to give the user back whatever he/she paid.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->takeItem("kramer", 1, &soomlaError);
 ```
@@ -536,7 +536,7 @@ CCStoreInventory::sharedStoreInventory()->takeItem("kramer", 1, &soomlaError);
 **Equip & Unequip:**
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 // The user equips an owned good, George:
 CCStoreInventory::sharedStoreInventory()->equipVirtualGood("george", &soomlaError);
@@ -553,7 +553,7 @@ CCStoreInventory::sharedStoreInventory()->unEquipVirtualGood("kramer", &soomlaEr
 
 ``` cpp
 //Check if user owns Kramer:
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 //If the balance is greater than 0, the user owns Kramer.
 CCStoreInventory::sharedStoreInventory()->getItemBalance("kramer", &soomlaError);
@@ -563,7 +563,7 @@ CCStoreInventory::sharedStoreInventory()->getItemBalance("kramer", &soomlaError)
 
 ``` cpp
 //Check if Kramer is currently equipped:
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInventory::sharedStoreInventory()->isVirtualGoodEquipped("kramer", &soomlaError);
 ```
@@ -605,36 +605,36 @@ In the following example there is a `SingleUseVG` for "Strength" and 3 upgrade l
 ``` cpp
 // Create a SingleUseVG for "Strength"
 CCVirtualGood *strength = CCSingleUseVG::create(
-    CCString::create("Strength Attribute"),                 // Name
-    CCString::create("Be strong!"),                         // Description
-    CCString::create("strength_ID"),                        // Item id
+    __String::create("Strength Attribute"),                 // Name
+    __String::create("Be strong!"),                         // Description
+    __String::create("strength_ID"),                        // Item id
     CCPurchaseWithMarket::create(                           // Purchase type
-        CCString::create("strength_ProdID"),
-        CCDouble::create(1.99)));
+        __String::create("strength_ProdID"),
+        __Double::create(1.99)));
 );
 
 // Create 2 UpgradeVGs that represent 2 upgrade levels for strength.
 CCVirtualGood *strength_upgrade1 = CCUpgradeVG::create(
-    CCString::create("strength_ID"),                        // Item ID of the associated good that is being upgraded
+    __String::create("strength_ID"),                        // Item ID of the associated good that is being upgraded
     NULL,                                                   // Item ID of the previous upgrade good
-    CCString::create("strength_upgrade2_ID"),               // Item ID of the next upgrade good
-    CCString::create("Strength Upgrade 1"),                 // Name
-    CCString::create("Kramer will be able to kick twice as many muffins"), // Description
-    CCString::create("strength_upgrade1_ID"),               // Item ID
+    __String::create("strength_upgrade2_ID"),               // Item ID of the next upgrade good
+    __String::create("Strength Upgrade 1"),                 // Name
+    __String::create("Kramer will be able to kick twice as many muffins"), // Description
+    __String::create("strength_upgrade1_ID"),               // Item ID
     CCPurchaseWithVirtualItem::create(                      // Purchase type
-        CCString::create("muffinCurrency_ID"),
-        CCInteger::create(50)));
+        __String::create("muffinCurrency_ID"),
+        __Integer::create(50)));
 
 CCVirtualGood *strength_upgrade2 = CCUpgradeVG::create(
-    CCString::create("strength_ID"),                        // Item ID of the associated good that is being upgraded
-    CCString::create("muffincake_level_1"),                 // Item ID of the previous upgrade good
-    CCString::create("muffincake_level_3"),                 // Item ID of the next upgrade good
-    CCString::create("Strength Upgrade 2"),                 // Name
-    CCString::create("Kramer will be able to kick 4 times as many muffins"), // Description
-    CCString::create("strength_upgrade2_ID"),               // Item ID
+    __String::create("strength_ID"),                        // Item ID of the associated good that is being upgraded
+    __String::create("muffincake_level_1"),                 // Item ID of the previous upgrade good
+    __String::create("muffincake_level_3"),                 // Item ID of the next upgrade good
+    __String::create("Strength Upgrade 2"),                 // Name
+    __String::create("Kramer will be able to kick 4 times as many muffins"), // Description
+    __String::create("strength_upgrade2_ID"),               // Item ID
     CCPurchaseWithVirtualItem::create(                      // Purchase type
-        CCString::create("muffinCurrency_ID"),
-        CCInteger::create(100)));
+        __String::create("muffinCurrency_ID"),
+        __Integer::create(100)));
 
 // UpgradeVG for strength level 3...
 ```
@@ -646,9 +646,9 @@ CCVirtualGood *strength_upgrade2 = CCUpgradeVG::create(
 When a user buys an upgrade, the buy method checks that the upgrade that’s being purchased is valid.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->buyItem(LEVEL_1_GOOD_ITEM_ID, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->buyItem("strength_upgrade2_ID", &soomlaError);
 ```
 
 **Upgrade:**
@@ -656,19 +656,19 @@ CCStoreInventory::sharedStoreInventory()->buyItem(LEVEL_1_GOOD_ITEM_ID, &soomlaE
 When you upgrade a virtual good, the method performs a check to see that this upgrade is valid.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->upgradeGood(LEVEL_1_GOOD_ITEM_ID, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->upgradeGood("strength_ID", &soomlaError);
 ```
 
 **Remove upgrades:**
 
-Remove all upgrades from the virtual good with the given ID (Muffin cake in our example).
+Remove all upgrades from the virtual good with the given ID (strength in our example).
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->removeGoodUpgrades(MUFFIN_CAKE_GOOD_ITEM_ID, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->removeGoodUpgrades("strength_ID", &soomlaError);
 ```
 
 **Give:**
@@ -676,9 +676,9 @@ CCStoreInventory::sharedStoreInventory()->removeGoodUpgrades(MUFFIN_CAKE_GOOD_IT
 Give a free upgrade.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->giveItem(LEVEL_1_GOOD_ITEM_ID, 1, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->giveItem("strength_upgrade2_ID", 1, &soomlaError);
 ```
 
 **Take:**
@@ -687,9 +687,9 @@ This function simply deducts the user’s balance. In case of a refund request, 
 
 ``` cpp
 // The parameter amount is not used in this method.
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->takeItem(LEVEL_1_GOOD_ITEM_ID, 1, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->takeItem("strength_upgrade2_ID", 1, &soomlaError);
 ```
 
 ####**Get current upgrade**
@@ -697,9 +697,9 @@ CCStoreInventory::sharedStoreInventory()->takeItem(LEVEL_1_GOOD_ITEM_ID, 1, &soo
 To get the current upgrade of a virtual good use getGoodCurrentUpgrade. If the good has no upgrades, the method will return null.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->getGoodCurrentUpgrade(MUFFIN_CAKE_GOOD_ITEM_ID, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->getGoodCurrentUpgrade("strength_ID", &soomlaError);
 ```
 
 ####**Get current upgrade level**
@@ -707,9 +707,9 @@ CCStoreInventory::sharedStoreInventory()->getGoodCurrentUpgrade(MUFFIN_CAKE_GOOD
 To find out the upgrade level of a virtual good use getGoodUpgradeLevel. If the good has no upgrades, the method returns 0.
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
-CCStoreInventory::sharedStoreInventory()->getGoodUpgradeLevel(MUFFIN_CAKE_GOOD_ITEM_ID, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->getGoodUpgradeLevel("strength_ID", &soomlaError);
 ```
 
 ## VirtualCategory <a href="https://github.com/soomla/cocos2dx-store/blob/master/Soomla/domain/CCVirtualCategory.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
@@ -726,14 +726,14 @@ Let’s suppose your game has the following categories of virtual goods: "Power 
 
 ``` cpp
 CCVirtualCategory *cakes = CCVirtualCategory::create(
-    CCString::create("Cakes"),
-    CCArray::create(
-        CCString::create("MUFFINCAKE_ITEM_ID"),
-        CCString::create("PAVLOVA_ITEM_ID"),
-        CCString::create("PAVLOVA_10"),
-        CCString::create("CHOCLATECAKE_ITEM_ID"),
-        CCString::create("CREAMCUP_ITEM_ID"),
-        CCString::create("CREAMCUP_10"),
+    __String::create("Cakes"),
+    __Array::create(
+        __String::create("MUFFINCAKE_ITEM_ID"),
+        __String::create("PAVLOVA_ITEM_ID"),
+        __String::create("PAVLOVA_10"),
+        __String::create("CHOCLATECAKE_ITEM_ID"),
+        __String::create("CREAMCUP_ITEM_ID"),
+        __String::create("CREAMCUP_10"),
         NULL));
 ```
 
@@ -742,7 +742,7 @@ CCVirtualCategory *cakes = CCVirtualCategory::create(
 **Check which category an item belongs to:**
 
 ``` cpp
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 
 CCStoreInfo::sharedStoreInfo()->getCategoryForVirtualGood(MUFFIN_CAKE_GOOD_ITEM_ID, &soomlaError);
 ```
