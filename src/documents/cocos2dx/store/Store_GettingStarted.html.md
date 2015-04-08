@@ -50,6 +50,7 @@ platform: 'cocos2dx'
 	__Dictionary *storeParams = __Dictionary::create();
 	 storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
 	 storeParams->setObject(__Bool::create(true), "testPurchases");
+	 storeParams->setObject(__Bool::create(true), "SSV");
 
 	soomla::CCSoomlaStore::initialize(assets, storeParams);
 	```
@@ -59,6 +60,8 @@ platform: 'cocos2dx'
 	- *Android Public Key* - is the public key given to you from Google. (iOS doesn't have a public key).
 
 	- *Test Purchases* - allows testing IAP on Google Play. (iOS doesn't have this functionality).
+
+	- *SSV* - enables server-side receipt verification. (Android doesn't have this functionality).
 
 	<div class="warning-box">Choose the secret wisely. You can't change it after you launch your game!
 	Initialize `CCSoomlaStore` ONLY ONCE when your application loads.</div>
