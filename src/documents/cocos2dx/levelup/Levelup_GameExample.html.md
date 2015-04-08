@@ -38,11 +38,11 @@ Chimpo is a smart, ambitious monkey, who embarks on a journey to reach the magic
 
 - Predators start to attack Chimpo after he has collected 2 bananas. Chimpo can escape the predators by either running to the exit before they catch him, or by knocking them out with coconuts.
 
-- The player can earn coins throughout the game and use them to buy cool stuff in the store (see [IStoreAssets](#-istoreassets-code-) below). Coins can be accumulated by either buying them in the store for real money, or by earning them as rewards in the different missions of the game (see [Missions](#-missions-) below).
+- The player can earn coins throughout the game and use them to buy cool stuff in the store (see [CCStoreAssets](#-ccstoreassets-code-) below). Coins can be accumulated by either buying them in the store for real money, or by earning them as rewards in the different missions of the game (see [Missions](#-missions-) below).
 
 ##Setup Code Example
 
-We start by presenting the complete examples of the economy (`IStoreAssets` implementation) and the LevelUp model.  In the following section we will breakdown the LevelUp code to explain it in more detail.
+We start by presenting the complete examples of the economy (`CCStoreAssets` implementation) and the LevelUp model.  In the following section we will breakdown the LevelUp code to explain it in more detail.
 
 ###**CCStoreAssets Code**
 
@@ -362,30 +362,23 @@ void addGatesToWorld(soomla::CCWorld *world) {
 }
 ```
 
-###**Event Handler**
+###**Event Handling**
 
-**`ExampleEventHandler.h`**
-
-``` cpp
-class ExampleEventHandler : public soomla::CCLevelUpEventHandler {
-public:
-  virtual void onWorldCompleted(CCWorld *world) = 0;
-
-  virtual void onMissionCompleted(CCMission *mission) = 0;
-
-  ...
-};
-
-```
-
-**`ExampleEventHandler.cpp`**
+Adding event handling to the main scene
 
 ``` cpp
-void ExampleEventHandler::onWorldCompleted(CCWorld *world) {
+void MainScene::addEvents() {
+  Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_WORLD_COMPLETED, CC_CALLBACK_1(MainScene::onWorldCompleted, this));
+  Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_MISSION_COMPLETED, CC_CALLBACK_1(MainScene::onMissionCompleted, this));
+}
+
+...
+
+void MainScene::onWorldCompleted(EventCustom *event) {
   // Implemented in the relevant sections below.
 }
 
-void ExampleEventHandler::onMissionCompleted(CCMission *mission) {
+void MainScene::onMissionCompleted(EventCustom *event) {
   // Implemented in the relevant sections below.
 }
 ```
@@ -394,46 +387,26 @@ void ExampleEventHandler::onMissionCompleted(CCMission *mission) {
 
 Read more in our [Getting Started](/cocos2dx/levelup/Levelup_GettingStarted) tutorial.
 
-**`AppDelegate.h`**
-
-``` cpp
-class  AppDelegate : private cocos2d::Application {
-public:
-  ...
-
-  virtual bool applicationDidFinishLaunching();
-  ...
-
-  soomla::CCLevelUpEventHandler *handler;
-};
-```
-
 **`AppDelegate.cpp`**
 
 ``` cpp
 ...
 
-AppDelegate::AppDelegate() {
-  handler = new ExampleEventHandler();
-}
-
 bool AppDelegate::applicationDidFinishLaunching() {
+
+  soomla::CCSoomla::initialize("customSecret");
 
   ExampleAssets *assets = ExampleAssets::create();
 
   __Dictionary *storeParams = __Dictionary::create();
   storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
 
-  CCStoreService::initShared(assets, storeParams);
+  soomla::CCSoomlaStore::initialize(assets, storeParams);
 
   __Dictionary *profileParams = __Dictionary::create();
-  CCProfileService::initShared(profileParams);
+  soomla::CCSoomlaProfile::initialize(profileParams);
 
-  CCLevelUpService::initShared();
-
-  CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
-
-  CCSoomlaLevelUp::getInstance()->initialize(ChimposJourney::createInitialWorld(), NULL);
+  soomla::CCSoomlaLevelUp::getInstance()->initialize(ChimposJourney::createInitialWorld(), NULL);
 }
 ```
 
@@ -544,12 +517,12 @@ There are various missions throughout the game that can be completed for rewards
 <br>
 ####`pointMission`
 
-`pointMission` is of type `RecordMission`, which is a mission that has an associated score and a desired record. In Chimpo's Journey, `pointMission` is available in the first level of the game. The mission's associated score is `pointScore`, and the desired record is 3 (see the `pointScore` calculation described in [Scores](#-scores-) above). If the user reaches the desired record, he/she will receive a medal badge as a reward.
+`pointMission` is of type `CCRecordMission`, which is a mission that has an associated score and a desired record. In Chimpo's Journey, `pointMission` is available in the first level of the game. The mission's associated score is `pointScore`, and the desired record is 3 (see the `pointScore` calculation described in [Scores](#-scores-) above). If the user reaches the desired record, he/she will receive a medal badge as a reward.
 
 <br>
 ####`coconutMission`
 
-This mission is of type `BalanceMission`, which is a mission that has an associated virtual item and a desired balance. In `coconutMission`, the associated virtual item is a `SingleUseVG` named `COCONUT`, and the desired balance is 5.
+This mission is of type `CCBalanceMission`, which is a mission that has an associated virtual item and a desired balance. In `coconutMission`, the associated virtual item is a `CCSingleUseVG` named `COCONUT`, and the desired balance is 5.
 
 There are several coconuts scattered throughout the levels of the game, and they can be used to throw at and kill enemies. Coconuts can be accumulated by finding and collecting them throughout the game, or by purchasing them in the store for an expensive price of 300 coins each. Once the player has accumulated 5 coconuts (without using them up of course), he/she will receive a reward.
 
@@ -571,10 +544,10 @@ This is a `CCSocialLikeMission` that is offered in the main menu of the game and
 <br>
 ####`statusMission`s
 
-`statusMissionJungle` and `statusMissionDesert` are of type `SocialStatusMission` and are offered each at the end of the world it is associated with. In these missions the user can post a specific status on Facebook and in return he/she will receive free coins. Upon world completion, an `onWorldCompleted` event is thrown - we created an event handler that displays a screen like in the image below, and allows the user to share the specific status.
+`statusMissionJungle` and `statusMissionDesert` are of type `CCSocialStatusMission` and are offered each at the end of the world it is associated with. In these missions the user can post a specific status on Facebook and in return he/she will receive free coins. Upon world completion, an `onWorldCompleted` event is thrown - we created an event handler that displays a screen like in the image below, and allows the user to share the specific status.
 
 ``` cpp
-void ExampleEventHandler::onWorldCompleted(CCWorld *world) {
+void MainScene::onWorldCompleted(CCWorld *world) {
   // Draw the UI that allows the user to perform the mission (share the statusToPost).
 }
 ```
@@ -654,7 +627,10 @@ soomla::CCStoreInventory::sharedStoreInventory()->giveItem("coconut_ID", 1, &lev
 Once the user completes the coconut mission at some point in the game, we'll want to change the UI at the top left corner of the screen from displaying the number of coconuts collected to the message "Mission Accomplished!". To do that we'll implement the event handler that is triggered when a mission is complete.
 
 ``` cpp
-void ExampleEventHandler::onMissionCompleted(CCMission *mission) {
+void MainScene::onMissionCompleted(CCMission *mission) {
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCMission *mission = dynamic_cast<CCMission *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_MISSION));
+
   if (mission->getName()->isEqual(__String::create("Coconut Mission"))) {
     // Remove from the UI the number of coconuts collected, and
     // instead insert the message "Mission Accomplished!".
@@ -685,9 +661,9 @@ If Chimpo is attacked by a predator, we'll need to end the level unsuccessfully:
 level->end(false);
 ```
 
-If we check the level's completion status, we'll get false. That means the `WorldCompletionGate` for the next level (whose associated world is this current level) will not be open, and therefore this will ensure that the next level won't be open for play. In this case, we'll want to draw the relevant UI, for example a screen that has a replay button that allows the player to try this level again.
+If we check the level's completion status, we'll get false. That means the `CCWorldCompletionGate` for the next level (whose associated world is this current level) will not be open, and therefore this will ensure that the next level won't be open for play. In this case, we'll want to draw the relevant UI, for example a screen that has a replay button that allows the player to try this level again.
 
-<div class="info-box">TIP: Here, in your games, you can incorporate a concept of "lives" to limit the number of times the user can try again to succeed at a level. If he/she reaches the limit and still does not succeed, you can offer him/her either to wait some duration of time until they can try again, or offer a `PurchasingMission` where they can buy extra lives (to continue play immediately) AND they'll receive a reward.</div>
+<div class="info-box">TIP: Here, in your games, you can incorporate a concept of "lives" to limit the number of times the user can try again to succeed at a level. If he/she reaches the limit and still does not succeed, you can offer him/her either to wait some duration of time until they can try again, or offer a `CCPurchasingMission` where they can buy extra lives (to continue play immediately) AND they'll receive a reward.</div>
 
 ``` cpp
 bool isLevelComplete = level1->isCompleted();
@@ -707,7 +683,7 @@ The user successfully escapes all predators and reaches the exit on the screen.
 
 If the exit `isOpen` (meaning that Chimpo collected the 2 bananas), we'll end the level successfully! Here, we should also render the relevant UI, such as a screen that congratulates the user and offers him/her to continue to the next level or go back to the main menu.
 
-Notice that once we call `End(true)`, the next level's `WorldCompletionGate` will open.
+Notice that once we call `End(true)`, the next level's `CCWorldCompletionGate` will open.
 
 ``` cpp
 // If Chimpo tries to walk through the exit, we need to check that
