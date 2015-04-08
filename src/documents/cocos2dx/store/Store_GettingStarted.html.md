@@ -26,7 +26,7 @@ platform: 'cocos2dx'
 	$ git clone git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
 	```
 
-2. cocos2dx-store uses a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing. Clone it into the `external` directory at the root of your Cocos2d-x framework.
+2. cocos2dx-store uses a [fork](https://github.com/soomla/jansson) of the jansson library for JSON parsing. Clone it into the `external` directory at the root of your Cocos2d-x framework.
 
 	```
 	$ git clone git@github.com:soomla/jansson.git external/jansson

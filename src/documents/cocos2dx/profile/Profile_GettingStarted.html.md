@@ -28,34 +28,35 @@ platform: 'cocos2dx'
     $ git clone git@github.com:soomla/cocos2dx-profile.git extensions/cocos2dx-profile
     ```
 
-3. We use a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing, clone our fork into the `external` directory at the root of your framework:
+3. We use a [fork](https://github.com/soomla/jansson) of the jansson library for JSON parsing, clone our fork into the `external` directory at the root of your framework:
 
     ```
-    $ git clone git@github.com:vedi/jansson.git external/jansson
+    $ git clone git@github.com:soomla/jansson.git external/jansson
     ```
-
-4. Implement your `CCProfileEventHandler` class in order to be notified about social-network-related events. Refer to the [Event Handling](/cocos2dx/profile/Profile_Events) section for more information.
-
-5. Initialize `CCServiceManager` and `CCProfileService` with the class you just created, a `customSecret` and other params. **Custom Secret** is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game!
+4. Make sure to include the `Cocos2dxProfile.h` header whenever you use any of the **cocos2dx-profile** methods:
 
   ``` cpp
-  __Dictionary *commonParams = __Dictionary::create();
-  commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-  soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+  #include "Cocos2dxProfile.h"
+  ```
+
+5. Initialize `CCSoomla` a `customSecret` and `CCSoomlaProfile` its params. **Custom Secret** is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game!
+
+  ``` cpp
+  soomla::CCSoomla::initialize("customSecret");
   ```
 
   ``` cpp
   __Dictionary *profileParams = __Dictionary::create();
-  soomla::CCProfileService::initShared(profileParams);
+  soomla::CCSoomlaProfile::initialize(profileParams);
   ```
 
-    <div class="warning-box">Initialize `CCProfileService` ONLY ONCE when your application loads.</div>
+    <div class="warning-box">Initialize `CCSoomlaProfile` ONLY ONCE when your application loads.</div>
 
-6. Note that some social providers need special parameters to be passed in order for them to work:
+6. Note that some social providers need special parameters to be passed to `CCSoomlaProfile` in order for them to work:
 
   a. **Facebook** - No special parameters
 
-  b. **Google+** - Please provide Client ID from the "API&Auth, credentials" section like so:
+  b. **Google+** - Please provide Client ID from the "API & Auth, credentials" section like so:
 
   ``` cpp
   __Dictionary *googleParams = __Dictionary::create();
@@ -74,17 +75,7 @@ platform: 'cocos2dx'
   profileParams->setObject(twitterParams, soomla::CCUserProfileUtils::providerEnumToString(soomla::TWITTER)->getCString());
   ```
 
-7. Make sure to include the `Cocos2dxProfile.h` header whenever you use any of the **cocos2dx-profile** methods:
-
-  ``` cpp
-  #include "Cocos2dxProfile.h"
-  ```
-
-8. Add an instance of your event handler to `CCProfileEventDispatcher` after `CCProfileService` initialization:
-
-  ``` cpp
-  soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(handler);
-  ```
+7. You'll need to subscribe to profile events to get notified about social network related events. refer to the [Event Handling](/cocos2dx/profile/Profile_Events) section for more information.
 
 <br>
 <div class="info-box">The next steps are different according to which platform you're using.</div>
@@ -93,7 +84,7 @@ platform: 'cocos2dx'
 
 In your XCode project, perform the following steps:
 
-1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder).
+1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder, make sure to check "create group").
 
 2. For each of the following XCode projects:
 
@@ -119,24 +110,7 @@ In your XCode project, perform the following steps:
 
  ![alt text](/img/tutorial_img/cocos2dx-profile/headerSP.png "Header search paths")
 
-4. To register services on the native application (`AppController`):
-
-  a. Import the following headers:
-
-  ```cpp
-  #import "ServiceManager.h"
-  #import "ProfileService.h"
-  ```
-
-  b. Register the native `ProfileService` by adding:
-
-  ```cpp
-  [[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
-  ```
-
-  at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
-
-  c. To support browser-based authentication read [here](#browser-based-authentication).
+4. To support browser-based authentication read [here](#browser-based-authentication).
 
 5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
@@ -186,7 +160,7 @@ Google+ is supported out-of-the-box, authentication is done either through the s
 
 ###Twitter for iOS
 
-Twitter is supported out-of-the-box, authentication is done either through the signed in Twitter account (iOS 5+) or through web browser (fallback). Follow the next steps to make it work:
+Twitter is supported out-of-the-box, authentication is done either through the signed in **native** Twitter account (iOS 5+) or through web browser (fallback). Follow the next steps to make it work:
 
 1. Click [here](https://apps.twitter.com/) to create your Twitter app.
 
@@ -226,35 +200,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
   - AndroidProfile.jar
   - Cocos2dxAndroidProfile.jar
 
-3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
-
-	``` java
-	public Cocos2dxGLSurfaceView onCreateView() {
-		// initialize services
-		final ServiceManager serviceManager = ServiceManager.getInstance();
-		serviceManager.setActivity(this);
-		serviceManager.setGlSurfaceView(glSurfaceView);
-		serviceManager.registerService(ProfileService.getInstance());
-	}
-	```
-
-4. Override `onPause`, `onResume`:
-
-	``` java
-    @Override
-    protected void onPause() {
-        super.onPause();
-        ServiceManager.getInstance().onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        ServiceManager.getInstance().onResume();
-        super.onResume();
-    }
-	```
-
-5. Update your AndroidManifest.xml to include permissions and the SoomlaApp:
+4. Update your AndroidManifest.xml to include permissions and the SoomlaApp:
 
     ``` xml
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -277,7 +223,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 
 Facebook is supported out-of-the-box, you just have to follow the next steps to make it work:
 
-1. Add the following jars from the [build](https://github.com/soomla/android-profile/tree/master/build) folder:
+1. Add the following jars from the `build/android` folder:
 
   - `AndroidProfileFacebook.jar`
 
@@ -425,15 +371,7 @@ For those of you who want to contribute code, please use our "sources environmen
 
 ###Twitter Caveats
 
-####**iOS**
-
-1. **Login method returns 401 error** - this could be the result of a few issues:
-
-  a. Have you supplied the correct consumer key and secret SoomlaProfile initialization?
-
-  b. Have you supplied a `Callback URL` in your Twitter application settings?
-
-####**Android**
+####**iOS/Android**
 
 1. **Login method returns 401 error** - this could be the result of a few issues:
 
@@ -445,9 +383,13 @@ For those of you who want to contribute code, please use our "sources environmen
 
 Most social framework SDKs support authentication through your web browser, when the user finishes authenticating through the browser your application will be called dependent on the URL schemes you have defined.
 
-The callback to this process is `openURL` which should be defined in your `AppDelegate`, **ios-profile** provides you with a helper method to handle the `openURL` callback through its providers. Add the following code to your `AppDelegate` to handle this properly:
+The callback to this process is `openURL` which should be defined in your `AppController`, **ios-profile** provides you with a helper method to handle the `openURL` callback through its providers. Add the following code to your `AppController` to handle this properly:
 
 ``` objectivec
+#import "SoomlaProfile.h"
+
+...
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -466,44 +408,33 @@ The callback to this process is `openURL` which should be defined in your `AppDe
 
 ##Example
 
-Below is an example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To see a full example, please see [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example). To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/docs/platforms/cocos2dx/Profile_MainClasses).
+Below is an example of initializing Profile, logging the user into Facebook, and sharing a story on the user's Facebook wall. To see a full example, please see [cocos2dx-profile-example](https://github.com/soomla/cocos2dx-profile-example). To learn about the different entities and functionality of Profile, see [Main Classes & Operations](/cocos2dx/profile/Profile_MainClasses).
 
 <br>
 
-Initialize ServiceManager and Profile in `AppDelegate.cpp`.
+Initialize `CCSoomla` and `CCSoomlaProfile`.
 
 ``` cpp
-__Dictionary *commonParams = __Dictionary::create();
-commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+soomla::CCSoomla::initialize("customSecret");
 
 ...
 
 __Dictionary *profileParams = __Dictionary::create();
-soomla::CCProfileService::initShared(profileParams);
-```
-
-<br>
-Initialize your event handler (in this example say your event handler class is called MyEventHandler).
-
-``` cpp
-soomla::CCMyEventHandler *myHandler = new MyEventHandler();
-...
-soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myHandler);
+soomla::CCSoomlaProfile::initialize(profileParams);
 ```
 
 <br>
 Log the user into Facebook.
 
 ``` cpp
-soomla::CCProfileController::getInstance()->login(soomla::FACEBOOK, &profileError);
+soomla::CCSoomlaProfile::getInstance()->login(soomla::FACEBOOK, NULL, &profileError);
 ```
 
 <br>
 Share a story on the user's Facebook wall.
 
 ``` cpp
-soomla::CCProfileController::getInstance()->updateStory(
+soomla::CCSoomlaProfile::getInstance()->updateStory(
     soomla::FACEBOOK,
     "Check out this great story by SOOMLA!",
     "SOOMLA is 2 years young!",
