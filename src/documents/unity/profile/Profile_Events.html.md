@@ -184,9 +184,9 @@ This event is triggered when logging out of the social provider has failed.
 ``` cs
 ProfileEvents.OnLogoutFailed += onLogoutFailed;
 
-public void onLogoutFailed(Provider provider, string payload) {
+public void onLogoutFailed(Provider provider, string message) {
 	// provider is the social provider
-	// payload is an identification string that you can give when you initiate the logout operation and want to receive back upon failure
+	// message is the failure message
 
 	// ... your game specific implementation here ...
 }

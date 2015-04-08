@@ -51,7 +51,7 @@ Handle the event through your own custom function:
 ```cpp
 void ExampleScene::onItemPurchased(cocos2d::EventCustom *event) {
   cocos2d::__Dictionary *eventData = (cocos2d::__Dictionary *)event->getUserData();
-  ... // get meta-data information from eventData
+  // ... get meta-data information from eventData
 }
 ```
 
@@ -72,11 +72,11 @@ Handle the event through your own custom function:
 
 ```cpp
 void ExampleScene::onItemPurchased(cocos2d::CCDictionary *eventData) {
-  ... // get meta-data information from eventData
+  // ... get meta-data information from eventData
 }
 ```
 
-## StoreEvents
+## Store Events
 
 Below we provide a list of all events in Store, their handling examples are written for v3, but it's easy to convert them to v2 dialect, see how above.
 
