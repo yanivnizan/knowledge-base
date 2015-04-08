@@ -427,7 +427,7 @@ soomla::CCSoomlaProfile::initialize(profileParams);
 Log the user into Facebook.
 
 ``` cpp
-soomla::CCSoomlaProfile::getInstance()->login(soomla::FACEBOOK, NULL, &profileError);
+soomla::CCSoomlaProfile::getInstance()->login(soomla::FACEBOOK, &profileError);
 ```
 
 <br>
