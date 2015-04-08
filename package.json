@@ -34,7 +34,7 @@
     "bal-util": "^2.4.1",
     "docpad": "~6.69.0",
     "docpad-plugin-cleanurls": "~2.7.0",
-    "docpad-plugin-eco": "~2.0.3",
+    "docpad-plugin-eco": "~2.1.0",
     "docpad-plugin-grunt": "~2.1.1",
     "docpad-plugin-highlightjs": "~2.2.2",
     "docpad-plugin-ignoreincludes": "~2.1.0",
