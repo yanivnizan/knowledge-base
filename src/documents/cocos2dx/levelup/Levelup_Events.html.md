@@ -75,3 +75,221 @@ void ExampleScene::onWorldCompleted(cocos2d::CCDictionary *eventData) {
 ```
 
 ## LevelUp Events
+
+### EVENT_LEVEL_UP_INITIALIZED
+
+This event is triggered when
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED, CC_CALLBACK_1(Example::onLevelUpInitialized, this));
+
+void Example::onLevelUpInitialized(EventCustom *event) {
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_WORLD_COMPLETED
+
+This event is triggered when a `CCWorld` has been completed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_WORLD_COMPLETED, CC_CALLBACK_1(Example::onWorldCompleted, this));
+
+void Example::onWorldCompleted(EventCustom *event) {
+	// DICT_ELEMENT_WORLD - the world that was completed
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCWorld *world = dynamic_cast<CCWorld *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_WORLD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_WORLD_REWARD_ASSIGNED
+
+This event is triggered when a `CCReward` is assigned to a `CCWorld`.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED, CC_CALLBACK_1(Example::onWorldRewardAssigned, this));
+
+void Example::onWorldRewardAssigned(EventCustom *event) {
+	// DICT_ELEMENT_WORLD - the world who had a reward assigned to it
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCWorld *world = dynamic_cast<CCWorld *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_WORLD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_LEVEL_STARTED
+
+This event is triggered when a `CCLevel` has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_LEVEL_STARTED, CC_CALLBACK_1(ExampleLevelUpEventHandler::onLevelStarted, this));
+
+void Example::onGoodBalanceChanged(EventCustom *event) {
+	// DICT_ELEMENT_LEVEL - the level that has started
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCLevel *level = dynamic_cast<CCLevel *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_LEVEL));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_LEVEL_ENDED
+
+This event is triggered when a `CCLevel` has been completed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_LEVEL_ENDED, CC_CALLBACK_1(Example::onLevelEnded, this));
+
+void Example::onLevelEnded(EventCustom *event) {
+	// DICT_ELEMENT_LEVEL - the level that has ended
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCLevel *level = dynamic_cast<CCLevel *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_LEVEL));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_SCORE_RECORD_REACHED
+
+This event is triggered when a `CCScore`'s record has been reached.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED, CC_CALLBACK_1(Example::onScoreRecordReached, this));
+
+void Example::onScoreRecordReached(EventCustom *event) {
+	// DICT_ELEMENT_SCORE - the score whose record has been reached
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCScore *score = dynamic_cast<CCScore *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_SCORE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_SCORE_RECORD_CHANGED
+
+This event is triggered when a `CCScore`'s record has changed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED, CC_CALLBACK_1(Example::onScoreRecordChanged, this));
+
+void Example::onScoreRecordChanged(EventCustom *event) {
+	// DICT_ELEMENT_SCORE - the score whose record has changed
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCScore *score = dynamic_cast<CCScore *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_SCORE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_LATEST_SCORE_CHANGED
+
+This event is triggered when a latest score is changed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_LATEST_SCORE_CHANGED, CC_CALLBACK_1(Example::onLatestScoreChanged, this));
+
+void Example::onLatestScoreChanged(EventCustom *event) {
+	// DICT_ELEMENT_SCORE - the score whose record has changed
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCScore *score = dynamic_cast<CCScore *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_SCORE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GATE_OPENED
+
+This event is triggered when a `CCGate` has opened.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_GATE_OPENED, CC_CALLBACK_1(Example::onGateOpened, this));
+
+void Example::onGateOpened(EventCustom *event) {
+	// DICT_ELEMENT_GATE - the gate that was opened
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCGate *gate = dynamic_cast<CCGate *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_GATE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GATE_CLOSED
+
+This event is triggered when a `CCGate` has closed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_GATE_CLOSED, CC_CALLBACK_1(Example::onGateClosed, this));
+
+void Example::onGateClosed(EventCustom *event) {
+	// DICT_ELEMENT_GATE - the gate that was opened
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCGate *gate = dynamic_cast<CCGate *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_GATE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_MISSION_COMPLETED
+
+This event is triggered when a `CCMission` has been completed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_MISSION_COMPLETED, CC_CALLBACK_1(Example::onMissionCompleted, this));
+
+void Example::onMissionCompleted(EventCustom *event) {
+	// DICT_ELEMENT_MISSION - the mission that was completed
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCMission *mission = dynamic_cast<CCMission *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_MISSION));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_MISSION_COMPLETION_REVOKED
+
+This event is triggered when a `CCMission` has been revoked.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED, CC_CALLBACK_1(Example::onMissionCompletionRevoked, this));
+
+void Example::onMissionCompletionRevoked(EventCustom *event) {
+	// DICT_ELEMENT_MISSION - the mission that was completed
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCMission *mission = dynamic_cast<CCMission *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_MISSION));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED
+
+This event is triggered when the last completed world inside a world has changed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED, CC_CALLBACK_1(Example::onLastCompletedInnerWorldChanged, this));
+
+void Example::onLastCompletedInnerWorldChanged(EventCustom *event) {
+	// DICT_ELEMENT_WORLD - the world which had last completed world changed
+	// DICT_ELEMENT_INNER_WORLD - The inner world ID which was last completed.
+
+	__Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCWorld *world = dynamic_cast<CCWorld *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_WORLD));
+  __String *innerWorldId = dynamic_cast<__String *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_INNER_WORLD));
+
+  // ... your game specific implementation here ...
+}
+```
