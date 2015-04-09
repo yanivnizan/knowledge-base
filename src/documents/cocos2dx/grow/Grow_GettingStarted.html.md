@@ -40,18 +40,15 @@ Go to the [GROW dashboard](http://dashboard.soom.la) and sign up \ login. Upon l
   #include "Cocos2dxHighway.h"
   ```
 
-6. Initialize `CCServiceManager` with a custom secret of your choice:
+6. Initialize `CCSoomla` with a custom secret of your choice (**Custom Secret** is an encryption secret you provide that will be used to secure your data.):
 
   ```cpp
-  __Dictionary *commonParams = __Dictionary::create();
-  commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-  soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+  soomla::CCSoomla::initialize("ExampleCustomSecret");
   ```
 
-  <div class="warning-box">Choose this secret wisely, you can't change it after you launch your game!
-  <br>Initialize `CCLevelUpService` ONLY ONCE when your application loads.</div>
+  <div class="warning-box">Choose this secret wisely, you can't change it after you launch your game!</div>
 
-7. Initialize `CCHighwayService` with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la):
+7. Initialize `CCSoomlaHighway` with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la):
 
   **Copy the "Game Key" and "Environment Key"** given to you from the [dashboard](http://dashboard.soom.la) and initialize `CCSoomlaHighway` with them. At this point, you're probably testing your integration and you want to use the **Sandbox** environment key.
 
@@ -65,25 +62,8 @@ Go to the [GROW dashboard](http://dashboard.soom.la) and sign up \ login. Upon l
 
   ![alt text](/img/tutorial_img/cocos_grow/dashboardKeys.png "Keys")
 
-8. Initialize the rest of the SOOMLA modules: `CCStoreService`, `CCProfileService`, and `CCLevelUpService`. **Custom Secret** is an encryption secret you provide that will be used to secure your data.
-
-    ```cpp
-    // `assets` should implement the `IStoreAssets` interface
-    // and should include your entire virtual economy
-    __Dictionary *storeParams = __Dictionary::create();
-    storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
-    soomla::CCStoreService::initShared(assets, storeParams);
-
-    __Dictionary *profileParams = __Dictionary::create();
-    soomla::CCProfileService::initShared(profileParams);
-
-    // `initialWorld` should contain all worlds and levels of the game
-    // rewards should contain a list of all rewards of the game
-    soomla::CCLevelUpService::initShared();
-    soomla::CCLevelUp::getInstance()->initialize(initialWorld, rewards);
-    ```
-
-9. Make sure to include the relevant headers where needed:
+  <div class="warning-box">Initialize `CCSoomlaHighway` ONLY ONCE when your application loads.</div>
+8. Make sure to include the relevant headers:
 
     ```cpp
     #include "Cocos2dxStore.h"
@@ -93,6 +73,24 @@ Go to the [GROW dashboard](http://dashboard.soom.la) and sign up \ login. Upon l
     #include "Cocos2dxLevelUp.h"
     ```
 
+9. Initialize the rest of the SOOMLA modules: `CCSoomlaStore`, `CCSoomlaProfile`, and `CCSoomlaLevelUp`.
+
+    ```cpp
+    // `assets` should implement the `CCStoreAssets` interface
+    // and should include your entire virtual economy
+    YourImplementationAssets *assets = YourImplementationAssets::create();
+
+    __Dictionary *storeParams = __Dictionary::create();
+    soomla::CCSoomlaStore::initialize(assets, storeParams);
+
+    __Dictionary *profileParams = __Dictionary::create();
+    soomla::CCSoomlaProfile::initialize(profileParams);
+
+    // initialWorld - should be created here and contain all worlds and levels of the game
+    // rewards - should contain a list of all rewards that are given through LevelUp
+    soomla::CCSoomlaLevelUp::getInstance()->initialize(initialWorld, rewards);
+    ```
+
 <br>
 <div class="info-box">The next steps are different according to which native platform you are building for.</div>
 
@@ -100,7 +98,7 @@ Go to the [GROW dashboard](http://dashboard.soom.la) and sign up \ login. Upon l
 
 In your XCode project, perform the following steps:
 
-1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder).
+1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder, make sure to check "create group").
 
 2. For each of the following XCode projects:
 
@@ -125,13 +123,10 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/Soomla`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios/headers`
 
   ![alt text](/img/tutorial_img/cocos_grow/headerSP.png "Header search paths")
 
@@ -143,36 +138,7 @@ In your XCode project, perform the following steps:
 
   ![alt text](/img/tutorial_img/ios_getting_started/linkerFlags.png "Linker Flags")
 
-6. To register services on the native application (`AppController`):
-
-  a. Import the following headers:
-    ```cpp
-    #import "ServiceManager.h"
-    #import "Cocos2dXSoomlaHighway.h"
-    #import "StoreService.h"
-    #import "ProfileService.h"
-    #import "LevelUpService.h"
-    ```
-
-  b. Register the native `Cocos2dXSoomlaHighway`, `StoreService`, `ProfileService`, and `LevelUpService` by adding:
-
-    ```cpp
-    [[ServiceManager sharedServiceManager]
-      registerService:[Cocos2dXSoomlaHighway sharedCocos2dXSoomlaHighway]];
-
-    [[ServiceManager sharedServiceManager]
-      registerService:[StoreService sharedStoreService]];
-
-    [[ServiceManager sharedServiceManager]
-      registerService:[ProfileService sharedProfileService]];
-
-    [[ServiceManager sharedServiceManager]
-      registerService:[LevelUpService sharedLevelUpService]];
-    ```
-
-    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
-
-7. Make sure you have these 7 Frameworks linked to your XCode project:
+6. Make sure you have these 7 Frameworks linked to your XCode project:
 
   - Security
   - libsqlite3.0.dylib
@@ -182,7 +148,7 @@ In your XCode project, perform the following steps:
   - SystemConfguration
   - AdSupport
 
-8. Connect the Profile module to a social network provider:
+7. Connect the Profile module to a social network provider:
 
   - [Facebook](/cocos2dx/profile/Profile_GettingStarted#facebook-for-ios)
 
@@ -258,42 +224,7 @@ That's it! Now all you have to do is build your XCode project and run your game.
 
     - Cocos2dxAndroidLevelUp.jar
 
-3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
-
-  ``` java
-  public Cocos2dxGLSurfaceView onCreateView() {
-    ...
-
-    // initialize services
-    final ServiceManager serviceManager = ServiceManager.getInstance();
-    serviceManager.setActivity(this);
-    serviceManager.setGlSurfaceView(glSurfaceView);
-
-    serviceManager.registerService(Cocos2dXHighwayService.getInstance());
-    serviceManager.registerService(StoreService.getInstance());
-    serviceManager.registerService(ProfileService.getInstance());
-    serviceManager.registerService(LevelUpService.getInstance());
-    ...
-  }
-  ```
-
-4. Override `onPause`, `onResume`:
-
-  ``` java
-  @Override
-  protected void onPause() {
-      super.onPause();
-      ServiceManager.getInstance().onPause();
-  }
-
-  @Override
-  protected void onResume() {
-      ServiceManager.getInstance().onResume();
-      super.onResume();
-  }
-  ```
-
-5. Update your `AndroidManifest.xml`:
+4. Update your `AndroidManifest.xml`:
 
   ``` xml
   <uses-permission android:name="android.permission.INTERNET"/>
@@ -316,13 +247,13 @@ That's it! Now all you have to do is build your XCode project and run your game.
   </application>
   ```
 
-6. Connect the Store module to your desired billing service:
+5. Connect the Store module to your desired billing service:
 
   - [Google Play](/cocos2dx/store/Store_GettingStarted#google-play)
 
   - [Amazon Appstore](/cocos2dx/store/Store_GettingStarted#amazon)
 
-7. Connect the Profile module to a social network provider:
+6. Connect the Profile module to a social network provider:
 
   - [Facebook](/cocos2dx/profile/Profile_GettingStarted#facebook-for-android)
 
@@ -347,10 +278,10 @@ And that's it! You have in-app purchasing, social engagement, and game architect
 
 Below is a short example of how to initialize SOOMLA's modules. We suggest you read about the different modules and their entities in SOOMLA's Knowledge Base: [Store](/cocos2dx/store/Store_Model), [Profile](/cocos2dx/profile/Profile_MainClasses), and [LevelUp](/cocos2dx/levelup/Levelup_Model).
 
-###IStoreAssets
+###CCStoreAssets
 
 ```cpp
-/** ExampleAssets (your implementation of IStoreAssets) **/
+/** ExampleAssets (your implementation of CCStoreAssets) **/
 CCVirtualCurrency *coinCurrency = CCVirtualCurrency::create(
   CCString::create("Coins"),
   CCString::create(""),
@@ -413,26 +344,22 @@ CCMission *mission = CCBalanceMission::create(
 // Add 5 levels to the main world with the gate, score, and mission templates we just created.
 mainWorld->batchAddLevelsWithTemplates(5, gate, score, mission);
 
+/** Set the custom secret **/
+soomla::CCSoomla::initialize("ExampleCustomSecret");
+
 /** Initialize Highway **/
 soomla::CCSoomlaHighway::initShared(__String::create("yourGameKey"), __String::create("yourEnvKey"));
 
 /** Set up and initialize Core, Store, Profile, and LevelUp **/
-ExampleAssets *assets = MuffinRushAssets::create();
-
-__Dictionary *commonParams = __Dictionary::create();
-commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
+ExampleAssets *assets = ExampleAssets::create();
 
 __Dictionary *storeParams = __Dictionary::create();
 storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
 
+soomla::CCSoomlaStore::initialize(assets, storeParams);
+
 __Dictionary *profileParams = __Dictionary::create();
+soomla::CCSoomlaProfile::initialize(profileParams);
 
-soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-
-soomla::CCStoreService::initShared(assets, storeParams);
-
-soomla::CCProfileService::initShared(profileParams);
-
-soomla::CCLevelUpService::initShared();
-soomla::CCLevelUp::getInstance()->initialize(mainWorld, NULL);
+soomla::CCSoomlaLevelUp::getInstance()->initialize(mainWorld, NULL);
 ```
