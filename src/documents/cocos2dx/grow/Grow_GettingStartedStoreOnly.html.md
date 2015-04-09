@@ -28,29 +28,47 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
 
   ![](/img/tutorial_img/cocos_grow/folder_structure.png "Folder Structure")
 
-4. Create your own implementation of `CCStoreAssets` that will represent the assets in your specific game. For a brief example, refer to the example below. For more details refer to the cocos2dx-store [Getting Started](/cocos2dx/store/Store_GettingStarted).
+3. Create your own implementation of `CCStoreAssets` that will represent the assets in your specific game. For a brief example, refer to the example below. For more details refer to the cocos2dx-store [Getting Started](/cocos2dx/store/Store_GettingStarted).
 
-5. Implement your `CCStoreEventHandler` in order to be notified about in-app purchase related events. Refer to the [Event Handling](/cocos2dx/store/Store_Events) section for more information.
-
-6. Make sure to include the `Cocos2dxStore.h` header whenever you use any of the *cocos2dx-store* functions:
+4. Make sure to include the `Cocos2dxStore.h` header whenever you use any of the *cocos2dx-store* functions:
 
     ```cpp
     #include "Cocos2dxStore.h"
     ```
 
-7. Add an instance of your event handler to `CCStoreEventDispatcher` after `CCStoreService` initialization:
+5. Initialize `CCSoomla` and `CCSoomlaStore`. Subscribe to any store events, refer to the [Event Handling](/cocos2dx/store/Store_Events) section for more information:
 
-    ```cpp
-    soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(handler);
+    ``` cpp
+    soomla::CCSoomla::initialize("ExampleCustomSecret");
+
+    YourImplementationAssets *assets = YourImplementationAssets::create();
+
+    __Dictionary *storeParams = __Dictionary::create();
+     storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
+     storeParams->setObject(__Bool::create(true), "testPurchases");
+     storeParams->setObject(__Bool::create(true), "SSV");
+
+    soomla::CCSoomlaStore::initialize(assets, storeParams);
     ```
 
-8. In your `AppDelegate.cpp` include `Cocos2dxHighway.h`:
+    - *Custom Secret* - is an encryption secret you provide that will be used to secure your data.
+
+    - *Android Public Key* - is the public key given to you from Google. (iOS doesn't have a public key).
+
+    - *Test Purchases* - allows testing IAP on Google Play. (iOS doesn't have this functionality).
+
+    - *SSV* - enables server-side receipt verification. (Android doesn't have this functionality).
+
+    <div class="warning-box">Choose the secret wisely. You can't change it after you launch your game!
+  	Initialize `CCSoomlaStore` ONLY ONCE when your application loads.</div>
+
+6. In your `AppDelegate.cpp` include `Cocos2dxHighway.h`:
 
     ```cpp
     #include "Cocos2dxHighway.h"
     ```
 
-9. Initialize `CCHighwayService` with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la).
+7. Initialize `CCSoomlaHighway` with the "Game Key" and "Env Key" given to you in the [dashboard](http://dashboard.soom.la).
 
   ``` cpp
   soomla::CCSoomlaHighway::initShared(
@@ -61,30 +79,11 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
   ![alt text](/img/tutorial_img/cocos_grow/dashboardKeys.png "Keys")
 
   <div class="info-box">Note: SOOMLA modules should be initialized in this order: core, highway, store
-  <br>Or in other words - `CCServiceManager`, `CCHighwayService` `CCStoreService`</div>
+  <br>Or in other words - `CCSoomla`, `CCSoomlaHighway` `CCSoomlaStore`</div>
 
-10. Initialize `CCServiceManager`, `CCStoreService`, `CCStoreAssets` (the the class you just created), a `customSecret` and other params.
-
-  - **Custom Secret** is an encryption secret you provide that will be used to secure your data. **NOTE:** Choose this secret wisely, you can't change it after you launch your game!
-
-  - **Android Public Key** - is the public key given to you from Google. (iOS doesn't have a public key).
-
-  ``` cpp
-  __Dictionary *commonParams = __Dictionary::create();
-  commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-  soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-
-  // `assets` should implement the `IStoreAssets` interface
-  // and should include your entire virtual economy
-  __Dictionary *storeParams = __Dictionary::create();
-  storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
-  soomla::CCStoreService::initShared(assets, storeParams);
-  ```
-
-11. According to your target platform (iOS or Android) go over the platform specific instructions below.  Once your app is running, you can go back to the [GROW dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
+8. According to your target platform (iOS or Android) go over the platform specific instructions below.  Once your app is running, you can go back to the [GROW dashboard](http://dashboard.soom.la) to verify the integration. Just refresh the page, and the environments tab should appear (be patient, this step can take a few minutes).
 
   ![alt text](/img/tutorial_img/unity_grow/verifyIntegration.png "Verify Integration")
-
 
 <br>
 <div class="info-box">The next steps are different according to which native platform you are building for.</div>
@@ -93,7 +92,7 @@ Get started with SOOMLA's Grow. Go to the [GROW dashboard](http://dashboard.soom
 
 In your XCode project, perform the following steps:
 
-1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder).
+1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder, make sure to check "create group").
 
 2. For each of the following XCode projects:
 
@@ -113,12 +112,10 @@ In your XCode project, perform the following steps:
 
   NOTE: This article assumes you have a `cocos2d` folder under your project folder which either contains the Cocos2d-x framework, or links to to its root folder.
 
-  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/Soomla`
-  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/build/ios/headers`
   - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
   - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
   - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
-  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
+  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-highway/Soomla`
 
   ![alt text](/img/tutorial_img/cocos_grow/headersSO.png "Header search paths")
 
@@ -131,28 +128,7 @@ In your XCode project, perform the following steps:
 
   ![alt text](/img/tutorial_img/ios_getting_started/linkerFlags.png "Linker Flags")
 
-6. To register services on the native application (`AppController`):
-
-  a. Import the following headers:
-    ```cpp
-    #import "ServiceManager.h"
-    #import "Cocos2dXSoomlaHighway.h"
-    #import "StoreService.h"
-    ```
-
-  b. Register the native `Cocos2dXSoomlaHighway` and `StoreService`` by adding:
-
-    ```cpp
-    [[ServiceManager sharedServiceManager]
-      registerService:[Cocos2dXSoomlaHighway sharedCocos2dXSoomlaHighway]];
-
-    [[ServiceManager sharedServiceManager]
-      registerService:[StoreService sharedStoreService]];
-    ```
-
-    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
-
-7. Make sure you have these 7 Frameworks linked to your XCode project:
+6. Make sure you have these 7 Frameworks linked to your XCode project:
 
   - Security
   - libsqlite3.0.dylib
@@ -208,63 +184,20 @@ That's it! Now all you have to do is build your XCode project and run your game.
 
     - Cocos2dxAndroidStore.jar
 
-3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
-
-  ``` java
-  public Cocos2dxGLSurfaceView onCreateView() {
-    ...
-
-    // initialize services
-    final ServiceManager serviceManager = ServiceManager.getInstance();
-    serviceManager.setActivity(this);
-    serviceManager.setGlSurfaceView(glSurfaceView);
-
-    serviceManager.registerService(Cocos2dXHighwayService.getInstance());
-    serviceManager.registerService(StoreService.getInstance());
-    ...
-  }
-  ```
-
-4. Override `onPause`, `onResume`:
-
-  ``` java
-  @Override
-  protected void onPause() {
-      super.onPause();
-      ServiceManager.getInstance().onPause();
-  }
-
-  @Override
-  protected void onResume() {
-      ServiceManager.getInstance().onResume();
-      super.onResume();
-  }
-  ```
-
-5. Update your `AndroidManifest.xml`:
+3. Update your `AndroidManifest.xml`:
 
   ``` xml
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="com.android.vending.BILLING"/>
 
-  <!-- optional: required for uploadImage from SD card -->
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
   <application
             ...
             android:name="com.soomla.SoomlaApp">
-
-    <receiver android:name="com.soomla.highway.net.NetworkStateReceiver">
-      <intent-filter>
-        <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-      </intent-filter>
-    </receiver>
-
   </application>
   ```
 
-6. Connect the Store module to your desired billing service:
+4. Connect the Store module to your desired billing service:
 
   - [Google Play](/cocos2dx/store/Store_GettingStarted#google-play)
 
@@ -277,7 +210,7 @@ That's it! Don't forget to run the **build_native.py** script so that SOOMLA sou
 Below is a short example of how to initialize SOOMLA's modules. We suggest you read about the different modules and their entities in SOOMLA's [Knowledge Base](/cocos2dx).
 
 ``` cpp
-/** ExampleAssets (your implementation of IStoreAssets) **/
+/** ExampleAssets (your implementation of CCStoreAssets) **/
 CCVirtualCurrency *coinCurrency = CCVirtualCurrency::create(
   CCString::create("Coins"),
   CCString::create(""),
@@ -309,18 +242,17 @@ CCVirtualGood *shieldGood = CCSingleUseVG::create(
 <br>
 
 ``` cpp
-soomla::CCHighwayService::initShared(__String::create("YOUR MASTER KEY"));
+/** Set the custom secret **/
+soomla::CCSoomla::initialize("ExampleCustomSecret");
 
+/** Initialize Highway **/
+soomla::CCSoomlaHighway::initShared(__String::create("yourGameKey"),
+                                    __String::create("yourEnvKey"));
 
-ExampleAssets *assets = MuffinRushAssets::create();
-
-__Dictionary *commonParams = __Dictionary::create();
-commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
+ExampleAssets *assets = ExampleAssets::create();
 
 __Dictionary *storeParams = __Dictionary::create();
 storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
 
-soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-
-soomla::CCStoreService::initShared(assets, storeParams);
+soomla::CCSoomlaStore::initialize(assets, storeParams);
 ```

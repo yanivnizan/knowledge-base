@@ -237,13 +237,6 @@ That's it! Now all you have to do is build your XCode project and run your game.
   <application
             ...
             android:name="com.soomla.SoomlaApp">
-
-    <receiver android:name="com.soomla.highway.net.NetworkStateReceiver">
-      <intent-filter>
-        <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-      </intent-filter>
-    </receiver>
-
   </application>
   ```
 
@@ -348,7 +341,8 @@ mainWorld->batchAddLevelsWithTemplates(5, gate, score, mission);
 soomla::CCSoomla::initialize("ExampleCustomSecret");
 
 /** Initialize Highway **/
-soomla::CCSoomlaHighway::initShared(__String::create("yourGameKey"), __String::create("yourEnvKey"));
+soomla::CCSoomlaHighway::initShared(__String::create("yourGameKey"),
+                                    __String::create("yourEnvKey"));
 
 /** Set up and initialize Core, Store, Profile, and LevelUp **/
 ExampleAssets *assets = ExampleAssets::create();
