@@ -24,300 +24,460 @@ cocos2dx-store allows you to subscribe to events, be notified when they occur, a
 
 Events are triggered when SOOMLA wants to notify you about different things that happen involving Store operations.
 
-For example, when a user purchases a Market item, an `onMarketPurchaseStarted` is fired as a result.
+For example, when a user starts a Market item purchase, an `EVENT_MARKET_PURCHASE_STARTED` event is fired as a result.
 
 
 ## Observing & Handling Events
 
-The `CCStoreEventDispatcher` class is where all events go through. To handle various events, create your own event handler, a class that implements `CCStoreEventHandler`, and add it to the `CCStoreEventDispatcher` class:
+SOOMLA uses the Cocos2d-x facilities to dispatch its own custom events.
+The names of such events are defined in `CCStoreConsts`, the meta-data of the event is held in a `__Dictionary`. You can subscribe to any event from anywhere in your code.
 
-``` cpp
-soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(storeEventHandler);
+When handling the event you can extract meta-data from the dictionary using pre-defined keys, which are also defined in `CCStoreConsts`.
+
+### Cocos2d-x v3 Events
+
+** Subscribing **
+
+Subscribe to events through the Cocos2d-x  [`EventDispatcher`](http://www.cocos2d-x.org/wiki/EventDispatcher_Mechanism):
+
+```cpp
+cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(soomla::CCStoreConsts::EVENT_ITEM_PURCHASED, CC_CALLBACK_1(ExampleScene::onItemPurchased, this));
 ```
 
-## StoreEvents
+** Handling **
 
-###`ExampleEventHandler.h`
+Handle the event through your own custom function:
 
-``` cpp
-class ExampleEventHandler : public soomla::CCStoreEventHandler {
-
-  public:
-
-    /**
-     Handles an `onSoomlaStoreInitialized` event, which is triggered when
-     SoomlaStore is initialized.
-     */
-    virtual void onSoomlaStoreInitialized();
-
-    /**
-     Handles an `onBillingSupported` event, which is triggered when SOOMLA
-     knows that billing IS supported on the device.
-     */
-    virtual void onBillingSupported();
-
-    /**
-     Handles an `onBillingNotSupported` event, which is triggered when SOOMLA
-     knows that billing is NOT supported on the device.
-     */
-    virtual void onBillingNotSupported();
-
-    /**
-     Handles an `onCurrencyBalanceChanged` event, which is triggered when the
-     balance of a specific virtual currency has changed.
-     @param virtualCurrency The currency whose balance has changed.
-     @param balance The balance of the currency.
-     @param amountAdded The amount added to the currency.
-     */
-    virtual void onCurrencyBalanceChanged(
-      soomla::CCVirtualCurrency *virtualCurrency,
-      int balance,
-      int amountAdded);
-
-    /**
-     Handles an `onGoodBalanceChanged` event, which is triggered when the
-     balance of a specific virtual good has changed.
-     @param virtualGood The good whose balance has changed.
-     @param balance The balance of the good.
-     @param amountAdded The amount added to the good.
-     */
-    virtual void onGoodBalanceChanged(
-      soomla::CCVirtualGood *virtualGood,
-      int balance,
-      int amountAdded);
-
-    /**
-     Handles an `onGoodEquipped` event, which is triggered when a specific
-     equippable virtual good has been equipped.
-     @param equippableVG The good that is being equipped.
-     */
-    virtual void onGoodEquipped(
-      soomla::CCEquippableVG *equippableVG);
-
-    /**
-     Handles an `onGoodUnEquipped` event, which is triggered when a specific
-     equippable virtual good has been unequipped.
-     @param equippableVG The good that is being unequipped.
-     */
-    virtual void onGoodUnEquipped(soomla::CCEquippableVG *equippableVG);
-
-    /**
-     Handles an `onGoodUpgrade` event, which is triggered when a specific
-     virtual good has been upgraded.
-     @param virtualGood The virtual good that is being upgraded.
-     @param upgradeVG The upgrade.
-     */
-    virtual void onGoodUpgrade(
-      soomla::CCVirtualGood *virtualGood,
-      soomla::CCUpgradeVG *upgradeVG);
-
-    /**
-     Handles an `onItemPurchased` event, which is triggered when when a specific
-     virtual good has been purchased.
-     @param purchasableVirtualItem The item being purchased.
-     */
-    virtual void onItemPurchased(
-      soomla::CCPurchasableVirtualItem *purchasableVirtualItem,
-      cocos2d::__String *payload);
-
-    /**
-     Handles an `onItemPurchaseStarted` event, which is triggered when a
-     purchase process has started.
-     @param purchasableVirtualItem The item whose purchase has started.
-     */
-    virtual void onItemPurchaseStarted(
-      soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
-    /**
-     Handles an `onMarketPurchaseStarted` event, which is triggered when a
-     purchase process has started, where the item is being purchased from
-     the store (App Store, Google Play, etc..).
-     @param purchasableVirtualItem The market item whose purchase has
-     started.
-     */
-    virtual void onMarketPurchaseStarted(
-      soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
-    /**
-     Handles an `onMarketPurchase` event, which is triggered when a market item
-     from the store (App Store, Google Play, etc..) has been purchased.
-     @param purchasableVirtualItem The market item being purchased.
-     @param receiptUrl Receipt URL from the store.
-     */
-    virtual void onMarketPurchase(
-      soomla::CCPurchasableVirtualItem *purchasableVirtualItem,
-      cocos2d::__String *token,
-      cocos2d::__String *payload);
-
-    /**
-     Handles an `onMarketPurchaseVerification` event, which is triggered when a
-     market purchase verification process has started.
-     @param purchasableVirtualItem The market item whose purchase is being
-            verified.
-     */
-    virtual void onMarketPurchaseVerification(
-      soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
-    /**
-     Handles an `onMarketPurchaseCancelled` event, which is triggered when a
-     market (App Store, Google Play, etc..) purchase has been cancelled.
-     @param purchasableVirtualItem the item whose purchase is being
-            cancelled.
-     */
-    virtual void onMarketPurchaseCancelled(
-      soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
-    /**
-     Handles an `onRestoreTransactionsStarted` event, which is triggered when a
-     restore transactions process has started.
-     */
-    virtual void onRestoreTransactionsStarted();
-
-    /**
-     Handles an `onRestoreTransactionsFinished` event, which is triggered when a
-     restore transactions process has finished.
-     @param success Indicates if the restore transactions process finished
-            successfully.
-     */
-    virtual void onRestoreTransactionsFinished(bool success);
-
-    /**
-     Handles an `onMarketItemsRefreshStarted` event, which is triggered when a market
-     item refreshed process has started.
-     */
-    virtual void onMarketItemsRefreshStarted();
-
-    /**
-     Handles an `onMarketItemsRefreshed` event, which is triggered when a market
-     item refreshed process has completed.
-     */
-    virtual void onMarketItemsRefreshed(cocos2d::__Array *virtualItems);
-
-    /**
-     Handles an `onUnexpectedErrorInStore` event, which is triggered when an
-     unexpected error occurs in the store.
-     */
-    virtual void onUnexpectedErrorInStore(cocos2d::__String *errorMessage);
-
-};
+```cpp
+void ExampleScene::onItemPurchased(cocos2d::EventCustom *event) {
+  cocos2d::__Dictionary *eventData = (cocos2d::__Dictionary *)event->getUserData();
+  // ... get meta-data information from eventData
+}
 ```
 
-#### Android Specific Events
 
-``` cpp
-/**
- Handles an `onMarketRefund` event, which is triggered when a market item is
- being refunded.
- @param purchasableVirtualItem The item that is being refunded in the market.
- */
-virtual void onMarketRefund(CCPurchasableVirtualItem *purchasableVirtualItem);
+### Cocos2d-x v2 Events
 
-/**
- Handles an `onIabServiceStarted` event, which is triggered when in-app
- billing service is started.
- */
-virtual void onIabServiceStarted();
+** Subscribing **
 
-/**
- Handles an `onIabServiceStopped` event, which is triggered when in-app
- billing service is stopped.
- */
-virtual void onIabServiceStopped();
+Subscribe to events through the Cocos2d-x `CCNotificationCenter`:
+
+```cpp
+cocos2d::CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(ExampleScene::onItemPurchased), soomla::CCStoreConsts::EVENT_ITEM_PURCHASED, NULL);
 ```
 
-###`ExampleEventHandler.cpp`
+** Handling **
 
-``` cpp
+Handle the event through your own custom function:
 
-void ExampleEventHandler::onBillingNotSupported() {
-    // ... your game specific implementation here ...
+```cpp
+void ExampleScene::onItemPurchased(cocos2d::CCDictionary *eventData) {
+  // ... get meta-data information from eventData
 }
+```
 
-void ExampleEventHandler::onBillingSupported() {
-    // ... your game specific implementation here ...
+## Store Events
+
+Below we provide a list of all events in Store, their handling examples are written for v3, but it's easy to convert them to v2 dialect, see how above.
+
+### EVENT_SOOMLA_STORE_INITIALIZED
+
+This event is triggered when the Soomla Store module is initialized and ready.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_SOOMLA_STORE_INITIALIZED, CC_CALLBACK_1(Example::onSoomlaStoreInitialized, this));
+
+void Example::onSoomlaStoreInitialized(EventCustom *event) {
+  // ... your game specific implementation here ...
 }
+```
 
-void ExampleEventHandler::onCurrencyBalanceChanged(CCVirtualCurrency *virtualCurrency, int balance, int amountAdded) {
-    // ... your game specific implementation here ...
-}
+**NOTE:** If you want to observe the `EVENT_SOOMLA_STORE_INITIALIZED` event you have to set up the listener before you initialize `CCSoomlaStore`. So, put the following code:
 
-void ExampleEventHandler::onGoodBalanceChanged(CCVirtualGood *virtualGood, int balance, int amountAdded) {
-    // ... your game specific implementation here ...
-}
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_SOOMLA_STORE_INITIALIZED, CC_CALLBACK_1(Example::onSoomlaStoreInitialized, this));
+```
 
-void ExampleEventHandler::onGoodEquipped(CCEquippableVG *equippableVG) {
-    // ... your game specific implementation here ...
-}
+before
 
-void ExampleEventHandler::onGoodUnEquipped(CCEquippableVG *equippableVG) {
-    // ... your game specific implementation here ...
-}
+```cpp
+soomla::CCSoomlaStore::initialize(assets, storeParams);
+```
 
-void ExampleEventHandler::onGoodUpgrade(CCVirtualGood *virtualGood, CCUpgradeVG *upgradeVG) {
-    // ... your game specific implementation here ...
-}
+### EVENT_CURRENCY_BALANCE_CHANGED
 
-void ExampleEventHandler::onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *payload) {
-    // ... your game specific implementation here ...
-}
+This event is triggered when the balance of a specific currency has changed.
 
-void ExampleEventHandler::onItemPurchaseStarted(CCPurchasableVirtualItem *purchasableVirtualItem) {
-    // ... your game specific implementation here ...
-}
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_CURRENCY_BALANCE_CHANGED, CC_CALLBACK_1(Example::onCurrencyBalanceChanged, this));
 
-void ExampleEventHandler::onMarketPurchaseCancelled(CCPurchasableVirtualItem *purchasableVirtualItem) {
-    // ... your game specific implementation here ...
-}
+void Example::onCurrencyBalanceChanged(EventCustom *event) {
+    // DICT_ELEMENT_CURRENCY      - the currency whose balance was changed
+    // DICT_ELEMENT_BALANCE       - the balance of the currency after the change
+    // DICT_ELEMENT_AMOUNT_ADDED  - the amount that was added to the currency balance
+    //    (in case the number of currencies was removed this will be a negative value)
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    CCVirtualCurrency *virtualCurrency = dynamic_cast<CCVirtualCurrency *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_CURRENCY));
+    __Integer *balance = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE));
+    __Integer *amountAdded = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_AMOUNT_ADDED));
 
-void ExampleEventHandler::onMarketPurchase(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *token, cocos2d::__String *payload) {
-    // ... your game specific implementation here ...
-}
-
-void ExampleEventHandler::onMarketPurchaseStarted(CCPurchasableVirtualItem *purchasableVirtualItem) {
-    // ... your game specific implementation here ...
-}
-
-void ExampleEventHandler::onMarketPurchaseVerification(CCPurchasableVirtualItem *purchasableVirtualItem) {
-    // ... your game specific implementation here ...
-}
-
-void ExampleEventHandler::onRestoreTransactionsStarted() {
-    // ... your game specific implementation here ...
-}
-
-void ExampleEventHandler::onRestoreTransactionsFinished(bool success) {
-    // ... your game specific implementation here ...
-}
-
-void ExampleEventHandler::onUnexpectedErrorInStore(cocos2d::__String *errorMessage) {
-    // ... your game specific implementation here ...
-}
-
-void ExampleEventHandler::onSoomlaStoreInitialized() {
-    // ... your game specific implementation here ...
-}
-
-void ExampleEventHandler::onMarketItemsRefreshed(cocos2d::__Array *virtualItems) {
-    // ... your game specific implementation here ...
-}
-
-void ExampleEventHandler::onMarketItemsRefreshStarted() {
     // ... your game specific implementation here ...
 }
 ```
 
-#### Android Specific Events
+### EVENT_GOOD_BALANCE_CHANGED
 
-``` cpp
-void ExampleEventHandler::onMarketRefund(CCPurchasableVirtualItem *purchasableVirtualItem) {
-    // ... your game specific implementation here ...
+This event is triggered when the balance of a specific virtual good has changed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_BALANCE_CHANGED, CC_CALLBACK_1(Example::onGoodBalanceChanged, this));
+
+void Example::onGoodBalanceChanged(EventCustom *event) {
+  // DICT_ELEMENT_GOOD          - the virtual good whose balance was changed
+  // DICT_ELEMENT_BALANCE       - the balance of the currency after the change
+  // DICT_ELEMENT_AMOUNT_ADDED  - the amount that was added to the currency balance
+  //    (in case the number of currencies was removed this will be a negative value)
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCVirtualGood *good = dynamic_cast<CCVirtualGood *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_GOOD));
+  __Integer *balance = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE));
+  __Integer *amountAdded = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_AMOUNT_ADDED));
+
+  // ... your game specific implementation here ...
 }
+```
 
-void ExampleEventHandler::onIabServiceStarted() {
-    // ... your game specific implementation here ...
+### EVENT_MARKET_PURCHASE_STARTED
+
+This event is triggered when a market purchase operation has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_MARKET_PURCHASE_STARTED, CC_CALLBACK_1(Example::onMarketPurchaseStarted, this));
+
+void Example::onMarketPurchaseStarted(EventCustom *event) {
+  // DICT_ELEMENT_PURCHASABLE - the PurchasableVirtualItem whose purchase
+  //                            operation has just started
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCPurchasableVirtualItem *purchasable = dynamic_cast<CCPurchasableVirtualItem *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_PURCHASABLE));
+
+  // ... your game specific implementation here ...
 }
+```
 
-void ExampleEventHandler::onIabServiceStopped() {
-    // ... your game specific implementation here ...
+### EVENT_MARKET_PURCHASE
+
+This event is triggered when a market purchase operation has completed successfully.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_MARKET_PURCHASE, CC_CALLBACK_1(Example::onMarketPurchase, this));
+
+void Example::onMarketPurchase(EventCustom *event) {
+  // DICT_ELEMENT_PURCHASABLE       - the PurchasableVirtualItem that was just purchased
+  // DICT_ELEMENT_TOKEN             - The purchase token
+  // DICT_ELEMENT_DEVELOPERPAYLOAD  - a text that you can give when you initiate the
+  //    purchase operation and you want to receive back upon completion
+  // Android only:
+  // DICT_ELEMENT_ORIGINAL_JSON     - Original JSON of the purchase (Google Only)
+  // DICT_ELEMENT_SIGNATURE         - Purchase signature (Google Only)
+  // DICT_ELEMENT_USER_ID           - The purchasing user ID (Amazon Only)
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCPurchasableVirtualItem *purchasable = dynamic_cast<CCPurchasableVirtualItem *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_PURCHASABLE));
+  __String *token = dynamic_cast<__String *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_TOKEN));
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_DEVELOPERPAYLOAD));
+
+  // Android only
+  __String *originalJSON = dynamic_cast<__String *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_ORIGINAL_JSON));
+  __String *signature = dynamic_cast<__String *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_SIGNATURE));
+  __String *userId = dynamic_cast<__String *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_USER_ID));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_MARKET_PURCHASE_CANCELED
+
+This event is triggered when a market purchase operation has been cancelled by the user.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_MARKET_PURCHASE_CANCELED, CC_CALLBACK_1(Example::onMarketPurchaseCancelled, this));
+
+void Example::onMarketPurchaseCancelled(EventCustom *event) {
+  // DICT_ELEMENT_PURCHASABLE - the PurchasableVirtualItem whose purchase operation
+  //                            was cancelled
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCPurchasableVirtualItem *purchasable = dynamic_cast<CCPurchasableVirtualItem *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_PURCHASABLE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_MARKET_PURCHASE_VERIFICATION
+
+This event is triggered when a market purchase verification process has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_MARKET_PURCHASE_VERIFICATION, CC_CALLBACK_1(Example::onMarketPurchaseVerification, this));
+
+void Example::onMarketPurchaseVerification(EventCustom *event) {
+  // DICT_ELEMENT_PURCHASABLE - The PurchasableVirtualItem item whose purchase is
+  //                            being verified
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCPurchasableVirtualItem *purchasable = dynamic_cast<CCPurchasableVirtualItem *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_PURCHASABLE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_MARKET_ITEMS_REFRESH_STARTED
+
+This event is triggered when a refresh market items operation has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_MARKET_ITEMS_REFRESH_STARTED, CC_CALLBACK_1(Example::onMarketItemsRefreshStarted, this));
+
+void Example::onMarketItemsRefreshStarted(EventCustom *event) {
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_MARKET_ITEMS_REFRESHED
+
+This event is triggered when a refresh market items operation has finished.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_MARKET_ITEMS_REFRESHED, CC_CALLBACK_1(Example::onMarketItemsRefreshed, this));
+
+void Example::onMarketItemsRefreshed(EventCustom *event) {
+  // DICT_ELEMENT_MARKET_ITEMS - the list of Market items that was fetched from the Market
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  __Array *marketItems = dynamic_cast<__Array *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_MARKET_ITEMS));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_MARKET_ITEMS_REFRESH_FAILED
+
+This event is triggered when a market item refreshed process has failed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_MARKET_ITEMS_REFRESH_FAILED, CC_CALLBACK_1(Example::onMarketItemsRefreshFailed, this));
+
+void Example::onMarketItemsRefreshFailed(EventCustom *event) {
+  // DICT_ELEMENT_ERROR_MESSAGE - The error which caused the failure
+
+  __Dictionary *eventData = (__Dictionary *)(event->getUserData());
+  __String *errorMessage = dynamic_cast<__String *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_ERROR_MESSAGE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_RESTORE_TRANSACTION_STARTED
+
+This event is triggered when a restore transactions operation has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_RESTORE_TRANSACTION_STARTED, CC_CALLBACK_1(Example::onMarketItemsRefreshStarted, this));
+
+void Example::onMarketItemsRefreshStarted(EventCustom *event) {
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_RESTORE_TRANSACTION_FINISHED
+
+This event is triggered when a restore transactions operation has completed successfully.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_RESTORE_TRANSACTION_FINISHED, CC_CALLBACK_1(Example::onRestoreTransactionsFinished, this));
+
+void Example::onRestoreTransactionsFinished(EventCustom *event) {
+  // DICT_ELEMENT_SUCCESS - true if the restore transactions operation has succeeded
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  __Bool *success = dynamic_cast<__Bool *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_SUCCESS));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_ITEM_PURCHASE_STARTED
+
+This event is triggered when an item purchase operation has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_ITEM_PURCHASE_STARTED, CC_CALLBACK_1(Example::onItemPurchaseStarted, this));
+
+void Example::onItemPurchaseStarted(EventCustom *event) {
+  // DICT_ELEMENT_PURCHASABLE - the PurchasableVirtualItem whose purchase operation has
+  //                            just started
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCPurchasableVirtualItem *purchasable = dynamic_cast<CCPurchasableVirtualItem *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_PURCHASABLE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_ITEM_PURCHASED
+
+This event is triggered when an item purchase operation has completed successfully.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_ITEM_PURCHASED, CC_CALLBACK_1(Example::onItemPurchased, this));
+
+void Example::onItemPurchased(EventCustom *event) {
+  // DICT_ELEMENT_PURCHASABLE       - the PurchasableVirtualItem that was just purchased
+  // DICT_ELEMENT_DEVELOPERPAYLOAD  - a text that you can give when you initiate the purchase
+  //    operation and you want to receive back upon completion
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCPurchasableVirtualItem *purchasable = dynamic_cast<CCPurchasableVirtualItem *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_PURCHASABLE));
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_DEVELOPERPAYLOAD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GOOD_EQUIPPED
+
+This event is triggered when a virtual good equipping operation has been completed successfully.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_EQUIPPED, CC_CALLBACK_1(Example::onGoodEquipped, this));
+
+void Example::onGoodEquipped(EventCustom *event) {
+  // DICT_ELEMENT_EQUIPPABLEVG - the virtual good that was just equipped
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCEquippableVG *equippable = dynamic_cast<CCEquippableVG *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_EQUIPPABLEVG));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GOOD_UNEQUIPPED
+
+This event is triggered when a virtual good un-equipping operation has been completed successfully.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_UNEQUIPPED, CC_CALLBACK_1(Example::onGoodUnEquipped, this));
+
+void Example::onGoodUnEquipped(EventCustom *event) {
+  // DICT_ELEMENT_EQUIPPABLEVG - the virtual good that was just unequipped
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCEquippableVG *equippable = dynamic_cast<CCEquippableVG *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_EQUIPPABLEVG));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GOOD_UPGRADE
+
+This event is triggered when a virtual good upgrading operation has been completed successfully.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_UPGRADE, CC_CALLBACK_1(Example::onGoodUpgrade, this));
+
+void Example::onGoodUpgrade(EventCustom *event) {
+  // DICT_ELEMENT_GOOD      - the virtual good that was just upgraded
+  // DICT_ELEMENT_UPGRADEVG - the upgrade after the operation completed
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCVirtualGood *good = dynamic_cast<CCVirtualGood *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_GOOD));
+  CCUpgradeVG *upgrade = dynamic_cast<CCUpgradeVG *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_UPGRADEVG));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_BILLING_SUPPORTED
+
+This event is triggered when the billing service is initialized and ready.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_BILLING_SUPPORTED, CC_CALLBACK_1(Example::onBillingSupported, this));
+
+void Example::onBillingSupported(EventCustom *event) {
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_BILLING_NOT_SUPPORTED
+
+This event is triggered when the billing service fails to initialize.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_BILLING_NOT_SUPPORTED, CC_CALLBACK_1(Example::onBillingNotSupported, this));
+
+void Example::onBillingNotSupported(EventCustom *event) {
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_UNEXPECTED_ERROR_IN_STORE
+
+This event is triggered an unexpected error occurs in the Store.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_UNEXPECTED_ERROR_IN_STORE, CC_CALLBACK_1(Example::onUnexpectedErrorInStore, this));
+
+void Example::onUnexpectedErrorInStore(EventCustom *event) {
+  // DICT_ELEMENT_ERROR_MESSAGE - the description of the error
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  __String *errorMessage = dynamic_cast<__String *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_ERROR_MESSAGE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### Android Specific Events
+
+#### EVENT_IAB_SERVICE_STARTED
+
+This event is triggered when the in-app billing service is started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_IAB_SERVICE_STARTED, CC_CALLBACK_1(Example::onIabServiceStarted, this));
+
+void Example::onIabServiceStarted(EventCustom *event) {
+  // ... your game specific implementation here ...
+}
+```
+
+#### EVENT_IAB_SERVICE_STOPPED
+
+This event is triggered when the in-app billing service is stopped.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_IAB_SERVICE_STOPPED, CC_CALLBACK_1(Example::onIabServiceStopped, this));
+
+void Example::onIabServiceStopped(EventCustom *event) {
+  // ... your game specific implementation here ...
+}
+```
+
+#### EVENT_MARKET_REFUND
+
+This event is triggered when a market refund operation has been completed successfully.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_MARKET_REFUND, CC_CALLBACK_1(Example::onMarketRefund, this));
+
+void Example::onMarketRefund(EventCustom *event) {
+  // DICT_ELEMENT_PURCHASABLE - the PurchasableVirtualItem to refund
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCPurchasableVirtualItem *purchasable = dynamic_cast<CCPurchasableVirtualItem *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_PURCHASABLE));
+
+  // ... your game specific implementation here ...
 }
 ```

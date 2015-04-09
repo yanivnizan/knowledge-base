@@ -53,7 +53,7 @@ CCUpgradeVG *firstUpgrade = soomla::CCStoreInfo::sharedStoreInfo()->getFirstUpgr
 
 ###Important Functions
 
-`buyItem(const char *itemId, CCSoomlaError **soomlaError)`
+`buyItem(const char *itemId, CCError **soomlaError)`
 
 Buys the item with the given `itemId` according to its purchase type - either with real money ($$$) or with other virtual items. Read more about `PurchaseTypes` in Economy Model.
 
@@ -61,12 +61,12 @@ Buys the item with the given `itemId` according to its purchase type - either wi
 
 ``` cpp
 //Buy a virtual item with itemId “blue_hat”:
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->buyItem("blue_hat", &soomlaError);
 ```
 <br>
 
-`giveItem(const char *itemId, int amount, CCSoomlaError **soomlaError)`
+`giveItem(const char *itemId, int amount, CCError **soomlaError)`
 
 Gives your user the given amount of the virtual item with the given item ID, and gets nothing in return. For example, when your user plays your game for the first time you can GIVE him 1000 free gems to start out with.
 
@@ -74,12 +74,12 @@ Gives your user the given amount of the virtual item with the given item ID, and
 
 ``` cpp
 //Give the user 10 units of the virtual currency with itemId“currency_coin”:
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->giveItem("currency_coin", 10, &soomlaError);
 ```
 <br>
 
-`takeItem(const char *itemId, int amount, CCSoomlaError **soomlaError)`
+`takeItem(const char *itemId, int amount, CCError **soomlaError)`
 
 Takes from your user the given amount of the virtual item with the given item ID. For example, when your user requests a refund you TAKE the item he/she is returning.
 
@@ -87,6 +87,6 @@ Takes from your user the given amount of the virtual item with the given item ID
 
 ``` cpp
 //Take 1 virtual good with itemId “green_hat”:
-CCSoomlaError *soomlaError = NULL;
+CCError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->takeItem("currency_coin", 1, &soomlaError);
 ```

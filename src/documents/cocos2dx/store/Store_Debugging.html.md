@@ -43,18 +43,7 @@ If you'd like to purchase an item with the item ID `huge_sword`, and check if al
 soomla::CCError *err;
 soomla::CCStoreInventory::sharedStoreInventory()->buyItem("huge_sword", &err);
 if (err != NULL) {
-    int code = err->getCode();
-    switch code {
-        case SOOMLA_EXCEPTION_ITEM_NOT_FOUND:
-            // itemNotFoundException was raised
-            break;
-        case SOOMLA_EXCEPTION_INSUFFICIENT_FUNDS:
-            // insufficienFundsException was raised
-            break;
-        case SOOMLA_EXCEPTION_NOT_ENOUGH_GOODS:
-            // notEnoughGoodsException was raised
-            break;
-    }
+    // ... handle error
 }
 ```
 

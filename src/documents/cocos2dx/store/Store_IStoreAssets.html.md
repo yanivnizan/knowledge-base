@@ -162,11 +162,11 @@ cocos2d::__Array *MuffinRushAssets::getCategories() {
 
 ```
 
-After you’ve implemented your version of `CCStoreAssets`, you’ll need to initialize `CCStoreService` with the implementation you just created (also explained in the [Getting Started](/cocos2dx/store/Store_GettingStarted) tutorial).
+After you’ve implemented your version of `CCStoreAssets`, you’ll need to initialize `CCSoomlaStore` with the implementation you just created (also explained in the [Getting Started](/cocos2dx/store/Store_GettingStarted) tutorial).
 
 ``` cpp
 ExampleAssets *assets = ExampleAssets::create();
-soomla::CCStoreService::initShared(assets, storeParams); // storeParams is explained in the
+soomla::CCSoomlaStore::initialize(assets, storeParams);  // storeParams is explained in the
                                                          // Getting Started tutorial
 ```
 

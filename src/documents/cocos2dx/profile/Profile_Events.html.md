@@ -22,292 +22,433 @@ Profile allows you to subscribe to events, be notified when they occur, and impl
 
 Events are triggered when SOOMLA wants to notify you about different things that happen involving Profile operations.
 
-For example, when a user performs a social action such as uploading a status, an `onSocialActionStartedEvent` is fired as a result.
+For example, when a user performs a social action such as uploading a status, an `EVENT_SOCIAL_ACTION_STARTED` event is fired as a result.
 
 
 ## Observing & Handling Events
 
-The `CCProfileEventDispatcher` class is where all events go through. See [CCProfileEventDispatcher](https://github.com/soomla/cocos2dx-profile/blob/master/Soomla/CCProfileEventDispatcher.cpp).
+SOOMLA uses the Cocos2d-x facilities to dispatch its own custom events.
+The names of such events are defined in `CCProfileConsts`, the meta-data of the event is held in a `__Dictionary`. You can subscribe to any event from anywhere in your code.
 
-To handle various events, create your own event handler (see example below) that implements `CCProfileEventHandler`, and add it to the `CCProfileEventDispatcher` class:
+When handling the event you can extract meta-data from the dictionary using pre-defined keys, which are also defined in `CCProfileConsts`.
 
-``` cpp
-CCMyEventHandler *myEventHandler = new CCMyEventHandler();
+### Cocos2d-x v3 Events
 
-soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(myEventHandler);
+** Subscribing **
+
+Subscribe to events through the Cocos2d-x  [`EventDispatcher`](http://www.cocos2d-x.org/wiki/EventDispatcher_Mechanism):
+
+```cpp
+cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(soomla::CCProfileConsts::EVENT_LOGIN_FINISHED, CC_CALLBACK_1(ExampleScene::onLoginFinished, this));
+```
+
+** Handling **
+
+Handle the event through your own custom function:
+
+```cpp
+void ExampleScene::onLoginFinished(cocos2d::EventCustom *event) {
+  cocos2d::__Dictionary *eventData = (cocos2d::__Dictionary *)event->getUserData();
+  // ... get meta-data information from eventData
+}
+```
+
+
+### Cocos2d-x v2 Events
+
+** Subscribing **
+
+Subscribe to events through the Cocos2d-x `CCNotificationCenter`:
+
+```cpp
+cocos2d::CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(ExampleScene::onLoginFinished), soomla::CCProfileConsts::EVENT_LOGIN_FINISHED, NULL);
+```
+
+** Handling **
+
+Handle the event through your own custom function:
+
+```cpp
+void ExampleScene::onLoginFinished(cocos2d::CCDictionary *eventData) {
+  // ... get meta-data information from eventData
+}
 ```
 
 ## Profile Events
 
-### `CCMyEventHandler.h`
+Below we provide a list of all events in Profile, their handling examples are written for v3, but it's easy to convert them to v2 dialect, see how above.
 
-``` cpp
-#include "CCProfileEventHandler.h"
+### EVENT_PROFILE_INITIALIZED
 
-class CCMyEventHandler: public soomla::CCProfileEventHandler {
+This event is triggered when Soomla Profile has been initialized.
 
-  public:
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_PROFILE_INITIALIZED, CC_CALLBACK_1(Example::onProfileInitialized, this));
 
-    // This event is triggered when Soomla Profile has been initialized.
-    virtual void onProfileInitialized();
-
-    // This event is triggered when the page for rating your app is opened.
-    virtual void onUserRatingEvent();
-
-    // This event is triggered when the user profile has been updated,
-    // after login.
-    virtual void onUserProfileUpdatedEvent(
-      CCUserProfile *userProfile);
-
-    // This event is triggered when logging into the social provider has started.
-    virtual void onLoginStarted(
-      CCProvider provider,
-      cocos2d::__String *payload);
-
-    // This event is triggered when logging into the social provider has finished
-    // successfully.
-    virtual void onLoginFinished(
-      CCUserProfile *userProfile,
-      cocos2d::__String *payload);
-
-    // This event is triggered when logging into the social provider has been cancelled.
-    virtual void onLoginCancelledEvent(
-      CCProvider provider,
-      cocos2d::__String *payload);
-
-    // This event is triggered when logging into the social provider has failed.
-    virtual void onLoginFailed(
-      CCProvider provider,
-      cocos2d::__String *errorDescription,
-      cocos2d::__String *payload);
-
-    // This event is triggered when logging out of the social provider has started.
-    virtual void onLogoutStarted(CCProvider provider);
-
-    // This event is triggered when logging out of the social provider has finished
-    // successfully.
-    virtual void onLogoutFinished(CCProvider provider);
-
-    // This event is triggered when logging out of the social provider has failed.
-    virtual void onLogoutFailed(
-      CCProvider provider,
-      cocos2d::__String *errorDescription);
-
-    // This event is triggered when a social action (like, post status, etc..)
-    // has started.
-    virtual void onSocialActionStartedEvent(
-      CCProvider provider,
-      CCSocialActionType socialActionType,
-      cocos2d::__String *payload);
-
-    // This event is triggered when a social action has finished successfully.
-    virtual void onSocialActionFinishedEvent(
-      CCProvider provider,
-      CCSocialActionType socialActionType,
-      cocos2d::__String *payload);
-
-    // This event is triggered when a social action has failed.
-    virtual void onSocialActionFailedEvent(
-      CCProvider provider,
-      CCSocialActionType socialActionType,
-      cocos2d::__String *errorDescription,
-      cocos2d::__String *payload);
-
-    // This event is triggered when fetching the contacts from the social provider
-    // has started.
-    virtual void onGetContactsStarted(
-      CCProvider provider,
-      cocos2d::__String *payload);
-
-    // This event is triggered when fetching the contacts from the social provider
-    // has finished successfully.
-    virtual void onGetContactsFinished(
-      CCProvider provider,
-      cocos2d::__Array *contactsDict,
-      cocos2d::__String *payload);
-
-    // This event is triggered when fetching the contacts from the social provider
-    // has failed.
-    virtual void onGetContactsFailed(
-      CCProvider provider,
-      cocos2d::__String *errorDescription,
-      cocos2d::__String *payload);
-
-    // This event is triggered when fetching the feed from the social provider
-    // has started.
-    virtual void onGetFeedStarted(
-      CCProvider provider,
-      cocos2d::__String *payload);
-
-    // This event is triggered when fetching the feed from the social provider
-    // has finished successfully.
-    virtual void onGetFeedFinished(
-      CCProvider provider,
-      cocos2d::__Array *feedList,
-      cocos2d::__String *payload);
-
-    // This event is triggered when fetching the feed from the social provider
-    // has failed.
-    virtual void onGetFeedFailed(
-      CCProvider provider,
-      cocos2d::__String *errorDescription,
-      cocos2d::__String *payload);
-
-};
+void Example::onProfileInitialized(EventCustom *event) {
+    // ... your game specific implementation here ...
+}
 ```
 
-### `CCMyEventHandler.cpp`
+### EVENT_USER_RATING
 
-``` cpp
-#include "CCMyEventHandler.h"
+This event is triggered when the page for rating your app is opened.
 
-void onProfileInitialized() {
-  // ... your game specific implementation here ...
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_USER_RATING, CC_CALLBACK_1(Example::onUserRatingEvent, this));
+
+void Example::onUserRatingEvent(EventCustom *event) {
+    // ... your game specific implementation here ...
 }
+```
 
-void onUserRatingEvent() {
-  // ... your game specific implementation here ...
-}
+### EVENT_USER_PROFILE_UPDATED
 
-virtual void onLoginFailed(CCProvider provider, cocos2d::__String *errorDescription,
-                          cocos2d::__String *payload) {
-  // provider is the social provider
-  // payload is the identification string sent from the caller of the action
+This event is triggered when the user profile has been updated, after login.
 
-  // ... your game specific implementation here ...
-}
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_USER_PROFILE_UPDATED, CC_CALLBACK_1(Example::onUserProfileUpdatedEvent, this));
 
-virtual void onLoginFinished(CCUserProfile *userProfile, cocos2d::__String *payload) {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the login
-  //  operation and want to receive back upon failure
+void Example::onUserProfileUpdatedEvent(EventCustom *event) {
+  // DICT_ELEMENT_USER_PROFILE - the user's profile from the logged in provider
 
-  // ... your game specific implementation here ...
-}
-
-void onLoginStarted(CCProvider provider, cocos2d::__String *payload) {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the login
-  //  operation and want to receive back upon starting
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCUserProfile *userProfile = dynamic_cast<CCUserProfile *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_USER_PROFILE));
 
   // ... your game specific implementation here ...
 }
+```
 
-void onLogoutFailed(CCProvider provider, cocos2d::__String *errorDescription) {
-  // provider is the social provider
+### EVENT_LOGIN_STARTED
 
-  // ... your game specific implementation here ...
-}
+This event is triggered when logging into the social provider has started.
 
- void onLogoutFinished(CCProvider provider) {
-  // provider is the social provider
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_LOGIN_STARTED, CC_CALLBACK_1(Example::onLoginStarted, this));
 
-  // ... your game specific implementation here ...
-}
+void Example::onLoginStarted(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
+  //      the login operation and want to receive back upon starting
 
-void onLogoutStarted(CCProvider provider) {
-  // provider is the social provider
-
-  // ... your game specific implementation here ...
-}
-
-void onGetContactsFailed(CCProvider provider, cocos2d::__String *errorDescription,
-                                cocos2d::__String *payload) {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the get
-  //  contacts operation and want to receive back upon failure
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
 
   // ... your game specific implementation here ...
 }
+```
 
-void onGetContactsFinished(CCProvider provider, cocos2d::__Array *contactsDict,
-                                  cocos2d::__String *payload) {
-  // provider is the social provider
-  // contactsDict is an Array of contacts represented by CCUserProfile
-  // payload is an identification string that you can give when you initiate the get
-  //  contacts operation and want to receive back upon its completion
+### EVENT_LOGIN_FINISHED
 
-  // ... your game specific implementation here ...
-}
+This event is triggered when logging into the social provider has finished **successfully**.
 
-void onGetContactsStarted(CCProvider provider, cocos2d::__String *payload) {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the get
-  //  contacts operation and want to receive back upon starting
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_LOGIN_FINISHED, CC_CALLBACK_1(Example::onLoginFinished, this));
 
-  // ... your game specific implementation here ...
-}
+void Example::onLoginFinished(EventCustom *event) {
+  // DICT_ELEMENT_USER_PROFILE - the user's profile from the logged in provider
+  // DICT_ELEMENT_PAYLOAD      - an identification string that you can give when you initiate
+  //      the login operation and want to receive back upon its completion
 
-void onGetFeedFailed(CCProvider provider, cocos2d::__String *errorDescription,
-                            cocos2d::__String *payload) {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the get feed
-  //  operation and want to receive back upon failure
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCUserProfile *userProfile = dynamic_cast<CCUserProfile *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_USER_PROFILE));
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
 
   // ... your game specific implementation here ...
 }
+```
 
-void onGetFeedFinished(CCProvider provider, cocos2d::__Array *feedList,
-                              cocos2d::__String *payload) {
-  // provider is the social provider
-  // feedList is an Array of feed entries
-  // payload is the identification String sent from the caller of the action
+### EVENT_LOGIN_CANCELLED
 
-  // ... your game specific implementation here ...
-}
+This event is triggered when logging into the social provider has been cancelled.
 
-void onGetFeedStarted(CCProvider provider, cocos2d::__String *payload) {
-  // provider is the social provider
-  // payload is the identification String sent from the caller of the action
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_LOGIN_CANCELLED, CC_CALLBACK_1(Example::onLoginCancelledEvent, this));
 
-  // ... your game specific implementation here ...
-}
+void Example::onLoginCancelledEvent(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
+  //      the login operation and want to receive back upon cancellation
 
-void onSocialActionFailedEvent(CCProvider provider,
-                                      CCSocialActionType socialActionType,
-                                      cocos2d::__String *errorDescription,
-                                      cocos2d::__String *payload) {
-  // provider is the social provider
-  // socialActionType is the social action that failed (like, upload status, etc..)
-  // payload is the identification String sent from the caller of the action
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
 
   // ... your game specific implementation here ...
 }
+```
 
-void onSocialActionFinishedEvent(CCProvider provider,
-                                        CCSocialActionType socialActionType,
-                                        cocos2d::__String *payload) {
-  // provider is the social provider
-  // socialActionType is the social action that finished (like, upload status, etc..)
-  // payload is an identification string that you can give when you initiate the social
-  //  action operation and want to receive back upon failure
+### EVENT_LOGIN_FAILED
 
-  // ... your game specific implementation here ...
-}
+This event is triggered when logging into the social provider has failed.
 
-void onSocialActionStartedEvent(CCProvider provider,
-                                        CCSocialActionType socialActionType,
-                                        cocos2d::__String *payload) {
-  // provider is the social provider
-  // socialActionType is the social action that started (like, upload status, etc..)
-  // payload is an identification string that you can give when you initiate the social
-  //  action operation and want to receive back upon starting
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_LOGIN_FAILED, CC_CALLBACK_1(Example::onLoginFailed, this));
 
-  // ... your game specific implementation here ...
-}
+void Example::onLoginFailed(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_MESSAGE  - the failure message
+  // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
+  //      the login operation and want to receive back upon failure
 
-void onLoginCancelledEvent(CCProvider provider, cocos2d::__String *payload) {
-  // provider is the social provider
-  // payload is an identification string that you can give when you initiate the login
-  //  operation and want to receive back upon cancellation
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *errorDescription = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_MESSAGE));
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
 
   // ... your game specific implementation here ...
 }
+```
 
-void onUserProfileUpdatedEvent(CCUserProfile *userProfile) {
-  // userProfile is the user's profile which was updated
+### EVENT_LOGOUT_STARTED
+
+This event is triggered when logging out of the social provider has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_LOGOUT_STARTED, CC_CALLBACK_1(Example::onLogoutStarted, this));
+
+void Example::onLogoutStarted(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
 
   // ... your game specific implementation here ...
 }
+```
 
+### EVENT_LOGOUT_FINISHED
+
+This event is triggered when logging out of the social provider has finished **successfully**.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_LOGOUT_FINISHED, CC_CALLBACK_1(Example::onLogoutFinished, this));
+
+void Example::onLogoutFinished(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_LOGOUT_FAILED
+
+This event is triggered when logging out of the social provider has failed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_LOGOUT_FAILED, CC_CALLBACK_1(Example::onLogoutFailed, this));
+
+void Example::onLogoutFailed(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_MESSAGE  - the failure message
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *errorDescription = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_MESSAGE));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_SOCIAL_ACTION_STARTED
+
+This event is triggered when a social action has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_SOCIAL_ACTION_STARTED, CC_CALLBACK_1(Example::onSocialActionStarted, this));
+
+void Example::onSocialActionStarted(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER            - the social provider
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE  - the social action (like, post status, etc..)
+  //      that started
+  // DICT_ELEMENT_PAYLOAD             - an identification string that you can give when you
+  //      initiate the social action operation and want to receive back upon starting
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  CCSocialActionType socialActionType = CCSocialActionType((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_SOCIAL_ACTION_TYPE)))->getValue());
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_SOCIAL_ACTION_FINISHED
+
+This event is triggered when a social action has finished **successfully**.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_SOCIAL_ACTION_FINISHED, CC_CALLBACK_1(Example::onSocialActionFinished, this));
+
+void Example::onSocialActionFinished(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER            - the social provider
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE  - the social action (like, post status, etc..)
+  //      that finished
+  // DICT_ELEMENT_PAYLOAD             - an identification string that you can give when you
+  //      initiate the social action operation and want to receive back upon its completion
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  CCSocialActionType socialActionType = CCSocialActionType((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_SOCIAL_ACTION_TYPE)))->getValue());
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_SOCIAL_ACTION_FAILED
+
+This event is triggered when a social action has failed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_SOCIAL_ACTION_FAILED, CC_CALLBACK_1(Example::onSocialActionFailed, this));
+
+void Example::onSocialActionFailed(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER            - the social provider
+  // DICT_ELEMENT_SOCIAL_ACTION_TYPE  - the social action (like, post status, etc..) that failed
+  // DICT_ELEMENT_MESSAGE             - the failure message
+  // DICT_ELEMENT_PAYLOAD             - an identification string that you can give when you
+  //      initiate the social action operation and want to receive back upon failure
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  CCSocialActionType socialActionType = CCSocialActionType((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_SOCIAL_ACTION_TYPE)))->getValue());
+  __String *errorDescription = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_MESSAGE));
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GET_CONTACTS_STARTED
+
+This event is triggered when fetching the contacts from the social provider has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_GET_CONTACTS_STARTED, CC_CALLBACK_1(Example::onGetContactsStarted, this));
+
+void Example::onGetContactsStarted(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_PAYLOAD - an identification string that you can give when you initiate
+  //      the get contacts operation and want to receive back upon starting
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GET_CONTACTS_FINISHED
+
+This event is triggered when fetching the contacts from the social provider has finished **successfully**.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_GET_CONTACTS_FINISHED, CC_CALLBACK_1(Example::onGetContactsFinished, this));
+
+void Example::onGetContactsFinished(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
+  //      the get contacts operation and want to receive back upon its completion
+  // DICT_ELEMENT_CONTACTS - a List of user profiles that have been fetched in the get
+  //      contacts operation
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+  __Array *contactsArray = dynamic_cast<__Array *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_CONTACTS));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GET_CONTACTS_FAILED
+
+This event is triggered when fetching the contacts from the social provider has failed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_GET_CONTACTS_FAILED, CC_CALLBACK_1(Example::onGetContactsFailed, this));
+
+void Example::onGetContactsFailed(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_MESSAGE  - the failure message
+  // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
+  //      the get contacts operation and want to receive back upon failure
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *errorDescription = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_MESSAGE));
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GET_FEED_STARTED
+
+This event is triggered when fetching the feed from the social provider has started.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_GET_FEED_STARTED, CC_CALLBACK_1(Example::onGetFeedStarted, this));
+
+void Example::onGetFeedStarted(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER is the social provider
+  // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
+  //      the get feed operation and want to receive back upon failure
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GET_FEED_FINISHED
+
+This event is triggered when fetching the feed from the social provider has finished **successfully**.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_GET_FEED_FINISHED, CC_CALLBACK_1(Example::onGetFeedFinished, this));
+
+void Example::onGetFeedFinished(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
+  //      the get feed operation and want to receive back upon its completion
+  // DICT_ELEMENT_FEEDS    - the user's feed that has been fetched in the get feed operation
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+  __Array *feedList = dynamic_cast<__Array *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_FEEDS));
+
+  // ... your game specific implementation here ...
+}
+```
+
+### EVENT_GET_FEED_FAILED
+
+This event is triggered when fetching the feed from the social provider has failed.
+
+```cpp
+Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCProfileConsts::EVENT_GET_FEED_FAILED, CC_CALLBACK_1(Example::onGetFeedFailed, this));
+
+void Example::onGetFeedFailed(EventCustom *event) {
+  // DICT_ELEMENT_PROVIDER - the social provider
+  // DICT_ELEMENT_MESSAGE  - the failure message
+  // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
+  //      the get feed operation and want to receive back upon failure
+
+  __Dictionary *eventData = (__Dictionary *)event->getUserData();
+  CCProvider provider = CCProvider((dynamic_cast<__Integer *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PROVIDER)))->getValue());
+  __String *errorDescription = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_MESSAGE));
+  __String *payload = dynamic_cast<__String *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+
+  // ... your game specific implementation here ...
+}
 ```

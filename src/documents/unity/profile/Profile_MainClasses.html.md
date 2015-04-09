@@ -175,7 +175,7 @@ This function posts a story (which is a detailed status) on the user's wall in t
 
 For example, once your user reaches a high score, you could display a popup that allows them to share their high score on Facebook with a click of a button. Once he/she shares the story, you can give them a reward such as a free character.
 
-**NOTE:** This functionality is supported in Facebook only.
+**NOTE:** This functionality is only **fully** supported in Facebook, since not all social network provide this type of customization in a post.
 
 ``` cs
 // Equippable virtual good - a soombot character with super powers
@@ -217,8 +217,6 @@ SoomlaProfile.UpdateStory(
 This function uploads an image to the user's wall in the social provider. Upon a successful upload, the user will receive the supplied reward.
 
 For example, when your user finishes a level in your game, you can offer him/her to upload an image (perhaps a screenshot of the finished level) and receive a reward.
-
-**NOTE:** This functionality is supported in Facebook only.
 
 ``` cs
 // A random reward that is selected from the given list - in this case it'll be one of the rewards defined above.

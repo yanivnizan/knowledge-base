@@ -14,11 +14,11 @@ platform: 'cocos2dx'
 
 ## How SOOMLA storage works
 
-Every user that downloads your game will have local, on-device storage that is encrypted and kept in an SQLite database. `SoomlaStore` is the only class you need to initialize in order to use the SOOMLA SDK.
+Every user that downloads your game will have local, on-device storage that is encrypted and kept in an SQLite database. `CCSoomlaStore` is the only class you need to initialize in order to use the SOOMLA SDK.
 
-Upon initialization, `SoomlaStore` initializes `CCStoreInfo`. The first time your game is loaded, `CCStoreInfo` is initialized with your implementation of `IStoreAssets`. On that first time, your virtual economy’s metadata is saved on the local database on your users’ devices. After that it is always initialized from the database.
+Upon initialization, `CCSoomlaStore` initializes `CCStoreInfo`. The first time your game is loaded, `CCStoreInfo` is initialized with your implementation of `CCStoreAssets`. On that first time, your virtual economy’s metadata is saved on the local database on your users’ devices. After that it is always initialized from the database.
 
-When you want to change the metadata (for example change the name of an item), in order for your users to see your changes, you'll have to bump the version, or in other words, increase the version number that the `getVersion` function (in your implementation of `IStoreAssets`) returns. The value of `getVersion` will determine if the saved data in the local (on-device) database will be deleted or not. You'll need to bump the version after ANY change in order to see the changes, otherwise your store’s metadata will always be loaded from the local database, hence your changes will not be shown. **Keep this in mind when you release updates to your users.**
+When you want to change the metadata (for example change the name of an item), in order for your users to see your changes, you'll have to bump the version, or in other words, increase the version number that the `getVersion` function (in your implementation of `CCStoreAssets`) returns. The value of `getVersion` will determine if the saved data in the local (on-device) database will be deleted or not. You'll need to bump the version after ANY change in order to see the changes, otherwise your store’s metadata will always be loaded from the local database, hence your changes will not be shown. **Keep this in mind when you release updates to your users.**
 
 ## Security
 
@@ -26,7 +26,7 @@ SOOMLA keeps the game's data in an encrypted database, and uses the AES (Advance
 
 In order to protect your game from 'bad people', follow these guidelines:
 
-- SOOMLA keeps your game's data in an encrypted database. In order to encrypt your data, SOOMLA generates a private key out of several parts of information. The **Soomla Secret** (in older versions was called customSec) is one of them. SOOMLA requires that you provide this value when initializing SoomlaStore and before releasing your game.
+- SOOMLA keeps your game's data in an encrypted database. In order to encrypt your data, SOOMLA generates a private key out of several parts of information. The **Soomla Secret** (in older versions was called customSec) is one of them. SOOMLA requires that you provide this value when initializing `CCSoomlaStore` and before releasing your game.
 
   <div class="warning-box">You can change this value once! If you try to change it again, old data from the database will become unavailable.</div>
 
@@ -63,7 +63,7 @@ int greenHatsBalance = soomla::CCStoreInventory::sharedStoreInventory()->getItem
 
 ### CCStoreInfo
 
-This class holds all of the metadata information about your specific game. It is initialized with your implementation of `IStoreAssets` and you can use it to retrieve information about your specific game. `CCStoreInfo` holds your store's:
+This class holds all of the metadata information about your specific game. It is initialized with your implementation of `CCStoreAssets` and you can use it to retrieve information about your specific game. `CCStoreInfo` holds your store's:
 
 - Virtual currencies
 
@@ -74,7 +74,7 @@ This class holds all of the metadata information about your specific game. It is
 - Virtual categories
 
 `CCStoreInfo` can be questioned about the existence of `VirtualItem`s and the associations between them.
-`CCStoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `IStoreAssets`. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
+`CCStoreInfo` is always initialized from the database, except for the first time the game is loaded - in that case it is initialized with your implementation of `CCStoreAssets`. When your game loads for the first time, the virtual economy's metadata is saved, and from that moment on it'll be loaded from the database.
 
 <br>
 
