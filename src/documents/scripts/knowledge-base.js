@@ -115,8 +115,10 @@ $(function() {
     var articleNavTop   = $hierarchyNav.offset().top,
         $articlePosition= $("#knowledge-navbar .container"),
         $headerPosition = $("#main-container .row:first .col-md-9"),
-        $window         = $(window),
         inHeader        = false,
+        $window         = $(window),
+        $nav            = $('#nav'),
+         $footer = $('#footer'),
         levelTwoNav     = $("#jumbo-main-text").length;
 
     if (levelTwoNav) {
@@ -129,7 +131,6 @@ $(function() {
         $('#tocify-header0 > li:first-of-type a').text($(".tocify-item.active").text());
       }
 
-      if ($hierarchyNav.length) {
 
         // If the article nav is scrolled out of view...
         if ($window.scrollTop() >= articleNavTop) {
@@ -153,7 +154,21 @@ $(function() {
             }
           }
         }
+
+
+    if ($nav.length) {
+
+      // check if nav is covering footer, then push nav up
+      if ($nav.offset().top + $nav.height() >= $footer.offset().top) {
+        $nav.css('bottom', '150px');
+
+        // switch back to normal if footer isn't in view anymore
+      } else if ($window.scrollTop() + $window.height() < $footer.offset().top){
+        $nav.css('bottom', 'auto');
       }
+    }
+
+
     });
   }
 
@@ -172,3 +187,4 @@ $(function() {
   });
 
 });
+
