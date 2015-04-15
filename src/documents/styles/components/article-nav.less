@@ -65,6 +65,9 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
 
     & a {
       text-overflow: ellipsis;
@@ -78,6 +81,11 @@
       }
     }
   }
+
+  & > ul:first-of-type {
+    margin-top: 70px;
+  }
+
   [data-tag="2"] {
     & li a {
       font-family: 'Open Sans', sans-serif;
@@ -120,8 +128,6 @@
 
 #collapse-container {
   display:inline-block;
-  width:20px;
-  height:20px;
   width:25px;
   height:30px;
 
@@ -147,6 +153,9 @@ span.plus {
 
 // Hide the tocify nav in medium resolutions
 #header-right #tocify-header0 {
+  & > li:first-of-type {
+    position: static;
+  }
   @media (max-width: (@screen-md - 1)) {
     display: none;
   }
