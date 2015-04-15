@@ -115,8 +115,10 @@ $(function() {
     var articleNavTop   = $hierarchyNav.offset().top,
         $articlePosition= $("#knowledge-navbar .container"),
         $headerPosition = $("#main-container .row:first .col-md-9"),
-        $window         = $(window),
         inHeader        = false,
+        $window         = $(window),
+        $nav            = $('#nav'),
+         $footer = $('#footer'),
         levelTwoNav     = $("#jumbo-main-text").length;
 
     if (levelTwoNav) {
@@ -153,7 +155,19 @@ $(function() {
             }
           }
         }
+
+        // check if nav is covering footer, then push nav up
+        if ($nav.offset().top + $nav.height() >= $footer.offset().top) {
+          $nav.css('bottom', '150px');
+
+          // switch back to normal if footer isn't in view anymore
+        } else if ($window.scrollTop() + $window.height() < $footer.offset().top){
+          $nav.css('bottom', 'auto');
+        }
+
       }
+
+
     });
   }
 
@@ -170,25 +184,6 @@ $(function() {
   $(".tocify-item > a").each(function() {
     $(this).attr('title', $(this).text());
   });
-
-  // make sure table of contents never covers footer
-  if ($('#nav').length) {
-    var $nav = $('#nav'),
-        $window = $(window),
-        $footer = $('#footer');
-    $(document).scroll(function() {
-
-      // check if nav is covering footer, then push nav up
-      if ($nav.offset().top + $nav.height() >= $footer.offset().top) {
-        $nav.css('bottom', '150px');
-
-        // switch back to normal if footer isn't in view anymore
-      } else if ($window.scrollTop() + $window.height() < $footer.offset().top){
-        $nav.css('bottom', 'auto');
-      }
-      return false;
-    });
-  }
 
 });
 
