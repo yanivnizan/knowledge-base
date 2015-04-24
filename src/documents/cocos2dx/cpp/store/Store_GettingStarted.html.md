@@ -32,7 +32,7 @@ platform: 'cocos2dx'
 	$ git clone git@github.com:soomla/jansson.git external/jansson
 	```
 
-3. Create your own implementation of `CCStoreAssets` that will represent the assets in your specific game. For a brief example, refer to the example below. For a complete example refer to [cocos2dx-store-example](https://github.com/soomla/cocos2dx-store-example/blob/master/Classes/MuffinRushAssets.cpp).
+3. Create your own implementation of `CCStoreAssets` that will represent the assets in your specific game. For a complete example refer to [cocos2dx-store-example](https://github.com/soomla/cocos2dx-store-example/blob/master/Classes/MuffinRushAssets.cpp).
 
 4. Make sure to include the `Cocos2dxStore.h` header whenever you use any of the *cocos2dx-store* functions:
 
@@ -104,7 +104,7 @@ In your XCode project, perform the following steps:
 
 4. Add `-ObjC` to your project **Build Settings->Other Linker Flags**.
 
-	![alt text](/img/tutorial_img/cocos2dx_getting_started/objc.png "Pther Linker Flags")
+	![alt text](/img/tutorial_img/cocos2dx_getting_started/objc.png "Other Linker Flags")
 
 5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
