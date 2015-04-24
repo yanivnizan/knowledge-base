@@ -66,7 +66,7 @@ platform: 'cocos2dx'
 	<div class="warning-box">Choose the secret wisely. You can't change it after you launch your game!
 	Initialize `CCSoomlaStore` ONLY ONCE when your application loads.</div>
 
-6. You'll need to subscribe to store events to get notified about in-app purchasing related events. refer to the [Event Handling](/cocos2dx/store/Store_Events) section for more information.
+6. You'll need to subscribe to store events to get notified about in-app purchasing related events. refer to the [Event Handling](/cocos2dx/cpp/store/Store_Events) section for more information.
 
 **The next steps are different according to which platform you're using.**
 
@@ -156,7 +156,7 @@ To integrate cocos2dx-store into your game, follow these steps.
 1. **Recursively** clone cocos2dx-core and cocos2dx-store.
 
     ```
-    $ git clone --recursivegit@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
+    $ git clone --recursive git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
 
     $ git clone --recursive git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
     ```
@@ -277,4 +277,4 @@ bool AppDelegate::applicationDidFinishLaunching() {
 }
 ```
 
-And that's it! cocos2dx-store knows how to contact Google Play or the App Store for you and will redirect your users to the purchasing system to complete the transaction. Don't forget to subscribe to store events in order to get notified of successful or failed purchases - See [Event Handling](/cocos2dx/store/Store_Events).
+And that's it! cocos2dx-store knows how to contact Google Play or the App Store for you and will redirect your users to the purchasing system to complete the transaction. Don't forget to subscribe to store events in order to get notified of successful or failed purchases - See [Event Handling](/cocos2dx/cpp/store/Store_Events).
