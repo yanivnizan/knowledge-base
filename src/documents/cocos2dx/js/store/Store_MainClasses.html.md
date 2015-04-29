@@ -83,7 +83,7 @@ Soomla.storeInventory.giveItem('currency_coin', 10);
 ```
 <br>
 
-`StoreInventory#takeItem(itemId, int amount)`
+`StoreInventory#takeItem(itemId, amount)`
 
 Takes from your user the given amount of the virtual item with the given item ID. For example, when your user requests a refund you TAKE the item he/she is returning.
 
