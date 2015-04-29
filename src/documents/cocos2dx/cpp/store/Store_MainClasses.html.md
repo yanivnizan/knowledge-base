@@ -73,7 +73,7 @@ Gives your user the given amount of the virtual item with the given item ID, and
 **Example:**
 
 ``` cpp
-//Give the user 10 units of the virtual currency with itemId“currency_coin”:
+//Give the user 10 units of the virtual currency with itemId “currency_coin”:
 CCError *soomlaError = NULL;
 CCStoreInventory::sharedStoreInventory()->giveItem("currency_coin", 10, &soomlaError);
 ```
@@ -88,5 +88,5 @@ Takes from your user the given amount of the virtual item with the given item ID
 ``` cpp
 //Take 1 virtual good with itemId “green_hat”:
 CCError *soomlaError = NULL;
-CCStoreInventory::sharedStoreInventory()->takeItem("currency_coin", 1, &soomlaError);
+CCStoreInventory::sharedStoreInventory()->takeItem("green_hat", 1, &soomlaError);
 ```
