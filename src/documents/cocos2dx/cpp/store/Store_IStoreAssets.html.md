@@ -186,7 +186,7 @@ Create an instance of all your desired virtual currencies. For every `VirtualCur
 
 ### `getCurrencyPacks`
 
-Create an instance of all your desired `VirtualCurrencyPack`s. For every `VirtualCurrencyPack`, you'll have to provide: name, description, item ID, purchase type, currency amount (the amount of currencies in the pack), and currency item ID (the item ID of the associated currency). Use this functions to access your game's currency packs.
+Create an instance of all your desired `VirtualCurrencyPack`s. For every `VirtualCurrencyPack`, you'll have to provide: name, description, item ID, purchase type, currency amount (the amount of currencies in the pack), and currency item ID (the item ID of the associated currency). Use this function to access your game's currency packs.
 
 ### `getGoods`
 
