@@ -375,7 +375,7 @@ However, notice that if you declare a `LifetimeVG` with a purchase type of `Purc
 
 ####**For Example**
 
-``` cs
+``` cpp
 // A blue car that is purchased with virtual coins.
 CCVirtualGood *BLUE_CAR =
     CCLifetimeVG::create(__String::create("Blue Car"),      // Name
@@ -480,7 +480,7 @@ An `EquippableVG` is a special type of `LifetimeVG`. In addition to the fact tha
 In this example we're defining 2 characters, George and Kramer as `CATEGORY` equippable goods. This means the user can own both characters but can play only as one at a time.
 
 ``` cpp
-// Character "Kramer" can be purchased for 350 Muffins.
+// Character "George" can be purchased for 350 Muffins.
 CCVirtualGood *georgeGood = CCEquippableVG::create(
     __Integer::create(CCEquippableVG::kCategory),           // Equipping model
     __String::create("George"),                             // Name
@@ -627,8 +627,8 @@ CCVirtualGood *strength_upgrade1 = CCUpgradeVG::create(
 
 CCVirtualGood *strength_upgrade2 = CCUpgradeVG::create(
     __String::create("strength_ID"),                        // Item ID of the associated good that is being upgraded
-    __String::create("muffincake_level_1"),                 // Item ID of the previous upgrade good
-    __String::create("muffincake_level_3"),                 // Item ID of the next upgrade good
+    __String::create("strength_upgrade2_ID"),               // Item ID of the previous upgrade good
+    __String::create("strength_upgrade3_ID"),               // Item ID of the next upgrade good
     __String::create("Strength Upgrade 2"),                 // Name
     __String::create("Kramer will be able to kick 4 times as many muffins"), // Description
     __String::create("strength_upgrade2_ID"),               // Item ID
@@ -744,5 +744,5 @@ CCVirtualCategory *cakes = CCVirtualCategory::create(
 ``` cpp
 CCError *soomlaError = NULL;
 
-CCStoreInfo::sharedStoreInfo()->getCategoryForVirtualGood(MUFFIN_CAKE_GOOD_ITEM_ID, &soomlaError);
+CCStoreInfo::sharedStoreInfo()->getCategoryForVirtualGood(MUFFINCAKE_ITEM_ID, &soomlaError);
 ```
