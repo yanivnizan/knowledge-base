@@ -83,7 +83,7 @@ This class holds all of the metadata information about your specific game. It is
 Get all the `CCVirtualCurrencies`:
 
 ``` cpp
-CCArray *vcArray = soomla::CCStoreInfo::sharedStoreInfo()->getVirtualCurrencies();
+CCArray *vcArray = soomla::CCStoreInfo::sharedStoreInfo()->getCurrencies();
 ```
 
 ## Storage Internals
