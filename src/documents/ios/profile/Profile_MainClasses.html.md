@@ -217,7 +217,7 @@ the following workflow:
     
     // request for the 1st page
     [[SoomlaProfile getInstance] getContactsWithProvider:FACEBOOK
-        andFromStart: YES       // Should we reset pagination or request the next page
+        andFromStart: YES       // you definitely need the 1st page
         andPayload: @""         // a String to receive when the function returns.
         andReward:nil           // The reward to grant
     ];
@@ -265,13 +265,13 @@ method another time with `fromStart` param set to `false` (it's a default value 
 the following workflow:
 
 ```objectivec
-- (void)getContacts {
+- (void)getFeed {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeedFinished:)
       name:EVENT_UP_GET_FEED_FINISHED object:nil];
     
     // request for the 1st page
     [[SoomlaProfile getInstance] getFeedWithProvider:FACEBOOK
-        andFromStart: YES       // Should we reset pagination or request the next page
+        andFromStart: YES       // you definitely need the 1st page
         andPayload: @""         // a String to receive when the function returns.
         andReward:nil           // The reward to grant
     ];
