@@ -18,7 +18,7 @@ platform: 'cocos2dx'
 
 ##General Instructions
 
-1. If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by cocos2dx-store (the tag is the version).
+1. If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by cocos2dx-profile (the tag is the version).
 
 2. Clone [soomla-cocos2dx-core](https://github.com/soomla/soomla-cocos2dx-core) and **cocos2dx-profile** into the `extensions` directory located at the root of your Cocos2d-x framework:
 
@@ -112,7 +112,7 @@ In your XCode project, perform the following steps:
 
 4. To support browser-based authentication read [here](#browser-based-authentication).
 
-5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
+5. Make sure you have the following frameworks linked to your XCode project: **Security, libsqlite3.0.dylib**.
 
 6. Go to **Build Settings->Library Search Paths**, set the library search paths to `extensions/cocos2dx-profile/build/ios` with the `recursive` option.
 

@@ -288,6 +288,49 @@ soomla::CCSoomlaProfile::getInstance()->getContacts(
 );
 ```
 
+#### Pagination
+
+You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
+method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
+the following workflow:
+
+```cpp
+void Example::getContacts() {
+    Director::getInstance()->getEventDispatcher()->addCustomEventListener(
+            CCProfileConsts::EVENT_GET_CONTACTS_FINISHED, 
+            CC_CALLBACK_1(Example::onGetContactsFinished, this));
+
+    // request for the 1st page
+    soomla::CCSoomlaProfile::getInstance()->getContacts(
+        soomla::FACEBOOK,
+        true,                               // you definitely need the 1st page
+        NULL,                               // no reward
+        NULL                                // no error handling, to keep example simple
+        );
+}
+
+void Example::onGetContactsFinished(EventCustom *event) {
+
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    __Bool *hasMore = dynamic_cast<__Bool *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_HAS_MORE));
+    __Array *contactsArray = dynamic_cast<__Array *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_CONTACTS));
+    
+    // ... handle page results ...
+    
+    if (hasMore != nullptr && hasMore->getValue()) {
+        soomla::CCSoomlaProfile::getInstance()->getContacts(
+            soomla::FACEBOOK,
+            false,                              // going on with the pagination
+            NULL,                               // no reward
+            NULL                                // no error handling, to keep example simple
+            );
+    } else {
+        // no pages anymore
+    }
+}
+
+```
+
 <br>
 ### `getFeed`
 
@@ -323,6 +366,49 @@ soomla::CCSoomlaProfile::getInstance()->getFeed(
 	reward,                               // Reward upon success of getting of feed
 	&profileError                         // Used for error handling
 );
+```
+
+#### Pagination
+
+You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
+method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
+the following workflow:
+
+```cpp
+void Example::getFeed() {
+    Director::getInstance()->getEventDispatcher()->addCustomEventListener(
+            CCProfileConsts::EVENT_GET_FEED_FINISHED, 
+            CC_CALLBACK_1(Example::onGetFeedFinished, this));
+
+    // request for the 1st page
+    soomla::CCSoomlaProfile::getInstance()->getFeed(
+        soomla::FACEBOOK,
+        true,                               // you definitely need the 1st page
+        NULL,                               // no reward
+        NULL                                // no error handling, to keep example simple
+        );
+}
+
+void Example::onGetContactsFinished(EventCustom *event) {
+
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    __Bool *hasMore = dynamic_cast<__Bool *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_HAS_MORE));
+    __Array *feedList = dynamic_cast<__Array *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_FEEDS));
+    
+    // ... handle page results ...
+    
+    if (hasMore != nullptr && hasMore->getValue()) {
+        soomla::CCSoomlaProfile::getInstance()->getFeed(
+            soomla::FACEBOOK,
+            false,                              // going on with the pagination
+            NULL,                               // no reward
+            NULL                                // no error handling, to keep example simple
+            );
+    } else {
+        // no pages anymore
+    }
+}
+
 ```
 
 <br>
