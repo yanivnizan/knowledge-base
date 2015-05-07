@@ -268,6 +268,62 @@ soomla::CCSoomlaProfile::getInstance()->getContacts(
 	&profileError                         // Used for error handling
 );
 ```
+OR 
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->getContacts(
+	soomla::FACEBOOK,                     // Provider
+	fromStart,                            // Should we reset pagination or request the next page
+	contactsReward,                       // Reward upon success of getting contacts
+	&profileError                         // Used for error handling
+);
+```
+OR 
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->getContacts(
+	soomla::FACEBOOK,                     // Provider
+	fromStart,                            // Should we reset pagination or request the next page
+	payload,                              // a String to receive when the function returns.
+	contactsReward,                       // Reward upon success of getting contacts
+	&profileError                         // Used for error handling
+);
+```
+
+<br>
+### `getFeed`
+
+This function Retrieves a list of the user's feed entries from the supplied provider. Upon a successful retrieval of 
+feed entries the user will be granted the supplied reward.
+
+<div class="info-box">G+ does not support this.</div>
+
+You could use `getFeed` to show your users a personalized screen where they can see which of their friends are also playing your game, or you could offer the contacts that don't play your game to download your game and receive some free coins.
+
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->getFeed(
+	soomla::FACEBOOK,                     // Provider
+	reward,                               // Reward upon success of getting of feed
+	&profileError                         // Used for error handling
+);
+```
+OR 
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->getFeed(
+	soomla::FACEBOOK,                     // Provider
+	fromStart,                            // Should we reset pagination or request the next page
+	reward,                               // Reward upon success of getting of feed
+	&profileError                         // Used for error handling
+);
+```
+OR 
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->getFeed(
+	soomla::FACEBOOK,                     // Provider
+	fromStart,                            // Should we reset pagination or request the next page
+	payload,                              // a String to receive when the function returns.
+	reward,                               // Reward upon success of getting of feed
+	&profileError                         // Used for error handling
+);
+```
 
 <br>
 ### `openAppRatingPage`
