@@ -281,7 +281,7 @@ This event is triggered when fetching the contacts from the social provider has 
 ``` cs
 ProfileEvents.OnGetContactsFinished += onGetContactsFinished;
 
-public void onGetContactsFinished(Provider provider, List<UserProfile> userProfiles, string payload) {
+public void onGetContactsFinished(Provider provider, SocialPageData<UserProfile> userProfiles, string payload) {
 	// provider is the social provider
 	// userProfiles is a List of user profiles that have been fetched in the get contacts operation
 	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon its completion
