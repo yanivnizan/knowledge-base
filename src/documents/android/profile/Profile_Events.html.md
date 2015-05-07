@@ -281,6 +281,7 @@ public void onGetContactsStarted(GetContactsStartedEvent getContactsStartedEvent
 	// A GetContactsStartedEvent contains the following:
 	// provider         = the provider on which the get contacts process started
 	// socialActionType = the social action performed
+	// fromStart        = should we reset pagination or request the next page
 	// payload          = an identification string that you can give when you initiate
 	//                    the get contacts operation and want to receive back upon starting
 
@@ -301,6 +302,7 @@ public void onGetContactsFinished(GetContactsFinishedEvent getContactsFinishedEv
 	// contacts         = an Array of contacts represented by UserProfile
 	// payload          = an identification string that you can give when you initiate the
 	//                    get contacts operation and want to receive back upon its completion
+	// hasMore          = if there are more items in pagination
 
 	// ... your game specific implementation here ...
 }
@@ -317,6 +319,7 @@ public void onGetContactsFailed(GetContactsFailedEvent getContactsFailedEvent) {
 	// provider         = the provider on which the get contacts process has failed
 	// socialActionType = the social action performed
 	// errorDescription = description of the reason for failure
+	// fromStart        = should we reset pagination or request the next page
 	// payload          = an identification string that you can give when you initiate
 	//                    the get contacts operation and want to receive back upon failure
 
@@ -334,6 +337,7 @@ public void onGetFeedStarted(GetFeedStartedEvent getFeedStartedEvent) {
 	// A GetFeedStartedEvent contains the following:
 	// provider    = the provider on which the get feed process started
 	// getFeedType = the social action performed
+	// fromStart   = should we reset pagination or request the next page
 	// payload     = an identification string that you can give when you initiate
 	//               the get feed operation and want to receive back upon starting
 
@@ -354,6 +358,7 @@ public void onGetFeedFinished(GetFeedFinishedEvent getFeedFinishedEvent) {
 	// feedPosts   = an Array of feed entries represented by strings
 	// payload     = an identification string that you can give when you initiate
 	//               the get feed operation and want to receive back upon completion
+	// hasMore     = if there are more items in pagination
 
 	// ... your game specific implementation here ...
 }
@@ -370,6 +375,7 @@ public void onGetFeedFailed(GetFeedFailedEvent getFeedFailedEvent) {
 	// provider         = the provider on which the get feed process has
 	// getFeedType      = the social action performed
 	// errorDescription = description of the reason for failure
+	// fromStart        = should we reset pagination or request the next page
 	// payload          = an identification string that you can give when you initiate
 	//                    the get feed operation and want to receive back upon failure
 
