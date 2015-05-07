@@ -356,7 +356,7 @@ void Example::onGetContactsFinished(EventCustom *event) {
   // DICT_ELEMENT_PROVIDER - the social provider
   // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
   //      the get contacts operation and want to receive back upon its completion
-  // DICT_ELEMENT_HAS_MORE - if there is more items in pagination
+  // DICT_ELEMENT_HAS_MORE - if there are more items in pagination
   // DICT_ELEMENT_CONTACTS - a List of user profiles that have been fetched in the get
   //      contacts operation
 
@@ -424,7 +424,7 @@ void Example::onGetFeedFinished(EventCustom *event) {
   // DICT_ELEMENT_PROVIDER - the social provider
   // DICT_ELEMENT_PAYLOAD  - an identification string that you can give when you initiate
   //      the get feed operation and want to receive back upon its completion
-  // DICT_ELEMENT_HAS_MORE - if there is more items in pagination
+  // DICT_ELEMENT_HAS_MORE - if there are more items in pagination
   // DICT_ELEMENT_FEEDS    - the user's feed that has been fetched in the get feed operation
 
   __Dictionary *eventData = (__Dictionary *)event->getUserData();

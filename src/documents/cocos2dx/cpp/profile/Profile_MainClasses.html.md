@@ -339,8 +339,6 @@ feed entries the user will be granted the supplied reward.
 
 <div class="info-box">G+ does not support this.</div>
 
-You could use `getFeed` to show your users a personalized screen where they can see which of their friends are also playing your game, or you could offer the contacts that don't play your game to download your game and receive some free coins.
-
 ``` cpp
 soomla::CCSoomlaProfile::getInstance()->getFeed(
 	soomla::FACEBOOK,                     // Provider
