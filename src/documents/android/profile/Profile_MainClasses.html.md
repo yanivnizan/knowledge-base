@@ -254,9 +254,99 @@ You could use `getContacts` to show your users a personalized screen where they 
 ``` java
 SoomlaProfile.getInstance().getContacts(
 	IProvider.Provider.FACEBOOK,          // Provider
+	false,                                // fromStart     
 	"",                                   // Payload
 	someReward                            // Reward
 );
+```
+
+#### Pagination
+
+You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
+method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
+the following workflow:
+
+```java
+public void getContacts() {
+
+    // request for the 1st page
+    SoomlaProfile.getInstance().getContacts(
+        IProvider.Provider.FACEBOOK,          // Provider
+        true,                                 // fromStart     
+        "",                                   // Payload
+        null                                  // Reward
+    );
+}
+
+@Subscribe
+public void onGetContactsFinished(GetContactsFinishedEvent getContactsFinishedEvent) {
+
+    // ... handle page results ...
+    
+    if (getContactsFinishedEvent.HasMore) {
+        SoomlaProfile.getInstance().getContacts(
+            IProvider.Provider.FACEBOOK,          // Provider
+            false,                                // fromStart     
+            "",                                   // Payload
+            null                                  // Reward
+        );
+    } else {
+        // no pages anymore
+    }
+}
+
+```
+
+<br>
+### `getFeed`
+
+This function retrieves a list of the user's feed entries from the supplied provider.
+
+<div class="info-box">G+ does not support this.</div>
+
+``` java
+SoomlaProfile.getInstance().getFeed(
+	IProvider.Provider.FACEBOOK,          // Provider
+	false,                                // fromStart     
+	"",                                   // Payload
+	someReward                            // Reward
+);
+```
+
+#### Pagination
+
+You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
+method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
+the following workflow:
+
+```java
+public void getFeed() {
+
+    // request for the 1st page
+    SoomlaProfile.getInstance().getFeed(
+        IProvider.Provider.FACEBOOK,          // Provider
+        true,                                 // fromStart     
+        "",                                   // Payload
+        null                                  // Reward
+    );
+}
+
+@Subscribe
+public void onGetFeedFinished(GetFeedFinishedEvent getFeedFinishedEvent) {
+
+    // ... handle page results ...
+    
+    if (getFeedFinishedEvent.HasMore) {
+        SoomlaProfile.getInstance().getFeed(
+            IProvider.Provider.FACEBOOK,          // Provider
+            false,                                // fromStart     
+            "",                                   // Payload
+            null                                  // Reward
+        );
+    } else {
+        // no pages anymore
+    }
+}
 ```
 
 <br>

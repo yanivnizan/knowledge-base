@@ -267,6 +267,34 @@ You could use `GetContacts` to show your users a personalized screen where they 
 SoomlaProfile.GetContacts(Provider.FACEBOOK);
 ```
 
+#### Pagination
+
+You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
+method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
+the following workflow:
+
+```cs
+public void GetContacts() {
+    ProfileEvents.OnGetContactsFinished += onGetContactsFinished;
+
+    // request for the 1st page
+    SoomlaProfile.GetContacts(Provider.FACEBOOK, true);
+}
+
+
+// your handler:
+public void onGetContactsFinished(Provider provider, SocialPageData<UserProfile> userProfiles, string payload) {
+
+    // ... handle page results ...
+    if (userProfiles.HasMore) {
+        SoomlaProfile.GetContacts(Provider.FACEBOOK, false);
+    } else {
+        // no pages anymore
+    }
+}
+
+```
+
 <br>
 ###`OpenAppRatingPage`
 

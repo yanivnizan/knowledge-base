@@ -266,8 +266,9 @@ This event is triggered when fetching the contacts from the social provider has 
 ``` cs
 ProfileEvents.OnGetContactsStarted += onGetContactsStarted;
 
-public void onGetContactsStarted(Provider provider, string payload) {
+public void onGetContactsStarted(Provider provider, bool fromStart, string payload) {
 	// provider is the social provider
+	// fromStart Should we reset pagination or request the next page
 	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon starting
 
 	// ... your game specific implementation here ...
@@ -297,8 +298,10 @@ This event is triggered when fetching the contacts from the social provider has 
 ``` cs
 ProfileEvents.OnGetContactsFailed += onGetContactsFailed;
 
-public void onGetContactsFailed(Provider provider, string payload) {
+public void onGetContactsFailed(Provider provider, string message, bool fromStart, string payload) {
 	// provider is the social provider
+	// message Description of the reason for failure
+	// fromStart Should we reset pagination or request the next page
 	// payload is an identification string that you can give when you initiate the get contacts operation and want to receive back upon failure
 
 	// ... your game specific implementation here ...

@@ -194,12 +194,106 @@ This function retrieves a list of the user's contacts from the supplied provider
 
 <div class="info-box">Notice that some social providers (FB, G+, Twitter) supply all of the user's contacts and some supply only the contacts that use your app.</div>
 
-You could use `GetContacts` to show your users a personalized screen where they can see which of their friends are also playing your game, or you could offer the contacts that don't play your game to download your game and receive some free coins.
+You could use `getContacts` to show your users a personalized screen where they can see which of their friends are also playing your game, or you could offer the contacts that don't play your game to download your game and receive some free coins.
 
 ``` objectivec
 [[SoomlaProfile getInstance] getContactsWithProvider:FACEBOOK
-	andReward:nil
+    andFromStart: false     // Should we reset pagination or request the next page
+    andPayload: @""         // a String to receive when the function returns.
+	andReward:nil           // The reward to grant
 ];
+```
+
+#### Pagination
+
+You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
+method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
+the following workflow:
+
+```objectivec
+- (void)getContacts {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getContactsFinished:)
+      name:EVENT_UP_GET_CONTACTS_FINISHED object:nil];
+    
+    // request for the 1st page
+    [[SoomlaProfile getInstance] getContactsWithProvider:FACEBOOK
+        andFromStart: YES       // you definitely need the 1st page
+        andPayload: @""         // a String to receive when the function returns.
+        andReward:nil           // The reward to grant
+    ];
+}
+
+
+// your handler:
+- (void)getContactsFinished:(NSNotification*)notification {
+
+    // ... handle page results ...
+
+    if (notification.userData[DICT_ELEMENT_HAS_MORE] != nil && [notification.userData[DICT_ELEMENT_HAS_MORE] boolValue]) {
+        [[SoomlaProfile getInstance] getContactsWithProvider:FACEBOOK
+            andFromStart: NO        // going on with the pagination
+            andPayload: @""         // a String to receive when the function returns.
+            andReward:nil           // The reward to grant
+        ];
+    } else {
+        // no pages anymore
+    }
+}
+
+```
+
+<br>
+###`getFeed`
+
+This function Retrieves a list of the user's feed entries from the supplied provider. Upon a successful retrieval of 
+feed entries the user will be granted the supplied reward.
+
+<div class="info-box">G+ does not support this.</div>
+
+``` objectivec
+[[SoomlaProfile getInstance] getFeedWithProvider:FACEBOOK
+    andFromStart: false     // Should we reset pagination or request the next page
+    andPayload: @""         // a String to receive when the function returns.
+	andReward:nil           // The reward to grant
+];
+```
+
+#### Pagination
+
+You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
+method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
+the following workflow:
+
+```objectivec
+- (void)getFeed {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFeedFinished:)
+      name:EVENT_UP_GET_FEED_FINISHED object:nil];
+    
+    // request for the 1st page
+    [[SoomlaProfile getInstance] getFeedWithProvider:FACEBOOK
+        andFromStart: YES       // you definitely need the 1st page
+        andPayload: @""         // a String to receive when the function returns.
+        andReward:nil           // The reward to grant
+    ];
+}
+
+
+// your handler:
+- (void)getFeedFinished:(NSNotification*)notification {
+
+    // ... handle page results ...
+
+    if (notification.userData[DICT_ELEMENT_HAS_MORE] != nil && [notification.userData[DICT_ELEMENT_HAS_MORE] boolValue]) {
+        [[SoomlaProfile getInstance] getFeedWithProvider:FACEBOOK
+            andFromStart: NO        // going on with the pagination
+            andPayload: @""         // a String to receive when the function returns.
+            andReward:nil           // The reward to grant
+        ];
+    } else {
+        // no pages anymore
+    }
+}
+
 ```
 
 <br>
