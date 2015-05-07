@@ -206,9 +206,7 @@ You could use `getContacts` to show your users a personalized screen where they 
 
 #### Pagination
 
-You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
-method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
-the following workflow:
+Note that the results will contain only part of the list. In order to get more items you should call the method again with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use the following workflow:
 
 ```objectivec
 - (void)getContacts {
@@ -260,9 +258,7 @@ feed entries the user will be granted the supplied reward.
 
 #### Pagination
 
-You should be ready the result will contain just a part of the list. In order to get more items, you should call the 
-method another time with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use
-the following workflow:
+Note that the results will contain only part of the list. In order to get more items you should call the method again with `fromStart` param set to `false` (it's a default value for overloaded methods). You can use the following workflow:
 
 ```objectivec
 - (void)getFeed {
