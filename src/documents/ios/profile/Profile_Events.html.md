@@ -331,6 +331,7 @@ The event `EVENT_UP_GET_CONTACTS_STARTED` is triggered when fetching the contact
   // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the get contacts
   //                                   process started
   // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
+  // DICT_ELEMENT_FROM_START         = Should we reset pagination or request the next page
   // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
   //      when you initiate the get contacts operation and want to receive back upon starting
 
@@ -355,6 +356,7 @@ The event `EVENT_UP_GET_CONTACTS_FINISHED` is triggered when fetching the contac
   // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
   // DICT_ELEMENT_CONTACTS           = An Array (NSArray*) of contacts (UserProfile*)
   // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
+  // DICT_ELEMENT_HAS_MORE           = if there are more items in pagination
   // when you initiate the get contacts operation and want to receive back upon its completion
 
 
@@ -378,6 +380,7 @@ The event `EVENT_UP_GET_CONTACTS_FAILED` is triggered when fetching the contacts
   //                                   process has failed
   // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
   // DICT_ELEMENT_MESSAGE            = Description (NSString*) of the reason for failure
+  // DICT_ELEMENT_FROM_START         = Should we reset pagination or request the next page
   // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
   //       when you initiate the get contacts operation and want to receive back upon failure
 
@@ -400,6 +403,7 @@ The event `EVENT_UP_GET_FEED_STARTED` is triggered when fetching the feed from t
   // DICT_ELEMENT_PROVIDER           = The provider (NSNumber*) on which the get feed process
   //                                   started
   // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
+  // DICT_ELEMENT_FROM_START         = Should we reset pagination or request the next page
   // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
   //          when you initiate the get feed operation and want to receive back upon starting
 
@@ -425,6 +429,7 @@ The event `EVENT_UP_GET_FEED_FINISHED` is triggered when fetching the feed from 
   // DICT_ELEMENT_FEEDS              = An Array (NSArray*) of feed entries (NSString*)
   // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give
   //        when you initiate the get feed operation and want to receive back upon completion
+  // DICT_ELEMENT_HAS_MORE           = if there are more items in pagination
 
   // ... your game specific implementation here ...
 }
@@ -446,6 +451,7 @@ The event `EVENT_UP_GET_FEED_FAILED` is triggered when fetching the feed from th
   //                                   has failed
   // DICT_ELEMENT_SOCIAL_ACTION_TYPE = The social action (NSNumber*) performed
   // DICT_ELEMENT_MESSAGE            = Description (NSString*) of the reason for failure
+  // DICT_ELEMENT_FROM_START         = Should we reset pagination or request the next page
   // DICT_ELEMENT_PAYLOAD            = An identification string (NSString*) that you can give  
   //           when you initiate the get feed operation and want to receive back upon failure
 
