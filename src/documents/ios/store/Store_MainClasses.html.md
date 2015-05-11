@@ -16,8 +16,6 @@ Here you can find descriptions of some of the main classes and interfaces of iOS
 
 ##SoomlaStore <a href="" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
-[<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/SoomlaStore.h)
-
 SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the App Store. It provides you with functionality such as starting/stopping the in-app billing service in the background, querying the inventory for information, or starting a purchase process in the App Store.
 
 <div class="info-box">This is the only class you need to initialize in order to use the SOOMLA SDK. More about this in [Getting Started](/ios/store/Store_GettingStarted).</div>
