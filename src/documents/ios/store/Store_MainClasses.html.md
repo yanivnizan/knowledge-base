@@ -14,7 +14,7 @@ platform: 'ios'
 
 Here you can find descriptions of some of the main classes and interfaces of iOS-store. These classes contain functionality for store-related operations such as purchasing, billing, inventory querying and storage.
 
-##SoomlaStore <a href="" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
+##SoomlaStore <a href="https://github.com/soomla/ios-store/blob/master/SoomlaiOSStore/SoomlaStore.h" target="_blank"><img class="link-icon" src="/img/tutorial_img/linkImg.png"></a>
 
 SoomlaStore holds the basic assets needed to operate the Store. You can use it to purchase products from the App Store. It provides you with functionality such as starting/stopping the in-app billing service in the background, querying the inventory for information, or starting a purchase process in the App Store.
 
