@@ -90,7 +90,7 @@ SoomlaProfile.getInstance().logout(
 
 Checks if the user is logged in and returns a boolean value.
 
-``` cs
+``` java
 if (SoomlaProfile.getInstance().isLoggedIn(this, IProvider.Provider.FACEBOOK) {
     // Here you can (and should) set the screen to match the logged-in state.
     // For example display the logout button, like button, share button, etc.
@@ -206,7 +206,7 @@ For example, when your user finishes a level in your game, you can offer him/her
 
 **NOTE:** This functionality is supported in Facebook only.
 
-``` cs
+``` java
 // A badge reward, gold coin.
 Reward goldMedal = new BadgeReward(
 	"badge_goldMedal",                    // ID
@@ -389,7 +389,7 @@ Reward hundredCoinReward = new VirtualItemReward(
 
 A specific type of `Reward` that represents a badge with an icon. **For example:** Give the user a badge reward for posting a status on his/her wall.
 
-``` cs
+``` java
 Reward goldMedal = new BadgeReward(
   "badge_goldMedal",                    // ID
   "Gold Medal"                          // Name
@@ -401,7 +401,7 @@ Reward goldMedal = new BadgeReward(
 
 A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, purple belt, brown belt, and lastly, black belt.
 
-``` cs
+``` java
 Reward blueBelt = new BadgeReward(
 	"blueBelt",                           // ID
 	"Karate blue belt"                    // Name
@@ -425,7 +425,7 @@ Reward beltReward = new SequenceReward(
 
 A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** Give users a mystery box `Reward` for uploading an image, that grants him/her a random `Reward`.
 
-``` cs
+``` java
 List<Reward> rewards = new ArrayList<Reward>();
 list.add(goldMedal);
 list.add(coinReward);
