@@ -170,6 +170,21 @@ SoomlaProfile.UpdateStatus(
 ![alt text](/img/tutorial_img/unity-profile/socialStatus.png "Update Status")
 
 <br>
+### `UpdateStatusWithConfirmation`
+
+It's a kind of `UpdateStatus` with confirmation dialog shown before performing the action.
+
+``` cs
+SoomlaProfile.UpdateStatusWithConfirmation(
+	Provider.FACEBOOK,                      // Provider
+	"I LOVE SOOMLA!  http://www.soom.la",   // Message to post as status
+	"",                                     // Payload
+	null,                                   // Reward
+	customMessage							// Message to show in the confirmation dialog
+);
+```
+**NOTE:** This confirmation dialog is not supported in FB. 
+<br>
 ###`UpdateStory`
 This function posts a story (which is a detailed status) on the user's wall in the supplied social provider. Upon a successful update, the user will receive the supplied reward.
 
@@ -212,6 +227,27 @@ SoomlaProfile.UpdateStory(
 ![alt text](/img/tutorial_img/unity-profile/socialStory.png "Post Story")
 
 <br>
+### `UpdateStoryWithConfirmation`
+
+It's a kind of `updateStory` with confirmation dialog shown before performing the action.
+
+``` cs
+SoomlaProfile.UpdateStoryWithConfirmation(
+	Provider.FACEBOOK,                          // Provider
+	"This is the story.",                       // Text of the story to post
+	"The story of SOOMBOT (Profile Test App)",  // Name
+	"SOOMBOT Story",                            // Caption
+	"Hey! It's SOOMBOT Story",                 	// Description
+	"http://about.soom.la/soombots",            // Link to post
+	"http://about.soom.la/.../spockbot.png",    // Image URL
+	"",                                         // Payload
+	null,                                       // Reward
+	customMessage								// Message to show in the confirmation dialog
+);
+```
+**NOTE:** This confirmation dialog is not supported in FB. 
+
+<br>
 ###`UploadImage`
 
 This function uploads an image to the user's wall in the social provider. Upon a successful upload, the user will receive the supplied reward.
@@ -236,6 +272,10 @@ SoomlaProfile.UploadImage(
 	mysteryReward                         // Reward for posting a story
 );
 ```
+
+`UploadImageWithConfirmation` is another kind of this function with confirmation dialog shown before performing the action. 
+
+**NOTE:** This confirmation dialog is not supported in FB. 
 
 ![alt text](/img/tutorial_img/unity-profile/socialUpload.png "Upload Image")
 

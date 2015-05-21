@@ -56,11 +56,19 @@ platform: 'android'
 	SoomlaProfile.getInstance().initialize(providerParams);
 	```
 
-  a. **Facebook** - No special parameters needed
+  a. **Facebook** - You can provide your custom permission set here.
+
+	``` java
+	HashMap<String, String> facebookParams = new HashMap<String, String>();
+	facebookParams.put("permissions", "public_profile,user_friends");
+	providerParams.put(IProvider.Provider.FACEBOOK, facebookParams);
+
+	SoomlaProfile.getInstance().initialize(providerParams);
+	```
 
   b. **Google+** - No special parameters needed
 
-	c. **Twitter** - Please provide **Consumer Key** and **Consumer Secret** from the "Keys and Access Tokens" section in [Twitter Apps](https://apps.twitter.com/), like so:
+  c. **Twitter** - Please provide **Consumer Key** and **Consumer Secret** from the "Keys and Access Tokens" section in [Twitter Apps](https://apps.twitter.com/), like so:
 
 	``` java
 	HashMap<String, String> twitterParams = new HashMap<String, String>();

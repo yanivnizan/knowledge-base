@@ -71,6 +71,9 @@ And that's it! unity3d-profile knows how to contact the social provider (Faceboo
   1. Edit the file `Assets/Facebook/Editor/iOS/fixup.projmods`<br>
 
   2. Under `headerpaths` change `Facebook/Scripts` to `Plugins/Facebook/Scripts`</div>
+  
+4. In the menu bar of the Unity editor go to **Window > Soomla > Edit Settings** and set up "Permissions" you want to request from FB.
+
 
 ###Google+
 

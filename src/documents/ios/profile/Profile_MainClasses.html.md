@@ -305,6 +305,18 @@ the following workflow:
 [[SoomlaProfile getInstance] openAppRatingPage];
 ```
 
+<br>
+###`multiShare`
+
+
+`multiShare` Shares text and/or image using native sharing functionality of your target platform.
+
+``` objectivec
+[[SoomlaProfile getInstance] multiShareWithText:@""I'm happy. I can be shared everywhere." 
+                               andImageFilePath:@"path/to/file/you/want/to/share"];
+
+```
+
 ##Auxiliary Model: Reward
 
 A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress.

@@ -159,6 +159,22 @@ soomla::CCSoomlaProfile::getInstance()->updateStatus(
 ![alt text](/img/tutorial_img/profile/socialStatus.png "Update Status")
 
 <br>
+### `updateStatusWithConfirmation`
+
+It's a kind of `updateStatus` with confirmation dialog shown before performing the action.
+
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->updateStatusWithConfirmation(
+	soomla::FACEBOOK,                       // Provider
+	"I LOVE SOOMLA!  http://www.soom.la",   // Message to post as status
+	"",                                     // Payload
+	nullptr,                                // Reward
+	customMessage,							// Message to show in the confirmation dialog
+	&profileError                           // Used for error handling
+);
+```
+
+<br>
 ### `updateStory`
 This function posts a story (which is a detailed status) on the user's wall in the supplied social provider. Upon a successful update, the user will receive the supplied reward.
 
@@ -191,6 +207,28 @@ soomla::CCSoomlaProfile::getInstance()->updateStory(
 ```
 
 ![alt text](/img/tutorial_img/profile/socialStory.png "Post Story")
+
+<br>
+### `updateStoryWithConfirmation`
+
+It's a kind of `updateStory` with confirmation dialog shown before performing the action.
+
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->updateStoryWithConfirmation(
+	soomla::FACEBOOK,                          // Provider
+	"This is the story.",                       // Text of the story to post
+	"The story of SOOMBOT (Profile Test App)",  // Name
+	"SOOMBOT Story",                            // Caption
+	"Hey! It's SOOMBOT Story",                 	// Description
+	"http://about.soom.la/soombots",            // Link to post
+	"http://about.soom.la/.../spockbot.png",    // Image URL
+	"",                                         // Payload
+	nullptr,                                    // Reward
+	customMessage,								// Message to show in the confirmation dialog
+	&profileError                               // Used for error handling
+);
+```
+
 
 <br>
 ### `uploadImage`
@@ -232,6 +270,23 @@ soomla::CCSoomlaProfile::getInstance()->uploadImage(
 ![alt text](/img/tutorial_img/profile/socialUpload.png "Upload Image")
 
 <div class="info-box">The image to upload should be on the device already; the path supplied needs to be a full path to the image on the device.</div>
+
+<br>
+### `uploadImageWithConfirmation`
+
+It's a kind of `uploadImage` with confirmation dialog shown before performing the action.
+
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->uploadImageWithConfirmation(
+	soomla::FACEBOOK,                       // Provider
+	"I love SOOMLA! http://www.soom.la",  	// Message to post with imag
+	"someFileName",                       	// File path
+	"",                                   	// Payload
+	nullptr,                          		// Reward
+	customMessage,							// Message to show in the confirmation dialog
+	&profileError                           // Used for error handling
+);
+```
 
 <br>
 ### `getStoredUserProfile`
@@ -416,6 +471,18 @@ void Example::onGetContactsFinished(EventCustom *event) {
 
 ``` cpp
 soomla::CCSoomlaProfile::openAppRatingPage(&profileError);
+```
+
+<br>
+### `multiShare`
+
+`multiShare` Shares text and/or image using native sharing functionality of your target platform.
+
+``` cpp
+soomla::CCSoomlaProfile::getInstance()->multiShare(
+    "I'm happy. I can be shared everywhere.",
+    "path/to/file/you/want/to/share"
+);
 ```
 
 ## Auxiliary Model: CCReward [<img class="link-icon" src="/img/tutorial_img/linkImg.png">](https://github.com/soomla/soomla-cocos2dx-core/blob/master/Soomla/rewards/CCReward.h)

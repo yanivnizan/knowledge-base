@@ -156,6 +156,25 @@ SoomlaProfile.getInstance().updateStatus(
 ![alt text](/img/tutorial_img/unity-profile/socialStatus.png "Update Status")
 
 <br>
+### `updateStatusWithConfirmation`
+
+It's a kind of `updateStatus` with confirmation dialog shown before performing the action.
+
+``` java
+SoomlaProfile.getInstance().updateStatusWithConfirmation(
+	IProvider.Provider.FACEBOOK,            // Provider
+	"I LOVE SOOMLA!  http://www.soom.la",   // Message to post as status
+	"",                                     // Payload
+	null,                             		// Reward
+	this,                             		// Activity
+	customMessage							// Message to show in the confirmation dialog
+);
+```
+
+There is also an overloaded version without `customMessage`. In this case default message will be used.  
+
+
+<br>
 ### `updateStory`
 This function posts a story (which is a detailed status) on the user's wall in the supplied social provider. Upon a successful update, the user will receive the supplied reward.
 
@@ -198,6 +217,30 @@ SoomlaProfile.getInstance().updateStory(
 ![alt text](/img/tutorial_img/unity-profile/socialStory.png "Post Story")
 
 <br>
+### `updateStoryWithConfirmation`
+
+It's a kind of `updateStory` with confirmation dialog shown before performing the action.
+
+``` java
+SoomlaProfile.getInstance().updateStoryWithConfirmation(
+	IProvider.Provider.FACEBOOK,                // Provider
+	"This is the story.",                       // Text of the story to post
+	"The story of SOOMBOT (Profile Test App)",  // Name
+	"SOOMBOT Story",                            // Caption
+	"Hey! It's SOOMBOT Story",                 	// Description
+	"http://about.soom.la/soombots",            // Link to post
+	"http://about.soom.la/.../spockbot.png",    // Image URL
+	"",                                         // Payload
+	null,                                       // Reward
+	this,                             			// Activity
+	customMessage								// Message to show in the confirmation dialog
+);
+```
+
+There is also an overloaded version without `customMessage`. In this case default message will be used.  
+
+
+<br>
 ### `uploadImage`
 
 This function uploads an image to the user's wall in the social provider. Upon a successful upload, the user will receive the supplied reward.
@@ -217,13 +260,32 @@ Reward goldMedal = new BadgeReward(
 SoomlaProfile.getInstance().uploadImage(
 	IProvider.Provider.FACEBOOK,          // Provider
 	"I love SOOMLA! http://www.soom.la",  // Message to post with imag
-	"someFileName",                       // File name
+	"someFileName",                       // File path
 	"",                                   // Payload
 	goldMedal                             // Reward
 );
 ```
 
 ![alt text](/img/tutorial_img/unity-profile/socialUpload.png "Upload Image")
+
+<br>
+### `uploadImageWithConfirmation`
+
+It's a kind of `uploadImage` with confirmation dialog shown before performing the action.
+
+``` java
+SoomlaProfile.getInstance().uploadImageWithConfirmation(
+	IProvider.Provider.FACEBOOK,          	// Provider
+	"I love SOOMLA! http://www.soom.la",  	// Message to post with imag
+	"someFileName",                       	// File path
+	"",                                   	// Payload
+	null,                             		// Reward
+	this,                             		// Activity
+	customMessage							// Message to show in the confirmation dialog
+);
+```
+
+There is also an overloaded version without `customMessage`. In this case default message will be used.  
 
 <br>
 ### `getStoredUserProfile`
@@ -357,6 +419,18 @@ public void onGetFeedFinished(GetFeedFinishedEvent getFeedFinishedEvent) {
 ``` java
 SoomlaProfile.getInstance().openAppRatingPage(
 	context                               // Context
+);
+```
+
+<br>
+### `multiShare`
+
+`multiShare` Shares text and/or image using native sharing functionality of your target platform.
+
+``` java
+SoomlaProfile.getInstance().multiShare(
+    "I'm happy. I can be shared everywhere.",
+    "path/to/file/you/want/to/share"
 );
 ```
 
