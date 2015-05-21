@@ -46,7 +46,7 @@ platform: 'ios'
     [[SoomlaProfile getInstance] initialize:providerParams];
   ```
 
-  a. **Facebook** - You can provide your custom permission set here.
+  1. **Facebook** - You can provide your custom permission set here.
 
     ```objectivec
     @(FACEBOOK) : @{ @"permissions": @"public_profile,user_friends" }
