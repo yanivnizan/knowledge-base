@@ -1,17 +1,24 @@
 @import "boostrap-source/bootstrap";
 
-//
-// Override Bootstrap variables
-//
-@grid-gutter-width: 80px;
-
 
 @soomla-color: #ff921e;;
 @platforms-color: #00a89c;
 @downloads-color: #3fa8f4;
 @university-color: #7ac843;
 @nav-grid-bg-color: #f0f9ff;
+@tab-color: #1676a6;
 
+
+//
+// Override Bootstrap variables
+//
+@grid-gutter-width: 80px;
+@nav-tabs-active-link-hover-bg: #f0f9ff;
+
+@nav-tabs-border-color: @tab-color;
+@nav-tabs-link-hover-border-color: @tab-color;
+@nav-tabs-active-link-hover-border-color: @tab-color;
+@nav-tabs-justified-link-border-color: @tab-color;
 
 
 //
@@ -26,6 +33,7 @@
 @import "components/article";
 @import "components/article-nav";
 @import "components/university";
+@import "components/sample";
 
 // Overwrite bootstrap col-md-8 to be slightly larger, smaller than col-md-9
 @media (min-width: 992px) {

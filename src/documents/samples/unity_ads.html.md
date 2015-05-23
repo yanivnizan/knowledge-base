@@ -14,7 +14,22 @@ platform: 'android'
 
 ## Use Case: Reward coins on video ads completion
 
-``` cs
+
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs nav-tabs-use-case-code" role="tablist">
+    <li role="presentation" class="active"><a href="#sample-unity" aria-controls="unity" role="tab" data-toggle="tab">Unity</a></li>
+    <li role="presentation"><a href="#sample-cocos2dx" aria-controls="cocos2dx" role="tab" data-toggle="tab">Cocos2d-x</a></li>
+    <li role="presentation"><a href="#sample-ios" aria-controls="iod" role="tab" data-toggle="tab">iOS</a></li>
+    <li role="presentation"><a href="#sample-android" aria-controls="android" role="tab" data-toggle="tab">Android</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content tab-content-use-case-code">
+    <div role="tabpanel" class="tab-pane active" id="sample-unity">
+      <pre>
+        <code class="cs">
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -24,14 +39,14 @@ using Soomla.Store;
 
 //Just apply this script to an UI Button
 public class freeCoins : MonoBehaviour {
-	public string COIN_ID = "coin_ID";
+    public string COIN_ID = "coin_ID";
     Button btn;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         btn = GetComponent<Button>();
-		Advertisement.Initialize ("YOUR_UNITYADS_GAMEID");
+        Advertisement.Initialize ("YOUR_UNITYADS_GAMEID");
         Advertisement.allowPrecache = true;
-	}
+    }
 
     void LateUpdate()
     {
@@ -39,24 +54,34 @@ public class freeCoins : MonoBehaviour {
         { btn.interactable = true;} else { btn.interactable = false;}
     }
 
-	//UI Button action
-	public void ShowAds()
-	{
-		ShowOptions options = new ShowOptions();
-		options.pause=true;
-		options.resultCallback=HandleShowResult;
-		Advertisement.Show(null,options);
-	}
-	void HandleShowResult(ShowResult result)
-	{
-		//Give 200 Coins if the user watched the Ads Completely
-		if(result==ShowResult.Finished)
-		{
-			StoreInventory.GiveItem(COIN_ID, 200);
-		}
-	}
+    //UI Button action
+    public void ShowAds()
+    {
+        ShowOptions options = new ShowOptions();
+        options.pause=true;
+        options.resultCallback=HandleShowResult;
+        Advertisement.Show(null,options);
+    }
+    void HandleShowResult(ShowResult result)
+    {
+        //Give 200 Coins if the user watched the Ads Completely
+        if(result==ShowResult.Finished)
+        {
+            StoreInventory.GiveItem(COIN_ID, 200);
+        }
+    }
 }
-```
+        </code>
+      </pre>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="sample-cocos2dx">...</div>
+    <div role="tabpanel" class="tab-pane" id="sample-ios">...</div>
+    <div role="tabpanel" class="tab-pane" id="sample-android">...</div>
+  </div>
+
+</div>
+
 
 ## Getting started with the two SDKs
 
