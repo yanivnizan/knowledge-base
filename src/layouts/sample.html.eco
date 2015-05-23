@@ -1,0 +1,23 @@
+---
+layout: 'knowledge-base'
+---
+<div id="nav">
+</div>
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div id="hierarchy-nav">
+        <%- @partial('nav-menu-l1', {current: @document.platform}) %>
+        <%- @partial('nav-menu-l2', {collection:@document.collection, platform: @document.platform, module: @document.module, theme: @document.theme}) %>
+        <%- @partial('nav-menu-l3', {collection:@document.collection, icon:@document.image}) %>
+      </div>
+    </div>
+  </div>
+<div id="doc-container" class="article-content clearfix">
+  <div class="row">
+    <div class="col-md-8">
+      <%- @content %>
+    </div>
+  </div>
+</div>
+</div>
