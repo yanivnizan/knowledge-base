@@ -310,6 +310,7 @@ the following workflow:
 
 
 `multiShare` Shares text and/or image using native sharing functionality of your target platform.
+The user will be shown a screen where he selects where he wants to share.
 
 ``` objectivec
 [[SoomlaProfile getInstance] multiShareWithText:@""I'm happy. I can be shared everywhere." 

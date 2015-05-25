@@ -172,7 +172,7 @@ SoomlaProfile.UpdateStatus(
 <br>
 ### `UpdateStatusWithConfirmation`
 
-It's a kind of `UpdateStatus` with confirmation dialog shown before performing the action.
+Works the same as `UpdateStatus` only here a confirmation dialog will be shown before the operation is performed.
 
 ``` cs
 SoomlaProfile.UpdateStatusWithConfirmation(
@@ -229,7 +229,7 @@ SoomlaProfile.UpdateStory(
 <br>
 ### `UpdateStoryWithConfirmation`
 
-It's a kind of `updateStory` with confirmation dialog shown before performing the action.
+Works the same as `updateStory` only here a confirmation dialog will be shown before the operation is performed.
 
 ``` cs
 SoomlaProfile.UpdateStoryWithConfirmation(
@@ -273,7 +273,8 @@ SoomlaProfile.UploadImage(
 );
 ```
 
-`UploadImageWithConfirmation` is another kind of this function with confirmation dialog shown before performing the action. 
+There is another function - `UploadImageWithConfirmation`. Works the same as `UploadImage` only here a confirmation 
+dialog will be shown before the operation is performed. 
 
 **NOTE:** This confirmation dialog is not supported in FB. 
 
@@ -342,6 +343,19 @@ public void onGetContactsFinished(Provider provider, SocialPageData<UserProfile>
 
 ``` cs
 SoomlaProfile.OpenAppRatingPage();
+```
+
+<br>
+### `MultiShare`
+
+`MultiShare` Shares text and/or image using native sharing functionality of your target platform.
+The user will be shown a screen where he selects where he wants to share.
+
+``` cs
+SoomlaProfile.MultiShare(
+    "I'm happy. I can be shared everywhere.",
+    "path/to/file/you/want/to/share"
+);
 ```
 
 <br>

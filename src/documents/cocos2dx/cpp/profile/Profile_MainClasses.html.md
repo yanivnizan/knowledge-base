@@ -161,7 +161,7 @@ soomla::CCSoomlaProfile::getInstance()->updateStatus(
 <br>
 ### `updateStatusWithConfirmation`
 
-It's a kind of `updateStatus` with confirmation dialog shown before performing the action.
+Works the same as `updateStatus` only here a confirmation dialog will be shown before the operation is performed.
 
 ``` cpp
 soomla::CCSoomlaProfile::getInstance()->updateStatusWithConfirmation(
@@ -211,7 +211,7 @@ soomla::CCSoomlaProfile::getInstance()->updateStory(
 <br>
 ### `updateStoryWithConfirmation`
 
-It's a kind of `updateStory` with confirmation dialog shown before performing the action.
+Works the same as `updateStory` only here a confirmation dialog will be shown before the operation is performed.
 
 ``` cpp
 soomla::CCSoomlaProfile::getInstance()->updateStoryWithConfirmation(
@@ -274,7 +274,7 @@ soomla::CCSoomlaProfile::getInstance()->uploadImage(
 <br>
 ### `uploadImageWithConfirmation`
 
-It's a kind of `uploadImage` with confirmation dialog shown before performing the action.
+Works the same as `uploadImage` only here a confirmation dialog will be shown before the operation is performed.
 
 ``` cpp
 soomla::CCSoomlaProfile::getInstance()->uploadImageWithConfirmation(
@@ -477,6 +477,7 @@ soomla::CCSoomlaProfile::openAppRatingPage(&profileError);
 ### `multiShare`
 
 `multiShare` Shares text and/or image using native sharing functionality of your target platform.
+The user will be shown a screen where he selects where he wants to share.
 
 ``` cpp
 soomla::CCSoomlaProfile::getInstance()->multiShare(
