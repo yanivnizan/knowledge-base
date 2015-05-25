@@ -46,7 +46,11 @@ platform: 'ios'
     [[SoomlaProfile getInstance] initialize:providerParams];
   ```
 
-  1. **Facebook** - No parameters
+  1. **Facebook** - You can provide your custom permission set here.
+
+    ```objectivec
+    @(FACEBOOK) : @{ @"permissions": @"public_profile,user_friends" }
+	```
 
   2. **Google+** - Please provide **CLIENT ID** from the "API&Auth" -> "Credentials" -> "Client ID for iOS applicatio" section in [Google Developer Console Projects](https://console.developers.google.com/project/), like so:
     ```objectivec

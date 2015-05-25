@@ -54,7 +54,14 @@ platform: 'cocos2dx'
 
 6. Note that some social providers need special parameters to be passed to `CCSoomlaProfile` in order for them to work:
 
-  a. **Facebook** - No special parameters
+  a. **Facebook** - You can provide your custom permission set here.
+
+	``` cpp
+    __Dictionary *facebookParams = __Dictionary::create();
+    facebookParams->setObject(__String::create("public_profile,user_friends"), "permissions");
+
+    profileParams->setObject(facebookParams, soomla::CCUserProfileUtils::providerEnumToString(soomla::FACEBOOK)->getCString());
+	```
 
   b. **Google+** - Please provide Client ID from the "API & Auth, credentials" section like so:
 

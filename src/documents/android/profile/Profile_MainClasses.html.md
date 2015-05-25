@@ -90,7 +90,7 @@ SoomlaProfile.getInstance().logout(
 
 Checks if the user is logged in and returns a boolean value.
 
-``` cs
+``` java
 if (SoomlaProfile.getInstance().isLoggedIn(this, IProvider.Provider.FACEBOOK) {
     // Here you can (and should) set the screen to match the logged-in state.
     // For example display the logout button, like button, share button, etc.
@@ -156,6 +156,25 @@ SoomlaProfile.getInstance().updateStatus(
 ![alt text](/img/tutorial_img/unity-profile/socialStatus.png "Update Status")
 
 <br>
+### `updateStatusWithConfirmation`
+
+Works the same as `updateStatus` only here a confirmation dialog will be shown before the operation is performed.
+
+``` java
+SoomlaProfile.getInstance().updateStatusWithConfirmation(
+	IProvider.Provider.FACEBOOK,            // Provider
+	"I LOVE SOOMLA!  http://www.soom.la",   // Message to post as status
+	"",                                     // Payload
+	null,                             		// Reward
+	this,                             		// Activity
+	customMessage							// Message to show in the confirmation dialog
+);
+```
+
+There is also an overloaded version without `customMessage`. In this case default message will be used.  
+
+
+<br>
 ### `updateStory`
 This function posts a story (which is a detailed status) on the user's wall in the supplied social provider. Upon a successful update, the user will receive the supplied reward.
 
@@ -198,6 +217,30 @@ SoomlaProfile.getInstance().updateStory(
 ![alt text](/img/tutorial_img/unity-profile/socialStory.png "Post Story")
 
 <br>
+### `updateStoryWithConfirmation`
+
+Works the same as `updateStory` only here a confirmation dialog will be shown before the operation is performed.
+
+``` java
+SoomlaProfile.getInstance().updateStoryWithConfirmation(
+	IProvider.Provider.FACEBOOK,                // Provider
+	"This is the story.",                       // Text of the story to post
+	"The story of SOOMBOT (Profile Test App)",  // Name
+	"SOOMBOT Story",                            // Caption
+	"Hey! It's SOOMBOT Story",                 	// Description
+	"http://about.soom.la/soombots",            // Link to post
+	"http://about.soom.la/.../spockbot.png",    // Image URL
+	"",                                         // Payload
+	null,                                       // Reward
+	this,                             			// Activity
+	customMessage								// Message to show in the confirmation dialog
+);
+```
+
+There is also an overloaded version without `customMessage`. In this case default message will be used.  
+
+
+<br>
 ### `uploadImage`
 
 This function uploads an image to the user's wall in the social provider. Upon a successful upload, the user will receive the supplied reward.
@@ -206,7 +249,7 @@ For example, when your user finishes a level in your game, you can offer him/her
 
 **NOTE:** This functionality is supported in Facebook only.
 
-``` cs
+``` java
 // A badge reward, gold coin.
 Reward goldMedal = new BadgeReward(
 	"badge_goldMedal",                    // ID
@@ -217,13 +260,32 @@ Reward goldMedal = new BadgeReward(
 SoomlaProfile.getInstance().uploadImage(
 	IProvider.Provider.FACEBOOK,          // Provider
 	"I love SOOMLA! http://www.soom.la",  // Message to post with imag
-	"someFileName",                       // File name
+	"someFileName",                       // File path
 	"",                                   // Payload
 	goldMedal                             // Reward
 );
 ```
 
 ![alt text](/img/tutorial_img/unity-profile/socialUpload.png "Upload Image")
+
+<br>
+### `uploadImageWithConfirmation`
+
+Works the same as `uploadImage` only here a confirmation dialog will be shown before the operation is performed.
+
+``` java
+SoomlaProfile.getInstance().uploadImageWithConfirmation(
+	IProvider.Provider.FACEBOOK,          	// Provider
+	"I love SOOMLA! http://www.soom.la",  	// Message to post with imag
+	"someFileName",                       	// File path
+	"",                                   	// Payload
+	null,                             		// Reward
+	this,                             		// Activity
+	customMessage							// Message to show in the confirmation dialog
+);
+```
+
+There is also an overloaded version without `customMessage`. In this case default message will be used.  
 
 <br>
 ### `getStoredUserProfile`
@@ -357,6 +419,19 @@ SoomlaProfile.getInstance().openAppRatingPage(
 ```
 
 <br>
+### `multiShare`
+
+`multiShare` Shares text and/or image using native sharing functionality of your target platform.
+The user will be shown a screen where he selects where he wants to share.
+
+``` java
+SoomlaProfile.getInstance().multiShare(
+    "I'm happy. I can be shared everywhere.",
+    "path/to/file/you/want/to/share"
+);
+```
+
+<br>
 ## Auxiliary Model: Reward
 
 A `Reward` is an entity which can be earned by the user for meeting certain criteria in game progress.
@@ -385,7 +460,7 @@ Reward hundredCoinReward = new VirtualItemReward(
 
 A specific type of `Reward` that represents a badge with an icon. **For example:** Give the user a badge reward for posting a status on his/her wall.
 
-``` cs
+``` java
 Reward goldMedal = new BadgeReward(
   "badge_goldMedal",                    // ID
   "Gold Medal"                          // Name
@@ -397,7 +472,7 @@ Reward goldMedal = new BadgeReward(
 
 A specific type of `Reward` that holds a list of other `Reward`s in a certain sequence. The rewards are given in ascending order. **For example:** In a Karate game the user can progress between belts and can be rewarded a sequence of: blue belt, purple belt, brown belt, and lastly, black belt.
 
-``` cs
+``` java
 Reward blueBelt = new BadgeReward(
 	"blueBelt",                           // ID
 	"Karate blue belt"                    // Name
@@ -421,7 +496,7 @@ Reward beltReward = new SequenceReward(
 
 A specific type of `Reward` that holds a list of other `Reward`s. When this `Reward` is given, it randomly chooses a `Reward` from the list of `Reward`s it internally holds. **For example:** Give users a mystery box `Reward` for uploading an image, that grants him/her a random `Reward`.
 
-``` cs
+``` java
 List<Reward> rewards = new ArrayList<Reward>();
 list.add(goldMedal);
 list.add(coinReward);
