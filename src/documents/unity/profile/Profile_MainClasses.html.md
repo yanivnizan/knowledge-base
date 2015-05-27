@@ -134,12 +134,12 @@ SoomlaProfile.Like(
 );
 ```
 
-The 3rd parameter received by the `like` function is a pageId. This can either be a page-id or page-name.
+The 2nd parameter received by the `like` function is a pageId. This can either be a page-id or page-name.
 
 ######For iOS Applications:
 When using the `like` function, you should pass the page-id in most cases. There reason for that is that the page-name will only work correctly when the Facebook App is not installed on the device. In which case, SOOMLA tries to open the "like" page in the browser.
 
-Page ID can be fetched from sites like http://findmyfacebookid.com/ , or Services like https://graph.facebook.com/requested_page_name, which once queried with a valid pageName will return a JsonString that contains the pageId value under the key "id".
+Page-id can be fetched from sites like http://findmyfacebookid.com/ , or Services like https://graph.facebook.com/requested_page_name, which once queried with a valid pageName will return a JsonString that contains the pageId value under the key "id".
 
 <div class="info-box">Note that the user is given the reward just for clicking `Like` from the application. The `Like` function opens the page to like, but does not track if the user *actually* liked the page or not.</div>
 
@@ -217,6 +217,7 @@ SoomlaProfile.UpdateStory(
 	"This is the story.",                       // Text of the story to post
 	"The story of SOOMBOT (Profile Test App)",  // Name
 	"SOOMBOT Story",                            // Caption
+	"Hey! It's SOOMBOT Story",                 	// Description
 	"http://about.soom.la/soombots",            // Link to post
 	"http://about.soom.la/.../spockbot.png",    // Image URL
 	"",                                         // Payload
