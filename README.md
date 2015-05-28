@@ -1,5 +1,6 @@
 
-# Knowledge Base (deployed to http://know.soom.la)
+# Knowledge Base
+#### http://know.soom.la
 
 This repo contains all documents that are published to SOOMLA's knowledge-base. We've opened it so anyone can fork and suggest their own ideas for what needs to appear in the various articles describing SOOMLA's open source framework and other services.
 
