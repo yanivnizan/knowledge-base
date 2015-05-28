@@ -60,9 +60,9 @@ And that's it! unity3d-profile knows how to contact the social provider (Faceboo
 
 1. Download and import the official [Facebook SDK](https://developers.facebook.com/docs/unity/getting-started/canvas).
 
-	<div class="warning-box">You don't need to initialize FB. SoomlaProfile will initialize it for you. (Do **not** call `FB.Init()`).</div>
-	
 2. Follow Facebook's integration process.
+
+<div class="warning-box">You don't need to initialize FB. SoomlaProfile will initialize it for you. (Do **not** call `FB.Init()`).</div>
 
 3. Create an empty folder named `Facebook` under `Assets/Plugins`.
 
@@ -73,7 +73,7 @@ And that's it! unity3d-profile knows how to contact the social provider (Faceboo
   1. Edit the file `Assets/Facebook/Editor/iOS/fixup.projmods`<br>
 
   2. Under `headerpaths` change `Facebook/Scripts` to `Plugins/Facebook/Scripts`</div>
-  
+
 5. In the menu bar of the Unity editor go to **Window > Soomla > Edit Settings** and set up "Permissions" you want to request from FB.
 
 
